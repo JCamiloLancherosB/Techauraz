@@ -130,6 +130,10 @@
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
 
+            {%- comment -%}
+              Display product description if available.
+              Truncated to 15 words for consistent card heights.
+            {%- endcomment -%}
             {%- if card_product.description != blank -%}
               <div class="card__description">
                 {{ card_product.description | strip_html | truncatewords: 15 }}

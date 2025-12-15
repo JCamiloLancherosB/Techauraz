@@ -197,7 +197,13 @@ h2.title {
 }
 
 /* Improved Transitions for Smooth Experience */
-* {
+.card,
+.card-wrapper,
+.button,
+.quick-add__submit,
+.media,
+.price,
+.badge {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
