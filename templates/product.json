@@ -1,1 +1,241 @@
-{"sections":{"main":{"type":"main-product","blocks":{"vendor":{"type":"text","disabled":true,"settings":{"text":"{{ product.vendor }}","text_style":"uppercase"}},"title":{"type":"title","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"description":{"type":"description","settings":{}},"price":{"type":"price","settings":{}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"share":{"type":"share","settings":{"share_label":"Compartir"}},"judge_me_reviews_preview_badge_nJBx3F":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}}},"block_order":["vendor","title","variant_picker","description","price","quantity_selector","buy_buttons","share","judge_me_reviews_preview_badge_nJBx3F"],"custom_css":[],"settings":{"gallery_layout":"thumbnail","media_size":"medium","constrain_to_viewport":"true","media_fit":"contain","media_position":"left","image_zoom":"hover","mobile_thumbnails":"hide","hide_variants":true,"enable_sticky_info":true,"color_scheme":"scheme-1","padding_top":84,"padding_bottom":12}},"product_urgency_bar":{"type":"product-urgency-bar","settings":{"urgency_text":"¡ÚLTIMAS 23 UNIDADES! | POCO STOCK","padding_top":12,"padding_bottom":12}},"product_views_counter":{"type":"product-views-counter","settings":{"min_views":100,"max_views":999,"padding_top":16,"padding_bottom":16}},"product_benefits":{"type":"product-benefits","blocks":{"benefit_1":{"type":"benefit","settings":{"emoji":"🔥","title":"Alta Calidad Premium","description":"Productos fabricados con los mejores materiales del mercado"}},"benefit_2":{"type":"benefit","settings":{"emoji":"🚚","title":"Envío Gratis","description":"Entrega rápida a toda Colombia sin costo adicional"}},"benefit_3":{"type":"benefit","settings":{"emoji":"✨","title":"Garantía 30 Días","description":"Devolución sin preguntas si no quedas satisfecho"}}},"block_order":["benefit_1","benefit_2","benefit_3"],"settings":{"heading":"¿Por qué elegir este producto?","padding_top":36,"padding_bottom":36}},"product_testimonials":{"type":"product-testimonials","blocks":{"testimonial_1":{"type":"testimonial","settings":{"rating":5,"testimonial":"Excelente producto, superó mis expectativas. La calidad es increíble y el envío fue muy rápido.","customer_name":"María González","customer_location":"Bogotá"}},"testimonial_2":{"type":"testimonial","settings":{"rating":5,"testimonial":"Muy recomendado, el mejor producto que he comprado. Llegó en perfectas condiciones.","customer_name":"Carlos Ramírez","customer_location":"Medellín"}},"testimonial_3":{"type":"testimonial","settings":{"rating":4,"testimonial":"Buena calidad y precio justo. El servicio al cliente fue excelente.","customer_name":"Ana Torres","customer_location":"Cali"}}},"block_order":["testimonial_1","testimonial_2","testimonial_3"],"settings":{"heading":"Lo que dicen nuestros clientes","padding_top":36,"padding_bottom":36}},"product_social_proof":{"type":"product-social-proof","settings":{}},"171500672571a9dd42":{"type":"apps","settings":{"include_margins":true}},"1759259835d66ec7b3":{"type":"apps","blocks":{"judge_me_reviews_review_widget_HUR3CT":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{"review_data":"sample_data","max_width":1200,"show_shop_reviews":false,"empty_state":"empty_widget"}}},"block_order":["judge_me_reviews_review_widget_HUR3CT"],"settings":{"include_margins":true}},"related-products":{"type":"related-products","custom_css":[],"settings":{"heading":"Te puede gustar","heading_size":"h1","products_to_show":8,"columns_desktop":4,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"columns_mobile":"2","padding_top":32,"padding_bottom":32}}},"order":["main","product_urgency_bar","product_views_counter","product_benefits","product_testimonials","product_social_proof","171500672571a9dd42","1759259835d66ec7b3","related-products"]}
+{
+    "sections": {
+        "main": {
+            "type": "main-product",
+            "blocks": {
+                "vendor": {
+                    "type": "text",
+                    "disabled": true,
+                    "settings": {
+                        "text": "{{ product.vendor }}",
+                        "text_style": "uppercase"
+                    }
+                },
+                "title": {
+                    "type": "title",
+                    "settings": {}
+                },
+                "variant_picker": {
+                    "type": "variant_picker",
+                    "settings": {
+                        "picker_type": "button",
+                        "swatch_shape": "circle"
+                    }
+                },
+                "description": {
+                    "type": "description",
+                    "settings": {}
+                },
+                "price": {
+                    "type": "price",
+                    "settings": {}
+                },
+                "quantity_selector": {
+                    "type": "quantity_selector",
+                    "settings": {}
+                },
+                "buy_buttons": {
+                    "type": "buy_buttons",
+                    "settings": {
+                        "show_dynamic_checkout": true,
+                        "show_gift_card_recipient": true
+                    }
+                },
+                "share": {
+                    "type": "share",
+                    "settings": {
+                        "share_label": "Compartir"
+                    }
+                },
+                "judge_me_reviews_preview_badge_nJBx3F": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {}
+                }
+            },
+            "block_order": [
+                "vendor",
+                "title",
+                "variant_picker",
+                "description",
+                "price",
+                "quantity_selector",
+                "buy_buttons",
+                "share",
+                "judge_me_reviews_preview_badge_nJBx3F"
+            ],
+            "custom_css": [],
+            "settings": {
+                "gallery_layout": "thumbnail",
+                "media_size": "medium",
+                "constrain_to_viewport": "true",
+                "media_fit": "contain",
+                "media_position": "left",
+                "image_zoom": "hover",
+                "mobile_thumbnails": "hide",
+                "hide_variants": true,
+                "enable_sticky_info": true,
+                "color_scheme": "scheme-1",
+                "padding_top": 84,
+                "padding_bottom": 12
+            }
+        },
+        "product_urgency_bar": {
+            "type": "product-urgency-bar",
+            "settings": {
+                "urgency_text": "\u00a1\u00daLTIMAS 23 UNIDADES! | POCO STOCK",
+                "padding_top": 12,
+                "padding_bottom": 12
+            }
+        },
+        "product_views_counter": {
+            "type": "product-views-counter",
+            "settings": {
+                "min_views": 100,
+                "max_views": 999,
+                "padding_top": 16,
+                "padding_bottom": 16
+            }
+        },
+        "product_benefits": {
+            "type": "product-benefits",
+            "blocks": {
+                "benefit_1": {
+                    "type": "benefit",
+                    "settings": {
+                        "emoji": "\ud83d\udd25",
+                        "title": "Alta Calidad Premium",
+                        "description": "Productos fabricados con los mejores materiales del mercado"
+                    }
+                },
+                "benefit_2": {
+                    "type": "benefit",
+                    "settings": {
+                        "emoji": "\ud83d\ude9a",
+                        "title": "Env\u00edo Gratis",
+                        "description": "Entrega r\u00e1pida a toda Colombia sin costo adicional"
+                    }
+                },
+                "benefit_3": {
+                    "type": "benefit",
+                    "settings": {
+                        "emoji": "\u2728",
+                        "title": "Garant\u00eda 30 D\u00edas",
+                        "description": "Devoluci\u00f3n sin preguntas si no quedas satisfecho"
+                    }
+                }
+            },
+            "block_order": [
+                "benefit_1",
+                "benefit_2",
+                "benefit_3"
+            ],
+            "settings": {
+                "heading": "\u00bfPor qu\u00e9 elegir este producto?",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "product_testimonials": {
+            "type": "product-testimonials",
+            "blocks": {
+                "testimonial_1": {
+                    "type": "testimonial",
+                    "settings": {
+                        "rating": 5,
+                        "testimonial": "Excelente producto, super\u00f3 mis expectativas. La calidad es incre\u00edble y el env\u00edo fue muy r\u00e1pido.",
+                        "customer_name": "Mar\u00eda Gonz\u00e1lez",
+                        "customer_location": "Bogot\u00e1"
+                    }
+                },
+                "testimonial_2": {
+                    "type": "testimonial",
+                    "settings": {
+                        "rating": 5,
+                        "testimonial": "Muy recomendado, el mejor producto que he comprado. Lleg\u00f3 en perfectas condiciones.",
+                        "customer_name": "Carlos Ram\u00edrez",
+                        "customer_location": "Medell\u00edn"
+                    }
+                },
+                "testimonial_3": {
+                    "type": "testimonial",
+                    "settings": {
+                        "rating": 4,
+                        "testimonial": "Buena calidad y precio justo. El servicio al cliente fue excelente.",
+                        "customer_name": "Ana Torres",
+                        "customer_location": "Cali"
+                    }
+                }
+            },
+            "block_order": [
+                "testimonial_1",
+                "testimonial_2",
+                "testimonial_3"
+            ],
+            "settings": {
+                "heading": "Lo que dicen nuestros clientes",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "product_social_proof": {
+            "type": "product-social-proof",
+            "settings": {}
+        },
+        "171500672571a9dd42": {
+            "type": "apps",
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "1759259835d66ec7b3": {
+            "type": "apps",
+            "blocks": {
+                "judge_me_reviews_review_widget_HUR3CT": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {
+                        "review_data": "sample_data",
+                        "max_width": 1200,
+                        "show_shop_reviews": false,
+                        "empty_state": "empty_widget"
+                    }
+                }
+            },
+            "block_order": [
+                "judge_me_reviews_review_widget_HUR3CT"
+            ],
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "related-products": {
+            "type": "related-products",
+            "custom_css": [],
+            "settings": {
+                "heading": "Te puede gustar",
+                "heading_size": "h1",
+                "products_to_show": 8,
+                "columns_desktop": 4,
+                "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+                "image_ratio": "adapt",
+                "image_shape": "default",
+                "show_secondary_image": true,
+                "show_vendor": false,
+                "show_rating": false,
+                "columns_mobile": "2",
+                "padding_top": 32,
+                "padding_bottom": 32
+            }
+        }
+    },
+    "order": [
+        "main",
+        "product_urgency_bar",
+        "product_views_counter",
+        "product_benefits",
+        "product_testimonials",
+        "product_social_proof",
+        "171500672571a9dd42",
+        "1759259835d66ec7b3",
+        "related-products"
+    ]
+}
