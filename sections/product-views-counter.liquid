@@ -1,0 +1,140 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="product-views-counter section-{{ section.id }}-padding">
+  <div class="product-views-counter__container page-width">
+    <div class="product-views-counter__content">
+      <span class="product-views-counter__badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 3C5 3 1.73 7.11 1 10c.73 2.89 4 7 9 7s8.27-4.11 9-7c-.73-2.89-4-7-9-7zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="currentColor"/>
+        </svg>
+        Vistas
+      </span>
+      <span class="product-views-counter__text">
+        En las últimas 24 horas, este producto ha sido visto 
+        <strong class="product-views-counter__number" data-views-count>0</strong> 
+        veces
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  function generateRealisticViewCount() {
+    // Generar número entre min y max configurados
+    const min = parseInt(document.querySelector('[data-views-count]')?.dataset.minViews || 100);
+    const max = parseInt(document.querySelector('[data-views-count]')?.dataset.maxViews || 999);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function animateCount(element, target) {
+    const duration = 1500;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(Math.floor(increment * step), target);
+      element.textContent = current.toLocaleString('es-CO');
+
+      if (step >= steps) {
+        clearInterval(timer);
+        element.textContent = target.toLocaleString('es-CO');
+      }
+    }, duration / steps);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const viewsElement = document.querySelector('[data-views-count]');
+    if (!viewsElement) return;
+
+    // Obtener configuración
+    const minViews = {{ section.settings.min_views | default: 100 }};
+    const maxViews = {{ section.settings.max_views | default: 999 }};
+    
+    viewsElement.dataset.minViews = minViews;
+    viewsElement.dataset.maxViews = maxViews;
+
+    const viewCount = generateRealisticViewCount();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      viewsElement.textContent = viewCount.toLocaleString('es-CO');
+    } else {
+      setTimeout(() => {
+        animateCount(viewsElement, viewCount);
+      }, 300);
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Contador de Vistas",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "min_views",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "label": "Vistas mínimas",
+      "default": 100,
+      "info": "Número mínimo de vistas a mostrar"
+    },
+    {
+      "type": "range",
+      "id": "max_views",
+      "min": 200,
+      "max": 2000,
+      "step": 50,
+      "label": "Vistas máximas",
+      "default": 999,
+      "info": "Número máximo de vistas a mostrar"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contador de Vistas"
+    }
+  ]
+}
+{% endschema %}

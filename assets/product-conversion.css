@@ -1,0 +1,594 @@
+/* ============================================================
+   PRODUCT CONVERSION OPTIMIZATION STYLES
+   Estilos para elementos de conversión en páginas de producto
+   ============================================================ */
+
+/* ============================================================
+   1. BARRA DE URGENCIA / STOCK
+   ============================================================ */
+
+.urgency-bar {
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.urgency-bar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.urgency-bar__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.urgency-bar__icon {
+  font-size: 1.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .urgency-bar__icon {
+    animation: none;
+  }
+}
+
+.urgency-bar__text {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .urgency-bar__text {
+    font-size: 0.9rem;
+  }
+  
+  .urgency-bar__icon {
+    font-size: 1.2rem;
+  }
+}
+
+/* ============================================================
+   2. NOTIFICACIONES SOCIAL PROOF
+   ============================================================ */
+
+.social-proof-popup {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  max-width: 350px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.social-proof-popup--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-proof-popup {
+    transition: opacity 0.01ms;
+    transform: none;
+  }
+}
+
+.social-proof-popup__content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+
+.social-proof-popup__avatar {
+  flex-shrink: 0;
+}
+
+.social-proof-popup__avatar svg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.social-proof-popup__message {
+  flex: 1;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.social-proof-popup__message strong {
+  font-weight: 600;
+}
+
+.social-proof-popup__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.social-proof-popup__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.social-proof-popup__close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .social-proof-popup {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .social-proof-popup__content {
+    padding: 0.875rem 1rem;
+  }
+  
+  .social-proof-popup__message {
+    font-size: 0.8125rem;
+  }
+}
+
+/* ============================================================
+   3. BENEFICIOS DEL PRODUCTO
+   ============================================================ */
+
+.product-benefits {
+  background: #fff7ed;
+  border-radius: 20px;
+}
+
+.product-benefits__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.product-benefits__heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 2rem;
+}
+
+.product-benefits__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.product-benefits__item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-benefits__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-benefits__item:hover {
+    transform: none;
+  }
+}
+
+.product-benefits__icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.product-benefits__content {
+  flex: 1;
+}
+
+.product-benefits__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.product-benefits__description {
+  font-size: 0.9375rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media screen and (min-width: 750px) {
+  .product-benefits__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product-benefits__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product-benefits__heading {
+    font-size: 1.5rem;
+  }
+  
+  .product-benefits__item {
+    padding: 1.25rem;
+  }
+  
+  .product-benefits__icon {
+    font-size: 1.75rem;
+  }
+  
+  .product-benefits__title {
+    font-size: 1rem;
+  }
+  
+  .product-benefits__description {
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================================
+   4. CARRUSEL DE TESTIMONIOS
+   ============================================================ */
+
+.product-testimonials {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-radius: 20px;
+}
+
+.product-testimonials__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.product-testimonials__heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.product-testimonials__carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-testimonials__track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-testimonials__track {
+    transition: none;
+  }
+}
+
+.product-testimonials__slide {
+  min-width: 100%;
+  padding: 0 1rem;
+}
+
+.product-testimonials__card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.product-testimonials__stars {
+  color: #fbbf24;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.product-testimonials__text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.product-testimonials__author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.product-testimonials__avatar {
+  flex-shrink: 0;
+}
+
+.product-testimonials__avatar img,
+.product-testimonials__avatar svg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.product-testimonials__author-info {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product-testimonials__name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+}
+
+.product-testimonials__location {
+  font-size: 0.875rem;
+  color: #6b7280;
+  display: block;
+}
+
+.product-testimonials__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.product-testimonials__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.product-testimonials__dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.product-testimonials__dot.active {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+
+.product-testimonials__dot:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .product-testimonials__heading {
+    font-size: 1.5rem;
+  }
+  
+  .product-testimonials__card {
+    padding: 1.5rem;
+  }
+  
+  .product-testimonials__stars {
+    font-size: 1.25rem;
+  }
+  
+  .product-testimonials__text {
+    font-size: 0.9375rem;
+  }
+  
+  .product-testimonials__avatar img,
+  .product-testimonials__avatar svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .product-testimonials__name {
+    font-size: 0.9375rem;
+  }
+  
+  .product-testimonials__location {
+    font-size: 0.8125rem;
+  }
+}
+
+/* ============================================================
+   5. CONTADOR DE VISTAS
+   ============================================================ */
+
+.product-views-counter {
+  background: transparent;
+}
+
+.product-views-counter__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.product-views-counter__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+
+.product-views-counter__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product-views-counter__badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.product-views-counter__text {
+  color: #ffffff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.product-views-counter__number {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fef3c7;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .product-views-counter__content {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+  
+  .product-views-counter__text {
+    font-size: 0.9375rem;
+  }
+  
+  .product-views-counter__number {
+    font-size: 1.125rem;
+  }
+}
+
+/* ============================================================
+   6. UTILIDADES Y ANIMACIONES GENERALES
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .urgency-bar__icon,
+  .product-benefits__item:hover,
+  .product-testimonials__track,
+  .product-testimonials__dot:hover,
+  .social-proof-popup {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Focus visible para mejorar accesibilidad */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   7. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Mobile: < 750px */
+@media screen and (max-width: 749px) {
+  .page-width {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tablet: 750px - 990px */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .page-width {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Desktop: > 990px */
+@media screen and (min-width: 990px) {
+  .page-width {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}

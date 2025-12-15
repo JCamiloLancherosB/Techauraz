@@ -1,0 +1,110 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+<div class="social-proof-popup" data-social-proof style="display: none;">
+  <div class="social-proof-popup__content">
+    <div class="social-proof-popup__avatar">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="20" fill="#667eea"/>
+        <path d="M20 20c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6zm0 3c-4 0-12 2-12 6v3h24v-3c0-4-8-6-12-6z" fill="white"/>
+      </svg>
+    </div>
+    <div class="social-proof-popup__message">
+      <strong data-customer-name></strong> de <span data-customer-city></span>
+      <br>
+      <span>compró este producto hace <span data-time-ago></span></span>
+    </div>
+    <button class="social-proof-popup__close" aria-label="Cerrar notificación">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const socialProofData = {
+    names: ['María', 'Carlos', 'Ana', 'Roberto', 'Laura', 'Diego', 'Sofia', 'Miguel', 'Valentina', 'Andrés'],
+    cities: ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena', 'Bucaramanga', 'Pereira', 'Santa Marta', 'Cúcuta', 'Manizales'],
+    timeAgo: ['2 minutos', '5 minutos', '15 minutos', '30 minutos', '1 hora', '2 horas']
+  };
+
+  function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  function updateSocialProof() {
+    const popup = document.querySelector('[data-social-proof]');
+    if (!popup) return;
+
+    const nameEl = popup.querySelector('[data-customer-name]');
+    const cityEl = popup.querySelector('[data-customer-city]');
+    const timeEl = popup.querySelector('[data-time-ago]');
+
+    nameEl.textContent = getRandomItem(socialProofData.names);
+    cityEl.textContent = getRandomItem(socialProofData.cities);
+    timeEl.textContent = getRandomItem(socialProofData.timeAgo);
+  }
+
+  function showSocialProof() {
+    const popup = document.querySelector('[data-social-proof]');
+    if (!popup || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    updateSocialProof();
+    popup.style.display = 'block';
+    
+    setTimeout(() => {
+      popup.classList.add('social-proof-popup--visible');
+    }, 100);
+
+    setTimeout(() => {
+      popup.classList.remove('social-proof-popup--visible');
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 300);
+    }, 5000);
+  }
+
+  function scheduleSocialProof() {
+    // Mostrar primera notificación después de 10 segundos
+    setTimeout(showSocialProof, 10000);
+    
+    // Repetir cada 30 segundos
+    setInterval(showSocialProof, 30000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.querySelector('.social-proof-popup__close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        const popup = document.querySelector('[data-social-proof]');
+        popup.classList.remove('social-proof-popup--visible');
+        setTimeout(() => {
+          popup.style.display = 'none';
+        }, 300);
+      });
+    }
+
+    scheduleSocialProof();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Notificaciones Social Proof",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Muestra notificaciones de compras recientes para generar confianza. Las notificaciones son ejemplos simulados."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Notificaciones Social Proof"
+    }
+  ]
+}
+{% endschema %}

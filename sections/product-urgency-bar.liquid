@@ -1,0 +1,79 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="urgency-bar section-{{ section.id }}-padding" data-urgency-bar>
+  <div class="urgency-bar__container page-width">
+    <div class="urgency-bar__content">
+      <span class="urgency-bar__icon">🔥</span>
+      <span class="urgency-bar__text">
+        {{ section.settings.urgency_text | default: "¡ÚLTIMAS UNIDADES! | POCO STOCK" }}
+      </span>
+      <span class="urgency-bar__icon">🔥</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Animación pulsante para la barra de urgencia
+  document.addEventListener('DOMContentLoaded', function() {
+    const urgencyBar = document.querySelector('[data-urgency-bar]');
+    if (urgencyBar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      urgencyBar.classList.add('urgency-bar--animate');
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Barra de Urgencia",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texto de urgencia",
+      "default": "¡ÚLTIMAS 23 UNIDADES! | POCO STOCK",
+      "info": "Mensaje que aparece en la barra de urgencia"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de Urgencia"
+    }
+  ]
+}
+{% endschema %}
