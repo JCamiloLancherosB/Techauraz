@@ -34,10 +34,7 @@
 
 <script>
 (function() {
-  function generateRealisticViewCount() {
-    // Generar número entre min y max configurados
-    const min = parseInt(document.querySelector('[data-views-count]')?.dataset.minViews || 100);
-    const max = parseInt(document.querySelector('[data-views-count]')?.dataset.maxViews || 999);
+  function generateRealisticViewCount(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -68,10 +65,7 @@
     const minViews = {{ section.settings.min_views | default: 100 }};
     const maxViews = {{ section.settings.max_views | default: 999 }};
     
-    viewsElement.dataset.minViews = minViews;
-    viewsElement.dataset.maxViews = maxViews;
-
-    const viewCount = generateRealisticViewCount();
+    const viewCount = generateRealisticViewCount(minViews, maxViews);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       viewsElement.textContent = viewCount.toLocaleString('es-CO');

@@ -540,9 +540,9 @@
   .product-testimonials__track,
   .product-testimonials__dot:hover,
   .social-proof-popup {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
+    animation: none;
+    transition: none;
+    transform: none;
   }
 }
 

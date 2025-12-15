@@ -148,7 +148,9 @@
       });
 
       this.carousel.addEventListener('mouseleave', () => {
-        this.startAutoplay();
+        if (!this.autoplayInterval) {
+          this.startAutoplay();
+        }
       });
     }
 

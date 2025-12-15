@@ -65,13 +65,22 @@
     }, 5000);
   }
 
+  let socialProofInterval = null;
+
   function scheduleSocialProof() {
     // Mostrar primera notificación después de 10 segundos
     setTimeout(showSocialProof, 10000);
     
     // Repetir cada 30 segundos
-    setInterval(showSocialProof, 30000);
+    socialProofInterval = setInterval(showSocialProof, 30000);
   }
+
+  // Limpiar intervalo al salir de la página
+  window.addEventListener('beforeunload', function() {
+    if (socialProofInterval) {
+      clearInterval(socialProofInterval);
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.social-proof-popup__close');
