@@ -1,5 +1,6 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'premium-enhancements.css' | asset_url | stylesheet_tag }}
 
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
@@ -26,6 +27,66 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Featured Collection Premium Styles */
+  .collection-{{ section.id }} .title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    color: #e5e7eb;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(135deg, #0ea5e9, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .collection-{{ section.id }} .title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(45deg, #0ea5e9, #22c55e);
+    border-radius: 999px;
+  }
+
+  .collection-{{ section.id }} .collection__description {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1.6rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .collection-{{ section.id }} .grid {
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .collection-{{ section.id }} .title {
+      font-size: 2.2rem;
+    }
+
+    .collection-{{ section.id }} .grid {
+      gap: 16px;
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .collection-{{ section.id }} .title {
+      font-size: 2.6rem;
+    }
+
+    .collection-{{ section.id }} .grid {
+      gap: 20px;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -49,11 +110,11 @@
 -%}
 
 <div class="color-{{ section.settings.color_scheme }} isolate gradient">
-  <div class="collection section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}">
+  <div class="collection collection-{{ section.id }} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}">
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
       {%- if section.settings.title != blank -%}
         <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.title }}
+          ✨ {{ section.settings.title }} ✨
         </h2>
       {%- endif -%}
       {%- if section.settings.description != blank
