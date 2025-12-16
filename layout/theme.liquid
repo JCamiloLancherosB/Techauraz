@@ -1,22 +1,22 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 <head>
-<!-- PRELOAD CRÍTICO - Mejora 300ms -->
+<!-- PRELOAD_tag CRÍTICO - Mejora 300ms -->
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Preload del JavaScript crítico -->
-<link rel="modulepreload" href="{{ 'theme-editor.js' | asset_url }}">
+<!-- Preload_tag del JavaScript crítico -->
+<link rel="modulepreload_tag" href="{{ 'theme-editor.js' | asset_url }}">
 
-<!-- Preload de la primera imagen visible (hero) -->
+<!-- Preload_tag de la primera imagen visible (hero) -->
 {% if section.settings.image %}
-  <link rel="preload" as="image" loading="eager"
+  <link rel="preload_tag" as="image" loading="eager"
     fetchpriority="high" href="{{ section.settings.image | image_url: width: 1920, quality: 85, format: 'webp' }}" imagesrcset="{{ section.settings.image | image_url: width: 750, quality: 85, format: 'webp' }} 750w, {{ section.settings.image | image_url: width: 1920, quality: 85, format: 'webp' }} 1920w" imagesizes="100vw">
 {% endif %}
 
-<!-- Preload del logo -->
-<link rel="preload" as="image" href="{{ section.settings.logo | image_url: width: 200, quality: 85, format: 'webp' }}">
+<!-- Preload_tag del logo -->
+<link rel="preload_tag" as="image" href="{{ section.settings.logo | image_url: width: 200, quality: 85, format: 'webp' }}">
     <!-- Meta Tags Básicos -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -180,7 +180,7 @@
     </title>
     {%- endunless -%}
     
-    <!-- Preload critical resources -->
+    <!-- Preload_tag critical resources -->
     <link rel="preload_tag" as="script" href="{{ 'global.js' | asset_url }}">
     
     <!-- DNS prefetch para external domains -->
@@ -419,21 +419,21 @@
   .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
 </style>
 
-<!-- CSS completo con preload + async -->
-<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- CSS completo con preload_tag + async -->
+<link rel="preload_tag_tag" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 
-    <!-- Preload de Fuentes -->
+    <!-- Preload_tag de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
-      <link rel="preload_tag" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload_tag_tag" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
-      <link rel="preload_tag" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload_tag_tag" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
     <!-- Componentes Adicionales -->
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload_tag: true }}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
