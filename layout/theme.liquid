@@ -443,8 +443,28 @@
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
 {%- endif -%}
 
-<!-- Techauraz Master CSS - Unified stylesheet (consolidates theme-fixes, techauraz-fixes, premium-enhancements) -->
-{{ 'techauraz-master.css' | asset_url | stylesheet_tag }}
+<!-- 
+  ============================================================================
+  CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
+  ============================================================================
+  1. base.css (preload, async) - Core theme styles with some heavy overrides
+  2. animations.css (preload, async) - Animation utilities
+  3. cross-sell.css (product pages only) - Cross-sell component styles
+  4. theme-fixes.css - DEPRECATED legacy fixes (kept for compatibility)
+  5. theme-refactor-2024.css - 2024 refactor fixes
+  6. techauraz-fixes.css - AUTHORITATIVE fixes (must load last)
+  
+  ⚠️ DO NOT change this order without testing:
+  - Product cards on collection pages
+  - Product detail page image gallery
+  - Related products section
+  - Homepage featured collections
+  
+  techauraz-fixes.css contains properly scoped overrides that fix:
+  - Card image aspect ratios (4:5 for cards, auto for PDP)
+  - Object-fit rules (cover for cards, contain for PDP)
+  - Grid layout on mobile/tablet/desktop
+  - Header icon sizing and sticky behavior
 
     <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
