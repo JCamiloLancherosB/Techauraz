@@ -449,6 +449,9 @@
 <!-- Theme Refactor 2024 - Comprehensive fixes for header, images, layout, and conversions -->
 {{ 'theme-refactor-2024.css' | asset_url | stylesheet_tag }}
 
+<!-- Techauraz Comprehensive Fixes - MUST LOAD LAST -->
+{{ 'techauraz-fixes.css' | asset_url | stylesheet_tag }}
+
     <!-- Preload_tag de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload_tag_tag" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -894,6 +897,7 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     <script src="{{ 'custom-scripts.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'techauraz-enhancements.js' | asset_url }}" defer="defer"></script>
     <script defer="defer">
   (function(){
 var header = document.querySelector('.section-header, .header-wrapper');
