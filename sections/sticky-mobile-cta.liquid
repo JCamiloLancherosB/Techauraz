@@ -1,5 +1,3 @@
-{{ 'component-sticky-cta.css' | asset_url | stylesheet_tag }}
-
 {%- if section.settings.enable_sticky_cta and product -%}
 <div 
   class="sticky-cta-bar" 
@@ -23,7 +21,7 @@
     </button>
     
     <a
-      href="https://wa.me/573008602789?text={{ 'Hola! Estoy interesado en ' | append: product.title | append: '. Me gustaría más información: ' | append: shop.url | append: product.url | url_encode }}"
+      href="https://wa.me/{{ section.settings.whatsapp_phone | default: '573008602789' | replace: '+', '' | replace: ' ', '' | replace: '-', '' }}?text={{ 'Hola! Estoy interesado en ' | append: product.title | append: '. Me gustaría más información: ' | append: shop.url | append: product.url | url_encode }}"
       class="sticky-cta-bar__button sticky-cta-bar__button--whatsapp"
       target="_blank"
       rel="noopener noreferrer"
@@ -221,6 +219,13 @@
       "id": "buy_button_text",
       "label": "Texto botón comprar",
       "default": "Comprar ahora"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_phone",
+      "label": "Número de WhatsApp",
+      "default": "+573008602789",
+      "info": "Número de WhatsApp con código de país (ejemplo: +573008602789)"
     },
     {
       "type": "text",
