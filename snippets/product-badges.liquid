@@ -1,0 +1,141 @@
+{% comment %}
+  Product Badges Snippet
+  Muestra badges dinámicos en productos (Nuevo, Descuento, Bestseller, Bajo Stock)
+  
+  Uso:
+  {% render 'product-badges', product: product, show_discount: true, show_new: true %}
+{% endcomment %}
+
+{% liquid
+  assign show_discount = show_discount | default: true
+  assign show_new = show_new | default: true
+  assign show_bestseller = show_bestseller | default: false
+  assign show_low_stock = show_low_stock | default: false
+  assign position = position | default: 'top-left'
+%}
+
+<div class="product-badges product-badges--{{ position }}">
+  {% comment %} Badge de Descuento {% endcomment %}
+  {% if show_discount and product.compare_at_price > product.price %}
+    {% assign discount_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+    <span class="product-badge product-badge--discount">
+      -{{ discount_percent }}%
+    </span>
+  {% endif %}
+
+  {% comment %} Badge de Nuevo {% endcomment %}
+  {% if show_new %}
+    {% assign days_since_publish = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400 %}
+    {% if days_since_publish <= 30 %}
+      <span class="product-badge product-badge--new">
+        Nuevo
+      </span>
+    {% endif %}
+  {% endif %}
+
+  {% comment %} Badge de Bestseller {% endcomment %}
+  {% if show_bestseller and product.tags contains 'bestseller' %}
+    <span class="product-badge product-badge--bestseller">
+      Bestseller
+    </span>
+  {% endif %}
+
+  {% comment %} Badge de Bajo Stock {% endcomment %}
+  {% if show_low_stock %}
+    {% assign total_inventory = 0 %}
+    {% for variant in product.variants %}
+      {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
+    {% endfor %}
+    {% if total_inventory > 0 and total_inventory <= 10 %}
+      <span class="product-badge product-badge--low-stock">
+        ¡Solo quedan {{ total_inventory }}!
+      </span>
+    {% endif %}
+  {% endif %}
+
+  {% comment %} Badge de Envío Gratis {% endcomment %}
+  {% if product.tags contains 'free-shipping' %}
+    <span class="product-badge product-badge--free-shipping">
+      Envío Gratis
+    </span>
+  {% endif %}
+</div>
+
+<style>
+.product-badges {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.product-badges--top-left {
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.product-badges--top-right {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.product-badges--bottom-left {
+  bottom: 0.75rem;
+  left: 0.75rem;
+}
+
+.product-badges--bottom-right {
+  bottom: 0.75rem;
+  right: 0.75rem;
+}
+
+.product-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full, 9999px);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+.product-badge--discount {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+}
+
+.product-badge--new {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+}
+
+.product-badge--bestseller {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+}
+
+.product-badge--low-stock {
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: #fff;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.product-badge--free-shipping {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+</style>
