@@ -262,9 +262,10 @@ class PurchaseNotification {
    */
   getRandomProduct() {
     if (this.options.products.length === 0) {
+      // Return a default placeholder product
       return {
         name: 'Audífonos Bluetooth',
-        image: '/cdn/shop/files/default-product.jpg',
+        image: 'data:image/svg+xml,%3Csvg width="60" height="60" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="60" height="60" fill="%23ddd"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999"%3E?%3C/text%3E%3C/svg%3E',
         url: '/products/audifonos-bluetooth'
       };
     }

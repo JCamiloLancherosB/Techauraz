@@ -318,7 +318,8 @@ class CrossSell {
    * Formatea precio
    */
   formatPrice(price) {
-    return (price / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    // Price is already in cents in Shopify, divide by 100
+    return (price / 100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
 

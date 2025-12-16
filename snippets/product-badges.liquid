@@ -25,7 +25,9 @@
 
   {% comment %} Badge de Nuevo {% endcomment %}
   {% if show_new %}
-    {% assign days_since_publish = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400 %}
+    {% assign current_timestamp = 'now' | date: '%s' | plus: 0 %}
+    {% assign publish_timestamp = product.published_at | date: '%s' | plus: 0 %}
+    {% assign days_since_publish = current_timestamp | minus: publish_timestamp | divided_by: 86400 %}
     {% if days_since_publish <= 30 %}
       <span class="product-badge product-badge--new">
         Nuevo
@@ -44,7 +46,11 @@
   {% if show_low_stock %}
     {% assign total_inventory = 0 %}
     {% for variant in product.variants %}
-      {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
+      {% if variant.inventory_management and variant.inventory_policy == 'deny' %}
+        {% if variant.inventory_quantity > 0 %}
+          {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
+        {% endif %}
+      {% endif %}
     {% endfor %}
     {% if total_inventory > 0 and total_inventory <= 10 %}
       <span class="product-badge product-badge--low-stock">

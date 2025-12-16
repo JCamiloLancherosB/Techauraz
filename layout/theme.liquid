@@ -429,8 +429,8 @@
   .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
 </style>
 
-<!-- CSS completo con preload_tag + async -->
-<link rel="preload_tag_tag" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- CSS completo con preload + async -->
+<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 
 <!-- Nuevos CSS del rediseño con preload optimizado -->
