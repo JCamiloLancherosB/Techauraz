@@ -157,6 +157,11 @@
 </div>
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
+            {%- if card_product.description != blank -%}
+  <div class="card__excerpt">
+    {{ card_product.description | strip_html | truncate: 90 }}
+  </div>
+{%- endif -%}
 
             {%- comment -%}
               Display product description if available.
