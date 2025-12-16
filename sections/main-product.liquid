@@ -161,6 +161,10 @@
     position: relative;
   }
 
+  .product-hero-slide {
+    transition: opacity 0.3s ease;
+  }
+
   .slider-prev,
   .slider-next {
     position: absolute;
@@ -2161,13 +2165,14 @@ function addUrgencyIndicator() {
   </div>
 
   <script>
-    // Sticky CTA Bar
+    // Sticky CTA Bar with throttled scroll
     (function() {
       const stickyBar = document.getElementById('sticky-cta-bar');
       const addToCartButton = document.getElementById('ProductSubmitButton-{{ section.id }}');
       
       if (stickyBar && addToCartButton && window.innerWidth < 750) {
         let lastScrollTop = 0;
+        let ticking = false;
         
         function checkScroll() {
           const buttonRect = addToCartButton.getBoundingClientRect();
@@ -2181,9 +2186,17 @@ function addUrgencyIndicator() {
           }
           
           lastScrollTop = scrollTop;
+          ticking = false;
         }
         
-        window.addEventListener('scroll', checkScroll);
+        function requestTick() {
+          if (!ticking) {
+            window.requestAnimationFrame(checkScroll);
+            ticking = true;
+          }
+        }
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
         checkScroll();
       }
     })();
@@ -2198,7 +2211,7 @@ function addUrgencyIndicator() {
       const secondsEl = countdownTimer.querySelector('[data-countdown-seconds]');
 
       // Set countdown to 6 hours from now
-      const endTime = new Date().getTime() + (6 * 60 * 60 * 1000);
+      let endTime = new Date().getTime() + (6 * 60 * 60 * 1000);
       
       function updateCountdown() {
         const now = new Date().getTime();
@@ -2259,10 +2272,20 @@ function addUrgencyIndicator() {
           currentSlide = index;
         }
 
-        // Scroll to slide (if using scrolling) or show/hide slides
+        // Use opacity and position for smoother transitions
         if (slides[index]) {
           slides.forEach((slide, i) => {
-            slide.style.display = i === index ? 'block' : 'none';
+            if (i === index) {
+              slide.style.opacity = '1';
+              slide.style.visibility = 'visible';
+              slide.style.position = 'relative';
+            } else {
+              slide.style.opacity = '0';
+              slide.style.visibility = 'hidden';
+              slide.style.position = 'absolute';
+              slide.style.top = '0';
+              slide.style.left = '0';
+            }
           });
         }
       }
