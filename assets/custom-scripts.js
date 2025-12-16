@@ -37,9 +37,9 @@
   const fbtContainer = document.getElementById('frequently-bought-together');
   if (!fbtContainer) return;
 
-  // Get dynamic data from data attributes
-  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice || '0', 10);
-  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId || '0', 10);
+  // Get dynamic data from data attributes with validation
+  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice, 10) || 0;
+  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId, 10) || 0;
   const moneyFormat = fbtContainer.dataset.moneyFormat || '${{amount}}';
   
   const checkboxes = fbtContainer.querySelectorAll('.fbt-checkbox');

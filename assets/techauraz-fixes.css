@@ -327,17 +327,16 @@ cart-drawer.active {
    9. PERFORMANCE OPTIMIZATIONS
    ============================================================================= */
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Hardware acceleration for animations */
-.card-wrapper,
-.header,
-.cart-drawer {
+/* Hardware acceleration for frequently animated elements only */
+.card-wrapper:hover,
+.header.scrolled {
   will-change: transform;
   transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Remove will-change after animations complete */
+.card-wrapper {
   backface-visibility: hidden;
 }
 
@@ -368,6 +367,14 @@ img[loading="lazy"].loaded {
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cod-benefits__title svg {
+  flex-shrink: 0;
+  color: #22c55e;
 }
 
 .cod-benefits__list {

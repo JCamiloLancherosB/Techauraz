@@ -10,9 +10,8 @@
 
   // Sticky header shrink on scroll
   const header = document.querySelector('.header');
-  const headerSection = document.querySelector('.section-header');
   
-  if (!header || !headerSection) return;
+  if (!header) return;
 
   let lastScrollTop = 0;
   let ticking = false;
