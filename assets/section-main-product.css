@@ -1,55 +1,6 @@
-/* Contenedor de las tarjetas de productos */
-.product__info-wrapper {
-  display: flex;
-  flex-wrap: wrap;  /* Permite que las tarjetas se ajusten en varias filas */
-  justify-content: space-between;  /* Distribuye el espacio de manera uniforme entre las tarjetas */
-  gap: 1rem;  /* Añade espacio entre las tarjetas */
-}
-
-/* Ajustar el tamaño de cada tarjeta */
-.product-card {
-  width: 22%; /* Ajusta el tamaño de las tarjetas. Puedes modificar este valor */
-  margin-bottom: 2rem; /* Espacio entre filas */
-  display: flex;
-  flex-direction: column;  /* Para que el contenido dentro de cada tarjeta se apile */
-  align-items: center;  /* Centra el contenido dentro de la tarjeta */
-  justify-content: space-between;
-  text-align: center;
-}
-
-/* Para los elementos dentro de la tarjeta */
-.product__media, .product__title, .product__price {
-  margin-bottom: 1rem;  /* Asegura espacio entre cada elemento dentro de la tarjeta */
-}
-
-/* Asegurando que el precio y el botón estén bien alineados */
-.product__price {
-  display: block;
-  font-size: 1.5rem;  /* Tamaño del precio */
-  font-weight: bold;
-}
-
-.product__button {
-  display: inline-block;
-  background-color: #5CB85C;
-  padding: 10px 20px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: auto;  /* Asegura que el botón se quede abajo */
-}
-
-
-.product__info-wrapper .product-card {
-  width: 25%; /* Ajusta este valor según el espacio que necesites para las tarjetas */
-  margin-bottom: 2rem; /* Espacio debajo de cada tarjeta */
-}
-
-
+/* =============================================================================
+   PRODUCT PAGE LAYOUT - Dawn Compatible
+   ============================================================================= */
 
 .product__info-wrapper {
   width: 100% !important;

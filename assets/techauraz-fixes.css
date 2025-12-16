@@ -28,7 +28,7 @@
 .card .media {
   position: relative !important; /* Override absolute positioning */
   width: 100% !important;
-  aspect-ratio: 1 / 1; /* Square images for cards */
+  aspect-ratio: 4 / 5; /* 4:5 aspect ratio for cards as per requirements */
   background: #020617;
   overflow: hidden;
 }
@@ -38,9 +38,8 @@
 .card .media img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important; /* Show full product without cropping */
+  object-fit: cover !important; /* Cover for cards as per requirements */
   display: block;
-  padding: 0.75rem;
 }
 
 /* Product page images should use contain */
@@ -59,9 +58,7 @@
 .product-main-image img {
   width: 100% !important;
   height: auto !important;
-  max-width: 420px;
-  max-height: 420px;
-  object-fit: contain !important;
+  object-fit: contain !important; /* Contain for PDP images as per requirements */
   display: block;
   margin: 0 auto;
 }
@@ -179,7 +176,7 @@
 
   .card__media,
   .card .media {
-    aspect-ratio: 1 / 1 !important;
+    aspect-ratio: 4 / 5 !important; /* Consistent 4:5 ratio on mobile */
   }
 
   .card__media img,
@@ -251,7 +248,7 @@ cart-drawer.active {
   .card .media::before {
     content: '';
     display: block;
-    padding-bottom: 100%; /* 1:1 aspect ratio */
+    padding-bottom: 125%; /* 4:5 aspect ratio (5/4 = 1.25 = 125%) */
   }
 
   .card__media > *,
@@ -418,23 +415,6 @@ img[loading="lazy"].loaded {
   }
 }
 
-.card__media,
-.card .media {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-}
-
-.card__media img,
-.card .media img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
 .card__excerpt {
   font-size: 0.85rem;
   line-height: 1.35;
@@ -457,4 +437,64 @@ img[loading="lazy"].loaded {
   font-size: 0.75rem;
   padding: 6px 10px;
   border-radius: 999px;
+}
+/* =============================================================================
+   NEUTRALIZE DANGEROUS BASE.CSS OVERRIDES
+   These rules counter problematic global overrides in base.css
+   ============================================================================= */
+
+/* Fix: base.css forces .product.grid to display:grid with 2-column layout
+   This breaks the PDP which should be a standard 2-column layout (media + info) */
+.product.grid {
+  display: flex !important; /* Restore Dawn's flex layout for PDP */
+  flex-wrap: wrap !important;
+  grid-template-columns: initial !important; /* Remove forced grid columns */
+  gap: normal !important; /* Let Dawn control spacing */
+}
+
+/* Desktop: Restore proper 2-column PDP layout */
+@media (min-width: 990px) {
+  .product.grid {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Allow Dawn's grid classes to work for collections */
+  .collection .grid,
+  .product-grid,
+  .template-collection .grid {
+    display: grid !important; /* Collection pages should use grid */
+  }
+}
+
+/* Tablet: 3-column layout for collections */
+@media (min-width: 750px) and (max-width: 989.98px) {
+  .collection .grid,
+  .product-grid,
+  .template-collection .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px 12px !important;
+  }
+}
+
+/* Mobile: 2-column layout for collections (override base.css forced 2-col) */
+@media (max-width: 749.98px) {
+  .collection .grid,
+  .product-grid,
+  .template-collection .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px 10px !important;
+  }
+  
+  .grid__item {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Product page should NOT be a grid on mobile */
+  .product.grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
 }
