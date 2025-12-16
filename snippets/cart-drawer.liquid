@@ -604,6 +604,17 @@
               {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
             {%- endif -%}
           </small>
+          
+          {%- comment -%} COD Benefits Section {%- endcomment -%}
+          <div class="cod-benefits">
+            <div class="cod-benefits__title">✓ PAGA EN CASA - Contraentrega</div>
+            <ul class="cod-benefits__list">
+              <li class="cod-benefits__item">Envío gratis en compras superiores a $150,000</li>
+              <li class="cod-benefits__item">Paga cuando recibes tu pedido</li>
+              <li class="cod-benefits__item">Entrega en 2-4 días hábiles</li>
+              <li class="cod-benefits__item">Atención al cliente 24/7</li>
+            </ul>
+          </div>
         </div>
 
         <!-- CTAs -->
@@ -625,7 +636,7 @@
               disabled
             {% endif %}
           >
-            {{ 'sections.cart.checkout' | t }}
+            🏠 PAGA EN CASA
           </button>
         </div>
       </div>

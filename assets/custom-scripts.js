@@ -37,10 +37,16 @@
   const fbtContainer = document.getElementById('frequently-bought-together');
   if (!fbtContainer) return;
 
-  const mainProductPrice = {{ product.price }};
+  // Get dynamic data from data attributes
+  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice || '0', 10);
+  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId || '0', 10);
+  const moneyFormat = fbtContainer.dataset.moneyFormat || '${{amount}}';
+  
   const checkboxes = fbtContainer.querySelectorAll('.fbt-checkbox');
   const totalPriceEl = document.getElementById('fbt-total-price');
   const addAllButton = document.getElementById('fbt-add-all-to-cart');
+
+  if (!totalPriceEl || !addAllButton) return;
 
   function updateTotalPrice() {
     let newTotal = mainProductPrice;
@@ -49,7 +55,13 @@
         newTotal += parseInt(checkbox.dataset.price, 10);
       }
     });
-    totalPriceEl.textContent = Shopify.formatMoney(newTotal, "{{ shop.money_format }}");
+    
+    if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+      totalPriceEl.textContent = Shopify.formatMoney(newTotal, moneyFormat);
+    } else {
+      totalPriceEl.textContent = (newTotal / 100).toFixed(2);
+    }
+  }
 
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', updateTotalPrice);
@@ -57,7 +69,7 @@
 
   addAllButton.addEventListener('click', function() {
     let itemsToAdd = [{
-      id: {{ product.selected_or_first_available_variant.id }},
+      id: mainVariantId,
       quantity: 1
     }];
 
