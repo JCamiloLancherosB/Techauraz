@@ -37,9 +37,9 @@
   const fbtContainer = document.getElementById('frequently-bought-together');
   if (!fbtContainer) return;
 
-  // Get dynamic data from data attributes with validation
-  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice, 10) || 0;
-  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId, 10) || 0;
+  // Get product data from data attributes instead of Liquid
+  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice || '0', 10);
+  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId || '0', 10);
   const moneyFormat = fbtContainer.dataset.moneyFormat || '${{amount}}';
   
   const checkboxes = fbtContainer.querySelectorAll('.fbt-checkbox');
@@ -56,10 +56,13 @@
       }
     });
     
+    // Use Shopify's formatMoney if available, otherwise simple fallback
     if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
       totalPriceEl.textContent = Shopify.formatMoney(newTotal, moneyFormat);
     } else {
-      totalPriceEl.textContent = (newTotal / 100).toFixed(2);
+      // Fallback: simple formatting (handles cents to dollars)
+      const formatted = moneyFormat.replace('{{amount}}', (newTotal / 100).toFixed(2));
+      totalPriceEl.textContent = formatted;
     }
   }
 
@@ -68,6 +71,8 @@
   });
 
   addAllButton.addEventListener('click', function() {
+    if (!mainVariantId) return;
+    
     let itemsToAdd = [{
       id: mainVariantId,
       quantity: 1

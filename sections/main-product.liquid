@@ -704,6 +704,53 @@
       top: 40px;
     }
   }
+  
+  /* =========================
+     WARM CRO THEME OVERRIDES
+     Only colors/CTA/badges
+  ========================== */
+  .pdp--warm {
+    /* Warm background tones */
+    --ta-bg: #FDF8F3;
+    --ta-card-bg: #FFF7ED;
+    --ta-text-main: #1F2937;
+    --ta-text-muted: #6B7280;
+    --ta-border-soft: rgba(251, 146, 60, 0.25);
+  }
+  
+  .product.pdp--warm .product__title h1 {
+    color: #1F2937 !important;
+  }
+  
+  .product.pdp--warm .product__text,
+  .product.pdp--warm .product__description {
+    color: #374151 !important;
+  }
+  
+  .product.pdp--warm .product-form__cart-submit,
+  .product.pdp--warm .product-form__submit {
+    background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%) !important;
+    color: #FFFFFF !important;
+  }
+  
+  .product.pdp--warm .product-form__cart-submit:hover,
+  .product.pdp--warm .product-form__submit:hover {
+    background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%) !important;
+  }
+  
+  .product.pdp--warm .badge,
+  .product.pdp--warm .card__badge {
+    background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%) !important;
+    color: #FFFFFF !important;
+  }
+  
+  .product.pdp--warm .urgency-indicator {
+    background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%) !important;
+  }
+  
+  .product.pdp--warm .price-item--regular {
+    color: #059669 !important;
+  }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -749,12 +796,10 @@
   </div>
 
   <div class="page-width">
-    <div 
-      class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}"
-      {% if product.metafields.techauraz.theme_style %}
-        data-theme-style="{{ product.metafields.techauraz.theme_style }}"
-      {% endif %}
-    >
+    {%- comment -%} Check for warm_cro metafield {%- endcomment -%}
+    {%- assign theme_style = product.metafields.techauraz.theme_style | default: '' -%}
+    
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}{% if theme_style == 'warm_cro' %} pdp--warm{% endif %}">
 
       <!-- COLUMNA IZQUIERDA: GALERÍA + 3D/GIF -->
       <slideshow-component class="product-hero-slider">

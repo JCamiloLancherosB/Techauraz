@@ -623,6 +623,24 @@
         </div>
 
         <!-- CTAs -->
+        
+        <!-- COD Message for TechAura -->
+        <div class="cart__cod-message">
+          <div class="cart__cod-message-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <strong>PAGA EN CASA</strong>
+          </div>
+          <p class="cart__cod-message-body">
+            ✓ Paga al recibir tu pedido<br>
+            ✓ Envío gratis en compras mayores a $150.000<br>
+            ✓ Contraentrega disponible
+          </p>
+        </div>
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <noscript>
@@ -634,14 +652,14 @@
           <button
             type="submit"
             id="CartDrawer-Checkout"
-            class="cart__checkout-button button"
+            class="cart__checkout-button cart__checkout-button--cod button"
             name="checkout"
             form="CartDrawer-Form"
             {% if cart == empty %}
               disabled
             {% endif %}
           >
-            🏠 PAGA EN CASA
+            🏠 {{ 'sections.cart.checkout' | t }} - Paga en Casa
           </button>
         </div>
       </div>

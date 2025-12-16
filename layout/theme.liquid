@@ -886,8 +886,11 @@
         countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
       };
 
-      const agregarCar = document.getElementById("ProductSubmitButton-template--22626285420853__main");
-      agregarCar.classList.remove("button--full-width", "button--secondary");
+      // Remove button classes if element exists
+      const agregarCar = document.querySelector('.product-form__submit[id*="ProductSubmitButton"]');
+      if (agregarCar) {
+        agregarCar.classList.remove("button--full-width", "button--secondary");
+      }
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -953,6 +956,39 @@ window.addEventListener('scroll', function(){
 
 window.addEventListener('resize', onResize);
 onResize();
+})();
+
+// Sticky header shrink on scroll
+(function() {
+  const headerWrapper = document.querySelector('.header-wrapper, .section-header');
+  if (!headerWrapper) return;
+  
+  let lastScrollY = 0;
+  let ticking = false;
+  
+  function updateHeaderOnScroll() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    
+    // Add 'scrolled' class when scrolled down more than 50px
+    if (scrollY > 50) {
+      headerWrapper.classList.add('scrolled');
+    } else {
+      headerWrapper.classList.remove('scrolled');
+    }
+    
+    lastScrollY = scrollY;
+    ticking = false;
+  }
+  
+  function requestTick() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeaderOnScroll);
+      ticking = true;
+    }
+  }
+  
+  window.addEventListener('scroll', requestTick, { passive: true });
+  updateHeaderOnScroll(); // Initial check
 })();
 </script>
 <!-- BOTÓN WHATSAPP FLOTANTE -->
