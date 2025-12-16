@@ -56,11 +56,8 @@ img {
   object-fit: contain;
 }
 
-/* Grid layout fixes for collections */
-.grid {
-  display: grid;
-  gap: var(--grid-gap, 1rem);
-}
+/* Grid layout fixes for collections - SCOPED to avoid breaking Dawn flexbox grid */
+/* Removed global .grid override - Dawn uses flex-based grid system */
 
 /* Responsive grid columns */
 @media screen and (min-width: 750px) {
