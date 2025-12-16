@@ -252,14 +252,16 @@ document.addEventListener('DOMContentLoaded', function() {
   faqItems.forEach(item => {
     const summary = item.querySelector('.product-faq__question');
     
-    // Agregar rol y aria-expanded para accesibilidad
-    summary.setAttribute('role', 'button');
-    summary.setAttribute('aria-expanded', item.hasAttribute('open') ? 'true' : 'false');
-    
-    // Actualizar aria-expanded cuando se abre/cierra
-    item.addEventListener('toggle', function() {
+    if (summary) {
+      // Agregar rol y aria-expanded para accesibilidad
+      summary.setAttribute('role', 'button');
       summary.setAttribute('aria-expanded', item.hasAttribute('open') ? 'true' : 'false');
-    });
+      
+      // Actualizar aria-expanded cuando se abre/cierra
+      item.addEventListener('toggle', function() {
+        summary.setAttribute('aria-expanded', item.hasAttribute('open') ? 'true' : 'false');
+      });
+    }
   });
 });
 </script>

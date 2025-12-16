@@ -14,7 +14,7 @@
   }
 {%- endstyle -%}
 
-<div class="countdown-timer section-{{ section.id }}-padding{% if section.settings.enable_section == false %}" style="display: none;{% endif %}">
+<div class="countdown-timer section-{{ section.id }}-padding"{% if section.settings.enable_section == false %} style="display: none;"{% endif %}>
   <div class="countdown-timer__container page-width">
     {% if section.settings.heading != blank %}
       <h2 class="countdown-timer__heading">{{ section.settings.heading }}</h2>
@@ -232,56 +232,60 @@
 
 <script>
 (function() {
-  function initCountdown() {
-    const countdownElement = document.querySelector('[data-countdown-timer]');
-    if (!countdownElement) return;
+  try {
+    function initCountdown() {
+      const countdownElement = document.querySelector('[data-countdown-timer]');
+      if (!countdownElement) return;
 
-    const daysElement = countdownElement.querySelector('[data-countdown-days]');
-    const hoursElement = countdownElement.querySelector('[data-countdown-hours]');
-    const minutesElement = countdownElement.querySelector('[data-countdown-minutes]');
-    const secondsElement = countdownElement.querySelector('[data-countdown-seconds]');
+      const daysElement = countdownElement.querySelector('[data-countdown-days]');
+      const hoursElement = countdownElement.querySelector('[data-countdown-hours]');
+      const minutesElement = countdownElement.querySelector('[data-countdown-minutes]');
+      const secondsElement = countdownElement.querySelector('[data-countdown-seconds]');
 
-    // Configuración: días y horas hasta el final de la oferta
-    const daysToAdd = {{ section.settings.days_to_add | default: 2 }};
-    const hoursToAdd = {{ section.settings.hours_to_add | default: 12 }};
-    
-    // Calcular fecha objetivo
-    const now = new Date();
-    const endDate = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000) + (hoursToAdd * 60 * 60 * 1000));
+      // Configuración: días y horas hasta el final de la oferta
+      const daysToAdd = {{ section.settings.days_to_add | default: 2 }};
+      const hoursToAdd = {{ section.settings.hours_to_add | default: 12 }};
+      
+      // Calcular fecha objetivo
+      const now = new Date();
+      const endDate = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000) + (hoursToAdd * 60 * 60 * 1000));
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = endDate - now;
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate - now;
 
-      if (distance < 0) {
-        // El contador ha terminado
-        daysElement.textContent = '0';
-        hoursElement.textContent = '00';
-        minutesElement.textContent = '00';
-        secondsElement.textContent = '00';
-        return;
+        if (distance < 0) {
+          // El contador ha terminado
+          daysElement.textContent = '0';
+          hoursElement.textContent = '00';
+          minutesElement.textContent = '00';
+          secondsElement.textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysElement.textContent = days;
+        hoursElement.textContent = String(hours).padStart(2, '0');
+        minutesElement.textContent = String(minutes).padStart(2, '0');
+        secondsElement.textContent = String(seconds).padStart(2, '0');
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      daysElement.textContent = days;
-      hoursElement.textContent = String(hours).padStart(2, '0');
-      minutesElement.textContent = String(minutes).padStart(2, '0');
-      secondsElement.textContent = String(seconds).padStart(2, '0');
+      // Actualizar inmediatamente y luego cada segundo
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     }
 
-    // Actualizar inmediatamente y luego cada segundo
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCountdown);
-  } else {
-    initCountdown();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCountdown);
+    } else {
+      initCountdown();
+    }
+  } catch (error) {
+    console.error('Error initializing countdown timer:', error);
   }
 })();
 </script>
