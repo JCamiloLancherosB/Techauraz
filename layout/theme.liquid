@@ -446,17 +446,17 @@
 <!-- Techauraz Master CSS - Unified stylesheet (consolidates theme-fixes, techauraz-fixes, premium-enhancements) -->
 {{ 'techauraz-master.css' | asset_url | stylesheet_tag }}
 
-    <!-- Preload_tag de Fuentes -->
+    <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
-      <link rel="preload_tag_tag" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
-      <link rel="preload_tag_tag" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
     <!-- Componentes Adicionales -->
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload_tag: true }}
+      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
