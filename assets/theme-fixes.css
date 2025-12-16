@@ -1,0 +1,166 @@
+/**
+ * Theme Layout Fixes for Techauraz
+ * Ensures responsive images and proper card sizing
+ */
+
+/* Ensure all images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Card media container responsive fixes */
+.card__media,
+.card .media,
+.product__media-wrapper,
+.media-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure card images maintain aspect ratio and don't overflow */
+.card__media img,
+.card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Product cards should flex to fill available space */
+.card-wrapper,
+.product-card-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card content should grow to fill space */
+.card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure product media doesn't exceed container */
+.product__media-wrapper img,
+.product__media img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Grid layout fixes for collections */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, 1rem);
+}
+
+/* Responsive grid columns */
+@media screen and (min-width: 750px) {
+  .grid--2-col-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3-col-tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4-col-tablet {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .grid--2-col-desktop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3-col-desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4-col-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid--5-col-desktop {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Mobile grid */
+@media screen and (max-width: 749px) {
+  .grid--1-col-mobile {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid--2-col-mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Prevent horizontal overflow */
+.page-width,
+.section,
+.shopify-section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for featured collection cards */
+.featured-collection .card,
+.collection .card,
+.product-grid .card {
+  height: 100%;
+  min-height: 0;
+}
+
+/* Ensure aspect ratio is maintained for card images */
+.card__media.ratio {
+  display: block;
+}
+
+.card__media.ratio::before {
+  content: '';
+  display: block;
+  padding-bottom: 100%; /* 1:1 aspect ratio by default */
+}
+
+.card__media.ratio > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Fix for slider/carousel overflow */
+.slider,
+.reviews-slider,
+.product-hero-slider {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Ensure slideshow components don't cause layout issues */
+.slideshow-component,
+.product-hero-slider {
+  position: relative;
+  width: 100%;
+}
+
+.slideshow-component img,
+.product-hero-slider img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
