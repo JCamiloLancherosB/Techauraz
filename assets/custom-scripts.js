@@ -37,10 +37,16 @@
   const fbtContainer = document.getElementById('frequently-bought-together');
   if (!fbtContainer) return;
 
-  const mainProductPrice = {{ product.price }};
+  // Get product data from data attributes instead of Liquid
+  const mainProductPrice = parseInt(fbtContainer.dataset.mainPrice || '0', 10);
+  const mainVariantId = parseInt(fbtContainer.dataset.mainVariantId || '0', 10);
+  const moneyFormat = fbtContainer.dataset.moneyFormat || '${{amount}}';
+  
   const checkboxes = fbtContainer.querySelectorAll('.fbt-checkbox');
   const totalPriceEl = document.getElementById('fbt-total-price');
   const addAllButton = document.getElementById('fbt-add-all-to-cart');
+
+  if (!totalPriceEl || !addAllButton) return;
 
   function updateTotalPrice() {
     let newTotal = mainProductPrice;
@@ -49,15 +55,21 @@
         newTotal += parseInt(checkbox.dataset.price, 10);
       }
     });
-    totalPriceEl.textContent = Shopify.formatMoney(newTotal, "{{ shop.money_format }}");
+    
+    // Format money (simple implementation, can be enhanced)
+    const formatted = moneyFormat.replace('{{amount}}', (newTotal / 100).toFixed(2));
+    totalPriceEl.textContent = formatted;
+  }
 
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', updateTotalPrice);
   });
 
   addAllButton.addEventListener('click', function() {
+    if (!mainVariantId) return;
+    
     let itemsToAdd = [{
-      id: {{ product.selected_or_first_available_variant.id }},
+      id: mainVariantId,
       quantity: 1
     }];
 
