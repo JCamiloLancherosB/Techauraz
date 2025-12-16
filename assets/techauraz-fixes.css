@@ -1,0 +1,400 @@
+/**
+ * =============================================================================
+ * TECHAURAZ COMPREHENSIVE FIXES
+ * =============================================================================
+ * This file contains critical fixes for the Shopify Dawn-based theme.
+ * Load this file LAST to ensure overrides take effect.
+ * 
+ * Issues Fixed:
+ * 1. Invisible images (media container height issues)
+ * 2. Header icon sizes and sticky behavior
+ * 3. Mobile grid layout
+ * 4. Object-fit rules for cards and PDP
+ */
+
+/* =============================================================================
+   1. MEDIA & IMAGE FIXES - Fix invisible images
+   ============================================================================= */
+
+/* Fix card media containers - ensure they have proper dimensions */
+.card__inner {
+  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Card media should have aspect ratio to prevent collapse */
+.card__media,
+.card .media {
+  position: relative !important; /* Override absolute positioning */
+  width: 100% !important;
+  aspect-ratio: 1 / 1; /* Square images for cards */
+  background: #020617;
+  overflow: hidden;
+}
+
+/* Ensure images fill their containers properly */
+.card__media img,
+.card .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* Show full product without cropping */
+  display: block;
+  padding: 0.75rem;
+}
+
+/* Product page images should use contain */
+.product__media-wrapper .media,
+.product__media,
+.product-media-container {
+  position: relative !important;
+  background: #020617;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.product__media img,
+.product__media-wrapper img,
+.product-gallery__image img,
+.product-main-image img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 420px;
+  max-height: 420px;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Collection and grid images */
+.collection .media img,
+.grid .media img,
+.featured-collection .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Fill container, crop if needed */
+}
+
+/* =============================================================================
+   2. HEADER FIXES - Icon sizes and sticky behavior
+   ============================================================================= */
+
+/* Normalize header icon sizes */
+.header__icon,
+.header__icon svg,
+.header__icon .icon {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+/* Ensure clickable area is at least 44px for accessibility */
+.header__icon {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Hamburger menu icon specific */
+.header__icon--menu svg,
+.header__icon--menu .icon {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Logo sizing */
+.header__heading-logo {
+  max-height: 40px !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+/* Sticky header with shrink on scroll */
+.shopify-section-header-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Header shrink when scrolled */
+.scrolled-past-header .header {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.scrolled-past-header .header__heading-logo {
+  max-height: 32px !important;
+  transition: max-height 0.3s ease !important;
+}
+
+/* Header icon visibility and contrast */
+.header__icon .icon,
+.header__icon svg {
+  color: #ffffff !important;
+  fill: none !important;
+  stroke: #ffffff !important;
+  stroke-width: 2px;
+}
+
+/* =============================================================================
+   3. MOBILE GRID LAYOUT FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Maximize screen width on mobile */
+  .page-width {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    max-width: 100% !important;
+  }
+
+  /* 2-column grid on mobile */
+  .product-grid,
+  .collection .grid,
+  .grid--2-col-mobile {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .grid__item {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Mobile card styling */
+  .card-wrapper,
+  .card {
+    width: 100% !important;
+    border-radius: 8px !important;
+  }
+
+  .card__media,
+  .card .media {
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .card__media img,
+  .card .media img {
+    padding: 6px !important;
+  }
+
+  .card__content,
+  .card__information {
+    padding: 8px 6px !important;
+    min-height: auto !important;
+  }
+
+  .card__heading {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    min-height: 32px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .price {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Mobile "Add to Cart" button in cards */
+  .card .button,
+  .quick-add__submit {
+    width: 100% !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 0 8px !important;
+    margin: 6px 0 0 0 !important;
+    font-size: 11px !important;
+    border-radius: 4px !important;
+  }
+}
+
+/* =============================================================================
+   4. CART DRAWER ENHANCEMENTS
+   ============================================================================= */
+
+/* Ensure cart drawer is visible when opened */
+cart-drawer {
+  visibility: visible !important;
+}
+
+cart-drawer.active {
+  transform: translateX(0) !important;
+}
+
+/* Cart drawer CTA styling */
+.cart-drawer__footer .button--primary,
+.cart__ctas .button--primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* =============================================================================
+   5. ASPECT RATIO FALLBACK for older browsers
+   ============================================================================= */
+
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 1 / 1) {
+  .card__media::before,
+  .card .media::before {
+    content: '';
+    display: block;
+    padding-bottom: 100%; /* 1:1 aspect ratio */
+  }
+
+  .card__media > *,
+  .card .media > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* =============================================================================
+   6. PDP METAFIELD THEME STYLE SUPPORT
+   ============================================================================= */
+
+/* Warm CRO theme style overrides for PDP */
+.pdp--warm {
+  --color-primary: #ff6b35;
+  --color-accent: #f7931e;
+}
+
+.pdp--warm .product-form__submit,
+.pdp--warm .shopify-payment-button__button {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%) !important;
+}
+
+.pdp--warm .price-item--regular {
+  color: #ff6b35 !important;
+}
+
+.pdp--warm .badge {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%) !important;
+  color: #ffffff !important;
+}
+
+/* =============================================================================
+   7. HEADER IMPROVEMENTS - Ensure menu items are visible
+   ============================================================================= */
+
+.header__menu-item,
+.header__menu-item span,
+.header__active-menu-item {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.header__menu-item:hover {
+  opacity: 0.8;
+}
+
+.header__active-menu-item {
+  border-bottom: 2px solid #0ea5e9 !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   8. ENSURE STICKY HEADER SCRIPT COMPATIBILITY
+   ============================================================================= */
+
+/* Add this class via JavaScript when scrolled */
+.header.scrolled {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.header.scrolled .header__heading-logo {
+  max-height: 32px !important;
+}
+
+/* =============================================================================
+   9. PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/* Hardware acceleration for frequently animated elements only */
+.card-wrapper:hover,
+.header.scrolled {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Remove will-change after animations complete */
+.card-wrapper {
+  backface-visibility: hidden;
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* =============================================================================
+   10. TRUST & BENEFIT INDICATORS FOR COD
+   ============================================================================= */
+
+.cod-benefits {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.cod-benefits__title {
+  color: #0ea5e9;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cod-benefits__title svg {
+  flex-shrink: 0;
+  color: #22c55e;
+}
+
+.cod-benefits__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cod-benefits__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  color: #e5e7eb;
+  font-size: 1.3rem;
+}
+
+.cod-benefits__item::before {
+  content: '✓';
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
