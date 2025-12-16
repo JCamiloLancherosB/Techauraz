@@ -7,19 +7,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- Preload_tag del JavaScript crítico -->
-<link rel="modulepreload" href="{{ 'theme-editor.js' | asset_url }}">
+<link rel="modulepreload_tag" href="{{ 'theme-editor.js' | asset_url }}">
 
-<!-- Note: Image preloading should be done in sections, not in layout -->
-{%- comment -%}
-<!-- Preload de la primera imagen visible (hero) -->
+<!-- Preload_tag de la primera imagen visible (hero) -->
 {% if section.settings.image %}
-  <link rel="preload" as="image" loading="eager"
+  <link rel="preload_tag" as="image" loading="eager"
     fetchpriority="high" href="{{ section.settings.image | image_url: width: 1920, quality: 85, format: 'webp' }}" imagesrcset="{{ section.settings.image | image_url: width: 750, quality: 85, format: 'webp' }} 750w, {{ section.settings.image | image_url: width: 1920, quality: 85, format: 'webp' }} 1920w" imagesizes="100vw">
 {% endif %}
 
-<!-- Preload del logo -->
-<link rel="preload" as="image" href="{{ section.settings.logo | image_url: width: 200, quality: 85, format: 'webp' }}">
-{%- endcomment -%}
+<!-- Preload_tag del logo -->
+<link rel="preload_tag" as="image" href="{{ section.settings.logo | image_url: width: 200, quality: 85, format: 'webp' }}">
     <!-- Meta Tags Básicos -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -184,7 +181,7 @@
     {%- endunless -%}
     
     <!-- Preload_tag critical resources -->
-    <link rel="preload" as="script" href="{{ 'global.js' | asset_url }}">
+    <link rel="preload_tag" as="script" href="{{ 'global.js' | asset_url }}">
     
     <!-- DNS prefetch para external domains -->
 <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
@@ -457,10 +454,10 @@
 
     <!-- Preload_tag de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload_tag_tag" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload_tag_tag" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
     <!-- Componentes Adicionales -->
