@@ -6,9 +6,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Preload del JavaScript crítico -->
+<!-- Preload_tag del JavaScript crítico -->
 <link rel="modulepreload" href="{{ 'theme-editor.js' | asset_url }}">
 
+<!-- Note: Image preloading should be done in sections, not in layout -->
+{%- comment -%}
 <!-- Preload de la primera imagen visible (hero) -->
 {% if section.settings.image %}
   <link rel="preload" as="image" loading="eager"
@@ -17,6 +19,7 @@
 
 <!-- Preload del logo -->
 <link rel="preload" as="image" href="{{ section.settings.logo | image_url: width: 200, quality: 85, format: 'webp' }}">
+{%- endcomment -%}
     <!-- Meta Tags Básicos -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -181,7 +184,7 @@
     {%- endunless -%}
     
     <!-- Preload_tag critical resources -->
-    <link rel="preload_tag" as="script" href="{{ 'global.js' | asset_url }}">
+    <link rel="preload" as="script" href="{{ 'global.js' | asset_url }}">
     
     <!-- DNS prefetch para external domains -->
 <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
