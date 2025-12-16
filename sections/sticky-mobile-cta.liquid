@@ -1,0 +1,238 @@
+{{ 'component-sticky-cta.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enable_sticky_cta and product -%}
+<div 
+  class="sticky-cta-bar" 
+  data-sticky-cta
+  role="region"
+  aria-label="Botones de compra rápida"
+>
+  <div class="sticky-cta-bar__container">
+    <button
+      type="button"
+      class="sticky-cta-bar__button sticky-cta-bar__button--buy"
+      data-sticky-buy
+      aria-label="Comprar {{ product.title }}"
+    >
+      <svg class="sticky-cta-bar__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L19 6H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9" cy="18" r="1" fill="currentColor"/>
+        <circle cx="16" cy="18" r="1" fill="currentColor"/>
+      </svg>
+      <span class="sticky-cta-bar__text">{{ section.settings.buy_button_text | default: 'Comprar ahora' }}</span>
+    </button>
+    
+    <a
+      href="https://wa.me/573008602789?text={{ 'Hola! Estoy interesado en ' | append: product.title | append: '. Me gustaría más información: ' | append: shop.url | append: product.url | url_encode }}"
+      class="sticky-cta-bar__button sticky-cta-bar__button--whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp sobre {{ product.title }}"
+    >
+      <svg class="sticky-cta-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span class="sticky-cta-bar__text">{{ section.settings.whatsapp_button_text | default: 'WhatsApp' }}</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  class StickyCTABar {
+    constructor(element) {
+      this.element = element;
+      this.buyButton = element.querySelector('[data-sticky-buy]');
+      this.productForm = document.querySelector('product-form');
+      this.submitButton = document.querySelector('#ProductSubmitButton-{{ section.id }}') || 
+                          document.querySelector('[name="add"]');
+      
+      this.init();
+    }
+
+    init() {
+      // Show/hide based on scroll position
+      this.handleScroll();
+      window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+      
+      // Handle buy button click
+      if (this.buyButton && this.submitButton) {
+        this.buyButton.addEventListener('click', () => {
+          this.submitButton.click();
+          // Scroll to top to see cart notification
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    }
+
+    handleScroll() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Show sticky bar after scrolling down 300px
+      if (scrollPosition > 300) {
+        this.element.classList.add('sticky-cta-bar--visible');
+      } else {
+        this.element.classList.remove('sticky-cta-bar--visible');
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const stickyBar = document.querySelector('[data-sticky-cta]');
+    if (stickyBar && window.innerWidth < 750) {
+      new StickyCTABar(stickyBar);
+    }
+  });
+</script>
+
+<style>
+  .sticky-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
+  }
+
+  .sticky-cta-bar--visible {
+    transform: translateY(0);
+  }
+
+  .sticky-cta-bar__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .sticky-cta-bar__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.938rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .sticky-cta-bar__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .sticky-cta-bar__text {
+    display: inline-block;
+  }
+
+  .sticky-cta-bar__button--buy {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  }
+
+  .sticky-cta-bar__button--buy:hover,
+  .sticky-cta-bar__button--buy:active {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  }
+
+  .sticky-cta-bar__button--whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  }
+
+  .sticky-cta-bar__button--whatsapp:hover,
+  .sticky-cta-bar__button--whatsapp:active {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  }
+
+  /* Show only on mobile */
+  @media screen and (max-width: 749px) {
+    .sticky-cta-bar {
+      display: block;
+    }
+  }
+
+  /* Larger mobile screens */
+  @media screen and (min-width: 480px) and (max-width: 749px) {
+    .sticky-cta-bar__container {
+      padding: 16px;
+      gap: 16px;
+    }
+    
+    .sticky-cta-bar__button {
+      padding: 16px 24px;
+      font-size: 1rem;
+    }
+  }
+
+  /* Accessibility */
+  .sticky-cta-bar__button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-cta-bar {
+      transition: none;
+    }
+  }
+
+  /* Safe area for devices with notch */
+  @supports (padding: max(0px)) {
+    .sticky-cta-bar__container {
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra CTA Sticky Mobile",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_cta",
+      "label": "Activar barra sticky",
+      "default": true,
+      "info": "Muestra botones fijos de compra y WhatsApp en móvil"
+    },
+    {
+      "type": "text",
+      "id": "buy_button_text",
+      "label": "Texto botón comprar",
+      "default": "Comprar ahora"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_button_text",
+      "label": "Texto botón WhatsApp",
+      "default": "WhatsApp"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra CTA Sticky Mobile"
+    }
+  ]
+}
+{% endschema %}

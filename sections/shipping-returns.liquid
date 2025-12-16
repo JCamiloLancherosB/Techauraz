@@ -1,0 +1,325 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="shipping-returns section-{{ section.id }}-padding">
+  <div class="shipping-returns__container page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="shipping-returns__heading h3">{{ section.settings.heading }}</h2>
+    {% endif %}
+    
+    <div class="shipping-returns__grid">
+      <div class="shipping-returns__card">
+        <div class="shipping-returns__icon-wrapper">
+          <svg class="shipping-returns__icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M2 6a3 3 0 013-3h18a3 3 0 013 3v14a3 3 0 01-3 3h-1v3a2 2 0 01-2 2h-2a2 2 0 01-2-2v-3h-8v3a2 2 0 01-2 2H4a2 2 0 01-2-2v-3H1a1 1 0 01-1-1V6zm5 14a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="shipping-returns__card-title">Envío Gratis</h3>
+        <p class="shipping-returns__card-text">
+          Envío totalmente gratuito a toda Colombia. Entrega en 2-5 días hábiles.
+        </p>
+      </div>
+
+      <div class="shipping-returns__card">
+        <div class="shipping-returns__icon-wrapper">
+          <svg class="shipping-returns__icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 16l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="shipping-returns__card-title">Pago Contra Entrega</h3>
+        <p class="shipping-returns__card-text">
+          Paga cuando recibas tu producto. Efectivo o tarjeta al momento de la entrega.
+        </p>
+      </div>
+
+      <div class="shipping-returns__card">
+        <div class="shipping-returns__icon-wrapper">
+          <svg class="shipping-returns__icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 2L4 8v10c0 8.8 6 17 12 20 6-3 12-11.2 12-20V8L16 2zm7 13l-9 9-5-5 1.5-1.5L14 21l7.5-7.5L23 15z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="shipping-returns__card-title">Garantía 15 Días</h3>
+        <p class="shipping-returns__card-text">
+          Devolución o cambio sin preguntas durante los primeros 15 días.
+        </p>
+      </div>
+    </div>
+
+    {% if section.settings.show_timeline %}
+    <div class="shipping-timeline">
+      <h3 class="shipping-timeline__heading">Proceso de entrega</h3>
+      <div class="shipping-timeline__steps">
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <span class="shipping-timeline__step-title">1. Confirmas tu pedido</span>
+            <span class="shipping-timeline__step-desc">Realizas tu compra online</span>
+          </div>
+        </div>
+        
+        <div class="shipping-timeline__connector" aria-hidden="true"></div>
+        
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <span class="shipping-timeline__step-title">2. Preparamos tu envío</span>
+            <span class="shipping-timeline__step-desc">Empacamos con cuidado</span>
+          </div>
+        </div>
+        
+        <div class="shipping-timeline__connector" aria-hidden="true"></div>
+        
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 3h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L21 8H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <span class="shipping-timeline__step-title">3. Recibes tu producto</span>
+            <span class="shipping-timeline__step-desc">En 2-5 días hábiles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .shipping-returns {
+    background: white;
+  }
+
+  .shipping-returns__container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .shipping-returns__heading {
+    text-align: center;
+    margin-bottom: 32px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .shipping-returns__grid {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .shipping-returns__card {
+    text-align: center;
+    padding: 24px;
+    background: #f9fafb;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .shipping-returns__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .shipping-returns__icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+  }
+
+  .shipping-returns__card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+  }
+
+  .shipping-returns__card-text {
+    font-size: 0.938rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .shipping-timeline {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  .shipping-timeline__heading {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 32px;
+  }
+
+  .shipping-timeline__steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .shipping-timeline__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .shipping-timeline__step-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    margin-bottom: 12px;
+  }
+
+  .shipping-timeline__step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .shipping-timeline__step-title {
+    font-weight: 600;
+    color: #111827;
+    font-size: 0.938rem;
+  }
+
+  .shipping-timeline__step-desc {
+    font-size: 0.813rem;
+    color: #6b7280;
+  }
+
+  .shipping-timeline__connector {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    margin: 0 16px;
+    max-width: 100px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .shipping-returns__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .shipping-timeline__steps {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .shipping-timeline__connector {
+      width: 2px;
+      height: 40px;
+      margin: 0;
+      background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .shipping-timeline__step {
+      max-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shipping-returns__card {
+      transition: none;
+    }
+
+    .shipping-returns__card:hover {
+      transform: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Envío y Garantía",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Encabezado",
+      "default": "Envío y Garantía"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timeline",
+      "label": "Mostrar línea de tiempo",
+      "default": true,
+      "info": "Muestra el proceso de entrega paso a paso"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Envío y Garantía"
+    }
+  ]
+}
+{% endschema %}

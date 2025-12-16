@@ -1,0 +1,284 @@
+{{ 'component-notification-toast.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enable_notifications -%}
+<div 
+  class="purchase-notification" 
+  data-notification-toast
+  data-interval="{{ section.settings.interval }}"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  hidden
+>
+  <div class="purchase-notification__content">
+    <div class="purchase-notification__icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="purchase-notification__text">
+      <p class="purchase-notification__message">
+        <strong data-customer-name></strong> de <span data-customer-location></span> compró
+        <span data-product-name></span>
+      </p>
+      <p class="purchase-notification__time">Hace <span data-time-ago></span></p>
+    </div>
+    <button 
+      class="purchase-notification__close" 
+      type="button"
+      aria-label="Cerrar notificación"
+      data-notification-close
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  class PurchaseNotification {
+    constructor(element) {
+      this.element = element;
+      this.interval = parseInt(element.dataset.interval) * 1000 || 15000;
+      this.closeBtn = element.querySelector('[data-notification-close]');
+      this.currentIndex = 0;
+      this.isVisible = false;
+      
+      // Sample notifications data
+      this.notifications = [
+        {
+          customerName: 'María G.',
+          location: 'Bogotá',
+          product: 'Audífonos Bluetooth Premium',
+          timeAgo: '5 minutos'
+        },
+        {
+          customerName: 'Carlos R.',
+          location: 'Medellín',
+          product: 'Smartwatch Pro',
+          timeAgo: '12 minutos'
+        },
+        {
+          customerName: 'Ana T.',
+          location: 'Cali',
+          product: 'Cargador Rápido USB-C',
+          timeAgo: '18 minutos'
+        },
+        {
+          customerName: 'Juan M.',
+          location: 'Barranquilla',
+          product: 'Memoria USB 64GB',
+          timeAgo: '25 minutos'
+        },
+        {
+          customerName: 'Laura P.',
+          location: 'Cartagena',
+          product: 'Mouse Gaming RGB',
+          timeAgo: '32 minutos'
+        }
+      ];
+
+      this.init();
+    }
+
+    init() {
+      this.closeBtn.addEventListener('click', () => this.hide());
+      
+      // Start showing notifications after initial delay
+      setTimeout(() => this.show(), 5000);
+      
+      // Set interval for rotating notifications
+      this.notificationInterval = setInterval(() => {
+        if (!this.isVisible) {
+          this.show();
+        }
+      }, this.interval);
+    }
+
+    show() {
+      if (this.isVisible) return;
+      
+      const notification = this.notifications[this.currentIndex];
+      
+      // Update notification content
+      this.element.querySelector('[data-customer-name]').textContent = notification.customerName;
+      this.element.querySelector('[data-customer-location]').textContent = notification.location;
+      this.element.querySelector('[data-product-name]').textContent = notification.product;
+      this.element.querySelector('[data-time-ago]').textContent = notification.timeAgo;
+      
+      // Show notification
+      this.element.hidden = false;
+      this.isVisible = true;
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => this.hide(), 5000);
+      
+      // Move to next notification
+      this.currentIndex = (this.currentIndex + 1) % this.notifications.length;
+    }
+
+    hide() {
+      this.element.hidden = true;
+      this.isVisible = false;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const notificationElement = document.querySelector('[data-notification-toast]');
+    if (notificationElement && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      new PurchaseNotification(notificationElement);
+    }
+  });
+</script>
+
+<style>
+  .purchase-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    max-width: 380px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .purchase-notification[hidden] {
+    display: none;
+  }
+
+  .purchase-notification__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .purchase-notification__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .purchase-notification__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .purchase-notification__message {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #1f2937;
+    margin: 0 0 4px 0;
+  }
+
+  .purchase-notification__message strong {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .purchase-notification__time {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .purchase-notification__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #9ca3af;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .purchase-notification__close:hover {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+
+  .purchase-notification__close:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Mobile responsive */
+  @media screen and (max-width: 749px) {
+    .purchase-notification {
+      bottom: 80px;
+      left: 12px;
+      right: 12px;
+      max-width: none;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .purchase-notification {
+      animation: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .purchase-notification {
+      border: 2px solid currentColor;
+    }
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Notificación de Compras",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_notifications",
+      "label": "Activar notificaciones",
+      "default": true,
+      "info": "Muestra notificaciones de compras recientes (datos de ejemplo)"
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Intervalo entre notificaciones",
+      "default": 15,
+      "info": "Tiempo en segundos entre cada notificación"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Notificación de Compras"
+    }
+  ]
+}
+{% endschema %}

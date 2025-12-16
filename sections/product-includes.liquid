@@ -1,0 +1,183 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="product-includes section-{{ section.id }}-padding">
+  <div class="product-includes__container page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="product-includes__heading h3">{{ section.settings.heading }}</h2>
+    {% endif %}
+    
+    {% if section.blocks.size > 0 %}
+      <ul class="product-includes__list">
+        {% for block in section.blocks %}
+          <li class="product-includes__item" {{ block.shopify_attributes }}>
+            <svg class="product-includes__check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="10" fill="#10b981"/>
+              <path d="M6 10l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="product-includes__text">{{ block.settings.item }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .product-includes {
+    background: white;
+  }
+
+  .product-includes__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .product-includes__heading {
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .product-includes__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+  }
+
+  .product-includes__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .product-includes__item:hover {
+    background: #f3f4f6;
+  }
+
+  .product-includes__check {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .product-includes__text {
+    flex: 1;
+    font-size: 0.938rem;
+    color: #374151;
+    line-height: 1.5;
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-includes__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-includes__item {
+      transition: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Qué Incluye",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Encabezado",
+      "default": "¿Qué incluye?"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Artículo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item",
+          "label": "Artículo incluido",
+          "default": "1x Producto principal"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Qué Incluye",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "item": "1x Producto principal"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "item": "1x Cable USB"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "item": "1x Manual de usuario"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "item": "Garantía de 15 días"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

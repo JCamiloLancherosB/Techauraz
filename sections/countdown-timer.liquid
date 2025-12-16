@@ -1,0 +1,302 @@
+{{ 'component-countdown.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.settings.enable_countdown -%}
+<div class="countdown-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="countdown-container page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="countdown-heading h3">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    
+    <div 
+      class="countdown-timer" 
+      data-countdown
+      data-end-date="{{ section.settings.end_date }}"
+      data-end-time="{{ section.settings.end_time }}"
+      role="timer"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div class="countdown-item">
+        <span class="countdown-value" data-days>00</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <div class="countdown-separator" aria-hidden="true">:</div>
+      <div class="countdown-item">
+        <span class="countdown-value" data-hours>00</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <div class="countdown-separator" aria-hidden="true">:</div>
+      <div class="countdown-item">
+        <span class="countdown-value" data-minutes>00</span>
+        <span class="countdown-label">Min</span>
+      </div>
+      <div class="countdown-separator" aria-hidden="true">:</div>
+      <div class="countdown-item">
+        <span class="countdown-value" data-seconds>00</span>
+        <span class="countdown-label">Seg</span>
+      </div>
+    </div>
+
+    {%- if section.settings.fallback_text != blank -%}
+      <div class="countdown-fallback" data-countdown-fallback hidden>
+        <p class="countdown-fallback__text">{{ section.settings.fallback_text }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  class CountdownTimer {
+    constructor(element) {
+      this.element = element;
+      this.endDate = element.dataset.endDate;
+      this.endTime = element.dataset.endTime || '23:59:59';
+      this.daysEl = element.querySelector('[data-days]');
+      this.hoursEl = element.querySelector('[data-hours]');
+      this.minutesEl = element.querySelector('[data-minutes]');
+      this.secondsEl = element.querySelector('[data-seconds]');
+      this.fallbackEl = document.querySelector('[data-countdown-fallback]');
+      
+      if (this.endDate) {
+        this.targetDate = new Date(`${this.endDate}T${this.endTime}`);
+        this.init();
+      }
+    }
+
+    init() {
+      this.updateCountdown();
+      this.interval = setInterval(() => this.updateCountdown(), 1000);
+    }
+
+    updateCountdown() {
+      const now = new Date().getTime();
+      const distance = this.targetDate.getTime() - now;
+
+      if (distance < 0) {
+        this.handleExpired();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      this.daysEl.textContent = String(days).padStart(2, '0');
+      this.hoursEl.textContent = String(hours).padStart(2, '0');
+      this.minutesEl.textContent = String(minutes).padStart(2, '0');
+      this.secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    handleExpired() {
+      clearInterval(this.interval);
+      this.element.style.display = 'none';
+      if (this.fallbackEl) {
+        this.fallbackEl.hidden = false;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const countdownElements = document.querySelectorAll('[data-countdown]');
+    countdownElements.forEach(el => new CountdownTimer(el));
+  });
+</script>
+
+<style>
+  .countdown-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .countdown-container {
+    text-align: center;
+  }
+
+  .countdown-heading {
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 80px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .countdown-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+  .countdown-separator {
+    font-size: 2rem;
+    font-weight: 700;
+    opacity: 0.6;
+  }
+
+  .countdown-fallback {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+
+  .countdown-fallback__text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* Mobile responsive */
+  @media screen and (max-width: 749px) {
+    .countdown-item {
+      min-width: 70px;
+      padding: 12px 8px;
+    }
+
+    .countdown-value {
+      font-size: 1.5rem;
+    }
+
+    .countdown-label {
+      font-size: 0.688rem;
+    }
+
+    .countdown-separator {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .countdown-item {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .countdown-item {
+      border: 2px solid currentColor;
+    }
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Contador de Oferta",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "Activar contador",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Encabezado",
+      "default": "¡OFERTA TERMINA EN!",
+      "info": "Texto que aparece sobre el contador"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "Fecha de finalización",
+      "info": "Formato: YYYY-MM-DD (ejemplo: 2024-12-31)",
+      "default": "2024-12-31"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "Hora de finalización",
+      "info": "Formato: HH:MM:SS (ejemplo: 23:59:59)",
+      "default": "23:59:59"
+    },
+    {
+      "type": "text",
+      "id": "fallback_text",
+      "label": "Texto cuando expira",
+      "info": "Mensaje que se muestra cuando el contador llega a cero",
+      "default": "¡La oferta ha finalizado! Consulta nuestras promociones actuales."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contador de Oferta"
+    }
+  ]
+}
+{% endschema %}
