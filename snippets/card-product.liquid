@@ -22,6 +22,7 @@
 
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+{{ 'premium-enhancements.css' | asset_url | stylesheet_tag }}
 
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -129,7 +130,15 @@
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
 
-            <span class="caption-large light">{{ block.settings.description | escape }}</span>
+            {%- comment -%}
+              Display product description if available.
+              Truncated to 15 words for consistent card heights.
+            {%- endcomment -%}
+            {%- if card_product.description != blank -%}
+              <div class="card__description">
+                {{ card_product.description | strip_html | truncatewords: 15 }}
+              </div>
+            {%- endif -%}
 
             {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
               {% liquid
