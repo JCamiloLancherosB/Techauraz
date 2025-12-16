@@ -11,6 +11,7 @@
    ============================================================================ */
 
 /* Header Icon Normalization - Fix oversized icons */
+/* Using !important here is intentional to override minified base.css */
 .header__icon {
   display: flex !important;
   align-items: center !important;
@@ -637,9 +638,10 @@ html {
   transition: opacity 0.2s ease;
 }
 
-/* Lazy loading optimization */
+/* Lazy loading optimization with intrinsic sizing to prevent layout shift */
 img[loading="lazy"] {
   content-visibility: auto;
+  contain-intrinsic-size: 300px 300px; /* Default size to prevent CLS */
 }
 
 /* ============================================================================
@@ -747,8 +749,8 @@ img[loading="lazy"] {
   }
 }
 
-/* Firefox-specific fixes */
-@-moz-document url-prefix() {
+/* Modern browser-specific fix using feature detection */
+@supports (-moz-appearance: none) {
   .button {
     padding-top: calc(0.5rem + 1px);
     padding-bottom: calc(0.5rem - 1px);
