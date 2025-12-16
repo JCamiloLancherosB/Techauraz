@@ -17,9 +17,9 @@
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
-<div class="announcement-bar__container">
+<div class="announcement-bar__container{% if section.settings.sticky_promo %} announcement-bar__container--sticky{% endif %}">
   <div class="announcement-bar__message animated">
-    🚚 <strong>¡ENVÍO GRATIS EN COLOMBIA!</strong> · <span style="color:#FFF700">Pago contra entrega disponible</span> 🔒
+    🚚 <strong>Envío GRATIS</strong> | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 🎉 <span style="color:#FFF700">15% OFF</span>
   </div>
 </div>
 <div
@@ -231,6 +231,13 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "sticky_promo",
+      "default": false,
+      "label": "Barra promocional fija (sticky)",
+      "info": "Mantiene la barra de promoción visible al hacer scroll"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
