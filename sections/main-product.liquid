@@ -1284,8 +1284,8 @@ function addUrgencyIndicator() {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     `;
     
-    engagement.innerHTML = `📸 ¿Te gustan las imágenes? ¡Imagínate teniéndolo!</p>
-      <button onclick="document.querySelector('.product-form__cart-submit').scrollIntoView({behavior: 'smooth'}); this.parentElement.remove();" 
+    engagement.innerHTML = `<p>📸 ¿Te gustan las imágenes? ¡Imagínate teniéndolo!</p>
+      <button style="margin-top: 10px; padding: 10px 20px; background: #3182ce; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;" onclick="document.querySelector('.product-form__cart-submit').scrollIntoView({behavior: 'smooth'}); this.parentElement.remove();">
         🛒 ¡Comprarlo ahora!
       </button>
     `;
@@ -1426,11 +1426,6 @@ function addUrgencyIndicator() {
           });
         }
       },
-
-      fbq('track', 'ViewContent', {
-  content_ids: ['123'], // 'REQUIRED': array of product IDs
-  content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
-})
       
       priceClick: () => {
         if (typeof gtag !== 'undefined') {
