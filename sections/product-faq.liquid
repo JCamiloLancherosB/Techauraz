@@ -253,8 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const summary = item.querySelector('.product-faq__question');
     
     if (summary) {
-      // Agregar rol y aria-expanded para accesibilidad
-      summary.setAttribute('role', 'button');
+      // Actualizar aria-expanded para accesibilidad
       summary.setAttribute('aria-expanded', item.hasAttribute('open') ? 'true' : 'false');
       
       // Actualizar aria-expanded cuando se abre/cierra

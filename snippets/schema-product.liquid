@@ -28,6 +28,7 @@
     "url": {{ product.url | within: collection | default: product.url | prepend: request.origin | json }},
     "priceCurrency": {{ cart.currency.iso_code | json }},
     "price": {{ product.selected_or_first_available_variant.price | divided_by: 100.0 | json }},
+    {% comment %}30 days validity: 2592000 seconds = 30 days{% endcomment %}
     "priceValidUntil": "{{ 'now' | date: '%s' | plus: 2592000 | date: '%Y-%m-%d' }}",
     "availability": "{% if product.selected_or_first_available_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "itemCondition": "https://schema.org/NewCondition",
