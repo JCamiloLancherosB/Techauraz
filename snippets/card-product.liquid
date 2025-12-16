@@ -22,7 +22,7 @@
 
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
-{{ 'premium-enhancements.css' | asset_url | stylesheet_tag }}
+{%- comment -%} premium-enhancements.css is now deprecated - styles moved to techauraz-master.css {%- endcomment -%}
 
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -157,24 +157,13 @@
 </div>
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
-            {%- if card_product.description != blank -%}
-  <div class="card__excerpt">
-    {{ card_product.description | strip_html | truncate: 90 }}
-  </div>
-{%- endif -%}
-
-{%- if card_product.compare_at_price > card_product.price -%}
-  {%- assign discount = card_product.compare_at_price | minus: card_product.price | times: 100 | divided_by: card_product.compare_at_price -%}
-  <span class="card__discount-badge">-{{ discount }}%</span>
-{%- endif -%}
-
             {%- comment -%}
               Display product description if available.
-              Truncated to 15 words for consistent card heights.
+              Truncated to 12 words for consistent card heights.
             {%- endcomment -%}
             {%- if card_product.description != blank -%}
               <div class="card__description">
-                {{ card_product.description | strip_html | truncatewords: 15 }}
+                {{ card_product.description | strip_html | truncatewords: 12 }}
               </div>
             {%- endif -%}
 
