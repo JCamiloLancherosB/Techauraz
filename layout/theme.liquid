@@ -110,6 +110,9 @@
     <!-- Meta Tags de Shopify -->
     {% render 'meta-tags' %}
 
+    {%- comment -%} SEO: Breadcrumbs Structured Data {%- endcomment -%}
+    {% render 'schema-breadcrumbs' %}
+
     <!-- Scripts Principales -->
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>

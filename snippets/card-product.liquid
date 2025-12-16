@@ -100,6 +100,27 @@
                 >
               {%- endif -%}
             </div>
+
+            {%- comment -%} CRO: Stock & Discount Badges {%- endcomment -%}
+            <div class="card__badges">
+              {%- if card_product.compare_at_price > card_product.price -%}
+                {%- assign discount_percentage = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
+                <span class="card__badge card__badge--discount">-{{ discount_percentage }}%</span>
+              {%- endif -%}
+              
+              {%- assign total_inventory = 0 -%}
+              {%- for variant in card_product.variants -%}
+                {%- if variant.inventory_quantity > 0 -%}
+                  {%- assign total_inventory = total_inventory | plus: variant.inventory_quantity -%}
+                {%- endif -%}
+              {%- endfor -%}
+              
+              {%- if total_inventory > 0 and total_inventory <= 10 -%}
+                <span class="card__badge card__badge--stock">¡Últimas {{ total_inventory }} unidades!</span>
+              {%- elsif card_product.available == false -%}
+                <span class="card__badge card__badge--sold-out">Agotado</span>
+              {%- endif -%}
+            </div>
           </div>
         {%- endif -%}
         
