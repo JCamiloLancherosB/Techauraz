@@ -1,0 +1,343 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="trust-badges section-{{ section.id }}-padding">
+  <div class="trust-badges__container page-width">
+    {% if section.settings.heading != blank %}
+      <h3 class="trust-badges__heading">{{ section.settings.heading }}</h3>
+    {% endif %}
+
+    <div class="trust-badges__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="trust-badges__item" {{ block.shopify_attributes }}>
+            {% if block.settings.icon_type == 'emoji' %}
+              <span class="trust-badges__icon" aria-hidden="true">{{ block.settings.emoji }}</span>
+            {% elsif block.settings.icon_type == 'svg' and block.settings.custom_svg != blank %}
+              <div class="trust-badges__icon">{{ block.settings.custom_svg }}</div>
+            {% elsif block.settings.icon_type == 'image' and block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 60 | image_tag: loading: 'lazy', alt: block.settings.text, class: 'trust-badges__image' }}
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <span class="trust-badges__text">{{ block.settings.text }}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        {%- comment -%} Badges de confianza por defecto {%- endcomment -%}
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">🔒</span>
+          <span class="trust-badges__text">Pago Seguro</span>
+        </div>
+        
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">💳</span>
+          <span class="trust-badges__text">Todos los Medios de Pago</span>
+        </div>
+
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">🚚</span>
+          <span class="trust-badges__text">Envío Gratis</span>
+        </div>
+
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">✅</span>
+          <span class="trust-badges__text">Garantía 30 Días</span>
+        </div>
+
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">💵</span>
+          <span class="trust-badges__text">Pago Contra Entrega</span>
+        </div>
+
+        <div class="trust-badges__item">
+          <span class="trust-badges__icon" aria-hidden="true">⭐</span>
+          <span class="trust-badges__text">+1000 Clientes Satisfechos</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.trust-badges {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.trust-badges__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.trust-badges__heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.trust-badges__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.trust-badges__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.trust-badges__item:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-badges__item:hover {
+    transform: none;
+  }
+}
+
+.trust-badges__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-badges__icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.trust-badges__image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.trust-badges__text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+  max-width: 150px;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .trust-badges__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .trust-badges__heading {
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .trust-badges__item {
+    padding: 0.75rem;
+  }
+
+  .trust-badges__icon {
+    font-size: 2rem;
+  }
+
+  .trust-badges__icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .trust-badges__image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .trust-badges__text {
+    font-size: 0.8125rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .trust-badges__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .trust-badges__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Sellos de Confianza",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Encabezado",
+      "default": "Compra con Confianza"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Sello",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Tipo de ícono",
+          "options": [
+            {
+              "value": "emoji",
+              "label": "Emoji"
+            },
+            {
+              "value": "image",
+              "label": "Imagen"
+            },
+            {
+              "value": "svg",
+              "label": "SVG personalizado"
+            }
+          ],
+          "default": "emoji"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "🔒",
+          "info": "Solo se usa si el tipo de ícono es 'Emoji'"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen",
+          "info": "Solo se usa si el tipo de ícono es 'Imagen'"
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "SVG personalizado",
+          "info": "Solo se usa si el tipo de ícono es 'SVG personalizado'. Pega el código SVG completo aquí."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Sello de Confianza"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sellos de Confianza",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "🔒",
+            "text": "Pago Seguro SSL"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "💳",
+            "text": "PSE, Tarjetas, Efectivo"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "🚚",
+            "text": "Envío Gratis"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "✅",
+            "text": "Garantía 30 Días"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "💵",
+            "text": "Contraentrega Disponible"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "emoji",
+            "emoji": "⭐",
+            "text": "+1000 Clientes"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

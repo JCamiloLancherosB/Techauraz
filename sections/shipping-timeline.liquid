@@ -1,0 +1,354 @@
+{{ 'product-conversion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="shipping-timeline section-{{ section.id }}-padding">
+  <div class="shipping-timeline__container page-width">
+    {% if section.settings.heading != blank %}
+      <h3 class="shipping-timeline__heading">{{ section.settings.heading }}</h3>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p class="shipping-timeline__description">{{ section.settings.description }}</p>
+    {% endif %}
+
+    <div class="shipping-timeline__track">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="shipping-timeline__step" {{ block.shopify_attributes }}>
+            <div class="shipping-timeline__step-icon">
+              {% if block.settings.emoji != blank %}
+                <span aria-hidden="true">{{ block.settings.emoji }}</span>
+              {% else %}
+                <span aria-hidden="true">✓</span>
+              {% endif %}
+            </div>
+            <div class="shipping-timeline__step-content">
+              <h4 class="shipping-timeline__step-title">{{ block.settings.title }}</h4>
+              <p class="shipping-timeline__step-description">{{ block.settings.description }}</p>
+              {% if block.settings.time != blank %}
+                <span class="shipping-timeline__step-time">{{ block.settings.time }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {%- comment -%} Timeline por defecto {%- endcomment -%}
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <span aria-hidden="true">📦</span>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <h4 class="shipping-timeline__step-title">Procesamiento del Pedido</h4>
+            <p class="shipping-timeline__step-description">Verificamos tu pago y preparamos tu pedido</p>
+            <span class="shipping-timeline__step-time">1-2 días hábiles</span>
+          </div>
+        </div>
+
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <span aria-hidden="true">🚚</span>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <h4 class="shipping-timeline__step-title">Envío</h4>
+            <p class="shipping-timeline__step-description">Tu pedido sale hacia su destino</p>
+            <span class="shipping-timeline__step-time">2-5 días hábiles</span>
+          </div>
+        </div>
+
+        <div class="shipping-timeline__step">
+          <div class="shipping-timeline__step-icon">
+            <span aria-hidden="true">🏠</span>
+          </div>
+          <div class="shipping-timeline__step-content">
+            <h4 class="shipping-timeline__step-title">Entrega</h4>
+            <p class="shipping-timeline__step-description">Recibe tu producto en la puerta de tu casa</p>
+            <span class="shipping-timeline__step-time">¡Listo!</span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.footer_text != blank %}
+      <p class="shipping-timeline__footer">{{ section.settings.footer_text }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.shipping-timeline {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 20px;
+}
+
+.shipping-timeline__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.shipping-timeline__heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.shipping-timeline__description {
+  font-size: 1.125rem;
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.shipping-timeline__track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.shipping-timeline__step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.shipping-timeline__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 70px;
+  bottom: -10px;
+  width: 2px;
+  background: linear-gradient(to bottom, #f97316 0%, #fb923c 100%);
+}
+
+.shipping-timeline__step-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.shipping-timeline__step-content {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.shipping-timeline__step-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.shipping-timeline__step-description {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 0.5rem 0;
+}
+
+.shipping-timeline__step-time {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+
+.shipping-timeline__footer {
+  font-size: 0.9375rem;
+  text-align: center;
+  color: #6b7280;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .shipping-timeline__heading {
+    font-size: 1.5rem;
+  }
+
+  .shipping-timeline__description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .shipping-timeline__step {
+    gap: 1rem;
+    padding: 1.25rem 0;
+  }
+
+  .shipping-timeline__step:not(:last-child)::after {
+    left: 24px;
+    top: 60px;
+  }
+
+  .shipping-timeline__step-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+
+  .shipping-timeline__step-title {
+    font-size: 1.125rem;
+  }
+
+  .shipping-timeline__step-description {
+    font-size: 0.9375rem;
+  }
+
+  .shipping-timeline__step-time {
+    font-size: 0.8125rem;
+  }
+
+  .shipping-timeline__footer {
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Timeline de Envío",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Encabezado",
+      "default": "📦 ¿Cómo funciona el envío?"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Seguimiento paso a paso desde la compra hasta la entrega"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Texto al pie",
+      "default": "* Tiempos estimados. Pueden variar según la ubicación."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji/Ícono",
+          "default": "📦",
+          "info": "Usa cualquier emoji"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Paso del proceso"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Descripción de este paso del proceso de envío"
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Tiempo estimado",
+          "default": "1-2 días",
+          "info": "Ejemplo: '1-2 días hábiles'"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline de Envío",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "📦",
+            "title": "Procesamiento del Pedido",
+            "description": "Verificamos tu pago y preparamos tu pedido con cuidado",
+            "time": "1-2 días hábiles"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "🚚",
+            "title": "Envío Nacional",
+            "description": "Tu pedido sale hacia su destino con transportadora certificada",
+            "time": "2-5 días hábiles"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "🏠",
+            "title": "Entrega a Domicilio",
+            "description": "Recibe tu producto en la puerta de tu casa",
+            "time": "¡Listo para usar!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

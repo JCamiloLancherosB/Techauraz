@@ -17,93 +17,206 @@
 <div class="product-includes section-{{ section.id }}-padding">
   <div class="product-includes__container page-width">
     {% if section.settings.heading != blank %}
-      <h2 class="product-includes__heading h3">{{ section.settings.heading }}</h2>
+      <h3 class="product-includes__heading">{{ section.settings.heading }}</h3>
     {% endif %}
-    
-    {% if section.blocks.size > 0 %}
-      <ul class="product-includes__list">
+
+    {% if section.settings.description != blank %}
+      <p class="product-includes__description">{{ section.settings.description }}</p>
+    {% endif %}
+
+    <div class="product-includes__grid">
+      {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          <li class="product-includes__item" {{ block.shopify_attributes }}>
-            <svg class="product-includes__check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#10b981"/>
-              <path d="M6 10l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="product-includes__text">{{ block.settings.item }}</span>
-          </li>
+          <div class="product-includes__item" {{ block.shopify_attributes }}>
+            <div class="product-includes__item-icon">
+              {% if block.settings.emoji != blank %}
+                <span aria-hidden="true">{{ block.settings.emoji }}</span>
+              {% else %}
+                <span aria-hidden="true">✓</span>
+              {% endif %}
+            </div>
+            <div class="product-includes__item-content">
+              <h4 class="product-includes__item-title">{{ block.settings.title }}</h4>
+              {% if block.settings.description != blank %}
+                <p class="product-includes__item-description">{{ block.settings.description }}</p>
+              {% endif %}
+            </div>
+          </div>
         {% endfor %}
-      </ul>
-    {% endif %}
+      {% else %}
+        {%- comment -%} Contenido por defecto {%- endcomment -%}
+        <div class="product-includes__item">
+          <div class="product-includes__item-icon">
+            <span aria-hidden="true">📦</span>
+          </div>
+          <div class="product-includes__item-content">
+            <h4 class="product-includes__item-title">Producto Principal</h4>
+            <p class="product-includes__item-description">El artículo principal en perfectas condiciones</p>
+          </div>
+        </div>
+
+        <div class="product-includes__item">
+          <div class="product-includes__item-icon">
+            <span aria-hidden="true">📖</span>
+          </div>
+          <div class="product-includes__item-content">
+            <h4 class="product-includes__item-title">Manual de Usuario</h4>
+            <p class="product-includes__item-description">Instrucciones completas en español</p>
+          </div>
+        </div>
+
+        <div class="product-includes__item">
+          <div class="product-includes__item-icon">
+            <span aria-hidden="true">🔌</span>
+          </div>
+          <div class="product-includes__item-content">
+            <h4 class="product-includes__item-title">Cable USB</h4>
+            <p class="product-includes__item-description">Cable de carga de alta calidad</p>
+          </div>
+        </div>
+
+        <div class="product-includes__item">
+          <div class="product-includes__item-icon">
+            <span aria-hidden="true">✅</span>
+          </div>
+          <div class="product-includes__item-content">
+            <h4 class="product-includes__item-title">Garantía</h4>
+            <p class="product-includes__item-description">Certificado de garantía de 30 días</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>
 
 <style>
-  .product-includes {
-    background: white;
-  }
+.product-includes {
+  background: #ffffff;
+  border: 2px solid #f97316;
+  border-radius: 20px;
+}
 
-  .product-includes__container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+.product-includes__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
 
+.product-includes__heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.product-includes__description {
+  font-size: 1.125rem;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.product-includes__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.product-includes__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fff7ed;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-includes__item:hover {
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 #f97316;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-includes__item:hover {
+    transform: none;
+  }
+}
+
+.product-includes__item-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+.product-includes__item-content {
+  flex: 1;
+}
+
+.product-includes__item-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+}
+
+.product-includes__item-description {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive */
+@media screen and (min-width: 750px) {
+  .product-includes__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
   .product-includes__heading {
-    text-align: center;
-    margin-bottom: 24px;
-    font-weight: 700;
-    color: #111827;
+    font-size: 1.5rem;
   }
 
-  .product-includes__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 16px;
+  .product-includes__description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .product-includes__item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: #f9fafb;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+    padding: 1rem;
   }
 
-  .product-includes__item:hover {
-    background: #f3f4f6;
+  .product-includes__item-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
   }
 
-  .product-includes__check {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
+  .product-includes__item-title {
+    font-size: 1rem;
   }
 
-  .product-includes__text {
-    flex: 1;
-    font-size: 0.938rem;
-    color: #374151;
-    line-height: 1.5;
+  .product-includes__item-description {
+    font-size: 0.875rem;
   }
-
-  @media screen and (min-width: 750px) {
-    .product-includes__list {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .product-includes__item {
-      transition: none;
-    }
-  }
+}
 </style>
 
 {% schema %}
 {
-  "name": "Qué Incluye",
+  "name": "Qué Incluye el Producto",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -111,7 +224,13 @@
       "type": "text",
       "id": "heading",
       "label": "Encabezado",
-      "default": "¿Qué incluye?"
+      "default": "📦 ¿Qué incluye tu compra?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Todo lo que recibirás al hacer tu pedido"
     },
     {
       "type": "range",
@@ -137,43 +256,64 @@
   "blocks": [
     {
       "type": "item",
-      "name": "Artículo",
+      "name": "Artículo Incluido",
       "settings": [
         {
           "type": "text",
-          "id": "item",
-          "label": "Artículo incluido",
-          "default": "1x Producto principal"
+          "id": "emoji",
+          "label": "Emoji/Ícono",
+          "default": "✓",
+          "info": "Usa cualquier emoji como ícono"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Artículo incluido"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Descripción breve del artículo incluido"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Qué Incluye",
+      "name": "Qué Incluye el Producto",
       "blocks": [
         {
           "type": "item",
           "settings": {
-            "item": "1x Producto principal"
+            "emoji": "📦",
+            "title": "Producto Principal",
+            "description": "El artículo principal en empaque original sellado"
           }
         },
         {
           "type": "item",
           "settings": {
-            "item": "1x Cable USB"
+            "emoji": "📖",
+            "title": "Manual de Usuario",
+            "description": "Instrucciones completas en español"
           }
         },
         {
           "type": "item",
           "settings": {
-            "item": "1x Manual de usuario"
+            "emoji": "🔌",
+            "title": "Cable USB",
+            "description": "Cable de carga y transferencia de datos"
           }
         },
         {
           "type": "item",
           "settings": {
-            "item": "Garantía de 15 días"
+            "emoji": "✅",
+            "title": "Garantía 30 Días",
+            "description": "Certificado de garantía oficial"
           }
         }
       ]

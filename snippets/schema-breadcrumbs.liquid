@@ -1,0 +1,87 @@
+{% comment %}
+  Breadcrumbs Structured Data (JSON-LD)
+  Uso: {% render 'schema-breadcrumbs' %}
+{% endcomment %}
+
+{% unless template == 'index' or template == '404' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": {{ shop.url | json }}
+    }
+    {% if template contains 'product' and product %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.type | default: "Productos" | json }},
+      "item": {{ shop.url | append: '/collections/all' | json }}
+    }
+    {% if collection %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ collection.title | json }},
+      "item": {{ collection.url | prepend: shop.url | json }}
+    }
+    ,
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": {{ product.title | json }},
+      "item": {{ product.url | prepend: shop.url | json }}
+    }
+    {% else %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }},
+      "item": {{ product.url | prepend: shop.url | json }}
+    }
+    {% endif %}
+    {% elsif template contains 'collection' and collection %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": {{ collection.url | prepend: shop.url | json }}
+    }
+    {% elsif template contains 'page' and page %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | json }},
+      "item": {{ page.url | prepend: shop.url | json }}
+    }
+    {% elsif template contains 'blog' %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ blog.title | default: "Blog" | json }},
+      "item": {{ blog.url | prepend: shop.url | json }}
+    }
+    {% if article %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ article.title | json }},
+      "item": {{ article.url | prepend: shop.url | json }}
+    }
+    {% endif %}
+    {% endif %}
+  ]
+}
+</script>
+{% endunless %}
