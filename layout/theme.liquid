@@ -201,6 +201,16 @@
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    
+    {%- comment -%} Scripts del rediseño {%- endcomment -%}
+    {%- if template.name == 'product' -%}
+      <script src="{{ 'cross-sell.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    
+    {%- comment -%} Purchase notifications - cargar solo en home y product {%- endcomment -%}
+    {%- if template.name == 'index' or template.name == 'product' -%}
+      <script src="{{ 'purchase-notification.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
 
     {{ content_for_header }}
 
@@ -419,9 +429,19 @@
   .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
 </style>
 
-<!-- CSS completo con preload_tag + async -->
-<link rel="preload_tag_tag" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- CSS completo con preload + async -->
+<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
+
+<!-- Nuevos CSS del rediseño con preload optimizado -->
+<link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
+
+{%- comment -%} Cargar cross-sell CSS solo en páginas de producto {%- endcomment -%}
+{%- if template.name == 'product' -%}
+  <link rel="preload" href="{{ 'cross-sell.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- Theme layout fixes for responsive images and cards -->
 {{ 'theme-fixes.css' | asset_url | stylesheet_tag }}
