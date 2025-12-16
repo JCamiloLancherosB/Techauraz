@@ -91,14 +91,16 @@ snippets/cart-drawer.liquid   - Added COD benefits
 
 ## 🏗️ Architecture
 
-### CSS Cascade (Load Order)
+### CSS Cascade (Load Order) - UPDATED 2024-12-16
 ```
-1. base.css                 (theme core)
-2. animations.css           (theme animations)
-3. cross-sell.css          (product specific)
-4. theme-fixes.css         (existing fixes)
-5. theme-refactor-2024.css (existing refactor)
-6. techauraz-fixes.css     ← MASTER OVERRIDE (load last!)
+1. base.css                   (theme core)
+2. animations.css             (theme animations)
+3. cross-sell.css            (product specific)
+4. techauraz-master.css      ← UNIFIED STYLES (consolidated)
+5. theme-refactor-2024.css   ← HEADER & IMAGE FIXES
+
+Note: techauraz-fixes.css, theme-fixes.css, and premium-enhancements.css
+      have been consolidated into techauraz-master.css and removed.
 ```
 
 ### JavaScript Flow
