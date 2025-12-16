@@ -13,6 +13,11 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
 
+  {%- comment -%} Preload hero image for LCP optimization {%- endcomment -%}
+  {%- if product.featured_media -%}
+    <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
+  {%- endif -%}
+
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -146,6 +151,111 @@
     .product-visual-3d__viewer model-viewer {
       max-width: 100%;
       height: auto;
+    }
+  }
+
+  /* =========================
+     HERO SLIDER NAVIGATION
+  ========================== */
+  .product-hero-slider {
+    position: relative;
+  }
+
+  .slider-prev,
+  .slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--cro-orange);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--cro-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .slider-prev:hover,
+  .slider-next:hover {
+    background: var(--cro-orange);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .slider-prev {
+    left: 16px;
+  }
+
+  .slider-next {
+    right: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .slider-prev,
+    .slider-next {
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
+    }
+
+    .slider-prev {
+      left: 8px;
+    }
+
+    .slider-next {
+      right: 8px;
+    }
+  }
+
+  /* Slider Dots/Bullets */
+  .slider-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--cro-orange);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .slider-dot:hover,
+  .slider-dot.active {
+    background: var(--cro-orange);
+    transform: scale(1.2);
+  }
+
+  .slider-dot:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .slider-dots {
+      bottom: 12px;
+      gap: 8px;
+    }
+
+    .slider-dot {
+      width: 10px;
+      height: 10px;
     }
   }
 
@@ -644,8 +754,18 @@
       {% render 'product-media', media: media %}
     </div>
   {% endfor %}
-  <button name="previous" class="slider-prev">‹</button>
-  <button name="next" class="slider-next">›</button>
+  <button name="previous" class="slider-prev" aria-label="Imagen anterior">‹</button>
+  <button name="next" class="slider-next" aria-label="Siguiente imagen">›</button>
+  
+  {%- if product.media.size > 1 -%}
+    <div class="slider-dots">
+      {% for media in product.media %}
+        <button class="slider-dot{% if forloop.first %} active{% endif %}" 
+                aria-label="Ir a imagen {{ forloop.index }}" 
+                data-slide="{{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+  {%- endif -%}
 </slideshow-component>
 
         <!-- BLOQUE 3D / GIF: AQUÍ AGREGAS TU MODELO O VIDEO -->
@@ -2116,6 +2236,89 @@ function addUrgencyIndicator() {
         }
       };
     }
+
+    // Hero Slider Dots Navigation
+    (function() {
+      const slider = document.querySelector('.product-hero-slider');
+      if (!slider) return;
+
+      const dots = slider.querySelectorAll('.slider-dot');
+      const slides = slider.querySelectorAll('.product-hero-slide');
+      
+      if (dots.length === 0 || slides.length === 0) return;
+
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        // Remove active class from all
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active to current
+        if (dots[index]) {
+          dots[index].classList.add('active');
+          currentSlide = index;
+        }
+
+        // Scroll to slide (if using scrolling) or show/hide slides
+        if (slides[index]) {
+          slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+          });
+        }
+      }
+
+      // Dot click handlers
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+      });
+
+      // Initialize first slide
+      showSlide(0);
+
+      // Arrow button handlers
+      const prevBtn = slider.querySelector('.slider-prev');
+      const nextBtn = slider.querySelector('.slider-next');
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          const newIndex = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+          showSlide(newIndex);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const newIndex = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(newIndex);
+        });
+      }
+
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+          // Swipe left - next slide
+          const newIndex = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(newIndex);
+        }
+        if (touchEndX > touchStartX + 50) {
+          // Swipe right - previous slide
+          const newIndex = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+          showSlide(newIndex);
+        }
+      }
+    })();
   </script>
 </section>
 
