@@ -1,15 +1,46 @@
 /**
  * =============================================================================
+ * DEPRECATED - DO NOT USE
+ * =============================================================================
+ * This file has been consolidated into techauraz-master.css
+ * Please use techauraz-master.css instead.
+ * This file is kept for backwards compatibility only.
+ * 
+ * @deprecated since version 1.0.0
+ * @see assets/techauraz-master.css
+ * =============================================================================
+ */
+
+/**
+ * =============================================================================
  * TECHAURAZ COMPREHENSIVE FIXES
  * =============================================================================
  * This file contains critical fixes for the Shopify Dawn-based theme.
- * Load this file LAST to ensure overrides take effect.
+ * ⚠️ MUST BE LOADED LAST - see layout/theme.liquid line 453
+ * 
+ * CSS Loading Order (from theme.liquid):
+ * 1. base.css (preload, async)
+ * 2. animations.css (preload, async)  
+ * 3. theme-fixes.css (deprecated, kept for compatibility)
+ * 4. theme-refactor-2024.css
+ * 5. techauraz-fixes.css ← THIS FILE (authoritative overrides)
  * 
  * Issues Fixed:
- * 1. Invisible images (media container height issues)
- * 2. Header icon sizes and sticky behavior
- * 3. Mobile grid layout
- * 4. Object-fit rules for cards and PDP
+ * 1. Invisible/collapsed card images (media container height/aspect-ratio issues)
+ * 2. Conflicting object-fit rules (contain vs cover)
+ * 3. Header icon sizes and sticky behavior
+ * 4. Mobile grid layout collapsing
+ * 5. Product page layout (grid vs flexbox)
+ * 
+ * Why This File Exists:
+ * - base.css contains global overrides that conflict with Dawn's defaults
+ * - Multiple "fixes" files (theme-fixes.css, theme-refactor-2024.css) have overlapping rules
+ * - This file consolidates fixes with proper specificity to override all previous CSS
+ * 
+ * Maintenance Notes:
+ * - DO NOT add new global img {} rules - they affect third-party widgets
+ * - DO scope all rules to specific contexts (.card-wrapper, .product-grid, etc.)
+ * - DO test changes on: collection pages, product pages, homepage, related products
  */
 
 /* =============================================================================
@@ -498,3 +529,28 @@ img[loading="lazy"].loaded {
     flex-direction: column !important;
   }
 }
+
+/* =============================================================================
+   11. CARD IMAGE HOVER BEHAVIOR (overrides base.css)
+   ============================================================================= */
+
+/* Collection/grid cards: use cover on hover for consistent fill */
+.collection .card-wrapper:hover .card__media .media img,
+.product-grid .card-wrapper:hover .card__media .media img,
+.featured-collection .card-wrapper:hover .card__media .media img,
+.related-products .card-wrapper:hover .card__media .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: scale(1.05);
+}
+
+/* Product page images: ALWAYS use contain, even on hover */
+.product__media img:hover,
+.product__media-wrapper img:hover,
+.product-gallery__image img:hover,
+.product-main-image img:hover {
+  object-fit: contain !important; /* Never crop product detail images */
+  transform: scale(1.03);
+}
+

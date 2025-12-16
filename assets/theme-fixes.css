@@ -1,6 +1,26 @@
 /**
+ * =============================================================================
+ * DEPRECATED - DO NOT USE
+ * =============================================================================
+ * This file has been consolidated into techauraz-master.css
+ * Please use techauraz-master.css instead.
+ * This file is kept for backwards compatibility only.
+ * 
+ * @deprecated since version 1.0.0
+ * @see assets/techauraz-master.css
+ * =============================================================================
+ */
+
+/**
  * Theme Layout Fixes for Techauraz
  * Ensures responsive images and proper card sizing
+ * 
+ * ⚠️ DEPRECATION NOTICE:
+ * This file contains legacy fixes that have been superseded by techauraz-fixes.css
+ * It is kept for backward compatibility but techauraz-fixes.css (loaded later) takes precedence.
+ * New fixes should be added to techauraz-fixes.css, not here.
+ * 
+ * See techauraz-fixes.css for the authoritative fix implementations.
  */
 
 /* Ensure all images are responsive */
