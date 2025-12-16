@@ -446,16 +446,23 @@
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
 {%- endif -%}
 
+<!-- TechAura Master CSS - Consolidated theme fixes and enhancements -->
+<link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
+
+<!-- Theme Refactor 2024 - Header and image rendering fixes -->
+<link rel="preload" href="{{ 'theme-refactor-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'theme-refactor-2024.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
   ============================================================================
-  1. base.css (preload, async) - Core theme styles with some heavy overrides
-  2. animations.css (preload, async) - Animation utilities
+  1. base.css (preload with fallback) - Core Dawn theme styles
+  2. animations.css (preload with fallback) - Animation utilities
   3. cross-sell.css (product pages only) - Cross-sell component styles
-  4. theme-fixes.css - DEPRECATED legacy fixes (kept for compatibility)
-  5. theme-refactor-2024.css - 2024 refactor fixes
-  6. techauraz-fixes.css - AUTHORITATIVE fixes (must load last)
+  4. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
+  5. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages
@@ -463,11 +470,17 @@
   - Related products section
   - Homepage featured collections
   
-  techauraz-fixes.css contains properly scoped overrides that fix:
+  techauraz-master.css contains:
   - Card image aspect ratios (4:5 for cards, auto for PDP)
   - Object-fit rules (cover for cards, contain for PDP)
   - Grid layout on mobile/tablet/desktop
+  - Premium visual enhancements (gradients, shadows, hover effects)
+  - Product form styling
+  
+  theme-refactor-2024.css contains:
   - Header icon sizing and sticky behavior
+  - Image rendering fixes
+  - Responsive improvements
 
     <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
