@@ -4,6 +4,23 @@
 /* Poner al FINAL de base.css                                  */
 /* ============================================================ */
 
+/* Cards (home/colecciones/related): 4:5 */
+.card__media,
+.card .media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.card__media img,
+.card .media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 768px) {
 
   /* 1. MAXIMIZAR ANCHO DE PANTALLA (Clave para que no se vean delgados) */
@@ -14,24 +31,24 @@
     width: 100% !important;
   }
 
-  /* 2. FORZAR GRILLA DE 2 COLUMNAS SIN HUECOS */
-  .product-grid, 
-  .collection .grid, 
-  .grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* Dos columnas idénticas */
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
+  /* Colecciones / grids de producto: controlar columnas SOLO aquí */
+@media (min-width: 990px) {
+  .collection .product-grid,
+  #ProductGridContainer .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
   }
+}
 
-  /* Asegurar que el item ocupe su celda completa */
-  .grid__item {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
+@media (max-width: 989px) {
+  .collection .product-grid,
+  #ProductGridContainer .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
+}
 
   /* 3. ESTILO DE LA TARJETA (Ancha y compacta) */
   .card-wrapper, .card {
@@ -46,13 +63,6 @@
     width: 100% !important;
     aspect-ratio: 1 / 1 !important; /* Cuadrado perfecto */
     background: #020617 !important; /* Fondo oscuro TechAura */
-  }
-
-  .card__media img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Cards use cover for better visual impact */
-    padding: 6px !important;
   }
 
   /* 5. TEXTO Y CONTENIDO (Para que no estire la tarjeta) */
@@ -113,29 +123,6 @@
   overflow: hidden !important;
   background: var(--ta-card-bg, #020617) !important;
 }
-
-.card__media .media img,
-.card__media img,
-.card .media img,
-.product-card__image {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important; /* Cards use cover for visual impact */
-  object-position: center !important;
-  display: block !important;
-}
-
-/* Desktop cards - maintain aspect ratio */
-@media (min-width: 750px) {
-  .card__media,
-  .card .media {
-    aspect-ratio: 4 / 5 !important;
-  }
-}
-
 /* PDP (Product Detail Page) - Use CONTAIN to show full product */
 .product__media-wrapper .media,
 .product__media.media,
@@ -173,14 +160,6 @@
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-}
-
-/* Ensure images are visible without JS */
-.card__media img,
-.card .media img,
-.product__media img {
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
 .announcement-bar__container {
