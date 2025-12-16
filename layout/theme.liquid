@@ -60,26 +60,106 @@
     <meta name="twitter:site" content="@techauraz">
     
     <!-- Structured Data -->
-    <script type="application/ld+json" defer="defer">
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Store",
+      "@type": "Organization",
       "name": "TechAura",
-      "description": "Tienda de productos tecnológicos y gadgets electrónicos en Colombia",
-      "url": "https://techauraz.com",
+      "alternateName": "Techauraz",
+      "url": "{{ shop.url }}",
+      "logo": "{{ 'logo.png' | asset_url }}",
+      "description": "Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tech con envío gratis",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "CO",
         "addressRegion": "Colombia"
       },
-      "telephone": "+57-1-1234567",
-      "openingHours": "Mo-Fr 09:00-18:00",
-      "priceRange": "$$",
-      "currenciesAccepted": "COP",
-      "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
-      "areaServed": "Colombia"
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+57-300-860-2789",
+        "contactType": "customer service",
+        "areaServed": "CO",
+        "availableLanguage": ["Spanish"]
+      },
+      "sameAs": [
+        "{{ settings.social_facebook_link }}",
+        "{{ settings.social_instagram_link }}",
+        "{{ settings.social_twitter_link }}"
+      ]
     }
     </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "TechAura",
+      "url": "{{ shop.url }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    {%- if template.name == 'product' and product -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 250 | json }},
+      "image": {{ product.featured_image | image_url: width: 1200 | json }},
+      "url": "{{ shop.url }}{{ product.url }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "TechAura"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "priceCurrency": "COP",
+        "price": "{{ product.selected_or_first_available_variant.price | divided_by: 100.0 }}",
+        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": "TechAura"
+        },
+        "priceValidUntil": "{{ 'now' | date: '%s' | plus: 2592000 | date: '%Y-%m-%d' }}",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "COP"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "CO"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+            },
+            "cutoffTime": "23:59:59",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 2,
+              "maxValue": 5,
+              "unitCode": "DAY"
+            }
+          }
+        }
+      }
+    }
+    </script>
+    {%- endif -%}
 
     <!-- Favicon -->
     {%- if settings.favicon != blank -%}

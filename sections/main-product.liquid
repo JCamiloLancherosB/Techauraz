@@ -741,6 +741,27 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                
+                {%- comment -%} Promo badges {%- endcomment -%}
+                {% render 'promo-badges',
+                  show_discount: true,
+                  show_free_shipping: true,
+                  show_cod: true,
+                  show_warranty: true,
+                  show_low_stock: false
+                %}
+                
+                {%- comment -%} WhatsApp CTA {%- endcomment -%}
+                <div style="margin-top: 12px;">
+                  {% render 'whatsapp-cta',
+                    phone: '+573008602789',
+                    product_title: product.title,
+                    product_url: product.url,
+                    button_text: 'Personaliza en WhatsApp',
+                    style: 'secondary',
+                    size: 'medium'
+                  %}
+                </div>
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}

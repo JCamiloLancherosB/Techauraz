@@ -119,7 +119,7 @@
                     "type": "benefit",
                     "settings": {
                         "emoji": "\u2728",
-                        "title": "Garant\u00eda 30 D\u00edas",
+                        "title": "Garant\u00eda 15 D\u00edas",
                         "description": "Devoluci\u00f3n sin preguntas si no quedas satisfecho"
                     }
                 }
@@ -181,6 +181,167 @@
             "type": "product-social-proof",
             "settings": {}
         },
+        "countdown_timer": {
+            "type": "countdown-timer",
+            "settings": {
+                "enable_countdown": true,
+                "heading": "¡OFERTA TERMINA EN!",
+                "end_date": "2025-12-31",
+                "end_time": "23:59:59",
+                "fallback_text": "¡La oferta ha finalizado! Consulta nuestras promociones actuales.",
+                "color_scheme": "scheme-1",
+                "padding_top": 24,
+                "padding_bottom": 24
+            }
+        },
+        "product_features": {
+            "type": "product-features",
+            "blocks": {
+                "feature_1": {
+                    "type": "feature",
+                    "settings": {
+                        "icon": "⚡",
+                        "label": "Procesador",
+                        "value": "Último modelo disponible"
+                    }
+                },
+                "feature_2": {
+                    "type": "feature",
+                    "settings": {
+                        "icon": "💾",
+                        "label": "Almacenamiento",
+                        "value": "Alta capacidad"
+                    }
+                }
+            },
+            "block_order": [
+                "feature_1",
+                "feature_2"
+            ],
+            "settings": {
+                "heading": "Especificaciones Técnicas",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "product_includes": {
+            "type": "product-includes",
+            "blocks": {
+                "item_1": {
+                    "type": "item",
+                    "settings": {
+                        "item": "1x Producto principal"
+                    }
+                },
+                "item_2": {
+                    "type": "item",
+                    "settings": {
+                        "item": "1x Cable USB"
+                    }
+                },
+                "item_3": {
+                    "type": "item",
+                    "settings": {
+                        "item": "1x Manual de usuario en español"
+                    }
+                },
+                "item_4": {
+                    "type": "item",
+                    "settings": {
+                        "item": "Garantía de 15 días"
+                    }
+                }
+            },
+            "block_order": [
+                "item_1",
+                "item_2",
+                "item_3",
+                "item_4"
+            ],
+            "settings": {
+                "heading": "¿Qué incluye?",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "shipping_returns": {
+            "type": "shipping-returns",
+            "settings": {
+                "heading": "Envío y Garantía",
+                "show_timeline": true,
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "product_faq": {
+            "type": "product-faq",
+            "blocks": {
+                "faq_1": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "¿Cuál es el tiempo de entrega?",
+                        "answer": "<p>El tiempo de entrega es de 2 a 5 días hábiles en todo Colombia.</p>"
+                    }
+                },
+                "faq_2": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "¿Puedo pagar contra entrega?",
+                        "answer": "<p>Sí, ofrecemos pago contra entrega en toda Colombia. Puedes pagar en efectivo o con tarjeta al momento de recibir tu producto.</p>"
+                    }
+                },
+                "faq_3": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "¿Cuál es la política de garantía?",
+                        "answer": "<p>Ofrecemos 15 días de garantía en todos nuestros productos. Si no estás satisfecho, puedes devolver o cambiar el producto sin preguntas.</p>"
+                    }
+                },
+                "faq_4": {
+                    "type": "faq",
+                    "settings": {
+                        "question": "¿El envío tiene costo?",
+                        "answer": "<p>No, el envío es completamente gratis a toda Colombia.</p>"
+                    }
+                }
+            },
+            "block_order": [
+                "faq_1",
+                "faq_2",
+                "faq_3",
+                "faq_4"
+            ],
+            "settings": {
+                "heading": "Preguntas Frecuentes",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "payment_badges": {
+            "type": "payment-badges",
+            "settings": {
+                "heading": "Métodos de pago seguros",
+                "show_payment_logos": true,
+                "padding_top": 32,
+                "padding_bottom": 32
+            }
+        },
+        "sticky_mobile_cta": {
+            "type": "sticky-mobile-cta",
+            "settings": {
+                "enable_sticky_cta": true,
+                "buy_button_text": "Comprar ahora",
+                "whatsapp_phone": "+573008602789",
+                "whatsapp_button_text": "WhatsApp"
+            }
+        },
+        "purchase_notification": {
+            "type": "purchase-notification",
+            "settings": {
+                "enable_notifications": true,
+                "interval": 15
+            }
+        },
         "171500672571a9dd42": {
             "type": "apps",
             "settings": {
@@ -231,11 +392,19 @@
         "main",
         "product_urgency_bar",
         "product_views_counter",
+        "countdown_timer",
         "product_benefits",
+        "product_features",
+        "product_includes",
+        "shipping_returns",
         "product_testimonials",
+        "product_faq",
+        "payment_badges",
         "product_social_proof",
         "171500672571a9dd42",
         "1759259835d66ec7b3",
-        "related-products"
+        "related-products",
+        "sticky_mobile_cta",
+        "purchase_notification"
     ]
 }
