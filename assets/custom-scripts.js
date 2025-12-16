@@ -56,9 +56,14 @@
       }
     });
     
-    // Format money (simple implementation, can be enhanced)
-    const formatted = moneyFormat.replace('{{amount}}', (newTotal / 100).toFixed(2));
-    totalPriceEl.textContent = formatted;
+    // Use Shopify's formatMoney if available, otherwise simple fallback
+    if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+      totalPriceEl.textContent = Shopify.formatMoney(newTotal, moneyFormat);
+    } else {
+      // Fallback: simple formatting (handles cents to dollars)
+      const formatted = moneyFormat.replace('{{amount}}', (newTotal / 100).toFixed(2));
+      totalPriceEl.textContent = formatted;
+    }
   }
 
   checkboxes.forEach(checkbox => {

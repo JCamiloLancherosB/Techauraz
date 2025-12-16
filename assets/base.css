@@ -300,3 +300,40 @@
   display: flex !important;
   align-items: center !important;
 }
+
+/* ============================================================ */
+/* TECHAURAZ CART DRAWER COD MESSAGE                            */
+/* ============================================================ */
+
+.cart__cod-message {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  padding: 16px;
+  border-radius: 12px;
+  margin: 16px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.cart__cod-message-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cart__cod-message-header strong {
+  font-size: 1.1em;
+}
+
+.cart__cod-message-body {
+  margin: 0;
+  font-size: 0.9em;
+  opacity: 0.95;
+}
+
+.cart__checkout-button--cod {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%) !important;
+  font-size: 1.1em !important;
+  padding: 16px !important;
+}

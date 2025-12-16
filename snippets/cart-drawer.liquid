@@ -609,17 +609,17 @@
         <!-- CTAs -->
         
         <!-- COD Message for TechAura -->
-        <div class="cart__cod-message" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); padding: 16px; border-radius: 12px; margin: 16px 0; text-align: center; color: #fff;">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+        <div class="cart__cod-message">
+          <div class="cart__cod-message-header">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="1" y="3" width="15" height="13"></rect>
               <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
               <circle cx="18.5" cy="18.5" r="2.5"></circle>
             </svg>
-            <strong style="font-size: 1.1em;">PAGA EN CASA</strong>
+            <strong>PAGA EN CASA</strong>
           </div>
-          <p style="margin: 0; font-size: 0.9em; opacity: 0.95;">
+          <p class="cart__cod-message-body">
             ✓ Paga al recibir tu pedido<br>
             ✓ Envío gratis en compras mayores a $150.000<br>
             ✓ Contraentrega disponible
@@ -636,13 +636,12 @@
           <button
             type="submit"
             id="CartDrawer-Checkout"
-            class="cart__checkout-button button"
+            class="cart__checkout-button cart__checkout-button--cod button"
             name="checkout"
             form="CartDrawer-Form"
             {% if cart == empty %}
               disabled
             {% endif %}
-            style="background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%) !important; font-size: 1.1em !important; padding: 16px !important;"
           >
             🏠 {{ 'sections.cart.checkout' | t }} - Paga en Casa
           </button>
