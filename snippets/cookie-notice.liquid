@@ -1,0 +1,134 @@
+{% comment %}
+  Cookie Notice Component
+  
+  Displays a GDPR-compliant cookie notice that explains cookie usage
+  and allows users to accept or decline.
+  
+  Usage:
+  {% render 'cookie-notice' %}
+{% endcomment %}
+
+<div class="cookie-notice" id="cookieNotice" style="display: none;">
+  <div class="cookie-notice__text">
+    <strong>🍪 Uso de Cookies</strong>
+    <br>
+    Utilizamos cookies para mejorar tu experiencia de navegación, personalizar contenido y anuncios, 
+    y analizar nuestro tráfico. Al hacer clic en "Aceptar", aceptas el uso de cookies. 
+    <a href="/pages/politica-de-privacidad" target="_blank">Política de Privacidad</a>
+  </div>
+  <div class="cookie-notice__buttons">
+    <button class="cookie-notice__button cookie-notice__button--decline" id="cookieDecline">
+      Rechazar
+    </button>
+    <button class="cookie-notice__button cookie-notice__button--accept" id="cookieAccept">
+      Aceptar
+    </button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    'use strict';
+    
+    const COOKIE_NAME = 'techauraz_cookie_consent';
+    const COOKIE_EXPIRY_DAYS = 365;
+    
+    // Get cookie notice element
+    const cookieNotice = document.getElementById('cookieNotice');
+    const acceptButton = document.getElementById('cookieAccept');
+    const declineButton = document.getElementById('cookieDecline');
+    
+    // Check if consent already given
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    }
+    
+    // Set cookie
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = `expires=${date.toUTCString()}`;
+      document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+    }
+    
+    // Show cookie notice
+    function showCookieNotice() {
+      if (cookieNotice) {
+        cookieNotice.style.display = 'block';
+      }
+    }
+    
+    // Hide cookie notice
+    function hideCookieNotice() {
+      if (cookieNotice) {
+        cookieNotice.classList.add('hidden');
+        setTimeout(() => {
+          cookieNotice.style.display = 'none';
+        }, 300);
+      }
+    }
+    
+    // Handle accept
+    function acceptCookies() {
+      setCookie(COOKIE_NAME, 'accepted', COOKIE_EXPIRY_DAYS);
+      hideCookieNotice();
+      
+      // Enable analytics/tracking if needed
+      if (typeof window.dataLayer !== 'undefined') {
+        window.dataLayer.push({
+          'event': 'cookie_consent_accepted'
+        });
+      }
+    }
+    
+    // Handle decline
+    function declineCookies() {
+      setCookie(COOKIE_NAME, 'declined', COOKIE_EXPIRY_DAYS);
+      hideCookieNotice();
+      
+      // Disable analytics/tracking if needed
+      if (typeof window.dataLayer !== 'undefined') {
+        window.dataLayer.push({
+          'event': 'cookie_consent_declined'
+        });
+      }
+    }
+    
+    // Check consent on page load
+    function checkConsent() {
+      const consent = getCookie(COOKIE_NAME);
+      
+      if (!consent) {
+        // Show notice after 1 second delay for better UX
+        setTimeout(showCookieNotice, 1000);
+      } else if (consent === 'accepted') {
+        // Consent already given, enable tracking
+        if (typeof window.dataLayer !== 'undefined') {
+          window.dataLayer.push({
+            'event': 'cookie_consent_accepted'
+          });
+        }
+      }
+    }
+    
+    // Event listeners
+    if (acceptButton) {
+      acceptButton.addEventListener('click', acceptCookies);
+    }
+    
+    if (declineButton) {
+      declineButton.addEventListener('click', declineCookies);
+    }
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkConsent);
+    } else {
+      checkConsent();
+    }
+    
+  })();
+</script>

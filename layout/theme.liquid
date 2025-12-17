@@ -214,6 +214,9 @@
     {%- if template.name == 'index' or template.name == 'product' -%}
       <script src="{{ 'purchase-notification.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    
+    {%- comment -%} Image loading enhancement - all pages {%- endcomment -%}
+    <script src="{{ 'image-loading.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
 
@@ -462,6 +465,10 @@
 <link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
 
+<!-- Product Page Refinements - Visual design, header, cookie notice, and responsiveness improvements -->
+<link rel="preload" href="{{ 'product-page-refinements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'product-page-refinements.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
@@ -485,7 +492,11 @@
      → Header positioning and image rendering fixes
      
   7. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
-     → MUST load last to ensure all alignment fixes override previous styles
+     → Alignment fixes and responsive layout improvements
+     
+  8. product-page-refinements.css (preload with fallback) - Visual design refinements
+     → Header scrollbar removal, color consistency, cookie notice, persuasive elements
+     → MUST load last to ensure all refinements override previous styles
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages
@@ -631,6 +642,9 @@
     </main>
 
     {% sections 'footer-group' %}
+
+    {%- comment -%} Cookie Notice - GDPR Compliance {%- endcomment -%}
+    {% render 'cookie-notice' %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
