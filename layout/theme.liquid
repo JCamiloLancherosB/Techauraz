@@ -467,12 +467,25 @@
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
   ============================================================================
   1. base.css (preload with fallback) - Core Dawn theme styles (minified)
+     → Contains fundamental theme styles but has 524 !important conflicts
+     
   2. base-overrides.css (preload with fallback) - Override redundant/problematic base.css rules
+     → MUST load after base.css to fix positioning and grid conflicts
+     
   3. animations.css (preload with fallback) - Animation utilities
+     → Independent animation system, can load anytime after base
+     
   4. cross-sell.css (product pages only) - Cross-sell component styles
+     → Product-specific, conditionally loaded
+     
   5. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
+     → Brand-specific styles, builds on corrected base
+     
   6. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
+     → Header positioning and image rendering fixes
+     
   7. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
+     → MUST load last to ensure all alignment fixes override previous styles
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages

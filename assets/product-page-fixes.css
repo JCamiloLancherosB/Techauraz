@@ -502,9 +502,15 @@
   position: relative !important;
 }
 
-/* Ensure proper box model */
-* {
+/* Ensure proper box model - improved approach per code review */
+html {
   box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 /* Fix any layout shifts */
@@ -527,14 +533,13 @@
   }
 }
 
-/* Reduce motion for users who prefer it */
+/* Reduce motion for users who prefer it - improved per code review */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 
