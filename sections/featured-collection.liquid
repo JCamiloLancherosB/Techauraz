@@ -172,6 +172,11 @@
               style="--animation-order: {{ forloop.index }};"
             {% endif %}
           >
+            {%- comment -%} Don't lazy load first 4 products for better LCP {%- endcomment -%}
+            {%- assign should_lazy_load = true -%}
+            {%- if forloop.index <= 4 -%}
+              {%- assign should_lazy_load = false -%}
+            {%- endif -%}
             {% render 'card-product',
               card_product: product,
               media_aspect_ratio: section.settings.image_ratio,
@@ -180,7 +185,8 @@
               show_vendor: section.settings.show_vendor,
               show_rating: section.settings.show_rating,
               show_quick_add: section.settings.enable_quick_add,
-              section_id: section.id
+              section_id: section.id,
+              lazy_load: should_lazy_load
             %}
           </li>
         {%- else -%}
