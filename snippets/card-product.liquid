@@ -104,7 +104,9 @@
             {%- comment -%} CRO: Stock & Discount Badges {%- endcomment -%}
             <div class="card__badges">
               {%- comment -%} New product badge - show for products published in last 30 days {%- endcomment -%}
-              {%- assign days_since_published = 'now' | date: '%s' | minus: card_product.published_at | date: '%s' | divided_by: 86400 -%}
+              {%- assign current_timestamp = 'now' | date: '%s' | plus: 0 -%}
+              {%- assign published_timestamp = card_product.published_at | date: '%s' | plus: 0 -%}
+              {%- assign days_since_published = current_timestamp | minus: published_timestamp | divided_by: 86400 -%}
               {%- if days_since_published <= 30 -%}
                 <span class="card__badge card__badge--new">Nuevo</span>
               {%- endif -%}

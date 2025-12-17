@@ -39,7 +39,7 @@
               <div class="testimonial-card__author">
                 {%- if block.settings.author_image != blank -%}
                   <img
-                    src="{{ block.settings.author_image | image_url: width: 80 }}"
+                    src="{{ block.settings.author_image | image_url: width: 50 }}"
                     alt="{{ block.settings.author_name | escape }}"
                     class="testimonial-card__avatar"
                     width="50"
@@ -47,7 +47,7 @@
                     loading="lazy">
                 {%- else -%}
                   <div class="testimonial-card__avatar testimonial-card__avatar--placeholder">
-                    {{ block.settings.author_name | slice: 0 | upcase }}
+                    {{ block.settings.author_name | slice: 0, 1 | upcase }}
                   </div>
                 {%- endif -%}
                 <div class="testimonial-card__author-info">

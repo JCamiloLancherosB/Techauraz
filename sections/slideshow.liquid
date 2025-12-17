@@ -3,7 +3,7 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%} Preload first hero image for better LCP {%- endcomment -%}
-{%- if section.blocks.first.settings.image and section.index == 1 -%}
+{%- if section.blocks.first.settings.image and section.index == 0 -%}
   <link 
     rel="preload" 
     as="image" 
