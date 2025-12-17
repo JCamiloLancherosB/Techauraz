@@ -454,6 +454,10 @@
 <link rel="preload" href="{{ 'theme-refactor-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'theme-refactor-2024.css' | asset_url }}"></noscript>
 
+<!-- Product Page Fixes - Alignment, responsive layout, and persuasive elements -->
+<link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
@@ -463,6 +467,7 @@
   3. cross-sell.css (product pages only) - Cross-sell component styles
   4. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
   5. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
+  6. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages
