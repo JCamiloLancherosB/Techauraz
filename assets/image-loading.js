@@ -10,6 +10,12 @@
   function markImageAsLoaded(img) {
     img.classList.add('loaded');
     img.style.opacity = '1';
+    
+    // Also add class to parent media container to hide spinner
+    const mediaContainer = img.closest('.card__media, .product__media');
+    if (mediaContainer) {
+      mediaContainer.classList.add('image-loaded');
+    }
   }
 
   // Function to handle image load
@@ -95,11 +101,25 @@
 
   // Re-process when new content is added (e.g., infinite scroll)
   const contentObserver = new MutationObserver(function(mutations) {
+    let hasNewImages = false;
+    
     mutations.forEach(function(mutation) {
       if (mutation.addedNodes.length > 0) {
-        processImages();
+        mutation.addedNodes.forEach(function(node) {
+          // Check if the added node or its children contain images
+          if (node.nodeType === 1) { // Element node
+            if (node.tagName === 'IMG' || node.querySelector('img')) {
+              hasNewImages = true;
+            }
+          }
+        });
       }
     });
+    
+    // Only process if we actually found new images
+    if (hasNewImages) {
+      processImages();
+    }
   });
 
   if (document.body) {

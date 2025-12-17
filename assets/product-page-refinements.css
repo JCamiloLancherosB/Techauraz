@@ -186,9 +186,10 @@ h2.title {
   animation: spin 0.8s linear infinite;
 }
 
-.card__media:has(img[src])::before,
-.product__media:has(img[src])::before {
-  display: none;
+/* Loading spinner - hidden when image loaded */
+.card__media.image-loaded::before,
+.product__media.image-loaded::before {
+  display: none !important;
 }
 
 @keyframes spin {
@@ -364,11 +365,6 @@ img[loading="lazy"][src] {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
-}
-
-/* Hide cookie notice when accepted */
-.cookie-notice.hidden {
-  display: none !important;
 }
 
 /* Cookie notice text */

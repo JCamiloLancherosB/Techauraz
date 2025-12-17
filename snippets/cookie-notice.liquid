@@ -64,7 +64,8 @@
     // Hide cookie notice
     function hideCookieNotice() {
       if (cookieNotice) {
-        cookieNotice.classList.add('hidden');
+        cookieNotice.style.opacity = '0';
+        cookieNotice.style.transform = 'translateX(-50%) translateY(100px)';
         setTimeout(() => {
           cookieNotice.style.display = 'none';
         }, 300);
