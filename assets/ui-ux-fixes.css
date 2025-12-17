@@ -1,0 +1,479 @@
+/*
+ * UI/UX Fixes for Techauraz Storefront
+ * Addresses: Header overflow, Related products, Price strikethrough, Theme colors
+ * 
+ * NOTE ON !important USAGE:
+ * This file uses !important extensively because it must override:
+ * - Inline styles from Shopify sections
+ * - Existing theme CSS with high specificity
+ * - Minified base.css with conflicting rules
+ * 
+ * This is a targeted fix file and should load after base theme CSS.
+ */
+
+/* ========================================
+   1. HEADER OVERFLOW & SCROLLBAR FIXES
+   ======================================== */
+
+/* Remove horizontal overflow from body and html */
+html,
+body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* Fix header container overflow */
+.header-wrapper,
+.section-header,
+.header {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* Ensure header content doesn't cause overflow */
+.header__inline-menu,
+.list-menu--inline {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  max-width: 100% !important;
+  flex-wrap: wrap !important;
+}
+
+/* Hide scrollbars but keep functionality */
+.header__inline-menu::-webkit-scrollbar,
+.list-menu--inline::-webkit-scrollbar {
+  display: none !important;
+}
+
+.header__inline-menu,
+.list-menu--inline {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* Prevent page-width from causing overflow */
+.page-width {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   2. PRICE STRIKETHROUGH FIX
+   ======================================== */
+
+/* Only strike through compare-at price (old price), NOT current price */
+.price--on-sale .price-item--regular {
+  text-decoration: line-through !important;
+  color: rgba(var(--color-foreground), 0.75) !important;
+  font-size: 1.3rem !important;
+}
+
+/* Ensure sale price is NEVER struck through */
+.price--on-sale .price-item--sale,
+.price__sale .price-item--sale,
+.price-item--sale {
+  text-decoration: none !important;
+  color: #22c55e !important;
+  font-weight: 800 !important;
+}
+
+/* Regular price when NOT on sale should not be struck through */
+.price__regular .price-item--regular:not(.price--on-sale .price-item--regular) {
+  text-decoration: none !important;
+  color: #22c55e !important;
+  font-weight: 800 !important;
+}
+
+/* Card price styling */
+.card .price-item--regular {
+  color: #22c55e !important;
+  font-weight: 800 !important;
+  font-size: 1.6rem !important;
+  text-decoration: none !important;
+}
+
+/* When card product is on sale */
+.card .price--on-sale .price-item--regular {
+  text-decoration: line-through !important;
+  color: rgba(var(--color-foreground), 0.65) !important;
+  font-size: 1.2rem !important;
+}
+
+.card .price--on-sale .price-item--sale {
+  text-decoration: none !important;
+  color: #22c55e !important;
+  font-weight: 800 !important;
+  font-size: 1.6rem !important;
+}
+
+/* ========================================
+   3. RELATED PRODUCTS SECTION FIXES
+   ======================================== */
+
+/* Ensure related products section displays properly */
+.related-products,
+.product-recommendations {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  width: 100% !important;
+}
+
+/* Related products cards must display */
+.related-products .card-wrapper,
+.product-recommendations .card-wrapper {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Product card images must load */
+.related-products .card__media,
+.related-products .media,
+.product-recommendations .card__media,
+.product-recommendations .media {
+  display: block !important;
+  visibility: visible !important;
+  background: #020617 !important;
+}
+
+.related-products .card__media img,
+.product-recommendations .card__media img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  object-fit: contain !important;
+}
+
+/* Ensure product titles display */
+.related-products .card__heading,
+.related-products .card__information,
+.product-recommendations .card__heading,
+.product-recommendations .card__information {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure CTA buttons display */
+.related-products .quick-add,
+.related-products .quick-add__submit,
+.product-recommendations .quick-add,
+.product-recommendations .quick-add__submit {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ========================================
+   4. THEME COLOR CONSISTENCY
+   ======================================== */
+
+/* Remove beige/peach backgrounds - use dark blue theme */
+body,
+.gradient,
+body.gradient,
+.section,
+.shopify-section {
+  background-color: #020617 !important;
+  background-image: none !important;
+}
+
+/* Ensure cards use dark theme */
+.card,
+.card__inner,
+.card__content {
+  background-color: #020617 !important;
+  border-color: rgba(148, 163, 184, 0.3) !important;
+}
+
+/* Remove any beige/peach/off-white backgrounds */
+.product-card,
+.card-wrapper,
+.price__container,
+.product__info-container,
+.product-form {
+  background-color: transparent !important;
+}
+
+/* Fix any light backgrounds to dark */
+[style*="background: #f"], 
+[style*="background-color: #f"],
+[style*="background: rgb(2"],
+[class*="bg-light"] {
+  background-color: #020617 !important;
+}
+
+/* Ensure proper text contrast on dark backgrounds */
+.card__heading .full-unstyled-link,
+.card__information,
+.product__title,
+.related-products__heading {
+  color: #f9fafb !important;
+}
+
+/* Secondary text color */
+.card__description,
+.caption-large,
+.caption-with-letter-spacing {
+  color: #9ca3af !important;
+}
+
+/* ========================================
+   5. PERSUASIVE ELEMENTS VISIBILITY
+   ======================================== */
+
+/* Ensure badges display */
+.card__badges,
+.card__badge {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Product descriptions on cards */
+.card__description {
+  display: -webkit-box !important;
+  visibility: visible !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Ratings visibility */
+.card-product-rating,
+.rating {
+  display: block !important;
+  visibility: visible !important;
+  min-height: 20px !important;
+}
+
+/* ========================================
+   6. RESPONSIVE FIXES
+   ======================================== */
+
+@media screen and (max-width: 749px) {
+  /* Header on mobile */
+  .header {
+    overflow-x: hidden !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  /* Product cards on mobile */
+  .related-products .grid,
+  .product-grid {
+    gap: 12px 10px !important;
+  }
+  
+  /* Prevent mobile overflow */
+  .card-wrapper,
+  .grid__item {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  /* Tablet layout */
+  .header {
+    overflow-x: hidden !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* Desktop layout */
+  .header {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  .header__inline-menu {
+    max-width: none !important;
+    flex-wrap: nowrap !important;
+  }
+}
+
+/* ========================================
+   7. ADDITIONAL FIXES
+   ======================================== */
+
+/* Fix any remaining overflow issues */
+* {
+  box-sizing: border-box;
+}
+
+.page-width,
+.container,
+.wrapper {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure price layout is correct */
+.price__container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 3px !important;
+}
+
+/* Sale price container */
+.price__sale {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 3px !important;
+}
+
+/* Regular price container */
+.price__regular {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 3px !important;
+}
+
+/* Hide regular price when on sale */
+/* Using :has() for modern browsers, with fallback handled by display:none on .price__regular when .price--on-sale class is present */
+.price__container:has(.price__sale .price-item--sale:not(:empty)) .price__regular {
+  display: none !important;
+}
+
+/* Fallback for browsers without :has() support */
+.price--on-sale .price__regular {
+  display: none !important;
+}
+
+/* Show sale container when product is on sale */
+/* Using :has() for modern browsers */
+.price__container:has(.price__sale .price-item--sale:not(:empty)) .price__sale {
+  display: flex !important;
+}
+
+/* Fallback for browsers without :has() support */
+.price--on-sale .price__sale {
+  display: flex !important;
+}
+
+/* ========================================
+   8. ADDITIONAL CARD & PRODUCT FIXES
+   ======================================== */
+
+/* Ensure all card elements are properly visible */
+.card,
+.card-wrapper,
+.product-card-wrapper {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Card media must be visible */
+.card__media,
+.card .media {
+  display: block !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Card content must display */
+.card__content,
+.card__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+}
+
+/* Product grid must use grid layout on desktop */
+@media screen and (min-width: 990px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Fix quick-add button display */
+.quick-add,
+.card .quick-add {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: auto !important;
+}
+
+/* ========================================
+   9. LOADING STATE FIXES
+   ======================================== */
+
+/* Ensure content is visible even during loading */
+.product-recommendations--loaded .card,
+.related-products .card {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove any loading overlays that might hide content */
+.card__media .loading,
+.card__media .placeholder,
+.card__media::before {
+  display: none !important;
+}
+
+/* Ensure images are not hidden by lazy loading */
+.card__media img[loading="lazy"],
+.media img[loading="lazy"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ========================================
+   10. SECTION VISIBILITY FIXES
+   ======================================== */
+
+/* Force related products section to display */
+.shopify-section:has(.related-products),
+.shopify-section:has(product-recommendations) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure section content is visible */
+product-recommendations,
+.product-recommendations {
+  display: block !important;
+  min-height: 300px !important;
+  visibility: visible !important;
+}
+
+/* Grid items must be visible */
+.grid__item {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
