@@ -436,6 +436,10 @@
 <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 
+<!-- Base CSS Overrides - Clean up redundant and problematic rules from minified base.css -->
+<link rel="preload" href="{{ 'base-overrides.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'base-overrides.css' | asset_url }}"></noscript>
+
 <!-- Nuevos CSS del rediseño con preload optimizado -->
 <link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
@@ -462,12 +466,13 @@
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
   ============================================================================
-  1. base.css (preload with fallback) - Core Dawn theme styles
-  2. animations.css (preload with fallback) - Animation utilities
-  3. cross-sell.css (product pages only) - Cross-sell component styles
-  4. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
-  5. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
-  6. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
+  1. base.css (preload with fallback) - Core Dawn theme styles (minified)
+  2. base-overrides.css (preload with fallback) - Override redundant/problematic base.css rules
+  3. animations.css (preload with fallback) - Animation utilities
+  4. cross-sell.css (product pages only) - Cross-sell component styles
+  5. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
+  6. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
+  7. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages

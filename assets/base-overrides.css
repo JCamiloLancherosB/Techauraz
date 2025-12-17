@@ -1,0 +1,489 @@
+/**
+ * =============================================================================
+ * BASE.CSS OVERRIDES - Clean up redundant and problematic rules
+ * =============================================================================
+ * Version: 1.0.0
+ * Purpose: Override redundant !important rules from minified base.css
+ * 
+ * Issues Addressed:
+ * 1. Excessive !important declarations (524 instances)
+ * 2. Conflicting position:absolute rules (31 instances)
+ * 3. Card-related conflicts (115 .card selectors)
+ * 4. Layout issues causing misalignment
+ * 5. Problematic code causing errors
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. CARD POSITIONING FIXES
+   ============================================================================= */
+
+/* Override absolute positioning that causes layout issues */
+.card__media .media {
+  position: relative !important;
+  bottom: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.card__media {
+  position: relative !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* Fix card inner positioning */
+.card__inner {
+  position: relative !important;
+}
+
+/* =============================================================================
+   2. IMAGE OBJECT-FIT CORRECTIONS
+   ============================================================================= */
+
+/* Ensure product cards show full product (override cover) */
+.card__media img,
+.product-card-wrapper .card__media img,
+.grid .card__media img {
+  object-fit: contain !important;
+  object-position: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Collection cards can use cover */
+.collection-card .card__media img,
+.collection-hero .card__media img {
+  object-fit: cover !important;
+}
+
+/* =============================================================================
+   3. GRID LAYOUT CLEANUP
+   ============================================================================= */
+
+/* Remove conflicting flex/grid declarations */
+.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.grid__item {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: none !important;
+}
+
+/* Mobile grid fix */
+@media screen and (max-width: 749px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+}
+
+/* Tablet grid */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Desktop grid */
+@media screen and (min-width: 990px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+}
+
+/* =============================================================================
+   4. TEXT ALIGNMENT FIXES
+   ============================================================================= */
+
+/* Remove forced center alignment that causes issues */
+.product__title {
+  text-align: left !important;
+}
+
+.card__heading {
+  text-align: left !important;
+}
+
+.card__information {
+  text-align: left !important;
+}
+
+/* =============================================================================
+   5. FLEXBOX CLEANUP
+   ============================================================================= */
+
+/* Fix card wrapper flex issues */
+.card-wrapper,
+.product-card-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: none !important;
+}
+
+.card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 !important;
+}
+
+.card__information {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+/* =============================================================================
+   6. MARGIN & PADDING NORMALIZATION
+   ============================================================================= */
+
+/* Remove excessive margins from base.css */
+.product__title {
+  margin: 0 0 1rem 0 !important;
+  padding: 0 !important;
+}
+
+.collection__description,
+.product__description {
+  margin: 1rem 0 !important;
+}
+
+/* Normalize page-width padding */
+.page-width {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  max-width: 1200px !important;
+}
+
+@media screen and (min-width: 750px) {
+  .page-width {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* =============================================================================
+   7. HEADER FIXES
+   ============================================================================= */
+
+/* Remove conflicting header styles */
+.header__heading {
+  flex: none !important;
+  text-align: left !important;
+}
+
+.header__icons {
+  flex: none !important;
+  gap: 0.75rem !important;
+}
+
+/* Header menu alignment */
+.list-menu--inline {
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: flex-start !important;
+}
+
+/* =============================================================================
+   8. PRICE DISPLAY CLEANUP
+   ============================================================================= */
+
+/* Remove forced center alignment on prices */
+.price,
+.price__container {
+  justify-content: flex-start !important;
+}
+
+/* Product page price can be centered */
+.product .price,
+.product .price__container {
+  justify-content: flex-start !important;
+}
+
+.price-item--regular {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* =============================================================================
+   9. ANIMATION CLEANUP
+   ============================================================================= */
+
+/* Disable problematic animations from base.css */
+@media (prefers-reduced-motion: reduce) {
+  .card-wrapper,
+  .product-card-wrapper {
+    animation: none !important;
+  }
+}
+
+/* Keep hover effects but clean up */
+.card-wrapper:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* =============================================================================
+   10. Z-INDEX CLEANUP
+   ============================================================================= */
+
+/* Fix z-index conflicts */
+.header,
+.header-wrapper {
+  z-index: 100 !important;
+}
+
+.modal,
+.drawer {
+  z-index: 200 !important;
+}
+
+.card__media {
+  z-index: 1 !important;
+}
+
+.card__information {
+  z-index: 2 !important;
+}
+
+/* =============================================================================
+   11. TRUST INDICATORS & BADGES
+   ============================================================================= */
+
+/* Fix trust indicators grid from base.css */
+.trust-indicators {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+  margin: 1.5rem 0 !important;
+  padding: 1.5rem !important;
+}
+
+/* Clean up badge styling */
+.card__badge {
+  position: absolute !important;
+  top: 0.75rem !important;
+  right: 0.75rem !important;
+  z-index: 10 !important;
+}
+
+.price__badge-sale {
+  display: inline-flex !important;
+  margin-left: 0.5rem !important;
+}
+
+/* =============================================================================
+   12. BUTTON CLEANUP
+   ============================================================================= */
+
+/* Normalize button sizing */
+.button,
+.btn,
+.product-form__submit,
+.shopify-payment-button__button {
+  min-height: 44px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1rem !important;
+}
+
+.button--full-width,
+.product-form__submit {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Card buttons */
+.card .button {
+  max-width: 100% !important;
+  margin: 0.5rem !important;
+}
+
+/* =============================================================================
+   13. FORM ELEMENT FIXES
+   ============================================================================= */
+
+/* Clean up product form layout */
+.product-form {
+  max-width: 500px !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.product-form__buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.product-form__quantity {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* =============================================================================
+   14. MEDIA QUERY SPECIFICITY CLEANUP
+   ============================================================================= */
+
+/* Override base.css mobile rules */
+@media screen and (max-width: 749px) {
+  .product {
+    grid-template-columns: 1fr !important;
+    padding: 1.5rem 1rem !important;
+  }
+
+  .card__information {
+    padding: 0.875rem 1rem !important;
+  }
+
+  .product__title {
+    font-size: 1.5rem !important;
+  }
+
+  .price-item--regular {
+    font-size: 1.25rem !important;
+  }
+
+  /* Clean up form on mobile */
+  .product-form,
+  .product-form__buttons {
+    max-width: 100% !important;
+  }
+}
+
+/* =============================================================================
+   15. VISIBILITY OVERRIDES
+   ============================================================================= */
+
+/* Ensure elements are visible (override display:none from base.css) */
+.product__description,
+.product-benefits,
+.shipping-benefits,
+.trust-indicators,
+.urgency-indicator {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.product__media-wrapper,
+.product__info-wrapper {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* =============================================================================
+   16. BACKGROUND & COLOR CLEANUP
+   ============================================================================= */
+
+/* Normalize backgrounds */
+.card {
+  background: #0f172a !important;
+}
+
+.card__media {
+  background: #f9fafb !important;
+}
+
+body,
+body.gradient {
+  background-color: #020617 !important;
+  color: #e2e8f0 !important;
+}
+
+/* =============================================================================
+   17. OVERFLOW FIXES
+   ============================================================================= */
+
+/* Fix overflow issues */
+.card {
+  overflow: hidden !important;
+}
+
+.card__media {
+  overflow: hidden !important;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+
+/* =============================================================================
+   18. BORDER & RADIUS CLEANUP
+   ============================================================================= */
+
+/* Normalize border radius */
+.card {
+  border-radius: 16px !important;
+}
+
+.card__media {
+  border-radius: 12px !important;
+}
+
+.button,
+.product-form__submit {
+  border-radius: 8px !important;
+}
+
+/* =============================================================================
+   19. ASPECT RATIO ENFORCEMENT
+   ============================================================================= */
+
+/* Ensure card media maintains aspect ratio */
+.card__media {
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* Product detail page can use auto */
+.product__media-wrapper .media,
+.product-media-container {
+  aspect-ratio: auto !important;
+}
+
+/* =============================================================================
+   20. FINAL CLEANUP RULES
+   ============================================================================= */
+
+/* Reset any problematic will-change */
+.card-wrapper {
+  will-change: auto !important;
+}
+
+/* Clean up transitions */
+.card,
+.card-wrapper {
+  transition: all 0.3s ease !important;
+}
+
+/* Remove any conflicting transforms */
+.card__media,
+.card__inner {
+  transform: none !important;
+}
+
+/* =============================================================================
+   END OF BASE.CSS OVERRIDES
+   ============================================================================= */
