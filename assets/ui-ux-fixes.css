@@ -338,3 +338,122 @@ body.gradient,
 .price__container:has(.price__sale .price-item--sale:not(:empty)) .price__sale {
   display: flex !important;
 }
+
+/* ========================================
+   8. ADDITIONAL CARD & PRODUCT FIXES
+   ======================================== */
+
+/* Ensure all card elements are properly visible */
+.card,
+.card-wrapper,
+.product-card-wrapper {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Card media must be visible */
+.card__media,
+.card .media {
+  display: block !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Card content must display */
+.card__content,
+.card__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+}
+
+/* Product grid must use grid layout on desktop */
+@media screen and (min-width: 990px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product-grid,
+  .related-products .grid,
+  .product-recommendations .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Fix quick-add button display */
+.quick-add,
+.card .quick-add {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: auto !important;
+}
+
+/* ========================================
+   9. LOADING STATE FIXES
+   ======================================== */
+
+/* Ensure content is visible even during loading */
+.product-recommendations--loaded .card,
+.related-products .card {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove any loading overlays that might hide content */
+.card__media .loading,
+.card__media .placeholder,
+.card__media::before {
+  display: none !important;
+}
+
+/* Ensure images are not hidden by lazy loading */
+.card__media img[loading="lazy"],
+.media img[loading="lazy"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ========================================
+   10. SECTION VISIBILITY FIXES
+   ======================================== */
+
+/* Force related products section to display */
+.shopify-section:has(.related-products),
+.shopify-section:has(product-recommendations) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure section content is visible */
+product-recommendations,
+.product-recommendations {
+  display: block !important;
+  min-height: 300px !important;
+  visibility: visible !important;
+}
+
+/* Grid items must be visible */
+.grid__item {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
