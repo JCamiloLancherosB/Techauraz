@@ -1,6 +1,14 @@
 /*
  * UI/UX Fixes for Techauraz Storefront
  * Addresses: Header overflow, Related products, Price strikethrough, Theme colors
+ * 
+ * NOTE ON !important USAGE:
+ * This file uses !important extensively because it must override:
+ * - Inline styles from Shopify sections
+ * - Existing theme CSS with high specificity
+ * - Minified base.css with conflicting rules
+ * 
+ * This is a targeted fix file and should load after base theme CSS.
  */
 
 /* ========================================
@@ -330,12 +338,24 @@ body.gradient,
 }
 
 /* Hide regular price when on sale */
+/* Using :has() for modern browsers, with fallback handled by display:none on .price__regular when .price--on-sale class is present */
 .price__container:has(.price__sale .price-item--sale:not(:empty)) .price__regular {
   display: none !important;
 }
 
+/* Fallback for browsers without :has() support */
+.price--on-sale .price__regular {
+  display: none !important;
+}
+
 /* Show sale container when product is on sale */
+/* Using :has() for modern browsers */
 .price__container:has(.price__sale .price-item--sale:not(:empty)) .price__sale {
+  display: flex !important;
+}
+
+/* Fallback for browsers without :has() support */
+.price--on-sale .price__sale {
   display: flex !important;
 }
 
