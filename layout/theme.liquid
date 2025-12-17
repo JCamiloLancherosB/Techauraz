@@ -436,6 +436,10 @@
 <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 
+<!-- Base CSS Overrides - Clean up redundant and problematic rules from minified base.css -->
+<link rel="preload" href="{{ 'base-overrides.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'base-overrides.css' | asset_url }}"></noscript>
+
 <!-- Nuevos CSS del rediseño con preload optimizado -->
 <link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
@@ -454,15 +458,34 @@
 <link rel="preload" href="{{ 'theme-refactor-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'theme-refactor-2024.css' | asset_url }}"></noscript>
 
+<!-- Product Page Fixes - Alignment, responsive layout, and persuasive elements -->
+<link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
   ============================================================================
-  1. base.css (preload with fallback) - Core Dawn theme styles
-  2. animations.css (preload with fallback) - Animation utilities
-  3. cross-sell.css (product pages only) - Cross-sell component styles
-  4. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
-  5. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
+  1. base.css (preload with fallback) - Core Dawn theme styles (minified)
+     → Contains fundamental theme styles but has 524 !important conflicts
+     
+  2. base-overrides.css (preload with fallback) - Override redundant/problematic base.css rules
+     → MUST load after base.css to fix positioning and grid conflicts
+     
+  3. animations.css (preload with fallback) - Animation utilities
+     → Independent animation system, can load anytime after base
+     
+  4. cross-sell.css (product pages only) - Cross-sell component styles
+     → Product-specific, conditionally loaded
+     
+  5. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
+     → Brand-specific styles, builds on corrected base
+     
+  6. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
+     → Header positioning and image rendering fixes
+     
+  7. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
+     → MUST load last to ensure all alignment fixes override previous styles
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages
