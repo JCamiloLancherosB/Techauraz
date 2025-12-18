@@ -1,12 +1,15 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 <head>
-<!-- PRELOAD_tag CRÍTICO - Mejora 300ms -->
+<!-- PRECONNECT and DNS Prefetch - Critical for performance -->
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.shopify.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
 
-<!-- Preload_tag del JavaScript crítico -->
+<!-- Preload critical JavaScript -->
 <link rel="modulepreload" href="{{ 'theme-editor.js' | asset_url }}">
 
 <!-- Note: Image preloading should be done in sections, not in layout -->
@@ -427,12 +430,72 @@
 
     {% endstyle %}
 
-    <!-- CSS crítico inline (solo estilos del header/hero) -->
+    <!-- Critical CSS inline (essential above-the-fold styles) -->
 <style>
-  /* Estilos mínimos para evitar FOUC */
-  body { margin: 0; font-family: 'Inter', sans-serif; background: #020617; }
-  .header-wrapper { background: rgba(15, 23, 42, 0.96); position: sticky; top: 0; z-index: 999; }
-  .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+  /* Critical CSS - Above the fold styles to prevent FOUC
+   * Note: Font family is hardcoded here as fallback before CSS custom properties load
+   * This prevents invisible text flash (FOIT) during initial render
+   */
+  body { 
+    margin: 0; 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background: #020617; 
+    line-height: 1.6;
+  }
+  
+  /* Header critical styles */
+  .header-wrapper, .section-header { 
+    background: rgba(15, 23, 42, 0.96); 
+    position: sticky; 
+    top: 0; 
+    z-index: 999;
+    will-change: transform;
+  }
+  
+  .header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Hero/Banner critical styles */
+  .banner { 
+    position: relative; 
+    display: block;
+  }
+  
+  .banner__media { 
+    position: relative; 
+    overflow: hidden;
+  }
+  
+  .banner__media img { 
+    width: 100%; 
+    height: auto; 
+    display: block;
+  }
+  
+  /* WhatsApp float button */
+  .whatsapp-float { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 9999; 
+  }
+  
+  /* Basic grid layout */
+  .page-width { 
+    max-width: 1440px; 
+    margin: 0 auto; 
+    padding: 0 1.5rem;
+  }
+  
+  /* Prevent layout shift */
+  img { max-width: 100%; height: auto; }
+  
+  /* Hide loading spinner until CSS loads */
+  .loading-spinner { opacity: 0; }
 </style>
 
 <!-- CSS completo con preload + async -->
@@ -443,11 +506,13 @@
 <link rel="preload" href="{{ 'base-overrides.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base-overrides.css' | asset_url }}"></noscript>
 
-<!-- Nuevos CSS del rediseño con preload optimizado -->
-<link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
+{%- comment -%} Load animations CSS only if enabled {%- endcomment -%}
+{%- if settings.animations_reveal_on_scroll -%}
+  <link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
+{%- endif -%}
 
-{%- comment -%} Cargar cross-sell CSS solo en páginas de producto {%- endcomment -%}
+{%- comment -%} Load cross-sell CSS only on product pages {%- endcomment -%}
 {%- if template.name == 'product' -%}
   <link rel="preload" href="{{ 'cross-sell.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
@@ -461,13 +526,16 @@
 <link rel="preload" href="{{ 'theme-refactor-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'theme-refactor-2024.css' | asset_url }}"></noscript>
 
-<!-- Product Page Fixes - Alignment, responsive layout, and persuasive elements -->
-<link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
+{%- comment -%} Load product-specific CSS only on product pages {%- endcomment -%}
+{%- if template.name == 'product' -%}
+  <!-- Product Page Fixes - Alignment, responsive layout, and persuasive elements -->
+  <link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
 
-<!-- Product Page Refinements - Visual design, header, cookie notice, and responsiveness improvements -->
-<link rel="preload" href="{{ 'product-page-refinements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'product-page-refinements.css' | asset_url }}"></noscript>
+  <!-- Product Page Refinements - Visual design, header, cookie notice, and responsiveness improvements -->
+  <link rel="preload" href="{{ 'product-page-refinements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'product-page-refinements.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- UI/UX Fixes - Header overflow, price strikethrough, related products, and theme color fixes -->
 <link rel="preload" href="{{ 'ui-ux-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -574,10 +642,15 @@
        }
      });
    </script>
-   <!-- GOOGLE TAG MANAGER ULTRA OPTIMIZADO -->
+   <!-- GOOGLE TAG MANAGER - OPTIMIZED -->
 <script>
 (function(w,d,s,l,i){
-  // Cargar GTM solo después de interacción del usuario
+  // Performance optimization constants
+  var GTM_DELAY = 5000;           // Delay before auto-loading GTM (5s)
+  var GTM_IDLE_TIMEOUT = 7000;    // Timeout for idle callback (7s)
+  var GTM_INTERACTION_DELAY = 100; // Short delay after interaction to avoid blocking (100ms - GTM is lighter)
+  
+  // Load GTM only after user interaction or idle time
   function loadGTM() {
     if (w.gtmLoaded) return;
     w.gtmLoaded = true;
@@ -591,20 +664,34 @@
     f.parentNode.insertBefore(j,f);
   }
   
-  // Cargar después de 3 segundos o al primer scroll/click
-  var timer = setTimeout(loadGTM, 3000);
+  // Load after delay or on first scroll/click/touch
+  var timer = setTimeout(loadGTM, GTM_DELAY);
   
   ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
     window.addEventListener(e, function() {
       clearTimeout(timer);
-      loadGTM();
+      // Delay slightly to not block interaction
+      setTimeout(loadGTM, GTM_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
-})(window,document,'script','dataLayer','GTM-PB6TD2ZD'); // REEMPLAZA con tu ID
+  
+  // Load on idle if supported
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      clearTimeout(timer);
+      loadGTM();
+    }, { timeout: GTM_IDLE_TIMEOUT });
+  }
+})(window,document,'script','dataLayer','GTM-PB6TD2ZD');
 </script>
-<!-- FACEBOOK PIXEL ULTRA OPTIMIZADO -->
+<!-- FACEBOOK PIXEL - OPTIMIZED -->
 <script>
 (function() {
+  // Performance optimization constants
+  var FB_DELAY = 6000;            // Delay before auto-loading FB Pixel (6s)
+  var FB_IDLE_TIMEOUT = 8000;     // Timeout for idle callback (8s)
+  var FB_INTERACTION_DELAY = 200; // Longer delay after interaction (200ms - FB Pixel is heavier than GTM)
+  
   var fbLoaded = false;
   
   function loadFBPixel() {
@@ -617,18 +704,27 @@
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
     (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     
-    fbq('init', '809161240853412'); // REEMPLAZA
+    fbq('init', '809161240853412');
     fbq('track', 'PageView');
   }
   
-  // Cargar solo después de interacción
-  var timer = setTimeout(loadFBPixel, 4000);
-  ['scroll', 'mousemove', 'touchstart'].forEach(function(e) {
+  // Load only after interaction or idle - later than GTM
+  var timer = setTimeout(loadFBPixel, FB_DELAY);
+  ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
     window.addEventListener(e, function() {
       clearTimeout(timer);
-      loadFBPixel();
+      // Delay to reduce impact on interaction
+      setTimeout(loadFBPixel, FB_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
+  
+  // Load on idle if supported
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      clearTimeout(timer);
+      loadFBPixel();
+    }, { timeout: FB_IDLE_TIMEOUT });
+  }
 })();
 </script>
 </head>
@@ -965,20 +1061,34 @@ onResize();
   </a>
 </div>
 
-<script defer="defer">
-  document.addEventListener('DOMContentLoaded', function() {
+<script>
+  // WhatsApp button animations - load on idle to reduce main thread blocking
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      initWhatsAppButton();
+    }, { timeout: 3000 });
+  } else {
+    // Fallback for browsers without requestIdleCallback
+    setTimeout(initWhatsAppButton, 2000);
+  }
+  
+  function initWhatsAppButton() {
     const whatsappBtn = document.querySelector('.whatsapp-button');
+    if (!whatsappBtn) return;
     
+    // Initial shake after delay
     setTimeout(() => {
       whatsappBtn.classList.add('shake');
       setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
-    }, 2000);
+    }, 1000);
 
+    // Periodic shake
     setInterval(() => {
       whatsappBtn.classList.add('shake');
       setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
     }, 15000);
 
+    // Track clicks (only if gtag is loaded)
     whatsappBtn.addEventListener('click', function() {
       if (typeof gtag !== 'undefined') {
         gtag('event', 'click', {
@@ -987,7 +1097,7 @@ onResize();
         });
       }
     });
-  });
+  }
 </script>
 <script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
 <!-- TRACKING OPTIMIZADO - SOLO UNA VEZ -->
@@ -1003,24 +1113,37 @@ onResize();
   }
   
 </script>
-<!-- OPTIMIZACIÓN DE RENDERIZADO -->
+<!-- RENDERING OPTIMIZATION -->
 <script>
-  // Posponer scripts no críticos
-  window.addEventListener('load', function() {
-    // Cargar widgets de terceros después
-    setTimeout(function() {
-      // Aquí van widgets como Tidio, Klaviyo, etc.
-    }, 3000);
-  });
+  // Defer non-critical scripts using requestIdleCallback
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      // Load third-party widgets in idle time
+      // Here go widgets like Tidio, Klaviyo, etc. if needed
+    }, { timeout: 5000 });
+  } else {
+    // Fallback: use setTimeout for older browsers
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // Here go widgets like Tidio, Klaviyo, etc.
+      }, 3000);
+    });
+  }
   
-  // Optimizar scroll
-  let ticking = false;
+  // Optimize scroll handlers - consolidate into one with debounce
+  let scrollTicking = false;
+  let lastScrollY = 0;
+  
+  function handleScroll() {
+    lastScrollY = window.scrollY || window.pageYOffset;
+    scrollTicking = false;
+    // Any scroll logic here runs with requestAnimationFrame
+  }
+  
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(function() {
-        ticking = false;
-      });
-      ticking = true;
+    if (!scrollTicking) {
+      window.requestAnimationFrame(handleScroll);
+      scrollTicking = true;
     }
   }, { passive: true });
 </script>
