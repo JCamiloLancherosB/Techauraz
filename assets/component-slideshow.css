@@ -18,13 +18,6 @@ slideshow-component .slideshow.banner {
   overflow-x: hidden; /* Hide horizontal overflow to prevent side-by-side images */
 }
 
-/* Ensure only one slide is visible at a time */
-.slideshow.slider--everywhere .slideshow__slide {
-  min-width: 100%;
-  width: 100%;
-  flex-shrink: 0;
-}
-
 .slideshow__slide {
   padding: 0;
   position: relative;
@@ -33,6 +26,7 @@ slideshow-component .slideshow.banner {
   visibility: visible;
   min-width: 100%; /* Ensure slide takes full width */
   width: 100%;
+  flex-shrink: 0; /* Prevent slides from shrinking */
 }
 
 /* Prevent CLS with aspect-ratio on slideshow media */
