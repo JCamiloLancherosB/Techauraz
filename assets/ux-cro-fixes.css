@@ -144,7 +144,8 @@ h2.title {
   margin: 0.75rem 0;
 }
 
-/* Desktop: Larger font sizes for better readability */
+/* Desktop: Larger font sizes for better readability
+   Note: !important used to override Shopify Dawn theme defaults */
 @media screen and (min-width: 750px) {
   .card .price,
   .card-information .price {

@@ -1,3 +1,11 @@
+/* Slideshow height custom properties for easy customization */
+:root {
+  --slideshow-height-small: 400px;
+  --slideshow-height-medium: 500px;
+  --slideshow-height-default: 600px;
+  --slideshow-height-large: 720px;
+}
+
 slideshow-component {
   position: relative;
   display: flex;
@@ -57,29 +65,29 @@ slideshow-component .slideshow.banner {
 /* Adjust for large slides */
 @media screen and (min-width: 750px) {
   .slideshow__media {
-    height: 600px;
+    height: var(--slideshow-height-default, 600px);
   }
   
   .slideshow__media img {
-    min-height: 600px;
+    min-height: var(--slideshow-height-default, 600px);
   }
   
   .banner--medium .slideshow__media,
   .banner--medium .slideshow__media img {
-    height: 500px;
-    min-height: 500px;
+    height: var(--slideshow-height-medium, 500px);
+    min-height: var(--slideshow-height-medium, 500px);
   }
   
   .banner--large .slideshow__media,
   .banner--large .slideshow__media img {
-    height: 720px;
-    min-height: 720px;
+    height: var(--slideshow-height-large, 720px);
+    min-height: var(--slideshow-height-large, 720px);
   }
   
   .banner--small .slideshow__media,
   .banner--small .slideshow__media img {
-    height: 400px;
-    min-height: 400px;
+    height: var(--slideshow-height-small, 400px);
+    min-height: var(--slideshow-height-small, 400px);
   }
 }
 
