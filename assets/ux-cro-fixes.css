@@ -49,7 +49,7 @@ html,
 .collection__title,
 .section-heading,
 h2.title {
-  overflow: visible !important;
+  overflow: visible;
   max-width: 100%;
 }
 
@@ -141,13 +141,14 @@ h2.title {
   margin: 0.75rem 0;
 }
 
-.price {
+.card .price,
+.card-information .price {
   font-size: 1.4rem;
   font-weight: 700;
   color: #22c55e;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Ensure add to cart button is always visible */
@@ -162,9 +163,9 @@ h2.title {
 .card__content .button,
 .card__content .quick-add__submit,
 .card .button--full-width {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
   margin-top: auto;
   width: 100%;
 }
@@ -381,8 +382,14 @@ h2.title {
   max-width: 100%;
 }
 
-/* Ensure all containers respect viewport width */
-* {
+/* Ensure all main containers respect viewport width */
+.page-width,
+.container,
+section,
+.spaced-section,
+.shopify-section,
+main,
+#MainContent {
   max-width: 100%;
 }
 
