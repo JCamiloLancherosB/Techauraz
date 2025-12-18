@@ -1569,7 +1569,7 @@
           if (detailsLink) {
             detailsLink.addEventListener('click', function(e) {
               e.preventDefault();
-              const description = document.querySelector('.product__description');
+              const description = document.querySelector('#product-description');
               if (description) {
                 description.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
