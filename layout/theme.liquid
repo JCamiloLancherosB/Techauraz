@@ -656,7 +656,7 @@
     f.parentNode.insertBefore(j,f);
   }
   
-  // Cargar después de 5 segundos o al primer scroll/click/touch
+  // Load after 5 seconds or on first scroll/click/touch
   var timer = setTimeout(loadGTM, 5000);
   
   ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
@@ -695,7 +695,7 @@
     fbq('track', 'PageView');
   }
   
-  // Cargar solo después de interacción o idle - más tarde que GTM
+  // Load only after interaction or idle - later than GTM
   var timer = setTimeout(loadFBPixel, 6000);
   ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
     window.addEventListener(e, function() {
@@ -1100,31 +1100,31 @@ onResize();
   }
   
 </script>
-<!-- OPTIMIZACIÓN DE RENDERIZADO -->
+<!-- RENDERING OPTIMIZATION -->
 <script>
-  // Posponer scripts no críticos usando requestIdleCallback
+  // Defer non-critical scripts using requestIdleCallback
   if ('requestIdleCallback' in window) {
     requestIdleCallback(function() {
-      // Cargar widgets de terceros en idle time
-      // Aquí van widgets como Tidio, Klaviyo, etc. si se necesitan
+      // Load third-party widgets in idle time
+      // Here go widgets like Tidio, Klaviyo, etc. if needed
     }, { timeout: 5000 });
   } else {
-    // Fallback: usar setTimeout para navegadores antiguos
+    // Fallback: use setTimeout for older browsers
     window.addEventListener('load', function() {
       setTimeout(function() {
-        // Aquí van widgets como Tidio, Klaviyo, etc.
+        // Here go widgets like Tidio, Klaviyo, etc.
       }, 3000);
     });
   }
   
-  // Optimizar scroll handlers - consolidar en uno solo con debounce
+  // Optimize scroll handlers - consolidate into one with debounce
   let scrollTicking = false;
   let lastScrollY = 0;
   
   function handleScroll() {
     lastScrollY = window.scrollY || window.pageYOffset;
     scrollTicking = false;
-    // Cualquier lógica de scroll aquí se ejecuta con requestAnimationFrame
+    // Any scroll logic here runs with requestAnimationFrame
   }
   
   window.addEventListener('scroll', function() {
