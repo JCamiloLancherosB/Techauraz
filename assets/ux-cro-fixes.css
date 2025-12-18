@@ -31,8 +31,11 @@ slideshow-component {
 }
 
 /* Prevent horizontal scrollbar in header/top area */
-body,
-html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 .header-wrapper,
 .section-header,
 #shopify-section-header {
@@ -312,10 +315,9 @@ h2.title {
    5. COOKIE BANNER FIX - SINGLE NON-INVASIVE BANNER
    ============================================================================= */
 
-/* Prevent duplicate cookie banners */
-#cookieNotice ~ #cookieNotice,
-.cookie-notice ~ .cookie-notice {
-  display: none !important;
+/* Prevent duplicate cookie banners - only one instance should exist */
+.cookie-notice:not(:first-of-type) {
+  display: none;
 }
 
 /* Desktop: Compact banner in bottom-right corner */
@@ -366,15 +368,6 @@ h2.title {
    6. ADDITIONAL FIXES
    ============================================================================= */
 
-/* Ensure header doesn't create horizontal scroll */
-.header,
-.header-wrapper,
-.header__inline-menu,
-.header__icons {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
 /* Fix any remaining overflow issues */
 .spaced-section,
 .shopify-section {
@@ -385,17 +378,16 @@ h2.title {
 /* Ensure all main containers respect viewport width */
 .page-width,
 .container,
-section,
-.spaced-section,
 .shopify-section,
 main,
 #MainContent {
   max-width: 100%;
 }
 
-html {
-  overflow-x: hidden;
-  max-width: 100vw;
+/* Specific section containers that need viewport constraint */
+.spaced-section,
+section.section {
+  max-width: 100%;
 }
 
 body {

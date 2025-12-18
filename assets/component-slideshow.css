@@ -43,11 +43,12 @@ slideshow-component .slideshow.banner {
 
 .slideshow__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
   object-fit: cover;
   max-height: 720px; /* Prevent oversized images */
   object-position: center;
+  min-height: 300px; /* Ensure minimum height for aspect ratio */
 }
 
 /* Adjust for large slides */
