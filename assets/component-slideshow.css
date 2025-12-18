@@ -34,8 +34,9 @@ slideshow-component .slideshow.banner {
 }
 
 /* Prevent CLS with aspect-ratio on slideshow media */
-/* Note: aspect-ratio removed here because Liquid dynamic styles handle this in slideshow.liquid
-   lines 16-36. The before pseudo-elements create proper spacing based on actual image ratio. */
+/* Note: aspect-ratio removed here because Liquid dynamic styles in slideshow.liquid
+   handle this via ::before pseudo-elements that create proper spacing based on actual 
+   image ratio, preventing Cumulative Layout Shift. */
 .slideshow__media {
   position: relative;
   overflow: hidden;
