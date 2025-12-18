@@ -354,32 +354,37 @@ img[loading="lazy"][src] {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.1) !important;
   z-index: 9999 !important;
   animation: slideUp 0.4s ease-out !important;
+  display: none; /* Hidden by default, shown via JS */
 }
 
-/* Desktop: More compact and less invasive */
+/* Desktop: More compact and less invasive - single banner on bottom right */
 @media screen and (min-width: 750px) {
   .cookie-notice {
-    max-width: 500px !important;
-    padding: 1.2rem 1.5rem !important;
-    bottom: 30px !important;
-    right: 30px !important;
+    max-width: 480px !important; /* Smaller on desktop */
+    padding: 1rem 1.25rem !important; /* More compact padding */
+    bottom: 20px !important;
+    right: 20px !important; /* Bottom right corner */
     left: auto !important;
     transform: none !important;
   }
   
   .cookie-notice__text {
-    font-size: 0.875rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.8rem !important; /* Smaller text */
+    line-height: 1.4 !important;
     margin-bottom: 0.75rem !important;
   }
   
+  .cookie-notice__text strong {
+    font-size: 0.85rem !important;
+  }
+  
   .cookie-notice__buttons {
-    gap: 0.75rem !important;
+    gap: 0.6rem !important;
   }
   
   .cookie-notice__button {
-    padding: 0.6rem 1.2rem !important;
-    font-size: 0.85rem !important;
+    padding: 0.5rem 1rem !important; /* Smaller buttons */
+    font-size: 0.8rem !important;
   }
 }
 
