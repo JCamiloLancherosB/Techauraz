@@ -89,7 +89,24 @@
   }
 
   .collection-{{ section.id }} .grid {
-    gap: 24px;
+    gap: 16px; /* Reduced from 24px */
+  }
+
+  /* Reduce section padding for tighter layout */
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    
+    .collection-{{ section.id }} .grid {
+      gap: 18px; /* Slightly reduced from 24px */
+    }
   }
 
   @media screen and (max-width: 749px) {

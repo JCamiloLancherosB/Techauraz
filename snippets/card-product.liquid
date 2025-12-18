@@ -241,6 +241,24 @@
                 {%- endfor -%}
               </div>
             {%- endif -%}
+            
+            {%- comment -%} Trust indicators - small icons for trust signals {%- endcomment -%}
+            {%- if card_product.available -%}
+              <div class="card__trust-indicators">
+                <div class="card__trust-indicator">
+                  <svg class="card__trust-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0L10 6L16 8L10 10L8 16L6 10L0 8L6 6L8 0Z" fill="currentColor"/>
+                  </svg>
+                  <span>Envío rápido</span>
+                </div>
+                <div class="card__trust-indicator">
+                  <svg class="card__trust-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" fill="currentColor"/>
+                  </svg>
+                  <span>En stock</span>
+                </div>
+              </div>
+            {%- endif -%}
           </div>
         </div>
         
