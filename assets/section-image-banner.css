@@ -168,11 +168,29 @@
 
 .banner__media-half {
   width: 50%;
+  flex: 1 1 50%;
+  max-width: 50%;
 }
 
 .banner__media-half + .banner__media-half {
   right: 0;
   left: auto;
+}
+
+/* Ensure 50/50 split with no gaps */
+@media screen and (min-width: 750px) {
+  .banner .banner__media-half {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .banner .banner__media-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .banner__media-half.animate--fixed:first-child > img,
