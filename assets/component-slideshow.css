@@ -15,6 +15,14 @@ slideshow-component .slideshow.banner {
   flex-wrap: nowrap;
   margin: 0;
   gap: 0;
+  overflow-x: hidden; /* Hide horizontal overflow to prevent side-by-side images */
+}
+
+/* Ensure only one slide is visible at a time */
+.slideshow.slider--everywhere .slideshow__slide {
+  min-width: 100%;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 .slideshow__slide {
@@ -23,6 +31,8 @@ slideshow-component .slideshow.banner {
   display: flex;
   flex-direction: column;
   visibility: visible;
+  min-width: 100%; /* Ensure slide takes full width */
+  width: 100%;
 }
 
 /* Prevent CLS with aspect-ratio on slideshow media */
