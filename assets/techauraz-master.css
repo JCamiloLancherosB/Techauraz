@@ -102,7 +102,7 @@
 /* Card media - fixed aspect ratio 4:5 */
 .card__media,
 .card .media {
-  position: relative !important;
+  position: relative;
   width: 100%;
   aspect-ratio: var(--ta-card-aspect);
   background: var(--ta-bg-dark);
@@ -364,7 +364,7 @@
   /* Only sliders should have horizontal scroll */
   .product-grid:not(.slider),
   .grid:not(.slider) {
-    overflow-x: visible !important;
+    overflow-x: visible;
   }
   
   /* Ensure grid items don't cause overflow */
@@ -385,17 +385,17 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-    overflow-x: visible !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow-x: visible;
   }
 
   .grid__item {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   :root {
@@ -422,9 +422,9 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 16px !important;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
   :root {
@@ -437,9 +437,9 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 24px !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 
   :root {
@@ -473,14 +473,14 @@
 
 /* Product page should NOT use grid layout */
 .product.grid {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  grid-template-columns: initial !important;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: initial;
 }
 
 @media screen and (max-width: 749px) {
   .product.grid {
-    flex-direction: column !important;
+    flex-direction: column;
   }
 }
 

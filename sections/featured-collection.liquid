@@ -53,7 +53,7 @@
     top: 0;
   }
 
-  /* Use a wrapper div or different approach for the underline instead of ::after */
+  /* Use title-wrapper::after for underline to avoid conflict with star pseudo-element */
   .collection-{{ section.id }} .title-wrapper {
     position: relative;
     display: flex;
