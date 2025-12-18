@@ -52,36 +52,38 @@ function initializeScrollZoomAnimationTrigger() {
   const elementData = new Map();
   
   animationTriggerElements.forEach((element) => {
-    let elementIsVisible = false;
+    // Create element-specific state object
+    const state = {
+      isVisible: false,
+      lastRatio: 0,
+      ticking: false  // Per-element ticking flag
+    };
+    
     const observer = new IntersectionObserver((elements) => {
       elements.forEach((entry) => {
-        elementIsVisible = entry.isIntersecting;
+        state.isVisible = entry.isIntersecting;
       });
     });
     observer.observe(element);
     
     // Store element-specific data
-    elementData.set(element, { 
-      isVisible: () => elementIsVisible,
-      lastRatio: 0
-    });
+    elementData.set(element, state);
 
     // Initial value - batch DOM reads using requestAnimationFrame
     requestAnimationFrame(() => {
       const ratio = 1 + scaleAmount * percentageSeen(element);
       element.style.setProperty('--zoom-in-ratio', ratio);
-      elementData.get(element).lastRatio = ratio;
+      state.lastRatio = ratio;
     });
 
     // Use requestAnimationFrame instead of scroll listener for better performance
-    let ticking = false;
     window.addEventListener(
       'scroll',
       () => {
         const data = elementData.get(element);
-        if (!data.isVisible() || ticking) return;
+        if (!data.isVisible || data.ticking) return;
         
-        ticking = true;
+        data.ticking = true;
         requestAnimationFrame(() => {
           const ratio = 1 + scaleAmount * percentageSeen(element);
           // Only update if changed to reduce DOM writes
@@ -89,7 +91,7 @@ function initializeScrollZoomAnimationTrigger() {
             element.style.setProperty('--zoom-in-ratio', ratio);
             data.lastRatio = ratio;
           }
-          ticking = false;
+          data.ticking = false;
         });
       },
       { passive: true }

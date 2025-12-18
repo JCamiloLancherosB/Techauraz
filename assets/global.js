@@ -636,10 +636,21 @@ class SliderComponent extends HTMLElement {
   initPages() {
     // Batch all DOM reads together to prevent layout thrashing
     const sliderWidth = this.slider.clientWidth;
-    this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => element.clientWidth > 0);
+    
+    // First pass: collect all clientWidth values in a single batch
+    const itemWidths = Array.from(this.sliderItems).map(element => ({
+      element,
+      width: element.clientWidth
+    }));
+    
+    // Filter based on cached widths
+    this.sliderItemsToShow = itemWidths
+      .filter(item => item.width > 0)
+      .map(item => item.element);
+    
     if (this.sliderItemsToShow.length < 2) return;
     
-    // Batch layout reads
+    // Second pass: batch offsetLeft reads
     const firstItemOffset = this.sliderItemsToShow[0].offsetLeft;
     const secondItemOffset = this.sliderItemsToShow[1].offsetLeft;
     

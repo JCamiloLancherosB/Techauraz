@@ -435,6 +435,13 @@
   /* Critical CSS - Above the fold styles to prevent FOUC and layout shifts
    * Optimized for LCP (Largest Contentful Paint) and CLS (Cumulative Layout Shift)
    * Font family is hardcoded as fallback before CSS custom properties load
+   * 
+   * NOTE: Color values are hardcoded for immediate rendering before theme CSS loads.
+   * These should match the primary theme colors in base.css:
+   * - Background: #020617 (slate-950)
+   * - Header background: rgba(15, 23, 42, 0.96) (slate-900 with opacity)
+   * - Text: #e2e8f0 (slate-200)
+   * - Secondary background: #1a1a2e (custom dark blue)
    */
   
   /* Base styles */
