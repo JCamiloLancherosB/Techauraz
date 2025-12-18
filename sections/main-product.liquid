@@ -1019,7 +1019,7 @@
 
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
-                  <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                  <div id="product-description" class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                     {{ product.description }}
                   </div>
                 {%- endif -%}
@@ -1555,12 +1555,28 @@
             {%- endcase -%}
           {%- endfor -%}
 
-          <a href="{{ product.url }}" class="link product__view-details animate-arrow">
+          <a href="#product-description" class="link product__view-details animate-arrow" data-scroll-to-description>
             {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}
           </a>
         </product-info>
       </div>
+
+      <script>
+        // Smooth scroll to product description
+        document.addEventListener('DOMContentLoaded', function() {
+          const detailsLink = document.querySelector('[data-scroll-to-description]');
+          if (detailsLink) {
+            detailsLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              const description = document.querySelector('#product-description');
+              if (description) {
+                description.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            });
+          }
+        });
+      </script>
 
       {%- if section.settings.media_position == 'right' -%}
         <div class="grid__item product__media-wrapper small-hide">
