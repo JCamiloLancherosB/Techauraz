@@ -430,9 +430,12 @@
 
     {% endstyle %}
 
-    <!-- CSS crítico inline (solo estilos del header/hero) -->
+    <!-- Critical CSS inline (essential above-the-fold styles) -->
 <style>
-  /* Critical CSS - Above the fold styles to prevent FOUC */
+  /* Critical CSS - Above the fold styles to prevent FOUC
+   * Note: Font family is hardcoded here as fallback before CSS custom properties load
+   * This prevents invisible text flash (FOIT) during initial render
+   */
   body { 
     margin: 0; 
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
@@ -645,7 +648,7 @@
   // Performance optimization constants
   var GTM_DELAY = 5000;           // Delay before auto-loading GTM (5s)
   var GTM_IDLE_TIMEOUT = 7000;    // Timeout for idle callback (7s)
-  var GTM_INTERACTION_DELAY = 100; // Delay after user interaction (100ms)
+  var GTM_INTERACTION_DELAY = 100; // Short delay after interaction to avoid blocking (100ms - GTM is lighter)
   
   // Load GTM only after user interaction or idle time
   function loadGTM() {
@@ -687,7 +690,7 @@
   // Performance optimization constants
   var FB_DELAY = 6000;            // Delay before auto-loading FB Pixel (6s)
   var FB_IDLE_TIMEOUT = 8000;     // Timeout for idle callback (8s)
-  var FB_INTERACTION_DELAY = 200; // Delay after user interaction (200ms)
+  var FB_INTERACTION_DELAY = 200; // Longer delay after interaction (200ms - FB Pixel is heavier than GTM)
   
   var fbLoaded = false;
   
