@@ -509,7 +509,7 @@
   <noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
 {%- endif -%}
 
-{%- comment -%} Cargar cross-sell CSS solo en páginas de producto {%- endcomment -%}
+{%- comment -%} Load cross-sell CSS only on product pages {%- endcomment -%}
 {%- if template.name == 'product' -%}
   <link rel="preload" href="{{ 'cross-sell.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
@@ -639,10 +639,15 @@
        }
      });
    </script>
-   <!-- GOOGLE TAG MANAGER ULTRA OPTIMIZADO -->
+   <!-- GOOGLE TAG MANAGER - OPTIMIZED -->
 <script>
 (function(w,d,s,l,i){
-  // Cargar GTM solo después de interacción del usuario o idle
+  // Performance optimization constants
+  var GTM_DELAY = 5000;           // Delay before auto-loading GTM (5s)
+  var GTM_IDLE_TIMEOUT = 7000;    // Timeout for idle callback (7s)
+  var GTM_INTERACTION_DELAY = 100; // Delay after user interaction (100ms)
+  
+  // Load GTM only after user interaction or idle time
   function loadGTM() {
     if (w.gtmLoaded) return;
     w.gtmLoaded = true;
@@ -656,14 +661,14 @@
     f.parentNode.insertBefore(j,f);
   }
   
-  // Load after 5 seconds or on first scroll/click/touch
-  var timer = setTimeout(loadGTM, 5000);
+  // Load after delay or on first scroll/click/touch
+  var timer = setTimeout(loadGTM, GTM_DELAY);
   
   ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
     window.addEventListener(e, function() {
       clearTimeout(timer);
       // Delay slightly to not block interaction
-      setTimeout(loadGTM, 100);
+      setTimeout(loadGTM, GTM_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
   
@@ -672,13 +677,18 @@
     requestIdleCallback(function() {
       clearTimeout(timer);
       loadGTM();
-    }, { timeout: 7000 });
+    }, { timeout: GTM_IDLE_TIMEOUT });
   }
 })(window,document,'script','dataLayer','GTM-PB6TD2ZD');
 </script>
-<!-- FACEBOOK PIXEL ULTRA OPTIMIZADO -->
+<!-- FACEBOOK PIXEL - OPTIMIZED -->
 <script>
 (function() {
+  // Performance optimization constants
+  var FB_DELAY = 6000;            // Delay before auto-loading FB Pixel (6s)
+  var FB_IDLE_TIMEOUT = 8000;     // Timeout for idle callback (8s)
+  var FB_INTERACTION_DELAY = 200; // Delay after user interaction (200ms)
+  
   var fbLoaded = false;
   
   function loadFBPixel() {
@@ -696,12 +706,12 @@
   }
   
   // Load only after interaction or idle - later than GTM
-  var timer = setTimeout(loadFBPixel, 6000);
+  var timer = setTimeout(loadFBPixel, FB_DELAY);
   ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
     window.addEventListener(e, function() {
       clearTimeout(timer);
       // Delay to reduce impact on interaction
-      setTimeout(loadFBPixel, 200);
+      setTimeout(loadFBPixel, FB_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
   
@@ -710,7 +720,7 @@
     requestIdleCallback(function() {
       clearTimeout(timer);
       loadFBPixel();
-    }, { timeout: 8000 });
+    }, { timeout: FB_IDLE_TIMEOUT });
   }
 })();
 </script>

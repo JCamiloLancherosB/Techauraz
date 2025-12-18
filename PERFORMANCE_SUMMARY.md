@@ -150,11 +150,13 @@ If performance degrades or issues occur:
 
 1. **Revert third-party delays** (layout/theme.liquid):
    ```javascript
-   // Line 600: Change back to 3000
-   var timer = setTimeout(loadGTM, 3000);
+   // GTM constants (around line 647-649)
+   var GTM_DELAY = 3000;           // Change from 5000 to 3000
+   var GTM_IDLE_TIMEOUT = 5000;    // Change from 7000 to 5000
    
-   // Line 631: Change back to 4000
-   var timer = setTimeout(loadFBPixel, 4000);
+   // FB Pixel constants (around line 688-690)
+   var FB_DELAY = 4000;            // Change from 6000 to 4000
+   var FB_IDLE_TIMEOUT = 6000;     // Change from 8000 to 6000
    ```
 
 2. **Restore blocking CSS** (if critical CSS causes issues):
