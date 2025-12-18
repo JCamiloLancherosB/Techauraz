@@ -387,10 +387,6 @@ slideshow-component,
   visibility: visible !important; /* Force visibility */
   opacity: 1 !important;
 }
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
 
 .card__badge {
   display: inline-block;
