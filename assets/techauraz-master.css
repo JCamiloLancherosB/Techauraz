@@ -102,22 +102,32 @@
 /* Card media - fixed aspect ratio 4:5 */
 .card__media,
 .card .media {
-  position: relative !important;
+  position: relative;
   width: 100%;
   aspect-ratio: var(--ta-card-aspect);
   background: var(--ta-bg-dark);
   overflow: hidden;
   border-radius: var(--ta-radius-lg) var(--ta-radius-lg) 0 0;
+  max-height: 500px; /* Prevent oversized images */
 }
 
-/* Card images - cover fill */
+/* Card images - cover fill with quality constraints */
 .card__media img,
 .card .media img {
   width: 100%;
   height: 100%;
+  max-height: 500px;
   object-fit: cover;
   transition: transform var(--ta-transition-slow);
   display: block;
+}
+
+/* Related products - contain instead of cover for better quality */
+.related-products .card__media img,
+.related-products .card .media img {
+  object-fit: contain;
+  max-height: 400px;
+  padding: 0.75rem;
 }
 
 /* Hover zoom effect on images */
@@ -167,14 +177,68 @@
 
 /* Card description - truncated */
 .card__description {
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--ta-text-muted);
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Mobile: Larger font for better legibility */
+@media screen and (max-width: 749px) {
+  .card__description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* "Ver todos los detalles" link */
+.card__details-link {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ta-border);
+}
+
+.card__details-link .link {
+  color: var(--ta-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--ta-transition-fast);
+}
+
+.card__details-link .link:hover {
+  color: var(--ta-accent);
+  text-decoration: underline;
+}
+
+/* Card benefits (bullet points) */
+.card__benefits {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.card__benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ta-text-secondary);
+  margin-bottom: 4px;
+}
+
+.card__benefit-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--ta-primary);
+}
+
+.card__benefit-text {
+  flex: 1;
 }
 
 /* =============================================================================
@@ -281,6 +345,35 @@
    RESPONSIVE GRID - Mobile 2-col, Tablet 3-col, Desktop 4-col
    ============================================================================= */
 
+/* Prevent horizontal scrolling on mobile */
+@media screen and (max-width: 749px) {
+  body,
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  .page-width,
+  .collection,
+  .featured-collection,
+  section {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Only sliders should have horizontal scroll */
+  .product-grid:not(.slider),
+  .grid:not(.slider) {
+    overflow-x: visible;
+  }
+  
+  /* Ensure grid items don't cause overflow */
+  .grid__item {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
 /* Mobile: 2 columns */
 @media screen and (max-width: 749px) {
   .page-width {
@@ -292,16 +385,17 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow-x: visible;
   }
 
   .grid__item {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   :root {
@@ -328,9 +422,9 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 16px !important;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
   :root {
@@ -343,9 +437,9 @@
   .product-grid,
   .collection .grid,
   .template-collection .grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 24px !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 
   :root {
@@ -379,14 +473,14 @@
 
 /* Product page should NOT use grid layout */
 .product.grid {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  grid-template-columns: initial !important;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: initial;
 }
 
 @media screen and (max-width: 749px) {
   .product.grid {
-    flex-direction: column !important;
+    flex-direction: column;
   }
 }
 
@@ -520,6 +614,9 @@ img.lazyloaded {
 .collection .title-wrapper .title {
   position: relative;
   padding-bottom: 1.5rem;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
 }
 
 .collection .title-wrapper .title::after {
@@ -532,6 +629,29 @@ img.lazyloaded {
   height: 4px;
   background: linear-gradient(135deg, var(--ta-primary), var(--ta-accent));
   border-radius: var(--ta-radius-pill);
+}
+
+/* Ensure title wrapper is centered */
+.collection .title-wrapper,
+.section .title-wrapper {
+  text-align: center;
+}
+
+/* Home page CTA buttons alignment */
+.banner__buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 45rem;
+  word-break: break-word;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner__buttons .button {
+  min-width: 180px;
+  text-align: center;
+  justify-content: center;
 }
 
 /* =============================================================================

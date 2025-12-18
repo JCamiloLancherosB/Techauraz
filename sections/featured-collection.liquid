@@ -42,33 +42,27 @@
     background-clip: text;
   }
 
-  .collection-{{ section.id }} .title::before,
-  .collection-{{ section.id }} .title::after {
+  .collection-{{ section.id }} .title::before {
     content: "★";
     position: absolute;
     color: #0ea5e9;
     font-size: 1.5rem;
     opacity: 0.6;
     animation: sparkle 2s ease-in-out infinite;
-  }
-
-  .collection-{{ section.id }} .title::before {
     left: -2rem;
     top: 0;
   }
 
-  .collection-{{ section.id }} .title::after {
-    right: -2rem;
-    top: 0;
-    animation-delay: 1s;
+  /* Use title-wrapper::after for underline to avoid conflict with star pseudo-element */
+  .collection-{{ section.id }} .title-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
-  @keyframes sparkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.2); }
-  }
-
-  .collection-{{ section.id }} .title::after {
+  .collection-{{ section.id }} .title-wrapper::after {
     content: "";
     position: absolute;
     bottom: -8px;
@@ -78,6 +72,11 @@
     height: 4px;
     background: linear-gradient(45deg, #0ea5e9, #22c55e);
     border-radius: 999px;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
   }
 
   .collection-{{ section.id }} .collection__description {
@@ -97,6 +96,12 @@
     .collection-{{ section.id }} .title {
       font-size: 2.2rem;
     }
+
+    .collection-{{ section.id }} .title::before {
+      left: -1.5rem;
+      font-size: 1.2rem;
+    }
+  }
 
     .collection-{{ section.id }} .grid {
       gap: 16px;

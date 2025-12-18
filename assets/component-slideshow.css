@@ -29,6 +29,7 @@ slideshow-component .slideshow.banner {
 .slideshow__media {
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16 / 9; /* Default aspect ratio to prevent CLS */
 }
 
 .slideshow__media img {
@@ -36,6 +37,14 @@ slideshow-component .slideshow.banner {
   height: auto;
   display: block;
   object-fit: cover;
+  max-height: 720px; /* Prevent oversized images */
+}
+
+/* Adjust for large slides */
+@media screen and (min-width: 750px) {
+  .slideshow__media img {
+    max-height: 900px;
+  }
 }
 
 @media screen and (max-width: 749px) {
