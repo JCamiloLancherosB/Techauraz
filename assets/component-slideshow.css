@@ -25,6 +25,19 @@ slideshow-component .slideshow.banner {
   visibility: visible;
 }
 
+/* Prevent CLS with aspect-ratio on slideshow media */
+.slideshow__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.slideshow__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 749px) {
   .slideshow--placeholder.banner--mobile-bottom.banner--adapt_image .slideshow__media,
   .slideshow--placeholder.banner--adapt_image:not(.banner--mobile-bottom) {
