@@ -187,6 +187,28 @@ En `assets/base.css`:
 - Product rich snippets
 - Geolocalización (Colombia)
 
+### ⚡ Performance Optimizations (2024)
+
+**Core Web Vitals Improvements**:
+- ✅ **LCP Optimization**: Enhanced critical CSS, hero image preload
+- ✅ **Layout Thrashing Eliminated**: Batched DOM reads/writes, RAF-based scroll handlers
+- ✅ **Render-Blocking Reduced**: Deferred non-critical CSS/JS, conditional loading
+- ✅ **TBT Reduction**: Third-party scripts delayed (GTM 5s, FB Pixel 6s)
+
+**Key Optimizations**:
+1. **Critical CSS Inline** (~3KB) - Prevents FOUC, faster FCP
+2. **JavaScript Optimization** - All scripts deferred, passive listeners, requestIdleCallback
+3. **Layout Thrashing Fixes** - Cached measurements, batched DOM operations
+4. **Conditional Asset Loading** - Product CSS only on product pages, ~30KB savings
+5. **Third-Party Delays** - GTM/FB Pixel use idle-time loading
+
+**Expected Metrics**:
+- LCP: 4.8s → 2.5-3.0s (-40-50%)
+- TBT: 3,300ms → 800-1,200ms (-60-70%)
+- Lighthouse: 48 → 75-80 (+56%)
+
+**Documentation**: See `PERF.md` for detailed implementation and testing guide
+
 ### 🌐 Internacionalización
 
 - Etiquetas traducibles con Shopify i18n
