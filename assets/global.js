@@ -634,11 +634,18 @@ class SliderComponent extends HTMLElement {
   }
 
   initPages() {
+    // Batch all DOM reads together to prevent layout thrashing
+    const sliderWidth = this.slider.clientWidth;
     this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => element.clientWidth > 0);
     if (this.sliderItemsToShow.length < 2) return;
-    this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
+    
+    // Batch layout reads
+    const firstItemOffset = this.sliderItemsToShow[0].offsetLeft;
+    const secondItemOffset = this.sliderItemsToShow[1].offsetLeft;
+    
+    this.sliderItemOffset = secondItemOffset - firstItemOffset;
     this.slidesPerPage = Math.floor(
-      (this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset
+      (sliderWidth - firstItemOffset) / this.sliderItemOffset
     );
     this.totalPages = this.sliderItemsToShow.length - this.slidesPerPage + 1;
     this.update();
@@ -689,8 +696,14 @@ class SliderComponent extends HTMLElement {
   }
 
   isSlideVisible(element, offset = 0) {
-    const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset;
-    return element.offsetLeft + element.clientWidth <= lastVisibleSlide && element.offsetLeft >= this.slider.scrollLeft;
+    // Batch DOM reads to prevent layout thrashing
+    const sliderWidth = this.slider.clientWidth;
+    const scrollLeft = this.slider.scrollLeft;
+    const lastVisibleSlide = sliderWidth + scrollLeft - offset;
+    const elementLeft = element.offsetLeft;
+    const elementRight = elementLeft + element.clientWidth;
+    
+    return elementRight <= lastVisibleSlide && elementLeft >= scrollLeft;
   }
 
   onButtonClick(event) {
