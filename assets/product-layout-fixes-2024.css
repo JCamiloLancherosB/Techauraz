@@ -7,6 +7,14 @@
  * 2. Botones de producto no visibles en tarjetas
  * 3. Información de producto oculta
  * 4. Responsividad móvil y escritorio
+ * 
+ * NOTE: This file uses !important declarations extensively to override existing
+ * theme styles that are preventing proper display of product information.
+ * The base theme has conflicting styles that hide critical elements like
+ * buttons, descriptions, and prices. !important is necessary here because:
+ * - Existing styles use high specificity selectors
+ * - Some styles are inline or dynamically generated
+ * - This is a corrective/override layer on top of the base theme
  * =============================================================================
  */
 
@@ -97,7 +105,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Product description in cards */
 .card__description {
-  display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
   font-size: 0.875rem !important;
@@ -449,9 +456,6 @@ modal-opener {
    ============================================================================= */
 
 /* Forzar visibilidad de elementos críticos */
-.card__content,
-.card__information,
-.card-information,
 .card__heading,
 .card__description,
 .card__benefits,
@@ -462,7 +466,6 @@ modal-opener {
 .price,
 .price__container,
 .product-form {
-  display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
   overflow: visible !important;
@@ -473,6 +476,9 @@ modal-opener {
 .card__information,
 .card-information {
   display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
 }
 
 .quick-add,
