@@ -432,23 +432,31 @@
 
     <!-- Critical CSS inline (essential above-the-fold styles) -->
 <style>
-  /* Critical CSS - Above the fold styles to prevent FOUC
-   * Note: Font family is hardcoded here as fallback before CSS custom properties load
-   * This prevents invisible text flash (FOIT) during initial render
+  /* Critical CSS - Above the fold styles to prevent FOUC and layout shifts
+   * Optimized for LCP (Largest Contentful Paint) and CLS (Cumulative Layout Shift)
+   * Font family is hardcoded as fallback before CSS custom properties load
    */
+  
+  /* Base styles */
+  * { box-sizing: border-box; }
+  
   body { 
     margin: 0; 
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-    background: #020617; 
+    background: #020617;
+    color: #e2e8f0; 
     line-height: 1.6;
+    font-size: 16px;
   }
   
-  /* Header critical styles */
-  .header-wrapper, .section-header { 
+  /* Header critical styles - Prevent header layout shift */
+  .header-wrapper, 
+  .section-header { 
     background: rgba(15, 23, 42, 0.96); 
     position: sticky; 
     top: 0; 
     z-index: 999;
+    contain: layout style;
     will-change: transform;
   }
   
@@ -457,45 +465,95 @@
     align-items: center; 
     justify-content: space-between; 
     padding: 0.5rem 1rem;
+    min-height: 60px;
   }
   
-  /* Hero/Banner critical styles */
-  .banner { 
+  .header__heading-logo {
+    flex: 0 0 auto;
+  }
+  
+  /* Hero/Banner critical styles - LCP optimization */
+  .banner,
+  .slideshow { 
     position: relative; 
     display: block;
+    contain: layout;
   }
   
-  .banner__media { 
+  .banner__media,
+  .slideshow__media { 
     position: relative; 
     overflow: hidden;
+    background: #1a1a2e;
   }
   
-  .banner__media img { 
+  .banner__media img,
+  .slideshow__media img { 
     width: 100%; 
     height: auto; 
     display: block;
+    object-fit: cover;
   }
   
-  /* WhatsApp float button */
-  .whatsapp-float { 
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 9999; 
+  /* Prevent CLS for images */
+  img { 
+    max-width: 100%; 
+    height: auto;
+    vertical-align: middle;
   }
   
-  /* Basic grid layout */
+  /* Basic grid layout - Prevent layout shift */
   .page-width { 
     max-width: 1440px; 
     margin: 0 auto; 
     padding: 0 1.5rem;
   }
   
-  /* Prevent layout shift */
-  img { max-width: 100%; height: auto; }
+  /* Product grid skeleton */
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
   
-  /* Hide loading spinner until CSS loads */
-  .loading-spinner { opacity: 0; }
+  @media (min-width: 750px) {
+    .grid--2-col-tablet { grid-template-columns: repeat(2, 1fr); }
+    .grid--3-col-tablet { grid-template-columns: repeat(3, 1fr); }
+    .grid--4-col-tablet { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  /* Utility classes to prevent CLS */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  /* Loading states - Hide until CSS loads to prevent FOUC */
+  .loading-spinner,
+  .loading-overlay { 
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Buttons - Basic styles to prevent FOUC */
+  button,
+  .button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 </style>
 
 <!-- CSS completo con preload + async -->

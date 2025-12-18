@@ -38,7 +38,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
   animationTriggerElements.forEach((element) => observer.observe(element));
 }
 
-// Zoom in animation logic
+// Zoom in animation logic - OPTIMIZED to reduce layout thrashing
 function initializeScrollZoomAnimationTrigger() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -47,7 +47,10 @@ function initializeScrollZoomAnimationTrigger() {
   if (animationTriggerElements.length === 0) return;
 
   const scaleAmount = 0.2 / 100;
-
+  
+  // Cache element data to avoid repeated layout reads
+  const elementData = new Map();
+  
   animationTriggerElements.forEach((element) => {
     let elementIsVisible = false;
     const observer = new IntersectionObserver((elements) => {
@@ -56,26 +59,52 @@ function initializeScrollZoomAnimationTrigger() {
       });
     });
     observer.observe(element);
+    
+    // Store element-specific data
+    elementData.set(element, { 
+      isVisible: () => elementIsVisible,
+      lastRatio: 0
+    });
 
-    element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
+    // Initial value - batch DOM reads using requestAnimationFrame
+    requestAnimationFrame(() => {
+      const ratio = 1 + scaleAmount * percentageSeen(element);
+      element.style.setProperty('--zoom-in-ratio', ratio);
+      elementData.get(element).lastRatio = ratio;
+    });
 
+    // Use requestAnimationFrame instead of scroll listener for better performance
+    let ticking = false;
     window.addEventListener(
       'scroll',
-      throttle(() => {
-        if (!elementIsVisible) return;
-
-        element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
-      }),
+      () => {
+        const data = elementData.get(element);
+        if (!data.isVisible() || ticking) return;
+        
+        ticking = true;
+        requestAnimationFrame(() => {
+          const ratio = 1 + scaleAmount * percentageSeen(element);
+          // Only update if changed to reduce DOM writes
+          if (Math.abs(ratio - data.lastRatio) > 0.001) {
+            element.style.setProperty('--zoom-in-ratio', ratio);
+            data.lastRatio = ratio;
+          }
+          ticking = false;
+        });
+      },
       { passive: true }
     );
   });
 }
 
+// OPTIMIZED: Batch DOM reads to prevent layout thrashing
 function percentageSeen(element) {
+  // Batch all reads together
   const viewportHeight = window.innerHeight;
   const scrollY = window.scrollY;
-  const elementPositionY = element.getBoundingClientRect().top + scrollY;
-  const elementHeight = element.offsetHeight;
+  const rect = element.getBoundingClientRect();
+  const elementPositionY = rect.top + scrollY;
+  const elementHeight = rect.height; // Use rect.height instead of offsetHeight
 
   if (elementPositionY > scrollY + viewportHeight) {
     // If we haven't reached the image yet

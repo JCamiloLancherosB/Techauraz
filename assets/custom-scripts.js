@@ -2,15 +2,23 @@
 // CÓDIGO OPTIMIZADO PARA TECHAURA
 // ============================================
 
-// --- 1. Sticky Bar (OPTIMIZADO CON THROTTLE) ---
+// --- 1. Sticky Bar (OPTIMIZED - Cache layout measurements) ---
 (function() {
   const stickyBar = document.getElementById('sticky-atc-bar');
   const productForm = document.querySelector('.product-form');
 
   if (!stickyBar || !productForm) return;
 
-  const showBarThreshold = productForm.offsetTop + productForm.offsetHeight;
+  let showBarThreshold = 0;
   let ticking = false;
+
+  // Cache threshold after page load to avoid repeated layout reads
+  function calculateThreshold() {
+    // Batch DOM reads in a single requestAnimationFrame
+    requestAnimationFrame(() => {
+      showBarThreshold = productForm.offsetTop + productForm.offsetHeight;
+    });
+  }
 
   function toggleStickyBar() {
     const scrollY = window.scrollY;
@@ -28,6 +36,11 @@
       ticking = true;
     }
   }
+
+  // Calculate threshold on load and after window resize
+  window.addEventListener('load', calculateThreshold);
+  window.addEventListener('resize', calculateThreshold);
+  calculateThreshold(); // Initial calculation
 
   window.addEventListener('scroll', requestTick, { passive: true });
 })();
