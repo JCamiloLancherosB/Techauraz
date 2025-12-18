@@ -1,0 +1,599 @@
+/**
+ * =============================================================================
+ * PRODUCT PAGE LAYOUT FIXES - December 2024
+ * =============================================================================
+ * Fixes for:
+ * 1. Títulos con scroll bars (overflow issues)
+ * 2. Botones de producto no visibles en tarjetas
+ * 3. Información de producto oculta
+ * 4. Responsividad móvil y escritorio
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. FIX TITLE/HEADING OVERFLOW ISSUES
+   ============================================================================= */
+
+/* Prevenir scroll en todos los títulos y headings */
+.product__title,
+.product__title h1,
+.card__heading,
+.card__heading h2,
+.card__heading h3,
+.related-products__heading,
+h1, h2, h3, h4, h5, h6 {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.3 !important;
+  max-width: 100% !important;
+}
+
+/* Asegurar que los títulos de producto no tengan scroll */
+.product__title {
+  margin: 0 0 1rem 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+}
+
+.product__title h1 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Card headings sin overflow */
+.card__heading {
+  margin-bottom: 0.5rem !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.card__heading .full-unstyled-link {
+  display: block !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  line-height: 1.3 !important;
+}
+
+/* Related products heading */
+.related-products__heading {
+  overflow: visible !important;
+  text-align: center !important;
+  padding: 0 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* =============================================================================
+   2. FIX PRODUCT CARD BUTTONS VISIBILITY
+   ============================================================================= */
+
+/* Asegurar que el contenido de la tarjeta sea visible */
+.card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  padding: 0.75rem 1rem 1rem !important;
+  background: #020617 !important;
+  overflow: visible !important;
+}
+
+/* Card information container - asegurar visibilidad */
+.card__information,
+.card-information {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  flex-grow: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Product description in cards */
+.card__description {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  color: #94a3b8 !important;
+  margin: 0.5rem 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+/* Product benefits in cards */
+.card__benefits {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.375rem !important;
+  margin: 0.5rem 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__benefit-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.75rem !important;
+  color: #cbd5e1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__benefit-icon {
+  flex-shrink: 0 !important;
+  width: 14px !important;
+  height: 14px !important;
+  color: #22c55e !important;
+}
+
+/* Trust indicators in cards */
+.card__trust-indicators {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+  margin: 0.5rem 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__trust-indicator {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  font-size: 0.6875rem !important;
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__trust-icon {
+  width: 12px !important;
+  height: 12px !important;
+  color: #22c55e !important;
+}
+
+/* Details link */
+.card__details-link {
+  display: block !important;
+  margin: 0.75rem 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__details-link .link {
+  font-size: 0.875rem !important;
+  color: #0ea5e9 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.card__details-link .link:hover {
+  text-decoration: underline !important;
+}
+
+/* Price visibility */
+.price,
+.price__container,
+.price-item,
+.price-item--regular,
+.price-item--sale {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card-information .price {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+/* =============================================================================
+   3. FIX QUICK ADD / BUY BUTTONS VISIBILITY
+   ============================================================================= */
+
+/* Quick add section - MUST BE VISIBLE */
+.quick-add {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin-top: 1rem !important;
+  width: 100% !important;
+}
+
+.quick-add.no-js-hidden {
+  display: block !important;
+}
+
+/* Quick add buttons */
+.quick-add__submit {
+  display: block !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  min-height: 44px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.quick-add__submit:hover {
+  filter: brightness(1.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+.quick-add__submit:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+/* Product form buttons in cards */
+.product-form {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.product-form .form {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Modal opener for quick add */
+modal-opener {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Quick add modal */
+.quick-add-modal {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* =============================================================================
+   4. FIX PRODUCT CARD BADGES
+   ============================================================================= */
+
+.card__badges {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  position: absolute !important;
+  top: 0.75rem !important;
+  left: 0.75rem !important;
+  z-index: 2 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.card__badge {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Badge color variants */
+.card__badge--new {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: #ffffff !important;
+}
+
+.card__badge--bestseller {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #ffffff !important;
+}
+
+.card__badge--discount {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  color: #ffffff !important;
+}
+
+.card__badge--stock {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  color: #ffffff !important;
+}
+
+.card__badge--sold-out {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
+  color: #ffffff !important;
+}
+
+/* =============================================================================
+   5. FIX "TE PUEDE GUSTAR" SECTION POSITIONING
+   ============================================================================= */
+
+/* Asegurar que related products no tape los CTAs */
+.related-products,
+.product-recommendations {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin-top: 3rem !important;
+  padding-top: 2rem !important;
+  clear: both !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Separación clara entre producto principal y productos relacionados */
+.related-products::before {
+  content: '' !important;
+  display: block !important;
+  width: 100% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Asegurar que el grid de relacionados esté por debajo */
+.related-products .grid,
+.product-recommendations .grid {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =============================================================================
+   6. RESPONSIVE FIXES
+   ============================================================================= */
+
+/* Mobile (hasta 749px) */
+@media screen and (max-width: 749px) {
+  .product__title h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .card__heading .full-unstyled-link {
+    font-size: 0.9375rem !important;
+  }
+
+  .card__description {
+    font-size: 0.8125rem !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .card__benefit-item {
+    font-size: 0.6875rem !important;
+  }
+
+  .quick-add__submit {
+    font-size: 0.8125rem !important;
+    padding: 0.6rem 1rem !important;
+  }
+
+  .card__badges {
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+    gap: 0.375rem !important;
+  }
+
+  .card__badge {
+    padding: 0.25rem 0.625rem !important;
+    font-size: 0.6875rem !important;
+  }
+
+  .related-products {
+    margin-top: 2rem !important;
+    padding-top: 1.5rem !important;
+  }
+}
+
+/* Tablet (750px - 989px) */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product__title h1 {
+    font-size: 2rem !important;
+  }
+
+  .card__heading .full-unstyled-link {
+    font-size: 1rem !important;
+  }
+
+  .card__description {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Desktop (990px+) */
+@media screen and (min-width: 990px) {
+  .product__title h1 {
+    font-size: 2.25rem !important;
+  }
+
+  .card__heading .full-unstyled-link {
+    font-size: 1.0625rem !important;
+  }
+
+  .card__description {
+    font-size: 0.9375rem !important;
+  }
+}
+
+/* =============================================================================
+   7. ENSURE NO HIDDEN ELEMENTS
+   ============================================================================= */
+
+/* Forzar visibilidad de elementos críticos */
+.card__content,
+.card__information,
+.card-information,
+.card__heading,
+.card__description,
+.card__benefits,
+.card__trust-indicators,
+.card__details-link,
+.quick-add,
+.quick-add__submit,
+.price,
+.price__container,
+.product-form {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
+/* Asegurar que flex containers mantengan sus propiedades */
+.card__content,
+.card__information,
+.card-information {
+  display: flex !important;
+}
+
+.quick-add,
+.quick-add__submit,
+.price,
+.price__container {
+  display: block !important;
+}
+
+/* Remove any position: absolute that might hide elements */
+.card__information,
+.card-information,
+.quick-add {
+  position: relative !important;
+}
+
+/* =============================================================================
+   8. FIX Z-INDEX STACKING ISSUES
+   ============================================================================= */
+
+/* Asegurar stack order correcto */
+.card {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.card__media {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.card__content {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.card__information {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.quick-add {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+.card__badges {
+  position: absolute !important;
+  z-index: 10 !important;
+}
+
+/* =============================================================================
+   9. FIX MAIN PRODUCT PAGE ELEMENTS
+   ============================================================================= */
+
+/* Product info container */
+.product__info-container,
+.product__info-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
+/* Product description */
+.product__description,
+#product-description {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* Product form submit buttons */
+.product-form__submit,
+.product-form__cart-submit {
+  display: block !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  min-height: 48px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Shopify payment button */
+.shopify-payment-button,
+.shopify-payment-button__button {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =============================================================================
+   10. FIX ACCESSIBILITY AND TOUCH TARGETS
+   ============================================================================= */
+
+/* Ensure touch targets are large enough */
+@media (hover: none) and (pointer: coarse) {
+  .quick-add__submit,
+  .product-form__submit,
+  .card__heading .full-unstyled-link {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+/* Focus visible for accessibility */
+.quick-add__submit:focus-visible,
+.product-form__submit:focus-visible,
+.card__heading .full-unstyled-link:focus-visible {
+  outline: 2px solid #0ea5e9 !important;
+  outline-offset: 2px !important;
+}
+
+/* =============================================================================
+   END OF PRODUCT LAYOUT FIXES
+   ============================================================================= */
