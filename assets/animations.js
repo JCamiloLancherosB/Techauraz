@@ -107,7 +107,8 @@ function percentageSeen(element) {
   const scrollY = window.scrollY;
   const rect = element.getBoundingClientRect();
   const elementPositionY = rect.top + scrollY;
-  const elementHeight = rect.height; // Use rect.height instead of offsetHeight
+  // Use offsetHeight for integer precision needed for animation calculations
+  const elementHeight = element.offsetHeight;
 
   if (elementPositionY > scrollY + viewportHeight) {
     // If we haven't reached the image yet

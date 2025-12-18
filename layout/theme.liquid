@@ -435,12 +435,13 @@
   /* Critical CSS - Above the fold styles to prevent FOUC and layout shifts
    * Optimized for LCP (Largest Contentful Paint) and CLS (Cumulative Layout Shift)
    * 
-   * Uses CSS custom properties that will be overridden by theme CSS when it loads.
-   * This provides immediate rendering while allowing theme customization.
+   * Uses CSS custom properties that will be overridden when the full theme CSS 
+   * loads asynchronously (base.css, techauraz-master.css, etc.).
+   * This provides immediate rendering while allowing full theme customization.
    */
   
   :root {
-    /* Critical theme colors - will be overridden by theme.liquid CSS variables */
+    /* Critical theme colors - overridden by full theme CSS when it loads */
     --critical-bg: #020617;
     --critical-header-bg: rgba(15, 23, 42, 0.96);
     --critical-text: #e2e8f0;
