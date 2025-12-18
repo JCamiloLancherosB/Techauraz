@@ -481,6 +481,7 @@ modal-opener {
   overflow: visible !important;
 }
 
+/* Block elements - diferentes de los flex containers arriba */
 .quick-add,
 .quick-add__submit,
 .price,
