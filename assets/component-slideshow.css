@@ -15,7 +15,9 @@ slideshow-component .slideshow.banner {
   flex-wrap: nowrap;
   margin: 0;
   gap: 0;
-  overflow-x: hidden; /* Hide horizontal overflow to prevent side-by-side images */
+  overflow: hidden; /* Hide all overflow to prevent side-by-side images and scrollbars */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 .slideshow__slide {
@@ -26,14 +28,16 @@ slideshow-component .slideshow.banner {
   visibility: visible;
   min-width: 100%; /* Ensure slide takes full width */
   width: 100%;
+  max-width: 100vw; /* Prevent slide from exceeding viewport */
   flex-shrink: 0; /* Prevent slides from shrinking */
+  scroll-snap-align: start; /* Snap to slide start */
 }
 
 /* Prevent CLS with aspect-ratio on slideshow media */
 .slideshow__media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 9; /* Default aspect ratio to prevent CLS */
+  width: 100%; /* Ensure media takes full container width */
 }
 
 .slideshow__media img {
@@ -42,6 +46,7 @@ slideshow-component .slideshow.banner {
   display: block;
   object-fit: cover;
   max-height: 720px; /* Prevent oversized images */
+  max-width: 100%; /* Prevent horizontal overflow */
 }
 
 /* Adjust for large slides */
@@ -229,4 +234,33 @@ slideshow-component:not(.page-width) .slider-buttons {
   visibility: hidden;
   opacity: 0;
   transform: scale(0.8);
+}
+
+/* Additional fixes to prevent scrollbars and ensure single-slide view */
+slideshow-component {
+  overflow: hidden; /* Prevent component overflow */
+  max-width: 100vw; /* Constrain to viewport */
+}
+
+/* Hide scrollbars on slideshow slider */
+.slideshow.slider {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.slideshow.slider::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Ensure banner doesn't create overflow */
+.banner,
+.slideshow.banner {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Prevent grid from causing overflow in slideshow */
+.slideshow.grid {
+  overflow: hidden;
+  max-width: 100%;
 }

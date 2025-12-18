@@ -73,12 +73,22 @@
 .title-wrapper-with-link {
   overflow-x: hidden;
   overflow-y: visible;
+  max-width: 100vw;
 }
 
 /* Featured collection title alignment */
 .title-wrapper {
   position: relative;
   overflow: visible;
+  text-align: center; /* Ensure centered text */
+}
+
+.title-wrapper .title,
+.title-wrapper h2 {
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .title-wrapper::after {
@@ -97,6 +107,7 @@
 slideshow-component,
 .slideshow {
   overflow: hidden;
+  max-width: 100vw;
 }
 
 .slider--everywhere {
@@ -116,6 +127,7 @@ slideshow-component,
   .collection-list-wrapper,
   .template-collection {
     overflow-x: hidden;
+    max-width: 100vw;
   }
   
   /* Ensure slider on mobile doesn't create scrollbar issues */
@@ -128,6 +140,21 @@ slideshow-component,
   .collection-list.slider--tablet::-webkit-scrollbar,
   .slider--mobile::-webkit-scrollbar {
     display: none;
+  }
+  
+  /* Prevent nested scroll in collection product grid */
+  .collection-product-wrapper,
+  .product-grid-container,
+  #ProductGridContainer {
+    overflow: visible; /* Allow content to flow naturally */
+    height: auto;
+    max-height: none;
+  }
+  
+  /* Ensure grid items don't create inner scroll */
+  .product-grid {
+    overflow: visible;
+    height: auto;
   }
 }
 
@@ -178,7 +205,7 @@ slideshow-component,
   background: var(--ta-bg-dark);
   overflow: hidden;
   border-radius: var(--ta-radius-lg) var(--ta-radius-lg) 0 0;
-  max-height: 500px; /* Prevent oversized images */
+  max-height: 450px; /* Prevent oversized images, reduced from 500px */
 }
 
 /* Card images - cover fill with quality constraints */
@@ -186,8 +213,10 @@ slideshow-component,
 .card .media img {
   width: 100%;
   height: 100%;
-  max-height: 500px;
+  max-height: 450px; /* Match container, reduced from 500px */
+  max-width: 100%; /* Prevent horizontal overflow */
   object-fit: cover;
+  object-position: center;
   transition: transform var(--ta-transition-slow);
   display: block;
 }
@@ -196,8 +225,8 @@ slideshow-component,
 .related-products .card__media img,
 .related-products .card .media img {
   object-fit: contain;
-  max-height: 400px;
-  padding: 0.75rem;
+  max-height: 380px; /* Reduced from 400px */
+  padding: 0.5rem; /* Reduced from 0.75rem */
 }
 
 /* Hover zoom effect on images */
@@ -211,14 +240,16 @@ slideshow-component,
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 12px; /* Reduced from 16px to reduce whitespace */
   background: var(--ta-bg-card);
+  gap: 8px; /* Add consistent spacing between elements */
 }
 
 .card__information {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 6px; /* Reduced gap for tighter layout */
 }
 
 /* Card heading */
@@ -287,28 +318,57 @@ slideshow-component,
 
 /* Card benefits (bullet points) */
 .card__benefits {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  display: block !important; /* Force visibility */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .card__benefit-item {
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.8rem; /* Slightly smaller to fit better */
+  line-height: 1.3;
   color: var(--ta-text-secondary);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .card__benefit-icon {
   flex-shrink: 0;
   margin-top: 2px;
   color: var(--ta-primary);
+  width: 12px;
+  height: 12px;
 }
 
 .card__benefit-text {
   flex: 1;
+}
+
+/* Trust indicators on cards */
+.card__trust-indicators {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.card__trust-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--ta-text-muted);
+}
+
+.card__trust-icon {
+  width: 12px;
+  height: 12px;
+  color: var(--ta-accent);
 }
 
 /* =============================================================================
@@ -321,6 +381,12 @@ slideshow-component,
   right: 12px;
   z-index: 10;
   display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  visibility: visible !important; /* Force visibility */
+  opacity: 1 !important;
+}
   flex-direction: column;
   gap: 6px;
   align-items: flex-end;
@@ -409,16 +475,24 @@ slideshow-component,
 .price {
   font-weight: 700;
   margin-top: auto;
+  margin-bottom: 8px; /* Ensure spacing before CTA */
+  display: flex !important; /* Force visibility */
+  flex-direction: column;
+  align-items: center;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .price-item--regular {
   color: var(--ta-text-primary);
   font-size: 1.1rem;
+  display: inline-block !important; /* Force visibility */
 }
 
 .price-item--sale {
   color: var(--ta-accent);
   font-size: 1.2rem;
+  display: inline-block !important; /* Force visibility */
 }
 
 .price s,
@@ -428,12 +502,24 @@ slideshow-component,
   margin-left: 8px;
 }
 
+/* Ensure card prices are always visible */
+.card .price,
+.card-information .price {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 30px; /* Ensure space is reserved */
+}
+
 /* =============================================================================
    QUICK ADD BUTTON - CTA Styling
    ============================================================================= */
 
 .quick-add {
   margin-top: 12px;
+  display: block !important; /* Force visibility */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .quick-add__submit {
@@ -448,6 +534,12 @@ slideshow-component,
   cursor: pointer;
   transition: all var(--ta-transition);
   box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+  display: flex !important; /* Force visibility */
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 44px; /* Ensure touch target size */
 }
 
 .quick-add__submit:hover {
