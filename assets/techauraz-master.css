@@ -112,8 +112,22 @@ slideshow-component,
 @media screen and (max-width: 749px) {
   .collection,
   .collection__title,
-  .collection-hero {
+  .collection-hero,
+  .collection-list-wrapper,
+  .template-collection {
     overflow-x: hidden;
+  }
+  
+  /* Ensure slider on mobile doesn't create scrollbar issues */
+  .collection-list.slider--tablet,
+  .slider--mobile {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .collection-list.slider--tablet::-webkit-scrollbar,
+  .slider--mobile::-webkit-scrollbar {
+    display: none;
   }
 }
 
