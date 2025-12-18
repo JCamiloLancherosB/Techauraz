@@ -1,0 +1,448 @@
+/**
+ * UX/CRO Fixes - Dec 2024
+ * Addressing hero carousel, section titles, mobile scroll, product cards, and cookie banner issues
+ */
+
+/* =============================================================================
+   1. HERO CAROUSEL FIXES
+   ============================================================================= */
+
+/* Ensure hero shows only one slide at a time, no side-by-side */
+slideshow-component {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.slideshow.banner {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.slideshow__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  max-width: 100%;
+  scroll-snap-align: start;
+}
+
+/* Prevent horizontal scrollbar in header/top area */
+body,
+html,
+.header-wrapper,
+.section-header,
+#shopify-section-header {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* =============================================================================
+   2. SECTION TITLE FIXES
+   ============================================================================= */
+
+/* Remove scrollbars from section titles */
+.title-wrapper,
+.collection__title,
+.section-heading,
+h2.title {
+  overflow: visible !important;
+  max-width: 100%;
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: visible;
+  padding-bottom: 1.5rem;
+}
+
+/* Ensure decorative elements don't cause overflow */
+.title-wrapper::before,
+.title-wrapper::after,
+.title::before,
+.title::after {
+  max-width: 100%;
+}
+
+/* =============================================================================
+   3. MOBILE COLLECTIONS SCROLL FIXES
+   ============================================================================= */
+
+/* Remove nested scroll containers on mobile */
+@media screen and (max-width: 749px) {
+  /* Only allow main page scroll */
+  .collection,
+  .collection-list,
+  .featured-collection,
+  .product-grid-container,
+  slider-component:not(.slider--mobile):not(.slider--tablet) {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  
+  /* Grid-based collections should not scroll horizontally */
+  .grid:not(.slider):not(.slider--mobile):not(.slider--tablet) {
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  /* Only sliders should have horizontal scroll */
+  .slider,
+  .slider--mobile,
+  .slider--tablet {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  
+  /* Hide scrollbars on sliders for cleaner look */
+  .slider::-webkit-scrollbar,
+  .slider--mobile::-webkit-scrollbar,
+  .slider--tablet::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .slider,
+  .slider--mobile,
+  .slider--tablet {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
+
+/* Tablet breakpoint */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid:not(.slider):not(.slider--desktop) {
+    overflow-x: hidden;
+  }
+}
+
+/* =============================================================================
+   4. PRODUCT CARD ENHANCEMENTS
+   ============================================================================= */
+
+/* Ensure price is always visible */
+.card__information,
+.card-information,
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #22c55e;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure add to cart button is always visible */
+.card__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.card__content .button,
+.card__content .quick-add__submit,
+.card .button--full-width {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Reduce excessive whitespace in cards */
+.card__heading {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.card__description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #94a3b8;
+  margin: 0.25rem 0 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Product card badges - ensure visibility */
+.card__badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.card__badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.card__badge--new {
+  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  color: #fff;
+}
+
+.card__badge--bestseller {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: #fff;
+}
+
+.card__badge--discount {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+}
+
+.card__badge--stock {
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  color: #000;
+}
+
+.card__badge--sold-out {
+  background: rgba(148, 163, 184, 0.9);
+  color: #fff;
+}
+
+/* Trust indicators - small icons */
+.card__trust-indicators {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card__trust-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.card__trust-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  opacity: 0.7;
+}
+
+/* Product benefits list */
+.card__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.card__benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  line-height: 1.3;
+}
+
+.card__benefit-icon {
+  width: 12px;
+  height: 12px;
+  fill: #0ea5e9;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.card__benefit-text {
+  flex: 1;
+}
+
+/* Image sizing fixes - prevent pixelation */
+.card__media img,
+.card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 4 / 5;
+  max-height: 500px;
+}
+
+/* Ensure images have proper aspect ratio */
+.card__media,
+.card .media {
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   5. COOKIE BANNER FIX - SINGLE NON-INVASIVE BANNER
+   ============================================================================= */
+
+/* Prevent duplicate cookie banners */
+#cookieNotice ~ #cookieNotice,
+.cookie-notice ~ .cookie-notice {
+  display: none !important;
+}
+
+/* Desktop: Compact banner in bottom-right corner */
+@media screen and (min-width: 750px) {
+  .cookie-notice {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    transform: none !important;
+    max-width: 420px !important;
+    width: auto !important;
+    min-width: 320px !important;
+    padding: 1rem 1.25rem !important;
+    z-index: 9998 !important;
+  }
+  
+  .cookie-notice__text {
+    font-size: 0.825rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .cookie-notice__buttons {
+    gap: 0.5rem !important;
+    justify-content: flex-end !important;
+  }
+  
+  .cookie-notice__button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Mobile: Keep full-width centered (unchanged) */
+@media screen and (max-width: 749px) {
+  .cookie-notice {
+    position: fixed !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    max-width: calc(100% - 20px) !important;
+    width: calc(100% - 20px) !important;
+  }
+}
+
+/* =============================================================================
+   6. ADDITIONAL FIXES
+   ============================================================================= */
+
+/* Ensure header doesn't create horizontal scroll */
+.header,
+.header-wrapper,
+.header__inline-menu,
+.header__icons {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fix any remaining overflow issues */
+.spaced-section,
+.shopify-section {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  max-width: 100%;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Exception for elements that need to overflow for functionality */
+.menu-drawer,
+.cart-drawer,
+.modal,
+.popup,
+details[open] summary + *,
+.predictive-search,
+.localization-selector {
+  max-width: none;
+}
+
+/* Ensure slider container is properly constrained */
+.slider-component-full-width,
+.slider-component {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   7. RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+/* Mobile optimizations */
+@media screen and (max-width: 749px) {
+  /* Tighter spacing on mobile */
+  .card__content {
+    padding: 0.75rem;
+    gap: 0.4rem;
+  }
+  
+  .card__heading {
+    font-size: 1.1rem;
+  }
+  
+  .price {
+    font-size: 1.3rem;
+  }
+  
+  .card__badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .card__content {
+    padding: 0.85rem;
+  }
+}

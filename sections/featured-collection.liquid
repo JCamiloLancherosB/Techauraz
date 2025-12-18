@@ -60,6 +60,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: visible; /* Prevent scrollbars on title wrapper */
   }
 
   .collection-{{ section.id }} .title-wrapper::after {
@@ -72,6 +73,7 @@
     height: 4px;
     background: linear-gradient(45deg, #0ea5e9, #22c55e);
     border-radius: 999px;
+    margin: 0 auto;
   }
 
   @keyframes sparkle {

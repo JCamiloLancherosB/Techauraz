@@ -16,6 +16,7 @@ slideshow-component .slideshow.banner {
   margin: 0;
   gap: 0;
   overflow-x: hidden; /* Hide horizontal overflow to prevent side-by-side images */
+  width: 100%;
 }
 
 .slideshow__slide {
@@ -26,7 +27,9 @@ slideshow-component .slideshow.banner {
   visibility: visible;
   min-width: 100%; /* Ensure slide takes full width */
   width: 100%;
+  max-width: 100%; /* Prevent overflow */
   flex-shrink: 0; /* Prevent slides from shrinking */
+  scroll-snap-align: start;
 }
 
 /* Prevent CLS with aspect-ratio on slideshow media */
@@ -34,14 +37,17 @@ slideshow-component .slideshow.banner {
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 9; /* Default aspect ratio to prevent CLS */
+  width: 100%;
+  max-width: 100%;
 }
 
 .slideshow__media img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
   max-height: 720px; /* Prevent oversized images */
+  object-position: center;
 }
 
 /* Adjust for large slides */
