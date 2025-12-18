@@ -48,8 +48,8 @@ function initializeScrollZoomAnimationTrigger() {
 
   const scaleAmount = 0.2 / 100;
   
-  // Cache element data to avoid repeated layout reads
-  const elementData = new Map();
+  // Use WeakMap to avoid memory leaks when elements are removed from DOM
+  const elementData = new WeakMap();
   
   animationTriggerElements.forEach((element) => {
     // Create element-specific state object
@@ -66,7 +66,7 @@ function initializeScrollZoomAnimationTrigger() {
     });
     observer.observe(element);
     
-    // Store element-specific data
+    // Store element-specific data - WeakMap allows garbage collection
     elementData.set(element, state);
 
     // Initial value - batch DOM reads using requestAnimationFrame
@@ -81,7 +81,8 @@ function initializeScrollZoomAnimationTrigger() {
       'scroll',
       () => {
         const data = elementData.get(element);
-        if (!data.isVisible || data.ticking) return;
+        // Null check in case element was removed from DOM
+        if (!data || !data.isVisible || data.ticking) return;
         
         data.ticking = true;
         requestAnimationFrame(() => {

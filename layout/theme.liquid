@@ -434,15 +434,18 @@
 <style>
   /* Critical CSS - Above the fold styles to prevent FOUC and layout shifts
    * Optimized for LCP (Largest Contentful Paint) and CLS (Cumulative Layout Shift)
-   * Font family is hardcoded as fallback before CSS custom properties load
    * 
-   * NOTE: Color values are hardcoded for immediate rendering before theme CSS loads.
-   * These should match the primary theme colors in base.css:
-   * - Background: #020617 (slate-950)
-   * - Header background: rgba(15, 23, 42, 0.96) (slate-900 with opacity)
-   * - Text: #e2e8f0 (slate-200)
-   * - Secondary background: #1a1a2e (custom dark blue)
+   * Uses CSS custom properties that will be overridden by theme CSS when it loads.
+   * This provides immediate rendering while allowing theme customization.
    */
+  
+  :root {
+    /* Critical theme colors - will be overridden by theme.liquid CSS variables */
+    --critical-bg: #020617;
+    --critical-header-bg: rgba(15, 23, 42, 0.96);
+    --critical-text: #e2e8f0;
+    --critical-media-bg: #1a1a2e;
+  }
   
   /* Base styles */
   * { box-sizing: border-box; }
@@ -450,8 +453,8 @@
   body { 
     margin: 0; 
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-    background: #020617;
-    color: #e2e8f0; 
+    background: var(--critical-bg);
+    color: var(--critical-text); 
     line-height: 1.6;
     font-size: 16px;
   }
@@ -459,7 +462,7 @@
   /* Header critical styles - Prevent header layout shift */
   .header-wrapper, 
   .section-header { 
-    background: rgba(15, 23, 42, 0.96); 
+    background: var(--critical-header-bg); 
     position: sticky; 
     top: 0; 
     z-index: 999;
@@ -491,7 +494,7 @@
   .slideshow__media { 
     position: relative; 
     overflow: hidden;
-    background: #1a1a2e;
+    background: var(--critical-media-bg);
   }
   
   .banner__media img,
