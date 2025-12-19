@@ -1,1 +1,170 @@
-{"sections":{"slideshow_iqMhTA":{"type":"slideshow","blocks":{"slide_AiKY4R":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/technology-6801334_1280.jpg","heading":"Prueba nuestra tecnología de última generación","heading_size":"h0","subheading":"Cargadores para celular, audífonos bluetooth, soportes para celular, relojes inteligentes, contenido digital al gusto, entre muchos otros productos más, no dudes más y revisa nuestro catálogo.","button_label":"Echar un vistazo","link":"shopify:\/\/collections\/all","button_style_secondary":true,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","text_alignment_mobile":"center"}},"slide_zPiaUe":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/image2.png","heading":"Memorias USB Personalizadas","heading_size":"h0","subheading":"Todo el contenido que busques, lo encuentras aquí y completamente al gusto.","button_label":"Ver opciones","link":"shopify:\/\/pages\/usb-al-gusto-personalizada","button_style_secondary":false,"box_align":"middle-center","show_text_box":false,"text_alignment":"left","image_overlay_opacity":10,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","text_alignment_mobile":"center"}}},"block_order":["slide_AiKY4R","slide_zPiaUe"],"settings":{"layout":"full_bleed","slide_height":"large","slider_visual":"dots","auto_rotate":true,"change_slides_speed":5,"image_behavior":"ambient","show_text_below":true,"accessibility_info":"Slideshow about our brand"}},"featured_collection_9GzLFt":{"type":"featured-collection","custom_css":[],"settings":{"title":"<strong>Productos destacados<\/strong>","heading_size":"h2","description":"<h4>¡Descubre una gama única de audífonos inalámbricos y con cable diseñados para elevar tu experiencia sonora en cada momento de tu día!<\/h4>","show_description":false,"description_style":"body","collection":"diademas-gamer-techaura","products_to_show":13,"columns_desktop":5,"full_width":true,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":true,"enable_quick_add":true,"columns_mobile":"1","swipe_on_mobile":true,"padding_top":32,"padding_bottom":52}},"featured_collection_gY3DF9":{"type":"featured-collection","settings":{"title":"<strong>TecnoAccesorios Premium - Herramientas y Dispositivos Inteligentes para Vida Moderna<\/strong>","heading_size":"h2","description":"<h4>Este conjunto de productos representa soluciones tecnológicas innovadoras y prácticas diseñadas para mejorar la calidad de vida y optimizar las experiencias cotidianas. Incluye dispositivos inteligentes y herramientas de alto rendimiento que combinan funcionalidad avanzada con diseño moderno.<\/h4>","show_description":false,"description_style":"body","collection":"varios-productos-tecnologicos-techaura-utiles","products_to_show":25,"columns_desktop":5,"full_width":true,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":true,"enable_quick_add":true,"columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"featured_collection_wXX7kY":{"type":"featured-collection","settings":{"title":"Relojes inteligentes para diferentes estilos","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"productos-inteligentes-electronicos","products_to_show":25,"columns_desktop":5,"full_width":true,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71","image_ratio":"square","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":true,"enable_quick_add":true,"columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"custom_liquid_ddxajX":{"type":"custom-liquid","name":"t:sections.custom-liquid.presets.name","settings":{"custom_liquid":"<!-- Slider de Reseñas Personalizadas -->\n<div class=\"custom-reviews-section\">\n  <h2 class=\"reviews-title\">Lo que dicen nuestros clientes<\/h2>\n  \n  <div class=\"reviews-slider\">\n    <!-- Reseña 1 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★<\/div>\n        <p class=\"review-text\">\"Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.\"<\/p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Carlos M.<\/span>\n        <\/div>\n      <\/div>\n    <\/div>\n\n    <!-- Reseña 2 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★<\/div>\n        <p class=\"review-text\">\"El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.\"<\/p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Ana R.<\/span>\n        <\/div>\n      <\/div>\n    <\/div>\n\n    <!-- Reseña 3 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★☆<\/div>\n        <p class=\"review-text\">\"Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.\"<\/p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Empresas Tech<\/span>\n        <\/div>\n      <\/div>\n    <\/div>\n\n    <!-- Reseña 4 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★<\/div>\n        <p class=\"review-text\">\"Compré los audífonos para mis hijos y están encantados. La duración de la batería es impresionante y son muy cómodos para usar durante horas.\"<\/p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">María L.<\/span>\n        <\/div>\n      <\/div>\n    <\/div>\n\n    <!-- Reseña 5 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★<\/div>\n        <p class=\"review-text\">\"El cargador inalámbrico es exactamente lo que necesitaba. Funciona perfectamente con mi teléfono y la entrega fue más rápida de lo esperado.\"<\/p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Roberto C.<\/span>\n        <\/div>\n      <\/div>\n    <\/div>\n  <\/div>\n<\/div>\n\n<style>\n.custom-reviews-section {\n  padding: 40px 20px;\n  background-color: #f8f9fa;\n  text-align: center;\n}\n\n.reviews-title {\n  font-size: 28px;\n  margin-bottom: 30px;\n  color: #333;\n  font-weight: 600;\n}\n\n.reviews-slider {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  gap: 20px;\n  padding: 10px;\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n}\n\n.reviews-slider::-webkit-scrollbar {\n  display: none;\n}\n\n.review-slide {\n  flex: 0 0 calc(33.333% - 20px);\n  scroll-snap-align: start;\n  background: white;\n  border-radius: 12px;\n  padding: 25px;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n  min-width: 300px;\n}\n\n.review-content {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\n\n.review-stars {\n  color: #ffc107;\n  font-size: 18px;\n  margin-bottom: 15px;\n}\n\n.review-text {\n  font-size: 16px;\n  line-height: 1.6;\n  color: #555;\n  margin-bottom: 20px;\n  flex-grow: 1;\n}\n\n.review-author {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n\n.review-avatar {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  object-fit: cover;\n}\n\n.review-name {\n  font-weight: 600;\n  color: #333;\n}\n\n\/* Responsive *\/\n@media (max-width: 768px) {\n  .review-slide {\n    flex: 0 0 calc(50% - 20px);\n    min-width: 250px;\n  }\n}\n\n@media (max-width: 480px) {\n  .review-slide {\n    flex: 0 0 calc(100% - 20px);\n    min-width: 280px;\n  }\n  \n  .reviews-title {\n    font-size: 24px;\n  }\n}\n<\/style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function() {\n  const slider = document.querySelector('.reviews-slider');\n  \n  \/\/ Configuración básica del slider\n  let isDown = false;\n  let startX;\n  let scrollLeft;\n\n  slider.addEventListener('mousedown', (e) => {\n    isDown = true;\n    startX = e.pageX - slider.offsetLeft;\n    scrollLeft = slider.scrollLeft;\n  });\n\n  slider.addEventListener('mouseleave', () => {\n    isDown = false;\n  });\n\n  slider.addEventListener('mouseup', () => {\n    isDown = false;\n  });\n\n  slider.addEventListener('mousemove', (e) => {\n    if (!isDown) return;\n    e.preventDefault();\n    const x = e.pageX - slider.offsetLeft;\n    const walk = (x - startX) * 2;\n    slider.scrollLeft = scrollLeft - walk;\n  });\n\n  \/\/ Touch events para móviles\n  slider.addEventListener('touchstart', (e) => {\n    startX = e.touches[0].pageX - slider.offsetLeft;\n    scrollLeft = slider.scrollLeft;\n  });\n\n  slider.addEventListener('touchmove', (e) => {\n    const x = e.touches[0].pageX - slider.offsetLeft;\n    const walk = (x - startX) * 2;\n    slider.scrollLeft = scrollLeft - walk;\n  });\n});\n<\/script>","color_scheme":"","padding_top":40,"padding_bottom":52}}},"order":["slideshow_iqMhTA","featured_collection_9GzLFt","featured_collection_gY3DF9","featured_collection_wXX7kY","custom_liquid_ddxajX"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_iqMhTA": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_AiKY4R": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/technology-6801334_1280.jpg",
+            "heading": "Prueba nuestra tecnología de última generación",
+            "heading_size": "h0",
+            "subheading": "Cargadores para celular, audífonos bluetooth, soportes para celular, relojes inteligentes, contenido digital al gusto, entre muchos otros productos más, no dudes más y revisa nuestro catálogo.",
+            "button_label": "Echar un vistazo",
+            "link": "shopify://collections/all",
+            "button_style_secondary": true,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_zPiaUe": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/image2.png",
+            "heading": "Memorias USB Personalizadas",
+            "heading_size": "h0",
+            "subheading": "Todo el contenido que busques, lo encuentras aquí y completamente al gusto.",
+            "button_label": "Ver opciones",
+            "link": "shopify://pages/usb-al-gusto-personalizada",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "left",
+            "image_overlay_opacity": 10,
+            "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_AiKY4R",
+        "slide_zPiaUe"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "image_behavior": "ambient",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "featured_collection_9GzLFt": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "settings": {
+        "title": "<strong>Productos destacados</strong>",
+        "heading_size": "h2",
+        "description": "<h4>¡Descubre una gama única de audífonos inalámbricos y con cable diseñados para elevar tu experiencia sonora en cada momento de tu día!</h4>",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "diademas-gamer-techaura",
+        "products_to_show": 13,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 32,
+        "padding_bottom": 52
+      }
+    },
+    "featured_collection_gY3DF9": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "<strong>TecnoAccesorios Premium - Herramientas y Dispositivos Inteligentes para Vida Moderna</strong>",
+        "heading_size": "h2",
+        "description": "<h4>Este conjunto de productos representa soluciones tecnológicas innovadoras y prácticas diseñadas para mejorar la calidad de vida y optimizar las experiencias cotidianas. Incluye dispositivos inteligentes y herramientas de alto rendimiento que combinan funcionalidad avanzada con diseño moderno.</h4>",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "varios-productos-tecnologicos-techaura-utiles",
+        "products_to_show": 25,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_wXX7kY": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Relojes inteligentes para diferentes estilos",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "productos-inteligentes-electronicos",
+        "products_to_show": 25,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_ddxajX": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!-- Slider de Reseñas Personalizadas -->\n<div class=\"custom-reviews-section\">\n  <h2 class=\"reviews-title\">Lo que dicen nuestros clientes</h2>\n  \n  <div class=\"reviews-slider\">\n    <!-- Reseña 1 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★</div>\n        <p class=\"review-text\">\"Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.\"</p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Carlos M.</span>\n        </div>\n      </div>\n    </div>\n\n    <!-- Reseña 2 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★</div>\n        <p class=\"review-text\">\"El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.\"</p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Ana R.</span>\n        </div>\n      </div>\n    </div>\n\n    <!-- Reseña 3 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★☆</div>\n        <p class=\"review-text\">\"Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.\"</p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Empresas Tech</span>\n        </div>\n      </div>\n    </div>\n\n    <!-- Reseña 4 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★</div>\n        <p class=\"review-text\">\"Compré los audífonos para mis hijos y están encantados. La duración de la batería es impresionante y son muy cómodos para usar durante horas.\"</p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">María L.</span>\n        </div>\n      </div>\n    </div>\n\n    <!-- Reseña 5 -->\n    <div class=\"review-slide\">\n      <div class=\"review-content\">\n        <div class=\"review-stars\">★★★★★</div>\n        <p class=\"review-text\">\"El cargador inalámbrico es exactamente lo que necesitaba. Funciona perfectamente con mi teléfono y la entrega fue más rápida de lo esperado.\"</p>\n        <div class=\"review-author\">\n          <img src=\"\" alt=\"Cliente satisfecho\" class=\"review-avatar\">\n          <span class=\"review-name\">Roberto C.</span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.custom-reviews-section {\n  padding: 40px 20px;\n  background-color: #f8f9fa;\n  text-align: center;\n}\n\n.reviews-title {\n  font-size: 28px;\n  margin-bottom: 30px;\n  color: #333;\n  font-weight: 600;\n}\n\n.reviews-slider {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  gap: 20px;\n  padding: 10px;\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n}\n\n.reviews-slider::-webkit-scrollbar {\n  display: none;\n}\n\n.review-slide {\n  flex: 0 0 calc(33.333% - 20px);\n  scroll-snap-align: start;\n  background: white;\n  border-radius: 12px;\n  padding: 25px;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n  min-width: 300px;\n}\n\n.review-content {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\n\n.review-stars {\n  color: #ffc107;\n  font-size: 18px;\n  margin-bottom: 15px;\n}\n\n.review-text {\n  font-size: 16px;\n  line-height: 1.6;\n  color: #555;\n  margin-bottom: 20px;\n  flex-grow: 1;\n}\n\n.review-author {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n\n.review-avatar {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  object-fit: cover;\n}\n\n.review-name {\n  font-weight: 600;\n  color: #333;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  .review-slide {\n    flex: 0 0 calc(50% - 20px);\n    min-width: 250px;\n  }\n}\n\n@media (max-width: 480px) {\n  .review-slide {\n    flex: 0 0 calc(100% - 20px);\n    min-width: 280px;\n  }\n  \n  .reviews-title {\n    font-size: 24px;\n  }\n}\n</style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function() {\n  const slider = document.querySelector('.reviews-slider');\n  \n  // Configuración básica del slider\n  let isDown = false;\n  let startX;\n  let scrollLeft;\n\n  slider.addEventListener('mousedown', (e) => {\n    isDown = true;\n    startX = e.pageX - slider.offsetLeft;\n    scrollLeft = slider.scrollLeft;\n  });\n\n  slider.addEventListener('mouseleave', () => {\n    isDown = false;\n  });\n\n  slider.addEventListener('mouseup', () => {\n    isDown = false;\n  });\n\n  slider.addEventListener('mousemove', (e) => {\n    if (!isDown) return;\n    e.preventDefault();\n    const x = e.pageX - slider.offsetLeft;\n    const walk = (x - startX) * 2;\n    slider.scrollLeft = scrollLeft - walk;\n  });\n\n  // Touch events para móviles\n  slider.addEventListener('touchstart', (e) => {\n    startX = e.touches[0].pageX - slider.offsetLeft;\n    scrollLeft = slider.scrollLeft;\n  });\n\n  slider.addEventListener('touchmove', (e) => {\n    const x = e.touches[0].pageX - slider.offsetLeft;\n    const walk = (x - startX) * 2;\n    slider.scrollLeft = scrollLeft - walk;\n  });\n});\n</script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "slideshow_iqMhTA",
+    "featured_collection_9GzLFt",
+    "featured_collection_gY3DF9",
+    "featured_collection_wXX7kY",
+    "custom_liquid_ddxajX"
+  ]
+}
