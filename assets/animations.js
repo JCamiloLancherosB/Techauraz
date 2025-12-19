@@ -48,12 +48,20 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     rootMargin: '0px 0px -50px 0px',
   });
   
-  animationTriggerElements.forEach((element) => {
+  // Batch DOM reads to prevent layout thrashing
+  // Read all positions first, then apply classes
+  const elementPositions = animationTriggerElements.map(element => {
+    const rect = element.getBoundingClientRect();
+    return {
+      element: element,
+      isAboveFold: rect.top < window.innerHeight
+    };
+  });
+  
+  // Now apply classes based on pre-calculated positions
+  elementPositions.forEach(({ element, isAboveFold }) => {
     // Only mark as offscreen if element is below viewport on initial load
     // This prevents above-fold content from being hidden
-    const rect = element.getBoundingClientRect();
-    const isAboveFold = rect.top < window.innerHeight;
-    
     if (!isAboveFold) {
       element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
     }

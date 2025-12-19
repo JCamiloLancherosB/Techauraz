@@ -259,14 +259,26 @@ h1.product__title {
   line-height: 1.2 !important;
 }
 
-/* Responsive font sizing for titles */
+/* Responsive font sizing for titles - using rem for better accessibility */
 .product__title h1 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width: 989px) {
+  .product__title h1 {
+    font-size: 2rem;
+  }
 }
 
 @media screen and (max-width: 749px) {
   .product__title h1 {
-    font-size: clamp(1.5rem, 5vw, 1.75rem) !important;
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .product__title h1 {
+    font-size: 1.5rem;
   }
 }
 
@@ -366,16 +378,13 @@ product-recommendations,
 
 /**
  * For older browsers, ensure all scroll-trigger content is visible
+ * Note: The JavaScript in animations.js also handles this fallback
+ * This CSS provides additional defense-in-depth
  */
 
-@supports not ((-webkit-appearance: none) and (not (-webkit-touch-callout: none))) {
-  /* Fallback for older browsers */
-  .scroll-trigger {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-  }
-}
+/* Older browsers typically don't support :not() with complex selectors well,
+   so we use a simpler approach of making everything visible by default,
+   which is already handled in section 1 above */
 
 /* =============================================================================
    14. MOBILE SPECIFIC FIXES
