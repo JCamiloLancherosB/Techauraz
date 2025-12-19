@@ -620,11 +620,11 @@
   2. base-overrides.css (preload with fallback) - Override redundant/problematic base.css rules
      → MUST load after base.css to fix positioning and grid conflicts
      
-  3. animations.css (preload with fallback) - Animation utilities
-     → Independent animation system, can load anytime after base
+  3. animations.css (preload with fallback, conditional) - Animation utilities
+     → Independent animation system, loaded only if animations enabled
      
   4. cross-sell.css (product pages only) - Cross-sell component styles
-     → Product-specific, conditionally loaded
+     → Product-specific, conditionally loaded on product pages
      
   5. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
      → Brand-specific styles, builds on corrected base
@@ -632,12 +632,19 @@
   6. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
      → Header positioning and image rendering fixes
      
-  7. product-page-fixes.css (preload with fallback) - Product page alignment and responsiveness
-     → Alignment fixes and responsive layout improvements
+  7. product-page-conversion-fixes.css (product pages only) - Product page conversion elements
+     → Critical conversion elements visibility, layout, and CRO optimizations
      
-  8. product-page-refinements.css (preload with fallback) - Visual design refinements
-     → Header scrollbar removal, color consistency, cookie notice, persuasive elements
+  8. ui-ux-fixes.css (preload with fallback) - UI/UX improvements
+     → Header overflow, price strikethrough, related products, theme color fixes
+     
+  9. ux-cro-fixes.css (preload with fallback) - UX/CRO optimizations
+     → Hero carousel, titles, mobile scroll, product cards, cookie banner
      → MUST load last to ensure all refinements override previous styles
+  
+  Additional section-specific CSS:
+  - product-conversion.css - Loaded by conversion sections (benefits, testimonials, etc.)
+  - product-layout-fixes-2024.css - Loaded by product card and related products sections
   
   ⚠️ DO NOT change this order without testing:
   - Product cards on collection pages
