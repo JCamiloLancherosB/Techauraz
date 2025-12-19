@@ -581,7 +581,6 @@ to{opacity:1}
 .quantity-selector{background:rgba(55,65,81,.3);border:1px solid rgba(255,255,255,.1);border-radius:var(--border-radius-md)}
 .price-display{color:rgb(var(--color-primary));font-weight:700;font-size:1.5rem}
 .stock-warning{color:#ff6b6b;font-weight:600;background:rgba(255,107,107,.1);padding:8px 12px;border-radius:var(--border-radius-sm);border-left:3px solid #ff6b6b}
-.visually-hidden{color:rgba(255,255,255,.6)!important}
 .caption-large{font-size:14px}
 .card__badge{background:linear-gradient(135deg,rgba(0,169,224,.9),rgba(0,132,180,.9))!important;color:#fff!important;padding:8px 16px;border-radius:6px;font-weight:700;font-size:13px;border:none}
 .full-unstyled-link:hover{text-decoration:underline;text-underline-offset:3px}
