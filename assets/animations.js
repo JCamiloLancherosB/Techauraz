@@ -57,10 +57,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
       // rect.bottom > 0: element's bottom edge is below viewport top
       // rect.top < window.innerHeight: element's top edge is above viewport bottom
       const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-      return {
-        element: element,
-        isVisible: isVisible
-      };
+      return { element, isVisible };
     });
     
     // Now apply classes based on pre-calculated positions

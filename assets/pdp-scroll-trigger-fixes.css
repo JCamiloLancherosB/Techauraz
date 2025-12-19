@@ -143,9 +143,12 @@
   transform: none !important;
 }
 
-/* Primary submit button - allow flex for icon alignment */
+/* Primary submit button - use flex for consistent layout */
+/* Flex display ensures proper alignment of button content and loading states */
 .product-form__submit {
-  display: inline-flex !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
@@ -282,8 +285,10 @@ h1.product__title {
 }
 
 /* Responsive font sizing for titles - using rem for better accessibility */
-/* Breakpoints use desktop-first approach with max-width (Shopify Dawn standard):
-   - Default: 2.5rem (for desktop 990px and above)
+/* Desktop-first approach with max-width queries (Shopify Dawn theme standard):
+   - This approach ensures desktop gets optimal size first, then scales down
+   - Matches Dawn theme patterns for consistency with base theme
+   - Default: 2.5rem (desktop 990px and above)
    - max-width: 989px: 2rem (tablet and smaller)
    - max-width: 749px: 1.75rem (mobile)
    - max-width: 479px: 1.5rem (small mobile)
