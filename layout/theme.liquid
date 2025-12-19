@@ -587,17 +587,6 @@
 <link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
 
-{%- comment -%} Load product-specific CSS only on product pages {%- endcomment -%}
-{%- if template.name == 'product' -%}
-  <!-- Product Page Conversion Fixes - Critical conversion elements visibility and layout -->
-  <link rel="preload" href="{{ 'product-page-conversion-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'product-page-conversion-fixes.css' | asset_url }}"></noscript>
-  
-  <!-- PDP Scroll-Trigger Fixes - Fix visibility issues with scroll animations -->
-  <link rel="preload" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}"></noscript>
-{%- endif -%}
-
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
