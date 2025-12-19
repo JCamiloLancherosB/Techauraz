@@ -30,7 +30,7 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    <!-- SEO Meta Description -->
+    <!-- SEO Meta Description - Uses page-specific description or falls back to default -->
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% else %}
@@ -594,7 +594,7 @@
   CSS LOADING ORDER
   ============================================================================
   
-  The following stylesheets are loaded in this order:
+  The following stylesheets are loaded in this order in the layout:
   
   1. base.css (preload with fallback)
      - Core Dawn theme styles
@@ -612,11 +612,11 @@
        • Premium visual enhancements (gradients, shadows, hover effects)
        • Product form styling
   
-  Additional section-specific CSS loaded by sections:
-  - product-page-conversion-fixes.css (in main-product section)
-  - product-conversion.css (in conversion sections)
-  - product-layout-fixes-2024.css (in product sections)
-  - pdp-scroll-trigger-fixes.css (in main-product section)
+  Additional section-specific CSS files loaded dynamically by sections when present:
+  - product-page-conversion-fixes.css (loaded by main-product section)
+  - product-conversion.css (loaded by conversion sections)
+  - product-layout-fixes-2024.css (loaded by product sections)
+  - pdp-scroll-trigger-fixes.css (loaded by main-product section)
 -->
 
     <!-- Preload de Fuentes -->
