@@ -19,6 +19,14 @@
  * - Provide noscript fallbacks
  * - Respect prefers-reduced-motion
  * 
+ * NOTE ON !important USAGE:
+ * This file uses !important extensively because it must override:
+ * - Base theme's minified CSS (base.css) with problematic scroll-trigger rules
+ * - Inline styles from Shopify sections
+ * - Existing theme CSS with high specificity
+ * While not ideal, this is necessary for a fix file that loads after the base theme.
+ * Alternative would be to modify base.css directly, but that's harder to maintain.
+ * 
  * =============================================================================
  */
 
@@ -260,6 +268,11 @@ h1.product__title {
 }
 
 /* Responsive font sizing for titles - using rem for better accessibility */
+/* Breakpoints match Shopify Dawn theme standards:
+   - 989px: Desktop breakpoint
+   - 749px: Tablet breakpoint
+   - 479px: Small mobile breakpoint
+*/
 .product__title h1 {
   font-size: 2.5rem;
 }

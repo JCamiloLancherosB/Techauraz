@@ -13,13 +13,12 @@ function onIntersection(elements, observer) {
         if (elementTarget.hasAttribute('data-cascade'))
           elementTarget.setAttribute('style', `--animation-order: ${index};`);
       }
+      // Once visible, keep it visible - unobserve so it doesn't get re-hidden
       observer.unobserve(elementTarget);
-    } else {
-      // Only add offscreen class if element is scrolled past (not before it)
-      // This prevents content from being hidden on initial page load
-      element.target.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
-      element.target.classList.remove(SCROLL_ANIMATION_CANCEL_CLASSNAME);
     }
+    // Note: We don't add offscreen class in the else block
+    // Elements should only be marked offscreen during initialization (below-fold)
+    // Once they animate in, they stay visible even when scrolled past
   });
 }
 
@@ -49,24 +48,27 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
   });
   
   // Batch DOM reads to prevent layout thrashing
-  // Read all positions first, then apply classes
-  const elementPositions = animationTriggerElements.map(element => {
-    const rect = element.getBoundingClientRect();
-    return {
-      element: element,
-      isAboveFold: rect.top < window.innerHeight
-    };
-  });
-  
-  // Now apply classes based on pre-calculated positions
-  elementPositions.forEach(({ element, isAboveFold }) => {
-    // Only mark as offscreen if element is below viewport on initial load
-    // This prevents above-fold content from being hidden
-    if (!isAboveFold) {
-      element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
-    }
+  // Wrap in requestAnimationFrame for optimal rendering cycle timing
+  requestAnimationFrame(() => {
+    // Read all positions first, then apply classes
+    const elementPositions = animationTriggerElements.map(element => {
+      const rect = element.getBoundingClientRect();
+      return {
+        element: element,
+        isAboveFold: rect.top < window.innerHeight
+      };
+    });
     
-    observer.observe(element);
+    // Now apply classes based on pre-calculated positions
+    elementPositions.forEach(({ element, isAboveFold }) => {
+      // Only mark as offscreen if element is below viewport on initial load
+      // This prevents above-fold content from being hidden
+      if (!isAboveFold) {
+        element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+      }
+      
+      observer.observe(element);
+    });
   });
 }
 
