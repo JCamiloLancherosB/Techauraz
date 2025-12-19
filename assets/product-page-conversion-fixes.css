@@ -68,7 +68,9 @@
 }
 
 /* Botón principal - Agregar al Carrito */
-.product-form__submit {
+.product-form__submit,
+button[name="add"],
+#ProductSubmitButton-template--23825181352214__main {
   width: 100% !important;
   min-height: 54px !important;
   padding: 16px 24px !important;
@@ -409,7 +411,9 @@ variant-selects {
 .product__description,
 .product-variant-picker,
 .product-form__quantity,
-.shopify-payment-button {
+.shopify-payment-button,
+.product-form,
+product-form {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -417,7 +421,8 @@ variant-selects {
 
 /* Prevenir que cualquier elemento oculte los CTAs */
 .product-form,
-.product-form__input {
+.product-form__input,
+product-form {
   position: relative !important;
   z-index: 1 !important;
 }
