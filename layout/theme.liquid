@@ -571,10 +571,6 @@
 <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 
-<!-- Base CSS Overrides - Clean up redundant and problematic rules from minified base.css -->
-<link rel="preload" href="{{ 'base-overrides.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'base-overrides.css' | asset_url }}"></noscript>
-
 {%- comment -%} Load animations CSS only if enabled {%- endcomment -%}
 {%- if settings.animations_reveal_on_scroll -%}
   <link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -591,10 +587,6 @@
 <link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
 
-<!-- Theme Refactor 2024 - Header and image rendering fixes -->
-<link rel="preload" href="{{ 'theme-refactor-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'theme-refactor-2024.css' | asset_url }}"></noscript>
-
 {%- comment -%} Load product-specific CSS only on product pages {%- endcomment -%}
 {%- if template.name == 'product' -%}
   <!-- Product Page Conversion Fixes - Critical conversion elements visibility and layout -->
@@ -605,14 +597,6 @@
   <link rel="preload" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}"></noscript>
 {%- endif -%}
-
-<!-- UI/UX Fixes - Header overflow, price strikethrough, related products, and theme color fixes -->
-<link rel="preload" href="{{ 'ui-ux-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'ui-ux-fixes.css' | asset_url }}"></noscript>
-
-<!-- UX/CRO Fixes - Hero carousel, titles, mobile scroll, product cards, cookie banner -->
-<link rel="preload" href="{{ 'ux-cro-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'ux-cro-fixes.css' | asset_url }}"></noscript>
 
 <!-- 
   ============================================================================
