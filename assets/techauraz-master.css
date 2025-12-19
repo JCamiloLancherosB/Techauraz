@@ -1074,3 +1074,126 @@ img.lazyloaded {
     padding: 12px;
   }
 }
+
+/* =============================================================================
+   SKIP-TO-CONTENT LINK - Accessibility
+   ============================================================================= */
+
+/* Hide skip-to-content link by default */
+.skip-to-content-link {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+/* Show skip-to-content link on keyboard focus */
+.skip-to-content-link:focus {
+  position: fixed !important;
+  top: 10px;
+  left: 10px;
+  z-index: 10000 !important;
+  overflow: visible;
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 12px 20px;
+  background: var(--ta-primary);
+  color: #fff;
+  border-radius: var(--ta-radius-md);
+  box-shadow: var(--ta-shadow-lg);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =============================================================================
+   SLIDESHOW CONTROLS - Centered Dots/Counter
+   ============================================================================= */
+
+.slideshow__controls {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.slider-counter {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+}
+
+/* =============================================================================
+   PRODUCT PAGE GRID - Proper Two-Column Layout
+   ============================================================================= */
+
+/* Override conflicting flex layout from line 688-698 */
+.product.grid {
+  display: grid !important;
+  flex-wrap: initial !important;
+}
+
+/* Mobile: Single column */
+@media screen and (max-width: 749px) {
+  .product.grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Tablet: 55% / 45% layout */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product.grid {
+    grid-template-columns: 55% 45% !important;
+    gap: 32px !important;
+  }
+}
+
+/* Desktop: 55% / 42% layout with gap accounting for remaining space */
+@media screen and (min-width: 990px) {
+  .product.grid {
+    grid-template-columns: 55% 42% !important;
+    gap: 3% !important;
+  }
+}
+
+/* Ensure product info wrapper fills its column */
+.product__info-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+/* =============================================================================
+   PRODUCT CARD GRIDS - Equal Heights
+   ============================================================================= */
+
+/* Add grid-auto-rows for equal height cards */
+.product-grid,
+.collection .grid,
+.template-collection .grid {
+  grid-auto-rows: 1fr !important;
+}
+
+/* Ensure card wrapper and card stretch to full height */
+.card-wrapper,
+.product-card-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex-grow: 1 !important;
+}
