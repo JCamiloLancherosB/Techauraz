@@ -13,11 +13,12 @@ function onIntersection(elements, observer) {
         if (elementTarget.hasAttribute('data-cascade'))
           elementTarget.setAttribute('style', `--animation-order: ${index};`);
       }
+      // Once visible, keep it visible - unobserve so it doesn't get re-hidden
       observer.unobserve(elementTarget);
-    } else {
-      element.target.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
-      element.target.classList.remove(SCROLL_ANIMATION_CANCEL_CLASSNAME);
     }
+    // Note: We don't add offscreen class in the else block
+    // Elements should only be marked offscreen during initialization (below-fold)
+    // Once they animate in, they stay visible even when scrolled past
   });
 }
 
@@ -32,10 +33,44 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     return;
   }
 
+  // Check if IntersectionObserver is supported
+  if (!window.IntersectionObserver) {
+    // Fallback: ensure all elements are visible
+    animationTriggerElements.forEach((element) => {
+      element.classList.remove(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+      element.classList.add(SCROLL_ANIMATION_CANCEL_CLASSNAME);
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver(onIntersection, {
     rootMargin: '0px 0px -50px 0px',
   });
-  animationTriggerElements.forEach((element) => observer.observe(element));
+  
+  // Batch DOM reads to prevent layout thrashing
+  // Wrap in requestAnimationFrame for optimal rendering cycle timing
+  requestAnimationFrame(() => {
+    // Read all positions first, then apply classes
+    const elementPositions = animationTriggerElements.map(element => {
+      const rect = element.getBoundingClientRect();
+      // Check if element intersects with viewport (any part overlapping)
+      // rect.bottom > 0: element's bottom edge is below viewport top
+      // rect.top < window.innerHeight: element's top edge is above viewport bottom
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      return { element, isVisible };
+    });
+    
+    // Now apply classes based on pre-calculated positions
+    elementPositions.forEach(({ element, isVisible }) => {
+      // Only mark as offscreen if element is NOT visible in viewport
+      // This prevents content that's in view from being hidden
+      if (!isVisible) {
+        element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+      }
+      
+      observer.observe(element);
+    });
+  });
 }
 
 // Zoom in animation logic - OPTIMIZED to reduce layout thrashing

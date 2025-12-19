@@ -1,0 +1,505 @@
+/**
+ * =============================================================================
+ * PDP SCROLL-TRIGGER & VISIBILITY FIXES - December 2024
+ * =============================================================================
+ * 
+ * PURPOSE: Fix critical visibility issues on Product Detail Pages (PDP)
+ * 
+ * PROBLEMS SOLVED:
+ * 1. Content hidden with opacity:.01 when scroll-trigger animations fail
+ * 2. Product description invisible when JS doesn't execute
+ * 3. Info elements stuck offscreen with transform
+ * 4. Content invisible when IntersectionObserver not supported
+ * 5. Scrollbars on product titles
+ * 6. Grid alignment issues on PDP
+ * 
+ * STRATEGY:
+ * - Make content visible by default
+ * - Only hide when explicitly offscreen
+ * - Provide noscript fallbacks
+ * - Respect prefers-reduced-motion
+ * 
+ * NOTE ON !important USAGE:
+ * This file uses !important extensively because it must override:
+ * - Base theme's minified CSS (base.css) with problematic scroll-trigger rules
+ * - Inline styles from Shopify sections
+ * - Existing theme CSS with high specificity
+ * While not ideal, this is necessary for a fix file that loads after the base theme.
+ * Alternative would be to modify base.css directly, but that's harder to maintain.
+ * 
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. SCROLL-TRIGGER VISIBILITY FIXES - CRITICAL
+   ============================================================================= */
+
+/**
+ * OVERRIDE: Make scroll-trigger content visible by default
+ * The base theme sets opacity:.01 which hides content if JS fails
+ * We reverse this: content visible by default, only hidden when offscreen
+ */
+
+/* Default state: VISIBLE (override base.css opacity:.01) */
+.scroll-trigger.animate--fade-in,
+.scroll-trigger.animate--slide-in {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Only hide when explicitly marked as offscreen */
+.scroll-trigger--offscreen.animate--fade-in,
+.scroll-trigger--offscreen.animate--slide-in {
+  opacity: .01;
+  visibility: hidden;
+}
+
+/* When element enters viewport, ensure it's visible */
+.scroll-trigger:not(.scroll-trigger--offscreen).animate--fade-in,
+.scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove transform offset by default - only apply when offscreen */
+.scroll-trigger.animate--slide-in {
+  transform: translateY(0) !important;
+}
+
+.scroll-trigger--offscreen.animate--slide-in {
+  transform: translateY(2rem);
+}
+
+/* =============================================================================
+   2. PRODUCT DESCRIPTION MUST BE VISIBLE
+   ============================================================================= */
+
+/**
+ * Critical conversion element: product description
+ * Must ALWAYS be visible regardless of animation state
+ */
+
+.product__description,
+#product-description,
+.product__info-container .product__description {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Ensure parent containers don't hide description */
+.product__info-wrapper.scroll-trigger,
+.product__info-container.scroll-trigger {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* =============================================================================
+   3. CRITICAL PDP ELEMENTS - ALWAYS VISIBLE
+   ============================================================================= */
+
+/**
+ * These elements are critical for conversion and must never be hidden
+ * regardless of animation or scroll state
+ */
+
+/* Product title */
+.product__title,
+.product__title h1 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  /* Fix scrollbar issues */
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Product price */
+.product__price,
+.price,
+.price--large {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Product form and CTA buttons - ensure proper display */
+.product-form,
+.product-form__buttons {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Primary submit button - use flex for consistent layout */
+/* Flex display ensures proper alignment of button content and loading states */
+.product-form__submit {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Shopify payment buttons - ensure visibility while preserving button structure */
+.shopify-payment-button {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Variant selectors */
+.product-variant-picker,
+variant-selects,
+.product-form__input {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Quantity selector */
+.product-form__quantity,
+quantity-input {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   4. NOSCRIPT FALLBACK - WHEN JS IS DISABLED
+   ============================================================================= */
+
+/**
+ * Ensure all content is visible when JavaScript is disabled
+ * This is critical for accessibility and SEO
+ */
+
+noscript .scroll-trigger,
+.no-js .scroll-trigger,
+.no-js .scroll-trigger.animate--fade-in,
+.no-js .scroll-trigger.animate--slide-in {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* =============================================================================
+   5. PREFERS-REDUCED-MOTION SUPPORT
+   ============================================================================= */
+
+/**
+ * Respect user preference for reduced motion
+ * Make all content immediately visible without animations
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-trigger,
+  .scroll-trigger.animate--fade-in,
+  .scroll-trigger.animate--slide-in,
+  .scroll-trigger--offscreen {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   6. PRODUCT INFO WRAPPER - ALIGNMENT FIX
+   ============================================================================= */
+
+/**
+ * Fix alignment issues with product info container
+ * Ensure proper grid layout and no unwanted transforms
+ */
+
+.product__info-wrapper {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+/* Grid layout for product page */
+.product.grid {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product.grid.grid--2-col-tablet {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product.grid.grid--2-col-tablet {
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 4rem !important;
+  }
+}
+
+/* =============================================================================
+   7. TITLE SCROLLBAR FIXES
+   ============================================================================= */
+
+/**
+ * Remove scrollbars from titles
+ * Ensure text wraps properly instead of overflowing
+ */
+
+.product__title,
+.product__title h1,
+.h1.product__title,
+h1.product__title {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  line-height: 1.2 !important;
+}
+
+/* Responsive font sizing for titles - using rem for better accessibility */
+/* Desktop-first approach with max-width queries (Shopify Dawn theme standard):
+   - This approach ensures desktop gets optimal size first, then scales down
+   - Matches Dawn theme patterns for consistency with base theme
+   - Default: 2.5rem (desktop 990px and above)
+   - max-width: 989px: 2rem (tablet and smaller)
+   - max-width: 749px: 1.75rem (mobile)
+   - max-width: 479px: 1.5rem (small mobile)
+*/
+.product__title h1 {
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width: 989px) {
+  .product__title h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product__title h1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .product__title h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* =============================================================================
+   8. URGENCY BADGES - ALWAYS VISIBLE
+   ============================================================================= */
+
+/**
+ * Conversion elements like urgency badges must always display
+ */
+
+.product-urgency-badge,
+.urgency-indicator {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+/* =============================================================================
+   9. MEDIA/IMAGE GALLERY - ALIGNMENT
+   ============================================================================= */
+
+/**
+ * Ensure product media wrapper aligns correctly
+ * No transforms that push content offscreen
+ */
+
+.product__media-wrapper,
+.product-hero-slider {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+.product-hero-slide {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   10. COUNTDOWN & TRUST ELEMENTS - VISIBLE
+   ============================================================================= */
+
+/**
+ * CRO elements must be visible for conversion
+ */
+
+.product-countdown,
+.product-trust-payments,
+.product-delivery-steps,
+.trust-indicators {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   11. COLLAPSIBLE TABS & ACCORDIONS - VISIBLE
+   ============================================================================= */
+
+/**
+ * Product information in accordions should be discoverable
+ */
+
+.product__accordion,
+.accordion,
+details.product__accordion {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   12. COMPLEMENTARY/RELATED PRODUCTS - VISIBLE
+   ============================================================================= */
+
+/**
+ * Related products section must render
+ */
+
+.complementary-products,
+product-recommendations,
+.related-products {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =============================================================================
+   13. FALLBACK FOR BROWSERS WITHOUT INTERSECTION OBSERVER
+   ============================================================================= */
+
+/**
+ * For older browsers without IntersectionObserver support
+ * The JavaScript in animations.js handles the primary fallback by detecting
+ * browser support and ensuring all elements are visible if IO is not available.
+ * 
+ * This CSS section provides additional defense-in-depth through the default
+ * visible state defined in section 1, which applies to all browsers.
+ * 
+ * No additional CSS rules needed here since:
+ * 1. Default state is visible (section 1)
+ * 2. JavaScript fallback handles unsupported browsers
+ * 3. Noscript tags in theme.liquid ensure CSS loads even with JS disabled
+ */
+
+/* =============================================================================
+   14. MOBILE SPECIFIC FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* All critical elements visible on mobile */
+  .product__description,
+  .product__title,
+  .product__price,
+  .product-form,
+  .product-form__submit {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  /* No transforms on mobile that could hide content */
+  .scroll-trigger,
+  .product__info-wrapper {
+    transform: none !important;
+  }
+}
+
+/* =============================================================================
+   15. SPECIFICITY OVERRIDES - LAST RESORT
+   ============================================================================= */
+
+/**
+ * High-specificity selectors to ensure our fixes override base theme
+ * Use only when necessary due to !important cascade
+ */
+
+/* Force visibility on product info container */
+.product .product__info-container,
+.product .product__info-wrapper .product__info-container,
+.product.grid .product__info-wrapper .product__info-container {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Force visibility on description in any context */
+.product .product__description,
+.product .product__info-container .product__description,
+.product.grid .product__info-wrapper .product__description,
+.product .scroll-trigger .product__description {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* =============================================================================
+   16. Z-INDEX LAYERING
+   ============================================================================= */
+
+/**
+ * Ensure proper stacking order
+ * Prevents elements from being hidden behind others
+ */
+
+.product__media-wrapper {
+  z-index: 1;
+}
+
+.product__info-wrapper {
+  z-index: 2;
+}
+
+.product-form,
+.product-form__buttons {
+  z-index: 3;
+  position: relative;
+}
+
+/* =============================================================================
+   END OF FILE
+   ============================================================================= */
