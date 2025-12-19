@@ -151,9 +151,9 @@
   transform: none !important;
 }
 
-/* Shopify payment buttons - preserve flex layout for proper rendering */
+/* Shopify payment buttons - ensure visibility while preserving button structure */
 .shopify-payment-button {
-  display: block !important;
+  display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
@@ -282,10 +282,11 @@ h1.product__title {
 }
 
 /* Responsive font sizing for titles - using rem for better accessibility */
-/* Breakpoints match Shopify Dawn theme standards (max-width for mobile-first approach):
-   - max-width: 989px: Below desktop (tablet and smaller)
-   - max-width: 749px: Below tablet (mobile)
-   - max-width: 479px: Small mobile devices
+/* Breakpoints use desktop-first approach with max-width (Shopify Dawn standard):
+   - Default: 2.5rem (for desktop 990px and above)
+   - max-width: 989px: 2rem (tablet and smaller)
+   - max-width: 749px: 1.75rem (mobile)
+   - max-width: 479px: 1.5rem (small mobile)
 */
 .product__title h1 {
   font-size: 2.5rem;

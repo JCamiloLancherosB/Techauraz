@@ -53,7 +53,9 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     // Read all positions first, then apply classes
     const elementPositions = animationTriggerElements.map(element => {
       const rect = element.getBoundingClientRect();
-      // Check if element is visible in viewport (at least partially)
+      // Check if element intersects with viewport (any part overlapping)
+      // rect.bottom > 0: element's bottom edge is below viewport top
+      // rect.top < window.innerHeight: element's top edge is above viewport bottom
       const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
       return {
         element: element,
