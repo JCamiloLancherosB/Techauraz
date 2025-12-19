@@ -1046,3 +1046,128 @@ a.product__text {
   }
 }
 
+/* =============================================================================
+   PRODUCT PAGE LAYOUT IMPROVEMENTS - 2024
+   ============================================================================= */
+
+/* Limit media max-width and center gallery */
+.product__media-wrapper,
+.product-media-container,
+.product__media-list {
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product__media-wrapper,
+  .product-media-container {
+    max-width: 500px !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product__media-wrapper,
+  .product-media-container {
+    max-width: 100% !important;
+  }
+}
+
+/* Tighten spacing between title, price, and CTA */
+.product__title {
+  margin-bottom: 1.2rem !important; /* Reduced from 1.5rem */
+}
+
+.product__title + .product__text.caption-with-letter-spacing {
+  margin-top: -1rem !important; /* Closer to title */
+}
+
+.price {
+  margin-bottom: 1.2rem !important; /* Reduced spacing below price */
+  margin-top: 0.8rem !important;
+}
+
+.product__tax {
+  margin-top: -0.8rem !important;
+  margin-bottom: 1.2rem !important;
+}
+
+/* Align price and add-to-cart button */
+.product-form {
+  margin-top: 1.6rem !important;
+}
+
+.product-form__buttons {
+  margin-top: 1.6rem !important;
+  gap: 1.2rem !important;
+}
+
+.product-form__quantity {
+  margin-bottom: 1.2rem !important;
+  margin-top: 1.2rem !important;
+}
+
+/* Ensure sticky info padding is balanced */
+@media screen and (min-width: 750px) {
+  .product__column-sticky {
+    padding-top: 2rem !important;
+    top: 2rem !important;
+  }
+  
+  .product__info-wrapper {
+    padding-left: 3rem !important; /* Reduced from 5rem */
+  }
+  
+  .product--right .product__info-wrapper {
+    padding-right: 3rem !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* Keep urgency badges aligned */
+.urgency-indicator {
+  margin-top: 1rem !important;
+  margin-bottom: 1.2rem !important;
+  text-align: left !important;
+}
+
+@media screen and (max-width: 749px) {
+  .urgency-indicator {
+    text-align: center !important;
+  }
+}
+
+/* Product info container spacing */
+.product__info-container {
+  padding: 0 !important;
+}
+
+.product__description {
+  margin-top: 2rem !important;
+}
+
+.product__accordion {
+  margin-top: 2rem !important;
+}
+
+/* Reduce excessive vertical spacing in product forms */
+.product-form__input {
+  margin-bottom: 1.2rem !important; /* Reduced from default */
+}
+
+/* Product benefits and features tighter spacing */
+.icon-with-text--vertical .icon-with-text__item {
+  margin-bottom: 1.2rem !important; /* Reduced spacing */
+}
+
+/* Shopify payment buttons spacing */
+.shopify-payment-button {
+  margin-top: 1.2rem !important;
+}
+
+.shopify-payment-button__more-options {
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+

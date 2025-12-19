@@ -225,3 +225,141 @@
     display: list-item;
   }
 }
+
+/* =============================================================================
+   MULTICOLUMN CARD IMPROVEMENTS - 2024
+   ============================================================================= */
+
+/* Ensure consistent card heights */
+.multicolumn-list {
+  display: grid !important;
+  grid-auto-rows: 1fr !important; /* Equal height cards */
+  align-items: stretch !important;
+}
+
+.multicolumn-list__item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.multicolumn-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex-grow: 1 !important;
+}
+
+.multicolumn-card__info {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  padding: 2rem !important; /* Reduced from 2.5rem */
+}
+
+/* Improve card spacing and gaps */
+@media screen and (max-width: 749px) {
+  .multicolumn-list:not(.slider) {
+    gap: 1.6rem !important;
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+  }
+  
+  .multicolumn-list.slider {
+    gap: 1.2rem !important;
+  }
+  
+  /* Mobile slider padding improvements */
+  .slider--mobile .multicolumn-card {
+    margin: 0 0.8rem !important;
+  }
+  
+  .slider--mobile {
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .multicolumn-list {
+    gap: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .multicolumn-list {
+    gap: 2.4rem !important;
+  }
+}
+
+/* Keep images contained without overflow */
+.multicolumn-card__image-wrapper {
+  overflow: hidden !important;
+  border-radius: var(--text-boxes-radius, 8px) !important;
+}
+
+.multicolumn-card__image-wrapper img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Reduce inner padding */
+.multicolumn-card-spacing {
+  padding-top: 2rem !important; /* Reduced from 2.5rem */
+  margin-left: 2rem !important; /* Reduced from 2.5rem */
+  margin-right: 2rem !important;
+}
+
+.background-none .multicolumn-card__info {
+  padding: 2rem 1rem 0 1rem !important; /* Tighter padding */
+}
+
+/* Improve title and content spacing */
+.multicolumn-card__info > :nth-child(2) {
+  margin-top: 0.8rem !important; /* Reduced from 1rem */
+}
+
+.multicolumn-card__info h3 {
+  margin-bottom: 0.8rem !important;
+}
+
+/* Better mobile slider experience */
+@media screen and (max-width: 749px) {
+  .background-none .slider .multicolumn-card__info {
+    padding-bottom: 0.5rem !important; /* Reduced from 1rem */
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+  }
+  
+  .multicolumn.background-none .slider.slider--mobile {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Grid column improvements for better layout */
+@media screen and (min-width: 750px) {
+  .multicolumn-list.grid--2-col-tablet {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .multicolumn-list.grid--3-col-tablet {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .multicolumn-list.grid--2-col-desktop {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .multicolumn-list.grid--3-col-desktop {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  .multicolumn-list.grid--4-col-desktop {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+

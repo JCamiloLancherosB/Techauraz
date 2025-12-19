@@ -514,3 +514,188 @@
     }
   }
 }
+
+/* =============================================================================
+   FOOTER IMPROVEMENTS - 2024
+   ============================================================================= */
+
+/* Improve footer spacing and reduce excessive padding */
+.footer {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15) !important; /* Better contrast */
+}
+
+.footer__content-top {
+  padding-top: 4rem !important; /* Reduced from default */
+  padding-bottom: 3rem !important; /* Reduced from 5rem */
+}
+
+@media screen and (max-width: 749px) {
+  .footer__content-top {
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+  }
+  
+  .footer-block.grid__item {
+    margin: 2.5rem 0 !important; /* Reduced from 4rem */
+  }
+}
+
+/* Better text contrast for readability */
+.footer-block__heading {
+  color: rgba(var(--color-foreground), 0.95) !important; /* Increased from 0.8 */
+  margin-bottom: 1.6rem !important;
+  font-size: 1.6rem !important;
+}
+
+.footer__copyright,
+.copyright__content,
+.policies li a,
+.footer-block__details-content .list-menu__item--link {
+  color: rgba(var(--color-foreground), 0.85) !important; /* Increased from 0.75 */
+}
+
+.footer__copyright:hover,
+.copyright__content a:hover,
+.policies li a:hover,
+.footer-block__details-content .list-menu__item--link:hover {
+  color: rgb(var(--color-foreground)) !important;
+}
+
+/* Newsletter input improvements */
+.footer .newsletter-form__field-wrapper {
+  max-width: 40rem !important; /* Slightly wider for better UX */
+}
+
+.footer .newsletter-form .field__input {
+  background-color: rgba(255, 255, 255, 0.08) !important; /* Better contrast */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  font-size: 1.5rem !important;
+  padding: 1.2rem 1.6rem !important;
+}
+
+.footer .newsletter-form .field__input:focus {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.footer .newsletter-form .field__input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+}
+
+.footer .newsletter-form__button {
+  min-height: 4.8rem !important;
+  padding: 0 2rem !important;
+  font-size: 1.5rem !important;
+  color: rgb(var(--color-button)) !important;
+  background-color: rgba(var(--color-button), 0.1) !important;
+  border: 1px solid rgb(var(--color-button)) !important;
+}
+
+.footer .newsletter-form__button:hover {
+  background-color: rgba(var(--color-button), 0.2) !important;
+}
+
+/* Cookie notice alignment improvements */
+.footer__content-bottom {
+  padding-top: 2rem !important; /* Reduced from 3rem */
+  padding-bottom: 2rem !important;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .footer__content-bottom {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+.footer__content-bottom-wrapper {
+  align-items: center !important;
+  gap: 1.5rem !important;
+}
+
+/* Copyright text improvements */
+.copyright__content {
+  font-size: 1.3rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Policies list improvements */
+.policies li {
+  font-size: 1.3rem !important;
+}
+
+.policies li::before {
+  padding: 0 1rem !important; /* Better spacing around divider */
+}
+
+/* Footer grid spacing improvements */
+@media screen and (min-width: 750px) {
+  .footer__content-top .grid {
+    row-gap: 4rem !important; /* Reduced from 6rem */
+  }
+}
+
+/* Newsletter block spacing */
+.footer-block--newsletter {
+  margin-top: 2rem !important; /* Reduced from 3rem */
+  gap: 1.2rem !important;
+}
+
+@media screen and (max-width: 749px) {
+  .footer-block--newsletter {
+    gap: 2rem !important;
+  }
+}
+
+/* Social icons spacing */
+.footer__list-social.list-social {
+  gap: 1.2rem !important;
+}
+
+.footer__list-social .list-social__link {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Payment icons improvements */
+.footer__payment {
+  margin-top: 1.5rem !important;
+}
+
+.footer__payment .list-payment {
+  gap: 1rem !important;
+}
+
+/* Localization forms improvements */
+.footer__localization {
+  padding: 0.8rem 0 !important;
+  gap: 1rem !important;
+}
+
+.footer__localization h2 {
+  margin: 0.8rem 0 !important;
+  font-size: 1.4rem !important;
+  color: rgba(var(--color-foreground), 0.85) !important;
+}
+
+/* Improve footer column alignment */
+.footer__column--info {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .footer__column--info {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+

@@ -1385,3 +1385,292 @@ img.lazyloaded {
   object-fit: cover !important;
   object-position: center !important;
 }
+
+/* =============================================================================
+   THEME-WIDE IMPROVEMENTS - 2024
+   Container widths, section spacing, button sizing
+   ============================================================================= */
+
+/* Normalize container max-widths for better readability */
+.page-width,
+.shopify-section .page-width {
+  max-width: 1280px !important; /* Cap at 1280px to avoid overly wide rows */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Specific containers that need narrower widths */
+.product .page-width,
+.product-grid-container .page-width,
+.collection .page-width {
+  max-width: 1200px !important;
+}
+
+.footer .page-width {
+  max-width: 1200px !important;
+}
+
+/* Hero/slideshow can be wider */
+.slideshow .page-width,
+.banner .page-width {
+  max-width: 100% !important;
+}
+
+/* Normalize section padding to reduce excessive whitespace */
+.shopify-section {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .shopify-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .shopify-section {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+}
+
+/* Reduce section + section spacing */
+.shopify-section + .shopify-section,
+.section + .section {
+  margin-top: 0 !important; /* Remove extra margin, padding handles it */
+}
+
+/* Background shade adjustment - lighter dark for better contrast */
+.gradient,
+body,
+body.gradient {
+  background-color: #0c1224 !important; /* Lighter than #020617 */
+}
+
+/* Keep accent colors consistent (blue/green) */
+:root {
+  --ta-primary: #0ea5e9 !important; /* Sky blue */
+  --ta-primary-dark: #0369a1 !important;
+  --ta-accent: #22c55e !important; /* Green */
+  --ta-accent-dark: #16a34a !important;
+  --ta-bg: #0c1224 !important; /* Updated background */
+  --ta-bg-alt: #1a1f36 !important; /* Slightly lighter alternate */
+}
+
+/* Button sizing improvements for better touch targets */
+.button,
+.button--primary,
+.button--secondary,
+.product-form__submit,
+.shopify-payment-button__button,
+.quick-add__submit {
+  min-height: 48px !important;
+  font-size: 1.6rem !important; /* 16px */
+  padding: 1.2rem 2.4rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+@media screen and (max-width: 749px) {
+  .button,
+  .button--primary,
+  .button--secondary {
+    min-height: 44px !important; /* Slightly smaller on mobile but still accessible */
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Ensure sufficient contrast on buttons */
+.button--primary,
+.product-form__submit {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.button--primary:hover,
+.product-form__submit:hover {
+  background: linear-gradient(135deg, #0284c7 0%, #075985 100%) !important;
+}
+
+/* Secondary buttons */
+.button--secondary {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.button--secondary:hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+}
+
+/* Improved card backgrounds for better separation */
+.card,
+.card--standard,
+.product-card {
+  background: #1a1f36 !important; /* Slightly lighter than body background */
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+}
+
+.card:hover {
+  border-color: rgba(14, 165, 233, 0.4) !important;
+  background: #1e2642 !important; /* Even lighter on hover */
+}
+
+/* Improve text contrast across the board */
+body,
+.text-body,
+p,
+.caption-large {
+  color: rgba(226, 232, 240, 0.95) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: rgba(249, 250, 251, 1) !important; /* Pure white for headings */
+}
+
+/* Links improvement */
+.link,
+.underlined-link {
+  color: rgba(14, 165, 233, 0.9) !important; /* Primary blue */
+}
+
+.link:hover,
+.underlined-link:hover {
+  color: rgba(14, 165, 233, 1) !important;
+}
+
+/* Price colors for better visibility */
+.price-item--regular {
+  color: #22c55e !important; /* Green accent */
+  font-weight: 700 !important;
+}
+
+.price-item--sale {
+  color: #22c55e !important;
+  font-weight: 800 !important;
+}
+
+.price s,
+.price del,
+.price__regular s {
+  color: rgba(148, 163, 184, 0.6) !important;
+}
+
+/* Product grid improvements - tighter spacing */
+.product-grid,
+.collection .grid,
+.template-collection .grid {
+  gap: 2rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product-grid,
+  .collection .grid,
+  .template-collection .grid {
+    gap: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product-grid,
+  .collection .grid,
+  .template-collection .grid {
+    gap: 2.4rem !important;
+  }
+}
+
+/* Related products section spacing */
+.related-products,
+.product-recommendations {
+  margin-top: 4rem !important;
+  padding: 3rem 1.6rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .related-products,
+  .product-recommendations {
+    margin-top: 5rem !important;
+    padding: 4rem 2rem !important;
+  }
+}
+
+/* Announcement bar improvements */
+.announcement-bar {
+  background-color: rgba(14, 165, 233, 0.1) !important;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.2) !important;
+}
+
+.announcement-bar__message {
+  font-size: 1.4rem !important;
+  color: rgba(226, 232, 240, 0.95) !important;
+  min-height: 4.4rem !important;
+  padding: 1rem 0 !important;
+}
+
+/* Header improvements - already has sticky behavior */
+.header,
+.header-wrapper {
+  background-color: rgba(12, 18, 36, 0.98) !important; /* Match new background */
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25) !important;
+}
+
+/* Newsletter form improvements */
+.newsletter-form .field__input {
+  font-size: 1.5rem !important;
+  min-height: 4.8rem !important;
+  padding: 1.2rem 1.6rem !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+
+.newsletter-form .field__input:focus {
+  border-color: rgba(14, 165, 233, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.newsletter-form__button {
+  min-height: 4.8rem !important;
+  font-size: 1.5rem !important;
+  padding: 0 2rem !important;
+}
+
+/* Badge improvements for better visibility */
+.badge,
+.card__badge {
+  font-size: 1.2rem !important;
+  padding: 0.6rem 1.2rem !important;
+  font-weight: 700 !important;
+  border-radius: 0.6rem !important;
+}
+
+/* Urgency elements improvements */
+.urgency-indicator {
+  background: linear-gradient(135deg, #ef4444 0%, #f97373 100%) !important;
+  padding: 1rem 1.6rem !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  font-size: 1.4rem !important;
+  text-align: center !important;
+}
+
+/* Trust badges improvements */
+.trust-badges-container {
+  gap: 1.2rem !important;
+  padding: 1.2rem !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 1.2rem !important;
+}
+
+.trust-badge {
+  font-size: 1.2rem !important;
+}
+
+.trust-badge svg {
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+}
+
