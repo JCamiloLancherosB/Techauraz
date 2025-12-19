@@ -30,9 +30,12 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    <!-- SEO Meta Description -->
     {% if page_description %}
-  <meta name="description" content="{{ page_description | escape }}">
-{% endif %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% else %}
+      <meta name="description" content="TechAura - Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tecnológicos con envío a todo el país">
+    {% endif %}
     
     <!-- Localización Colombia -->
     <meta name="geo.region" content="CO">
@@ -44,7 +47,6 @@
     <meta name="distribution" content="Colombia">
     
     <!-- SEO Esencial TechAura -->
-    <meta name="description" content="TechAura - Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tecnológicos con envío a todo el país">
     <meta name="keywords" content="tecnología Colombia, memorias USB personalizadas, gadgets electrónicos, smartwatches, accesorios tecnológicos, tienda tech Colombia, productos electrónicos">
     <meta name="author" content="TechAura">
     <meta name="robots" content="index, follow">
@@ -589,61 +591,33 @@
 
 <!-- 
   ============================================================================
-  CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
+  CSS LOADING ORDER
   ============================================================================
-  1. base.css (preload with fallback) - Core Dawn theme styles (minified)
-     → Contains fundamental theme styles but has 524 !important conflicts
-     
-  2. base-overrides.css (preload with fallback) - Override redundant/problematic base.css rules
-     → MUST load after base.css to fix positioning and grid conflicts
-     
-  3. animations.css (preload with fallback, conditional) - Animation utilities
-     → Independent animation system, loaded only if animations enabled
-     
-  4. cross-sell.css (product pages only) - Cross-sell component styles
-     → Product-specific, conditionally loaded on product pages
-     
-  5. techauraz-master.css (preload with fallback) - Unified TechAura theme styles
-     → Brand-specific styles, builds on corrected base
-     
-  6. theme-refactor-2024.css (preload with fallback) - 2024 header and image fixes
-     → Header positioning and image rendering fixes
-     
-  7. product-page-conversion-fixes.css (product pages only) - Product page conversion elements
-     → Critical conversion elements visibility, layout, and CRO optimizations
-     
-  8. pdp-scroll-trigger-fixes.css (product pages only) - Scroll-trigger animation visibility fixes
-     → Ensures content is visible by default, fixes opacity:.01 issue, provides noscript fallback
-     → CRITICAL: Must load after animations.css to override problematic scroll-trigger rules
-     
-  9. ui-ux-fixes.css (preload with fallback) - UI/UX improvements
-     → Header overflow, price strikethrough, related products, theme color fixes
-     
-  10. ux-cro-fixes.css (preload with fallback) - UX/CRO optimizations
-     → Hero carousel, titles, mobile scroll, product cards, cookie banner
-     → MUST load last to ensure all refinements override previous styles
   
-  Additional section-specific CSS:
-  - product-conversion.css - Loaded by conversion sections (benefits, testimonials, etc.)
-  - product-layout-fixes-2024.css - Loaded by product card and related products sections
+  The following stylesheets are loaded in this order:
   
-  ⚠️ DO NOT change this order without testing:
-  - Product cards on collection pages
-  - Product detail page image gallery
-  - Related products section
-  - Homepage featured collections
+  1. base.css (preload with fallback)
+     - Core Dawn theme styles
+     
+  2. animations.css (conditional - only if animations enabled in settings)
+     - Animation utilities and scroll reveal animations
+     
+  3. cross-sell.css (conditional - product pages only)
+     - Cross-sell component styles for product pages
+     
+  4. techauraz-master.css (preload with fallback)
+     - Main TechAura brand styles including:
+       • Card image aspect ratios and object-fit rules
+       • Grid layout responsive breakpoints
+       • Premium visual enhancements (gradients, shadows, hover effects)
+       • Product form styling
   
-  techauraz-master.css contains:
-  - Card image aspect ratios (4:5 for cards, auto for PDP)
-  - Object-fit rules (cover for cards, contain for PDP)
-  - Grid layout on mobile/tablet/desktop
-  - Premium visual enhancements (gradients, shadows, hover effects)
-  - Product form styling
-  
-  theme-refactor-2024.css contains:
-  - Header icon sizing and sticky behavior
-  - Image rendering fixes
-  - Responsive improvements
+  Additional section-specific CSS loaded by sections:
+  - product-page-conversion-fixes.css (in main-product section)
+  - product-conversion.css (in conversion sections)
+  - product-layout-fixes-2024.css (in product sections)
+  - pdp-scroll-trigger-fixes.css (in main-product section)
+-->
 
     <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
