@@ -597,13 +597,9 @@
 
 {%- comment -%} Load product-specific CSS only on product pages {%- endcomment -%}
 {%- if template.name == 'product' -%}
-  <!-- Product Page Fixes - Alignment, responsive layout, and persuasive elements -->
-  <link rel="preload" href="{{ 'product-page-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'product-page-fixes.css' | asset_url }}"></noscript>
-
-  <!-- Product Page Refinements - Visual design, header, cookie notice, and responsiveness improvements -->
-  <link rel="preload" href="{{ 'product-page-refinements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'product-page-refinements.css' | asset_url }}"></noscript>
+  <!-- Product Page Conversion Fixes - Critical conversion elements visibility and layout -->
+  <link rel="preload" href="{{ 'product-page-conversion-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'product-page-conversion-fixes.css' | asset_url }}"></noscript>
 {%- endif -%}
 
 <!-- UI/UX Fixes - Header overflow, price strikethrough, related products, and theme color fixes -->

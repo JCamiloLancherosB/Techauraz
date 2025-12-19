@@ -1,0 +1,481 @@
+/**
+ * =============================================================================
+ * PRODUCT PAGE CONVERSION FIXES - December 2024
+ * =============================================================================
+ * 
+ * OBJETIVO: Corregir problemas críticos de conversión en la página de producto
+ * 
+ * Problemas resueltos:
+ * 1. Títulos con barras de desplazamiento (scrollbars)
+ * 2. Botones de comprar/agregar al carrito no visibles
+ * 3. Carrusel/galería desalineado en desktop
+ * 4. CTAs y textos demasiado abajo
+ * 5. Descripción del producto visible en plantilla
+ * 6. Banner de cookies duplicado (solo mantener el personalizado)
+ * 
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. TÍTULO SIN SCROLLBAR - OVERFLOW FIXES
+   ============================================================================= */
+
+/* Eliminar scrollbars de títulos de producto */
+.product__title,
+.product__title h1 {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  line-height: 1.2 !important;
+}
+
+/* Título del producto con tamaño responsive */
+.product__title h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
+  margin: 0 0 1rem 0 !important;
+  padding: 0 !important;
+  color: #1F2937 !important;
+}
+
+/* Producto urgency badge - visible y sin overflow */
+.product-urgency-badge {
+  display: inline-block !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  margin-bottom: 1rem !important;
+}
+
+/* =============================================================================
+   2. BOTONES CTA VISIBLES Y ACCESIBLES
+   ============================================================================= */
+
+/* Asegurar que los botones de compra sean completamente visibles */
+.product-form__submit,
+.shopify-payment-button,
+.product-form__buttons {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* Botón principal - Agregar al Carrito */
+.product-form__submit {
+  width: 100% !important;
+  min-height: 54px !important;
+  padding: 16px 24px !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.product-form__submit:hover:not([disabled]) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5) !important;
+}
+
+.product-form__submit:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+/* Dynamic checkout buttons */
+.shopify-payment-button__button {
+  min-height: 48px !important;
+  border-radius: 12px !important;
+}
+
+/* Contenedor de botones de compra */
+.product-form__buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  margin-top: 1.5rem !important;
+}
+
+/* =============================================================================
+   3. GALERÍA/CARRUSEL ALINEADO EN DESKTOP
+   ============================================================================= */
+
+/* Grid principal del producto - alineación correcta */
+.product.grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 2rem !important;
+  align-items: start !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product.grid.grid--2-col-tablet {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product.grid.grid--2-col-tablet {
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 4rem !important;
+  }
+}
+
+/* Galería de producto - sin desalineación */
+.product__media-wrapper,
+.product-hero-slider {
+  position: relative !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-self: start !important;
+}
+
+/* Slides del hero - alineación correcta */
+.product-hero-slide {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* Controles del slider - visibles y bien posicionados */
+.slider-prev,
+.slider-next {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #F59E0B !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.slider-prev {
+  left: 16px !important;
+}
+
+.slider-next {
+  right: 16px !important;
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  background: #F59E0B !important;
+  color: white !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* Dots del slider */
+.slider-dots {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin-top: 1rem !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+.slider-dot {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 2px solid #F59E0B !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.slider-dot.active,
+.slider-dot:hover {
+  background: #F59E0B !important;
+  transform: scale(1.2) !important;
+}
+
+/* =============================================================================
+   4. CONTENIDO INFO NO "HUNDIDO" - VISIBLE EN VIEWPORT
+   ============================================================================= */
+
+/* Columna derecha de información - visible desde el inicio */
+.product__info-wrapper {
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  align-self: start !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-wrapper {
+    padding: 0 0 0 2rem !important;
+  }
+  
+  /* Sticky info solo en desktop */
+  .product__column-sticky {
+    position: sticky !important;
+    top: 100px !important;
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Product info container - todo visible */
+.product__info-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  padding: 0 !important;
+}
+
+/* Precio visible y destacado */
+.product__price {
+  display: block !important;
+  visibility: visible !important;
+  margin: 1rem 0 !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+}
+
+/* =============================================================================
+   5. DESCRIPCIÓN DEL PRODUCTO VISIBLE
+   ============================================================================= */
+
+/* Descripción del producto - siempre visible */
+.product__description,
+#product-description {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 1.5rem 0 !important;
+  padding: 0 !important;
+  color: #374151 !important;
+  line-height: 1.6 !important;
+  font-size: 1rem !important;
+}
+
+.product__description p {
+  margin-bottom: 1rem !important;
+}
+
+/* Selector de cantidad visible */
+.product-form__quantity {
+  display: block !important;
+  visibility: visible !important;
+  margin: 1rem 0 !important;
+}
+
+/* Selector de variantes visible */
+.product-variant-picker,
+variant-selects {
+  display: block !important;
+  visibility: visible !important;
+  margin: 1rem 0 !important;
+}
+
+/* =============================================================================
+   6. COOKIE BANNER - SOLO UNA INSTANCIA (PERSONALIZADA)
+   ============================================================================= */
+
+/* Ocultar todos los banners de cookies excepto el primero (personalizado) */
+.cookie-notice:not(:first-of-type),
+.cookie-banner:not(:first-of-type),
+[class*="cookie"]:not(.cookie-notice):not(.cookie-notice__text):not(.cookie-notice__buttons):not(.cookie-notice__button) {
+  display: none !important;
+}
+
+/* Asegurar que solo el banner personalizado sea visible */
+#cookieNotice.cookie-notice {
+  display: block !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  max-width: 90% !important;
+  width: 600px !important;
+  z-index: 99999 !important;
+  background: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+  padding: 1.5rem !important;
+  border: 2px solid #F59E0B !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ocultar el banner cuando el usuario ya aceptó/rechazó */
+#cookieNotice[style*="display: none"],
+#cookieNotice[style*="display:none"] {
+  display: none !important;
+}
+
+/* Botones del cookie notice */
+.cookie-notice__button {
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+}
+
+.cookie-notice__button--accept {
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%) !important;
+  color: white !important;
+}
+
+.cookie-notice__button--decline {
+  background: #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+/* =============================================================================
+   7. MOBILE OPTIMIZATIONS
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Título más pequeño en mobile */
+  .product__title h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Botones en mobile */
+  .product-form__submit {
+    min-height: 50px !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Slider controls en mobile */
+  .slider-prev,
+  .slider-next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .slider-prev {
+    left: 8px !important;
+  }
+  
+  .slider-next {
+    right: 8px !important;
+  }
+  
+  /* Cookie notice en mobile */
+  #cookieNotice.cookie-notice {
+    bottom: 10px !important;
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+    padding: 1rem !important;
+  }
+  
+  .cookie-notice__text {
+    font-size: 0.875rem !important;
+  }
+  
+  .cookie-notice__button {
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* =============================================================================
+   8. ASEGURAR VISIBILIDAD DE ELEMENTOS DE CONVERSIÓN
+   ============================================================================= */
+
+/* Todos los elementos críticos de conversión deben ser visibles */
+.product__price,
+.product-form__buttons,
+.product-form__submit,
+.product__description,
+.product-variant-picker,
+.product-form__quantity,
+.shopify-payment-button {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Prevenir que cualquier elemento oculte los CTAs */
+.product-form,
+.product-form__input {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =============================================================================
+   9. PADDING Y SPACING CORRECTOS
+   ============================================================================= */
+
+/* Sección principal del producto */
+#MainProduct-template--23825181352214__main {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  #MainProduct-template--23825181352214__main {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+/* Page width container */
+.page-width {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 1.5rem !important;
+}
+
+/* =============================================================================
+   10. Z-INDEX Y LAYERING CORRECTO
+   ============================================================================= */
+
+/* Asegurar que los elementos estén en el orden correcto */
+.product__media-wrapper {
+  z-index: 1 !important;
+}
+
+.product__info-wrapper {
+  z-index: 2 !important;
+}
+
+.product-form__buttons,
+.product-form__submit {
+  z-index: 10 !important;
+}
+
+.cookie-notice {
+  z-index: 99999 !important;
+}
+
+/* Header */
+.header-wrapper,
+.section-header {
+  z-index: 100 !important;
+}
+
+/* Cart drawer */
+.cart-drawer,
+.menu-drawer {
+  z-index: 1000 !important;
+}
