@@ -53,17 +53,19 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     // Read all positions first, then apply classes
     const elementPositions = animationTriggerElements.map(element => {
       const rect = element.getBoundingClientRect();
+      // Check if element is visible in viewport (at least partially)
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
       return {
         element: element,
-        isAboveFold: rect.top < window.innerHeight
+        isVisible: isVisible
       };
     });
     
     // Now apply classes based on pre-calculated positions
-    elementPositions.forEach(({ element, isAboveFold }) => {
-      // Only mark as offscreen if element is below viewport on initial load
-      // This prevents above-fold content from being hidden
-      if (!isAboveFold) {
+    elementPositions.forEach(({ element, isVisible }) => {
+      // Only mark as offscreen if element is NOT visible in viewport
+      // This prevents content that's in view from being hidden
+      if (!isVisible) {
         element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
       }
       

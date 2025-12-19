@@ -134,10 +134,24 @@
   transform: none !important;
 }
 
-/* Product form and CTA buttons */
+/* Product form and CTA buttons - ensure proper display */
 .product-form,
-.product-form__buttons,
-.product-form__submit,
+.product-form__buttons {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Primary submit button - allow flex for icon alignment */
+.product-form__submit {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Shopify payment buttons - preserve flex layout for proper rendering */
 .shopify-payment-button {
   display: block !important;
   visibility: visible !important;
@@ -268,10 +282,10 @@ h1.product__title {
 }
 
 /* Responsive font sizing for titles - using rem for better accessibility */
-/* Breakpoints match Shopify Dawn theme standards:
-   - 989px: Desktop breakpoint
-   - 749px: Tablet breakpoint
-   - 479px: Small mobile breakpoint
+/* Breakpoints match Shopify Dawn theme standards (max-width for mobile-first approach):
+   - max-width: 989px: Below desktop (tablet and smaller)
+   - max-width: 749px: Below tablet (mobile)
+   - max-width: 479px: Small mobile devices
 */
 .product__title h1 {
   font-size: 2.5rem;
@@ -390,14 +404,18 @@ product-recommendations,
    ============================================================================= */
 
 /**
- * For older browsers, ensure all scroll-trigger content is visible
- * Note: The JavaScript in animations.js also handles this fallback
- * This CSS provides additional defense-in-depth
+ * For older browsers without IntersectionObserver support
+ * The JavaScript in animations.js handles the primary fallback by detecting
+ * browser support and ensuring all elements are visible if IO is not available.
+ * 
+ * This CSS section provides additional defense-in-depth through the default
+ * visible state defined in section 1, which applies to all browsers.
+ * 
+ * No additional CSS rules needed here since:
+ * 1. Default state is visible (section 1)
+ * 2. JavaScript fallback handles unsupported browsers
+ * 3. Noscript tags in theme.liquid ensure CSS loads even with JS disabled
  */
-
-/* Older browsers typically don't support :not() with complex selectors well,
-   so we use a simpler approach of making everything visible by default,
-   which is already handled in section 1 above */
 
 /* =============================================================================
    14. MOBILE SPECIFIC FIXES
