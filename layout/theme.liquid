@@ -583,6 +583,10 @@
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
 {%- endif -%}
 
+<!-- TechAura Master CSS - Consolidated theme fixes and enhancements -->
+<link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER - CRITICAL FOR LAYOUT FIXES
