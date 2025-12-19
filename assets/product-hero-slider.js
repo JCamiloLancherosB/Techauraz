@@ -27,6 +27,10 @@ class ProductHeroSlider extends HTMLElement {
       return;
     }
     
+    // Ensure buttons are visible when there are multiple slides
+    if (this.prevButton) this.prevButton.style.display = '';
+    if (this.nextButton) this.nextButton.style.display = '';
+    
     this.init();
   }
   
