@@ -588,7 +588,7 @@ to{opacity:1}
 .price__container:has(.price__sale .price-item--sale:not(:empty)) .price__regular{display:none!important}
 .price__container:has(.price__sale .price-item--sale:not(:empty)) .price__sale{display:flex!important;flex-direction:column!important;align-items:center!important;gap:3px!important}
 .price__sale .price-item--sale{color:#4caf50!important;font-size:26px!important;font-weight:900!important}
-.price__container .price__sale,.price__regular:empty,.price__sale:empty,.visually-hidden{display:none!important}
+.price__container .price__sale,.price__regular:empty,.price__sale:empty{display:none!important}
 .slideshow__text.banner__box.content-container.content-container--full-width-mobile.color-scheme-3.gradient.slideshow__text--left.slideshow__text-mobile--center{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important;margin:0 auto!important;width:100%!important;max-width:800px!important}
 .slideshow__text.banner__box>*{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
 .slideshow__text--left{align-items:center!important;justify-content:center!important;text-align:center!important}

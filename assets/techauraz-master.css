@@ -1197,3 +1197,191 @@ img.lazyloaded {
   height: 100% !important;
   flex-grow: 1 !important;
 }
+
+/* =============================================================================
+   CRITICAL FIXES - Override broken base.css rules
+   ============================================================================= */
+
+/* FIX 1: Skip-to-content link - MUST be hidden until focused */
+.skip-to-content-link.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  display: block !important; /* Override display:none from base.css */
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.skip-to-content-link:focus,
+.skip-to-content-link:focus-visible {
+  position: fixed !important;
+  top: 10px !important;
+  left: 10px !important;
+  z-index: 999999 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 1rem 2rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  background: var(--ta-primary, #0ea5e9) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+/* FIX 2: Visually hidden elements - proper hiding without display:none */
+.visually-hidden:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* FIX 3: Slideshow controls alignment */
+.slideshow__controls {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  width: 100% !important;
+  padding: 1rem 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.slider-counter {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+.slideshow__control-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+}
+
+/* FIX 4: Product page two-column layout */
+.product.grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 2rem !important;
+  align-items: start !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product.grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product.grid {
+    grid-template-columns: 55% 43% !important;
+    gap: 3rem !important;
+  }
+  
+  .product--large.grid {
+    grid-template-columns: 58% 40% !important;
+  }
+  
+  .product--medium.grid {
+    grid-template-columns: 55% 43% !important;
+  }
+  
+  .product--small.grid {
+    grid-template-columns: 50% 48% !important;
+  }
+}
+
+/* Product info wrapper - fill available space */
+.product__info-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-wrapper {
+    padding: 0 0 0 1.5rem !important;
+  }
+}
+
+/* FIX 5: Product card grid equal heights */
+.collection .grid,
+.product-grid,
+.featured-collection .grid,
+.related-products .grid {
+  display: grid !important;
+  grid-auto-rows: 1fr !important;
+  align-items: stretch !important;
+}
+
+.card-wrapper,
+.product-card-wrapper,
+.grid__item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 !important;
+}
+
+.card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  padding: 1rem !important;
+}
+
+.card__information {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.card .price {
+  margin-top: auto !important;
+}
+
+.card .quick-add {
+  margin-top: 0.75rem !important;
+}
+
+/* FIX 6: Card media consistent aspect ratio */
+.card__media,
+.card .media {
+  aspect-ratio: 4 / 5 !important;
+  overflow: hidden !important;
+}
+
+.card__media img,
+.card .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
