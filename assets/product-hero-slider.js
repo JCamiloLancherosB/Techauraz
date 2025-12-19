@@ -131,6 +131,20 @@ class ProductHeroSlider extends HTMLElement {
     }
   }
   
+  handleSwipe(touchStartX, touchEndX) {
+    const swipeThreshold = 50; // minimum distance for swipe
+    
+    if (touchEndX < touchStartX - swipeThreshold) {
+      // Swipe left - next slide
+      this.nextSlide();
+    }
+    
+    if (touchEndX > touchStartX + swipeThreshold) {
+      // Swipe right - previous slide
+      this.previousSlide();
+    }
+  }
+  
   initTouchSupport() {
     let touchStartX = 0;
     let touchEndX = 0;
@@ -141,24 +155,8 @@ class ProductHeroSlider extends HTMLElement {
     
     this.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
-      this.handleSwipe();
+      this.handleSwipe(touchStartX, touchEndX);
     }, { passive: true });
-    
-    const handleSwipe = () => {
-      const swipeThreshold = 50; // minimum distance for swipe
-      
-      if (touchEndX < touchStartX - swipeThreshold) {
-        // Swipe left - next slide
-        this.nextSlide();
-      }
-      
-      if (touchEndX > touchStartX + swipeThreshold) {
-        // Swipe right - previous slide
-        this.previousSlide();
-      }
-    };
-    
-    this.handleSwipe = handleSwipe;
   }
   
   disconnectedCallback() {
@@ -166,12 +164,9 @@ class ProductHeroSlider extends HTMLElement {
   }
 }
 
-// Register custom element
-if (!customElements.get('slideshow-component')) {
-  // Only define if it doesn't exist (might be defined in global.js)
-  customElements.define('slideshow-component', ProductHeroSlider);
-} else {
-  console.log('slideshow-component already defined, using existing implementation');
+// Register custom element with unique name to avoid conflicts
+if (!customElements.get('product-hero-slider')) {
+  customElements.define('product-hero-slider', ProductHeroSlider);
 }
 
 // Alternative approach: Add functionality to existing slideshow-component
