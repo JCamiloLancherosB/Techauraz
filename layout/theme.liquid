@@ -600,6 +600,10 @@
   <!-- Product Page Conversion Fixes - Critical conversion elements visibility and layout -->
   <link rel="preload" href="{{ 'product-page-conversion-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ 'product-page-conversion-fixes.css' | asset_url }}"></noscript>
+  
+  <!-- PDP Scroll-Trigger Fixes - Fix visibility issues with scroll animations -->
+  <link rel="preload" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}"></noscript>
 {%- endif -%}
 
 <!-- UI/UX Fixes - Header overflow, price strikethrough, related products, and theme color fixes -->
@@ -635,10 +639,14 @@
   7. product-page-conversion-fixes.css (product pages only) - Product page conversion elements
      → Critical conversion elements visibility, layout, and CRO optimizations
      
-  8. ui-ux-fixes.css (preload with fallback) - UI/UX improvements
+  8. pdp-scroll-trigger-fixes.css (product pages only) - Scroll-trigger animation visibility fixes
+     → Ensures content is visible by default, fixes opacity:.01 issue, provides noscript fallback
+     → CRITICAL: Must load after animations.css to override problematic scroll-trigger rules
+     
+  9. ui-ux-fixes.css (preload with fallback) - UI/UX improvements
      → Header overflow, price strikethrough, related products, theme color fixes
      
-  9. ux-cro-fixes.css (preload with fallback) - UX/CRO optimizations
+  10. ux-cro-fixes.css (preload with fallback) - UX/CRO optimizations
      → Hero carousel, titles, mobile scroll, product cards, cookie banner
      → MUST load last to ensure all refinements override previous styles
   

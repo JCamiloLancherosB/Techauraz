@@ -15,6 +15,8 @@ function onIntersection(elements, observer) {
       }
       observer.unobserve(elementTarget);
     } else {
+      // Only add offscreen class if element is scrolled past (not before it)
+      // This prevents content from being hidden on initial page load
       element.target.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
       element.target.classList.remove(SCROLL_ANIMATION_CANCEL_CLASSNAME);
     }
@@ -32,10 +34,32 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     return;
   }
 
+  // Check if IntersectionObserver is supported
+  if (!window.IntersectionObserver) {
+    // Fallback: ensure all elements are visible
+    animationTriggerElements.forEach((element) => {
+      element.classList.remove(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+      element.classList.add(SCROLL_ANIMATION_CANCEL_CLASSNAME);
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver(onIntersection, {
     rootMargin: '0px 0px -50px 0px',
   });
-  animationTriggerElements.forEach((element) => observer.observe(element));
+  
+  animationTriggerElements.forEach((element) => {
+    // Only mark as offscreen if element is below viewport on initial load
+    // This prevents above-fold content from being hidden
+    const rect = element.getBoundingClientRect();
+    const isAboveFold = rect.top < window.innerHeight;
+    
+    if (!isAboveFold) {
+      element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+    }
+    
+    observer.observe(element);
+  });
 }
 
 // Zoom in animation logic - OPTIMIZED to reduce layout thrashing
