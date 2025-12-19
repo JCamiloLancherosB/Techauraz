@@ -4,6 +4,8 @@
 
 Tienda Shopify premium especializada en productos tecnológicos (USBs personalizadas, iluminación, gadgets electrónicos) optimizada para conversiones y experiencia de usuario.
 
+> 📚 **Documentación completa disponible en [`/docs`](./docs/INDEX.md)** - Incluye guías de implementación, performance, testing y deployment.
+
 ### 🎨 Sistema de Diseño
 
 **Tema:** Oscuro tecnológico con acentos neón
