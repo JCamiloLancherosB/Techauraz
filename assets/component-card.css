@@ -540,3 +540,44 @@
     font-size: 0.6875rem;
   }
 }
+
+/* Ensure high contrast and readability on dark backgrounds */
+.card {
+  color: #f9fafb;
+}
+
+.card__information {
+  background-color: #020617;
+}
+
+.card .price {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.card .price--on-sale .price-item--regular {
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+/* Ensure quick-add button is visible and accessible */
+.quick-add__submit {
+  background-color: rgba(14, 165, 233, 0.9);
+  color: #ffffff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.quick-add__submit:hover {
+  background-color: rgba(14, 165, 233, 1);
+  transform: translateY(-1px);
+}
+
+/* Rating stars visibility */
+.rating-star {
+  color: #fbbf24;
+}
+
+.rating-text {
+  color: #cbd5e1;
+}
