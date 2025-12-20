@@ -93,6 +93,12 @@
     gap: 16px; /* Reduced from 24px */
   }
 
+  /* Prevent unwanted scrollbars on grid when desktop slider is disabled */
+  .collection-{{ section.id }} .product-grid:not(.slider--desktop) {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+
   /* Reduce section padding for tighter layout */
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;

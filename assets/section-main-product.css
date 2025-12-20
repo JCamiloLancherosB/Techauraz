@@ -1170,4 +1170,57 @@ a.product__text {
   margin-bottom: 0.5rem !important;
 }
 
+/* Center product content and improve alignment */
+.product__info-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* CTA button alignment and sizing */
+.product-form__submit {
+  width: 100%;
+  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  min-height: 5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+/* Fix large gaps in product info sections */
+.product__info-container > * + * {
+  margin-top: 1.5rem;
+}
+
+.product__title {
+  line-height: 1.3;
+  margin-bottom: 1rem !important;
+}
+
+/* Better visual hierarchy */
+.product__text {
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Ensure consistent spacing in product blocks */
+.product-form__buttons {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .product-form__buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .product-form__submit {
+    flex: 1;
+  }
+}
 
