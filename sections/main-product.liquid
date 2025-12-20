@@ -12,7 +12,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-  {{ 'product-page-conversion-fixes.css' | asset_url | stylesheet_tag }}
+  {%- comment -%} product-page-conversion-fixes.css removed - styles in techauraz-unified.css {%- endcomment -%}
 
   {%- comment -%} Preload hero image for LCP optimization {%- endcomment -%}
   {%- if product.featured_media -%}
