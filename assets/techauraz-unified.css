@@ -74,6 +74,13 @@
   --ta-space-xl: 2rem;      /* 32px */
   --ta-space-2xl: 3rem;     /* 48px */
   
+  /* Typography - Normalized Scale */
+  --ta-font-body: 1.6rem;      /* 16px - body text */
+  --ta-font-sm: 0.875rem;      /* 14px - small text */
+  --ta-font-xs: 0.75rem;       /* 12px - extra small */
+  --ta-font-lg: 1.125rem;      /* 18px - large text */
+  --ta-font-xl: 1.25rem;       /* 20px - extra large */
+  
   /* Header Dimensions */
   --ta-header-height: 70px;
   --ta-header-mobile: 60px;
@@ -86,7 +93,7 @@
 
 /* Override base.css excessive font sizes */
 .text-body {
-  font-size: 1.6rem;  /* Down from 2.2rem */
+  font-size: var(--ta-font-body);  /* 1.6rem (16px) - down from 2.2rem */
   letter-spacing: 0.02rem;
   line-height: 1.6;
 }
@@ -398,9 +405,14 @@ header-drawer {
 }
 
 /* Lock body scroll when drawer is open */
-body:has(.menu-drawer.menu-opening) {
+/* Using :has() with fallback for older browsers */
+body:has(.menu-drawer.menu-opening),
+body.menu-drawer-open {
   overflow: hidden;
 }
+
+/* Note: For browsers without :has() support, the menu drawer JS 
+   should add 'menu-drawer-open' class to body element */
 
 /* Drawer header */
 .menu-drawer__header {
@@ -1106,7 +1118,9 @@ slideshow-component {
    BASE.CSS OVERRIDES - Tone Down Aggressive Promotional Styles
    ============================================================================= */
 
-/* Override aggressive "OFERTA ESPECIAL" badge with more subtle tech-style sale badge */
+/* Override aggressive "OFERTA ESPECIAL" badge with more subtle tech-style sale badge 
+   Note: This targets the pseudo-element ::after created by base.css line 20 
+   which adds promotional badge to all sale prices */
 .price--on-sale::after {
   content: "OFERTA" !important;
   position: absolute !important;
