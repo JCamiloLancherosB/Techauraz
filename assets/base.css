@@ -4,7 +4,7 @@
 .rte table,table:not([class]){table-layout:fixed}
 .form-status-list li,.rte ol,.rte ul{list-style-position:inside}
 .grid,.list-unstyled,summary{list-style:none}
-.gradient,body,body.gradient{background-color:rgb(var(--color-background));color:rgba(226,232,240,.9);font-family:var(--font-body-family),Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.gradient,body,body.gradient{background-color:var(--ta-bg);color:rgba(226,232,240,.9);font-family:var(--font-body-family),Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 .header__active-menu-item{border-bottom:2px solid rgb(var(--color-button))}
 .collection__description,.title{color:rgb(var(--color-foreground))}
 .footer{border-top-color:rgba(var(--color-foreground),.1)}
@@ -49,7 +49,7 @@ from{transform:translateX(-100%)}
 to{transform:translateX(0)}
 .focus-inset:focus{box-shadow:inset 0 0 0 2px #fff}
 .btn:disabled,.button:disabled{background:#aab6c7;color:#fff;opacity:.6;cursor:not-allowed}
-.product-gallery__image img,.product-main-image img{object-fit:contain;border-color:#202a3d;box-shadow:0 3px 18px rgba(38,119,199,.09);background:#f5f7fa;transition:transform .2s}
+.product-gallery__image img,.product-main-image img{object-fit:contain;border-color:rgba(var(--color-foreground),.15);box-shadow:0 3px 18px rgba(var(--color-shadow),.09);background:rgba(var(--color-background),.05);transition:transform .2s}
 .urgency-indicator{background:linear-gradient(135deg,#ef4444 0,#f97373 100%);padding:8px 14px;border-radius:999px;font-weight:600;text-align:center;box-shadow:0 4px 10px rgba(239,68,68,.35)}
 .h6,.link--text:hover,blockquote,h6{color:rgba(var(--color-foreground),.75)}
 .main-content,.product-main,.product-page,.product-section{padding-top:52px;margin-top:0}
@@ -633,10 +633,41 @@ body{overflow-x:hidden;min-height:100vh}
 .card-wrapper .full-unstyled-link::after{content:'';position:absolute;inset:0;top:-9999px;bottom:-9999px;left:-9999px;right:-9999px;z-index:5}
 
 :root {
-
---ta-h-m:56px;--ta-h-t:64px;--ta-bg:#0f172a;--ta-bg-alt:#1e293b;--ta-card-bg:#1e293b;--ta-border-soft:rgba(148, 163, 184, 0.25);--ta-text-main:#e5e7eb;--ta-text-muted:#9ca3af;--ta-price:#22c55e;--ta-primary:#0ea5e9;--ta-primary-dark:#0369a1;--ta-primary-soft:rgba(14, 165, 233, 0.25);--ta-radius-lg:18px;--ta-radius-pill:999px;--ta-shadow-soft:0 10px 30px rgba(15, 23, 42, 0.65);--ta-font-body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--header-height:60px}
+  /* Layout Heights */
+  --ta-h-m: 56px;
+  --ta-h-t: 64px;
+  --header-height: 60px;
+  
+  /* Colors - Background */
+  --ta-bg: #0f172a;
+  --ta-bg-alt: #1e293b;
+  --ta-card-bg: #1e293b;
+  
+  /* Colors - Text */
+  --ta-text-main: #e5e7eb;
+  --ta-text-muted: #9ca3af;
+  
+  /* Colors - Theme */
+  --ta-primary: #0ea5e9;
+  --ta-primary-dark: #0369a1;
+  --ta-primary-soft: rgba(14, 165, 233, 0.25);
+  --ta-price: #22c55e;
+  
+  /* Borders */
+  --ta-border-soft: rgba(148, 163, 184, 0.25);
+  
+  /* Border Radius */
+  --ta-radius-lg: 18px;
+  --ta-radius-pill: 999px;
+  
+  /* Shadows */
+  --ta-shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.65);
+  
+  /* Typography */
+  --ta-font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 .gradient,body,body.gradient{background-color:var(--ta-bg);background-image:none;color:var(--ta-text-main);font-family:var(--ta-font-body);line-height:1.6}
-.header,.header-wrapper{position:sticky;top:0;left:0;width:100%;z-index:999;background-color:rgba(2,6,23,.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(148,163,184,.25);transition:.3s}
+.header,.header-wrapper{position:sticky;top:0;left:0;width:100%;z-index:999;background-color:var(--ta-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(148,163,184,.25);transition:.3s}
 
 @media (min-width:990px) {
 
@@ -863,7 +894,7 @@ html {
 body {
   font-size: 1.6rem; /* 16px base, up from ~14px */
   line-height: 1.6;
-  background-color: #0f172a; /* Slate-900 for better contrast than pure black */
+  background-color: var(--ta-bg); /* Use consistent background variable */
 }
 
 /* Navigation and link improvements */
