@@ -273,8 +273,10 @@ main {
 }
 
 /* Card price - always visible */
+.card .price,
+.card-information .price,
 .price {
-  display: flex !important;
+  display: flex;
   align-items: baseline;
   gap: 0.5rem;
   margin-top: auto;
@@ -432,7 +434,7 @@ main {
    COLOR CONSISTENCY - Use existing ta- prefix variables
    ============================================================================= */
 
-/* Note: Color variables are defined in techauraz-ui-enhancements.css
+/* Note: Color variables (--ta-*) are defined in techauraz-master.css
    to avoid duplication. This section ensures consistent application. */
 
 /* Links - consistent blue */
@@ -663,9 +665,15 @@ body {
   max-width: 100vw;
 }
 
-/* Mobile tweaks */
+/* Mobile tweaks - Final mobile-specific styles */
 @media screen and (max-width: 749px) {
   /* Note: Heading sizes use clamp() which handles responsiveness automatically */
+  
+  /* Tighter section padding */
+  .section,
+  .shopify-section {
+    padding: 2rem 0;
+  }
   
   /* Tighter button padding */
   .button,
@@ -679,8 +687,11 @@ body {
     padding: 0.875rem;
   }
   
-  .card__heading {
+  /* Card heading adjustments */
+  .card__heading,
+  .card-information__heading {
     font-size: 0.875rem;
+    min-height: 2.6em;
   }
 }
 

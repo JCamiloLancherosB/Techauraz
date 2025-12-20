@@ -86,7 +86,7 @@
 }
 
 .list-menu--inline {
-  display: flex !important;
+  display: flex;
   align-items: center;
   gap: 1.5rem;
   margin: 0;
@@ -336,47 +336,16 @@ a:focus-visible {
 }
 
 /* =============================================================================
-   COLOR PALETTE - Unified Application
+   COLOR PALETTE - Ensure Consistent Application
    ============================================================================= */
 
-/* Ensure color variables are consistently applied */
-:root {
-  /* Primary colors */
-  --ta-primary: #0ea5e9;
-  --ta-primary-dark: #0369a1;
-  --ta-primary-light: #38bdf8;
-  
-  /* Accent colors */
-  --ta-accent: #22c55e;
-  --ta-accent-dark: #16a34a;
-  --ta-accent-light: #4ade80;
-  
-  /* Background colors */
-  --ta-bg-dark: #020617;
-  --ta-bg-card: #0f172a;
-  --ta-bg-card-hover: #1e293b;
-  --ta-bg-overlay: rgba(2, 6, 23, 0.95);
-  
-  /* Text colors */
-  --ta-text-primary: #f8fafc;
-  --ta-text-secondary: #e2e8f0;
-  --ta-text-muted: #94a3b8;
-  
-  /* Border colors */
-  --ta-border: rgba(148, 163, 184, 0.2);
-  --ta-border-light: rgba(148, 163, 184, 0.1);
-  
-  /* Status colors */
-  --ta-success: #22c55e;
-  --ta-warning: #f59e0b;
-  --ta-error: #ef4444;
-  --ta-info: #0ea5e9;
-}
+/* Note: Color variables are defined in techauraz-master.css 
+   This section ensures they are consistently applied throughout */
 
 /* Ensure backgrounds are consistent */
 body,
 .gradient {
-  background-color: var(--ta-bg-dark) !important;
+  background-color: var(--ta-bg-dark);
   color: var(--ta-text-secondary);
 }
 
@@ -998,30 +967,8 @@ html {
   max-width: 100vw;
 }
 
-/* Mobile optimizations */
-@media screen and (max-width: 749px) {
-  /* Note: Heading sizes use clamp() which handles responsiveness automatically */
-  
-  /* Tighter section padding */
-  .section,
-  .shopify-section {
-    padding: 2rem 0;
-  }
-  
-  /* Smaller button text on mobile */
-  .button,
-  .btn {
-    font-size: 0.9375rem;
-    padding: 0.625rem 1.25rem;
-  }
-  
-  /* Card heading adjustments */
-  .card__heading,
-  .card-information__heading {
-    font-size: 0.9375rem;
-    min-height: 2.6em;
-  }
-}
+/* Note: Mobile-specific optimizations are handled in techauraz-polish-2024.css
+   which loads after this file to ensure consistent final styling */
 
 /* Tablet optimizations */
 @media screen and (min-width: 750px) and (max-width: 989px) {
