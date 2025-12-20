@@ -467,6 +467,15 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-end;
+  max-width: calc(100% - 2rem);
+}
+
+@media screen and (max-width: 749px) {
+  .card__badge {
+    top: 0.8rem;
+    right: 0.8rem;
+    max-width: calc(100% - 1.6rem);
+  }
 }
 
 .badge {
