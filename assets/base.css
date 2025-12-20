@@ -610,8 +610,8 @@ html{--header-height:64px;--header-height:var(--ta-header-tablet)}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 body{overflow-x:hidden;min-height:100vh}
 
-/* Prevent horizontal overflow on mobile */
-html, body {
+/* Prevent horizontal overflow globally */
+html {
   max-width: 100vw;
   overflow-x: hidden;
 }
