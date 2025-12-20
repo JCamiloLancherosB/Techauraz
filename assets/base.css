@@ -609,6 +609,16 @@ html{--header-height:64px;--header-height:var(--ta-header-tablet)}
 .section-header .header__heading-logo{max-height:36px;height:36px;width:auto}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 body{overflow-x:hidden;min-height:100vh}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
 *{-webkit-tap-highlight-color:transparent}
 .product-form__quantity{display:flex;flex-direction:row;align-items:center;justify-content:flex-start}
 .product-gallery__image img,.product-main-image img,.product__media img{background:var(--ta-bg)}
