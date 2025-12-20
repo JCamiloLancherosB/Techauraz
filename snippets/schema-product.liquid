@@ -52,6 +52,7 @@
   ,
   "review": [
     {% for review in product.metafields.reviews.reviews limit: 5 %}
+    {% if review.rating %}
     {
       "@type": "Review",
       "reviewRating": {
@@ -73,6 +74,7 @@
       "datePublished": {{ review.created_at | date: '%Y-%m-%d' | json }}
       {% endif %}
     }{% unless forloop.last %},{% endunless %}
+    {% endif %}
     {% endfor %}
   ]
   {% endif %}

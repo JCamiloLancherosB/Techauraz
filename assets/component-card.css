@@ -8,7 +8,7 @@
 .card {
   text-decoration: none;
   text-align: var(--text-alignment);
-  background: #020617;
+  background: var(--ta-bg-dark, #020617);
   border-radius: 16px;
   border: 1px solid rgba(148, 163, 184, 0.3);
   overflow: hidden;
@@ -123,7 +123,7 @@
 .card__media {
   margin: var(--image-padding);
   width: calc(100% - 2 * var(--image-padding));
-  background: #020617;
+  background: var(--ta-bg-dark, #020617);
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -547,7 +547,7 @@
 }
 
 .card__information {
-  background-color: #020617;
+  background-color: var(--ta-bg-dark, #020617);
 }
 
 .card .price {
