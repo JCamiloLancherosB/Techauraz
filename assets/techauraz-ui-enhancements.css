@@ -129,8 +129,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   color: var(--ta-text-secondary, #e2e8f0);
   transition: color 0.2s ease, transform 0.2s ease;
@@ -139,8 +139,8 @@
 
 .header__icon svg,
 .header__icon .icon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .header__icon:hover,
@@ -1000,14 +1000,7 @@ html {
 
 /* Mobile optimizations */
 @media screen and (max-width: 749px) {
-  /* Reduce heading sizes slightly on mobile */
-  h1, .h1 {
-    font-size: 2rem;
-  }
-  
-  h2, .h2 {
-    font-size: 1.75rem;
-  }
+  /* Note: Heading sizes use clamp() which handles responsiveness automatically */
   
   /* Tighter section padding */
   .section,

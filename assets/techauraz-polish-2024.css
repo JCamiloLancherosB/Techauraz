@@ -13,19 +13,24 @@
    CRITICAL FIXES - Override inconsistencies
    ============================================================================= */
 
-/* Ensure consistent background throughout */
+/* Ensure consistent background throughout - use specific selectors */
 body,
-html,
+html {
+  background-color: #020617;
+  color: #e2e8f0;
+}
+
+body.gradient,
+html.gradient,
 .gradient {
-  background-color: #020617 !important;
-  color: #e2e8f0 !important;
+  background-color: #020617;
 }
 
 /* Fix any background color conflicts */
 .section,
 .shopify-section,
 main {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 /* =============================================================================
@@ -34,7 +39,7 @@ main {
 
 /* Ensure header wrapper is clean */
 .header-wrapper {
-  background: rgba(2, 6, 23, 0.98) !important;
+  background: rgba(2, 6, 23, 0.98);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
   z-index: 100;
@@ -42,7 +47,7 @@ main {
 
 /* Header grid - proper alignment */
 .header {
-  display: grid !important;
+  display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-areas: 'drawer heading icons';
   align-items: center;
@@ -116,7 +121,7 @@ main {
 }
 
 .list-menu--inline {
-  display: flex !important;
+  display: flex;
   align-items: center;
   gap: 1rem;
   margin: 0;
@@ -324,7 +329,7 @@ main {
 .product-grid,
 .collection-product-grid,
 .collection .grid {
-  display: grid !important;
+  display: grid;
   width: 100%;
   gap: 1rem;
 }
@@ -334,7 +339,7 @@ main {
   .product-grid,
   .collection-product-grid,
   .collection .grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -343,7 +348,7 @@ main {
   .product-grid,
   .collection-product-grid,
   .collection .grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
   }
 }
@@ -353,12 +358,12 @@ main {
   .product-grid,
   .collection-product-grid,
   .collection .grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
   
   .product-grid--5-col {
-    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -424,31 +429,20 @@ main {
 }
 
 /* =============================================================================
-   COLOR CONSISTENCY - Unified Palette
+   COLOR CONSISTENCY - Use existing ta- prefix variables
    ============================================================================= */
 
-/* Ensure primary and accent colors are used consistently */
-:root {
-  --color-primary: #0ea5e9;
-  --color-primary-dark: #0369a1;
-  --color-accent: #22c55e;
-  --color-accent-dark: #16a34a;
-  --color-bg: #020617;
-  --color-bg-card: #0f172a;
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #e2e8f0;
-  --color-text-muted: #94a3b8;
-  --color-border: rgba(148, 163, 184, 0.2);
-}
+/* Note: Color variables are defined in techauraz-ui-enhancements.css
+   to avoid duplication. This section ensures consistent application. */
 
 /* Links - consistent blue */
 a {
-  color: #0ea5e9;
+  color: var(--ta-primary, #0ea5e9);
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #22c55e;
+  color: var(--ta-accent, #22c55e);
 }
 
 /* Badges - consistent colors */
@@ -671,10 +665,7 @@ body {
 
 /* Mobile tweaks */
 @media screen and (max-width: 749px) {
-  /* Slightly smaller headings */
-  h1, .h1 {
-    font-size: 2rem;
-  }
+  /* Note: Heading sizes use clamp() which handles responsiveness automatically */
   
   /* Tighter button padding */
   .button,
