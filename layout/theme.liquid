@@ -248,17 +248,9 @@
   <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
 {%- endif -%}
 
-<!-- TechAura Master CSS - Consolidated theme fixes and enhancements -->
-<link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
-
-<!-- TechAura UI/UX Enhancements - Comprehensive styling overhaul -->
-<link rel="preload" href="{{ 'techauraz-ui-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-ui-enhancements.css' | asset_url }}"></noscript>
-
-<!-- TechAura Polish 2024 - Final refinements and consistency fixes -->
-<link rel="preload" href="{{ 'techauraz-polish-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-polish-2024.css' | asset_url }}"></noscript>
+<!-- TechAura Unified CSS - Consolidated, optimized theme styles -->
+<link rel="preload" href="{{ 'techauraz-unified.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-unified.css' | asset_url }}"></noscript>
 
 <!-- 
   ============================================================================
@@ -268,7 +260,8 @@
   The following stylesheets are loaded in this order in the layout:
   
   1. base.css (preload with fallback)
-     - Core Dawn theme styles
+     - Core Dawn theme styles (with 62.5% base font-size = 10px per 1rem)
+     - Body text base overridden to 1.6rem (16px) for better readability
      
   2. animations.css (conditional - only if animations enabled in settings)
      - Animation utilities and scroll reveal animations
@@ -276,28 +269,28 @@
   3. cross-sell.css (conditional - product pages only)
      - Cross-sell component styles for product pages
      
-  4. techauraz-master.css (preload with fallback)
-     - Main TechAura brand styles including:
-       • Card image aspect ratios and object-fit rules
-       • Grid layout responsive breakpoints
-       • Premium visual enhancements (gradients, shadows, hover effects)
-       • Product form styling
+  4. techauraz-unified.css (preload with fallback) ✨ NEW
+     - Consolidated and optimized TechAura theme styles including:
+       • Normalized typography (fixes zoom effect)
+       • Compact, aligned header for desktop and mobile
+       • Professional tech store color palette (blue/cyan)
+       • Proper slideshow/hero controls positioning
+       • Normalized card sizing and spacing
+       • Persuasive visual elements
+       • Resolved CSS conflicts from previous files
+       • Mobile drawer functionality (focus trap, scroll lock)
+       • Performance optimizations
+     
+     This replaces the previous three files:
+     - techauraz-master.css (deprecated)
+     - techauraz-ui-enhancements.css (deprecated)
+     - techauraz-polish-2024.css (deprecated)
   
-  5. techauraz-ui-enhancements.css (preload with fallback)
-     - Comprehensive UI/UX refinements including:
-       • Header alignment and consistent spacing
-       • Unified typography system and vertical rhythm
-       • Normalized image aspect ratios
-       • Polished product cards and grids
-       • Consistent button and input styling
-       • Professional section spacing
-       • Improved description readability
+  5. Component-specific CSS files loaded per section as needed
+     - component-*.css files loaded dynamically by sections
   
-  6. techauraz-polish-2024.css (preload with fallback)
-     - Final refinements and consistency fixes including:
-       • Critical override for inconsistencies
-       • Header polish and clean alignment
-       • Image aspect ratio fixes
+  ============================================================================
+-->
        • Product card and grid polish
        • Button and color consistency
        • Section spacing and typography polish
@@ -305,10 +298,11 @@
        • Responsive refinements and accessibility
   
   Additional section-specific CSS files loaded dynamically by sections when present:
-  - product-page-conversion-fixes.css (loaded by main-product section)
-  - product-conversion.css (loaded by conversion sections)
-  - product-layout-fixes-2024.css (loaded by product sections)
-  - pdp-scroll-trigger-fixes.css (loaded by main-product section)
+  - product-conversion.css (loaded by conversion sections - if exists)
+  - pdp-scroll-trigger-fixes.css (loaded by main-product section - if exists)
+  
+  Note: product-page-conversion-fixes.css and product-layout-fixes-2024.css 
+        have been removed as their styles are now in techauraz-unified.css
 -->
 
     <!-- Preload de Fuentes -->
