@@ -1103,5 +1103,45 @@ slideshow-component {
 }
 
 /* =============================================================================
+   BASE.CSS OVERRIDES - Tone Down Aggressive Promotional Styles
+   ============================================================================= */
+
+/* Override aggressive "OFERTA ESPECIAL" badge with more subtle tech-style sale badge */
+.price--on-sale::after {
+  content: "OFERTA" !important;
+  position: absolute !important;
+  top: -8px !important;
+  right: -8px !important;
+  background: linear-gradient(135deg, var(--ta-accent), var(--ta-primary)) !important;
+  color: white !important;
+  padding: 4px 10px !important;
+  border-radius: var(--ta-radius-pill) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  animation: none !important; /* Remove pulsing animation */
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3) !important;
+  z-index: 20 !important;
+}
+
+/* Override social proof popup with tech theme colors */
+.social-proof-popup {
+  background: linear-gradient(135deg, var(--ta-primary), var(--ta-accent)) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: var(--ta-shadow-md) !important;
+}
+
+/* Override viewer count with tech theme */
+.viewer-count {
+  background: linear-gradient(135deg, var(--ta-primary), var(--ta-primary-dark)) !important;
+  padding: 8px 16px !important;
+  border-radius: var(--ta-radius-pill) !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* =============================================================================
    END OF TECHAURAZ UNIFIED STYLESHEET
    ============================================================================= */
