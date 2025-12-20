@@ -173,6 +173,11 @@ slideshow-component .slideshow.banner {
 
 .slideshow__controls {
   border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .slideshow__controls--top {
@@ -194,6 +199,22 @@ slideshow-component .slideshow.banner {
 @media screen and (min-width: 750px) {
   .slideshow__controls {
     position: relative;
+    padding: 1.5rem 2rem;
+  }
+
+  /* Position arrows on sides of slideshow for desktop */
+  .slideshow__controls--top .slider-button--prev {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .slideshow__controls--top .slider-button--next {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 

@@ -31,6 +31,36 @@
     margin-left: -1.2rem;
   }
 
+  /* Ensure proper hit area for menu toggle */
+  .header__icon--menu {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Improve header icon spacing and alignment */
+  .header__icons {
+    gap: 0.8rem;
+  }
+
+  .header__icon {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Better focus states for header icons */
+  .header__icon:focus-visible {
+    outline: 2px solid rgba(var(--color-foreground), 0.8);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper {
       width: 75%;
@@ -87,7 +117,14 @@
 
 {%- style -%}
   .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 1.5rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 1.5rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .header {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
   }
 
   .section-header {

@@ -1,5 +1,17 @@
 .header__icon--menu {
   position: initial;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__icon--menu:focus-visible {
+  outline: 2px solid rgba(var(--color-foreground), 0.8);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .js menu-drawer > details > summary::before,
@@ -22,7 +34,7 @@
 menu-drawer > details[open] > summary::before {
   visibility: visible;
   opacity: 1;
-  transition: opacity var(--duration-default) ease, visibility var(--duration-default) ease;
+  transition: opacity var(--duration-medium) ease, visibility var(--duration-medium) ease;
 }
 
 .menu-drawer {
@@ -36,6 +48,8 @@ menu-drawer > details[open] > summary::before {
   padding: 0;
   background-color: rgb(var(--color-background));
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   filter: drop-shadow(
     var(--drawer-shadow-horizontal-offset) var(--drawer-shadow-vertical-offset) var(--drawer-shadow-blur-radius)
       rgba(var(--color-shadow), var(--drawer-shadow-opacity))
@@ -49,7 +63,7 @@ menu-drawer > details[open] > summary::before {
 
 .js details[open] > .menu-drawer,
 .js details[open] > .menu-drawer__submenu {
-  transition: transform var(--duration-default) ease, visibility var(--duration-default) ease;
+  transition: transform var(--duration-medium) ease, visibility var(--duration-medium) ease;
 }
 
 .no-js details[open] > .menu-drawer,
@@ -116,9 +130,11 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .menu-drawer__menu-item {
-  padding: 1.1rem 3rem;
+  padding: 1.4rem 3rem;
   text-decoration: none;
   font-size: 1.8rem;
+  display: block;
+  min-height: 44px;
 }
 
 .no-js .menu-drawer__menu-item {
@@ -148,6 +164,13 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer__close-button:hover {
   color: rgb(var(--color-foreground));
   background-color: rgba(var(--color-foreground), 0.04);
+  transition: background-color 0.2s ease;
+}
+
+.menu-drawer__menu-item:focus-visible,
+.menu-drawer__close-button:focus-visible {
+  outline: 2px solid rgba(var(--color-foreground), 0.8);
+  outline-offset: -2px;
 }
 
 .menu-drawer__menu-item--active:hover {
