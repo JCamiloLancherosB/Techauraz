@@ -252,6 +252,10 @@
 <link rel="preload" href="{{ 'techauraz-master.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-master.css' | asset_url }}"></noscript>
 
+<!-- TechAura UI/UX Enhancements - Comprehensive styling overhaul -->
+<link rel="preload" href="{{ 'techauraz-ui-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-ui-enhancements.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -274,6 +278,16 @@
        • Grid layout responsive breakpoints
        • Premium visual enhancements (gradients, shadows, hover effects)
        • Product form styling
+  
+  5. techauraz-ui-enhancements.css (preload with fallback)
+     - Comprehensive UI/UX refinements including:
+       • Header alignment and consistent spacing
+       • Unified typography system and vertical rhythm
+       • Normalized image aspect ratios
+       • Polished product cards and grids
+       • Consistent button and input styling
+       • Professional section spacing
+       • Improved description readability
   
   Additional section-specific CSS files loaded dynamically by sections when present:
   - product-page-conversion-fixes.css (loaded by main-product section)
