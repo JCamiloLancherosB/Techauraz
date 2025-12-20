@@ -17,9 +17,38 @@
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
+<style>
+.announcement-bar__container {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(34, 211, 238, 0.15));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 0.8rem 0;
+}
+.announcement-bar__container--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.announcement-bar__message {
+  text-align: center;
+  font-size: 1.4rem;
+  color: rgba(226, 232, 240, 0.95);
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+}
+.announcement-bar__message strong {
+  font-weight: 700;
+  color: #22d3ee;
+}
+@media screen and (max-width: 749px) {
+  .announcement-bar__message {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+}
+</style>
 <div class="announcement-bar__container{% if section.settings.sticky_promo %} announcement-bar__container--sticky{% endif %}">
-  <div class="announcement-bar__message animated">
-    🚚 <strong>Envío GRATIS</strong> | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 🎉 <span style="color:#FFF700">15% OFF</span>
+  <div class="announcement-bar__message">
+    🚚 <strong>Envío GRATIS</strong> | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 📞 WhatsApp: <a href="https://wa.me/573008602789" style="color:#22c55e;text-decoration:none;">+57 300 860 2789</a>
   </div>
 </div>
 <div
