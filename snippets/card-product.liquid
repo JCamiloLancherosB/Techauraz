@@ -117,9 +117,10 @@
                 <span class="card__badge card__badge--bestseller">Más vendido</span>
               {%- endif -%}
               
-              {%- comment -%} Discount percentage badge {%- endcomment -%}
+              {%- comment -%} Discount percentage badge AND "En Oferta" badge {%- endcomment -%}
               {%- if card_product.compare_at_price > card_product.price -%}
                 {%- assign discount_percentage = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
+                <span class="card__badge card__badge--sale">En Oferta</span>
                 <span class="card__badge card__badge--discount">-{{ discount_percentage }}%</span>
               {%- endif -%}
               
