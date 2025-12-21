@@ -99,3 +99,53 @@
   text-transform: uppercase;
   color: rgba(var(--color-foreground), 0.7);
 }
+
+/* ===== TECHAURAZ PRICE ENHANCEMENTS ===== */
+
+/* Enhanced Product Page Pricing */
+.product__price .price--large .price-item--regular {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product__price .price--large .price-item--sale {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #10b981;
+}
+
+.product__price .price--large s.price-item--regular {
+  font-size: 1.8rem;
+  color: rgba(148, 163, 184, 0.6);
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+/* Mobile Responsive Pricing */
+@media screen and (max-width: 749px) {
+  .product__price .price--large .price-item--regular,
+  .product__price .price--large .price-item--sale {
+    font-size: 2.6rem;
+  }
+  
+  .product__price .price--large s.price-item--regular {
+    font-size: 1.6rem;
+  }
+}
+
+/* Price Badge Enhancements */
+.price .badge {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
