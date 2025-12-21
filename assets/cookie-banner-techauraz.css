@@ -227,10 +227,10 @@
   }
 }
 
-/* Ensure WhatsApp button stays above */
+/* Ensure WhatsApp button stays above - values match JavaScript constants */
 .cookie-banner ~ .whatsapp-float,
 .cookie-banner ~ [class*="whatsapp"] {
-  bottom: calc(8rem + env(safe-area-inset-bottom, 0)) !important;
+  bottom: calc(10rem + env(safe-area-inset-bottom, 0)) !important;
   transition: bottom 0.4s ease;
 }
 

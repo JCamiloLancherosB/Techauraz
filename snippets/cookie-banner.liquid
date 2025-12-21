@@ -34,7 +34,12 @@
 
 <script>
   (function() {
+    // Configuration constants
     const COOKIE_CONSENT_KEY = 'techauraz_cookie_consent';
+    const BANNER_DELAY_MS = 1000;
+    const WHATSAPP_OFFSET_DESKTOP = '10rem';
+    const WHATSAPP_OFFSET_MOBILE = '12rem';
+    
     const banner = document.getElementById('cookie-banner');
     const acceptBtn = document.getElementById('cookie-accept');
     const declineBtn = document.getElementById('cookie-decline');
@@ -50,7 +55,7 @@
         setTimeout(() => {
           banner.classList.add('is-visible');
           updateWhatsAppPosition();
-        }, 1000); // Delay to not interrupt initial page load
+        }, BANNER_DELAY_MS);
       }
     }
     
@@ -68,11 +73,7 @@
         if (banner.classList.contains('is-visible')) {
           // Move WhatsApp button up when banner is visible
           const isMobile = window.matchMedia('(max-width: 749px)').matches;
-          if (isMobile) {
-            whatsappBtn.style.bottom = '12rem';
-          } else {
-            whatsappBtn.style.bottom = '10rem';
-          }
+          whatsappBtn.style.bottom = isMobile ? WHATSAPP_OFFSET_MOBILE : WHATSAPP_OFFSET_DESKTOP;
         } else {
           // Reset to original position
           whatsappBtn.style.bottom = '';
