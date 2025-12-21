@@ -3,6 +3,8 @@
   height: 100%;
   position: relative;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
@@ -14,6 +16,10 @@
   overflow: hidden;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 480px; /* Enforce minimum height for consistency */
 }
 
 .card-wrapper:hover .card {
@@ -130,6 +136,7 @@
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  aspect-ratio: 1 / 1; /* Enforce square aspect ratio */
 }
 
 .card__media::after {
@@ -160,18 +167,18 @@
 
 .card__information {
   padding: 1.2rem 1.4rem;
-  min-height: 135px; /* Normalize card heights */
+  min-height: 160px; /* Increased for consistent card heights */
   display: flex;
   flex-direction: column;
-  gap: 0.7rem; /* Tighter spacing */
+  gap: 0.6rem; /* Reduced spacing for less clutter */
   justify-content: flex-start;
 }
 
 @media screen and (min-width: 750px) {
   .card__information {
     padding: 1.4rem 1.6rem;
-    min-height: 150px; /* Consistent height on desktop */
-    gap: 0.8rem; /* Consistent spacing */
+    min-height: 180px; /* Increased consistent height on desktop */
+    gap: 0.7rem; /* Reduced consistent spacing */
   }
 }
 
@@ -403,6 +410,7 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 0.7rem;
+  min-height: 0; /* Allow flexbox to work properly */
 }
 
 .card__information {
@@ -596,9 +604,13 @@
 
 /* Mobile Responsive Improvements */
 @media screen and (max-width: 749px) {
+  .card {
+    min-height: 420px; /* Adjusted for mobile */
+  }
+  
   .card__information {
     padding: 0.75rem 0.95rem;
-    min-height: 95px;
+    min-height: 140px; /* Adjusted for mobile */
   }
   
   .card__description {
@@ -622,9 +634,13 @@
 
 /* Tablet Responsive */
 @media screen and (min-width: 750px) and (max-width: 989px) {
+  .card {
+    min-height: 450px; /* Adjusted for tablet */
+  }
+  
   .card__information {
     padding: 0.95rem 1.15rem;
-    min-height: 120px;
+    min-height: 160px; /* Adjusted for tablet */
   }
   
   .card__description {
@@ -654,27 +670,29 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-start;
+  max-width: calc(100% - 1.6rem); /* Prevent overflow */
 }
 
 .card__badge {
   display: inline-block;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 1rem; /* Increased horizontal padding to prevent text cut-off */
   border-radius: 6px;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  line-height: 1.2;
+  line-height: 1.3;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
+  white-space: nowrap; /* Prevent text wrapping */
+  min-width: fit-content; /* Ensure badge fits content */
 }
 
 .card__badge--new {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  text-align: right;
 }
 
 .card__badge--bestseller {
@@ -732,11 +750,12 @@
     top: 0.6rem;
     left: 0.6rem;
     gap: 0.4rem;
+    max-width: calc(100% - 1.2rem);
   }
 
   .card__badge {
-    padding: 0.3rem 0.7rem;
-    font-size: 1rem;
+    padding: 0.4rem 0.85rem; /* Ensure adequate padding on mobile */
+    font-size: 0.95rem;
   }
 }
 
@@ -822,36 +841,20 @@
 }
 
 .card__trust-indicators {
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.6rem;
+  font-size: 1.1rem;
 }
 
 .card__trust-indicator {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 1.15rem;
-  color: rgba(226, 232, 240, 0.85);
-  padding: 0.4rem 0.7rem;
-  background: rgba(71, 85, 105, 0.4);
-  border-radius: 6px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  transition: all 0.2s ease;
-}
-
-.card__trust-indicator:hover {
-  background: rgba(71, 85, 105, 0.5);
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-.card__trust-icon {
-  flex-shrink: 0;
-  width: 13px;
-  height: 13px;
-  color: rgba(16, 185, 129, 1);
-  filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.5));
+  color: rgba(16, 185, 129, 0.9);
+  font-size: 1.1rem;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 /* Mobile adjustments */
@@ -866,18 +869,13 @@
   }
 
   .card__trust-indicators {
-    gap: 0.6rem;
-    margin-top: 0.6rem;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+    font-size: 1rem;
   }
 
   .card__trust-indicator {
     font-size: 1rem;
-    padding: 0.25rem 0.5rem;
-  }
-
-  .card__trust-icon {
-    width: 10px;
-    height: 10px;
   }
 }
 
