@@ -117,13 +117,13 @@
 
 {%- style -%}
   .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 1.5rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 1.5rem;
+    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 2rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 2rem;
   }
 
   @media screen and (min-width: 750px) {
     .header {
-      padding-left: 3rem;
-      padding-right: 3rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
     }
   }
 
@@ -142,6 +142,15 @@
     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .header {
+      padding-left: 4rem;
+      padding-right: 4rem;
     }
   }
 {%- endstyle -%}
