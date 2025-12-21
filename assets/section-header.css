@@ -183,25 +183,13 @@
    SEARCH MODAL - Fix icon overlapping
    ============================================================================= */
 
-/* Hide close icon by default */
-.modal__toggle-close {
-  display: none;
-}
-
-/* Show only search icon when closed */
-.header__search details:not([open]) .modal__toggle-open {
-  display: block;
-}
-
-.header__search details:not([open]) .modal__toggle-close {
-  display: none;
-}
-
-/* Show only close icon when open */
+/* Hide close icon by default, show only search icon when closed */
+.modal__toggle-close,
 .header__search details[open] .modal__toggle-open {
   display: none;
 }
 
+/* Show close icon when open */
 .header__search details[open] .modal__toggle-close {
   display: block;
 }
@@ -317,7 +305,7 @@
 
 .header-wrapper.color-scheme-1,
 .header-wrapper.color-scheme-2 {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%);
+  /* Uses the gradient defined in .header-wrapper above */
 }
 
 /* Secondary accent color for special states */
