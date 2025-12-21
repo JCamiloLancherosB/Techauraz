@@ -256,6 +256,9 @@
 <link rel="preload" href="{{ 'forms-techauraz.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'forms-techauraz.css' | asset_url }}"></noscript>
 
+<!-- TechAura Responsive Audit Fixes - Comprehensive responsive & accessibility improvements -->
+{{ 'responsive-audit-fixes.css' | asset_url | stylesheet_tag }}
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -273,7 +276,7 @@
   3. cross-sell.css (conditional - product pages only)
      - Cross-sell component styles for product pages
      
-  4. techauraz-unified.css (preload with fallback) ✨ NEW
+  4. techauraz-unified.css (preload with fallback) ✨
      - Consolidated and optimized TechAura theme styles including:
        • Normalized typography (fixes zoom effect)
        • Compact, aligned header for desktop and mobile
@@ -290,7 +293,21 @@
      - techauraz-ui-enhancements.css (deprecated)
      - techauraz-polish-2024.css (deprecated)
   
-  5. Component-specific CSS files loaded per section as needed
+  5. forms-techauraz.css (preload with fallback)
+     - Enhanced form styling and validation states
+  
+  6. responsive-audit-fixes.css ✨ NEW
+     - Comprehensive responsive design fixes:
+       • Z-index hierarchy (header, modals, drawers, WhatsApp, cookie banner)
+       • Typography and legibility improvements
+       • Smooth animations with cubic-bezier timing
+       • prefers-reduced-motion support
+       • Touch targets (minimum 44x44px on mobile)
+       • Safe area insets for iPhone X+
+       • Overflow prevention and layout fixes
+       • Utility classes for common patterns
+  
+  7. Component-specific CSS files loaded per section as needed
      - component-*.css files loaded dynamically by sections
   
   ============================================================================
