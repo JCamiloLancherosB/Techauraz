@@ -517,6 +517,8 @@
 
 /* =============================================================================
    FOOTER IMPROVEMENTS - 2024 - Techauraz Brand Styling
+   NOTE: !important declarations are used throughout to override existing theme
+   styles that have high specificity. This ensures consistent brand styling.
    ============================================================================= */
 
 /* Improve footer spacing and reduce excessive padding */

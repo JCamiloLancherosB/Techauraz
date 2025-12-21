@@ -95,5 +95,6 @@
 
 .newsletter-form__button .icon {
   width: 1.5rem;
+  /* Dark blue text color matches Techauraz brand for contrast on golden button */
   color: #0f172a;
 }

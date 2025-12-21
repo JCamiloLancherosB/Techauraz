@@ -250,12 +250,14 @@
           </div>
 
           {%- comment -%} WhatsApp CTA {%- endcomment -%}
-          <div class="footer__whatsapp-wrapper">
-            <a href="https://wa.me/{{ section.settings.whatsapp_number | default: '573102345678' }}" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
-              {%- render 'icon-whatsapp' -%}
-              <span>Contáctanos por WhatsApp</span>
-            </a>
-          </div>
+          {%- if section.settings.whatsapp_number != blank -%}
+            <div class="footer__whatsapp-wrapper">
+              <a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
+                {%- render 'icon-whatsapp' -%}
+                <span>Contáctanos por WhatsApp</span>
+              </a>
+            </div>
+          {%- endif -%}
 
           {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
             <div class="footer__follow-on-shop">
@@ -600,8 +602,8 @@
       "type": "text",
       "id": "whatsapp_number",
       "label": "WhatsApp Number",
-      "info": "Enter phone number with country code (e.g., 573102345678)",
-      "default": "573102345678"
+      "info": "Enter phone number with country code (e.g., 573102345678). Leave empty to hide WhatsApp button.",
+      "default": ""
     },
     {
       "type": "header",
