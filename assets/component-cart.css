@@ -153,6 +153,14 @@ cart-items {
 
 .cart__ctas button {
   width: 100%;
+  min-height: 48px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cart__ctas button:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
 }
 
 .cart__ctas > *:not(noscript:first-child) + * {
@@ -194,6 +202,27 @@ cart-items {
 
 .cart__checkout-button {
   max-width: 36rem;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  border: none;
+  min-height: 52px;
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cart__checkout-button:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.cart__checkout-button:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 3px;
 }
 
 .cart__ctas {
