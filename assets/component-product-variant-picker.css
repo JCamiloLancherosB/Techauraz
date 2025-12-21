@@ -156,3 +156,63 @@ variant-selects {
   }
 }
 /* End custom styles for Swatch display type */
+
+/* ===== TECHAURAZ VARIANT PICKER ENHANCEMENTS ===== */
+
+/* Enhanced Pill Styling */
+.product-form__input--pill input[type='radio'] + label {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: #fbbf24;
+  background: rgba(30, 41, 59, 0.95);
+  transform: translateY(-2px);
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0f172a;
+  border-color: #fbbf24;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Enhanced Swatch Styling */
+.product-form__input--swatch .swatch {
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  transition: all 0.3s ease;
+}
+
+.product-form__input--swatch .swatch:hover {
+  border-color: #fbbf24;
+  transform: scale(1.1);
+}
+
+.product-form__input--swatch input:checked + .swatch {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+}
+
+/* Dropdown Enhancements */
+.product-form__input--dropdown select {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  color: #f1f5f9;
+  padding: 1rem 1.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.product-form__input--dropdown select:hover {
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.product-form__input--dropdown select:focus {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+  outline: none;
+}
