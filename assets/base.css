@@ -258,63 +258,65 @@ select:focus {
 /* =============================================================================
    GRID AND COLLECTION LAYOUT IMPROVEMENTS
    Responsive fixes for home/recommendations grids
+   NOTE: !important used here to override Dawn theme framework defaults
    ============================================================================= */
 
 /* Reduce oversized gaps in grids */
 @media screen and (min-width: 990px) {
   .grid {
-    gap: 1.5rem !important; /* Reduced from larger default gaps */
+    gap: 1.5rem !important; /* Override framework default */
   }
   
   /* Ensure 3-4 column layouts work properly */
   .grid--3-col-desktop,
   .grid--4-col-desktop {
-    gap: 2rem !important;
+    gap: 2rem !important; /* Override framework default */
   }
 }
 
 /* Mobile: Touch-friendly carousel with side padding */
 @media screen and (max-width: 749px) {
   .grid.slider--mobile {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    gap: 1.2rem !important;
+    padding-left: 1.5rem !important; /* Override framework padding */
+    padding-right: 1.5rem !important; /* Override framework padding */
+    gap: 1.2rem !important; /* Override framework gap */
   }
   
   /* Ensure proper spacing at end of carousel */
   .slider--mobile:after {
-    padding-left: 1.5rem !important;
+    padding-left: 1.5rem !important; /* Override framework spacing */
   }
 }
 
 /* Fix bullets/labels alignment in cards */
 .card__information ul,
 .card__information ol {
-  padding-left: 1.5rem !important;
-  margin: 0.5rem 0 !important;
+  padding-left: 1.5rem !important; /* Override theme card padding */
+  margin: 0.5rem 0 !important; /* Override theme margins */
 }
 
 .card__information li {
-  margin-bottom: 0.3rem !important;
-  line-height: 1.5 !important;
+  margin-bottom: 0.3rem !important; /* Override theme list spacing */
+  line-height: 1.5 !important; /* Override theme line height */
 }
 
 /* Remove giant whitespace below cards */
 .card-wrapper {
-  margin-bottom: 0 !important;
+  margin-bottom: 0 !important; /* Override theme spacing */
 }
 
 .grid__item {
-  margin-bottom: 0 !important;
+  margin-bottom: 0 !important; /* Override theme spacing */
 }
 
 .product-grid {
-  margin-bottom: 2rem !important; /* Consistent bottom margin for grid */
+  margin-bottom: 2rem !important; /* Override theme spacing */
 }
 
 /* =============================================================================
    Z-INDEX MANAGEMENT
    Prevent overlaps between cookies bar, WhatsApp button, and other elements
+   NOTE: !important required to override third-party scripts and plugins
    ============================================================================= */
 
 /* Floating elements z-index hierarchy */
@@ -322,14 +324,14 @@ select:focus {
 .whatsapp-button-float,
 [class*="whatsapp"][class*="float"],
 [class*="floating-whatsapp"] {
-  z-index: 999 !important; /* Below modals, above content */
+  z-index: 999 !important; /* Override third-party defaults */
 }
 
 .cookie-banner,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: 1000 !important; /* Above WhatsApp, below modals */
+  z-index: 1000 !important; /* Override third-party defaults */
 }
 
 /* Modals and overlays */
@@ -337,28 +339,27 @@ select:focus {
 .product-media-modal,
 .product-popup-modal,
 [role="dialog"] {
-  z-index: 1001 !important; /* Highest priority */
+  z-index: 1001 !important; /* Override framework modals */
 }
 
 /* Cart drawer */
 .cart-drawer,
 .drawer {
-  z-index: 1001 !important;
+  z-index: 1001 !important; /* Override framework drawer */
 }
 
 /* Mobile-specific z-index adjustments */
 @media screen and (max-width: 749px) {
   .whatsapp-float,
   .whatsapp-button-float {
-    bottom: 2rem !important;
-    right: 1.5rem !important;
-    /* Ensure doesn't overlap with navigation or important CTAs */
+    bottom: 2rem !important; /* Override default positioning */
+    right: 1.5rem !important; /* Override default positioning */
   }
   
   .cookie-banner {
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
+    bottom: 0 !important; /* Override default positioning */
+    left: 0 !important; /* Override default positioning */
+    right: 0 !important; /* Override default positioning */
   }
 }
 

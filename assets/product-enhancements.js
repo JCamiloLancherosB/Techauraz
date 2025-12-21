@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Guard against duplicate initialization for this product
   if (productId && window.productEnhancementsInitialized.has(productId)) {
-    // Development mode only - remove console.log in production
-    if (typeof DEBUG !== 'undefined' && DEBUG) {
+    // Development mode only - safely check for DEBUG flag
+    if (typeof window.DEBUG !== 'undefined' && window.DEBUG === true) {
       console.log('Product enhancements already initialized for product:', productId);
     }
     return;

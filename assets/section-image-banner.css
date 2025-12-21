@@ -531,6 +531,7 @@
 
 /* =============================================================================
    HERO BANNER RESPONSIVE IMPROVEMENTS
+   NOTE: !important required to override inline styles and framework defaults
    ============================================================================= */
 
 :root {
@@ -562,81 +563,82 @@
 
 /* Responsive max-width for captions to prevent awkward wrapping */
 .banner__box {
-  max-width: 90% !important; /* Responsive constraint */
+  max-width: 90% !important; /* Override inline/framework styles */
 }
 
 @media screen and (min-width: 750px) {
   .banner__box {
-    max-width: 60rem !important; /* Optimized for readability */
+    max-width: 60rem !important; /* Override framework max-width */
   }
 }
 
 @media screen and (min-width: 1200px) {
   .banner__box {
-    max-width: 75rem !important; /* Wider on large screens */
+    max-width: 75rem !important; /* Override framework max-width */
   }
 }
 
 /* Improve arrow/dot accessibility on dark backgrounds */
+/* NOTE: Overriding slideshow component defaults which may have inline styles */
 .banner .slider-button,
 .banner .slideshow__controls .slider-button {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 2px solid rgba(0, 0, 0, 0.1) !important;
-  color: #1a202c !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  background: rgba(255, 255, 255, 0.95) !important; /* Override component default */
+  border: 2px solid rgba(0, 0, 0, 0.1) !important; /* Override component default */
+  color: #1a202c !important; /* Override component default */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important; /* Override component default */
 }
 
 .banner .slider-button:hover {
-  background: white !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35) !important;
+  background: white !important; /* Override component default */
+  border-color: rgba(0, 0, 0, 0.2) !important; /* Override component default */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35) !important; /* Override component default */
 }
 
 /* Center slide dots and improve visibility */
 .banner .slideshow__controls {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  bottom: 2rem !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: auto !important;
-  background: rgba(255, 255, 255, 0.9) !important;
-  padding: 8px 16px !important;
-  border-radius: 20px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important; /* Override component default */
+  justify-content: center !important; /* Override component default */
+  align-items: center !important; /* Override component default */
+  bottom: 2rem !important; /* Override component positioning */
+  left: 50% !important; /* Override component positioning */
+  transform: translateX(-50%) !important; /* Override component transform */
+  width: auto !important; /* Override component width */
+  background: rgba(255, 255, 255, 0.9) !important; /* Override component background */
+  padding: 8px 16px !important; /* Override component padding */
+  border-radius: 20px !important; /* Override component border-radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; /* Override component shadow */
 }
 
 .banner .slideshow__controls .slider-counter__link {
-  background: #94a3b8 !important;
-  border: 2px solid white !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  background: #94a3b8 !important; /* Override component default */
+  border: 2px solid white !important; /* Override component default */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Override component default */
 }
 
 .banner .slideshow__controls .slider-counter__link--active,
 .banner .slideshow__controls .slider-counter__link[aria-current="true"] {
-  background: #667eea !important;
-  border-color: #667eea !important;
+  background: #667eea !important; /* Override component default */
+  border-color: #667eea !important; /* Override component default */
 }
 
 /* Mobile adjustments for better touch targets */
 @media screen and (max-width: 749px) {
   .banner--large.banner--mobile-bottom:not(.banner--adapt) .banner__media,
   .banner--large.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt) > .banner__media {
-    height: 35rem !important; /* Reduced from 39rem */
+    height: 35rem !important; /* Override framework height */
   }
 
   .banner--medium.banner--mobile-bottom:not(.banner--adapt) .banner__media,
   .banner--medium.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt) > .banner__media {
-    height: 30rem !important; /* Reduced from 34rem */
+    height: 30rem !important; /* Override framework height */
   }
 
   .banner .slideshow__controls {
-    bottom: 1rem !important;
-    padding: 6px 12px !important;
+    bottom: 1rem !important; /* Override component positioning */
+    padding: 6px 12px !important; /* Override component padding */
   }
 
   .banner__box {
-    padding: 1.5rem !important;
+    padding: 1.5rem !important; /* Override framework padding */
   }
 }
