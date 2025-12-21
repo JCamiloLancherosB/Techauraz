@@ -31,42 +31,45 @@
   --z-whatsapp: 9999;      /* Highest priority - always accessible */
   --z-notification: 9998;
   --z-max: 9999;
+  
+  /* iOS zoom prevention - minimum font size for form inputs */
+  --font-size-no-zoom: 16px;
 }
 
-/* Header z-index */
+/* Header z-index - !important needed to override existing section-header.css */
 .header-wrapper,
 .shopify-section-header-sticky {
   z-index: var(--z-header) !important;
 }
 
-/* Drawer/Menu z-index */
+/* Drawer/Menu z-index - !important needed to override existing component-cart-drawer.css */
 .menu-drawer,
 .cart-drawer,
 .drawer {
   z-index: var(--z-drawer) !important;
 }
 
-/* Modal z-index */
+/* Modal z-index - !important needed to override existing base.css */
 .modal,
 [role="dialog"],
 .modal__content {
   z-index: var(--z-modal) !important;
 }
 
-/* Dropdown menus */
+/* Dropdown menus - !important ensures proper stacking */
 .header__submenu,
 .disclosure__list,
 .predictive-search {
   z-index: var(--z-dropdown) !important;
 }
 
-/* Cookie banner - high but below WhatsApp */
+/* Cookie banner - !important needed to override existing cookie-banner-techauraz.css */
 .cookie-banner,
 #cookie-banner {
   z-index: var(--z-cookie-banner) !important;
 }
 
-/* WhatsApp floating button - always accessible */
+/* WhatsApp floating button - !important ensures it's always accessible above all other elements */
 .whatsapp-float,
 [class*="whatsapp"],
 .wa-float-button,
@@ -74,7 +77,7 @@
   z-index: var(--z-whatsapp) !important;
 }
 
-/* Overlay backgrounds */
+/* Overlay backgrounds - !important ensures they stay below their respective modals/drawers */
 .modal-overlay,
 .drawer-overlay,
 .menu-drawer__backdrop {
@@ -151,7 +154,7 @@ h1, h2, h3, h4, h5, h6,
   input[type="password"],
   textarea,
   select {
-    font-size: 16px; /* Prevents iOS zoom on focus - use px unit for consistency */
+    font-size: var(--font-size-no-zoom); /* Prevents iOS zoom on focus */
   }
 }
 
@@ -584,9 +587,9 @@ img {
   object-fit: cover;
 }
 
-/* Lazy loading placeholder */
+/* Lazy loading placeholder - use theme colors */
 img[loading="lazy"] {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+  background: linear-gradient(135deg, var(--ta-bg-card-hover, rgba(30, 41, 59, 0.5)) 0%, var(--ta-bg-card, rgba(15, 23, 42, 0.5)) 100%);
 }
 
 /* =============================================================================
@@ -618,7 +621,7 @@ img[loading="lazy"] {
 /* Header - prevent content from going under sticky header */
 .main-content,
 #MainContent {
-  min-height: calc(100vh - var(--header-height, 70px));
+  min-height: calc(100vh - var(--ta-header-height, 70px));
 }
 
 /* Product page - fix gallery and info layout */
