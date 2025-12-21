@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 480px; /* Enforce minimum height for consistency */
 }
 
 .card-wrapper:hover .card {
@@ -167,18 +166,19 @@
 
 .card__information {
   padding: 1.2rem 1.4rem;
-  min-height: 160px; /* Increased for consistent card heights */
+  min-height: 150px; /* Balanced height for consistent card appearance */
   display: flex;
   flex-direction: column;
   gap: 0.6rem; /* Reduced spacing for less clutter */
   justify-content: flex-start;
+  flex-grow: 1; /* Allow content to grow */
 }
 
 @media screen and (min-width: 750px) {
   .card__information {
     padding: 1.4rem 1.6rem;
-    min-height: 180px; /* Increased consistent height on desktop */
-    gap: 0.7rem; /* Reduced consistent spacing */
+    min-height: 165px; /* Balanced height on desktop */
+    gap: 0.8rem; /* Consistent spacing */
   }
 }
 
@@ -573,18 +573,20 @@
   transform: scale(1.05);
 }
 
-/* Button Styles */
+/* Button Styles - More elegant, less aggressive 
+   NOTE: !important flags required here to override Shopify theme defaults 
+   and ensure consistent button styling across all product cards */
 .quick-add__submit {
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-  color: #ffffff !important;
+  color: #0f172a !important; /* Dark text for better contrast on amber */
   border-radius: 8px !important;
   font-size: 1.3rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
   border: none !important;
   text-align: center !important;
-  padding: 0.75rem 1.4rem !important;
+  padding: 0.9rem 1.6rem !important;
   min-height: 44px !important;
   transition: all 0.3s ease !important;
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
@@ -593,7 +595,8 @@
 .quick-add__submit:hover {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+  color: #0f172a !important;
 }
 
 .quick-add__submit:disabled {
@@ -609,8 +612,8 @@
   }
   
   .card__information {
-    padding: 0.75rem 0.95rem;
-    min-height: 140px; /* Adjusted for mobile */
+    padding: 1rem 1.2rem;
+    min-height: 130px; /* Balanced for mobile with shorter content */
   }
   
   .card__description {
@@ -619,7 +622,7 @@
   }
   
   .card__heading .full-unstyled-link {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
   }
   
   .price-item--regular {
@@ -628,7 +631,8 @@
   
   .quick-add__submit {
     font-size: 1.2rem !important;
-    padding: 0.65rem 1.1rem !important;
+    padding: 0.75rem 1.2rem !important;
+    font-weight: 700 !important;
   }
 }
 
@@ -639,8 +643,8 @@
   }
   
   .card__information {
-    padding: 0.95rem 1.15rem;
-    min-height: 160px; /* Adjusted for tablet */
+    padding: 1.2rem 1.4rem;
+    min-height: 150px; /* Balanced for tablet */
   }
   
   .card__description {
@@ -653,6 +657,11 @@
   
   .price-item--regular {
     font-size: 1.6rem !important;
+  }
+  
+  .quick-add__submit {
+    font-size: 1.25rem !important;
+    padding: 0.85rem 1.5rem !important;
   }
 }
 
