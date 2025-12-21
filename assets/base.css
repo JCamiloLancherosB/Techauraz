@@ -256,6 +256,113 @@ select:focus {
 }
 
 /* =============================================================================
+   GRID AND COLLECTION LAYOUT IMPROVEMENTS
+   Responsive fixes for home/recommendations grids
+   ============================================================================= */
+
+/* Reduce oversized gaps in grids */
+@media screen and (min-width: 990px) {
+  .grid {
+    gap: 1.5rem !important; /* Reduced from larger default gaps */
+  }
+  
+  /* Ensure 3-4 column layouts work properly */
+  .grid--3-col-desktop,
+  .grid--4-col-desktop {
+    gap: 2rem !important;
+  }
+}
+
+/* Mobile: Touch-friendly carousel with side padding */
+@media screen and (max-width: 749px) {
+  .grid.slider--mobile {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    gap: 1.2rem !important;
+  }
+  
+  /* Ensure proper spacing at end of carousel */
+  .slider--mobile:after {
+    padding-left: 1.5rem !important;
+  }
+}
+
+/* Fix bullets/labels alignment in cards */
+.card__information ul,
+.card__information ol {
+  padding-left: 1.5rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+.card__information li {
+  margin-bottom: 0.3rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Remove giant whitespace below cards */
+.card-wrapper {
+  margin-bottom: 0 !important;
+}
+
+.grid__item {
+  margin-bottom: 0 !important;
+}
+
+.product-grid {
+  margin-bottom: 2rem !important; /* Consistent bottom margin for grid */
+}
+
+/* =============================================================================
+   Z-INDEX MANAGEMENT
+   Prevent overlaps between cookies bar, WhatsApp button, and other elements
+   ============================================================================= */
+
+/* Floating elements z-index hierarchy */
+.whatsapp-float,
+.whatsapp-button-float,
+[class*="whatsapp"][class*="float"],
+[class*="floating-whatsapp"] {
+  z-index: 999 !important; /* Below modals, above content */
+}
+
+.cookie-banner,
+.cookies-banner,
+[class*="cookie"][class*="banner"],
+[class*="gdpr"] {
+  z-index: 1000 !important; /* Above WhatsApp, below modals */
+}
+
+/* Modals and overlays */
+.modal,
+.product-media-modal,
+.product-popup-modal,
+[role="dialog"] {
+  z-index: 1001 !important; /* Highest priority */
+}
+
+/* Cart drawer */
+.cart-drawer,
+.drawer {
+  z-index: 1001 !important;
+}
+
+/* Mobile-specific z-index adjustments */
+@media screen and (max-width: 749px) {
+  .whatsapp-float,
+  .whatsapp-button-float {
+    bottom: 2rem !important;
+    right: 1.5rem !important;
+    /* Ensure doesn't overlap with navigation or important CTAs */
+  }
+  
+  .cookie-banner {
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
+
+/* =============================================================================
    END OF BASE STYLES
    All component-specific styles should be in their respective CSS files:
    - Buttons: component-*.css or techauraz-unified.css

@@ -1,12 +1,31 @@
 /**
  * Product Page Enhancements
  * Extracted from inline scripts for better maintainability and performance
+ * 
+ * IMPORTANT: This file uses data-product-id scoping to prevent conflicts
+ * between multiple product instances on the same page. Do not remove the
+ * initialization guard or product ID scoping without careful consideration.
  */
 
+// Initialization guard to prevent duplicate execution
+if (typeof window.productEnhancementsInitialized === 'undefined') {
+  window.productEnhancementsInitialized = new Set();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  // Get product ID from section element for keying timers
+  // Get product ID from section element for keying timers - DO NOT MODIFY
   const productSection = document.querySelector('[data-product-id]');
   const productId = productSection ? productSection.getAttribute('data-product-id') : null;
+  
+  // Guard against duplicate initialization for this product
+  if (productId && window.productEnhancementsInitialized.has(productId)) {
+    console.log('Product enhancements already initialized for product:', productId);
+    return;
+  }
+  
+  if (productId) {
+    window.productEnhancementsInitialized.add(productId);
+  }
 
   // Verificación de compatibilidad IE
   function isIE() {
@@ -43,11 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // FUNCIONALIDADES PERSUASIVAS MEJORADAS
+  // All queries scoped to current product section to prevent cross-product conflicts
   
   // 1. Agregar elementos de confianza dinámicos (SOLO SI NO EXISTEN)
   function addTrustIndicators() {
-    const priceElement = document.querySelector('.product__price');
-    if (!priceElement || document.querySelector('.trust-indicators')) return;
+    // Scope query to current product section
+    const priceElement = productSection ? productSection.querySelector('.product__price') : null;
+    const existingIndicators = productSection ? productSection.querySelector('.trust-indicators') : null;
+    if (!priceElement || existingIndicators) return;
     
     const trustDiv = document.createElement('div');
     trustDiv.className = 'trust-indicators';
@@ -63,8 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 2. Agregar indicador de urgencia (SOLO SI NO EXISTE)
   function addUrgencyIndicator() {
-    const trustElement = document.querySelector('.trust-indicators');
-    if (!trustElement || document.querySelector('.urgency-indicator')) return;
+    // Scope query to current product section
+    const trustElement = productSection ? productSection.querySelector('.trust-indicators') : null;
+    const existingUrgency = productSection ? productSection.querySelector('.urgency-indicator') : null;
+    if (!trustElement || existingUrgency) return;
     
     const urgencyDiv = document.createElement('div');
     urgencyDiv.className = 'urgency-indicator';
@@ -73,11 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
     trustElement.parentNode.insertBefore(urgencyDiv, trustElement.nextSibling);
   }
 
-  // 3. Contador de urgencia dinámico (keyed by product ID)
+  // 3. Contador de urgencia dinámico (keyed by product ID to prevent conflicts)
   function initUrgencyTimer() {
-    const urgencyEl = document.querySelector('.urgency-indicator');
+    // Scope query to current product section
+    const urgencyEl = productSection ? productSection.querySelector('.urgency-indicator') : null;
     if (!urgencyEl || !productId) return;
     
+    // Use product-specific storage key to prevent conflicts
     const storageKey = `product-urgency-timer-${productId}`;
     let timeLeft = localStorage.getItem(storageKey);
     if (!timeLeft) {
