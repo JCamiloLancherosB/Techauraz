@@ -137,7 +137,6 @@
   overflow: hidden;
   position: relative;
   aspect-ratio: 1 / 1; /* Enforce square aspect ratio */
-  max-height: 320px; /* Consistent max height */
 }
 
 .card__media::after {
@@ -568,8 +567,6 @@
   padding: 0.75rem;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
-  aspect-ratio: 1 / 1; /* Enforce square aspect ratio for consistency */
-  max-height: 300px; /* Limit image height */
 }
 
 .card-wrapper:hover .media img {
@@ -696,7 +693,6 @@
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  text-align: left; /* Changed from right to left for proper alignment */
 }
 
 .card__badge--bestseller {
