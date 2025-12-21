@@ -300,9 +300,14 @@
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div id="product-description" class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    {{ product.description }}
+                    <div class="product-description__content">
+                      {{ product.description }}
+                    </div>
                   </div>
                 {%- endif -%}
+                
+                {%- comment -%} Beneficios del producto {%- endcomment -%}
+                {% render 'product-benefits' %}
 
               {%- when 'sku' -%}
                 <p
@@ -650,6 +655,12 @@
                     size: 'medium'
                   %}
                 </div>
+                
+                {%- comment -%} Why Buy Section - después de los botones de compra {%- endcomment -%}
+                {% render 'product-why-buy' %}
+                
+                {%- comment -%} FAQs del producto {%- endcomment -%}
+                {% render 'product-faqs' %}
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
