@@ -20,3 +20,16 @@
   display: flex;
   padding: 0.5rem;
 }
+
+/* Footer payment icons improved */
+.footer .list-payment__item .icon,
+.footer .list-payment__item svg {
+  height: 28px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.footer .list-payment__item:hover .icon,
+.footer .list-payment__item:hover svg {
+  opacity: 1;
+}

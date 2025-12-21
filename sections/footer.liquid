@@ -169,6 +169,10 @@
               {%- if section.settings.newsletter_heading != blank -%}
                 <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
               {%- endif -%}
+              <div class="footer__newsletter-incentive">
+                <span>🎁</span>
+                <span>Recibe ofertas exclusivas</span>
+              </div>
               {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="newsletter-form__field-wrapper">
@@ -193,7 +197,7 @@
                       placeholder="{{ 'newsletter.label' | t }}"
                       required
                     >
-                    <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                    <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
                     <button
@@ -228,6 +232,30 @@
               {%- endform -%}
             </div>
           {%- endif -%}
+
+          {%- comment -%} Trust Badges Section {%- endcomment -%}
+          <div class="footer__trust-badges">
+            <div class="footer__trust-badge">
+              <span class="footer__trust-badge-icon">✓</span>
+              <span>Pago Seguro</span>
+            </div>
+            <div class="footer__trust-badge">
+              <span class="footer__trust-badge-icon">✓</span>
+              <span>Envío Gratis</span>
+            </div>
+            <div class="footer__trust-badge">
+              <span class="footer__trust-badge-icon">✓</span>
+              <span>Garantía 100%</span>
+            </div>
+          </div>
+
+          {%- comment -%} WhatsApp CTA {%- endcomment -%}
+          <div style="text-align: center; margin: 1.5rem 0;">
+            <a href="https://wa.me/573102345678" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
+              {%- render 'icon-whatsapp' -%}
+              <span>Contáctanos por WhatsApp</span>
+            </a>
+          </div>
 
           {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
             <div class="footer__follow-on-shop">
@@ -354,20 +382,16 @@
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
         <small class="copyright__content">{{ powered_by_link }}</small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title }}</a></small
-                  >
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
       </div>
+      {%- if section.settings.show_policy -%}
+        <div class="footer__policies">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <a href="{{ policy.url }}">{{ policy.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </footer>
