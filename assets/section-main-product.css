@@ -1770,24 +1770,7 @@ a.product__text {
 
 
 /* ===== PRECIO PROMINENTE ===== */
-.product__price .price--large .price-item--regular {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: #fbbf24;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.product__price .price--large .price-item--sale {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: #10b981;
-}
-
-.product__price .price--large s.price-item--regular {
-  font-size: 1.8rem;
-  color: rgba(148, 163, 184, 0.6);
-  text-decoration: line-through;
-}
+/* Price styles moved to component-price.css to avoid duplication */
 
 /* ===== BOTÓN DE COMPRA CON ANIMACIÓN ===== */
 .product-form__submit {
@@ -1846,17 +1829,4 @@ a.product__text {
 }
 
 /* ===== SELECTOR DE VARIANTES MEJORADO ===== */
-.product-form__input--dropdown select {
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 8px;
-  color: #f1f5f9;
-  padding: 1rem 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.product-form__input--dropdown select:focus {
-  border-color: #fbbf24;
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
-  outline: none;
-}
+/* Variant selector styles moved to component-product-variant-picker.css to avoid duplication */
