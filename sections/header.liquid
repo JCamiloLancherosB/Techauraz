@@ -54,6 +54,13 @@
     position: relative;
   }
 
+  /* Ensure consistent icon SVG sizing in header */
+  .header__icon svg,
+  .header__icon .icon {
+    width: 20px;
+    height: 20px;
+  }
+
   /* Better focus states for header icons */
   .header__icon:focus-visible {
     outline: 2px solid rgba(var(--color-foreground), 0.8);
