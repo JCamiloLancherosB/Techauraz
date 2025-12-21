@@ -306,7 +306,12 @@
       },
       "estimated_total": "Total Estimado",
       "new_estimated_total": "Nuevo total estimado",
-      "empty_subtitle": "Descubre nuestros productos y añádelos a tu carrito"
+      "empty_subtitle": "Descubre nuestros productos y añádelos a tu carrito",
+      "trust_badges": {
+        "free_shipping": "Envío Gratis +$150.000",
+        "secure_payment": "Pago Seguro",
+        "return_guarantee": "Garantía de Devolución"
+      }
     },
     "footer": {
       "payment": "Formas de pago"
