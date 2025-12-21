@@ -4,6 +4,8 @@
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'forms-techauraz.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   .footer {
@@ -173,63 +175,58 @@
                 <span>🎁</span>
                 <span>Recibe ofertas exclusivas</span>
               </div>
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-                <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="newsletter-form__field-wrapper">
-                  <div class="field">
-                    <input
+              
+              <div class="newsletter-form">
+                {%- form 'customer', id: 'ContactFooter', class: 'newsletter-form__form' -%}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="newsletter-form__wrapper">
+                    <input 
                       id="NewsletterForm--{{ section.id }}"
-                      type="email"
-                      name="contact[email]"
-                      class="field__input"
+                      type="email" 
+                      name="contact[email]" 
+                      class="newsletter-form__input" 
+                      placeholder="{{ 'newsletter.label' | t }}"
                       value="{{ form.email }}"
-                      aria-required="true"
+                      required
+                      autocomplete="email"
                       autocorrect="off"
                       autocapitalize="off"
-                      autocomplete="email"
                       {% if form.errors %}
-                        autofocus
                         aria-invalid="true"
                         aria-describedby="ContactFooter-error"
                       {% elsif form.posted_successfully? %}
                         aria-describedby="ContactFooter-success"
                       {% endif %}
-                      placeholder="{{ 'newsletter.label' | t }}"
-                      required
                     >
-                    <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">
+                    <label class="visually-hidden" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
-                    <button
-                      type="submit"
-                      class="newsletter-form__button field__button"
-                      name="commit"
-                      id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
-                    >
-                      {% render 'icon-arrow' %}
+                    <button type="submit" class="newsletter-form__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                      Suscribirse
                     </button>
                   </div>
+                  
                   {%- if form.errors -%}
-                    <small class="newsletter-form__message form__message" id="ContactFooter-error">
+                    <small class="newsletter-form__message form__message" id="ContactFooter-error" style="display: block; margin-top: 1rem; color: #ef4444;">
                       {%- render 'icon-error' -%}
                       {{- form.errors.translated_fields.email | capitalize }}
                       {{ form.errors.messages.email -}}
                     </small>
                   {%- endif -%}
-                </div>
-                {%- if form.posted_successfully? -%}
-                  <h3
-                    class="newsletter-form__message newsletter-form__message--success form__message"
-                    id="ContactFooter-success"
-                    tabindex="-1"
-                    autofocus
-                  >
-                    {% render 'icon-success' -%}
-                    {{- 'newsletter.success' | t }}
-                  </h3>
-                {%- endif -%}
-              {%- endform -%}
+                  
+                  {%- if form.posted_successfully? -%}
+                    <div class="newsletter-form__success is-visible" id="ContactFooter-success">
+                      <span class="newsletter-form__success-icon">✅</span>
+                      <span>{{- 'newsletter.success' | t }}</span>
+                    </div>
+                  {%- else -%}
+                    <div class="newsletter-form__success" id="newsletter-success">
+                      <span class="newsletter-form__success-icon">✅</span>
+                      <span>¡Gracias! Te has suscrito correctamente.</span>
+                    </div>
+                  {%- endif -%}
+                {%- endform -%}
+              </div>
             </div>
           {%- endif -%}
 
