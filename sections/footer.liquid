@@ -250,8 +250,8 @@
           </div>
 
           {%- comment -%} WhatsApp CTA {%- endcomment -%}
-          <div style="text-align: center; margin: 1.5rem 0;">
-            <a href="https://wa.me/573102345678" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
+          <div class="footer__whatsapp-wrapper">
+            <a href="https://wa.me/{{ section.settings.whatsapp_number | default: '573102345678' }}" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
               {%- render 'icon-whatsapp' -%}
               <span>Contáctanos por WhatsApp</span>
             </a>
@@ -591,6 +591,17 @@
       "id": "show_policy",
       "default": false,
       "label": "t:sections.footer.settings.show_policy.label"
+    },
+    {
+      "type": "header",
+      "content": "WhatsApp Contact"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp Number",
+      "info": "Enter phone number with country code (e.g., 573102345678)",
+      "default": "573102345678"
     },
     {
       "type": "header",

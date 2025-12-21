@@ -803,6 +803,11 @@
 }
 
 /* WhatsApp CTA */
+.footer__whatsapp-wrapper {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
 .footer__whatsapp {
   display: inline-flex;
   align-items: center;
