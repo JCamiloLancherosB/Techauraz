@@ -136,7 +136,7 @@
         {%- if search.results_count == 0 and search.filters == empty -%}
           <div class="search-no-results">
             <div class="search-no-results__icon">🔍</div>
-            <h2 class="search-no-results__title">No encontramos resultados para "{{ search.terms }}"</h2>
+            <h2 class="search-no-results__title">No encontramos resultados para "{{ search.terms | escape }}"</h2>
             <p class="search-no-results__message">
               Intenta con otras palabras o explora nuestras categorías más populares
             </p>
@@ -161,7 +161,7 @@
         {%- elsif search.results_count > 0 -%}
           {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
             <p class="search-results-count" role="status">
-              Se encontraron <strong>{{ search.results_count }}</strong> resultados para "<strong>{{ search.terms }}</strong>"
+              Se encontraron <strong>{{ search.results_count }}</strong> resultados para "<strong>{{ search.terms | escape }}</strong>"
             </p>
           {%- endunless -%}
         {%- endif -%}
