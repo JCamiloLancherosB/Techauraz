@@ -49,6 +49,7 @@
       if (!hasConsent()) {
         setTimeout(() => {
           banner.classList.add('is-visible');
+          updateWhatsAppPosition();
         }, 1000); // Delay to not interrupt initial page load
       }
     }
@@ -57,6 +58,26 @@
     function hideBanner() {
       banner.classList.remove('is-visible');
       banner.classList.add('is-hidden');
+      updateWhatsAppPosition();
+    }
+    
+    // Update WhatsApp button position based on banner visibility
+    function updateWhatsAppPosition() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        if (banner.classList.contains('is-visible')) {
+          // Move WhatsApp button up when banner is visible
+          const isMobile = window.matchMedia('(max-width: 749px)').matches;
+          if (isMobile) {
+            whatsappBtn.style.bottom = '12rem';
+          } else {
+            whatsappBtn.style.bottom = '10rem';
+          }
+        } else {
+          // Reset to original position
+          whatsappBtn.style.bottom = '';
+        }
+      }
     }
     
     // Save consent
