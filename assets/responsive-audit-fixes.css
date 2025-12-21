@@ -97,11 +97,12 @@ h1, h2, h3, h4, h5, h6,
 
 /* Ensure minimum readable font sizes on mobile */
 @media screen and (max-width: 749px) {
-  /* Only apply to elements that don't have explicit font-size set by techauraz-unified.css */
-  body:not([style*="font-size"]) p,
-  body:not([style*="font-size"]) li,
-  body:not([style*="font-size"]) span:not([class]) {
-    font-size: 1.5rem; /* 15px minimum on mobile for better readability */
+  /* Target specific text elements that commonly need minimum sizing */
+  .card__description,
+  .product__description p,
+  .rte p:not([class]),
+  article p:not([class]) {
+    font-size: max(1.5rem, 1em); /* Ensure at least 15px, respecting parent if larger */
   }
   
   /* Headings scale down gracefully */
@@ -141,11 +142,16 @@ h1, h2, h3, h4, h5, h6,
     font-size: 1.4rem;
   }
   
-  /* Form inputs */
-  input,
+  /* Form inputs - prevent iOS zoom on focus with higher specificity */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  input[type="password"],
   textarea,
   select {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    font-size: 16px; /* Prevents iOS zoom on focus - use px unit for consistency */
   }
 }
 
@@ -372,14 +378,7 @@ textarea {
   backface-visibility: hidden;
 }
 
-/* Remove will-change when not needed to save resources */
-.card:not(:hover),
-.menu-drawer:not(.is-open),
-.cart-drawer:not(.is-open),
-.drawer:not(.is-open),
-.modal__content.is-hidden {
-  will-change: auto;
-}
+/* Browser automatically removes will-change when elements return to default state */
 
 /* =============================================================================
    RESPONSIVE LAYOUT FIXES
