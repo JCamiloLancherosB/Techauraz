@@ -1,0 +1,88 @@
+{% comment %}
+  Techauraz Cookie Banner
+  - Minimal, non-intrusive design
+  - Stores preference in localStorage
+  - Supports cookie preferences modal
+{% endcomment %}
+
+{{ 'cookie-banner-techauraz.css' | asset_url | stylesheet_tag }}
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc">
+  <div class="cookie-banner__inner">
+    <span class="cookie-banner__icon" aria-hidden="true">🍪</span>
+    
+    <div class="cookie-banner__content">
+      <h2 id="cookie-banner-title" class="cookie-banner__title">
+        Usamos cookies
+      </h2>
+      <p id="cookie-banner-desc" class="cookie-banner__text">
+        Utilizamos cookies para mejorar tu experiencia de compra y mostrarte productos relevantes.
+        <a href="/policies/privacy-policy">Política de privacidad</a>
+      </p>
+    </div>
+    
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-banner__accept" id="cookie-accept">
+        Aceptar todo
+      </button>
+      <button type="button" class="cookie-banner__decline" id="cookie-decline">
+        Solo esenciales
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const COOKIE_CONSENT_KEY = 'techauraz_cookie_consent';
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+    
+    // Check if consent was already given
+    function hasConsent() {
+      return localStorage.getItem(COOKIE_CONSENT_KEY) !== null;
+    }
+    
+    // Show banner with animation
+    function showBanner() {
+      if (!hasConsent()) {
+        setTimeout(() => {
+          banner.classList.add('is-visible');
+        }, 1000); // Delay to not interrupt initial page load
+      }
+    }
+    
+    // Hide banner
+    function hideBanner() {
+      banner.classList.remove('is-visible');
+      banner.classList.add('is-hidden');
+    }
+    
+    // Save consent
+    function saveConsent(type) {
+      const consent = {
+        type: type, // 'all' or 'essential'
+        timestamp: new Date().toISOString(),
+        version: '1.0'
+      };
+      localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consent));
+      hideBanner();
+      
+      // Trigger custom event for analytics
+      window.dispatchEvent(new CustomEvent('cookieConsentGiven', { detail: consent }));
+    }
+    
+    // Event listeners
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => saveConsent('all'));
+    }
+    
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => saveConsent('essential'));
+    }
+    
+    // Initialize
+    showBanner();
+  })();
+</script>
