@@ -6,7 +6,11 @@
   - Success state
 {% endcomment %}
 
-{{ 'forms-techauraz.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign whatsapp_number = '573008602789'
+  assign whatsapp_display = '+57 300 860 2789'
+  assign support_email = shop.email | default: 'soporte@techauraz.com'
+-%}
 
 <div class="contact-section page-width">
   <div class="contact-section__header">
@@ -23,14 +27,14 @@
       <ul class="contact-info-box__list">
         <li class="contact-info-box__item">
           <span class="contact-info-box__icon">📱</span>
-          <a href="https://wa.me/573008602789" class="contact-info-box__link">
-            +57 300 860 2789
+          <a href="https://wa.me/{{ whatsapp_number }}" class="contact-info-box__link">
+            {{ whatsapp_display }}
           </a>
         </li>
         <li class="contact-info-box__item">
           <span class="contact-info-box__icon">📧</span>
-          <a href="mailto:soporte@techauraz.com" class="contact-info-box__link">
-            soporte@techauraz.com
+          <a href="mailto:{{ support_email }}" class="contact-info-box__link">
+            {{ support_email }}
           </a>
         </li>
         <li class="contact-info-box__item">
@@ -41,7 +45,7 @@
         </li>
       </ul>
       
-      <a href="https://wa.me/573008602789?text=Hola,%20tengo%20una%20consulta" 
+      <a href="https://wa.me/{{ whatsapp_number }}?text=Hola,%20tengo%20una%20consulta" 
          class="contact-info-box__whatsapp" 
          target="_blank" 
          rel="noopener">
@@ -180,54 +184,6 @@
     </div>
   </div>
 </div>
-
-<style>
-  .contact-section {
-    padding: 4rem 0;
-  }
-  
-  .contact-section__header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  
-  .contact-section__title {
-    font-size: 3.2rem;
-    font-weight: 700;
-    color: #fef3c7;
-    margin-bottom: 1rem;
-  }
-  
-  .contact-section__subtitle {
-    font-size: 1.6rem;
-    color: #94a3b8;
-    max-width: 50rem;
-    margin: 0 auto;
-  }
-  
-  .contact-section__grid {
-    display: grid;
-    gap: 4rem;
-  }
-  
-  @media screen and (min-width: 990px) {
-    .contact-section__grid {
-      grid-template-columns: 35rem 1fr;
-      align-items: start;
-    }
-    
-    .contact-info-box {
-      position: sticky;
-      top: 10rem;
-    }
-  }
-  
-  @media screen and (max-width: 749px) {
-    .contact-section__title {
-      font-size: 2.4rem;
-    }
-  }
-</style>
 
 <script>
   // Character counter for textarea

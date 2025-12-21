@@ -521,3 +521,50 @@
     animation: none;
   }
 }
+
+/* Contact section layout */
+.contact-section {
+  padding: 4rem 0;
+}
+
+.contact-section__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.contact-section__title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #fef3c7;
+  margin-bottom: 1rem;
+}
+
+.contact-section__subtitle {
+  font-size: 1.6rem;
+  color: #94a3b8;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.contact-section__grid {
+  display: grid;
+  gap: 4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .contact-section__grid {
+    grid-template-columns: 35rem 1fr;
+    align-items: start;
+  }
+  
+  .contact-info-box {
+    position: sticky;
+    top: 10rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .contact-section__title {
+    font-size: 2.4rem;
+  }
+}
