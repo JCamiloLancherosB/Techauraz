@@ -246,7 +246,7 @@
                 </div>
 
               {%- when 'inventory' -%}
-                {#--- inventario: sin cambios de lógica, solo presentacional ---#}
+                {%- comment -%}inventario: sin cambios de lógica, solo presentacional{%- endcomment -%}
                 <p
                   class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                   {{ block.shopify_attributes }}
