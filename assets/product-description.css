@@ -69,19 +69,13 @@
   color: #f59e0b;
 }
 
-/* Special styling for paragraphs starting with strong (like section headers) */
-.product__description p:has(strong:first-child) {
+/* Special styling for section headers - apply .highlight-box class to paragraphs in product descriptions */
+.product__description p.highlight-box {
   background: rgba(30, 41, 59, 0.5);
   padding: 1rem;
   border-radius: 8px;
   border-left: 3px solid #fbbf24;
   margin: 1.5rem 0;
-}
-
-/* Emoji support - ensure proper spacing and alignment */
-.product__description li::before {
-  /* Space for inline emojis or bullets that come from content */
-  display: inline-block;
 }
 
 /* Responsive adjustments */
@@ -98,7 +92,7 @@
     font-size: 1.4rem;
   }
   
-  .product__description p:has(strong:first-child) {
+  .product__description p.highlight-box {
     padding: 0.8rem;
   }
 }
