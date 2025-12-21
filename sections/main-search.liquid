@@ -133,15 +133,37 @@
         {%- endif -%}
       </div>
       {%- if search.performed -%}
-        {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
-          {%- if search.results_count > 0 -%}
-            <p role="status">
-              {{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}
-            </p>
-          {%- endif -%}
-        {%- endunless -%}
         {%- if search.results_count == 0 and search.filters == empty -%}
-          <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+          <div class="search-no-results">
+            <div class="search-no-results__icon">🔍</div>
+            <h2 class="search-no-results__title">No encontramos resultados para "{{ search.terms | escape }}"</h2>
+            <p class="search-no-results__message">
+              Intenta con otras palabras o explora nuestras categorías más populares
+            </p>
+            
+            <div class="search-no-results__suggestions">
+              <h3 class="search-no-results__suggestions-title">💡 Búsquedas populares</h3>
+              <ul class="search-no-results__suggestions-list">
+                <li><a href="/search?q=audifonos" class="search-no-results__suggestion-link">Audífonos</a></li>
+                <li><a href="/search?q=parlante" class="search-no-results__suggestion-link">Parlantes</a></li>
+                <li><a href="/search?q=drone" class="search-no-results__suggestion-link">Drones</a></li>
+                <li><a href="/search?q=power+bank" class="search-no-results__suggestion-link">Power Bank</a></li>
+                <li><a href="/search?q=gamer" class="search-no-results__suggestion-link">Gaming</a></li>
+              </ul>
+            </div>
+            
+            <div class="search-no-results__cta">
+              <a href="/collections/all" class="search-no-results__button">
+                Ver todos los productos
+              </a>
+            </div>
+          </div>
+        {%- elsif search.results_count > 0 -%}
+          {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
+            <p class="search-results-count" role="status">
+              Se encontraron <strong>{{ search.results_count }}</strong> resultados para "<strong>{{ search.terms | escape }}</strong>"
+            </p>
+          {%- endunless -%}
         {%- endif -%}
       {%- endif -%}
     </div>
