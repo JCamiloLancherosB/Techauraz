@@ -31,7 +31,11 @@
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
+              <div class="cart__empty-icon cart__empty-icon--drawer">
+                {% render 'icon-cart-empty' %}
+              </div>
               <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+              <p class="cart__empty-subtitle">Descubre nuestros productos y añádelos a tu carrito</p>
               <button
                 class="drawer__close"
                 type="button"
@@ -40,7 +44,7 @@
               >
                 {% render 'icon-close' %}
               </button>
-              <a href="{{ routes.all_products_collection_url }}" class="button">
+              <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping">
                 {{ 'general.continue_shopping' | t }}
               </a>
 
@@ -99,11 +103,13 @@
           </div>
         </div>
         
-        <style>
+          <style>
           .cart-drawer__shipping-bar {
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(34, 211, 238, 0.05));
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            margin: 0 1.5rem 1rem;
           }
           
           .shipping-bar__message {
@@ -132,15 +138,15 @@
           .shipping-bar__progress {
             height: 8px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 9999px;
+            border-radius: 999px;
             overflow: hidden;
             position: relative;
           }
           
           .shipping-bar__fill {
             height: 100%;
-            background: linear-gradient(90deg, #6366f1, #22d3ee);
-            border-radius: 9999px;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 999px;
             transition: width 0.3s ease;
             position: relative;
             overflow: hidden;

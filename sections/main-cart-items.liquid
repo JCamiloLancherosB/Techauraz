@@ -35,8 +35,12 @@
     </div>
 
     <div class="cart__warnings">
+      <div class="cart__empty-icon">
+        {% render 'icon-cart-empty' %}
+      </div>
       <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-      <a href="{{ routes.all_products_collection_url }}" class="button">
+      <p class="cart__empty-subtitle">Descubre nuestros productos y añádelos a tu carrito</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping">
         {{ 'general.continue_shopping' | t }}
       </a>
 
