@@ -910,7 +910,7 @@
       },
       "customer_account": {
         "not_user_label": "¿No es %{first_name}?",
-        "have_an_account_label": "¿Tener una cuenta?",
+        "have_an_account_label": "¿Tienes una cuenta?",
         "sign_in_link_label": "Acceso",
         "sign_out_link_label": "Cerrar sesión",
         "save_my_information_label": "Guarda esta información para la próxima vez.",
