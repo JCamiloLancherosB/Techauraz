@@ -38,6 +38,10 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
+    {%- comment -%} FULL CARD LINK - Makes entire card clickable {%- endcomment -%}
+    <a href="{{ card_product.url }}" class="card-wrapper__link--overlay" aria-label="{{ card_product.title | escape }}">
+      <span class="visually-hidden">{{ card_product.title | escape }}</span>
+    </a>
     <div
       class="
         card card--{{ settings.card_style }}
