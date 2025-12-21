@@ -159,18 +159,18 @@
 
 .card__information {
   padding: 1.3rem 1.5rem;
-  min-height: 140px;
+  min-height: 140px; /* Normalize card heights */
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.8rem; /* Reduced from larger gaps */
   justify-content: flex-start;
 }
 
 @media screen and (min-width: 750px) {
   .card__information {
     padding: 1.5rem 1.8rem;
-    min-height: 160px;
-    gap: 0.8rem;
+    min-height: 160px; /* Consistent height on desktop */
+    gap: 0.8rem; /* Reduced oversized gaps */
   }
 }
 
@@ -179,6 +179,7 @@
   line-height: 1.6;
   color: rgba(var(--color-foreground), 0.6);
   margin: 0.5rem 0;
+  /* Line-clamp descriptions to prevent height variations */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -190,8 +191,13 @@
 .card__heading {
   margin-bottom: 0.5rem;
   line-height: 1.3;
+  /* Line-clamp titles to normalize heights */
   max-height: 2.6em;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .card__heading .full-unstyled-link {

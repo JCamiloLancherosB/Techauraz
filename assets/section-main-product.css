@@ -2,6 +2,12 @@
    PRODUCT PAGE LAYOUT - Dawn Compatible
    ============================================================================= */
 
+/* RESPONSIVE TWO-COLUMN FIX: Remove empty column gap and enforce balanced width */
+/* Note: Using specific selector to override Dawn's default grid gap */
+.product.grid {
+  gap: 0;
+}
+
 .product__info-wrapper {
   width: 100% !important;
   max-width: 100% !important;
@@ -11,6 +17,26 @@
 .product--no-media {
   max-width: 57rem;
   margin: 0 auto;
+}
+
+/* Mobile: Stack media then info with proper spacing */
+@media screen and (max-width: 749px) {
+  .product {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product__media-wrapper {
+    order: 1;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product__info-wrapper {
+    order: 2;
+    width: 100%;
+    padding: 0 1.5rem;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -25,20 +51,26 @@
     padding-right: var(--media-shadow-horizontal-offset);
   }
 
+  /* Balanced width enforcement - 50/50 split on desktop */
+  .product__media-wrapper,
   .product__info-wrapper {
-    padding: 0 0 0 5rem;
+    width: 50%;
+  }
+
+  .product__info-wrapper {
+    padding: 0 0 0 3rem; /* Reduced from 5rem for tighter layout */
   }
 
   .product__info-wrapper--extra-padding {
-    padding: 0 0 0 8rem;
+    padding: 0 0 0 5rem; /* Slightly reduced */
   }
 
   .product--right .product__info-wrapper {
-    padding: 0 5rem 0 0;
+    padding: 0 3rem 0 0;
   }
 
   .product--right .product__info-wrapper--extra-padding {
-    padding: 0 8rem 0 0;
+    padding: 0 5rem 0 0;
   }
 
   .product--right .product__media-list {
@@ -1228,29 +1260,36 @@ a.product__text {
    PERSUASIVE UI ELEMENTS - Product Page Enhancements
    ============================================================================= */
 
-/* Utility Bar */
+/* Utility Bar - Tighter padding to prevent layout push */
 .product-top-utility-bar {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-align: center;
-  padding: 12px 20px;
+  padding: 8px 16px; /* Reduced from 12px 20px */
   font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 20px;
+  font-size: 13px; /* Reduced from 14px */
+  margin-bottom: 15px; /* Reduced from 20px */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Slider Controls */
+/* Hero Slider Controls - Improved visibility and contrast */
 .product-hero-slider {
   position: relative;
   width: 100%;
   overflow: hidden;
+  min-height: 400px; /* Placeholder min-height for media */
+  background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%); /* Placeholder background */
+  border-radius: 12px;
 }
 
 .product-hero-slide {
   width: 100%;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  min-height: inherit; /* Inherit min-height from parent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider-prev,
@@ -1258,10 +1297,10 @@ a.product__text {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
+  background: rgba(255, 255, 255, 0.95); /* Improved contrast */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Border for better visibility */
   width: 44px;
-  height: 44px;
+  height: 44px; /* Consistent height */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1269,16 +1308,18 @@ a.product__text {
   cursor: pointer;
   z-index: 10;
   font-size: 24px;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  color: #1a202c; /* Dark color for contrast */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Stronger shadow for visibility */
   transition: all 0.3s ease;
 }
 
 .slider-prev:hover,
 .slider-next:hover {
   background: white;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   transform: translateY(-50%) scale(1.1);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .slider-prev {
@@ -1289,27 +1330,32 @@ a.product__text {
   right: 15px;
 }
 
-/* Slider Dots */
+/* Slider Dots - Enhanced contrast and visibility */
 .slider-dots {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 15px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.9); /* Background for better visibility */
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .slider-dot {
   width: 12px;
-  height: 12px;
+  height: 12px; /* Consistent height */
   border-radius: 50%;
-  background: #cbd5e1;
-  border: none;
+  background: #94a3b8; /* Darker default for better contrast */
+  border: 2px solid white; /* Border for definition */
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .slider-dot:hover {
-  background: #94a3b8;
+  background: #64748b;
   transform: scale(1.2);
 }
 
@@ -1317,6 +1363,7 @@ a.product__text {
   background: #667eea;
   width: 32px;
   border-radius: 6px;
+  border-color: #667eea;
 }
 
 /* 3D/GIF Wrapper */
@@ -1361,7 +1408,7 @@ a.product__text {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Price/Urgency Badges */
+/* Price/Urgency Badges - Improved spacing, contrast, and text clamping */
 .product-urgency-badge {
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
   color: white;
@@ -1373,6 +1420,11 @@ a.product__text {
   margin-bottom: 15px;
   animation: pulse 2s infinite;
   box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+  /* Prevent overflow with text clamping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .product-offer-badge {
@@ -1385,6 +1437,11 @@ a.product__text {
   font-size: 14px;
   margin-top: 10px;
   box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+  /* Prevent overflow with text clamping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .product-shipping-eta {
@@ -1392,10 +1449,18 @@ a.product__text {
   font-weight: 600;
   font-size: 14px;
   margin-top: 12px;
+  margin-bottom: 12px; /* Consistent spacing */
   padding: 10px;
   background: #f0fdf4;
   border-radius: 8px;
   border-left: 4px solid #10b981;
+  /* Prevent overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
 }
 
 .urgency-indicator {
@@ -1407,7 +1472,16 @@ a.product__text {
   font-size: 14px;
   text-align: center;
   margin-top: 12px;
+  margin-bottom: 12px; /* Consistent spacing */
   box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+  /* Prevent overflow and stacking shifts */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  min-height: 48px; /* Prevent layout shift */
 }
 
 /* Countdown Widget */
@@ -1607,10 +1681,12 @@ a.product__text {
 /* Responsive adjustments */
 @media screen and (max-width: 749px) {
   .product-top-utility-bar {
-    font-size: 12px;
-    padding: 10px 15px;
+    font-size: 11px; /* Further reduced for mobile */
+    padding: 6px 12px; /* Tighter on mobile */
+    margin-bottom: 12px;
   }
   
+  /* Mobile slider controls - safe padding for swipe */
   .slider-prev,
   .slider-next {
     width: 36px;
@@ -1619,11 +1695,32 @@ a.product__text {
   }
   
   .slider-prev {
-    left: 10px;
+    left: 10px; /* Safe padding from edge */
   }
   
   .slider-next {
-    right: 10px;
+    right: 10px; /* Safe padding from edge */
+  }
+  
+  /* Slider dots - ensure they don't interfere with swipe */
+  .slider-dots {
+    padding: 6px;
+    gap: 8px;
+  }
+  
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .slider-dot.active {
+    width: 24px;
+  }
+  
+  /* Product hero slider touch-friendly */
+  .product-hero-slider {
+    min-height: 300px;
+    touch-action: pan-y pinch-zoom; /* Enable swipe gestures */
   }
   
   .product-countdown__segment {
@@ -1641,6 +1738,14 @@ a.product__text {
   
   .product-delivery-steps__text {
     font-size: 11px;
+  }
+  
+  /* Prevent badge overflow on mobile */
+  .product-urgency-badge,
+  .product-offer-badge,
+  .urgency-indicator {
+    font-size: 12px;
+    padding: 8px 12px;
   }
 }
 
