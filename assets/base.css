@@ -292,7 +292,8 @@ select:focus {
 /* =============================================================================
    GRID AND COLLECTION LAYOUT IMPROVEMENTS
    Responsive fixes for home/recommendations grids
-   NOTE: !important used here to override Dawn theme framework defaults
+   NOTE: !important flags required to override Dawn theme framework defaults
+   which use high specificity selectors and inline styles
    ============================================================================= */
 
 /* Reduce oversized gaps in grids */

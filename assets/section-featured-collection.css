@@ -98,18 +98,18 @@
 /* Mobile optimizations */
 @media screen and (max-width: 749px) {
   .collection .title {
-    font-size: 2rem !important;
-    margin-bottom: 0.8rem !important;
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
   }
   
   .collection__description {
-    font-size: 1.3rem !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
   }
   
-  .collection.section-padding,
-  .featured-collection {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+  /* Fallback padding for collections without section-specific classes */
+  .collection:not([class*="section-"]) {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
