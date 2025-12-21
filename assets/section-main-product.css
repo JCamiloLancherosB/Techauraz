@@ -3,8 +3,9 @@
    ============================================================================= */
 
 /* RESPONSIVE TWO-COLUMN FIX: Remove empty column gap and enforce balanced width */
-.product {
-  gap: 0 !important; /* Remove empty column gap on desktop */
+/* Note: Using specific selector to override Dawn's default grid gap */
+.product.grid {
+  gap: 0;
 }
 
 .product__info-wrapper {
@@ -21,20 +22,20 @@
 /* Mobile: Stack media then info with proper spacing */
 @media screen and (max-width: 749px) {
   .product {
-    display: flex !important;
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: column;
   }
   
   .product__media-wrapper {
-    order: 1 !important;
-    width: 100% !important;
-    margin-bottom: 1.5rem !important;
+    order: 1;
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
   
   .product__info-wrapper {
-    order: 2 !important;
-    width: 100% !important;
-    padding: 0 1.5rem !important;
+    order: 2;
+    width: 100%;
+    padding: 0 1.5rem;
   }
 }
 
@@ -53,24 +54,23 @@
   /* Balanced width enforcement - 50/50 split on desktop */
   .product__media-wrapper,
   .product__info-wrapper {
-    width: 50% !important;
-    max-width: 50% !important;
+    width: 50%;
   }
 
   .product__info-wrapper {
-    padding: 0 0 0 3rem !important; /* Reduced from 5rem for tighter layout */
+    padding: 0 0 0 3rem; /* Reduced from 5rem for tighter layout */
   }
 
   .product__info-wrapper--extra-padding {
-    padding: 0 0 0 5rem !important; /* Slightly reduced */
+    padding: 0 0 0 5rem; /* Slightly reduced */
   }
 
   .product--right .product__info-wrapper {
-    padding: 0 3rem 0 0 !important;
+    padding: 0 3rem 0 0;
   }
 
   .product--right .product__info-wrapper--extra-padding {
-    padding: 0 5rem 0 0 !important;
+    padding: 0 5rem 0 0;
   }
 
   .product--right .product__media-list {

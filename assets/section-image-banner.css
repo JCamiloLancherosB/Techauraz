@@ -533,21 +533,30 @@
    HERO BANNER RESPONSIVE IMPROVEMENTS
    ============================================================================= */
 
+:root {
+  --banner-height-large: 60rem;
+  --banner-height-medium: 45rem;
+  --banner-height-small: 35rem;
+  --banner-max-height-large: 70vh;
+  --banner-max-height-medium: 60vh;
+  --banner-max-height-small: 50vh;
+}
+
 /* Reduce excessive vertical height on banners */
 @media screen and (min-width: 750px) {
   .banner--large:not(.banner--adapt) {
-    min-height: 60rem !important; /* Reduced from 72rem */
-    max-height: 70vh; /* Prevent excessive height */
+    min-height: var(--banner-height-large);
+    max-height: var(--banner-max-height-large);
   }
 
   .banner--medium:not(.banner--adapt) {
-    min-height: 45rem !important; /* Reduced from 56rem */
-    max-height: 60vh;
+    min-height: var(--banner-height-medium);
+    max-height: var(--banner-max-height-medium);
   }
 
   .banner--small:not(.banner--adapt) {
-    min-height: 35rem !important; /* Reduced from 42rem */
-    max-height: 50vh;
+    min-height: var(--banner-height-small);
+    max-height: var(--banner-max-height-small);
   }
 }
 

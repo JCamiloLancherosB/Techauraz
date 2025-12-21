@@ -23,15 +23,16 @@
 
 .newsletter-form__field-wrapper .field__input {
   padding-right: 5rem;
-  background-color: rgba(255, 255, 255, 0.05) !important; /* Improved contrast */
-  border: 2px solid rgba(148, 163, 184, 0.3) !important;
-  color: rgba(226, 232, 240, 0.95) !important;
-  padding: 1.2rem 5rem 1.2rem 1.5rem !important; /* Better padding */
+  /* Improved contrast for dark theme */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  color: rgba(226, 232, 240, 0.95);
+  padding: 1.2rem 5rem 1.2rem 1.5rem;
 }
 
 .newsletter-form__field-wrapper .field__input:focus {
-  border-color: rgba(14, 165, 233, 0.6) !important;
-  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(14, 165, 233, 0.6);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .newsletter-form__field-wrapper .field {
@@ -66,13 +67,14 @@
   top: 0;
   height: 100%;
   z-index: 2;
-  background: linear-gradient(135deg, #0ea5e9, #0891b2) !important; /* Better contrast */
-  border: none !important;
+  /* Better contrast with gradient */
+  background: linear-gradient(135deg, #0ea5e9, #0891b2);
+  border: none;
   transition: all 0.3s ease;
 }
 
 .newsletter-form__button:hover {
-  background: linear-gradient(135deg, #0284c7, #0e7490) !important;
+  background: linear-gradient(135deg, #0284c7, #0e7490);
   transform: scale(1.05);
 }
 

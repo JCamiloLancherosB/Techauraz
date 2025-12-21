@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Guard against duplicate initialization for this product
   if (productId && window.productEnhancementsInitialized.has(productId)) {
-    console.log('Product enhancements already initialized for product:', productId);
+    // Development mode only - remove console.log in production
+    if (typeof DEBUG !== 'undefined' && DEBUG) {
+      console.log('Product enhancements already initialized for product:', productId);
+    }
     return;
   }
   
