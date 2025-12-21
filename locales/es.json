@@ -62,6 +62,12 @@
     "success": "Gracias por suscribirte",
     "button_label": "Suscribir"
   },
+  "forms": {
+    "validation": {
+      "required": "Este campo es requerido",
+      "email": "Ingresa un correo válido"
+    }
+  },
   "accessibility": {
     "skip_to_text": "saltar al contenido",
     "close": "Cerca",

@@ -3,6 +3,12 @@
 (function() {
   'use strict';
 
+  // Get translation for error messages (from data attributes or defaults)
+  const errorMessages = {
+    required: document.documentElement.getAttribute('data-form-required-error') || 'Este campo es requerido',
+    email: document.documentElement.getAttribute('data-form-email-error') || 'Ingresa un correo válido'
+  };
+
   // Email validation
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -53,10 +59,10 @@
     const type = input.type;
     
     if (isRequired && !value) {
-      showError(input, 'Este campo es requerido');
+      showError(input, errorMessages.required);
       return false;
     } else if (type === 'email' && value && !isValidEmail(value)) {
-      showError(input, 'Ingresa un correo válido');
+      showError(input, errorMessages.email);
       return false;
     } else if (value) {
       showSuccess(input);
