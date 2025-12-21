@@ -1,0 +1,114 @@
+/* =============================================================================
+   FEATURED COLLECTION SECTION STYLES
+   Improved typography, spacing, and visual hierarchy
+   ============================================================================= */
+
+/* Section title improvements */
+.collection .title-wrapper {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.collection .title {
+  font-size: clamp(2rem, 4vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  color: #fef3c7 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 1rem !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Description/subtitle improvements */
+.collection__description,
+.collection .collection__description {
+  font-size: 1.4rem !important;
+  color: rgba(226, 232, 240, 0.8) !important;
+  max-width: 700px !important;
+  margin: 0 auto 2rem !important;
+  line-height: 1.6 !important;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .collection .title {
+    font-size: clamp(2.4rem, 4vw, 3.6rem) !important;
+  }
+  
+  .collection__description,
+  .collection .collection__description {
+    font-size: 1.6rem !important;
+    max-width: 800px !important;
+  }
+  
+  .collection .title-wrapper {
+    margin-bottom: 3rem;
+  }
+}
+
+/* Reduce excessive spacing between sections */
+.collection.section-padding,
+.featured-collection {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .collection.section-padding,
+  .featured-collection {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
+  }
+}
+
+/* Grid optimizations */
+.collection .grid {
+  gap: 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .collection .grid {
+    gap: 1.5rem;
+  }
+}
+
+/* View all button improvements */
+.collection__view-all {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.collection__view-all .button {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1.4rem;
+}
+
+.collection__view-all .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 749px) {
+  .collection .title {
+    font-size: 2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .collection__description {
+    font-size: 1.3rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .collection.section-padding,
+  .featured-collection {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
