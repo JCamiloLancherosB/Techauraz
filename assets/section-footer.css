@@ -516,17 +516,20 @@
 }
 
 /* =============================================================================
-   FOOTER IMPROVEMENTS - 2024
+   FOOTER IMPROVEMENTS - 2024 - Techauraz Brand Styling
+   NOTE: !important declarations are used throughout to override existing theme
+   styles that have high specificity. This ensures consistent brand styling.
    ============================================================================= */
 
 /* Improve footer spacing and reduce excessive padding */
 .footer {
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15) !important; /* Better contrast */
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
+  border-top: 1px solid rgba(251, 191, 36, 0.2) !important;
 }
 
 .footer__content-top {
-  padding-top: 4rem !important; /* Reduced from default */
-  padding-bottom: 3rem !important; /* Reduced from 5rem */
+  padding-top: 4rem !important;
+  padding-bottom: 3rem !important;
 }
 
 @media screen and (max-width: 749px) {
@@ -696,6 +699,248 @@
   .footer__column--info {
     padding-left: 0 !important;
     padding-right: 0 !important;
+  }
+}
+
+/* Newsletter improved with Techauraz brand colors */
+.footer .newsletter-form__field-wrapper {
+  display: flex;
+  gap: 0;
+  max-width: 400px;
+}
+
+.footer .field__input {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  border-right: none !important;
+  border-radius: 8px 0 0 8px !important;
+  color: #f1f5f9 !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.footer .field__input:focus {
+  border-color: #fbbf24 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2) !important;
+}
+
+.footer .newsletter-form__button {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  border: none !important;
+  border-radius: 0 8px 8px 0 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  padding: 1rem 1.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  width: auto !important;
+  min-width: 60px !important;
+}
+
+.footer .newsletter-form__button:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  transform: translateX(2px) !important;
+}
+
+.footer .newsletter-form__button .icon {
+  color: #0f172a !important;
+}
+
+/* Social media improved */
+.footer .list-social {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.footer .list-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(30, 41, 59, 0.6) !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 50% !important;
+  color: #94a3b8 !important;
+  transition: all 0.3s ease !important;
+  padding: 0 !important;
+}
+
+.footer .list-social__link:hover {
+  background: rgba(251, 191, 36, 0.1) !important;
+  border-color: #fbbf24 !important;
+  color: #fbbf24 !important;
+  transform: translateY(-3px) !important;
+}
+
+.footer .list-social__link svg,
+.footer .list-social__link .icon {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Trust badges */
+.footer__trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  margin: 2rem 0;
+}
+
+.footer__trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.footer__trust-badge-icon {
+  color: #10b981;
+  font-size: 1.5rem;
+}
+
+/* WhatsApp CTA */
+.footer__whatsapp-wrapper {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.footer__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer__whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  color: #ffffff;
+}
+
+/* Links policies */
+.footer__policies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.footer__policies a {
+  color: rgba(148, 163, 184, 0.8);
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__policies a:hover {
+  color: #fbbf24;
+}
+
+/* Payment methods improved */
+.footer__payment {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.footer__payment .list-payment {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.footer__payment svg,
+.footer__payment .icon {
+  height: 28px !important;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.footer__payment svg:hover,
+.footer__payment .icon:hover {
+  opacity: 1;
+}
+
+/* Copyright improved */
+.footer__copyright {
+  text-align: center;
+  color: rgba(148, 163, 184, 0.6) !important;
+  font-size: 1.2rem !important;
+  padding-top: 1.5rem;
+}
+
+/* Better text colors for dark theme */
+.footer .footer-block__heading {
+  color: #f1f5f9 !important;
+}
+
+.footer-block__details-content .list-menu__item--link,
+.footer .copyright__content a {
+  color: rgba(148, 163, 184, 0.8) !important;
+}
+
+.footer-block__details-content .list-menu__item--link:hover,
+.footer .copyright__content a:hover {
+  color: #fbbf24 !important;
+}
+
+/* Newsletter incentive message */
+.footer__newsletter-incentive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  color: #fbbf24;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 749px) {
+  .footer__trust-badges {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .footer .newsletter-form__field-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .footer .field__input,
+  .footer .newsletter-form__button {
+    border-radius: 8px !important;
+    width: 100% !important;
+  }
+  
+  .footer .field__input {
+    border-right: 1px solid rgba(148, 163, 184, 0.3) !important;
+  }
+  
+  .footer__policies {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .footer .list-social {
+    gap: 1rem;
   }
 }
 
