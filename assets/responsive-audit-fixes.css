@@ -18,18 +18,18 @@
    ============================================================================= */
 
 :root {
-  /* Z-index scale - organized hierarchy */
+  /* Z-index scale - organized hierarchy (compatible with existing values) */
   --z-base: 1;
   --z-dropdown: 100;
   --z-sticky: 200;
   --z-header: 300;
-  --z-drawer: 400;
-  --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
-  --z-cookie-banner: 800;
-  --z-whatsapp: 850;
-  --z-notification: 900;
+  --z-drawer: 1000;  /* Compatible with existing component-cart-drawer.css */
+  --z-modal: 1001;   /* Compatible with existing base.css modal values */
+  --z-popover: 1002;
+  --z-tooltip: 1003;
+  --z-cookie-banner: 999;  /* Compatible with existing cookie-banner-techauraz.css */
+  --z-whatsapp: 9999;      /* Highest priority - always accessible */
+  --z-notification: 9998;
   --z-max: 9999;
 }
 
@@ -78,7 +78,7 @@
 .modal-overlay,
 .drawer-overlay,
 .menu-drawer__backdrop {
-  z-index: calc(var(--z-drawer) - 1) !important;
+  z-index: calc(var(--z-drawer) - 10) !important;
 }
 
 /* =============================================================================
@@ -97,8 +97,11 @@ h1, h2, h3, h4, h5, h6,
 
 /* Ensure minimum readable font sizes on mobile */
 @media screen and (max-width: 749px) {
-  body {
-    font-size: 1.5rem; /* 15px minimum on mobile */
+  /* Only apply to elements that don't have explicit font-size set by techauraz-unified.css */
+  body:not([style*="font-size"]) p,
+  body:not([style*="font-size"]) li,
+  body:not([style*="font-size"]) span:not([class]) {
+    font-size: 1.5rem; /* 15px minimum on mobile for better readability */
   }
   
   /* Headings scale down gracefully */
@@ -173,13 +176,11 @@ h1, h2, h3, h4, h5, h6,
    SMOOTH ANIMATIONS - Optimized Transitions
    ============================================================================= */
 
-/* Base transition timing */
-:root {
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+/* Note: Using existing transition variables from techauraz-unified.css:
+   --ta-transition-fast: 0.15s ease
+   --ta-transition: 0.25s ease  
+   --ta-transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+*/
 
 /* Smooth hover transitions for interactive elements */
 a,
@@ -191,13 +192,13 @@ button,
 input,
 select,
 textarea {
-  transition: all var(--transition-normal);
+  transition: all var(--ta-transition, 0.25s ease);
 }
 
 /* Card hover - smooth lift effect */
 .card-wrapper:hover .card {
   transform: translateY(-4px);
-  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+  transition: transform var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)), box-shadow var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 /* Button hover animations */
@@ -205,19 +206,19 @@ textarea {
 .btn:hover,
 [type="submit"]:hover {
   transform: translateY(-2px);
-  transition: all var(--transition-normal);
+  transition: all var(--ta-transition, 0.25s ease);
 }
 
 .button:active,
 .btn:active,
 [type="submit"]:active {
   transform: translateY(0);
-  transition: transform 100ms ease;
+  transition: transform var(--ta-transition-fast, 0.15s ease);
 }
 
 /* Image hover zoom - smooth */
 .media--hover-effect img {
-  transition: transform var(--transition-slow), opacity var(--transition-normal);
+  transition: transform var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)), opacity var(--ta-transition, 0.25s ease);
 }
 
 .card-wrapper:hover .media--hover-effect img {
@@ -228,7 +229,7 @@ textarea {
 .menu-drawer,
 .cart-drawer,
 .drawer {
-  transition: transform var(--transition-slow), visibility var(--transition-slow);
+  transition: transform var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)), visibility var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .menu-drawer.is-open,
@@ -300,27 +301,27 @@ textarea {
 
 /* Apply animations to elements */
 .animate-fade-in {
-  animation: fadeIn var(--transition-slow) forwards;
+  animation: fadeIn var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp var(--transition-slow) forwards;
+  animation: fadeInUp var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 .animate-fade-in-down {
-  animation: fadeInDown var(--transition-slow) forwards;
+  animation: fadeInDown var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 .animate-slide-in-right {
-  animation: slideInRight var(--transition-slow) forwards;
+  animation: slideInRight var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 .animate-slide-in-left {
-  animation: slideInLeft var(--transition-slow) forwards;
+  animation: slideInLeft var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 .animate-scale-in {
-  animation: scaleIn var(--transition-slow) forwards;
+  animation: scaleIn var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)) forwards;
 }
 
 /* Staggered animations for lists */
@@ -355,19 +356,28 @@ textarea {
 }
 
 /* Performance optimization - use GPU acceleration wisely */
-.card,
-.menu-drawer,
-.cart-drawer,
-.drawer,
-.modal__content {
+/* Only apply will-change during interactions, not by default */
+.card-wrapper:hover .card {
+  will-change: transform;
+}
+
+.menu-drawer.is-open,
+.cart-drawer.is-open,
+.drawer.is-open {
+  will-change: transform;
+}
+
+.modal__content:not(.is-hidden) {
   will-change: transform;
   backface-visibility: hidden;
 }
 
-/* Remove will-change when not needed */
+/* Remove will-change when not needed to save resources */
 .card:not(:hover),
 .menu-drawer:not(.is-open),
-.cart-drawer:not(.is-open) {
+.cart-drawer:not(.is-open),
+.drawer:not(.is-open),
+.modal__content.is-hidden {
   will-change: auto;
 }
 
@@ -671,7 +681,7 @@ img[loading="lazy"] {
   right: 1rem;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  transition: opacity var(--ta-transition, 0.25s ease), transform var(--ta-transition, 0.25s ease);
 }
 
 .card-wrapper:hover .quick-add {
