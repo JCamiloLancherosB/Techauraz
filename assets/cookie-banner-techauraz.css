@@ -1,0 +1,435 @@
+/* ===== TECHAURAZ COOKIE BANNER ===== */
+
+/* Banner container */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.99) 100%);
+  border-top: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cookie-banner.is-visible {
+  transform: translateY(0);
+}
+
+.cookie-banner.is-hidden {
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+/* Banner inner container */
+.cookie-banner__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Cookie icon */
+.cookie-banner__icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+/* Content section */
+.cookie-banner__content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.cookie-banner__title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fef3c7;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cookie-banner__text {
+  font-size: 1.4rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cookie-banner__text a {
+  color: #fbbf24;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.cookie-banner__text a:hover {
+  color: #f59e0b;
+}
+
+/* Buttons container */
+.cookie-banner__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* Accept button (primary) */
+.cookie-banner__accept {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0f172a;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.cookie-banner__accept:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.cookie-banner__accept:active {
+  transform: translateY(0);
+}
+
+/* Decline button (secondary) */
+.cookie-banner__decline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.cookie-banner__decline:hover {
+  border-color: rgba(148, 163, 184, 0.5);
+  color: #e2e8f0;
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* Settings/Preferences link */
+.cookie-banner__settings {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem;
+  color: #94a3b8;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.cookie-banner__settings:hover {
+  color: #fbbf24;
+}
+
+.cookie-banner__settings .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* Compact mode for returning visitors */
+.cookie-banner--compact {
+  padding: 1rem 1.5rem;
+}
+
+.cookie-banner--compact .cookie-banner__inner {
+  gap: 1.5rem;
+}
+
+.cookie-banner--compact .cookie-banner__title {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.cookie-banner--compact .cookie-banner__text {
+  display: none;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 749px) {
+  .cookie-banner {
+    padding: 1.2rem;
+    /* Leave space for WhatsApp button */
+    padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0));
+  }
+  
+  .cookie-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+  
+  .cookie-banner__icon {
+    display: none;
+  }
+  
+  .cookie-banner__content {
+    text-align: center;
+  }
+  
+  .cookie-banner__title {
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  
+  .cookie-banner__text {
+    font-size: 1.3rem;
+  }
+  
+  .cookie-banner__actions {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .cookie-banner__accept,
+  .cookie-banner__decline {
+    flex: 1;
+    min-width: unset;
+    padding: 1.2rem 1rem;
+  }
+  
+  .cookie-banner__settings {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem;
+  }
+}
+
+/* Ensure WhatsApp button stays above - values match JavaScript constants */
+.cookie-banner ~ .whatsapp-float,
+.cookie-banner ~ [class*="whatsapp"] {
+  bottom: calc(10rem + env(safe-area-inset-bottom, 0)) !important;
+  transition: bottom 0.4s ease;
+}
+
+.cookie-banner.is-hidden ~ .whatsapp-float,
+.cookie-banner.is-hidden ~ [class*="whatsapp"] {
+  bottom: 2rem !important;
+}
+
+/* Cookie preferences modal */
+.cookie-preferences {
+  position: fixed;
+  inset: 0;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.cookie-preferences.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cookie-preferences__modal {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.cookie-preferences.is-open .cookie-preferences__modal {
+  transform: scale(1);
+}
+
+.cookie-preferences__header {
+  padding: 2rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cookie-preferences__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fef3c7;
+  margin: 0;
+}
+
+.cookie-preferences__close {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cookie-preferences__close:hover {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.cookie-preferences__body {
+  padding: 2rem;
+}
+
+.cookie-preferences__category {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.cookie-preferences__category:last-child {
+  border-bottom: none;
+}
+
+.cookie-preferences__category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.cookie-preferences__category-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fef3c7;
+}
+
+.cookie-preferences__category-desc {
+  font-size: 1.3rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Toggle switch */
+.cookie-toggle {
+  position: relative;
+  width: 48px;
+  height: 26px;
+}
+
+.cookie-toggle__input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cookie-toggle__slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 26px;
+  transition: all 0.3s ease;
+}
+
+.cookie-toggle__slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.cookie-toggle__input:checked + .cookie-toggle__slider {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.cookie-toggle__input:checked + .cookie-toggle__slider:before {
+  transform: translateX(22px);
+  background: #0f172a;
+}
+
+.cookie-toggle__input:disabled + .cookie-toggle__slider {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cookie-preferences__footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cookie-preferences__save {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0f172a;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cookie-preferences__save:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+/* Animation for banner entrance */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner,
+  .cookie-preferences,
+  .cookie-preferences__modal,
+  .cookie-toggle__slider,
+  .cookie-toggle__slider:before {
+    transition: none;
+  }
+}
