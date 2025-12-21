@@ -601,6 +601,13 @@
   }
 }
 
+/* Newsletter error message styling */
+.newsletter-form__message {
+  display: block;
+  margin-top: 1rem;
+  color: #ef4444;
+}
+
 /* ===== OVERRIDES FOR EXISTING SHOPIFY FIELDS ===== */
 
 /* Apply Techauraz styling to existing Shopify field inputs */
