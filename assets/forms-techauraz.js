@@ -126,12 +126,10 @@
   
   // Newsletter success handling
   function handleNewsletterSuccess() {
-    const successMessages = document.querySelectorAll('.newsletter-form__message--success');
+    const successMessages = document.querySelectorAll('.newsletter-form__success.is-visible');
     successMessages.forEach(msg => {
-      const successDiv = msg.closest('.newsletter-form')?.querySelector('.newsletter-form__success');
-      if (successDiv) {
-        successDiv.classList.add('is-visible');
-      }
+      // Success message is already visible via Liquid, just ensure proper styling
+      msg.style.display = 'flex';
     });
   }
   
