@@ -252,6 +252,10 @@
 <link rel="preload" href="{{ 'techauraz-unified.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-unified.css' | asset_url }}"></noscript>
 
+<!-- TechAura Forms CSS - Enhanced form styling -->
+<link rel="preload" href="{{ 'forms-techauraz.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'forms-techauraz.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -442,8 +446,8 @@
 
     {% sections 'footer-group' %}
 
-    {%- comment -%} Cookie Notice - GDPR Compliance {%- endcomment -%}
-    {% render 'cookie-notice' %}
+    {%- comment -%} Cookie Banner - GDPR Compliance {%- endcomment -%}
+    {% render 'cookie-banner' %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

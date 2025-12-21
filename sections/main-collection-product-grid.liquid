@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'collection-techauraz.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -120,15 +121,16 @@
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
-            <div class="title-wrapper center">
-              <h2 class="title title--primary">
-                {{ 'sections.collection_template.empty' | t -}}
-                <br>
-                {{
-                  'sections.collection_template.use_fewer_filters_html'
-                  | t: link: collection.url, class: 'underlined-link link'
-                }}
-              </h2>
+            <div class="collection-empty">
+              <div class="collection-empty__icon">📦</div>
+              <h2 class="collection-empty__title">Esta colección está vacía</h2>
+              <p class="collection-empty__message">
+                No hay productos disponibles en esta categoría por el momento. 
+                Explora otras colecciones o vuelve pronto para ver novedades.
+              </p>
+              <a href="{{ routes.all_products_collection_url }}" class="collection-empty__cta">
+                Ver todos los productos
+              </a>
             </div>
           </div>
         {%- else -%}

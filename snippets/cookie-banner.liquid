@@ -1,0 +1,110 @@
+{% comment %}
+  Techauraz Cookie Banner
+  - Minimal, non-intrusive design
+  - Stores preference in localStorage
+  - Supports cookie preferences modal
+{% endcomment %}
+
+{{ 'cookie-banner-techauraz.css' | asset_url | stylesheet_tag }}
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc">
+  <div class="cookie-banner__inner">
+    <span class="cookie-banner__icon" aria-hidden="true">🍪</span>
+    
+    <div class="cookie-banner__content">
+      <h2 id="cookie-banner-title" class="cookie-banner__title">
+        Usamos cookies
+      </h2>
+      <p id="cookie-banner-desc" class="cookie-banner__text">
+        Utilizamos cookies para mejorar tu experiencia de compra y mostrarte productos relevantes.
+        <a href="/policies/privacy-policy">Política de privacidad</a>
+      </p>
+    </div>
+    
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-banner__accept" id="cookie-accept">
+        Aceptar todo
+      </button>
+      <button type="button" class="cookie-banner__decline" id="cookie-decline">
+        Solo esenciales
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Configuration constants
+    const COOKIE_CONSENT_KEY = 'techauraz_cookie_consent';
+    const BANNER_DELAY_MS = 1000;
+    const WHATSAPP_OFFSET_DESKTOP = '10rem';
+    const WHATSAPP_OFFSET_MOBILE = '12rem';
+    
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+    
+    // Check if consent was already given
+    function hasConsent() {
+      return localStorage.getItem(COOKIE_CONSENT_KEY) !== null;
+    }
+    
+    // Show banner with animation
+    function showBanner() {
+      if (!hasConsent()) {
+        setTimeout(() => {
+          banner.classList.add('is-visible');
+          updateWhatsAppPosition();
+        }, BANNER_DELAY_MS);
+      }
+    }
+    
+    // Hide banner
+    function hideBanner() {
+      banner.classList.remove('is-visible');
+      banner.classList.add('is-hidden');
+      updateWhatsAppPosition();
+    }
+    
+    // Update WhatsApp button position based on banner visibility
+    function updateWhatsAppPosition() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        if (banner.classList.contains('is-visible')) {
+          // Move WhatsApp button up when banner is visible
+          const isMobile = window.matchMedia('(max-width: 749px)').matches;
+          whatsappBtn.style.bottom = isMobile ? WHATSAPP_OFFSET_MOBILE : WHATSAPP_OFFSET_DESKTOP;
+        } else {
+          // Reset to original position
+          whatsappBtn.style.bottom = '';
+        }
+      }
+    }
+    
+    // Save consent
+    function saveConsent(type) {
+      const consent = {
+        type: type, // 'all' or 'essential'
+        timestamp: new Date().toISOString(),
+        version: '1.0'
+      };
+      localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consent));
+      hideBanner();
+      
+      // Trigger custom event for analytics
+      window.dispatchEvent(new CustomEvent('cookieConsentGiven', { detail: consent }));
+    }
+    
+    // Event listeners
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => saveConsent('all'));
+    }
+    
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => saveConsent('essential'));
+    }
+    
+    // Initialize
+    showBanner();
+  })();
+</script>
