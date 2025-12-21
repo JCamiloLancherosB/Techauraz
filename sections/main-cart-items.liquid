@@ -39,7 +39,7 @@
         {% render 'icon-cart-empty' %}
       </div>
       <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-      <p class="cart__empty-subtitle">Descubre nuestros productos y añádelos a tu carrito</p>
+      <p class="cart__empty-subtitle">{{ 'sections.cart.empty_subtitle' | t }}</p>
       <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping">
         {{ 'general.continue_shopping' | t }}
       </a>
