@@ -3,10 +3,10 @@
 (function() {
   'use strict';
 
-  // Get translation for error messages (from data attributes or defaults)
+  // Get translation for error messages (from data attributes or English defaults)
   const errorMessages = {
-    required: document.documentElement.getAttribute('data-form-required-error') || 'Este campo es requerido',
-    email: document.documentElement.getAttribute('data-form-email-error') || 'Ingresa un correo válido'
+    required: document.documentElement.getAttribute('data-form-required-error') || 'This field is required',
+    email: document.documentElement.getAttribute('data-form-email-error') || 'Please enter a valid email'
   };
 
   // Email validation
@@ -23,10 +23,22 @@
     if (!errorEl) {
       errorEl = document.createElement('div');
       errorEl.className = 'form-error';
-      errorEl.innerHTML = `<span class="form-error__icon">⚠️</span><span>${message}</span>`;
+      
+      const iconSpan = document.createElement('span');
+      iconSpan.className = 'form-error__icon';
+      iconSpan.textContent = '⚠️';
+      
+      const messageSpan = document.createElement('span');
+      messageSpan.textContent = message;
+      
+      errorEl.appendChild(iconSpan);
+      errorEl.appendChild(messageSpan);
       input.parentNode.appendChild(errorEl);
     } else {
-      errorEl.querySelector('span:last-child').textContent = message;
+      const messageSpan = errorEl.querySelector('span:last-child');
+      if (messageSpan) {
+        messageSpan.textContent = message;
+      }
     }
     
     setTimeout(() => errorEl.classList.add('is-visible'), 10);
