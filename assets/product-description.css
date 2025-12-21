@@ -112,7 +112,7 @@
   background: rgba(30, 41, 59, 0.7);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  font-family: 'Courier New', monospace;
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
   font-size: 0.9em;
 }
 
