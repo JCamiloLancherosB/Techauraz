@@ -73,8 +73,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: none !important; /* Override any fixed height */
   min-height: auto;
+}
+
+/* Override any existing max-height without !important */
+.card-wrapper .card__heading {
+  max-height: none;
 }
 
 .card__heading .full-unstyled-link {
@@ -141,7 +145,11 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: none !important;
+}
+
+/* Override any existing max-height */
+.card-wrapper .card__description {
+  max-height: none;
 }
 
 @media screen and (max-width: 749px) {
@@ -202,18 +210,7 @@
    ACCESSIBILITY
    ============================================================================= */
 
-/* Screen reader text for overlay link */
-.card-wrapper__link--overlay .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+/* Screen reader text is handled by existing .visually-hidden class */
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
