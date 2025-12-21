@@ -163,7 +163,7 @@
 
 .card__information {
   padding: 1.2rem 1.4rem;
-  min-height: 160px; /* Normalize card heights - increased from 135px */
+  min-height: 150px; /* Balanced height for consistent card appearance */
   display: flex;
   flex-direction: column;
   gap: 0.7rem; /* Tighter spacing */
@@ -174,7 +174,7 @@
 @media screen and (min-width: 750px) {
   .card__information {
     padding: 1.4rem 1.6rem;
-    min-height: 180px; /* Consistent height on desktop - increased from 150px */
+    min-height: 165px; /* Balanced height on desktop */
     gap: 0.8rem; /* Consistent spacing */
   }
 }
@@ -603,7 +603,7 @@
 @media screen and (max-width: 749px) {
   .card__information {
     padding: 1rem 1.2rem;
-    min-height: 140px; /* Adjusted for mobile */
+    min-height: 130px; /* Balanced for mobile with shorter content */
   }
   
   .card__description {
@@ -630,7 +630,7 @@
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .card__information {
     padding: 1.2rem 1.4rem;
-    min-height: 160px; /* Adjusted for tablet */
+    min-height: 150px; /* Balanced for tablet */
   }
   
   .card__description {

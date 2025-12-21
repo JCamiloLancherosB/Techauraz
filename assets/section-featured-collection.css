@@ -1,43 +1,44 @@
 /* =============================================================================
    FEATURED COLLECTION SECTION STYLES
    Improved typography, spacing, and visual hierarchy
+   These styles provide defaults that can be overridden by section-specific inline styles
    ============================================================================= */
 
-/* Section title improvements */
+/* Section title improvements - fallback for generic collections */
 .collection .title-wrapper {
   text-align: center;
   margin-bottom: 2.5rem;
 }
 
 .collection .title {
-  font-size: clamp(2rem, 4vw, 3.2rem) !important;
-  font-weight: 700 !important;
-  color: #fef3c7 !important;
-  line-height: 1.2 !important;
-  margin-bottom: 1rem !important;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: #fef3c7;
+  line-height: 1.2;
+  margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Description/subtitle improvements */
+/* Description/subtitle improvements - fallback for generic collections */
 .collection__description,
 .collection .collection__description {
-  font-size: 1.4rem !important;
-  color: rgba(226, 232, 240, 0.8) !important;
-  max-width: 700px !important;
-  margin: 0 auto 2rem !important;
-  line-height: 1.6 !important;
+  font-size: 1.4rem;
+  color: rgba(226, 232, 240, 0.8);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
   text-align: center;
 }
 
 @media screen and (min-width: 750px) {
   .collection .title {
-    font-size: clamp(2.4rem, 4vw, 3.6rem) !important;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
   }
   
   .collection__description,
   .collection .collection__description {
-    font-size: 1.6rem !important;
-    max-width: 800px !important;
+    font-size: 1.6rem;
+    max-width: 800px;
   }
   
   .collection .title-wrapper {
@@ -45,18 +46,18 @@
   }
 }
 
-/* Reduce excessive spacing between sections */
-.collection.section-padding,
-.featured-collection {
-  padding-top: 4rem !important;
-  padding-bottom: 4rem !important;
+/* Note: Section padding is controlled by inline styles in featured-collection.liquid
+   based on section settings. These are fallback values for collections without
+   section-specific padding classes. */
+.collection:not([class*="section-"]) {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 @media screen and (min-width: 750px) {
-  .collection.section-padding,
-  .featured-collection {
-    padding-top: 6rem !important;
-    padding-bottom: 6rem !important;
+  .collection:not([class*="section-"]) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
