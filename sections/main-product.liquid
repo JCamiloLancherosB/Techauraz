@@ -859,6 +859,18 @@
       {%- endif -%}
     </div>
 
+    {%- comment -%} Full-width product description below the gallery {%- endcomment -%}
+    {%- if product.description != blank -%}
+      <div class="product-description-full-width">
+        <div class="product-description-container">
+          <h2 class="product-description-heading">{{ 'products.product.description' | t }}</h2>
+          <div class="product-description-content rte">
+            {{ product.description }}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
