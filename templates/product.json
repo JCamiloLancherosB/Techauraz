@@ -30,6 +30,18 @@
                     "type": "price",
                     "settings": {}
                 },
+                "pdp_conversion_badges": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-conversion-badges' %}"
+                    }
+                },
+                "pdp_key_specs": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-key-specs' %}"
+                    }
+                },
                 "quantity_selector": {
                     "type": "quantity_selector",
                     "settings": {}
@@ -39,6 +51,12 @@
                     "settings": {
                         "show_dynamic_checkout": true,
                         "show_gift_card_recipient": true
+                    }
+                },
+                "pdp_whatsapp_cta": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-whatsapp-cta', product: product %}"
                     }
                 },
                 "share": {
@@ -58,8 +76,11 @@
                 "variant_picker",
                 "description",
                 "price",
+                "pdp_conversion_badges",
+                "pdp_key_specs",
                 "quantity_selector",
                 "buy_buttons",
+                "pdp_whatsapp_cta",
                 "share",
                 "judge_me_reviews_preview_badge_nJBx3F"
             ],
@@ -82,7 +103,7 @@
         "product_urgency_bar": {
             "type": "product-urgency-bar",
             "settings": {
-                "urgency_text": "\u00a1\u00daLTIMAS 23 UNIDADES! | POCO STOCK",
+                "urgency_text": "⚡ Stock limitado - Solo quedan pocas unidades",
                 "padding_top": 12,
                 "padding_bottom": 12
             }
@@ -102,25 +123,25 @@
                 "benefit_1": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "\ud83d\udd25",
-                        "title": "Alta Calidad Premium",
-                        "description": "Productos fabricados con los mejores materiales del mercado"
+                        "emoji": "🔥",
+                        "title": "Calidad garantizada o te devolvemos tu dinero",
+                        "description": "Productos premium que superarán tus expectativas"
                     }
                 },
                 "benefit_2": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "\ud83d\ude9a",
-                        "title": "Env\u00edo Gratis",
-                        "description": "Entrega r\u00e1pida a toda Colombia sin costo adicional"
+                        "emoji": "🚚",
+                        "title": "Recíbelo gratis en la puerta de tu casa",
+                        "description": "Envío sin costo a toda Colombia en 2-5 días hábiles"
                     }
                 },
                 "benefit_3": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "\u2728",
-                        "title": "Garant\u00eda 15 D\u00edas",
-                        "description": "Devoluci\u00f3n sin preguntas si no quedas satisfecho"
+                        "emoji": "✨",
+                        "title": "30 días para probarlo sin compromiso",
+                        "description": "Si no te convence, lo devuelves gratis. Sin preguntas."
                     }
                 }
             },
@@ -130,7 +151,7 @@
                 "benefit_3"
             ],
             "settings": {
-                "heading": "\u00bfPor qu\u00e9 elegir este producto?",
+                "heading": "Compra con total confianza",
                 "padding_top": 36,
                 "padding_bottom": 36
             }

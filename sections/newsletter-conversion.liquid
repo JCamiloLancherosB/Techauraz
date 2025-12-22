@@ -1,0 +1,95 @@
+{% comment %}
+  Conversion-Optimized Newsletter Form
+  
+  Simplified newsletter signup with single input and clear CTA.
+  
+  Usage:
+  {% render 'newsletter-conversion' %}
+{% endcomment %}
+
+{%- liquid
+  assign heading = section.settings.heading | default: 'Únete a nuestra comunidad'
+  assign subheading = section.settings.subheading | default: 'Recibe ofertas exclusivas y novedades de productos tech'
+  assign button_text = section.settings.button_text | default: 'Suscribirme'
+-%}
+
+<div class="ta-conv-newsletter-section" style="padding: 3rem 1.5rem; text-align: center;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    {%- if heading and heading != blank -%}
+      <h2 style="font-size: 2.4rem; font-weight: 700; color: #f8fafc; margin: 0 0 0.75rem 0;">{{ heading }}</h2>
+    {%- endif -%}
+    
+    {%- if subheading and subheading != blank -%}
+      <p style="font-size: 1.5rem; color: rgba(226, 232, 240, 0.85); margin: 0 0 2rem 0;">{{ subheading }}</p>
+    {%- endif -%}
+    
+    {%- form 'customer', class: 'ta-conv-newsletter', id: 'ContactFooter' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      
+      {%- if form.posted_successfully? -%}
+        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #10b981; margin-bottom: 1rem;">
+          ✓ ¡Gracias por suscribirte! Revisa tu correo para confirmar.
+        </div>
+      {%- endif -%}
+      
+      {%- if form.errors -%}
+        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; color: #ef4444; margin-bottom: 1rem;">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      
+      <input 
+        type="email" 
+        name="contact[email]" 
+        class="ta-conv-newsletter__input"
+        placeholder="tu@email.com"
+        aria-label="Correo electrónico"
+        autocomplete="email"
+        required>
+      
+      <button 
+        type="submit" 
+        class="ta-conv-newsletter__submit"
+        name="commit">
+        {{ button_text }}
+      </button>
+    {%- endform -%}
+    
+    <p style="font-size: 1.2rem; color: rgba(148, 163, 184, 0.8); margin: 1rem 0 0 0;">
+      No spam. Cancela cuando quieras.
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter Conversión",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Únete a nuestra comunidad"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Recibe ofertas exclusivas y novedades de productos tech"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "Suscribirme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Conversión"
+    }
+  ]
+}
+{% endschema %}

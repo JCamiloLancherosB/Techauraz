@@ -1,0 +1,120 @@
+{% comment %}
+  Conversion-Optimized Product Card
+  
+  Accepts:
+  - product: {Object} Product object
+  - show_badges: {Boolean} Show badges (default: true)
+  - cta_text: {String} CTA text (default: "Ver producto")
+  
+  Usage:
+  {% render 'product-card-conversion', 
+    product: product,
+    show_badges: true,
+    cta_text: 'Ver producto'
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign show_badges = show_badges | default: true
+  assign cta_text = cta_text | default: 'Ver producto'
+  
+  # Calculate discount percentage if on sale
+  assign on_sale = false
+  assign discount_percent = 0
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    assign discount = product.compare_at_price | minus: product.price
+    assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price | round
+  endif
+  
+  # Check if product is new (published in last 30 days)
+  assign is_new = false
+  assign days_old = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400
+  if days_old <= 30
+    assign is_new = true
+  endif
+  
+  # Check stock level
+  assign low_stock = false
+  assign in_stock = true
+  if product.selected_or_first_available_variant.inventory_quantity <= 10 and product.selected_or_first_available_variant.inventory_quantity > 0
+    assign low_stock = true
+  elsif product.available == false
+    assign in_stock = false
+  endif
+-%}
+
+<div class="ta-conv-product-card">
+  <a href="{{ product.url }}" class="ta-conv-product-card__link" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+    <span class="visually-hidden">{{ product.title | escape }}</span>
+  </a>
+  
+  <div class="ta-conv-product-card__image">
+    {%- if product.featured_image -%}
+      <img 
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        srcset="{{ product.featured_image | image_url: width: 300 }} 300w,
+                {{ product.featured_image | image_url: width: 600 }} 600w"
+        sizes="(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw"
+        alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+        loading="lazy"
+        width="600"
+        height="600">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    
+    {%- if show_badges -%}
+      <div class="ta-conv-product-card__badges">
+        {%- if on_sale and discount_percent > 0 -%}
+          <span class="ta-conv-badge ta-conv-badge--sale">-{{ discount_percent }}%</span>
+        {%- endif -%}
+        
+        {%- if is_new -%}
+          <span class="ta-conv-badge ta-conv-badge--new">Nuevo</span>
+        {%- endif -%}
+        
+        {%- if low_stock -%}
+          <span class="ta-conv-badge ta-conv-badge--stock">Pocas unidades</span>
+        {%- endif -%}
+        
+        {%- comment -%} Always show free shipping badge as per business requirement {%- endcomment -%}
+        <span class="ta-conv-badge ta-conv-badge--free-shipping">Envío gratis</span>
+      </div>
+    {%- endif -%}
+  </div>
+  
+  <div class="ta-conv-product-card__content" style="position: relative; z-index: 2;">
+    <h3 class="ta-conv-product-card__title">{{ product.title }}</h3>
+    
+    <div class="ta-conv-product-card__price">
+      <span class="ta-conv-product-card__price-current">
+        {{ product.price | money }}
+      </span>
+      {%- if on_sale -%}
+        <span class="ta-conv-product-card__price-original">
+          {{ product.compare_at_price | money }}
+        </span>
+      {%- endif -%}
+    </div>
+    
+    {%- if in_stock -%}
+      <a href="{{ product.url }}" class="ta-conv-product-card__cta" style="position: relative; z-index: 3;">
+        {{ cta_text }}
+      </a>
+    {%- else -%}
+      <button class="ta-conv-product-card__cta" disabled style="opacity: 0.6; cursor: not-allowed; position: relative; z-index: 3;">
+        Agotado
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  /* Additional badge style for sale */
+  .ta-conv-badge--sale {
+    background: rgba(239, 68, 68, 0.9);
+    color: #ffffff;
+    font-weight: 700;
+  }
+</style>

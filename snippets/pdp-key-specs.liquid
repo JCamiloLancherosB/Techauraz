@@ -1,0 +1,98 @@
+{% comment %}
+  Product Detail Page - Key Specifications
+  
+  Shows concise key specs for products near CTA
+  
+  Accepts:
+  - specs: {Array} Array of spec objects with label and value
+  
+  Usage in product template or main-product section:
+  {% render 'pdp-key-specs' %}
+  
+  Example with metafields:
+  {% if product.metafields.specs %}
+    {% render 'pdp-key-specs', specs: product.metafields.specs %}
+  {% endif %}
+{% endcomment %}
+
+{%- liquid
+  # Default specs if none provided
+  assign default_specs = '[]' | parse_json
+  assign specs = specs | default: default_specs
+-%}
+
+{%- if specs.size > 0 -%}
+  <div class="ta-conv-pdp-specs">
+    {%- for spec in specs -%}
+      <div class="ta-conv-pdp-spec">
+        <p class="ta-conv-pdp-spec__label">{{ spec.label }}</p>
+        <p class="ta-conv-pdp-spec__value">{{ spec.value }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% comment %}
+  Alternative: Manual specs display for common product types
+  Can be used when metafields are not set
+{% endcomment %}
+
+{%- if specs.size == 0 and product.type -%}
+  {%- case product.type -%}
+    {%- when 'Audífonos' or 'Headphones' or 'Earbuds' -%}
+      <div class="ta-conv-pdp-specs">
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Resistencia</p>
+          <p class="ta-conv-pdp-spec__value">IPX7</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Batería</p>
+          <p class="ta-conv-pdp-spec__value">80h totales</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Power Bank</p>
+          <p class="ta-conv-pdp-spec__value">2000mAh</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Latencia</p>
+          <p class="ta-conv-pdp-spec__value">Baja (Gaming)</p>
+        </div>
+      </div>
+    
+    {%- when 'Smartwatch' or 'Reloj' -%}
+      <div class="ta-conv-pdp-specs">
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Pantalla</p>
+          <p class="ta-conv-pdp-spec__value">AMOLED HD</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Batería</p>
+          <p class="ta-conv-pdp-spec__value">5-7 días</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Resistencia</p>
+          <p class="ta-conv-pdp-spec__value">IP68</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Deportes</p>
+          <p class="ta-conv-pdp-spec__value">100+ modos</p>
+        </div>
+      </div>
+    
+    {%- when 'USB' or 'Memoria USB' -%}
+      <div class="ta-conv-pdp-specs">
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Velocidad</p>
+          <p class="ta-conv-pdp-spec__value">USB 3.0</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Durabilidad</p>
+          <p class="ta-conv-pdp-spec__value">10+ años</p>
+        </div>
+        <div class="ta-conv-pdp-spec">
+          <p class="ta-conv-pdp-spec__label">Contenido</p>
+          <p class="ta-conv-pdp-spec__value">Personalizado</p>
+        </div>
+      </div>
+  {%- endcase -%}
+{%- endif -%}

@@ -16,16 +16,16 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/technology-6801334_1280.jpg",
-            "heading": "Prueba nuestra tecnología de última generación",
+            "heading": "Tecnología Premium para tu Estilo de Vida",
             "heading_size": "h0",
-            "subheading": "Cargadores para celular, audífonos bluetooth, soportes para celular, relojes inteligentes, contenido digital al gusto, entre muchos otros productos más, no dudes más y revisa nuestro catálogo.",
-            "button_label": "Echar un vistazo",
+            "subheading": "Audífonos, smartwatches y gadgets con garantía de 30 días. Envío GRATIS a toda Colombia y pago contra entrega disponible.",
+            "button_label": "Comprar ahora",
             "link": "shopify://collections/all",
-            "button_style_secondary": true,
+            "button_style_secondary": false,
             "box_align": "middle-center",
             "show_text_box": true,
             "text_alignment": "center",
-            "image_overlay_opacity": 0,
+            "image_overlay_opacity": 40,
             "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
             "text_alignment_mobile": "center"
           }
@@ -34,16 +34,16 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/image2.png",
-            "heading": "Memorias USB Personalizadas",
+            "heading": "Memorias USB 100% Personalizadas",
             "heading_size": "h0",
-            "subheading": "Todo el contenido que busques, lo encuentras aquí y completamente al gusto.",
-            "button_label": "Ver opciones",
+            "subheading": "Diseña tu USB con el contenido que desees. Entrega rápida en 2-5 días con garantía de satisfacción.",
+            "button_label": "Personalizar ahora",
             "link": "shopify://pages/usb-al-gusto-personalizada",
             "button_style_secondary": false,
             "box_align": "middle-center",
-            "show_text_box": false,
-            "text_alignment": "left",
-            "image_overlay_opacity": 10,
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 40,
             "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
             "text_alignment_mobile": "center"
           }
@@ -158,11 +158,68 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "trust_badges_section": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% render 'trust-badges-conversion' %}",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "benefits_conversion_home": {
+      "type": "benefits-conversion",
+      "blocks": {
+        "benefit_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
+          }
+        },
+        "benefit_payment": {
+          "type": "benefit",
+          "settings": {
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
+          }
+        },
+        "benefit_guarantee": {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Garantía de 30 días",
+            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
+          }
+        },
+        "benefit_delivery": {
+          "type": "benefit",
+          "settings": {
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_shipping",
+        "benefit_payment",
+        "benefit_guarantee",
+        "benefit_delivery"
+      ],
+      "settings": {
+        "heading": "¿Por qué comprar con TechAura?"
+      }
     }
   },
   "order": [
     "slideshow_iqMhTA",
+    "trust_badges_section",
     "featured_collection_9GzLFt",
+    "benefits_conversion_home",
     "featured_collection_gY3DF9",
     "featured_collection_wXX7kY",
     "custom_liquid_ddxajX"

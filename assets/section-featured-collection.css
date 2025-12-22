@@ -61,14 +61,20 @@
   }
 }
 
-/* Grid optimizations */
+/* Grid optimizations - Tighter for conversion */
 .collection .grid {
-  gap: 2rem;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .collection .grid {
+    gap: 2rem;
+  }
 }
 
 @media screen and (max-width: 749px) {
   .collection .grid {
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 }
 

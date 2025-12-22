@@ -1,0 +1,115 @@
+{% comment %}
+  Conversion-Focused Benefits Section
+  
+  Displays scannable benefit blocks with icons and outcome-driven headlines.
+  
+  Accepts:
+  - heading: {String} Section heading
+  - benefits: {Array} Array of benefit objects with icon, title, and description
+  
+  Usage in section:
+  {% render 'benefits-conversion' %}
+{% endcomment %}
+
+{%- liquid
+  assign heading = section.settings.heading | default: '¿Por qué comprar con nosotros?'
+-%}
+
+<div class="page-width ta-conv-section-spacing">
+  <h2 class="ta-conv-section-heading">{{ heading }}</h2>
+  
+  <div class="ta-conv-benefits">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'benefit' -%}
+          <div class="ta-conv-benefit" {{ block.shopify_attributes }}>
+            <div class="ta-conv-benefit__icon">{{ block.settings.icon | default: '✨' }}</div>
+            <h3 class="ta-conv-benefit__title">{{ block.settings.title }}</h3>
+            <p class="ta-conv-benefit__description">{{ block.settings.description }}</p>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Beneficios de Conversión",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título de la sección",
+      "default": "¿Por qué comprar con nosotros?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icono (emoji)",
+          "default": "✨",
+          "info": "Usa emojis como 🚚, 💳, ✨, ⚡, etc."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Beneficio importante"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Describe el resultado positivo que obtiene el cliente con este beneficio."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beneficios de Conversión",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Sin costos ocultos ni sorpresas. El precio que ves es el que pagas, envío incluido a toda Colombia."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "30 días de garantía",
+            "description": "Si no quedas satisfecho, devuélvelo sin preguntas. Tu satisfacción es nuestra prioridad."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos y enviamos tu pedido el mismo día. Recíbelo rápidamente donde estés."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
