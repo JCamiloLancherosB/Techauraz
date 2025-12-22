@@ -8,19 +8,25 @@
    ============================================================================= */
 
 /* Ensure banner text has proper contrast and shadow for readability */
-.banner__heading,
-.banner__box h1,
-.banner__box h2 {
-  color: #ffffff !important;
+/* Using high specificity instead of !important */
+.banner .banner__heading,
+.banner .banner__box h1,
+.banner .banner__box h2,
+.banner__content .banner__heading,
+.banner__content .banner__box h1,
+.banner__content .banner__box h2 {
+  color: #ffffff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.5);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.banner__text,
-.banner__box p {
-  color: #f8fafc !important;
+.banner .banner__text,
+.banner .banner__box p,
+.banner__content .banner__text,
+.banner__content .banner__box p {
+  color: #f8fafc;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
   font-weight: 500;
   line-height: 1.6;
@@ -189,15 +195,15 @@
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
-/* Tertiary/link buttons */
+/* Tertiary/link buttons - WCAG 2.1 compliant touch target */
 .button--tertiary,
 .link {
   background: transparent;
   color: #fbbf24;
   text-decoration: underline;
   text-underline-offset: 4px;
-  padding: 0.8rem 1.2rem;
-  min-height: 44px;
+  padding: 1rem 1.2rem;
+  min-height: 48px;
 }
 
 .button--tertiary:hover,
@@ -216,11 +222,11 @@
   box-shadow: none !important;
 }
 
-/* Button sizing variants */
+/* Button sizing variants - maintain WCAG 2.1 touch target minimums */
 .button--small {
   font-size: 1.4rem;
   padding: 1rem 1.6rem;
-  min-height: 40px;
+  min-height: 44px; /* WCAG minimum for touch targets */
 }
 
 .button--large {
@@ -318,12 +324,13 @@ a[href*="wa.me"]:hover {
 
 /* Tighter spacing for product headings */
 .product__title {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
   line-height: 1.3;
 }
 
-.product__title + .product__text {
-  margin-top: -0.5rem;
+/* Improved approach: reduce gap between title and text without negative margin */
+.product__text.caption-with-letter-spacing {
+  margin-top: 0;
 }
 
 /* Price section spacing */
