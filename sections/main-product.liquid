@@ -97,7 +97,7 @@
     </div>
   {%- endif -%}
 </product-hero-slider>
-
+<div>
         <!-- BLOQUE 3D / GIF: AQUÍ AGREGAS TU MODELO O VIDEO -->
         <div class="product-visual-3d">
           {%- if first_3d_model -%}
@@ -752,9 +752,8 @@
                                 {% if number_of_slides > 1 %}
                                   aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
                                   aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
-                                >
                                 {% endif %}
-                              
+                              >
                                 <ul class="list-unstyled" role="list">
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
