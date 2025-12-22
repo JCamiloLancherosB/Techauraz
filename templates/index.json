@@ -55,13 +55,22 @@
       ],
       "settings": {
         "layout": "full_bleed",
-        "slide_height": "medium",
+        "slide_height": "small",
         "slider_visual": "dots",
         "auto_rotate": true,
         "change_slides_speed": 3,
         "image_behavior": "ambient",
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "trust_badges_section": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% render 'trust-badges-conversion' %}",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "featured_collection_9GzLFt": {
@@ -91,6 +100,52 @@
         "swipe_on_mobile": true,
         "padding_top": 32,
         "padding_bottom": 52
+      }
+    },
+    "benefits_conversion_home": {
+      "type": "benefits-conversion",
+      "blocks": {
+        "benefit_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
+          }
+        },
+        "benefit_payment": {
+          "type": "benefit",
+          "settings": {
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
+          }
+        },
+        "benefit_guarantee": {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Garantía de 30 días",
+            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
+          }
+        },
+        "benefit_delivery": {
+          "type": "benefit",
+          "settings": {
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_shipping",
+        "benefit_payment",
+        "benefit_guarantee",
+        "benefit_delivery"
+      ],
+      "settings": {
+        "heading": "¿Por qué comprar con TechAura?"
       }
     },
     "featured_collection_gY3DF9": {
@@ -157,61 +212,6 @@
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
-      }
-    },
-    "trust_badges_section": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "{% render 'trust-badges-conversion' %}",
-        "color_scheme": "",
-        "padding_top": 32,
-        "padding_bottom": 32
-      }
-    },
-    "benefits_conversion_home": {
-      "type": "benefits-conversion",
-      "blocks": {
-        "benefit_shipping": {
-          "type": "benefit",
-          "settings": {
-            "icon": "🚚",
-            "title": "Recibe gratis en tu casa",
-            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
-          }
-        },
-        "benefit_payment": {
-          "type": "benefit",
-          "settings": {
-            "icon": "💳",
-            "title": "Paga cuando recibes",
-            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
-          }
-        },
-        "benefit_guarantee": {
-          "type": "benefit",
-          "settings": {
-            "icon": "✨",
-            "title": "Garantía de 30 días",
-            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
-          }
-        },
-        "benefit_delivery": {
-          "type": "benefit",
-          "settings": {
-            "icon": "⚡",
-            "title": "Entrega en 2-5 días",
-            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_shipping",
-        "benefit_payment",
-        "benefit_guarantee",
-        "benefit_delivery"
-      ],
-      "settings": {
-        "heading": "¿Por qué comprar con TechAura?"
       }
     }
   },
