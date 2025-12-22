@@ -13,6 +13,7 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
   {{ 'product-description.css' | asset_url | stylesheet_tag }}
+  {{ 'product-page-visual-fixes-2024.css' | asset_url | stylesheet_tag }}
   {%- if product.featured_media -%}
     <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
   {%- endif -%}
