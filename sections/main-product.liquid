@@ -863,7 +863,7 @@
     {%- if product.description != blank -%}
       <div class="product-description-full-width">
         <div class="product-description-container">
-          <h2 class="product-description-heading">Descripción del Producto</h2>
+          <h2 class="product-description-heading">{{ 'products.product.description' | t }}</h2>
           <div class="product-description-content rte">
             {{ product.description }}
           </div>
