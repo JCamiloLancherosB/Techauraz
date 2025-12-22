@@ -4,7 +4,6 @@
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
 >
-  {%- comment -%} SEO: Product Structured Data {%- endcomment -%}
   {% render 'schema-product', product: product %}
   
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
@@ -14,9 +13,6 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
   {{ 'product-description.css' | asset_url | stylesheet_tag }}
-  {%- comment -%} product-page-conversion-fixes.css removed - styles in techauraz-unified.css {%- endcomment -%}
-
-  {%- comment -%} Preload hero image for LCP optimization {%- endcomment -%}
   {%- if product.featured_media -%}
     <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
   {%- endif -%}
@@ -756,8 +752,9 @@
                                 {% if number_of_slides > 1 %}
                                   aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
                                   aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                                >
                                 {% endif %}
-                              >
+                              
                                 <ul class="list-unstyled" role="list">
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
