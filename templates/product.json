@@ -30,6 +30,18 @@
                     "type": "price",
                     "settings": {}
                 },
+                "pdp_conversion_badges": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-conversion-badges' %}"
+                    }
+                },
+                "pdp_key_specs": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-key-specs' %}"
+                    }
+                },
                 "quantity_selector": {
                     "type": "quantity_selector",
                     "settings": {}
@@ -39,6 +51,12 @@
                     "settings": {
                         "show_dynamic_checkout": true,
                         "show_gift_card_recipient": true
+                    }
+                },
+                "pdp_whatsapp_cta": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-whatsapp-cta', product: product %}"
                     }
                 },
                 "share": {
@@ -58,8 +76,11 @@
                 "variant_picker",
                 "description",
                 "price",
+                "pdp_conversion_badges",
+                "pdp_key_specs",
                 "quantity_selector",
                 "buy_buttons",
+                "pdp_whatsapp_cta",
                 "share",
                 "judge_me_reviews_preview_badge_nJBx3F"
             ],

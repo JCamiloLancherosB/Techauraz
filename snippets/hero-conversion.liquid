@@ -1,0 +1,86 @@
+{% comment %}
+  Conversion-Optimized Hero Section
+  
+  Accepts:
+  - title: {String} Main headline
+  - subtitle: {String} Subcopy
+  - primary_cta_text: {String} Primary CTA text (default: "Comprar ahora")
+  - primary_cta_url: {String} Primary CTA URL
+  - secondary_cta_text: {String} Secondary CTA text (default: "Garantía 30 días")
+  - secondary_cta_url: {String} Secondary CTA URL
+  - image: {Image} Background image
+  - image_mobile: {Image} Mobile background image (optional)
+  - overlay_opacity: {Number} Image overlay opacity (0-100)
+  
+  Usage:
+  {% render 'hero-conversion', 
+    title: 'Tu título aquí',
+    subtitle: 'Tu subtítulo aquí',
+    primary_cta_text: 'Comprar ahora',
+    primary_cta_url: '/collections/all',
+    secondary_cta_text: 'Garantía 30 días',
+    secondary_cta_url: '/pages/garantia'
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign title = title | default: 'Prueba nuestra tecnología de última generación'
+  assign subtitle = subtitle | default: 'Productos tech premium con garantía de satisfacción y envío gratis a toda Colombia'
+  assign primary_cta_text = primary_cta_text | default: 'Ver catálogo'
+  assign primary_cta_url = primary_cta_url | default: '/collections/all'
+  assign secondary_cta_text = secondary_cta_text | default: 'Garantía 30 días'
+  assign secondary_cta_url = secondary_cta_url | default: '/pages/garantia'
+  assign overlay_opacity = overlay_opacity | default: 50
+-%}
+
+<div class="ta-conv-hero">
+  {%- if image -%}
+    <div class="ta-conv-hero__bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+      <picture>
+        {%- if image_mobile -%}
+          <source 
+            media="(max-width: 749px)" 
+            srcset="{{ image_mobile | image_url: width: 750 }} 750w,
+                    {{ image_mobile | image_url: width: 1100 }} 1100w"
+            sizes="100vw">
+        {%- endif -%}
+        <img 
+          src="{{ image | image_url: width: 1920 }}"
+          srcset="{{ image | image_url: width: 750 }} 750w,
+                  {{ image | image_url: width: 1100 }} 1100w,
+                  {{ image | image_url: width: 1500 }} 1500w,
+                  {{ image | image_url: width: 1920 }} 1920w"
+          sizes="100vw"
+          alt="{{ title | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      </picture>
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 15, 26, {{ overlay_opacity | divided_by: 100.0 }});"></div>
+    </div>
+  {%- endif -%}
+  
+  <div class="ta-conv-hero__content" style="position: relative; z-index: 1;">
+    <h1 class="ta-conv-hero__title">{{ title }}</h1>
+    <p class="ta-conv-hero__subtitle">{{ subtitle }}</p>
+    
+    <div class="ta-conv-hero__ctas">
+      <a href="{{ primary_cta_url }}" class="ta-conv-btn-primary">
+        {{ primary_cta_text }}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 0.25rem;">
+          <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      
+      {%- if secondary_cta_text and secondary_cta_text != blank -%}
+        <a href="{{ secondary_cta_url }}" class="ta-conv-btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.25rem;">
+            <path d="M14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8Z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M5.5 8L7 9.5L10.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          {{ secondary_cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
