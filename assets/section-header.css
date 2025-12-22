@@ -30,9 +30,21 @@
   position: relative;
 }
 
+/* Define header height CSS variable */
+:root {
+  --header-height: 80px;
+}
+
 /* Add padding to body to prevent content from going under fixed header */
-body {
-  padding-top: var(--header-height, 80px);
+.template-product body,
+body.template-product {
+  padding-top: var(--header-height);
+}
+
+@media screen and (max-width: 749px) {
+  :root {
+    --header-height: 70px;
+  }
 }
 
 /* Enhanced sticky header transition */
