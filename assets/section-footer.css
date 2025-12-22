@@ -1,9 +1,21 @@
 .footer {
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  margin-top: 3rem;
 }
 
 .footer:not(.color-scheme-1) {
   border-top: none;
+}
+
+/* Ensure footer spacing on product pages */
+.template-product .footer {
+  margin-top: 4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .template-product .footer {
+    margin-top: 3rem;
+  }
 }
 
 .footer__content-top {
