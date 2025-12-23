@@ -56,7 +56,7 @@
       "settings": {
         "layout": "full_bleed",
         "slide_height": "small",
-        "slider_visual": "dots",
+        "slider_visual": "counter",
         "auto_rotate": true,
         "change_slides_speed": 3,
         "image_behavior": "ambient",
