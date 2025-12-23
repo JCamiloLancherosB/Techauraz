@@ -98,10 +98,3 @@
   /* Dark blue text color matches Techauraz brand for contrast on golden button */
   color: #0f172a;
 }
-
-/* Enhance visually-hidden with modern clip-path for newsletter labels */
-.newsletter-form .field__label.visually-hidden,
-.newsletter-form__wrapper .field__label.visually-hidden,
-.newsletter-form__form .field__label.visually-hidden {
-  clip-path: inset(50%) !important;
-}
