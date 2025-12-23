@@ -25,7 +25,7 @@
   z-index: 100 !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow-x: hidden !important;
-  contain: layout style;
+  contain: layout style paint;
 }
 
 /* Prevent layout shift when header becomes fixed */
