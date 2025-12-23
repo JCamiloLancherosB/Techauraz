@@ -646,6 +646,10 @@ onResize();
     justify-content: center;
     width: 60px;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     border-radius: 50%;
     box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
@@ -655,6 +659,7 @@ onResize();
     text-decoration: none;
     position: relative;
     flex-shrink: 0;
+    overflow: hidden;
   }
 
   .whatsapp-button svg {
@@ -662,6 +667,8 @@ onResize();
     height: 32px;
     fill: white;
     transition: transform 0.3s ease;
+    display: block;
+    margin: auto;
   }
 
   .whatsapp-button:hover {
@@ -762,6 +769,10 @@ onResize();
     .whatsapp-button {
       width: 56px;
       height: 56px;
+      min-width: 56px;
+      min-height: 56px;
+      max-width: 56px;
+      max-height: 56px;
     }
     .whatsapp-button svg {
       width: 28px;

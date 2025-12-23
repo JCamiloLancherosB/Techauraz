@@ -9,24 +9,21 @@
 
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc">
   <div class="cookie-banner__inner">
-    <span class="cookie-banner__icon" aria-hidden="true">🍪</span>
-    
     <div class="cookie-banner__content">
       <h2 id="cookie-banner-title" class="cookie-banner__title">
-        Usamos cookies
+        🍪 Usamos cookies
       </h2>
       <p id="cookie-banner-desc" class="cookie-banner__text">
-        Utilizamos cookies para mejorar tu experiencia de compra y mostrarte productos relevantes.
-        <a href="/policies/privacy-policy">Política de privacidad</a>
+        Mejoramos tu experiencia con cookies. <a href="/policies/privacy-policy">Política</a>
       </p>
     </div>
     
     <div class="cookie-banner__actions">
       <button type="button" class="cookie-banner__accept" id="cookie-accept">
-        Aceptar todo
+        Aceptar
       </button>
       <button type="button" class="cookie-banner__decline" id="cookie-decline">
-        Solo esenciales
+        Rechazar
       </button>
     </div>
   </div>
@@ -73,7 +70,7 @@
         if (banner.classList.contains('is-visible')) {
           // Move WhatsApp button up when banner is visible
           const isMobile = window.matchMedia('(max-width: 749px)').matches;
-          whatsappBtn.style.bottom = isMobile ? WHATSAPP_OFFSET_MOBILE : WHATSAPP_OFFSET_DESKTOP;
+          whatsappBtn.style.bottom = isMobile ? '10rem' : '8rem';
         } else {
           // Reset to original position
           whatsappBtn.style.bottom = '';
