@@ -430,5 +430,5 @@ select:focus {
 
 
 #shopify-pc__banner{
- display: none;
+ visibility: hidden;
 }
