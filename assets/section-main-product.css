@@ -6,12 +6,13 @@
 /* Note: Using specific selector to override Dawn's default grid gap */
 .product.grid {
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
 }
 
 .product__info-wrapper {
   width: 100% !important;
   max-width: 100% !important;
+  padding: 0 1rem; /* Reduced padding */
 }
 
 .product--no-media {
@@ -24,7 +25,7 @@
   .product {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem; /* Reduced from 1.5rem */
   }
   
   .product__media-wrapper {
@@ -35,7 +36,7 @@
   .product__info-wrapper {
     order: 2;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 0.5rem; /* Reduced padding */
   }
   
   /* Two-column grid for product thumbnails/cards on mobile */
@@ -51,14 +52,14 @@
   
   /* Ensure hero slider remains full width */
   .product-hero-slider {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem; /* Reduced from 1rem */
   }
 }
 
 /* Tablet breakpoint adjustments (750px - 989px) */
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .product__info-wrapper {
-    padding: 0 1.5rem 0 2rem;
+    padding: 0 1rem 0 1.5rem; /* Reduced padding */
   }
   
   .product__media-wrapper {
@@ -77,7 +78,7 @@
   .product__column-sticky {
     display: block;
     position: sticky;
-    top: calc(var(--header-height) + 2rem);
+    top: calc(var(--header-height) + 1.5rem); /* Reduced from 2rem */
     z-index: 2;
   }
 
@@ -92,23 +93,23 @@
   }
 
   .product__info-wrapper {
-    padding: 0 0 0 2rem;
+    padding: 0 0 0 1.5rem; /* Reduced from 2rem */
   }
 
   .product__info-wrapper--extra-padding {
-    padding: 0 0 0 3rem;
+    padding: 0 0 0 2rem; /* Reduced from 3rem */
   }
 
   .product--right .product__info-wrapper {
-    padding: 0 2rem 0 0;
+    padding: 0 1.5rem 0 0; /* Reduced from 2rem */
   }
 
   .product--right .product__info-wrapper--extra-padding {
-    padding: 0 3rem 0 0;
+    padding: 0 2rem 0 0; /* Reduced from 3rem */
   }
 
   .product--right .product__media-list {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced from 2rem */
   }
 
 }
