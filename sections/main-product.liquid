@@ -685,9 +685,10 @@
                                 {% endif %}
                               >
                                 <ul class="list-unstyled" role="list">
+                                  {%- assign products_offset = forloop.index0 | times: block.settings.products_per_page -%}
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
-                                    offset: continue
+                                    offset: products_offset
                                   -%}
                                     <li>
                                       {% render 'card-product',
