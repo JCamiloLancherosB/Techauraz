@@ -111,6 +111,7 @@ slideshow-component .slideshow.banner {
   justify-content: center;
   max-width: 65rem;
   padding: 3rem;
+  margin: 2rem; /* Add margin to prevent text from touching edges */
   background: rgba(15, 15, 26, 0.90);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -118,6 +119,9 @@ slideshow-component .slideshow.banner {
   gap: 1.5rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(148, 163, 184, 0.2);
+  /* Ensure text is above media but below controls */
+  position: relative;
+  z-index: 2;
 }
 
 .slideshow__text .banner__heading {
@@ -180,15 +184,18 @@ slideshow-component .slideshow.banner {
 @media screen and (max-width: 749px) {
   .slideshow__text.banner__box {
     max-width: 100%;
-    padding: 2.5rem 1.8rem;
+    padding: 2rem 1.5rem;
+    margin: 1.5rem 1rem; /* Reduced margin on mobile */
   }
   
   .slideshow__text .banner__heading {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
+    line-height: 1.2;
   }
   
   .slideshow__text .banner__text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
   }
   
   .slideshow__text .button {
@@ -269,13 +276,19 @@ slideshow-component .slideshow.banner {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  z-index: 2;
+  z-index: 3; /* Increased to be above banner content but not intrusive */
+  pointer-events: none; /* Allow clicks through container */
+}
+
+.slideshow__controls > * {
+  pointer-events: auto; /* Re-enable clicks on actual controls */
 }
 
 .slideshow__controls .slider-button {
-  background: rgba(15, 15, 26, 0.7);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 15, 26, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(148, 163, 184, 0.4);
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -284,6 +297,7 @@ slideshow-component .slideshow.banner {
   justify-content: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .slideshow__controls .slider-button:hover {
@@ -324,15 +338,19 @@ slideshow-component .slideshow.banner {
 @media screen and (max-width: 749px) {
   .slideshow__controls {
     padding: 0 1rem;
+    z-index: 3; /* Ensure controls are accessible on mobile */
   }
   
   .slideshow__controls .slider-button {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+    background: rgba(15, 15, 26, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
   
   .slideshow__controls .slider-counter {
     bottom: 1.5rem;
+    gap: 0.6rem;
   }
   
   .slideshow__controls--border-radius-mobile {

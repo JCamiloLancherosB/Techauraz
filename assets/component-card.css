@@ -896,3 +896,174 @@
 .card__details-link .link:hover {
   color: rgba(147, 197, 253, 1);
 }
+
+/* =============================================================================
+   MOBILE RESPONSIVE FIXES FOR PRODUCT CARDS (320px - 430px)
+   Ensures proper layout, no overflow, accessible buttons
+   ============================================================================= */
+
+@media screen and (max-width: 430px) {
+  /* Prevent horizontal overflow on small screens */
+  .card-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 100%;
+    min-height: 380px;
+    box-sizing: border-box;
+  }
+  
+  /* Ensure card media doesn't overflow */
+  .card__media,
+  .card .media {
+    max-width: 100%;
+    width: 100% !important;
+    height: auto;
+  }
+  
+  .card__media img,
+  .card .media img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Ensure information section fits properly */
+  .card__information {
+    padding: 0.9rem 1rem;
+    min-height: 120px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Make sure text doesn't overflow */
+  .card__heading {
+    font-size: 1.3rem !important;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .card__heading .full-unstyled-link {
+    font-size: 1.3rem !important;
+  }
+  
+  .card__description {
+    font-size: 1.1rem !important;
+    line-height: 1.4;
+  }
+  
+  /* Price responsive */
+  .price-item--regular {
+    font-size: 1.4rem !important;
+  }
+  
+  .price-item--sale {
+    font-size: 1.2rem !important;
+  }
+  
+  /* Make CTA buttons fully accessible and clickable */
+  .card__cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+    width: 100%;
+  }
+  
+  .card__cta .button,
+  .quick-add__submit {
+    width: 100% !important;
+    min-height: 44px !important;
+    padding: 0.9rem 1rem !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Ensure badges don't overflow */
+  .card__badge,
+  .card__badges {
+    max-width: calc(100% - 1rem);
+    font-size: 0.9rem !important;
+    padding: 0.3rem 0.7rem !important;
+  }
+  
+  /* Ensure no horizontal scroll */
+  .card__content,
+  .card__inner {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}
+
+/* Extra small devices (320px) */
+@media screen and (max-width: 320px) {
+  .card {
+    min-height: 360px;
+  }
+  
+  .card__information {
+    padding: 0.8rem;
+    min-height: 110px;
+  }
+  
+  .card__heading .full-unstyled-link {
+    font-size: 1.2rem !important;
+  }
+  
+  .card__description {
+    font-size: 1rem !important;
+  }
+  
+  .price-item--regular {
+    font-size: 1.3rem !important;
+  }
+  
+  .quick-add__submit {
+    font-size: 1.1rem !important;
+    padding: 0.8rem !important;
+  }
+}
+
+/* Prevent grid overflow on mobile */
+@media screen and (max-width: 749px) {
+  .grid {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .grid__item {
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+  
+  /* Ensure proper column layout for product grids */
+  .grid--2-col-mobile > .grid__item,
+  .product-grid .grid__item {
+    width: calc(50% - 1rem);
+    flex: 0 0 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+  
+  /* Single column on very small screens */
+  @media screen and (max-width: 375px) {
+    .grid--2-col-mobile > .grid__item,
+    .product-grid .grid__item {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}

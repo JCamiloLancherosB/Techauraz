@@ -9,24 +9,21 @@
 
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc">
   <div class="cookie-banner__inner">
-    <span class="cookie-banner__icon" aria-hidden="true">🍪</span>
-    
     <div class="cookie-banner__content">
       <h2 id="cookie-banner-title" class="cookie-banner__title">
-        Usamos cookies
+        🍪 Usamos cookies
       </h2>
       <p id="cookie-banner-desc" class="cookie-banner__text">
-        Utilizamos cookies para mejorar tu experiencia de compra y mostrarte productos relevantes.
-        <a href="/policies/privacy-policy">Política de privacidad</a>
+        Mejoramos tu experiencia con cookies. <a href="/policies/privacy-policy">Política</a>
       </p>
     </div>
     
     <div class="cookie-banner__actions">
       <button type="button" class="cookie-banner__accept" id="cookie-accept">
-        Aceptar todo
+        Aceptar
       </button>
       <button type="button" class="cookie-banner__decline" id="cookie-decline">
-        Solo esenciales
+        Rechazar
       </button>
     </div>
   </div>
@@ -37,8 +34,8 @@
     // Configuration constants
     const COOKIE_CONSENT_KEY = 'techauraz_cookie_consent';
     const BANNER_DELAY_MS = 1000;
-    const WHATSAPP_OFFSET_DESKTOP = '10rem';
-    const WHATSAPP_OFFSET_MOBILE = '12rem';
+    const WHATSAPP_OFFSET_MOBILE = '10rem';
+    const WHATSAPP_OFFSET_DESKTOP = '8rem';
     
     const banner = document.getElementById('cookie-banner');
     const acceptBtn = document.getElementById('cookie-accept');

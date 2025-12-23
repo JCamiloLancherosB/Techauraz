@@ -3,24 +3,15 @@
    - Centered and compact design
    - Fixed positioning at bottom
    - Responsive sizing
+   - HIDDEN BY DEFAULT to prevent content obstruction
    ============================================================================= */
 
 .cookie-notice {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 500px;
-  width: calc(100% - 3rem);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.98) 100%);
-  border: 1px solid rgba(251, 191, 36, 0.3);
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(251, 191, 36, 0.15);
-  z-index: 999;
-  opacity: 1;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: auto;
+  /* Hide cookie notice completely to prevent content obstruction */
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .cookie-notice[style*="display: none"] {
