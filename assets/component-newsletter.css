@@ -99,10 +99,19 @@
   color: #0f172a;
 }
 
-/* Ensure newsletter label is hidden (accessibility-friendly) */
+/* Ensure newsletter label is hidden visually but accessible to screen readers */
 .newsletter-form .field__label.visually-hidden,
 .newsletter-form__wrapper .field__label.visually-hidden,
 .newsletter-form__form .field__label.visually-hidden {
-  display: none !important;
-  visibility: hidden !important;
+  /* Enhanced visually-hidden technique - keeps it accessible to screen readers */
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
