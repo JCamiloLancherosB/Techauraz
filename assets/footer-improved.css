@@ -1,0 +1,495 @@
+/**
+ * =============================================================================
+ * FOOTER IMPROVEMENTS - Enhanced Contrast, Spacing, and Alignment
+ * =============================================================================
+ * Purpose: Fix footer readability and visual integration
+ * - Improved text contrast on dark backgrounds
+ * - Better spacing and alignment
+ * - Enhanced newsletter form visibility
+ * - Social icons with proper sizing
+ * - Legal links with sufficient contrast
+ * - Responsive layout for mobile/tablet/desktop
+ * =============================================================================
+ */
+
+/* =============================================================================
+   FOOTER CONTAINER - Enhanced Background & Spacing
+   ============================================================================= */
+
+.footer {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  margin-top: 4rem;
+  padding: 4rem 0 2rem;
+}
+
+.footer .page-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* =============================================================================
+   FOOTER CONTENT TOP - Grid Layout
+   ============================================================================= */
+
+.footer__content-top {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  margin-bottom: 2rem;
+}
+
+.footer__blocks-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+}
+
+@media screen and (max-width: 639px) {
+  .footer__blocks-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+  .footer__blocks-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* =============================================================================
+   FOOTER BLOCKS - Typography & Spacing
+   ============================================================================= */
+
+.footer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-block__heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fef3c7;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-block__details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-block__details-content a,
+.footer-block__details-content .list-menu__item {
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer-block__details-content a:hover,
+.footer-block__details-content .list-menu__item:hover {
+  color: #fbbf24;
+  padding-left: 0.5rem;
+}
+
+/* Links with sufficient contrast for WCAG AA */
+.footer-block__details-content a:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+  color: #fbbf24;
+}
+
+/* =============================================================================
+   NEWSLETTER FORM - Improved Visibility & Contrast
+   ============================================================================= */
+
+.footer-block--newsletter {
+  background: rgba(30, 41, 59, 0.5);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.footer-block--newsletter .footer-block__heading {
+  color: #fbbf24;
+  margin-bottom: 1rem;
+}
+
+.footer-block--newsletter .field__input,
+.footer-block--newsletter input[type="email"] {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #f1f5f9;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  min-height: 48px;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-block--newsletter .field__input:focus,
+.footer-block--newsletter input[type="email"]:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.footer-block--newsletter .field__input::placeholder,
+.footer-block--newsletter input[type="email"]::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.footer-block--newsletter .newsletter-form__button,
+.footer-block--newsletter button[type="submit"] {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  padding: 1.2rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-height: 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-block--newsletter .newsletter-form__button:hover,
+.footer-block--newsletter button[type="submit"]:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Newsletter form layout */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+  .newsletter-form {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  
+  .newsletter-form .field {
+    flex: 1;
+  }
+  
+  .newsletter-form button {
+    flex-shrink: 0;
+  }
+}
+
+/* =============================================================================
+   SOCIAL ICONS - Enhanced Visibility
+   ============================================================================= */
+
+.footer__list-social {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.footer__list-social .list-social__item {
+  display: inline-block;
+}
+
+.footer__list-social .list-social__link,
+.footer__list-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 50%;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.footer__list-social .list-social__link:hover,
+.footer__list-social a:hover {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: #fbbf24;
+  color: #fbbf24;
+  transform: translateY(-2px);
+}
+
+.footer__list-social svg,
+.footer__list-social .icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* =============================================================================
+   FOOTER BOTTOM - Copyright & Legal Links
+   ============================================================================= */
+
+.footer__content-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 640px) {
+  .footer__content-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footer__content-bottom-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) {
+  .footer__content-bottom-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+/* Copyright text */
+.footer__copyright {
+  color: #94a3b8;
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.footer__copyright a {
+  color: #e2e8f0;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  transition: color 0.2s ease;
+}
+
+.footer__copyright a:hover {
+  color: #fbbf24;
+}
+
+/* Legal links */
+.footer__policy-links,
+.policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) {
+  .footer__policy-links,
+  .policies {
+    justify-content: flex-start;
+  }
+}
+
+.footer__policy-links a,
+.policies a {
+  color: #94a3b8;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.footer__policy-links a:hover,
+.policies a:hover {
+  color: #fbbf24;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.footer__policy-links a:focus-visible,
+.policies a:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+  color: #fbbf24;
+}
+
+/* =============================================================================
+   PAYMENT ICONS
+   ============================================================================= */
+
+.footer__payment {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) {
+  .footer__payment {
+    justify-content: flex-start;
+  }
+}
+
+.footer__payment .icon,
+.footer__payment svg {
+  width: 40px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.footer__payment .icon:hover,
+.footer__payment svg:hover {
+  opacity: 1;
+}
+
+/* =============================================================================
+   LOCALIZATION (Country/Language Selector)
+   ============================================================================= */
+
+.footer__localization {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+@media screen and (min-width: 640px) {
+  .footer__localization {
+    justify-content: flex-start;
+  }
+}
+
+.footer__localization .localization-form {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+}
+
+.footer__localization select {
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+}
+
+.footer__localization select:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+/* Mobile (<640px) */
+@media screen and (max-width: 639px) {
+  .footer {
+    padding: 3rem 0 2rem;
+  }
+  
+  .footer .page-width {
+    padding: 0 1.5rem;
+  }
+  
+  .footer__content-top {
+    padding-bottom: 2.5rem;
+  }
+  
+  .footer-block {
+    text-align: center;
+  }
+  
+  .footer-block__details-content {
+    align-items: center;
+  }
+  
+  .footer__list-social {
+    justify-content: center;
+  }
+}
+
+/* Tablet (640-1024px) */
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+  .footer {
+    padding: 3.5rem 0 2rem;
+  }
+  
+  .footer__blocks-wrapper {
+    gap: 3rem;
+  }
+}
+
+/* Desktop (>1024px) */
+@media screen and (min-width: 1025px) {
+  .footer {
+    padding: 5rem 0 3rem;
+  }
+  
+  .footer__content-top {
+    padding-bottom: 4rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* =============================================================================
+   HIGH CONTRAST MODE SUPPORT
+   ============================================================================= */
+
+@media (prefers-contrast: high) {
+  .footer-block__details-content a,
+  .footer__copyright a,
+  .footer__policy-links a {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  
+  .footer__list-social .list-social__link,
+  .footer__list-social a {
+    border-width: 2px;
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION SUPPORT
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-block__details-content a:hover,
+  .footer__list-social a:hover,
+  .footer-block--newsletter button:hover {
+    transform: none;
+    transition: none;
+  }
+}

@@ -1369,46 +1369,13 @@ a.product__text {
   transform: scale(1.2);
 }
 
-/* 3D/GIF Wrapper */
-.product-visual-3d {
+/* 3D/GIF Wrapper - Repurposed for trust badges */
+.product-trust-section {
   margin-top: 20px;
+  padding: 1.5rem;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.product-visual-3d__viewer,
-.product-visual-3d__gif {
-  width: 100%;
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8fafc;
-}
-
-.product-visual-3d__poster {
-  position: relative;
-  width: 100%;
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.product-visual-3d__icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 16px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(30, 41, 59, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Price/Urgency Badges - Improved spacing, contrast, and text clamping */
