@@ -427,3 +427,8 @@ select:focus {
    - Products: section-main-product.css, product-conversion.css
    - Header/Footer: section-header.css, section-footer.css
    ============================================================================= */
+
+
+#shopify-pc__banner{
+ display: none;
+}
