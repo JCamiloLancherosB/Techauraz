@@ -7,6 +7,7 @@
   {% render 'schema-product', product: product %}
   
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'global-button-styles.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -46,24 +47,7 @@
     <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
-  {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
-  {%- if first_3d_model -%}
-    {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
-    <link
-      id="ModelViewerStyle"
-      rel="stylesheet"
-      href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
-      media="print"
-      onload="this.media='all'"
-    >
-    <link
-      id="ModelViewerOverride"
-      rel="stylesheet"
-      href="{{ 'component-model-viewer-ui.css' | asset_url }}"
-      media="print"
-      onload="this.media='all'"
-    >
-  {%- endif -%}
+  {%- comment -%}3D model support removed as per requirements{%- endcomment -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
 
@@ -99,63 +83,9 @@
   {%- endif -%}
 </product-hero-slider>
 
-        <!-- BLOQUE 3D / GIF: AQUÍ AGREGAS TU MODELO O VIDEO -->
-        <div class="product-visual-3d">
-          {%- if first_3d_model -%}
-            {%- comment -%}
-              MODELO 3D: Shopify model_viewer_tag
-              Solo necesitas subir el modelo 3D al producto en Shopify;
-              este bloque lo mostrará automáticamente.
-            {%- endcomment -%}
-
-            <deferred-media
-              class="product-visual-3d__viewer"
-              data-media-id="{{ first_3d_model.id }}"
-            >
-              <button
-                class="product-visual-3d__poster"
-                type="button"
-                aria-label="{{ 'products.product.xr_button_label' | t }}"
-              >
-                {{ first_3d_model | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-                <span class="product-visual-3d__icon">
-                  {% render 'icon-3d-model' %}
-                  <span>Ver en 3D</span>
-                </span>
-              </button>
-
-              <template>
-                {{ first_3d_model | model_viewer_tag:
-                  image_size: '800x800',
-                  reveal: 'interaction',
-                  loading: 'eager',
-                  camera_controls: true,
-                  auto_rotate: true,
-                  disable_zoom: false
-                }}
-              </template>
-            </deferred-media>
-
-          {%- else -%}
-            {%- comment -%}
-              FALLBACK: GIF / VIDEO
-              - Sube un video del producto (MP4) a los medios del producto.
-              - Shopify lo detectará como media_type 'video'.
-              - El primer video se usará aquí como animación.
-            {%- endcomment -%}
-
-            {% assign gif_media = product.media | where: 'media_type', 'video' | first %}
-            {% if gif_media %}
-              <div class="product-visual-3d__gif">
-                {{ gif_media | video_tag:
-                   controls: false,
-                   loop: true,
-                   autoplay: true,
-                   muted: true,
-                   playsinline: true }}
-              </div>
-            {% endif %}
-          {%- endif -%}
+        {%- comment -%}3D model block removed per requirements - space repurposed for trust badges{%- endcomment -%}
+        <div class="product-trust-section">
+          {% render 'trust-badges' %}
         </div>
 
       <!-- COLUMNA DERECHA: INFO -->
@@ -900,12 +830,7 @@
       <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if first_3d_model -%}
-      <script type="application/json" id="ProductJSON-{{ product.id }}">
-        {{ product.media | where: 'media_type', 'model' | json }}
-      </script>
-      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
-    {%- endif -%}
+    {%- comment -%}3D model scripts removed per requirements{%- endcomment -%}
   </div>
 </section>
 
