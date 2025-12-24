@@ -194,6 +194,18 @@
       assign has_app_block = true
     endif
   endfor
+  
+  assign social_links = false
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_twitter_link != blank or settings.social_pinterest_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank or settings.social_vimeo_link != blank
+    assign social_links = true
+  endif
+  
+  assign localization_forms = false
+  if section.settings.enable_country_selector and localization.available_countries.size > 1
+    assign localization_forms = true
+  elsif section.settings.enable_language_selector and localization.available_languages.size > 1
+    assign localization_forms = true
+  endif
 -%}
 {%- comment -%}
   Tracking scripts (GTM/Facebook Pixel) removed from here.

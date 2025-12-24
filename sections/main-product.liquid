@@ -6,8 +6,8 @@
 >
   {% render 'schema-product', product: product %}
   
-  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-  {{ 'global-button-styles.css' | asset_url | stylesheet_tag }}
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'global-button-styles.css' | asset_url | stylesheet_tag: preload: true }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -685,9 +685,10 @@
                                 {% endif %}
                               >
                                 <ul class="list-unstyled" role="list">
+                                  {%- assign products_offset = forloop.index0 | times: block.settings.products_per_page -%}
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
-                                    offset: continue
+                                    offset: products_offset
                                   -%}
                                     <li>
                                       {% render 'card-product',
