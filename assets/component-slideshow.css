@@ -265,71 +265,6 @@ slideshow-component .slideshow.banner {
   }
 }
 
-.slideshow__controls {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  border: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  z-index: 3; /* Increased to be above banner content but not intrusive */
-  pointer-events: none; /* Allow clicks through container */
-}
-
-.slideshow__controls > * {
-  pointer-events: auto; /* Re-enable clicks on actual controls */
-}
-
-.slideshow__controls .slider-button {
-  background: rgba(15, 15, 26, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.slideshow__controls .slider-button:hover {
-  background: rgba(15, 15, 26, 0.9);
-  border-color: rgba(34, 211, 238, 0.6);
-  transform: scale(1.1);
-}
-
-.slideshow__controls .slider-counter {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.8rem;
-}
-
-.slideshow__controls .slider-counter__link .dot {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(226, 232, 240, 0.4);
-  transition: all 0.3s ease;
-}
-
-.slideshow__controls .slider-counter__link.is-selected .dot,
-.slideshow__controls .slider-counter__link:hover .dot {
-  background: rgba(34, 211, 238, 0.9);
-  transform: scale(1.2);
-}
-
 .spaced-section--full-width:last-child slideshow-component:not(.page-width) .slideshow__controls {
   border-bottom: none;
 }
@@ -435,27 +370,4 @@ slideshow-component {
 .slideshow.grid {
   overflow: hidden;
   max-width: 100%;
-}
-
-/* Enhanced dot visibility and styling for slideshow pagination */
-.slideshow__controls .slider-counter__link--dots .dot {
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  border: 0.2rem solid rgba(255, 255, 255, 0.6);
-  background-color: transparent;
-  padding: 0;
-  display: block;
-  transition: all 0.3s ease;
-}
-
-.slideshow__controls .slider-counter__link--active.slider-counter__link--dots .dot {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 255, 255, 0.95);
-  transform: scale(1.15);
-}
-
-.slideshow__controls .slider-counter__link--dots:hover .dot {
-  border-color: rgba(255, 255, 255, 0.9);
-  background-color: rgba(255, 255, 255, 0.4);
 }
