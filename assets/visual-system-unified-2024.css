@@ -1,0 +1,744 @@
+/* =============================================================================
+   VISUAL SYSTEM UNIFICATION - December 2024
+   Comprehensive dark theme palette, rating visibility, and UI polish
+   ============================================================================= */
+
+/* =============================================================================
+   1. RATING STARS VISIBILITY FIX (Priority)
+   Ensures stars are visible on dark backgrounds
+   ============================================================================= */
+
+/* Override rating star colors for dark backgrounds */
+.rating-star {
+  --color-rating-star: #fbbf24; /* Bright amber for visibility */
+  --color-rating-star-empty: rgba(148, 163, 184, 0.3); /* Subtle gray for empty stars */
+  letter-spacing: calc(var(--letter-spacing) * 1rem);
+  font-size: calc(var(--font-size) * 1rem);
+  line-height: 1;
+  display: inline-block;
+  font-family: Times, 'Times New Roman', serif;
+  margin: 0;
+}
+
+/* Enhanced gradient approach for better visibility */
+.rating-star::before {
+  content: '★★★★★';
+  background: linear-gradient(
+    90deg,
+    #fbbf24 var(--percent),
+    rgba(148, 163, 184, 0.3) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+/* Ensure rating text has sufficient contrast on dark backgrounds
+   NOTE: !important needed to override component-rating.css defaults */
+.rating-text {
+  color: #cbd5e1 !important;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.rating-count {
+  color: #94a3b8 !important;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+/* Product card rating visibility */
+.card-wrapper .rating-star {
+  --letter-spacing: 0.7;
+  --font-size: 1.5; /* Slightly larger for better visibility */
+}
+
+/* Product page rating visibility */
+.product .rating-star {
+  --letter-spacing: 0.8;
+  --font-size: 1.8; /* Larger on product pages */
+}
+
+/* Rating wrapper improvements */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+/* Ensure rating is visible in all contexts */
+.card__information .rating,
+.product__info-container .rating {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* =============================================================================
+   2. DARK THEME PALETTE - CARDS
+   Consistent backgrounds, borders, and hierarchy
+   ============================================================================= */
+
+/* Card base styling with improved dark theme */
+.card {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.95) 0%,
+    rgba(15, 23, 42, 0.98) 100%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-wrapper:hover .card {
+  border-color: rgba(251, 191, 36, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.2);
+}
+
+/* Card content area */
+.card__content {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.92) 0%,
+    rgba(15, 23, 42, 0.95) 100%
+  );
+  padding: 1.2rem;
+}
+
+/* Card information section */
+.card__information {
+  background: transparent;
+}
+
+/* Card heading with better contrast */
+.card__heading .full-unstyled-link {
+  color: #fef3c7;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.card__heading .full-unstyled-link:hover {
+  color: #fbbf24;
+}
+
+/* Card description with improved readability */
+.card__description {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+}
+
+/* =============================================================================
+   3. BADGE SYSTEM STANDARDIZATION
+   Unified accent system for badges and status chips
+   ============================================================================= */
+
+/* Base badge styling */
+.card__badge {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+/* "Nuevo" badge - Emerald accent */
+.card__badge--new {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Bestseller badge - Purple accent */
+.card__badge--bestseller {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Discount percentage badge - Red accent */
+.card__badge--discount {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* "En Oferta" badge - Amber accent (primary) */
+.card__badge--sale {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #0f172a;
+  text-shadow: none;
+  font-weight: 800;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* Stock warning badge - Orange accent */
+.card__badge--stock {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-color: rgba(245, 158, 11, 0.3);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+/* Sold out badge - Gray */
+.card__badge--sold-out {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-color: rgba(107, 114, 128, 0.3);
+}
+
+/* Badge animation for stock warnings */
+@keyframes pulse-badge {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card__badge--stock {
+    animation: none;
+  }
+}
+
+/* Badge container positioning */
+.card__badges {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  max-width: calc(100% - 1.6rem);
+}
+
+/* =============================================================================
+   4. TRUST INDICATORS AND STATUS CHIPS
+   Standardized "envío rápido", "en stock" chips
+   ============================================================================= */
+
+.card__trust-indicators {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.card__trust-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 4px;
+  color: #6ee7b7;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+.card__trust-indicator::before {
+  content: "✓";
+  margin-right: 0.3rem;
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* Mobile adjustments for trust indicators */
+@media screen and (max-width: 749px) {
+  .card__trust-indicators {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .card__trust-indicator {
+    font-size: 1rem;
+    padding: 0.25rem 0.6rem;
+  }
+}
+
+/* =============================================================================
+   5. PRICE IMPROVEMENTS
+   Enhanced contrast, weight, and readability
+   NOTE: !important flags required to override Shopify's component-price.css
+   default styles which also use high specificity.
+   ============================================================================= */
+
+/* Regular price - Green accent with better visibility */
+.price,
+.price__container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.6rem 0;
+}
+
+.price-item--regular {
+  color: #10b981 !important;
+  font-weight: 800 !important;
+  font-size: 1.8rem !important;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Sale price styling */
+.price-item--sale {
+  color: rgba(148, 163, 184, 0.6) !important;
+  text-decoration: line-through;
+  font-size: 1.4rem !important;
+  font-weight: 500;
+}
+
+/* Price on sale - ensure regular is bright */
+.price--on-sale .price-item--regular {
+  color: #10b981 !important;
+  font-weight: 800 !important;
+}
+
+/* Mobile price adjustments */
+@media screen and (max-width: 749px) {
+  .price-item--regular {
+    font-size: 1.6rem !important;
+  }
+
+  .price-item--sale {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Product page price improvements */
+.product__price .price-item--regular {
+  font-size: 2.4rem !important;
+  color: #10b981 !important;
+  font-weight: 800 !important;
+}
+
+.product__price .price-item--sale {
+  font-size: 1.8rem !important;
+}
+
+/* =============================================================================
+   6. LINK CONTRAST AND INTERACTIONS
+   Improved "Ver todos los detalles" and other links
+   ============================================================================= */
+
+/* Details link styling */
+.card__details-link {
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+.card__details-link .link {
+  font-size: 1.3rem;
+  color: #60a5fa;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.card__details-link .link:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.card__details-link .link:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+  background: rgba(96, 165, 250, 0.15);
+}
+
+/* General link improvements on cards */
+.card a:not(.button):not(.full-unstyled-link) {
+  color: #93c5fd;
+  transition: color 0.2s ease;
+}
+
+.card a:not(.button):not(.full-unstyled-link):hover {
+  color: #bfdbfe;
+}
+
+/* =============================================================================
+   7. PRODUCT PAGE DARK THEME ENHANCEMENTS
+   Consistent palette for product detail pages
+   ============================================================================= */
+
+/* Product info container */
+.product__info-container {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.8) 0%,
+    rgba(15, 23, 42, 0.9) 100%
+  );
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Product title */
+.product__title {
+  color: #fef3c7;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+/* Product description improvements */
+.product__description {
+  color: #e2e8f0;
+  line-height: 1.7;
+  font-size: 1.5rem;
+}
+
+.product__description p {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+/* Product media enhancements */
+.product__media-wrapper {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.5) 0%,
+    rgba(15, 23, 42, 0.6) 100%
+  );
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  overflow: hidden;
+}
+
+/* =============================================================================
+   8. BUTTON AND CTA CONSISTENCY
+   Aligned with dark theme palette
+   NOTE: !important flags required to override Shopify's default theme styles
+   which have high specificity. This ensures visual consistency across all pages.
+   ============================================================================= */
+
+/* Primary CTA button */
+.button--primary,
+.product-form__submit,
+.quick-add__submit {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 1.2rem 2rem !important;
+  min-height: 48px !important;
+  font-size: 1.4rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.button--primary:hover,
+.product-form__submit:hover,
+.quick-add__submit:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5) !important;
+  color: #0f172a !important;
+}
+
+.button--primary:focus-visible,
+.product-form__submit:focus-visible,
+.quick-add__submit:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+/* Secondary button */
+.button--secondary {
+  background: rgba(30, 41, 59, 0.6) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(148, 163, 184, 0.4) !important;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.button--secondary:hover {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  color: #fbbf24 !important;
+  transform: translateY(-2px);
+}
+
+/* =============================================================================
+   9. LAYOUT POLISH - SHADOWS, SEPARATORS, HOVER ELEVATIONS
+   ============================================================================= */
+
+/* Card media overlay for better hierarchy */
+.card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.06),
+    rgba(245, 158, 11, 0.06)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-wrapper:hover .card__media::after {
+  opacity: 1;
+}
+
+/* Separator lines */
+.card__separator,
+.product__separator {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(148, 163, 184, 0.3) 50%,
+    transparent
+  );
+  margin: 1rem 0;
+}
+
+/* Enhanced shadows for depth */
+.card,
+.product__info-container,
+.product__media-wrapper {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+              0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper:hover .card {
+  box-shadow: 0 12px 32px rgba(251, 191, 36, 0.25),
+              0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================================================================
+   10. LINE CLAMPING AND TEXT OVERFLOW
+   Prevent awkward truncation
+   ============================================================================= */
+
+/* Card heading line clamp */
+.card__heading {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.6em;
+  line-height: 1.3;
+}
+
+/* Card description line clamp */
+.card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3.2em;
+  line-height: 1.6;
+}
+
+/* Consistent spacing to prevent awkward gaps */
+.card__information > * + * {
+  margin-top: 0.6rem;
+}
+
+.card__information {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* =============================================================================
+   11. TRUST BADGES AND COUNTDOWN ALIGNMENT
+   Ensure consistent styling with updated palette
+   ============================================================================= */
+
+/* Trust badges */
+.product-trust-section,
+.trust-badges {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(8px);
+}
+
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 6px;
+  color: #6ee7b7;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Countdown timer */
+.product-countdown,
+.countdown-timer {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  color: #fca5a5;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.countdown-timer__value {
+  color: #fef3c7;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+/* =============================================================================
+   12. MOBILE RESPONSIVE REFINEMENTS
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Card adjustments */
+  .card {
+    min-height: 400px;
+  }
+
+  .card__information {
+    padding: 1rem 1.2rem;
+    min-height: 130px;
+  }
+
+  /* Badge sizing */
+  .card__badge {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  /* Product info */
+  .product__info-container {
+    padding: 1.5rem;
+  }
+
+  /* Button sizing */
+  .button--primary,
+  .product-form__submit,
+  .quick-add__submit {
+    font-size: 1.3rem !important;
+    padding: 1rem 1.5rem !important;
+  }
+
+  /* Trust badges */
+  .trust-badge {
+    font-size: 1.1rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+/* =============================================================================
+   13. ACCESSIBILITY ENHANCEMENTS
+   ============================================================================= */
+
+/* Focus visible states for interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+    border-color: rgba(251, 191, 36, 0.8);
+  }
+
+  .card__badge {
+    border-width: 2px;
+    font-weight: 800;
+  }
+
+  .rating-star::before {
+    font-weight: 900;
+  }
+}
+
+/* Ensure sufficient color contrast */
+.card,
+.product__info-container {
+  color: #e2e8f0;
+}
+
+/* =============================================================================
+   14. PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/* GPU acceleration for transforms - apply during interaction only */
+.card:hover,
+.card__media:hover,
+.button:hover,
+.button:active {
+  will-change: transform;
+}
+
+/* Remove will-change after transition completes */
+.card,
+.card__media,
+.button {
+  transform: translateZ(0);
+}
+
+/* Reduce motion for users with vestibular disorders
+   NOTE: !important needed to ensure user preferences override all animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
