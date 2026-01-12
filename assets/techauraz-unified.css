@@ -160,8 +160,8 @@
 /* Header grid - proper alignment */
 .header {
   display: grid;
-  grid-template-areas: 'logo drawer heading icons';
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-areas: 'drawer heading icons';
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.5rem;
