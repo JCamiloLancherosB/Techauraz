@@ -18,30 +18,6 @@ slideshow-component {
   }
 }
 
-slideshow-component .slideshow.banner {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  margin: 0;
-  gap: 0;
-  overflow: hidden; /* Hide all overflow to prevent side-by-side images and scrollbars */
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  width: 100%;
-  max-width: 100vw;
-}
-
-.slideshow__slide {
-  padding: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  visibility: visible;
-  min-width: 100%; /* Ensure slide takes full width */
-  width: 100%;
-  max-width: 100vw; /* Prevent slide from exceeding viewport */
-  flex-shrink: 0; /* Prevent slides from shrinking */
-  scroll-snap-align: start; /* Snap to slide start */
-}
 
 /* Prevent CLS with aspect-ratio on slideshow media */
 /* Note: aspect-ratio removed here because Liquid dynamic styles in slideshow.liquid
