@@ -574,7 +574,7 @@ slideshow-component {
   z-index: 3;
   pointer-events: none;
 }
-/* 
+
 .slider-button {
   pointer-events: auto;
   display: flex;
@@ -589,7 +589,7 @@ slideshow-component {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
-} */
+}
 
 .slider-button:hover {
   background: white;
