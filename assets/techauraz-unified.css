@@ -82,9 +82,9 @@
   --ta-font-xl: 1.25rem;       /* 20px - extra large */
   
   /* Header Dimensions */
-  /* --ta-header-height: 70px;
+  --ta-header-height: 80px;
   --ta-header-mobile: 60px;
-  --ta-logo-max-height: 40px; */
+  --ta-logo-max-height: 40px;
 }
 
 /* =============================================================================
