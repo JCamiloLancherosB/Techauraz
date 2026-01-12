@@ -65,9 +65,10 @@ body.template-product {
    LOGO - Ensure proper visibility and sizing
    ============================================================================= */
 
-/* On homepage: align logo to the left instead of center */
+/* On homepage: align logo to the left instead of center 
+   Note: Header uses CSS Grid, so justify-self is appropriate */
 .template-index .header__heading {
-  justify-self: flex-start;
+  justify-self: start;
   text-align: left;
 }
 
