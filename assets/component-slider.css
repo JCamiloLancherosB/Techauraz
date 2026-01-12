@@ -326,12 +326,6 @@ slider-component.slider-component-full-width {
   color: rgb(var(--color-foreground));
 }
 
-.slider-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @media screen and (min-width: 990px) {
   .slider:not(.slider--everywhere):not(.slider--desktop) + .slider-buttons {
     display: none;
@@ -360,7 +354,7 @@ slider-component.slider-component-full-width {
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  /* display: flex; */
+  display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
