@@ -65,7 +65,7 @@ body.template-product {
    LOGO - Ensure proper visibility and sizing
    ============================================================================= */
 
-.header__heading-logo-wrapper {
+/* .header__heading-logo-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@ body.template-product {
   width: auto;
   height: auto;
   object-fit: contain;
-}
+} */
 
 @media screen and (min-width: 990px) {
   .header__heading-logo {
