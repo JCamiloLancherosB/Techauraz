@@ -26,6 +26,12 @@ if (!customElements.get('quick-add-modal')) {
           .then((responseText) => {
             const responseHTML = new DOMParser().parseFromString(responseText, 'text/html');
             this.productElement = responseHTML.querySelector('section[id^="MainProduct-"]');
+            
+            if (!this.productElement) {
+              console.error('Product section not found in response');
+              return;
+            }
+            
             this.productElement.classList.forEach((classApplied) => {
               if (classApplied.startsWith('color-') || classApplied === 'gradient')
                 this.modalContent.classList.add(classApplied);
@@ -44,6 +50,9 @@ if (!customElements.get('quick-add-modal')) {
             this.updateImageSizes();
             this.preventVariantURLSwitching();
             super.show(opener);
+          })
+          .catch((error) => {
+            console.error('Failed to load product:', error);
           })
           .finally(() => {
             opener.removeAttribute('aria-disabled');
