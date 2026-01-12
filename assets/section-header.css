@@ -78,7 +78,6 @@ body.template-product {
   width: auto;
   height: auto;
   object-fit: contain;
-  left: 10px;
 } 
 
 @media screen and (min-width: 990px) {
