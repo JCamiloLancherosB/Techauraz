@@ -265,10 +265,6 @@ slideshow-component .slideshow.banner {
   }
 }
 
-.spaced-section--full-width:last-child slideshow-component:not(.page-width) .slideshow__controls {
-  border-bottom: none;
-}
-
 slideshow-component:not(.page-width) .slider-buttons {
   border-right: 0;
   border-left: 0;
