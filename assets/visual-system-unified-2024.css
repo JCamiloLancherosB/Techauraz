@@ -68,6 +68,22 @@
   margin: 0.5rem 0;
 }
 
+/* Rating container alignment in card */
+.card__information .rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+}
+
+/* Rating text alignment */
+.card__information .rating-text,
+.card__information .rating-count {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
 /* Ensure rating is visible in all contexts */
 .card__information .rating,
 .product__info-container .rating {
@@ -740,5 +756,70 @@ textarea:focus-visible,
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================================================
+   CARD CONTENT ALIGNMENT - Consistent spacing and positioning
+   ============================================================================= */
+
+/* Ensure card information section has consistent spacing */
+.card__information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.2rem 1.4rem;
+}
+
+/* Align all card elements consistently */
+.card__information > * {
+  margin: 0;
+}
+
+/* Card heading alignment */
+.card__heading {
+  margin-bottom: 0.4rem;
+}
+
+/* Rating alignment - ensure it's positioned consistently */
+.card-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Price alignment */
+.card-information .price {
+  margin: 0.6rem 0;
+}
+
+/* Trust indicators alignment */
+.card__trust-indicators {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Details link alignment */
+.card__details-link {
+  margin-top: auto;
+  padding-top: 0.8rem;
+}
+
+/* Ensure consistent card height and content distribution */
+.card__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+/* Responsive adjustments for card alignment */
+@media screen and (max-width: 749px) {
+  .card__information {
+    padding: 1rem 1.2rem;
+    gap: 0.5rem;
   }
 }
