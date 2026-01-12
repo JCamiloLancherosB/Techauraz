@@ -551,8 +551,9 @@ body.menu-drawer-open {
 
 /* Slideshow arrows - properly positioned INSIDE the frame */
 .slider-buttons {
-  position: absolute;
-  top: 90%;
+  /* position: absolute;
+  top: 90%; */
+  display: none;
   left: 0;
   right: 0;
   transform: translateY(-50%);
