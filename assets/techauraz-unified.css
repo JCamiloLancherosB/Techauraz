@@ -351,7 +351,7 @@ header-drawer {
   top: 0;
   z-index: 100;
 }
-
+/* 
 .scrolled-past-header .header {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -360,7 +360,7 @@ header-drawer {
 .scrolled-past-header .header__heading-logo {
   max-height: 36px;
   transition: max-height var(--ta-transition);
-}
+} */
 
 /* =============================================================================
    MOBILE DRAWER - Proper Functionality
