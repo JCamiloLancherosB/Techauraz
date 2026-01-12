@@ -332,25 +332,6 @@ slideshow-component:not(.page-width) .slider-buttons {
   transform: scale(1.1);
 }
 
-.slideshow__autoplay--paused .icon-pause,
-.slideshow__autoplay:not(.slideshow__autoplay--paused) .icon-play {
-  visibility: hidden;
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-/* Additional fixes to prevent scrollbars and ensure single-slide view */
-slideshow-component {
-  overflow: hidden; /* Prevent component overflow */
-  max-width: 100vw; /* Constrain to viewport */
-}
-
-/* Hide scrollbars on slideshow slider */
-.slideshow.slider {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-
 .slideshow.slider::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
