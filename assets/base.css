@@ -398,10 +398,6 @@ select:focus {
   z-index: 1001 !important; /* Override framework modals */
 }
 
-.slider-button {
-  display: none;
-}
-
 /* Cart drawer */
 .cart-drawer,
 .drawer {
