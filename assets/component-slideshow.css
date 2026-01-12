@@ -18,7 +18,6 @@ slideshow-component {
   }
 }
 
-
 /* Prevent CLS with aspect-ratio on slideshow media */
 /* Note: aspect-ratio removed here because Liquid dynamic styles in slideshow.liquid
    handle this via ::before pseudo-elements that create proper spacing based on actual 
