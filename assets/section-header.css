@@ -70,7 +70,7 @@ body.template-product {
   align-items: center;
   justify-content: center;
   min-height: 40px;
-}
+} */
 
 .header__heading-logo {
   display: block;
@@ -78,7 +78,8 @@ body.template-product {
   width: auto;
   height: auto;
   object-fit: contain;
-} */
+  left: 10px;
+} 
 
 @media screen and (min-width: 990px) {
   .header__heading-logo {
