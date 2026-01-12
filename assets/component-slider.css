@@ -350,6 +350,23 @@ slider-component.slider-component-full-width {
   }
 }
 
+.slider-button {
+  color: rgba(var(--color-foreground), 0.75);
+  background: rgba(var(--color-background), 0.8);
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
 .slider-button:focus-visible {
   outline: 2px solid rgba(var(--color-foreground), 0.8);
   outline-offset: 2px;
