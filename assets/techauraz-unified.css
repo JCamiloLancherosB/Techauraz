@@ -551,6 +551,8 @@ body.menu-drawer-open {
 
 /* Slideshow arrows - properly positioned INSIDE the frame */
 .slider-buttons {
+  position: absolute;
+  top: 90%;
   left: 0;
   right: 0;
   transform: translateY(-50%);
@@ -562,7 +564,7 @@ body.menu-drawer-open {
   pointer-events: none;
 }
 
-.slider-button {
+/* .slider-button {
   pointer-events: auto;
   display: flex;
   align-items: center;
@@ -576,7 +578,7 @@ body.menu-drawer-open {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
-}
+}A */
 
 .slider-button:hover {
   background: white;
