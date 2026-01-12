@@ -330,54 +330,8 @@ slideshow-component .slideshow.banner {
   transform: scale(1.2);
 }
 
-.slideshow__controls--top {
-  order: 2;
-  z-index: 2;
-  display: hidden;
-}
-
-@media screen and (max-width: 749px) {
-  .slideshow__controls {
-    padding: 0 1rem;
-    z-index: 3; /* Ensure controls are accessible on mobile */
-  }
-  
-  .slideshow__controls .slider-button {
-    width: 42px;
-    height: 42px;
-    background: rgba(15, 15, 26, 0.9);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  }
-  
-  .slideshow__controls .slider-counter {
-    bottom: 1.5rem;
-    gap: 0.6rem;
-  }
-  
-  .slideshow__controls--border-radius-mobile {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
-
 .spaced-section--full-width:last-child slideshow-component:not(.page-width) .slideshow__controls {
   border-bottom: none;
-}
-
-@media screen and (min-width: 750px) {
-  .slideshow__controls {
-    padding: 0 2rem;
-  }
-
-  /* Remove absolute positioning from individual buttons - they're already in the container */
-  .slideshow__controls--top .slider-button--prev,
-  .slideshow__controls--top .slider-button--next {
-    position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
-    transform: none;
-  }
 }
 
 slideshow-component:not(.page-width) .slider-buttons {
