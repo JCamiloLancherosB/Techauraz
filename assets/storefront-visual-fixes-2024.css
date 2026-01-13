@@ -2,7 +2,7 @@
    TECHAURAZ STOREFRONT VISUAL & FUNCTIONAL FIXES
    =============================================================================
    Version: 1.0.0
-   Date: 2025-01-13
+   Date: 2024-01-13
    
    Comprehensive fixes for:
    1. Mobile hero carousel - single slide at a time with full text visibility
@@ -19,9 +19,9 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Force single slide display on mobile */
-  .slideshow.slider,
-  .slideshow.slider--everywhere {
+  /* Force single slide display on mobile - high specificity to override existing slider styles */
+  slideshow-component .slideshow.slider,
+  slideshow-component .slideshow.slider--everywhere {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
@@ -31,8 +31,8 @@
     scroll-padding-left: 0 !important;
   }
   
-  .slideshow__slide,
-  .slideshow.slider .slider__slide {
+  slideshow-component .slideshow__slide,
+  slideshow-component .slideshow.slider .slider__slide {
     min-width: 100% !important;
     width: 100% !important;
     max-width: 100vw !important;
@@ -41,8 +41,8 @@
   }
   
   /* Ensure grid doesn't interfere with single-slide display */
-  .slideshow.grid--1-col,
-  .slideshow.grid {
+  slideshow-component .slideshow.grid--1-col,
+  slideshow-component .slideshow.grid {
     display: flex !important;
     grid-template-columns: none !important;
   }
@@ -438,9 +438,18 @@
 }
 
 /* Adjust WhatsApp position when cookie banner is visible */
-body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float,
-body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
+/* Note: Uses .cookie-visible class that should be added via JavaScript */
+body.cookie-visible .whatsapp-float,
+body.cookie-notice-visible .whatsapp-float {
   bottom: 6rem !important;
+}
+
+/* Fallback for browsers with :has() support (Chrome 105+, Safari 15.4+) */
+@supports selector(:has(*)) {
+  body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float,
+  body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
+    bottom: 6rem !important;
+  }
 }
 
 @media screen and (max-width: 749px) {
@@ -452,9 +461,17 @@ body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
     height: 52px !important;
   }
   
-  body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float,
-  body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
+  body.cookie-visible .whatsapp-float,
+  body.cookie-notice-visible .whatsapp-float {
     bottom: 5rem !important;
+  }
+  
+  /* Fallback for browsers with :has() support */
+  @supports selector(:has(*)) {
+    body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float,
+    body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
+      bottom: 5rem !important;
+    }
   }
 }
 
@@ -504,6 +521,12 @@ h2.title {
 .card__media img,
 .badge {
   transition: all 0.3s ease !important;
+}
+
+/* Apply will-change only on hover for better performance */
+.card-wrapper:hover .card,
+.button:hover,
+.card__media:hover img {
   will-change: transform !important;
 }
 
