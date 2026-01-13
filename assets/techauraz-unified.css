@@ -196,23 +196,6 @@ header-drawer {
   justify-self: start;
 }
 
-.header__icon--menu {
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-/* Logo - consistent sizing */
-.header__heading {
-  grid-area: heading;
-  margin: 0;
-  line-height: 0;
-  text-align: center;
-}
-
 .header__heading-link {
   display: inline-flex;
   align-items: center;
@@ -222,13 +205,6 @@ header-drawer {
 .header__heading-link:hover {
   transform: scale(1.03);
   opacity: 0.9;
-}
-
-.header__heading-logo {
-  display: block;
-  max-height: var(--ta-logo-max-height);
-  width: auto;
-  height: auto;
 }
 
 /* Navigation - desktop only */
