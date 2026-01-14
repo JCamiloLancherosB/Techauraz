@@ -385,16 +385,16 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Contenedor principal de testimonios */
+  /* Main testimonials container */
   .testimonials-section,
   .testimonials,
   .product-testimonials,
   [class*="testimonial"].section {
     padding: 2rem 1rem !important;
-    overflow: hidden !important;
+    overflow-x: hidden !important;
   }
 
-  /* Título de la sección */
+  /* Section title */
   .testimonials__title,
   .testimonials-section__title,
   .testimonials-section .title,
@@ -406,36 +406,36 @@
     margin-bottom: 1.5rem !important;
   }
 
-  /* Slider de testimonios - ocultar si está vacío o mostrar correctamente */
+  /* Testimonials slider - show content properly, prevent empty gray area */
   .testimonials__slider,
   .testimonials-slider,
   .testimonials-slider-wrapper,
   .product-testimonials__carousel {
-    min-height: 200px !important;
+    min-height: auto !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
   }
 
-  /* Asegurar que el slider desktop sea visible en mobile */
+  /* Ensure slider displays in mobile (theme uses slider--desktop class) */
   .testimonials-slider.slider--desktop {
     display: flex !important;
     flex-wrap: nowrap !important;
   }
 
-  /* Si el slider tiene imágenes, mostrarlas */
+  /* Slider images - show properly if present */
   .testimonials__slider img,
   .testimonials-slider img,
   .testimonial__image,
   .testimonials-slider__image {
     width: 100% !important;
     height: auto !important;
-    min-height: 150px !important;
     object-fit: cover !important;
     border-radius: 12px !important;
     display: block !important;
   }
 
-  /* Cards de testimonios - mejorar visibilidad */
+  /* Testimonial cards - dark theme with brand colors */
   .testimonial-card,
   .testimonial-card__content,
   .testimonial__item,
@@ -450,7 +450,7 @@
     width: 100% !important;
   }
 
-  /* Estrellas de rating */
+  /* Rating stars */
   .testimonial__stars,
   .testimonial-card__rating,
   .product-testimonials__stars,
@@ -461,7 +461,7 @@
     display: block !important;
   }
 
-  /* Texto del testimonio */
+  /* Testimonial text - prevent truncation */
   .testimonial__text,
   .testimonial__content,
   .testimonial-card__text,
@@ -472,14 +472,14 @@
     color: rgba(226, 232, 240, 0.9) !important;
     margin-bottom: 1rem !important;
     font-style: italic !important;
-    /* Evitar corte de texto */
+    /* Prevent text truncation */
     overflow: visible !important;
     text-overflow: unset !important;
     white-space: normal !important;
     max-width: 100% !important;
   }
 
-  /* Nombre del autor */
+  /* Author name */
   .testimonial__author,
   .testimonial__name,
   .testimonial-card__author-name,
@@ -490,7 +490,7 @@
     color: #fef3c7 !important;
   }
 
-  /* Contenedor del autor */
+  /* Author container */
   .testimonial-card__author,
   .product-testimonials__author {
     display: flex !important;
@@ -501,7 +501,7 @@
     border-top: 1px solid rgba(148, 163, 184, 0.25) !important;
   }
 
-  /* Avatar del autor */
+  /* Author avatar */
   .testimonial-card__avatar,
   .product-testimonials__avatar {
     flex-shrink: 0 !important;
@@ -520,7 +520,7 @@
     object-fit: cover !important;
   }
 
-  /* Grid de testimonios si no es slider */
+  /* Testimonials grid (non-slider layout) */
   .testimonials__grid,
   .testimonials-grid {
     display: grid !important;
@@ -528,7 +528,7 @@
     gap: 1.5rem !important;
   }
 
-  /* Controles del slider */
+  /* Slider controls - counter, buttons, and dots */
   .testimonials .slider-counter,
   .testimonials-section .slider-counter,
   .slider-buttons .slider-counter {
@@ -544,7 +544,7 @@
     z-index: 10 !important;
   }
 
-  /* Botones del slider */
+  /* Slider navigation buttons */
   .slider-button,
   .slider-button--prev,
   .slider-button--next {
@@ -559,7 +559,7 @@
     color: #fbbf24 !important;
   }
 
-  /* Dots del slider */
+  /* Slider indicator dots */
   .product-testimonials__dots,
   .testimonials__dots {
     display: flex !important;
