@@ -624,6 +624,25 @@
     padding: 0.75rem 1.2rem !important;
     font-weight: 700 !important;
   }
+  
+  /* Ensure card images are visible on mobile */
+  /* !important flags needed to override conflicting base styles and ensure images display */
+  .card__media {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  
+  .card__media img,
+  .card__media .media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
 }
 
 /* Tablet Responsive */
