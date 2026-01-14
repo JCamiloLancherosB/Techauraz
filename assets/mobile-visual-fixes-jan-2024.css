@@ -127,7 +127,7 @@
     align-items: start !important;
   }
 
-  /* Individual benefit items - proper alignment with enhanced styling */
+  /* Individual benefit items - enhanced styling with gradient background */
   .benefit-item,
   .icon-with-text,
   .icon-with-text__item,
@@ -144,7 +144,7 @@
     gap: 0.5rem !important;
   }
 
-  /* Benefit icons - larger and more visible */
+  /* Benefit icons - increased from 32px to 48px for better visibility */
   .benefit-item__icon,
   .icon-with-text__icon,
   .ta-conv-benefit__icon,
