@@ -10,6 +10,14 @@
  * =============================================================================
  */
 
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* =============================================================================
    BANNER CONTENT POSITIONING - Remove Center Overlay
    ============================================================================= */
