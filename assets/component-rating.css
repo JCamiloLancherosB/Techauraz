@@ -27,7 +27,7 @@
 }
 
 .rating-star {
-  --color-rating-star: rgb(var(--color-foreground));
+  --color-rating-star: #fbbf24;
   --percent: calc(
     (
         var(--rating) / var(--rating-max) + var(--rating-decimal) * var(--font-size) /
@@ -46,11 +46,12 @@
   content: '★★★★★';
   background: linear-gradient(
     90deg,
-    var(--color-rating-star) var(--percent),
-    rgba(var(--color-foreground), 0.15) var(--percent)
+    #fbbf24 var(--percent),
+    rgba(251, 191, 36, 0.3) var(--percent)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .rating-text {
@@ -175,19 +176,6 @@
     display: block !important;
     margin-top: 0.25rem !important;
   }
-}
-
-/* Fix específico para component-rating */
-.rating-star::before {
-  content: '★★★★★' !important;
-  background: linear-gradient(
-    90deg,
-    #fbbf24 var(--percent, 80%),
-    rgba(251, 191, 36, 0.3) var(--percent, 80%)
-  ) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
 }
 
 /* Evitar texto duplicado en ratings */
