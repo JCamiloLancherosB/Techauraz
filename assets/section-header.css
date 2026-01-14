@@ -217,9 +217,10 @@ header-drawer {
   --header-height: 80px;
 }
 
-/* Add padding to body to prevent content from going under fixed header */
-.template-product body,
-body.template-product {
+/* Add padding to body to prevent content from going under fixed header
+   Note: Header has position:fixed !important applied to .header-wrapper,
+   so all pages need this padding to compensate for the fixed header */
+body {
   padding-top: var(--header-height);
 }
 
