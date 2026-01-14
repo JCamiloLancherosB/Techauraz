@@ -45,11 +45,6 @@
   clip-path: inset(0px);
 }
 
-.banner__media.animate--zoom-in > img:not(.zoom):not(.deferred-media__poster-button),
-.banner__media.animate--zoom-in > svg:not(.zoom):not(.deferred-media__poster-button) {
-  position: fixed;
-  height: 100vh;
-}
 
 @media screen and (max-width: 749px) {
   .banner--small.banner--mobile-bottom:not(.banner--adapt) .banner__media,
