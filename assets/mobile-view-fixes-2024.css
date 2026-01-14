@@ -1,0 +1,650 @@
+/* =============================================================================
+   MOBILE VIEW FIXES - TechAuraz 2024
+   =============================================================================
+   Comprehensive fixes for mobile responsiveness issues:
+   - Hero/slideshow: single image per slide, no truncation
+   - Product grids: proper 2-column layout
+   - Header: prevent overflow
+   - Cookie/WhatsApp: proper positioning
+   - General: typography and spacing
+   ============================================================================= */
+
+/* =============================================================================
+   1. HERO/SLIDESHOW MOBILE FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Ensure slideshow slider shows one image at a time */
+  .slideshow.slider {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slideshow__slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  /* Prevent double images by ensuring proper slide width */
+  .slideshow.grid {
+    grid-template-columns: 100%;
+  }
+
+  .slideshow .grid__item {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  /* Fix truncated overlay text - reduce padding and adjust sizing */
+  .slideshow__text.banner__box {
+    max-width: calc(100% - 2rem);
+    padding: 1.5rem 1.2rem;
+    margin: 1rem 1rem 1rem 1rem;
+    gap: 1rem;
+  }
+
+  .slideshow__text .banner__heading {
+    font-size: 2rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+  }
+
+  .slideshow__text .banner__text {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+
+  .slideshow__text .banner__text p {
+    margin: 0;
+  }
+
+  .slideshow__text .banner__buttons {
+    margin-top: 1rem;
+    gap: 0.8rem;
+  }
+
+  .slideshow__text .button {
+    padding: 1.2rem 2rem;
+    font-size: 1.4rem;
+  }
+
+  /* Position controls correctly on mobile */
+  .slideshow__controls {
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+  }
+
+  .slideshow__controls.slideshow__controls--top {
+    top: auto;
+    bottom: 1rem;
+  }
+
+  /* Slider buttons on mobile */
+  .slider-button {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* Reduce slideshow media height on mobile for better visibility */
+  .slideshow__media,
+  .slideshow__media img {
+    min-height: 350px;
+    max-height: 450px;
+  }
+
+  /* Ensure text wrapper doesn't overflow */
+  .slideshow__text-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+/* =============================================================================
+   2. PRODUCT LISTING/GRID MOBILE FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Force 2-column grid layout on mobile
+     !important is necessary here to override:
+     - Inline styles from section settings
+     - Theme-level grid configurations
+     - Slider/carousel mode on desktop that persists on mobile
+     This ensures consistent 2-column product display regardless of theme settings */
+  .product-grid,
+  .collection .grid,
+  .featured-collection .grid,
+  .grid--2-col-tablet-down {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Ensure grid items don't break layout */
+  .grid__item,
+  .product-grid .grid__item {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Product card spacing and layout */
+  .card-wrapper {
+    width: 100%;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Product card content alignment */
+  .card__content,
+  .ta-conv-product-card__content {
+    padding: 1rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card__heading,
+  .ta-conv-product-card__title {
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Price display */
+  .price,
+  .ta-conv-product-card__price {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* Badges positioning */
+  .card__badge,
+  .ta-conv-product-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card__badge span,
+  .ta-conv-badge {
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* Rating display */
+  .card__rating {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* CTA buttons */
+  .card .button,
+  .card__cta {
+    padding: 0.8rem 1rem;
+    font-size: 1.3rem;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* Prevent overlap with WhatsApp FAB - add bottom padding */
+  .product-grid,
+  .collection .grid {
+    padding-bottom: 8rem;
+  }
+}
+
+/* =============================================================================
+   3. HEADER/NAVIGATION MOBILE FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Prevent horizontal scroll */
+  .header-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Logo alignment and sizing */
+  .header__heading {
+    flex: 0 0 auto;
+    max-width: 40%;
+  }
+
+  .header__heading-logo {
+    max-height: 40px;
+    width: auto;
+  }
+
+  /* Navigation icons */
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+  }
+
+  .header__icon {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+  }
+
+  /* Menu drawer */
+  .menu-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .menu-drawer__inner {
+    padding: 1.5rem;
+  }
+
+  /* Prevent menu items from causing overflow */
+  .header__menu-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* =============================================================================
+   4. SECTION HEADINGS AND VALUE PROPS
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Section headings - ensure full readability */
+  .section-header,
+  .title-wrapper {
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .title,
+  h1, h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.2;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Ensure no clipping */
+  .collection .title-wrapper {
+    overflow: visible;
+  }
+
+  .collection .title::before {
+    /* Adjust star position for mobile */
+    left: -1.2rem;
+    font-size: 1rem;
+  }
+
+  /* Descriptions */
+  .collection__description {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+  }
+
+  /* Pagination indicators alignment */
+  .slider-counter,
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem auto;
+  }
+
+  .slider-counter__link,
+  .pagination__item {
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   5. COOKIE BAR AND WHATSAPP FAB POSITIONING
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Cookie notice - ensure it doesn't obstruct content */
+  .cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100vw;
+    padding: 1rem;
+    z-index: 998;
+    margin: 0;
+  }
+
+  /* WhatsApp FAB positioning - ensure visibility
+     Note: Base styling defined in theme.liquid (bottom: 80px, right: 15px)
+     These rules provide fallback for alternative WhatsApp implementations
+     that may use different class names but need consistent positioning */
+  .whatsapp-float:not([style*="bottom"]),
+  .whatsapp-button-float,
+  [class*="whatsapp-fab"]:not(.whatsapp-float) {
+    position: fixed;
+    bottom: 80px; /* Consistent with theme.liquid */
+    right: 15px; /* Consistent with theme.liquid (15px = 1.5rem) */
+    z-index: 9999;
+  }
+
+  /* Ensure minimum size for accessibility */
+  .whatsapp-float,
+  .whatsapp-button-float,
+  [class*="whatsapp-fab"] {
+    min-width: 56px;
+    min-height: 56px;
+  }
+
+  /* Adjust WhatsApp position when cookie is visible */
+  body.cookie-visible .whatsapp-float,
+  body.cookie-visible .whatsapp-button-float {
+    bottom: 140px; /* Cookie height + spacing */
+  }
+
+  /* Sticky CTA bar - ensure proper positioning */
+  .sticky-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    max-width: 100vw;
+  }
+
+  /* Adjust when cookie is visible */
+  body.cookie-visible .sticky-cta-bar {
+    bottom: 6rem;
+  }
+}
+
+/* =============================================================================
+   6. GENERAL MOBILE POLISH
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Consistent typography */
+  body {
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* Improve color contrast */
+  .card__content,
+  .product__info-wrapper {
+    color: rgba(241, 245, 249, 0.95);
+  }
+
+  /* Remove horizontal overflow globally */
+  html,
+  body,
+  .page-width,
+  .shopify-section {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Ensure sections have proper padding */
+  .shopify-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .page-width {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Button touch targets */
+  .button,
+  .btn,
+  a.button {
+    min-height: 44px;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Form elements */
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevent iOS zoom */
+    min-height: 48px;
+  }
+
+  /* Images responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Cards image aspect ratio */
+  .card__media {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* =============================================================================
+   7. SPECIFIC COMPONENT FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Announcement bar */
+  .announcement-bar {
+    font-size: 1.2rem;
+    padding: 0.8rem 1rem;
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer__content-top {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Modal/Drawer */
+  .modal,
+  .drawer {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Search */
+  .search-modal {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* Product page */
+  .product {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product__media-wrapper,
+  .product__info-wrapper {
+    width: 100%;
+  }
+
+  /* Collection filters */
+  .facets-container {
+    padding: 1rem;
+  }
+
+  /* Quick add */
+  .quick-add-modal {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+/* =============================================================================
+   8. SAFE AREA INSETS FOR NOTCHED DEVICES
+   ============================================================================= */
+
+@supports (padding: max(0px)) {
+  @media screen and (max-width: 749px) {
+    .header-wrapper {
+      padding-top: max(1rem, env(safe-area-inset-top));
+    }
+
+    .cookie-notice,
+    .sticky-cta-bar {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .whatsapp-float {
+      /* Consistent with theme.liquid positioning */
+      bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+    }
+  }
+}
+
+/* =============================================================================
+   9. PREVENT COMMON MOBILE ISSUES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Prevent text selection issues */
+  .slider,
+  .slideshow {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Prevent tap highlight on iOS */
+  a,
+  button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent layout shift */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Ensure proper stacking context for header
+     Note: Header has position:fixed in section-header.css
+     This sets z-index to maintain proper layer hierarchy:
+     - Header (z-index: 100)
+     - Sticky CTA (z-index: 100)
+     - Cookie notice (z-index: 998)
+     - WhatsApp FAB (z-index: 9999) */
+  .header-wrapper {
+    z-index: 100;
+  }
+
+  /* Add padding to body for fixed header
+     Uses --header-height variable defined in section-header.css:
+     - Mobile (max-width: 749px): 70px
+     - Desktop: 80px
+     This ensures content doesn't hide under fixed header */
+  body:not(.template-password) {
+    padding-top: var(--header-height, 70px);
+  }
+
+  /* First section adjustment */
+  .shopify-section:first-of-type {
+    margin-top: 0;
+  }
+}
+
+/* =============================================================================
+   10. ACCESSIBILITY IMPROVEMENTS
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Focus visible states */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+  }
+
+  /* Skip to content link */
+  .skip-to-content:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    padding: 1rem;
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* =============================================================================
+   11. REDUCED MOTION SUPPORT
+   ============================================================================= */
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .slideshow.slider {
+    scroll-behavior: auto;
+  }
+}

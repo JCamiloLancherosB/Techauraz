@@ -284,6 +284,10 @@
 <link rel="preload" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}"></noscript>
 
+<!-- Mobile View Fixes 2024 - Comprehensive mobile responsiveness improvements -->
+<link rel="preload" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -321,7 +325,7 @@
   5. forms-techauraz.css (preload with fallback)
      - Enhanced form styling and validation states
   
-  6. responsive-audit-fixes.css ✨ NEW
+  6. responsive-audit-fixes.css ✨
      - Comprehensive responsive design fixes:
        • Z-index hierarchy (header, modals, drawers, WhatsApp, cookie banner)
        • Typography and legibility improvements
@@ -332,7 +336,16 @@
        • Overflow prevention and layout fixes
        • Utility classes for common patterns
   
-  7. Component-specific CSS files loaded per section as needed
+  7. mobile-view-fixes-2024.css ✨
+     - Targeted mobile responsiveness fixes:
+       • Hero/slideshow: single image per slide, no truncation
+       • Product grids: proper 2-column layout on mobile
+       • Header: prevent horizontal overflow
+       • Cookie/WhatsApp: proper positioning without overlap
+       • Section headings: full readability without clipping
+       • General polish: typography, spacing, touch targets
+  
+  8. Component-specific CSS files loaded per section as needed
      - component-*.css files loaded dynamically by sections
   
   ============================================================================
@@ -775,7 +788,7 @@ onResize();
 
   @media (max-width: 768px) {
     .whatsapp-float {
-      bottom: 15px;
+      bottom: 80px; /* Move up to avoid overlap with potential sticky elements */
       right: 15px;
     }
     .whatsapp-button {
@@ -792,6 +805,16 @@ onResize();
     }
     .whatsapp-tooltip {
       display: none;
+    }
+  }
+  
+  /* Safe area support for notched devices */
+  @supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+        right: max(15px, env(safe-area-inset-right));
+      }
     }
   }
 </style>
