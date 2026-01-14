@@ -2,6 +2,9 @@
    PRODUCT PAGE LAYOUT - Dawn Compatible
    ============================================================================= */
 
+/* Note: Animations (fadeIn, slideInLeft, slideInRight, etc.) are imported from assets/animations.css */
+
+
 /* RESPONSIVE TWO-COLUMN FIX: Remove empty column gap and enforce balanced width */
 /* Note: Using specific selector to override Dawn's default grid gap */
 .product.grid {
@@ -166,7 +169,6 @@
   min-height: 4.6rem;
 }
 
-
 .shopify-payment-button__button [role='button'].focused,
 .no-js .shopify-payment-button__button [role='button']:focus {
   outline: 0.2rem solid rgba(var(--color-foreground), 0.5) !important;
@@ -253,7 +255,6 @@
   padding-left: 0;
 }
 
-
 /* Fallback */
 .no-js .shopify-payment-button__button [role='button']:focus + label {
   box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
@@ -262,7 +263,6 @@
 .product-form__input .select {
   max-width: 100%;
 }
-
 
 .no-js .product-form__submit.button--secondary {
   --color-button: inherit;
@@ -291,7 +291,6 @@
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
 }
-
 
 .product__info-container iframe {
   max-width: 100%;
@@ -458,7 +457,6 @@ a.product__text {
   display: flex;
   align-items: center;
 
-
   justify-content: center;
   height: 3rem;
   width: 3rem;
@@ -486,7 +484,6 @@ a.product__text {
   z-index: 1;
   transition: color var(--duration-short) ease, opacity var(--duration-short) ease;
 }
-
 
 .product__media-toggle::after {
   content: '';
@@ -599,7 +596,6 @@ a.product__text {
 .product-media-modal__content .deferred-media {
   width: 100%;
 }
-
 
 .product-media-modal__toggle:hover {
   color: rgba(var(--color-foreground), 0.75);
@@ -797,7 +793,6 @@ a.product__text {
     display: none;
   }
 }
-
 
 .js .product__media {
   overflow: hidden !important;
@@ -1616,33 +1611,18 @@ a.product__text {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
   to {
     opacity: 1;
     transform: translateX(0);
@@ -1753,8 +1733,6 @@ a.product__text {
     padding: 0.8rem;
   }
 }
-
-
 
 /* ===== PRECIO PROMINENTE ===== */
 /* Price styles moved to component-price.css to avoid duplication */

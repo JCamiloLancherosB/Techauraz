@@ -32,7 +32,7 @@
     ticking = false;
   }
 
-  function requestTick() {
+  function requestHeaderTick() {
     if (!ticking) {
       window.requestAnimationFrame(updateHeader);
       ticking = true;
@@ -40,7 +40,7 @@
   }
 
   // Listen for scroll events
-  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener("scroll", requestHeaderTick, { passive: true });
   
   // Check initial state
   updateHeader();

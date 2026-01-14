@@ -30,7 +30,7 @@
     ticking = false;
   }
 
-  function requestTick() {
+  function requestStickyBarTick() {
     if (!ticking) {
       window.requestAnimationFrame(toggleStickyBar);
       ticking = true;
@@ -42,7 +42,7 @@
   window.addEventListener('resize', calculateThreshold);
   calculateThreshold(); // Initial calculation
 
-  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener("scroll", requestStickyBarTick, { passive: true });
 })();
 
 // --- 2. Frequently Bought Together (OPTIMIZADO) ---

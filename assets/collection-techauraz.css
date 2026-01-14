@@ -1,5 +1,8 @@
 /* ===== TECHAURAZ COLLECTION STYLES ===== */
 
+/* Note: Animations (fadeIn, slideInLeft, slideInRight, etc.) are imported from assets/animations.css */
+
+
 /* Collection Header */
 .collection-header {
   text-align: center;

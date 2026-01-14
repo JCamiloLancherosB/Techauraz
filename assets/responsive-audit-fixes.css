@@ -13,6 +13,9 @@
    - Overflow prevention
    ============================================================================= */
 
+/* Note: Animations (fadeIn, slideInLeft, slideInRight, etc.) are imported from assets/animations.css */
+
+
 /* =============================================================================
    Z-INDEX HIERARCHY - Prevent Element Overlap
    ============================================================================= */
@@ -229,10 +232,7 @@ textarea {
 }
 
 /* Fade in animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+
   to {
     opacity: 1;
   }
@@ -260,19 +260,11 @@ textarea {
   }
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
   to {
     transform: translateX(0);
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-  }
   to {
     transform: translateX(0);
   }
