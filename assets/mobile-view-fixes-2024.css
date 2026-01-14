@@ -114,7 +114,12 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Force 2-column grid layout on mobile */
+  /* Force 2-column grid layout on mobile
+     !important is necessary here to override:
+     - Inline styles from section settings
+     - Theme-level grid configurations
+     - Slider/carousel mode on desktop that persists on mobile
+     This ensures consistent 2-column product display regardless of theme settings */
   .product-grid,
   .collection .grid,
   .featured-collection .grid,
@@ -352,24 +357,24 @@
   }
 
   /* WhatsApp FAB positioning - ensure visibility
-     Note: Base positioning in theme.liquid (bottom: 80px)
-     This provides fallback for floating WhatsApp elements that may not use the exact same class */
+     Note: Base styling defined in theme.liquid (bottom: 80px, right: 15px)
+     These rules provide fallback for alternative WhatsApp implementations
+     that may use different class names but need consistent positioning */
+  .whatsapp-float:not([style*="bottom"]),
+  .whatsapp-button-float,
+  [class*="whatsapp-fab"]:not(.whatsapp-float) {
+    position: fixed;
+    bottom: 80px; /* Consistent with theme.liquid */
+    right: 15px; /* Consistent with theme.liquid (15px = 1.5rem) */
+    z-index: 9999;
+  }
+
+  /* Ensure minimum size for accessibility */
   .whatsapp-float,
   .whatsapp-button-float,
   [class*="whatsapp-fab"] {
-    position: fixed;
-    bottom: 80px; /* Consistent with theme.liquid */
-    right: 1.5rem;
-    z-index: 9999;
-    width: 56px;
-    height: 56px;
     min-width: 56px;
     min-height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   /* Adjust WhatsApp position when cookie is visible */
@@ -575,15 +580,22 @@
     box-sizing: border-box;
   }
 
-  /* Ensure proper stacking context
-     Note: Header fixed positioning is set in section-header.css
-     This only ensures proper z-index hierarchy */
+  /* Ensure proper stacking context for header
+     Note: Header has position:fixed in section-header.css
+     This sets z-index to maintain proper layer hierarchy:
+     - Header (z-index: 100)
+     - Sticky CTA (z-index: 100)
+     - Cookie notice (z-index: 998)
+     - WhatsApp FAB (z-index: 9999) */
   .header-wrapper {
     z-index: 100;
   }
 
   /* Add padding to body for fixed header
-     Note: --header-height variable defined in section-header.css (70px mobile, 80px desktop) */
+     Uses --header-height variable defined in section-header.css:
+     - Mobile (max-width: 749px): 70px
+     - Desktop: 80px
+     This ensures content doesn't hide under fixed header */
   body:not(.template-password) {
     padding-top: var(--header-height, 70px);
   }
