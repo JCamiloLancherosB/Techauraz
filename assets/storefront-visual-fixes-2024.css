@@ -227,28 +227,53 @@
 /* Apply consistent colors to buttons */
 .button--primary,
 .button[type="submit"]:not(.quick-add__submit) {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
-  color: white !important;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #0f172a !important;
   border: none !important;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 1.2rem 2.4rem !important;
+  min-height: 44px !important;
 }
 
 .button--primary:hover,
 .button[type="submit"]:not(.quick-add__submit):hover {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, #0369a1 100%) !important;
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4) !important;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
   transform: translateY(-2px) !important;
+  color: #0f172a !important;
+}
+
+.button--primary:focus-visible,
+.button[type="submit"]:focus-visible {
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px !important;
+  border-color: #fbbf24 !important;
 }
 
 .button--secondary {
-  background: rgba(34, 211, 238, 0.1) !important;
-  border: 2px solid rgba(34, 211, 238, 0.5) !important;
-  color: var(--color-text-secondary) !important;
+  background: transparent !important;
+  border: 2px solid rgba(148, 163, 184, 0.4) !important;
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+  padding: 1.2rem 2.4rem !important;
+  min-height: 44px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
 }
 
 .button--secondary:hover {
-  background: rgba(34, 211, 238, 0.2) !important;
-  border-color: rgba(34, 211, 238, 0.8) !important;
+  background: rgba(148, 163, 184, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  color: #fbbf24 !important;
+  transform: translateY(-1px) !important;
+}
+
+.button--secondary:focus-visible {
+  outline: 2px solid #fbbf24 !important;
+  outline-offset: 2px !important;
 }
 
 /* Card colors consistency */
@@ -335,7 +360,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .whatsapp-float:hover,
@@ -415,7 +440,7 @@ h2.title {
 .button,
 .card__media img,
 .badge {
-  transition: all 0.3s ease !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Apply will-change only on hover for better performance */
@@ -425,17 +450,31 @@ h2.title {
   will-change: transform !important;
 }
 
-/* Hover effects */
+/* Hover effects - consistent lift */
 .card-wrapper:hover .card {
-  transform: translateY(-2px) !important;
+  transform: translateY(-4px) !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  box-shadow: 0 12px 32px rgba(251, 191, 36, 0.2) !important;
 }
 
-.button:hover {
+.button:hover:not(:disabled) {
   transform: translateY(-2px) !important;
 }
 
 .card__media:hover img {
   transform: scale(1.05) !important;
+}
+
+/* Focus states - accessibility */
+.card:focus-within {
+  outline: 2px solid #fbbf24 !important;
+  outline-offset: 3px !important;
+  border-color: rgba(251, 191, 36, 0.7) !important;
+}
+
+.button:focus-visible {
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px !important;
 }
 
 /* Reduce motion for accessibility */
@@ -446,6 +485,12 @@ h2.title {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .card-wrapper:hover .card,
+  .button:hover,
+  .card__media:hover img {
+    transform: none !important;
   }
 }
 
