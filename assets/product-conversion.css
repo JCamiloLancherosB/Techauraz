@@ -47,15 +47,6 @@
   text-transform: uppercase;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-}
-
 /* Responsive */
 @media screen and (max-width: 749px) {
   .urgency-bar__text {
@@ -531,7 +522,7 @@
 }
 
 /* ============================================================
-   6. UTILIDADES Y ANIMACIONES GENERALES
+   6. ACCESIBILIDAD - REDUCED MOTION
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -546,49 +537,15 @@
   }
 }
 
-/* Mejoras de accesibilidad */
-.visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
-/* Focus visible para mejorar accesibilidad */
-*:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
 /* ============================================================
-   7. RESPONSIVE BREAKPOINTS
+   NOTA: Estilos base heredados de otros archivos
+   ============================================================
+   
+   Los siguientes estilos se cargan desde archivos base y no se
+   duplican aquí para mantener el código DRY:
+   
+   - .visually-hidden → heredado de assets/base.css
+   - *:focus-visible → heredado de assets/base.css
+   - .page-width responsive breakpoints → heredado de assets/base.css
+   - @keyframes pulse → heredado de assets/animations.css
    ============================================================ */
-
-/* Mobile: < 750px */
-@media screen and (max-width: 749px) {
-  .page-width {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* Tablet: 750px - 990px */
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .page-width {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* Desktop: > 990px */
-@media screen and (min-width: 990px) {
-  .page-width {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-}
