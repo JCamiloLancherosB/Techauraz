@@ -288,6 +288,10 @@
 <link rel="preload" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}"></noscript>
 
+<!-- Mobile Visual Fixes January 2024 - Specific fixes for visual issues identified in mobile view -->
+<link rel="preload" href="{{ 'mobile-visual-fixes-jan-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'mobile-visual-fixes-jan-2024.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -351,7 +355,7 @@
   11. storefront-polish-refinements-2024.css
       - Final polish for sales-ready experience
   
-  12. mobile-view-fixes-2024.css ✨ NEW (2024-01-14)
+  12. mobile-view-fixes-2024.css ✨ (2024-01-14)
       - Critical mobile fixes addressing specific issues:
         • Hero/slider - single slide display (no double images)
         • Product grid - strict 2-column layout with proper spacing
@@ -361,7 +365,20 @@
         • Touch target optimization (44px minimum)
         • iOS safe area support
   
-  13. Component-specific CSS files loaded per section as needed
+  13. mobile-visual-fixes-jan-2024.css ✨ NEW (2024-01-14)
+      - Targeted fixes for mobile visual issues identified via screenshots:
+        • Featured Products section title overlapping with header icons
+        • Cookie banner content overlap prevention
+        • Hero banner benefits alignment and spacing
+        • Button contrast improvements (COMPRAR AHORA)
+        • Product card badge visibility (Envío rápido, En stock)
+        • AGREGAR AL CARRITO button consistency
+        • ¿Por qué comprar con TechAuraz? section spacing
+        • Slider/carousel content display and navigation positioning
+        • Testimonials section fixes (empty slider, card readability)
+        • General mobile spacing and overflow prevention
+  
+  14. Component-specific CSS files loaded per section as needed
       - component-*.css files loaded dynamically by sections
   
   ============================================================================
