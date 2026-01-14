@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 998; /* Below slideshow controls and hero CTA (z-index: 999+) */
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.96) 100%);
   border-top: 1px solid rgba(251, 191, 36, 0.3);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
@@ -15,6 +15,18 @@
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* Desktop: Add bottom margin to avoid overlapping hero CTA and slideshow controls */
+@media screen and (min-width: 750px) {
+  .cookie-banner {
+    bottom: 2rem; /* Offset from bottom to clear hero CTA buttons */
+    left: 2rem;
+    right: 2rem;
+    border-radius: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 
 .cookie-banner.is-visible {

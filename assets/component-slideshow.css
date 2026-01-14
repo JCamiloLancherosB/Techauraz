@@ -127,6 +127,8 @@ slideshow-component {
   margin-top: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
+  position: relative;
+  z-index: 999; /* Above cookie banner (998) and WhatsApp widget (997) */
 }
 
 /* Enhanced button styles for slideshow */
