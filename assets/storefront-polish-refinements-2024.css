@@ -4,6 +4,12 @@
    Version: 1.0.0
    Date: 2024-01-13
    
+   DEPENDENCIAS:
+   - base.css (estilos base, utilidades, focus-visible, grid)
+   - animations.css (keyframes y clases de animación)
+   
+   NOTA: Estilos base heredados, no duplicar aquí.
+   
    Final polish refinements for sales-ready experience:
    1. Color consistency fixes (light bg sections to dark theme)
    2. Section alignment improvements (featured, value props, why buy)

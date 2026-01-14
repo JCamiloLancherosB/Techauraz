@@ -5,6 +5,12 @@
  * Version: 2.0.0
  * Date: 2024-12-20
  * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ * 
  * This file consolidates and optimizes:
  * - techauraz-master.css (deprecated)
  * - techauraz-ui-enhancements.css (deprecated)
@@ -671,17 +677,7 @@ body.menu-drawer-open {
   }
 }
 
-.page-width {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--ta-space-lg);
-}
-
-@media screen and (max-width: 749px) {
-  .page-width {
-    padding: 0 var(--ta-space-md);
-  }
-}
+/* Note: .page-width is defined in base.css */
 
 /* Section titles - centered with accent */
 .title-wrapper {
@@ -751,17 +747,7 @@ body.menu-drawer-open {
    UTILITY CLASSES
    ============================================================================= */
 
-/* Visually hidden but accessible */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
+/* Note: .visually-hidden is defined in base.css */
 
 /* Skip to content link for accessibility */
 .skip-to-content-link:focus {
@@ -783,34 +769,7 @@ body.menu-drawer-open {
    ANIMATIONS - Smooth Transitions
    ============================================================================= */
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
+/* Note: @keyframes fadeIn, slideUp, slideInLeft, etc. are defined in animations.css */
 
 /* Apply animations */
 .animate-fade-in {
