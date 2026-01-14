@@ -315,7 +315,6 @@
   .slider-button,
   .slideshow-button,
   .carousel-button {
-    position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     z-index: 10 !important;
