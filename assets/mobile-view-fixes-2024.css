@@ -351,12 +351,14 @@
     margin: 0;
   }
 
-  /* WhatsApp FAB positioning - ensure visibility */
+  /* WhatsApp FAB positioning - ensure visibility
+     Note: Base positioning in theme.liquid (bottom: 80px)
+     This provides fallback for floating WhatsApp elements that may not use the exact same class */
   .whatsapp-float,
   .whatsapp-button-float,
   [class*="whatsapp-fab"] {
     position: fixed;
-    bottom: 8rem;
+    bottom: 80px; /* Consistent with theme.liquid */
     right: 1.5rem;
     z-index: 9999;
     width: 56px;
@@ -373,7 +375,7 @@
   /* Adjust WhatsApp position when cookie is visible */
   body.cookie-visible .whatsapp-float,
   body.cookie-visible .whatsapp-button-float {
-    bottom: 14rem;
+    bottom: 140px; /* Cookie height + spacing */
   }
 
   /* Sticky CTA bar - ensure proper positioning */
@@ -539,7 +541,8 @@
     }
 
     .whatsapp-float {
-      bottom: max(8rem, calc(8rem + env(safe-area-inset-bottom)));
+      /* Consistent with theme.liquid positioning */
+      bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
     }
   }
 }
@@ -572,18 +575,17 @@
     box-sizing: border-box;
   }
 
-  /* Ensure proper stacking context */
+  /* Ensure proper stacking context
+     Note: Header fixed positioning is set in section-header.css
+     This only ensures proper z-index hierarchy */
   .header-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
   }
 
-  /* Add padding to body for fixed header */
-  body {
-    padding-top: 70px;
+  /* Add padding to body for fixed header
+     Note: --header-height variable defined in section-header.css (70px mobile, 80px desktop) */
+  body:not(.template-password) {
+    padding-top: var(--header-height, 70px);
   }
 
   /* First section adjustment */

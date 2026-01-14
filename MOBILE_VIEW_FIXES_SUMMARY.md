@@ -294,6 +294,17 @@ The new stylesheet is loaded after other theme CSS files:
 3. **Old iOS (<11):** No safe area inset support
 4. **IE11:** Not supported (as per Shopify standards)
 
+## Code Review Resolutions
+
+### Issue 1: Header Fixed Positioning Conflict
+**Resolution:** Removed duplicate `position: fixed` from mobile-view-fixes-2024.css since section-header.css already handles this. Now only manages z-index hierarchy.
+
+### Issue 2: Body Padding Hardcoded Value
+**Resolution:** Updated to use CSS custom property `var(--header-height, 70px)` defined in section-header.css, allowing dynamic adjustment if header height changes.
+
+### Issue 3: Inconsistent WhatsApp FAB Positioning Units
+**Resolution:** Changed from 8rem to 80px throughout mobile-view-fixes-2024.css to match theme.liquid and maintain consistency.
+
 ## Future Enhancements
 
 1. **Dynamic Grid:** Consider 1-column for very small screens
