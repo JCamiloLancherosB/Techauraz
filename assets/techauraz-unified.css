@@ -31,38 +31,38 @@
  */
 
 /* =============================================================================
-   CSS VARIABLES - Design System
+   CSS VARIABLES - Design System (Updated for Unified Color Palette)
    ============================================================================= */
 :root {
-  /* Tech Store Color Palette - Blue/Cyan Theme */
-  --ta-primary: #0ea5e9;           /* Sky blue - primary CTA */
-  --ta-primary-dark: #0284c7;      /* Darker blue for hover */
-  --ta-accent: #22d3ee;            /* Cyan - accent highlights */
-  --ta-accent-dark: #06b6d4;       /* Darker cyan */
-  --ta-success: #22c55e;           /* Green - success states */
+  /* Tech Store Color Palette - Amber/Gold primary with Blue/Cyan accents */
+  --ta-primary: #fbbf24;           /* Amber - primary CTA */
+  --ta-primary-dark: #f59e0b;      /* Darker amber for hover */
+  --ta-accent: #0ea5e9;            /* Sky blue - accent highlights */
+  --ta-accent-dark: #0284c7;       /* Darker blue */
+  --ta-success: #10b981;           /* Green - success states */
   --ta-warning: #f59e0b;           /* Amber - warnings */
   
-  /* Backgrounds - Dark Tech Theme */
+  /* Backgrounds - Unified Dark Tech Theme */
   --ta-bg-dark: #020617;           /* Deep navy - main background */
   --ta-bg-card: #0f172a;           /* Slate - card background */
   --ta-bg-card-hover: #1e293b;     /* Lighter slate - hover state */
   --ta-bg-overlay: rgba(2, 6, 23, 0.95); /* Modal/drawer overlay */
   
-  /* Text Colors */
+  /* Text Colors - High Contrast */
   --ta-text-primary: #f8fafc;      /* Almost white - headings */
   --ta-text-secondary: #e2e8f0;    /* Light gray - body text */
   --ta-text-muted: #94a3b8;        /* Slate - secondary info */
   
   /* Borders & Dividers */
   --ta-border: rgba(148, 163, 184, 0.2);
-  --ta-border-hover: rgba(14, 165, 233, 0.5);
+  --ta-border-hover: rgba(251, 191, 36, 0.4);
   
-  /* Shadows - Blue Glow Effects */
-  --ta-shadow-sm: 0 2px 8px rgba(14, 165, 233, 0.1);
-  --ta-shadow-md: 0 4px 16px rgba(14, 165, 233, 0.2);
-  --ta-shadow-lg: 0 8px 24px rgba(14, 165, 233, 0.3);
+  /* Shadows - Amber/Gold Glow Effects */
+  --ta-shadow-sm: 0 2px 8px rgba(251, 191, 36, 0.15);
+  --ta-shadow-md: 0 4px 16px rgba(251, 191, 36, 0.25);
+  --ta-shadow-lg: 0 8px 24px rgba(251, 191, 36, 0.35);
   --ta-shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --ta-shadow-card-hover: 0 8px 24px rgba(14, 165, 233, 0.25);
+  --ta-shadow-card-hover: 0 8px 24px rgba(251, 191, 36, 0.3);
   
   /* Border Radius */
   --ta-radius-sm: 6px;

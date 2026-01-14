@@ -6,10 +6,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 998; /* Below slideshow controls and hero CTA (z-index: 999+) */
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.96) 100%);
-  border-top: 1px solid rgba(251, 191, 36, 0.3);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  z-index: 998; /* Below hero CTAs and slideshow controls (z-index: 999+) */
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.92) 0%, rgba(15, 23, 42, 0.94) 100%);
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
   padding: 1rem 1.5rem;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -64,7 +64,7 @@
 .cookie-banner__title {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #fef3c7;
+  color: var(--color-text-secondary);
   margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
@@ -73,20 +73,20 @@
 
 .cookie-banner__text {
   font-size: 1.3rem;
-  color: #94a3b8;
+  color: var(--color-text-muted);
   line-height: 1.4;
   margin: 0;
 }
 
 .cookie-banner__text a {
-  color: #fbbf24;
+  color: var(--color-secondary);
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.2s ease;
 }
 
 .cookie-banner__text a:hover {
-  color: #f59e0b;
+  color: var(--color-secondary-dark);
 }
 
 /* Buttons container */
@@ -97,14 +97,14 @@
   flex-shrink: 0;
 }
 
-/* Accept button (primary) - Compact */
+/* Accept button (primary) - Subtle to not compete with main CTAs */
 .cookie-banner__accept {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.6rem;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+  color: #ffffff;
   font-size: 1.3rem;
   font-weight: 600;
   border: none;
@@ -115,26 +115,26 @@
 }
 
 .cookie-banner__accept:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, #22c55e 0%, var(--color-success) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .cookie-banner__accept:active {
   transform: translateY(0);
 }
 
-/* Decline button (secondary) - Compact */
+/* Decline button (secondary) - Minimal */
 .cookie-banner__decline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.6rem;
   background: transparent;
-  color: #94a3b8;
+  color: var(--color-text-muted);
   font-size: 1.3rem;
   font-weight: 500;
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -142,9 +142,9 @@
 }
 
 .cookie-banner__decline:hover {
-  border-color: rgba(148, 163, 184, 0.5);
-  color: #e2e8f0;
-  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.4);
+  color: var(--color-text-secondary);
+  background: rgba(148, 163, 184, 0.05);
 }
 
 /* Settings/Preferences link */
@@ -163,7 +163,7 @@
 }
 
 .cookie-banner__settings:hover {
-  color: #fbbf24;
+  color: var(--color-secondary);
 }
 
 .cookie-banner__settings .icon {
@@ -325,8 +325,8 @@
 }
 
 .cookie-preferences__close:hover {
-  background: rgba(251, 191, 36, 0.2);
-  color: #fbbf24;
+  background: rgba(14, 165, 233, 0.2);
+  color: var(--color-secondary);
 }
 
 .cookie-preferences__body {
@@ -396,12 +396,12 @@
 }
 
 .cookie-toggle__input:checked + .cookie-toggle__slider {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
 }
 
 .cookie-toggle__input:checked + .cookie-toggle__slider:before {
   transform: translateX(22px);
-  background: #0f172a;
+  background: var(--color-bg-primary);
 }
 
 .cookie-toggle__input:disabled + .cookie-toggle__slider {
@@ -419,8 +419,8 @@
 
 .cookie-preferences__save {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+  color: #ffffff;
   font-size: 1.4rem;
   font-weight: 600;
   border: none;
@@ -430,7 +430,7 @@
 }
 
 .cookie-preferences__save:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, #22c55e 0%, var(--color-success) 100%);
 }
 
 /* Animation for banner entrance */
