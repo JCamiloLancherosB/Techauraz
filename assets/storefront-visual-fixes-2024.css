@@ -232,10 +232,10 @@
   border: none !important;
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
   font-weight: 700 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
   padding: 1.2rem 2.4rem !important;
-  min-height: 44px;
+  min-height: 44px !important;
 }
 
 .button--primary:hover,
@@ -259,9 +259,9 @@
   color: #e2e8f0 !important;
   font-weight: 600 !important;
   padding: 1.2rem 2.4rem !important;
-  min-height: 44px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  min-height: 44px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
 }
 
 .button--secondary:hover {
@@ -360,7 +360,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .whatsapp-float:hover,
