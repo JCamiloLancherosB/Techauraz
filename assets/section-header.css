@@ -163,6 +163,7 @@
   padding: 1rem 1.5rem;
   max-width: 100%;
   background-color: #020617;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 990px) {
