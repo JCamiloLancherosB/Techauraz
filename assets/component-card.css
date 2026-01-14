@@ -492,7 +492,11 @@
   }
 }
 
-/* Card badges */
+/* ============================================================
+   PRODUCT CARD BADGES (Discount, Stock, New, etc.)
+   Positioned on right side for sale/discount badges
+   ============================================================ */
+
 .card__badge {
   position: absolute;
   top: 1rem;
@@ -505,14 +509,6 @@
   max-width: calc(100% - 2rem);
 }
 
-@media screen and (max-width: 749px) {
-  .card__badge {
-    top: 0.7rem;
-    right: 0.7rem;
-    max-width: calc(100% - 1.4rem);
-  }
-}
-
 /* Desktop - larger badges with better spacing */
 @media screen and (min-width: 990px) {
   .card__badge {
@@ -523,7 +519,51 @@
   }
 }
 
-.badge {
+@media screen and (max-width: 749px) {
+  .card__badge {
+    top: 0.7rem;
+    right: 0.7rem;
+    max-width: calc(100% - 1.4rem);
+    gap: 0.4rem;
+  }
+}
+
+/* Alternative badge container - left-aligned badges for stock/shipping */
+.card__badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+  max-width: calc(100% - 2rem);
+}
+
+/* Desktop - enhanced badge spacing */
+@media screen and (min-width: 990px) {
+  .card__badges {
+    top: 1.2rem;
+    left: 1.2rem;
+    gap: 0.65rem;
+    max-width: calc(100% - 2.4rem);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .card__badges {
+    top: 0.6rem;
+    left: 0.6rem;
+    gap: 0.4rem;
+    max-width: calc(100% - 1.2rem);
+  }
+}
+
+/* Badge element styles */
+.badge,
+.card__badge .badge,
+.card__badges .badge {
   display: inline-flex;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
@@ -533,13 +573,28 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  min-width: fit-content;
 }
 
 /* Desktop - slightly larger badges for better readability */
 @media screen and (min-width: 990px) {
-  .badge {
+  .badge,
+  .card__badge .badge,
+  .card__badges .badge {
     padding: 0.45rem 0.9rem;
     font-size: 1.15rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .badge,
+  .card__badge .badge,
+  .card__badges .badge {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -740,71 +795,12 @@
 }
 
 /* ============================================================
-   CRO: PRODUCT CARD BADGES (Discount & Stock)
-   Updated for better visibility and alignment
+   BADGE COLOR VARIANTS
+   Specific badge types with distinct colors
    ============================================================ */
 
-.card__badges {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  align-items: flex-start;
-  max-width: calc(100% - 2rem); /* Prevent overflow */
-}
-
-@media screen and (max-width: 749px) {
-  .card__badges {
-    top: 0.6rem;
-    left: 0.6rem;
-    gap: 0.4rem;
-    max-width: calc(100% - 1.2rem);
-  }
-
-  .card__badge {
-    padding: 0.4rem 0.85rem; /* Ensure adequate padding on mobile */
-    font-size: 0.95rem;
-  }
-}
-
-/* Desktop - enhanced badge spacing */
-@media screen and (min-width: 990px) {
-  .card__badges {
-    top: 1.2rem;
-    left: 1.2rem;
-    gap: 0.65rem;
-    max-width: calc(100% - 2.4rem);
-  }
-}
-
-.card__badge {
-  display: inline-block;
-  padding: 0.5rem 1rem; /* Increased horizontal padding to prevent text cut-off */
-  border-radius: 6px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1.3;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  white-space: nowrap; /* Prevent text wrapping */
-  min-width: fit-content; /* Ensure badge fits content */
-}
-
-/* Desktop - slightly larger for better visibility */
-@media screen and (min-width: 990px) {
-  .card__badge {
-    padding: 0.55rem 1.1rem;
-    font-size: 1.1rem;
-  }
-}
-
-.card__badge--new {
+.card__badge--new,
+.badge--new {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
