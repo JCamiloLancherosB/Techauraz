@@ -164,7 +164,7 @@
   max-width: 100%;
   background-color: #020617;
   text-decoration: none;
-  --header-height: 60px;
+  --header-height: 60px;  
 }
 
 @media screen and (min-width: 990px) {
