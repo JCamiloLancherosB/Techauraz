@@ -1,3 +1,12 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid, scroll-behavior)
+ * - animations.css (keyframes base y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ * Este archivo incluye animaciones específicas de componentes mobile (pulse-stock).
+ */
+
 /* =============================================================================
    TECHAURAZ MOBILE VISUAL FIXES - January 2024
    =============================================================================
@@ -252,6 +261,7 @@
     animation: pulse-stock 2s ease-in-out infinite !important;
   }
 
+  /* Stock badge animation - component-specific with green branding */
   @keyframes pulse-stock {
     0%, 100% {
       transform: scale(1);
@@ -262,6 +272,8 @@
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
     }
   }
+
+  /* Note: This is a component-specific animation with green theme, different from generic pulse */
 
   /* Sale/discount badges - red gradient */
   .badge--sale,
@@ -537,14 +549,7 @@
    11. ACCESSIBILITY - REDUCED MOTION SUPPORT
    ============================================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Note: Reduced motion handling is covered by animations.css */
 
 /* =============================================================================
    END OF MOBILE VISUAL FIXES
