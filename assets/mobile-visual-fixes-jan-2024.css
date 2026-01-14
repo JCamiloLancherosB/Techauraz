@@ -1,9 +1,10 @@
 /* 
  * DEPENDENCIAS: 
  * - base.css (estilos base, utilidades, focus-visible, grid, scroll-behavior)
- * - animations.css (keyframes y clases de animación - use 'pulse' instead of 'pulse-stock')
+ * - animations.css (keyframes base y clases de animación)
  * 
  * NOTA: Estilos base heredados, no duplicar aquí.
+ * Este archivo incluye animaciones específicas de componentes mobile (pulse-stock).
  */
 
 /* =============================================================================
@@ -257,10 +258,22 @@
     background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
-    animation: pulse 2s ease-in-out infinite !important; /* Using pulse keyframe from animations.css */
+    animation: pulse-stock 2s ease-in-out infinite !important;
   }
 
-  /* Note: Keyframes are covered by animations.css */
+  /* Stock badge animation - component-specific with green branding */
+  @keyframes pulse-stock {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+    }
+  }
+
+  /* Note: This is a component-specific animation with green theme, different from generic pulse */
 
   /* Sale/discount badges - red gradient */
   .badge--sale,

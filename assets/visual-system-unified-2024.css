@@ -1,9 +1,10 @@
 /* 
  * DEPENDENCIAS: 
  * - base.css (estilos base, utilidades, focus-visible, grid)
- * - animations.css (keyframes y clases de animación)
+ * - animations.css (keyframes base y clases de animación)
  * 
  * NOTA: Estilos base heredados, no duplicar aquí.
+ * Este archivo incluye animaciones específicas de componentes (pulse-badge).
  */
 
 /* =============================================================================
@@ -215,8 +216,22 @@
   color: #ffffff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border-color: rgba(245, 158, 11, 0.3);
-  animation: pulse 2s ease-in-out infinite; /* Using pulse keyframe from animations.css */
+  animation: pulse-badge 2s ease-in-out infinite;
 }
+
+/* Badge animation for stock warnings - component-specific */
+@keyframes pulse-badge {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6);
+  }
+}
+
+/* Note: This is a component-specific animation, different from the generic pulse in animations.css */
 
 /* Sold out badge - Gray */
 .card__badge--sold-out {
