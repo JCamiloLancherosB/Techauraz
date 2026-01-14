@@ -153,6 +153,8 @@
 /* Header grid - proper alignment */
 .header {
   display: grid;
+  height: 7rem;
+  overflow: hidden;
   grid-template-areas: 'drawer heading icons';
   grid-template-columns: auto 1fr auto;
   align-items: center;
