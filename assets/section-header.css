@@ -217,7 +217,8 @@ header-drawer {
   --header-height: 80px;
 }
 
-/* Add padding to body to prevent content from going under fixed header */
+/* Add padding to body to prevent content from going under fixed header
+   Note: Header is ALWAYS fixed (line 19), so all pages need this padding */
 body {
   padding-top: var(--header-height);
 }

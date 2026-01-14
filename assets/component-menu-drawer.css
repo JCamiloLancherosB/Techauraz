@@ -24,7 +24,9 @@
   border-radius: 4px;
 }
 
-/* Icon toggle - show hamburger by default, close when drawer is open */
+/* Icon toggle - show hamburger by default, close when drawer is open
+   Note: Both icon-hamburger and icon-close are rendered in header-drawer.liquid 
+   and only their visibility is toggled via CSS */
 .header__icon--menu .icon-close {
   display: none;
 }
