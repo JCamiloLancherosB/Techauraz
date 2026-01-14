@@ -818,4 +818,63 @@ textarea:focus-visible,
     padding: 1rem 1.2rem;
     gap: 0.5rem;
   }
+
+  /* Rating fixes for mobile - ensure proper display */
+  .rating-wrapper,
+  .card__rating,
+  .product-card__rating,
+  .card-information .rating {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0.5rem 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Rating star color override for visibility */
+  .rating-star {
+    --color-rating-star: #fbbf24 !important;
+  }
+
+  .rating-star::before {
+    background: linear-gradient(
+      90deg,
+      #fbbf24 var(--percent),
+      rgba(251, 191, 36, 0.3) var(--percent)
+    ) !important;
+  }
+
+  /* Rating text and count - inline display */
+  .rating-text,
+  .rating-count {
+    display: inline-block !important;
+    font-size: 1.2rem !important;
+    color: rgba(226, 232, 240, 0.8) !important;
+    margin: 0 !important;
+  }
+
+  .rating-text {
+    margin-left: 0.5rem !important;
+  }
+
+  .rating-count {
+    margin-left: 0.25rem !important;
+  }
+
+  /* Hide duplicate rating elements */
+  .rating-text + .rating-text,
+  .rating__value + .rating__value {
+    display: none !important;
+  }
+
+  /* Trust indicators spacing */
+  .card__trust-indicators {
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .card__trust-indicator {
+    font-size: 1rem !important;
+    padding: 0.25rem 0.6rem !important;
+  }
 }

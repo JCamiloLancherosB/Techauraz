@@ -2,8 +2,17 @@
   text-align: center;
 }
 
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
 .rating {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin: 0;
 }
 
@@ -45,12 +54,17 @@
 }
 
 .rating-text {
-  display: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: rgba(226, 232, 240, 0.8);
+  margin: 0 0 0 0.5rem;
 }
 
 .rating-count {
   display: inline-block;
-  margin: 0;
+  margin: 0 0 0 0.25rem;
+  font-size: 1.2rem;
+  color: rgba(226, 232, 240, 0.8);
 }
 
 @media (forced-colors: active) {
@@ -61,4 +75,126 @@
   .rating-text {
     display: block;
   }
+}
+
+/* =============================================================================
+   MOBILE FIXES - Rating Display and Badges
+   ============================================================================= */
+
+/* Fix para ratings en cards de productos - mobile */
+@media screen and (max-width: 749px) {
+  /* Contenedor del rating */
+  .rating-wrapper,
+  .card__rating,
+  .product-card__rating {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0.5rem 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Estrellas del rating */
+  .rating-star,
+  .rating .stars,
+  [class*="rating"] .star {
+    color: #fbbf24 !important;
+    font-size: 1.4rem !important;
+    letter-spacing: 0.1rem !important;
+    display: inline-block !important;
+  }
+
+  /* Texto del rating - evitar duplicación */
+  .rating-text,
+  .rating__text,
+  .rating-count {
+    font-size: 1.2rem !important;
+    color: rgba(226, 232, 240, 0.8) !important;
+    display: inline-block !important;
+  }
+
+  /* Ocultar elementos duplicados si existen */
+  .rating-text + .rating-text,
+  .rating__value + .rating__value {
+    display: none !important;
+  }
+
+  /* Badges de productos */
+  .product-badge,
+  .card__badge,
+  .badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 6px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    gap: 0.3rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Badge de envío rápido */
+  .badge--shipping,
+  [class*="shipping"],
+  [class*="envio"] {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: #ffffff !important;
+  }
+
+  /* Badge de stock */
+  .badge--stock,
+  [class*="stock"]:not([class*="out"]) {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #ffffff !important;
+  }
+
+  /* Contenedor de badges */
+  .card__badges,
+  .product-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  /* Precio - asegurar visibilidad */
+  .price,
+  .card__price,
+  .product-card__price {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #10b981 !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Texto "(Nuevo)" u otros labels */
+  .card__label,
+  .product-label {
+    font-size: 1.1rem !important;
+    color: rgba(226, 232, 240, 0.7) !important;
+    display: block !important;
+    margin-top: 0.25rem !important;
+  }
+}
+
+/* Fix específico para component-rating */
+.rating-star::before {
+  content: '★★★★★' !important;
+  background: linear-gradient(
+    90deg,
+    #fbbf24 var(--percent, 80%),
+    rgba(251, 191, 36, 0.3) var(--percent, 80%)
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Evitar texto duplicado en ratings */
+.rating-star + .rating-text {
+  margin-left: 0.5rem !important;
+}
+
+.rating-count {
+  margin-left: 0.25rem !important;
 }
