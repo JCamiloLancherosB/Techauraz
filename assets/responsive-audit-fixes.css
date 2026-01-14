@@ -942,6 +942,7 @@ h2.section-heading,
 /* Main content container - reduce top padding */
 #MainContent,
 .main-content {
+  background-color: #020617;
   padding-top: 0;
 }
 
