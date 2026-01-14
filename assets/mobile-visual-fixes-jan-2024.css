@@ -117,9 +117,7 @@
   .benefits-grid,
   .benefits-section,
   .icon-with-text-section,
-  [class*="benefits"] .grid,
-  .ta-conv-benefits,
-  .benefits-bar__grid {
+  [class*="benefits"] .grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem !important;
@@ -127,69 +125,39 @@
     align-items: start !important;
   }
 
-  /* Individual benefit items - enhanced styling with gradient background */
+  /* Individual benefit items - proper alignment */
   .benefit-item,
   .icon-with-text,
-  .icon-with-text__item,
-  .ta-conv-benefit,
-  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) {
+  [class*="benefit"] {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    padding: 1.2rem !important;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    padding: 1rem 0.5rem !important;
     gap: 0.5rem !important;
   }
 
-  /* Benefit icons - increased from 32px to 48px for better visibility */
+  /* Benefit icons - consistent sizing */
   .benefit-item__icon,
   .icon-with-text__icon,
-  .ta-conv-benefit__icon,
-  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) .icon,
-  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) svg,
-  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) img {
-    font-size: 2.5rem !important;
-    width: 48px !important;
-    height: 48px !important;
-    margin-bottom: 0.75rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  [class*="benefit"] svg,
+  [class*="benefit"] img {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 0.5rem !important;
     flex-shrink: 0 !important;
   }
 
-  /* Benefit emoji icons */
-  .benefit-emoji {
-    font-size: 2.5rem !important;
-  }
-
-  /* Benefit titles - enhanced visibility */
-  .benefit-item__title,
-  .icon-with-text__title,
-  .ta-conv-benefit__title {
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    color: #fbbf24 !important;
-    margin-bottom: 0.3rem !important;
-    line-height: 1.2 !important;
-  }
-
-  /* Benefit text/description - proper wrapping and readability */
+  /* Benefit text - proper wrapping */
   .benefit-item__text,
-  .benefit-item__description,
   .icon-with-text__text,
-  .ta-conv-benefit__description,
-  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) .text {
-    font-size: 1.1rem !important;
-    line-height: 1.4 !important;
-    color: rgba(226, 232, 240, 0.8) !important;
+  [class*="benefit"] .text {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+    color: rgba(226, 232, 240, 0.9) !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     max-width: 100% !important;
-    margin: 0 !important;
   }
 }
 
@@ -417,193 +385,56 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Main testimonials container */
+  /* Testimonials container */
   .testimonials-section,
   .testimonials,
-  .product-testimonials,
-  [class*="testimonial"].section {
+  [class*="testimonial"] {
     padding: 2rem 1rem !important;
-    overflow-x: hidden !important;
-  }
-
-  /* Section title */
-  .testimonials__title,
-  .testimonials-section__title,
-  .testimonials-section .title,
-  .product-testimonials__heading,
-  [class*="testimonial"] h2 {
-    font-size: clamp(2rem, 5vw, 2.4rem) !important;
-    color: #fbbf24 !important;
-    text-align: center !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  /* Testimonials slider - show content properly, prevent empty gray area */
-  .testimonials__slider,
-  .testimonials-slider,
-  .testimonials-slider-wrapper,
-  .product-testimonials__carousel {
     min-height: auto !important;
-    position: relative !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
   }
 
-  /* Ensure slider displays in mobile (theme uses slider--desktop class) */
-  .testimonials-slider.slider--desktop {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-  }
-
-  /* Slider images - show properly if present */
-  .testimonials__slider img,
-  .testimonials-slider img,
-  .testimonial__image,
-  .testimonials-slider__image {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    border-radius: 12px !important;
-    display: block !important;
-  }
-
-  /* Testimonial cards - dark theme with brand colors */
+  /* Testimonial cards - ensure content is visible */
   .testimonial-card,
-  .testimonial-card__content,
-  .testimonial__item,
-  .product-testimonials__card,
+  .testimonial-item,
   [class*="testimonial"] .card {
+    display: block !important;
+    width: 100% !important;
+    min-height: 200px !important;
+    padding: 1.5rem !important;
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
     border-radius: 12px !important;
     border: 1px solid rgba(148, 163, 184, 0.25) !important;
-    padding: 1.5rem !important;
     margin-bottom: 1rem !important;
-    display: block !important;
-    width: 100% !important;
   }
 
-  /* Rating stars */
-  .testimonial__stars,
-  .testimonial-card__rating,
-  .product-testimonials__stars,
-  .testimonial-card .stars {
-    color: #fbbf24 !important;
-    font-size: 1.4rem !important;
-    margin-bottom: 1rem !important;
-    display: block !important;
-  }
-
-  /* Testimonial text - prevent truncation */
+  /* Testimonial text - readable */
   .testimonial__text,
-  .testimonial__content,
-  .testimonial-card__text,
-  .product-testimonials__text,
-  .testimonial-card p {
+  .testimonial__content {
     font-size: 1.4rem !important;
     line-height: 1.6 !important;
     color: rgba(226, 232, 240, 0.9) !important;
     margin-bottom: 1rem !important;
-    font-style: italic !important;
-    /* Prevent text truncation */
-    overflow: visible !important;
-    text-overflow: unset !important;
-    white-space: normal !important;
-    max-width: 100% !important;
   }
 
-  /* Author name */
+  /* Testimonial author */
   .testimonial__author,
-  .testimonial__name,
-  .testimonial-card__author-name,
-  .product-testimonials__name,
-  .testimonial-card .author {
+  .testimonial__name {
     font-size: 1.3rem !important;
     font-weight: 600 !important;
     color: #fef3c7 !important;
+    margin-bottom: 0.3rem !important;
   }
 
-  /* Author container */
-  .testimonial-card__author,
-  .product-testimonials__author {
-    display: flex !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    margin-top: 1rem !important;
-    padding-top: 1rem !important;
-    border-top: 1px solid rgba(148, 163, 184, 0.25) !important;
-  }
-
-  /* Author avatar */
-  .testimonial-card__avatar,
-  .product-testimonials__avatar {
-    flex-shrink: 0 !important;
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 50% !important;
-  }
-
-  .testimonial-card__avatar img,
-  .product-testimonials__avatar img,
-  .testimonial-card__avatar svg,
-  .product-testimonials__avatar svg {
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 50% !important;
+  /* Testimonial images in slider */
+  .testimonial__image,
+  .testimonials-slider__image,
+  [class*="testimonial"] img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
     object-fit: cover !important;
-  }
-
-  /* Testimonials grid (non-slider layout) */
-  .testimonials__grid,
-  .testimonials-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-  }
-
-  /* Slider controls - counter positioned closer to content than general sliders */
-  .testimonials .slider-counter,
-  .testimonials-section .slider-counter,
-  .slider-buttons .slider-counter {
-    bottom: 1rem !important; /* Closer than general slider-counter (1.5rem) */
-  }
-
-  /* Slider navigation buttons */
-  .slider-button,
-  .slider-button--prev,
-  .slider-button--next {
-    background: rgba(15, 23, 42, 0.9) !important;
-    border: 1px solid rgba(148, 163, 184, 0.3) !important;
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color: #fbbf24 !important;
-  }
-
-  /* Slider indicator dots */
-  .product-testimonials__dots,
-  .testimonials__dots {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 0.75rem !important;
-    margin-top: 1.5rem !important;
-  }
-
-  .product-testimonials__dot,
-  .slider-counter__link .dot {
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 50% !important;
-    background: rgba(148, 163, 184, 0.5) !important;
-    transition: all 0.3s ease !important;
-  }
-
-  .product-testimonials__dot.active,
-  .slider-counter__link--active .dot {
-    background: #fbbf24 !important;
-    transform: scale(1.3) !important;
+    border-radius: 8px !important;
   }
 }
 
