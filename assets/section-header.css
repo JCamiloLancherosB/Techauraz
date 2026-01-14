@@ -33,6 +33,122 @@
   position: relative;
 }
 
+
+
+/* =============================================================================
+   5. HEADER - ALIGNMENT AND OVERFLOW FIXES
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Prevent horizontal overflow */
+  .header-wrapper,
+  .header {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  .header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1rem 1.5rem !important;
+    gap: 1rem !important;
+  }
+  
+  /* Logo alignment */
+  .header__heading,
+  .header__heading-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-shrink: 0 !important;
+    max-width: 50% !important;
+  }
+  
+  .header__heading-logo {
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+  }
+  
+  /* Navigation */
+  .header__menu {
+    display: none !important; /* Hidden on mobile */
+  }
+  
+  /* Icons alignment */
+  .header__icons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .header__icon {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Menu drawer button */
+  .header__icon--menu {
+    margin-right: auto !important;
+  }
+}
+
+/* =============================================================================
+   6. SECTION HEADINGS - TEXT CLIPPING PREVENTION
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Section titles - no clipping */
+  .section-heading,
+  .title-wrapper .title,
+  h2.title,
+  .collection__title,
+  .featured-collection .title {
+    font-size: clamp(2rem, 5vw, 2.6rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    padding: 0 1rem !important;
+  }
+  
+  /* Section descriptions */
+  .section-description,
+  .collection__description {
+    font-size: clamp(1.3rem, 3vw, 1.5rem) !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    color: var(--color-text-muted, #94a3b8) !important;
+    max-width: 100% !important;
+    padding: 0 1.5rem !important;
+    margin: 0 auto 2rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Title wrapper - prevent decorative elements from causing overflow */
+  .title-wrapper {
+    position: relative !important;
+    overflow: visible !important;
+    padding: 0 1rem !important;
+  }
+  
+  .title-wrapper::before,
+  .title-wrapper::after {
+    max-width: 80px !important;
+  }
+}
+
 /* Define header height CSS variable */
 :root {
   --header-height: 80px;
