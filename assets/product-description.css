@@ -1,6 +1,14 @@
 /* ===== PRODUCT DESCRIPTION HTML COMPATIBILITY ===== */
 /* Styles for rich HTML product descriptions with h3, h4, lists, strong, emojis, etc. */
 
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* Full-width description section below gallery */
 .product-description-full-width {
   width: 100%;
@@ -245,8 +253,6 @@
 /* Images within descriptions */
 .product__description img,
 .product-description-content img {
-  max-width: 100%;
-  height: auto;
   border-radius: 8px;
   margin: 1rem 0;
 }

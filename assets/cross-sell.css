@@ -3,6 +3,14 @@
    Estilos para Cross-sell y Upsell
    ============================================ */
 
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* ================== CROSS-SELL SECTION ================== */
 
 .cross-sell {

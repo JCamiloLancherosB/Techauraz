@@ -5,6 +5,12 @@
  * Version: 2.0.0
  * Date: 2024-12-20
  * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ * 
  * This file consolidates and optimizes:
  * - techauraz-master.css (deprecated)
  * - techauraz-ui-enhancements.css (deprecated)
@@ -675,16 +681,7 @@ body.menu-drawer-open {
   }
 }
 
-/* Note: .page-width base definition is in base.css - we only add max-width override here */
-.page-width {
-  max-width: 1400px;
-}
-
-@media screen and (max-width: 749px) {
-  .page-width {
-    padding: 0 var(--ta-space-md);
-  }
-}
+/* Note: .page-width is defined in base.css */
 
 /* Section titles - centered with accent */
 .title-wrapper {
@@ -776,7 +773,7 @@ body.menu-drawer-open {
    ANIMATIONS - Smooth Transitions
    ============================================================================= */
 
-/* Note: @keyframes (fadeIn, slideUp, slideInLeft, etc.) are defined in animations.css */
+/* Note: @keyframes fadeIn, slideInUp, slideInLeft, etc. are defined in animations.css */
 
 /* Apply animations */
 .animate-fade-in {
