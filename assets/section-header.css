@@ -65,6 +65,8 @@
   }
   
   .header__heading-logo {
+    position: relative;
+    right: 80px;
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
@@ -250,8 +252,6 @@ body {
 }
 
 .template-index .header__heading-logo-wrapper {
-  position: relative;
-  right: 80px;
   align-items: center;
   justify-content: flex-start;
   min-height: 40px;
