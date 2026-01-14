@@ -284,6 +284,10 @@
 <link rel="preload" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}"></noscript>
 
+<!-- Mobile View Fixes 2024 - Critical mobile fixes for hero, grid, FAB, and text clipping -->
+<link rel="preload" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'mobile-view-fixes-2024.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER
@@ -321,7 +325,7 @@
   5. forms-techauraz.css (preload with fallback)
      - Enhanced form styling and validation states
   
-  6. responsive-audit-fixes.css ✨ NEW
+  6. responsive-audit-fixes.css ✨
      - Comprehensive responsive design fixes:
        • Z-index hierarchy (header, modals, drawers, WhatsApp, cookie banner)
        • Typography and legibility improvements
@@ -332,8 +336,33 @@
        • Overflow prevention and layout fixes
        • Utility classes for common patterns
   
-  7. Component-specific CSS files loaded per section as needed
-     - component-*.css files loaded dynamically by sections
+  7. card-clickable-fix.css
+     - Full card area clickable for better mobile UX
+  
+  8. product-page-visual-fixes-2024.css
+     - Banner, buttons, description, footer improvements
+  
+  9. visual-system-unified-2024.css
+     - Rating visibility, dark theme palette, badge system
+  
+  10. storefront-visual-fixes-2024.css
+      - Mobile carousel, 2-col grid, color consistency, alignment
+  
+  11. storefront-polish-refinements-2024.css
+      - Final polish for sales-ready experience
+  
+  12. mobile-view-fixes-2024.css ✨ NEW (2024-01-14)
+      - Critical mobile fixes addressing specific issues:
+        • Hero/slider - single slide display (no double images)
+        • Product grid - strict 2-column layout with proper spacing
+        • WhatsApp FAB - proper positioning with cookie bar awareness
+        • Text clipping prevention for headings and descriptions
+        • Header alignment and overflow fixes
+        • Touch target optimization (44px minimum)
+        • iOS safe area support
+  
+  13. Component-specific CSS files loaded per section as needed
+      - component-*.css files loaded dynamically by sections
   
   ============================================================================
 -->
@@ -549,6 +578,7 @@
     {%- endif -%}
     <script src="{{ 'custom-scripts.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-enhancements.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'mobile-fixes-handler.js' | asset_url }}" defer="defer"></script>
     <script defer="defer">
   (function(){
 var header = document.querySelector('.section-header, .header-wrapper');
