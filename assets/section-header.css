@@ -206,7 +206,6 @@ header-drawer {
 
 /* Navigation - desktop only */
 .header__inline-menu {
-  grid-area: navigation;
   display: none;
 }
 
