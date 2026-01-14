@@ -90,14 +90,6 @@
   }
 }
 
-.banner__media {
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-
 .banner__media-half {
   width: 50%;
   flex: 1 1 50%;
