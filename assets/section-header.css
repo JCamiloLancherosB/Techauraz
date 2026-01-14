@@ -62,7 +62,6 @@
     align-items: center !important;
     justify-content: flex-start !important;
     flex-shrink: 0 !important;
-    max-width: 150% !important;
   }
   
   .header__heading-logo {
