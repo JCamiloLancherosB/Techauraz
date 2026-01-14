@@ -788,7 +788,7 @@ onResize();
 
   @media (max-width: 768px) {
     .whatsapp-float {
-      bottom: 15px;
+      bottom: 80px; /* Move up to avoid overlap with potential sticky elements */
       right: 15px;
     }
     .whatsapp-button {
@@ -805,6 +805,16 @@ onResize();
     }
     .whatsapp-tooltip {
       display: none;
+    }
+  }
+  
+  /* Safe area support for notched devices */
+  @supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+        right: max(15px, env(safe-area-inset-right));
+      }
     }
   }
 </style>
