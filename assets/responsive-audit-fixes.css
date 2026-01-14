@@ -17,25 +17,6 @@
    Z-INDEX HIERARCHY - Prevent Element Overlap
    ============================================================================= */
 
-:root {
-  /* Z-index scale - organized hierarchy (compatible with existing values) */
-  --z-base: 1;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-header: 300;
-  --z-drawer: 1000;  /* Compatible with existing component-cart-drawer.css */
-  --z-modal: 1001;   /* Compatible with existing base.css modal values */
-  --z-popover: 1002;
-  --z-tooltip: 1003;
-  --z-cookie-banner: 999;  /* Compatible with existing cookie-banner-techauraz.css */
-  --z-whatsapp: 9999;      /* Highest priority - always accessible */
-  --z-notification: 9998;
-  --z-max: 9999;
-  
-  /* iOS zoom prevention - minimum font size for form inputs */
-  --font-size-no-zoom: 16px;
-}
-
 /* Header z-index - !important needed to override existing section-header.css */
 .header-wrapper,
 .shopify-section-header-sticky {
