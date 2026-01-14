@@ -229,6 +229,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  background-color: #020617;
 }
 
 @media screen and (min-width: 750px) {
