@@ -30,16 +30,7 @@
     -webkit-overflow-scrolling: touch !important;
     scroll-padding-left: 0 !important;
   }
-  
-  slideshow-component .slideshow__slide,
-  slideshow-component .slideshow.slider .slider__slide {
-    min-width: 100% !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    flex-shrink: 0 !important;
-    scroll-snap-align: start !important;
-  }
-  
+
   /* Ensure grid doesn't interfere with single-slide display */
   slideshow-component .slideshow.grid--1-col,
   slideshow-component .slideshow.grid {
