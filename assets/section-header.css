@@ -218,8 +218,7 @@ header-drawer {
 }
 
 /* Add padding to body to prevent content from going under fixed header */
-.template-product body,
-body.template-product {
+body {
   padding-top: var(--header-height);
 }
 
