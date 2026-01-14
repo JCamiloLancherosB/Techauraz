@@ -334,18 +334,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
   }
 
-  .slider-button--prev,
-  .slideshow-button--prev,
-  .carousel-button--prev {
-    left: 1rem !important;
-  }
-
-  .slider-button--next,
-  .slideshow-button--next,
-  .carousel-button--next {
-    right: 1rem !important;
-  }
-
   /* Slider counter - visible positioning */
   .slider-counter,
   .slideshow-counter,
