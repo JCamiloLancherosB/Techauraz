@@ -71,6 +71,22 @@ slideshow-component {
   .slideshow--placeholder.banner--adapt_image:not(.banner--mobile-bottom) {
     height: 28rem;
   }
+  
+  /* Ensure slideshow images are visible on mobile */
+  .slideshow__media {
+    min-height: 250px;
+    position: relative;
+  }
+  
+  .slideshow__media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block !important;
+  }
 }
 
 @media screen and (min-width: 750px) {
