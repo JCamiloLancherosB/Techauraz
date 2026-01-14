@@ -384,18 +384,6 @@ body.cookie-notice-visible .whatsapp-float {
   }
 }
 
-/* =============================================================================
-   6. SPACING & TYPOGRAPHY CONSISTENCY
-   Reduce repetition and improve readability
-   ============================================================================= */
-
-/* Section spacing */
-section,
-.section {
-  padding-top: clamp(3rem, 5vw, 5rem) !important;
-  padding-bottom: clamp(3rem, 5vw, 5rem) !important;
-}
-
 /* Section headings */
 .section-heading,
 .title-wrapper .title,
