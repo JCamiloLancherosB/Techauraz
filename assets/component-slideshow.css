@@ -136,9 +136,10 @@ slideshow-component {
   padding: 1.4rem 2.8rem;
   font-size: 1.6rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  background: linear-gradient(135deg, var(--color-primary, #fbbf24) 0%, var(--color-primary-dark, #f59e0b) 100%);
+  color: var(--color-text-inverse, #0f172a);
   border: none;
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.35);
+  box-shadow: 0 4px 16px var(--shadow-primary, rgba(251, 191, 36, 0.35));
   transition: all 0.3s ease;
   min-height: 44px;
   min-width: 44px;
@@ -146,12 +147,12 @@ slideshow-component {
 
 .slideshow__text .button--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(14, 165, 233, 0.45);
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  box-shadow: 0 6px 24px rgba(251, 191, 36, 0.45);
+  background: linear-gradient(135deg, #fde68a 0%, var(--color-primary, #fbbf24) 100%);
 }
 
 .slideshow__text .button--primary:focus-visible {
-  outline: 3px solid #fbbf24;
+  outline: 3px solid var(--color-primary);
   outline-offset: 3px;
 }
 
@@ -159,22 +160,22 @@ slideshow-component {
   padding: 1.4rem 2.4rem;
   font-size: 1.5rem;
   font-weight: 500;
-  background: rgba(34, 211, 238, 0.25);
-  border: 2px solid rgba(34, 211, 238, 0.7);
-  color: #e0f2fe;
+  background: rgba(14, 165, 233, 0.15);
+  border: 2px solid rgba(14, 165, 233, 0.4);
+  color: var(--color-text-primary, #f8fafc);
   transition: all 0.3s ease;
   min-height: 44px;
   min-width: 44px;
 }
 
 .slideshow__text .button--secondary:hover {
-  background: rgba(34, 211, 238, 0.35);
-  border-color: rgba(34, 211, 238, 0.9);
+  background: rgba(14, 165, 233, 0.25);
+  border-color: rgba(14, 165, 233, 0.6);
   transform: translateY(-1px);
 }
 
 .slideshow__text .button--secondary:focus-visible {
-  outline: 3px solid #fbbf24;
+  outline: 3px solid var(--color-primary);
   outline-offset: 3px;
 }
 
