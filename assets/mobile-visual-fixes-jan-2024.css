@@ -117,7 +117,9 @@
   .benefits-grid,
   .benefits-section,
   .icon-with-text-section,
-  [class*="benefits"] .grid {
+  [class*="benefits"] .grid,
+  .ta-conv-benefits,
+  .benefits-bar__grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem !important;
@@ -125,39 +127,69 @@
     align-items: start !important;
   }
 
-  /* Individual benefit items - proper alignment */
+  /* Individual benefit items - proper alignment with enhanced styling */
   .benefit-item,
   .icon-with-text,
-  [class*="benefit"] {
+  .icon-with-text__item,
+  .ta-conv-benefit,
+  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    padding: 1rem 0.5rem !important;
+    padding: 1.2rem !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
     gap: 0.5rem !important;
   }
 
-  /* Benefit icons - consistent sizing */
+  /* Benefit icons - larger and more visible */
   .benefit-item__icon,
   .icon-with-text__icon,
-  [class*="benefit"] svg,
-  [class*="benefit"] img {
-    width: 32px !important;
-    height: 32px !important;
-    margin-bottom: 0.5rem !important;
+  .ta-conv-benefit__icon,
+  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) .icon,
+  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) svg,
+  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) img {
+    font-size: 2.5rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     flex-shrink: 0 !important;
   }
 
-  /* Benefit text - proper wrapping */
+  /* Benefit emoji icons */
+  .benefit-emoji {
+    font-size: 2.5rem !important;
+  }
+
+  /* Benefit titles - enhanced visibility */
+  .benefit-item__title,
+  .icon-with-text__title,
+  .ta-conv-benefit__title {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    margin-bottom: 0.3rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Benefit text/description - proper wrapping and readability */
   .benefit-item__text,
+  .benefit-item__description,
   .icon-with-text__text,
-  [class*="benefit"] .text {
-    font-size: 1.2rem !important;
-    line-height: 1.3 !important;
-    color: rgba(226, 232, 240, 0.9) !important;
+  .ta-conv-benefit__description,
+  [class*="benefit"]:not([class*="badge"]):not([class*="shipping"]):not([class*="stock"]) .text {
+    font-size: 1.1rem !important;
+    line-height: 1.4 !important;
+    color: rgba(226, 232, 240, 0.8) !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     max-width: 100% !important;
+    margin: 0 !important;
   }
 }
 
