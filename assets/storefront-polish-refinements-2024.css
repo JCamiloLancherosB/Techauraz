@@ -302,7 +302,6 @@
 .slider-button {
   background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(148, 163, 184, 0.3);
   border-radius: 50%;
   width: 44px;
@@ -385,7 +384,6 @@
   color: var(--color-text-primary, #fef3c7);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 1rem;
 }
 
 .section h3,
@@ -402,7 +400,6 @@
 [class*="__text"] {
   color: var(--color-text-secondary, rgba(226, 232, 240, 0.85));
   line-height: 1.6;
-  margin-bottom: 1rem;
 }
 
 /* =============================================================================
