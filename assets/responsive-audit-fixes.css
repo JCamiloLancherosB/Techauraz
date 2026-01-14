@@ -897,20 +897,6 @@ h2.section-heading,
   }
 }
 
-/* Title wrapper - compact */
-.title-wrapper,
-.section-header {
-  margin-bottom: 1.5rem;
-  padding-bottom: 0;
-}
-
-@media screen and (max-width: 749px) {
-  .title-wrapper,
-  .section-header {
-    margin-bottom: 1rem;
-  }
-}
-
 /* Rich text sections - tighter */
 .rich-text,
 .shopify-section--rich-text {
