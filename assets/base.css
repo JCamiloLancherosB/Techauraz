@@ -247,12 +247,6 @@ select:focus {
   border-radius: 4px;
 }
 
-/* === SELECTION === */
-::selection {
-  background-color: rgba(251, 191, 36, 0.3);
-  color: #fef3c7;
-}
-
 /* === SCROLLBAR (Modern Browsers) === */
 ::-webkit-scrollbar {
   width: 10px;
