@@ -546,6 +546,7 @@
    
    - .visually-hidden → heredado de assets/base.css
    - *:focus-visible → heredado de assets/base.css
-   - .page-width responsive breakpoints → heredado de assets/base.css
+   - .page-width (base + responsive breakpoints) → heredado de 
+     assets/base.css y assets/responsive-audit-fixes.css
    - @keyframes pulse → heredado de assets/animations.css
    ============================================================ */
