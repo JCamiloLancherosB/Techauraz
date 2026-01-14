@@ -112,39 +112,3 @@
 
   updateTotalPrice();
 })();
-
-// --- 3. Tarjetas Clickeables (OPTIMIZADO - SIN REFLOW) ---
-(function() {
-  // Usar IntersectionObserver para cargar solo las tarjetas visibles
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const card = entry.target;
-        const productLink = card.querySelector('.card__heading a, .full-unstyled-link');
-        
-        if (productLink && !card.hasAttribute('data-clickable')) {
-          const productUrl = productLink.href;
-          
-          // Hacer clickeable sin agregar elementos extra
-          card.style.cursor = 'pointer';
-          card.setAttribute('data-clickable', 'true');
-          
-          card.addEventListener('click', function(e) {
-            // Ignorar clicks en botones y badges
-            if (e.target.closest('.quick-add__submit, button, .card__badge')) {
-              return;
-            }
-            window.location.href = productUrl;
-          });
-          
-          observer.unobserve(card);
-        }
-      }
-    });
-  }, { rootMargin: '50px' });
-
-  // Observar todas las tarjetas
-  document.querySelectorAll('.card-wrapper').forEach(card => {
-    observer.observe(card);
-  });
-})();
