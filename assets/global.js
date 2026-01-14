@@ -757,7 +757,7 @@ class SlideshowComponent extends SliderComponent {
     if (!this.sliderControlWrapper) return;
 
     this.sliderFirstItemNode = this.slider.querySelector('.slideshow__slide');
-    if (this.sliderItemsToShow.length > 0) this.currentPage = 1;
+    if (this.sliderItemsToShow > 0) this.currentPage = 1;
 
     this.announcementBarSlider = this.querySelector('.announcement-bar-slider');
     // Value below should match --duration-announcement-bar CSS value
