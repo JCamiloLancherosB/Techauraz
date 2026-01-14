@@ -86,17 +86,6 @@
       >
         {% render 'icon-caret' %}
       </button>
-
-      {%- if section.settings.auto_rotate -%}
-        <button
-          type="button"
-          class="slideshow__autoplay slider-button no-js-hidden{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
-          aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
-        >
-          {%- render 'icon-pause' -%}
-          {%- render 'icon-play' -%}
-        </button>
-      {%- endif -%}
     </div>
     <noscript>
       <div class="slider-buttons">
@@ -252,17 +241,6 @@
       >
         {% render 'icon-caret' %}
       </button>
-
-      {%- if section.settings.auto_rotate -%}
-        <button
-          type="button"
-          class="slideshow__autoplay slider-button no-js-hidden{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
-          aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
-        >
-          {%- render 'icon-pause' -%}
-          {%- render 'icon-play' -%}
-        </button>
-      {%- endif -%}
     </div>
     <noscript>
       <div class="slider-buttons">
