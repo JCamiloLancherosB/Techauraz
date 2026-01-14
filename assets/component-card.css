@@ -625,6 +625,7 @@
   }
   
   /* Ensure card images are visible on mobile */
+  /* !important flags needed to override conflicting base styles and ensure images display */
   .card__media {
     position: relative !important;
     width: 100% !important;

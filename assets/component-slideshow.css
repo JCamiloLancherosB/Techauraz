@@ -74,7 +74,7 @@ slideshow-component {
   
   /* Ensure slideshow images are visible on mobile */
   .slideshow__media {
-    min-height: 250px;
+    min-height: 250px; /* Minimum height for mobile to ensure images display properly */
     position: relative;
   }
   
