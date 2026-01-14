@@ -218,7 +218,8 @@ header-drawer {
 }
 
 /* Add padding to body to prevent content from going under fixed header
-   Note: Header is ALWAYS fixed (line 19), so all pages need this padding */
+   Note: Header has position:fixed !important applied to .header-wrapper,
+   so all pages need this padding to compensate for the fixed header */
 body {
   padding-top: var(--header-height);
 }

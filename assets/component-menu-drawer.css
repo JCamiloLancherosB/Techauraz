@@ -25,8 +25,14 @@
 }
 
 /* Icon toggle - show hamburger by default, close when drawer is open
-   Note: Both icon-hamburger and icon-close are rendered in header-drawer.liquid 
-   and only their visibility is toggled via CSS */
+   Markup structure in header-drawer.liquid:
+   <summary class="header__icon--menu">
+     <span>
+       {% render 'icon-hamburger' %}
+       {% render 'icon-close' %}
+     </span>
+   </summary>
+   Both icons are always rendered; CSS controls which is visible */
 .header__icon--menu .icon-close {
   display: none;
 }
