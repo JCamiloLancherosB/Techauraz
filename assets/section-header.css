@@ -250,7 +250,6 @@ body {
 }
 
 .template-index .header__heading-logo-wrapper {
-  display: flex;
   align-items: center;
   justify-content: flex-start;
   min-height: 40px;
