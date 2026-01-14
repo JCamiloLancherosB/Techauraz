@@ -70,6 +70,7 @@
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
+    border-radius: 100px;
   }
   
   /* Navigation */
