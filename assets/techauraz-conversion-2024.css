@@ -5,6 +5,12 @@
  * Version: 1.0.0
  * Date: 2024-12-22
  * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ * 
  * Conversion-focused enhancements for higher conversions with:
  * - Persuasive visual design
  * - Clear product storytelling
