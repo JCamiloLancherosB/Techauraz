@@ -216,7 +216,15 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  /* Background for mobile - will be overridden on desktop for slideshow */
   background-color: #020617;
+}
+
+/* Neutralize background on desktop for slideshow to show media through */
+@media screen and (min-width: 750px) {
+  .slideshow .banner__content {
+    background-color: transparent;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -587,8 +595,8 @@
   padding: 8px 16px !important; /* Override component padding */
   border-radius: 20px !important; /* Override component border-radius */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; /* Override component shadow */
-  z-index: 100 !important; /* Ensure controls are above hero media, text, and CTA buttons */
-  position: absolute !important; /* Ensure positioning context */
+  /* Ensure controls stay above text overlay */
+  z-index: 5 !important;
 }
 
 .banner .slideshow__controls .slider-counter__link {
