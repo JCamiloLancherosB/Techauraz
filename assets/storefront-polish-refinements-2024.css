@@ -1,3 +1,11 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid, scroll-behavior)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* =============================================================================
    TECHAURAZ STOREFRONT POLISH REFINEMENTS - January 2024
    =============================================================================
@@ -521,16 +529,7 @@
   border-radius: 8px;
 }
 
-/* Smooth scrolling for better UX */
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+/* Note: Smooth scrolling and reduced motion handling are covered by base.css */
 
 /* Ensure all interactive elements have proper cursor */
 .slider-button,

@@ -1,3 +1,11 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* =============================================================================
    VISUAL SYSTEM UNIFICATION - December 2024
    Comprehensive dark theme palette, rating visibility, and UI polish
@@ -207,7 +215,7 @@
   color: #ffffff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border-color: rgba(245, 158, 11, 0.3);
-  animation: pulse-badge 2s ease-in-out infinite;
+  animation: pulse 2s ease-in-out infinite; /* Using pulse keyframe from animations.css */
 }
 
 /* Sold out badge - Gray */
@@ -218,24 +226,7 @@
   border-color: rgba(107, 114, 128, 0.3);
 }
 
-/* Badge animation for stock warnings */
-@keyframes pulse-badge {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6);
-  }
-}
-
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .card__badge--stock {
-    animation: none;
-  }
-}
+/* Note: Keyframes and reduced motion handling are covered by animations.css */
 
 /* Badge container positioning */
 .card__badges {
@@ -747,17 +738,7 @@ textarea:focus-visible,
   transform: translateZ(0);
 }
 
-/* Reduce motion for users with vestibular disorders
-   NOTE: !important needed to ensure user preferences override all animations */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+/* Note: Reduced motion handling is covered by animations.css */
 
 /* =============================================================================
    CARD CONTENT ALIGNMENT - Consistent spacing and positioning

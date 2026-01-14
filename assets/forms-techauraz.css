@@ -1,3 +1,11 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación, use 'rotate' instead of 'spin')
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* ===== TECHAURAZ FORM STYLES ===== */
 
 .form-techauraz {
@@ -203,13 +211,7 @@
   border: 2px solid rgba(15, 23, 42, 0.3);
   border-top-color: #0f172a;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  animation: rotate 0.8s linear infinite; /* Using rotate keyframe from animations.css */
 }
 
 /* Secondary button */

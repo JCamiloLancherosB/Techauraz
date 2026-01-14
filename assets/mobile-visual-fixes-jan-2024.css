@@ -1,3 +1,11 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid, scroll-behavior)
+ * - animations.css (keyframes y clases de animación - use 'pulse' instead of 'pulse-stock')
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* =============================================================================
    TECHAURAZ MOBILE VISUAL FIXES - January 2024
    =============================================================================
@@ -249,19 +257,10 @@
     background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
-    animation: pulse-stock 2s ease-in-out infinite !important;
+    animation: pulse 2s ease-in-out infinite !important; /* Using pulse keyframe from animations.css */
   }
 
-  @keyframes pulse-stock {
-    0%, 100% {
-      transform: scale(1);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-    50% {
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
-    }
-  }
+  /* Note: Keyframes are covered by animations.css */
 
   /* Sale/discount badges - red gradient */
   .badge--sale,
@@ -537,14 +536,7 @@
    11. ACCESSIBILITY - REDUCED MOTION SUPPORT
    ============================================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Note: Reduced motion handling is covered by animations.css */
 
 /* =============================================================================
    END OF MOBILE VISUAL FIXES

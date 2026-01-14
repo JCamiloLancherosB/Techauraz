@@ -1,3 +1,11 @@
+/* 
+ * DEPENDENCIAS: 
+ * - base.css (estilos base, utilidades, focus-visible, grid)
+ * - animations.css (keyframes y clases de animación)
+ * 
+ * NOTA: Estilos base heredados, no duplicar aquí.
+ */
+
 /* =============================================================================
    PRODUCT PAGE VISUAL AUDIT & FIXES - December 2024
    Addresses: Banner readability, button consistency, description spacing, footer
@@ -775,11 +783,7 @@ a[href*="wa.me"]:hover {
    5. RESPONSIVE & ACCESSIBILITY IMPROVEMENTS
    ============================================================================= */
 
-/* Focus visible for keyboard navigation */
-*:focus-visible {
-  outline: 3px solid #fbbf24;
-  outline-offset: 3px;
-}
+/* Note: Global focus-visible styling is covered by base.css */
 
 /* Skip to content link for accessibility */
 .skip-to-content-link {
