@@ -23,6 +23,10 @@
  * - Resolved CSS conflicts and removed duplicate rules
  * - Persuasive visual elements with proper contrast
  * - Optimized file size and loading performance
+ * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid, reset)
+ * - animations.css (keyframes y clases de animación)
  * =============================================================================
  */
 
@@ -777,7 +781,7 @@ body.menu-drawer-open {
 }
 
 .animate-slide-up {
-  animation: slideInUp 0.6s ease;
+  animation: slideUp 0.6s ease;  /* Uses slideUp from animations.css (replaces local slideInUp) */
 }
 
 /* =============================================================================
