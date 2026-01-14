@@ -311,6 +311,12 @@
       "login": {
         "title": "Have an account?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
+      },
+      "empty_subtitle": "Discover our products and add them to your cart",
+      "trust_badges": {
+        "free_shipping": "Free Shipping $150,000+",
+        "secure_payment": "Secure Payment",
+        "return_guarantee": "Return Guarantee"
       }
     },
     "footer": {
