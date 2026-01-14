@@ -564,6 +564,8 @@
   border: 2px solid rgba(0, 0, 0, 0.1) !important; /* Override component default */
   color: #1a202c !important; /* Override component default */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important; /* Override component default */
+  z-index: 101 !important; /* Ensure buttons are above all content */
+  position: relative !important;
 }
 
 .banner .slider-button:hover {
@@ -585,6 +587,8 @@
   padding: 8px 16px !important; /* Override component padding */
   border-radius: 20px !important; /* Override component border-radius */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; /* Override component shadow */
+  z-index: 100 !important; /* Ensure controls are above hero media, text, and CTA buttons */
+  position: absolute !important; /* Ensure positioning context */
 }
 
 .banner .slideshow__controls .slider-counter__link {

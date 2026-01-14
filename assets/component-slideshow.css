@@ -10,6 +10,7 @@ slideshow-component {
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Ensure controls aren't clipped - removed overflow: hidden from parent if it existed */
 }
 
 @media screen and (max-width: 989px) {
