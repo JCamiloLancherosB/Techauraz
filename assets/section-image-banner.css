@@ -337,13 +337,6 @@
   height: 100%;
 }
 
-/* Default overlay for better text readability 
-   NOTE: !important required to ensure overlay is visible by default,
-   overriding the dynamic opacity value from section settings */
-.banner::after {
-  opacity: 1 !important;
-}
-
 .banner__box > * + .banner__text {
   margin-top: 1.5rem;
 }
