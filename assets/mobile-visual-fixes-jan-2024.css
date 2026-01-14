@@ -93,16 +93,6 @@
   body.cookie-banner-visible {
     padding-bottom: 120px !important; /* Fallback for browsers without :has() support */
   }
-  
-  /* Modern browsers with :has() support */
-  @supports selector(:has(*)) {
-
-    /* Adjust page content when cookie banner is visible */
-    body:has(.cookie-banner.is-visible) .page-width:last-child,
-    body:has(.cookie-banner.is-visible) #MainContent > .section:last-child {
-      padding-bottom: calc(var(--cookie-banner-height, 120px) + 2rem) !important;
-    }
-  }
 }
 
 /* =============================================================================
