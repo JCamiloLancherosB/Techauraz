@@ -59,8 +59,8 @@ body {
 
 /* === FOCUS STYLES (Accessibility) === */
 *:focus-visible {
-  outline: 2px solid #f59e0b;
-  outline-offset: 2px;
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
@@ -240,8 +240,8 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid #f59e0b;
-  outline-offset: 2px;
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
   border-radius: 4px;
 }
 

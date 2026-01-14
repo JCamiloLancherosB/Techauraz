@@ -509,6 +509,14 @@ h2.title {
     padding: 1.2rem 1.5rem !important;
   }
   
+  .button:focus-visible,
+  .btn:focus-visible,
+  a.button:focus-visible,
+  button[type="submit"]:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 3px !important;
+  }
+  
   .header__icon,
   .header__icon--cart,
   .header__icon--account {
@@ -519,9 +527,22 @@ h2.title {
     justify-content: center !important;
   }
   
+  .header__icon:focus-visible,
+  .header__icon--cart:focus-visible,
+  .header__icon--account:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 2px !important;
+  }
+  
   .slider-button,
   .slider-counter__link {
     min-width: 44px !important;
     min-height: 44px !important;
+  }
+  
+  .slider-button:focus-visible,
+  .slider-counter__link:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 3px !important;
   }
 }
