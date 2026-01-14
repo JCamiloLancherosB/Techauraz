@@ -220,6 +220,16 @@
 }
 
 /* Badge animation for stock warnings - component-specific */
+@keyframes pulse-badge {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6);
+  }
+}
 
 /* Note: This is a component-specific animation, different from the generic pulse in animations.css */
 
