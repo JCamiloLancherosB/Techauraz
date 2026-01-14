@@ -769,7 +769,7 @@ body.menu-drawer-open {
    ANIMATIONS - Smooth Transitions
    ============================================================================= */
 
-/* Note: @keyframes fadeIn, slideUp, slideInLeft, etc. are defined in animations.css */
+/* Note: @keyframes fadeIn, slideInUp, slideInLeft, etc. are defined in animations.css */
 
 /* Apply animations */
 .animate-fade-in {
