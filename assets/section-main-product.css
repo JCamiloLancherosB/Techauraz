@@ -4,7 +4,6 @@
 
 /* Note: Animations (fadeIn, slideInLeft, slideInRight, etc.) are imported from assets/animations.css */
 
-
 /* RESPONSIVE TWO-COLUMN FIX: Remove empty column gap and enforce balanced width */
 /* Note: Using specific selector to override Dawn's default grid gap */
 .product.grid {
@@ -114,8 +113,6 @@
   .product--right .product__media-list {
     margin-bottom: 1.5rem; /* Reduced from 2rem */
   }
-
-}
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media) {
@@ -1602,52 +1599,6 @@ a.product__text {
 }
 
 /* Animations */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
 
 /* Responsive adjustments */
 @media screen and (max-width: 749px) {
@@ -1765,11 +1716,6 @@ a.product__text {
   animation: shimmer-button 2s infinite;
 }
 
-@keyframes shimmer-button {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
 .product-form__submit:hover {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
   transform: translateY(-3px);
@@ -1795,3 +1741,4 @@ a.product__text {
 
 /* ===== SELECTOR DE VARIANTES MEJORADO ===== */
 /* Variant selector styles moved to component-product-variant-picker.css to avoid duplication */
+}
