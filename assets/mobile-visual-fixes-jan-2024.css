@@ -409,10 +409,17 @@
   /* Slider de testimonios - ocultar si está vacío o mostrar correctamente */
   .testimonials__slider,
   .testimonials-slider,
+  .testimonials-slider-wrapper,
   .product-testimonials__carousel {
     min-height: 200px !important;
     position: relative !important;
     overflow: visible !important;
+  }
+
+  /* Asegurar que el slider desktop sea visible en mobile */
+  .testimonials-slider.slider--desktop {
+    display: flex !important;
+    flex-wrap: nowrap !important;
   }
 
   /* Si el slider tiene imágenes, mostrarlas */
@@ -430,6 +437,7 @@
 
   /* Cards de testimonios - mejorar visibilidad */
   .testimonial-card,
+  .testimonial-card__content,
   .testimonial__item,
   .product-testimonials__card,
   [class*="testimonial"] .card {
