@@ -203,8 +203,8 @@
 
 /* "En Oferta" badge - Amber accent (primary) */
 .card__badge--sale {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text-inverse);
   text-shadow: none;
   font-weight: 800;
   border-color: rgba(251, 191, 36, 0.4);
@@ -212,7 +212,7 @@
 
 /* Stock warning badge - Orange accent */
 .card__badge--stock {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker, #d97706) 100%);
   color: #ffffff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border-color: rgba(245, 158, 11, 0.3);
@@ -472,8 +472,8 @@
 .button--primary,
 .product-form__submit,
 .quick-add__submit {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-  color: #0f172a !important;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker, #d97706) 100%) !important;
+  color: var(--color-text-inverse) !important;
   font-weight: 700 !important;
   border: none !important;
   border-radius: 8px !important;
@@ -481,7 +481,7 @@
   min-height: 48px !important;
   font-size: 1.4rem !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 12px var(--shadow-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -489,16 +489,16 @@
 .button--primary:hover,
 .product-form__submit:hover,
 .quick-add__submit:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  background: linear-gradient(135deg, #fde68a 0%, var(--color-primary) 100%) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5) !important;
-  color: #0f172a !important;
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5) !important;
+  color: var(--color-text-inverse) !important;
 }
 
 .button--primary:focus-visible,
 .product-form__submit:focus-visible,
 .quick-add__submit:focus-visible {
-  outline: 3px solid #fbbf24;
+  outline: 3px solid var(--color-primary);
   outline-offset: 3px;
 }
 
@@ -515,7 +515,7 @@
 .button--secondary:hover {
   background: rgba(30, 41, 59, 0.8) !important;
   border-color: rgba(251, 191, 36, 0.6) !important;
-  color: #fbbf24 !important;
+  color: var(--color-primary) !important;
   transform: translateY(-2px);
 }
 
