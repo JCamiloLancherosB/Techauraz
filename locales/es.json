@@ -303,7 +303,7 @@
       "empty": "Tu carrito está vacío",
       "cart_error": "Se produjo un error al actualizar su carrito. Inténtalo de nuevo.",
       "cart_quantity_error_html": "Solo puedes agregar {{ quantity }} de este artículo a tu carrito.",
-      "taxes_and_shipping_policy_at_checkout_html": "Impuestos, descuentos y <a href=\"{{ link }}\">envío</a> calculados al finalizar la compra",
+      "taxes_and_shipping_policy_at_checkout_html": "Impuestos, descuentos y <a href={{ link }}>envío</a> calculados al finalizar la compra",
       "taxes_included_but_shipping_at_checkout": "Impuestos incluidos y envío y descuentos calculados al finalizar la compra.",
       "taxes_included_and_shipping_policy_html": "Impuesto incluido. <a href=\"{{ link }}\">Envío</a> y descuentos calculados al finalizar la compra.",
       "taxes_and_shipping_at_checkout": "Impuestos, descuentos y envío calculados al finalizar la compra.",
