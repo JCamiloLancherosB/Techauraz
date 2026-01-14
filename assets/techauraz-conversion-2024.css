@@ -19,39 +19,21 @@
 /* =============================================================================
    CONVERSION VARIABLES
    ============================================================================= */
-:root {
-  /* Conversion-specific colors */
-  --ta-conv-primary: #0ea5e9;       /* Primary CTA color */
-  --ta-conv-primary-hover: #0284c7; /* Primary hover */
-  --ta-conv-secondary: #22d3ee;     /* Secondary CTA */
-  --ta-conv-success: #10b981;       /* Success/guarantee badge */
-  --ta-conv-urgency: #f59e0b;       /* Urgency/stock badges */
-  --ta-conv-trust: #22c55e;         /* Trust badges */
-  
-  /* Badge colors */
-  --ta-conv-badge-new: #8b5cf6;     /* Purple for "Nuevo" */
-  --ta-conv-badge-free: #10b981;    /* Green for "Envío gratis" */
-  --ta-conv-badge-stock: #f59e0b;   /* Amber for stock */
-  
-  /* Spacing - tighter for conversion */
-  --ta-conv-space-tight: 0.75rem;   /* 12px */
-  --ta-conv-space-card: 1rem;       /* 16px */
-  --ta-conv-space-section: 2rem;    /* 32px */
-}
+
 
 /* =============================================================================
    HERO SECTION CONVERSION ENHANCEMENTS
    ============================================================================= */
 
 /* Reduce hero empty space and improve focus */
-.ta-conv-hero {
+/* .ta-conv-hero {
   position: relative;
   min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-}
+} */
 
 @media screen and (min-width: 750px) {
   .ta-conv-hero {
