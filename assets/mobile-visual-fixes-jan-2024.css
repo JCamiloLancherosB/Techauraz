@@ -80,16 +80,22 @@
     overflow-y: auto !important;
   }
 
-  /* When cookie banner is visible, add bottom spacing to content */
-  body.cookie-banner-visible,
-  body:has(.cookie-banner.is-visible) {
-    padding-bottom: calc(var(--cookie-banner-height, 120px)) !important;
+  /* When cookie banner is visible, add bottom spacing to content - with fallback */
+  body.cookie-banner-visible {
+    padding-bottom: 120px !important; /* Fallback for browsers without :has() support */
   }
+  
+  /* Modern browsers with :has() support */
+  @supports selector(:has(*)) {
+    body:has(.cookie-banner.is-visible) {
+      padding-bottom: calc(var(--cookie-banner-height, 120px)) !important;
+    }
 
-  /* Adjust page content when cookie banner is visible */
-  body:has(.cookie-banner.is-visible) .page-width:last-child,
-  body:has(.cookie-banner.is-visible) #MainContent > .section:last-child {
-    padding-bottom: calc(var(--cookie-banner-height, 120px) + 2rem) !important;
+    /* Adjust page content when cookie banner is visible */
+    body:has(.cookie-banner.is-visible) .page-width:last-child,
+    body:has(.cookie-banner.is-visible) #MainContent > .section:last-child {
+      padding-bottom: calc(var(--cookie-banner-height, 120px) + 2rem) !important;
+    }
   }
 }
 
@@ -222,6 +228,7 @@
     line-height: 1.2 !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
     backdrop-filter: blur(4px) !important;
     white-space: nowrap !important;
   }
@@ -270,7 +277,8 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Ensure slider shows content properly */
+  /* Ensure slider shows content properly
+     Note: scroll-snap is progressive enhancement - older browsers will still scroll horizontally */
   .slider,
   .slideshow,
   .carousel {
@@ -281,7 +289,8 @@
     -webkit-overflow-scrolling: touch !important;
   }
 
-  /* Slider items - full width display */
+  /* Slider items - full width display
+     Note: scroll-snap-align is progressive enhancement */
   .slider__slide,
   .slideshow__slide,
   .carousel__item {
@@ -317,6 +326,7 @@
     min-height: 44px !important;
     border-radius: 50% !important;
     background: rgba(15, 23, 42, 0.9) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
     backdrop-filter: blur(8px) !important;
     border: 1px solid rgba(148, 163, 184, 0.3) !important;
     display: flex !important;
@@ -347,6 +357,7 @@
     transform: translateX(-50%) !important;
     z-index: 10 !important;
     background: rgba(15, 23, 42, 0.8) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
     backdrop-filter: blur(8px) !important;
     padding: 0.5rem 1rem !important;
     border-radius: 20px !important;
