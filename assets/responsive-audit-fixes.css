@@ -764,31 +764,6 @@ img[loading="lazy"] {
 .gap-3 { gap: 1.5rem; }
 .gap-4 { gap: 2rem; }
 
-/* =============================================================================
-   SECTION SPACING OPTIMIZATION - Reduce Excessive Whitespace
-   Achieves more compact, conversion-focused layout
-   ============================================================================= */
-
-/* Override default section padding with tighter spacing */
-.shopify-section {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-@media screen and (max-width: 749px) {
-  .shopify-section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .shopify-section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-}
-
 /* Specific sections with reduced spacing */
 .shopify-section--featured-collection,
 .shopify-section--featured-products,
@@ -876,11 +851,6 @@ footer {
   }
 }
 
-/* Remove excessive vertical margins between sections */
-.shopify-section + .shopify-section {
-  margin-top: 0;
-}
-
 /* Headings - reduce bottom margin */
 h2.section-heading,
 .section__heading,
@@ -949,7 +919,7 @@ h2.section-heading,
 /* First section after header - minimal spacing */
 .shopify-section:first-of-type,
 #MainContent > .shopify-section:first-child {
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
   background-color: #020617;
 }
 
