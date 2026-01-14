@@ -240,8 +240,25 @@ slideshow-component {
 
 @media screen and (min-width: 750px) {
   .slideshow__text-wrapper.banner__content {
+    /* Position text wrapper absolutely over the media on desktop */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: 100%;
     padding: 5rem;
+    /* Set z-index above media but allow controls to be on top */
+    z-index: 3;
+    /* Disable pointer events on wrapper so controls remain clickable */
+    pointer-events: none;
+    /* Remove background so media shows through */
+    background: transparent;
+  }
+  
+  /* Re-enable pointer events on the text box itself for CTA buttons */
+  .slideshow__text-wrapper.banner__content .slideshow__text.banner__box {
+    pointer-events: auto;
   }
 }
 
@@ -252,6 +269,9 @@ slideshow-component:not(.page-width) .slider-buttons {
 
 .slideshow__control-wrapper {
   display: flex;
+  /* Ensure controls remain clickable above text overlay */
+  position: relative;
+  z-index: 4;
 }
 
 .slideshow__autoplay {
