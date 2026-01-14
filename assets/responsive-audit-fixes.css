@@ -950,6 +950,7 @@ h2.section-heading,
 .shopify-section:first-of-type,
 #MainContent > .shopify-section:first-child {
   padding-top: 1.5rem;
+  background-color: #020617;
 }
 
 @media screen and (max-width: 749px) {
