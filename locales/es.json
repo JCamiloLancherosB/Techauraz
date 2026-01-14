@@ -17,15 +17,15 @@
         "share_on_pinterest": "Pin en Pinterest"
       },
       "links": {
-        "twitter": "Gorjeo",
+        "twitter": "Twitter",
         "facebook": "Facebook",
         "pinterest": "Pinterest",
         "instagram": "Instagram",
-        "tumblr": "tumblr",
+        "tumblr": "Tumblr",
         "snapchat": "Snapchat",
         "youtube": "YouTube",
         "vimeo": "Vimeo",
-        "tiktok": "Tik Tok"
+        "tiktok": "TikTok"
       }
     },
     "continue_shopping": "Seguir comprando",
@@ -33,7 +33,7 @@
       "label": "Paginación",
       "page": "Página {{ number }}",
       "next": "Siguiente página",
-      "previous": "Pagina anterior"
+      "previous": "Página anterior"
     },
     "search": {
       "search": "Buscar",
@@ -45,7 +45,7 @@
       "view_empty_cart": "Ver carrito"
     },
     "share": {
-      "copy_to_clipboard": "Copiar link",
+      "copy_to_clipboard": "Copiar enlace",
       "share_url": "Enlace",
       "success_message": "Enlace copiado al portapapeles",
       "close": "Cerrar compartir"
@@ -69,8 +69,8 @@
     }
   },
   "accessibility": {
-    "skip_to_text": "saltar al contenido",
-    "close": "Cerca",
+    "skip_to_text": "Saltar al contenido",
+    "close": "Cerrar",
     "unit_price_separator": "por",
     "vendor": "Proveedor:",
     "error": "Error",
@@ -187,7 +187,7 @@
     },
     "facets": {
       "apply": "Aplicar",
-      "clear": "Claro",
+      "clear": "Limpiar",
       "clear_all": "Eliminar todo",
       "from": "De",
       "filter_and_sort": "Filtrar y ordenar",
@@ -256,7 +256,7 @@
       }
     },
     "cart": {
-      "cart": "Carro"
+      "cart": "Carrito"
     },
     "contact": {
       "form": {
@@ -286,12 +286,12 @@
       }
     },
     "cart": {
-      "title": "tu carrito",
+      "title": "Tu carrito",
       "caption": "Artículos del carrito",
       "remove_title": "Eliminar {{ title }}",
-      "note": "Ordene instrucciones especiales",
-      "checkout": "Verificar",
-      "empty": "Tu carrito esta vacío",
+      "note": "Instrucciones especiales del pedido",
+      "checkout": "Finalizar compra",
+      "empty": "Tu carrito está vacío",
       "cart_error": "Se produjo un error al actualizar su carrito. Inténtalo de nuevo.",
       "cart_quantity_error_html": "Solo puedes agregar {{ quantity }} de este artículo a tu carrito.",
       "taxes_and_shipping_policy_at_checkout_html": "Impuestos, descuentos y <a href=\"{{ link }}\">envío</a> calculados al finalizar la compra",
@@ -434,7 +434,7 @@
       "delete": "Borrar",
       "delete_confirm": "¿Está seguro de que desea eliminar esta dirección?"
     },
-    "log_in": "Acceso",
+    "log_in": "Iniciar sesión",
     "log_out": "Cerrar sesión",
     "login_page": {
       "cancel": "Cancelar",
@@ -444,9 +444,9 @@
       "guest_continue": "Continuar",
       "guest_title": "Continuar como invitado",
       "password": "Contraseña",
-      "title": "Acceso",
+      "title": "Iniciar sesión",
       "sign_in": "Iniciar sesión",
-      "submit": "Entregar"
+      "submit": "Enviar"
     },
     "orders": {
       "title": "Historial de pedidos",
@@ -668,7 +668,7 @@
     "page_titles": {
       "blog_or_article_with_error": "Error: %{title}",
       "products": "Productos",
-      "shopping_cart": "tu carrito de la compra",
+      "shopping_cart": "Tu carrito de compras",
       "account": "Cuenta",
       "create_account": "Crear una cuenta",
       "reset_account": "Restablecer cuenta",
@@ -687,12 +687,12 @@
     "challenge": {
       "message": "Para continuar, haznos saber que no eres un robot.",
       "error": "Tu respuesta no fue correcta, por favor intenta nuevamente.",
-      "submit_button_text": "Entregar"
+      "submit_button_text": "Enviar"
     },
     "checkpoint": {
       "message": "Resuelve Captcha para continuar",
       "error": "La validación del captcha falló",
-      "submit_button_text": "Entregar"
+      "submit_button_text": "Enviar"
     },
     "store_availability": {
       "pick_up_time": {
@@ -702,9 +702,9 @@
     },
     "checkout": {
       "general": {
-        "cart": "Carro",
-        "close_modal_label": "Cerca",
-        "close_notice_label": "Cerca",
+        "cart": "Carrito",
+        "close_modal_label": "Cerrar",
+        "close_notice_label": "Cerrar",
         "expand_notice_label": "Ver más",
         "continue_to_shipping_method": "Continuar con el envío",
         "continue_to_payment_method": "Continuar con el pago",
@@ -864,15 +864,15 @@
         "loading_title": "Pagar - {{shopName}}",
         "display_name": "{{firstName}} {{lastName}}",
         "google_map_title": "Mapa de Google",
-        "submit_order_button_label": "Orden de envio",
+        "submit_order_button_label": "Enviar pedido",
         "submit_for_review_button_label": "Enviar para revisión",
         "submit_for_review_notice_label": "El pago no vence hasta que se revise su pedido",
         "continue_to_payment_plans_button_label": "Continuar a planes de pago",
-        "back_button_label": "Devolver",
+        "back_button_label": "Volver",
         "choose_delivery_strategy": "Elija un método de entrega",
         "autocomplete_zero_item": "No hay artículos disponibles",
         "autocomplete_powered_by_google": "Desarrollado por {{brandName}}",
-        "submit": "Entregar",
+        "submit": "Enviar",
         "processing": "Procesando…",
         "stepper": {
           "increase": "Aumentar {{type}}",
@@ -923,7 +923,7 @@
       "customer_account": {
         "not_user_label": "¿No es %{first_name}?",
         "have_an_account_label": "¿Tener una cuenta?",
-        "sign_in_link_label": "Acceso",
+        "sign_in_link_label": "Iniciar sesión",
         "sign_out_link_label": "Cerrar sesión",
         "save_my_information_label": "Guarda esta información para la próxima vez.",
         "invalid_address": "La dirección seleccionada no es válida. %{update_address_link} o seleccione una dirección diferente.",
@@ -1245,7 +1245,7 @@
         "detected_card_brand": "Marca de tarjeta detectada: {brand}",
         "credit_card_vaulting_sign_in_banner_title": "Guarde su tarjeta de crédito",
         "credit_card_vaulting_sign_in_banner_info": "Inicie sesión o cree una cuenta para guardar su tarjeta de crédito para futuras compras.",
-        "credit_card_vaulting_sign_in_banner_button_label": "Acceso",
+        "credit_card_vaulting_sign_in_banner_button_label": "Iniciar sesión",
         "ftd_vault_credit_card_label": "Guarde esta tarjeta de crédito en mi cuenta para realizar un pago más rápido",
         "card_number_label": "Número de tarjeta",
         "card_number_placeholder": "Número de tarjeta",
@@ -1743,7 +1743,7 @@
         "login_prompt": {
           "no_access": {
             "message": "{{logIn}} a una cuenta con acceso a esta ubicación para agregar o usar métodos de pago guardados.",
-            "link": "Acceso"
+            "link": "Iniciar sesión"
           }
         },
         "direct_payment_terms": "Estás en {{translatedName}} términos. Su tarjeta será cargada el {{dueDate}}.",
@@ -1838,7 +1838,7 @@
         "order_number_label": "Número de orden",
         "customer_validation_error": "Introduzca un correo electrónico válido o un número de pedido.",
         "customer_validation_error_phone": "Ingrese un teléfono válido o un número de pedido.",
-        "login": "Acceso",
+        "login": "Iniciar sesión",
         "unfulfilled_items_title": "Preparándose para el envío",
         "unfulfilled_items_description": "Actualmente estamos preparando estos artículos para su envío.",
         "marker": {
@@ -1860,7 +1860,7 @@
         "order_updates_subscribe_to_email_notifications": "Reciba actualizaciones de envío por correo electrónico",
         "order_updates_subscribe_to_email_or_phone_notifications": "Reciba actualizaciones de envío por correo electrónico o mensaje de texto",
         "order_updates_subscribe_to_phone_notifications": "Reciba actualizaciones de envío por mensaje de texto",
-        "order_updates_submit_subscription": "Entregar",
+        "order_updates_submit_subscription": "Enviar",
         "track_shipment": "Rastrear envio",
         "other_options": "Otras opciones",
         "delivery_information_label": "Información de entrega:",
@@ -2641,7 +2641,7 @@
         "payment_method_expiring_on": "Expira el {{expiryDate}}",
         "payment_method_expired_on": "Expiró el {{expiryDate}}",
         "preauthorized_payments": "Pagos preautorizados",
-        "close_payment_modal": "Cerca",
+        "close_payment_modal": "Cerrar",
         "close_payment_modal_accessibility_label": "Cerrar detalles del método de pago modal",
         "payment_method_not_found_error": "No se puede encontrar el método de pago",
         "payment_details_loading": "Cargando detalles del método de pago",
@@ -2700,10 +2700,10 @@
       "terms_of_service": "Términos de servicio"
     },
     "ui_components": {
-      "closeNotification": "Cerca",
+      "closeNotification": "Cerrar",
       "expandNotification": "Ver más",
-      "closeModal": "Cerca",
-      "submit": "Entregar",
+      "closeModal": "Cerrar",
+      "submit": "Enviar",
       "processing": "Procesando…",
       "increase": "Aumentar {{type}}",
       "decrease": "Disminuir {{type}}",
