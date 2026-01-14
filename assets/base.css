@@ -444,6 +444,26 @@ select:focus {
 }
 
 /* =============================================================================
+   UTILITY CLASSES - For JavaScript Performance Optimization
+   Classes used by JS to avoid inline style manipulation
+   ============================================================================= */
+
+/* Province/Region container visibility */
+.province-hidden {
+  display: none !important;
+}
+
+/* Image magnification loading states */
+.image-magnify-loading {
+  opacity: 0.5;
+}
+
+.image-magnify-ready {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* =============================================================================
    END OF BASE STYLES
    All component-specific styles should be in their respective CSS files:
    - Buttons: component-*.css or techauraz-unified.css

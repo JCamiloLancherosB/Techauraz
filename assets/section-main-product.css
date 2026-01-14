@@ -768,6 +768,7 @@ a.product__text {
   z-index: 1;
   margin: 0;
   border-radius: calc(var(--media-radius) - var(--media-border-width));
+  background-color: var(--gradient-background);
 }
 
 .image-magnify-hover {
