@@ -96,9 +96,6 @@
   
   /* Modern browsers with :has() support */
   @supports selector(:has(*)) {
-    body:has(.cookie-banner.is-visible) {
-      padding-bottom: calc(var(--cookie-banner-height, 120px)) !important;
-    }
 
     /* Adjust page content when cookie banner is visible */
     body:has(.cookie-banner.is-visible) .page-width:last-child,
