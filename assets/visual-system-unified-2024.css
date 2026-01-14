@@ -212,7 +212,7 @@
 
 /* Stock warning badge - Orange accent */
 .card__badge--stock {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker, #d97706) 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker) 100%);
   color: #ffffff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border-color: rgba(245, 158, 11, 0.3);
@@ -472,7 +472,7 @@
 .button--primary,
 .product-form__submit,
 .quick-add__submit {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker, #d97706) 100%) !important;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker) 100%) !important;
   color: var(--color-text-inverse) !important;
   font-weight: 700 !important;
   border: none !important;

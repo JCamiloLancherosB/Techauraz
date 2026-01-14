@@ -86,7 +86,7 @@
 }
 
 .cookie-banner__text a:hover {
-  color: var(--color-accent);
+  color: var(--color-secondary-dark);
 }
 
 /* Buttons container */
