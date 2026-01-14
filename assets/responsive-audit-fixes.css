@@ -851,6 +851,11 @@ footer {
   }
 }
 
+/* Remove excessive vertical margins between sections */
+.shopify-section + .shopify-section {
+  margin-top: 0;
+}
+
 /* Headings - reduce bottom margin */
 h2.section-heading,
 .section__heading,
