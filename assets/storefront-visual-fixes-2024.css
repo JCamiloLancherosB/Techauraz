@@ -217,41 +217,6 @@
   }
 }
 
-/* =============================================================================
-   3. COLOR VARIABLE CONSISTENCY
-   Ensure all components use unified color system
-   ============================================================================= */
-
-:root {
-  /* Primary palette */
-  --color-primary: #0ea5e9;
-  --color-primary-dark: #0284c7;
-  --color-primary-light: #38bdf8;
-  
-  /* Accent colors */
-  --color-accent: #22c55e;
-  --color-accent-dark: #16a34a;
-  --color-accent-amber: #fbbf24;
-  
-  /* Text colors */
-  --color-text-primary: #fef3c7;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
-  
-  /* Background colors */
-  --color-bg-dark: rgba(15, 23, 42, 0.98);
-  --color-bg-card: rgba(30, 41, 59, 0.95);
-  --color-bg-hover: rgba(51, 65, 85, 0.95);
-  
-  /* Border colors */
-  --color-border: rgba(148, 163, 184, 0.25);
-  --color-border-hover: rgba(251, 191, 36, 0.5);
-  
-  /* Shadow colors */
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --shadow-color-strong: rgba(0, 0, 0, 0.3);
-}
-
 /* Apply consistent colors to buttons */
 .button--primary,
 .button[type="submit"]:not(.quick-add__submit) {
