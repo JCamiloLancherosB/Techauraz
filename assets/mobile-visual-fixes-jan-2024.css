@@ -39,12 +39,12 @@
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Add top padding to prevent overlap with fixed header */
+  /* Add extra top padding to first section on mobile for better spacing */
   .section.section-featured-collection,
   .section.featured-collection,
   .collection-section,
   #MainContent .section:first-child {
-    padding-top: calc(var(--header-height, 70px) + 2rem) !important;
+    padding-top: 2rem !important;
     margin-top: 0 !important;
   }
 
