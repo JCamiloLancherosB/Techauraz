@@ -8,6 +8,10 @@
 (function() {
   'use strict';
   
+  // Constants
+  const MOBILE_BREAKPOINT = 749; // px
+  const MIN_BOTTOM_PADDING = 100; // px
+  
   // Wait for DOM to be ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -82,10 +86,10 @@
         getComputedStyle(document.documentElement).getPropertyValue('--cookie-banner-height') || '0'
       );
       
-      if (cookieBannerHeight > 0 && window.innerWidth <= 749) {
+      if (cookieBannerHeight > 0 && window.innerWidth <= MOBILE_BREAKPOINT) {
         // Mobile - adjust for cookie banner
         whatsappFAB.style.bottom = `calc(${cookieBannerHeight}px + 1rem)`;
-      } else if (window.innerWidth <= 749) {
+      } else if (window.innerWidth <= MOBILE_BREAKPOINT) {
         // Mobile - no cookie banner
         whatsappFAB.style.bottom = '1rem';
       } else {
@@ -116,7 +120,7 @@
    * Ensure product grid has proper spacing on mobile
    */
   function handleProductGridSpacing() {
-    if (window.innerWidth > 749) return; // Only for mobile
+    if (window.innerWidth > MOBILE_BREAKPOINT) return; // Only for mobile
     
     const productGrids = document.querySelectorAll(
       '.product-grid.grid, .collection .grid:not(.slider--mobile):not(.slider), .featured-collection .grid:not(.slider--mobile):not(.slider)'
@@ -140,7 +144,7 @@
         const currentPaddingBottom = parseInt(computedStyle.paddingBottom) || 0;
         
         // Only add extra padding if not already sufficient
-        if (currentPaddingBottom < 100) {
+        if (currentPaddingBottom < MIN_BOTTOM_PADDING) {
           section.style.paddingBottom = `calc(${currentPaddingBottom}px + 8rem)`;
         }
       }
@@ -151,7 +155,7 @@
    * Fix slideshow double image issue by ensuring single slide display
    */
   function fixSlideshowDisplay() {
-    if (window.innerWidth > 749) return; // Only for mobile
+    if (window.innerWidth > MOBILE_BREAKPOINT) return; // Only for mobile
     
     const slideshows = document.querySelectorAll('slideshow-component .slideshow.slider');
     
@@ -165,10 +169,10 @@
       // Ensure each slide takes full width
       const slides = slideshow.querySelectorAll('.slideshow__slide, .slider__slide');
       slides.forEach(slide => {
-        slide.style.minWidth = '100vw';
-        slide.style.width = '100vw';
-        slide.style.maxWidth = '100vw';
-        slide.style.flex = '0 0 100vw';
+        slide.style.minWidth = '100%';
+        slide.style.width = '100%';
+        slide.style.maxWidth = '100%';
+        slide.style.flex = '0 0 100%';
         slide.style.flexShrink = '0';
       });
     });

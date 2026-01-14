@@ -171,7 +171,7 @@ body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float {
 ### Modified Files:
 1. **`layout/theme.liquid`**
    - Added mobile-view-fixes-2024.css preload link (lines 287-289)
-   - Added mobile-fixes-handler.js script tag (line 553)
+   - Added mobile-fixes-handler.js script tag (after custom-scripts.js and techauraz-enhancements.js)
    - Updated CSS loading order documentation
 
 ## CSS Loading Order
