@@ -17,6 +17,10 @@
  * - Resolved CSS conflicts and removed duplicate rules
  * - Persuasive visual elements with proper contrast
  * - Optimized file size and loading performance
+ * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid, reset)
+ * - animations.css (keyframes y clases de animación)
  * =============================================================================
  */
 
@@ -671,10 +675,9 @@ body.menu-drawer-open {
   }
 }
 
+/* Note: .page-width base definition is in base.css - we only add max-width override here */
 .page-width {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--ta-space-lg);
 }
 
 @media screen and (max-width: 749px) {
@@ -751,17 +754,7 @@ body.menu-drawer-open {
    UTILITY CLASSES
    ============================================================================= */
 
-/* Visually hidden but accessible */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
+/* Note: .visually-hidden is defined in base.css */
 
 /* Skip to content link for accessibility */
 .skip-to-content-link:focus {
@@ -783,34 +776,7 @@ body.menu-drawer-open {
    ANIMATIONS - Smooth Transitions
    ============================================================================= */
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
+/* Note: @keyframes fadeIn, slideUp, slideInLeft and other animations are defined in animations.css */
 
 /* Apply animations */
 .animate-fade-in {
@@ -818,7 +784,7 @@ body.menu-drawer-open {
 }
 
 .animate-slide-up {
-  animation: slideInUp 0.6s ease;
+  animation: slideUp 0.6s ease;  /* Uses slideUp from animations.css */
 }
 
 /* =============================================================================

@@ -13,6 +13,10 @@
  * - No style conflicts
  * 
  * Namespace: .ta-conv-* to prevent conflicts
+ * 
+ * DEPENDENCIAS:
+ * - base.css (estilos base, utilidades, focus-visible, grid, reset)
+ * - animations.css (keyframes y clases de animación)
  * =============================================================================
  */
 
