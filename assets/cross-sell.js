@@ -307,7 +307,7 @@ class CrossSell {
     document.body.appendChild(notification);
     
     setTimeout(() => {
-      notification.style.animation = 'slideInRight 0.3s ease reverse';
+      notification.classList.add('slide-out-animation');
       setTimeout(() => {
         notification.remove();
       }, 300);
