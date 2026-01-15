@@ -1,0 +1,888 @@
+/* =============================================================================
+   TECHAURAZ RESPONSIVE MOBILE UNIFIED STYLES
+   =============================================================================
+   Version: 2.0.0
+   Date: 2024-01-15
+   
+   CONSOLIDATED FILE - Replaces:
+   - mobile-visual-fixes-jan-2024.css
+   - mobile-view-fixes-2024.css
+   - storefront-visual-fixes-2024.css
+   
+   Dependencies:
+   - base.css (base styles, utilities, color system)
+   - animations.css (keyframe animations)
+   
+   Mobile fixes for all viewport sizes with focus on:
+   1. Hero carousel - single slide display, full text visibility
+   2. Product grid - strict 2-column layout
+   3. Section spacing and alignment
+   4. Button treatments and touch targets
+   5. Badge visibility
+   6. Cookie banner and WhatsApp FAB positioning
+   7. Accessibility and reduced motion support
+   ============================================================================= */
+
+/* =============================================================================
+   CSS CUSTOM PROPERTIES - Mobile Specific
+   ============================================================================= */
+:root {
+  /* Z-index hierarchy */
+  --z-header: 100;
+  --z-dropdown: 200;
+  --z-cookie-banner: 999;
+  --z-drawer: 1000;
+  --z-modal: 1001;
+  --z-whatsapp: 9999;
+  
+  /* Mobile FAB positioning */
+  --mobile-fab-bottom-clearance: 8rem;
+  --mobile-fab-size: 56px;
+  --cookie-banner-height: 0px; /* Updated via JS */
+}
+
+/* =============================================================================
+   1. MOBILE HERO CAROUSEL - Single Slide Display
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Force flex layout for single slide display */
+  slideshow-component .slideshow.slider,
+  slideshow-component .slideshow.slider--everywhere,
+  slideshow-component .slideshow.grid,
+  slideshow-component .slideshow.grid--1-col {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-padding-left: 0 !important;
+    gap: 0 !important;
+    grid-template-columns: none !important;
+  }
+  
+  /* Each slide - full viewport width */
+  slideshow-component .slideshow__slide,
+  slideshow-component .slideshow.slider .slider__slide,
+  slideshow-component .slideshow.grid .grid__item {
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Media container */
+  .slideshow__slide .slideshow__media,
+  .slideshow__slide .banner__media {
+    width: 100% !important;
+    min-height: 400px !important;
+    height: auto !important;
+  }
+  
+  /* Text overlay positioning */
+  .slideshow__text-wrapper.banner__content {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    z-index: 2 !important;
+  }
+  
+  /* Text box - readable with backdrop blur */
+  .slideshow__text.banner__box {
+    max-width: calc(100% - 2.4rem) !important;
+    padding: 2rem 1.5rem !important;
+    margin: 1rem 1.2rem !important;
+    background: rgba(15, 15, 26, 0.92) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    overflow: visible !important;
+  }
+  
+  /* Heading - no truncation */
+  .slideshow__text .banner__heading {
+    font-size: 2rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.8rem !important;
+    color: #fef3c7 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    display: block !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  /* Subheading - full visibility */
+  .slideshow__text .banner__text {
+    font-size: 1.3rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1rem !important;
+    color: rgba(226, 232, 240, 0.95) !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    display: block !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Buttons - full width stacked */
+  .slideshow__text .banner__buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.8rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .slideshow__text .button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 1.2rem 2rem !important;
+    font-size: 1.4rem !important;
+    min-height: 44px !important;
+  }
+  
+  /* Slideshow controls */
+  .slideshow__controls {
+    position: absolute !important;
+    bottom: 2rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10 !important;
+    display: flex !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+  
+  .slideshow__controls--top {
+    bottom: 1.5rem !important;
+  }
+  
+  /* Slider indicators */
+  .slider-counter__link--dots .dot {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(226, 232, 240, 0.4) !important;
+    border: 2px solid rgba(226, 232, 240, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .slider-counter__link--active.slider-counter__link--dots .dot {
+    background: var(--color-primary, #fbbf24) !important;
+    border-color: var(--color-primary, #fbbf24) !important;
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  /* Slider navigation buttons */
+  .slider-button,
+  .slideshow-button,
+  .carousel-button {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(148, 163, 184, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* =============================================================================
+   2. PRODUCT GRID - Strict 2-Column Layout
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Force 2-column grid */
+  .product-grid.grid,
+  .collection .grid:not(.slider--mobile):not(.slider),
+  .featured-collection .grid:not(.slider--mobile):not(.slider),
+  .product-grid-container .grid:not(.slider--mobile):not(.slider),
+  #product-grid .grid,
+  .collection-product-grid .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    width: 100% !important;
+    overflow: visible !important;
+    padding-bottom: var(--mobile-fab-bottom-clearance) !important;
+  }
+  
+  /* Grid items - respect column layout */
+  .product-grid .grid__item,
+  .collection .grid__item,
+  .featured-collection .grid__item,
+  #product-grid .grid__item {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    flex: none !important;
+  }
+  
+  /* Card wrapper */
+  .card-wrapper {
+    height: 100% !important;
+    display: block !important;
+  }
+  
+  /* Card - flexible column layout */
+  .card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Card media - square aspect ratio */
+  .card__media,
+  .card .media {
+    aspect-ratio: 1 / 1 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  /* Card information */
+  .card__information,
+  .card__content {
+    padding: 1rem 0.8rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    flex: 1 !important;
+  }
+  
+  /* Card heading - limit to 2 lines */
+  .card__heading,
+  .card__title {
+    font-size: 1.3rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.4rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* Price */
+  .card .price,
+  .card__price {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  /* Rating */
+  .card .rating,
+  .card__rating {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.4rem !important;
+    line-height: 1 !important;
+  }
+  
+  /* Quick add button */
+  .quick-add__submit,
+  .card__cta {
+    padding: 0.8rem 1rem !important;
+    font-size: 1.2rem !important;
+    min-height: 40px !important;
+    width: 100% !important;
+  }
+}
+
+/* Tablet - maintain 2 columns */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-grid.grid,
+  .collection .grid:not(.slider--tablet),
+  .featured-collection .grid:not(.slider--tablet) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* =============================================================================
+   3. SECTION SPACING & ALIGNMENT
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* First section - clear header */
+  .section.section-featured-collection,
+  .section.featured-collection,
+  .collection-section,
+  #MainContent .section:first-child {
+    padding-top: 2rem !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Section headings */
+  .section__heading,
+  .title-wrapper-with-link,
+  .title-wrapper,
+  .collection-hero__title,
+  .featured-collection .title {
+    padding-top: 2rem !important;
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  
+  /* Consistent section spacing */
+  .section,
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  /* Page width containers */
+  .page-width {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    max-width: 100% !important;
+  }
+  
+  /* Prevent horizontal overflow */
+  body,
+  #MainContent,
+  .main-content {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* =============================================================================
+   4. BUTTON TREATMENTS - Enhanced Contrast & Touch Targets
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Primary CTA buttons */
+  .button--primary,
+  .slideshow__text .button,
+  .banner__buttons .button,
+  [class*="cta"] .button,
+  button[name="add"],
+  [href*="cart/add"],
+  [href*="checkout"],
+  .product-form__submit {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: #0f172a !important;
+    border: 2px solid rgba(251, 191, 36, 0.4) !important;
+    font-weight: 800 !important;
+    font-size: 1.5rem !important;
+    padding: 1.3rem 2rem !important;
+    text-shadow: none !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5) !important;
+    transition: all 0.3s ease !important;
+    min-height: 48px !important;
+    min-width: 44px !important;
+  }
+  
+  .button--primary:hover,
+  .button--primary:focus {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6) !important;
+  }
+  
+  /* Add to cart buttons */
+  .quick-add__submit,
+  .product-form__submit,
+  [class*="add-to-cart"] {
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 1.1rem 1.5rem !important;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: #0f172a !important;
+    border: 2px solid rgba(251, 191, 36, 0.4) !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4) !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .quick-add__submit:hover,
+  .quick-add__submit:focus,
+  .product-form__submit:hover,
+  .product-form__submit:focus {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.5) !important;
+  }
+}
+
+/* Desktop button styles - consistent branding */
+.button--primary,
+.button[type="submit"]:not(.quick-add__submit) {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #0f172a !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 1.2rem 2.4rem !important;
+  min-height: 44px !important;
+}
+
+.button--primary:hover,
+.button[type="submit"]:not(.quick-add__submit):hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
+  transform: translateY(-2px) !important;
+  color: #0f172a !important;
+}
+
+.button--primary:focus-visible,
+.button[type="submit"]:focus-visible {
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px !important;
+}
+
+.button--secondary {
+  background: transparent !important;
+  border: 2px solid rgba(148, 163, 184, 0.4) !important;
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+  padding: 1.2rem 2.4rem !important;
+  min-height: 44px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+.button--secondary:hover {
+  background: rgba(148, 163, 184, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  color: #fbbf24 !important;
+  transform: translateY(-1px) !important;
+}
+
+.button--secondary:focus-visible {
+  outline: 2px solid #fbbf24 !important;
+  outline-offset: 2px !important;
+}
+
+/* =============================================================================
+   5. BADGES - Enhanced Visibility
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Badge container */
+  .card__badge,
+  .card__badges,
+  .product-badge {
+    position: absolute !important;
+    top: 0.8rem !important;
+    right: 0.8rem !important;
+    z-index: 3 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    max-width: calc(100% - 1.6rem) !important;
+  }
+  
+  /* Individual badges */
+  .badge,
+  .card__badge,
+  [class*="badge"] {
+    display: inline-flex !important;
+    padding: 0.5rem 0.9rem !important;
+    border-radius: 6px !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.2 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(4px) !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Shipping badge - amber gradient */
+  .badge--shipping,
+  .badge--fast-shipping,
+  [class*="shipping"] {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  /* Stock badge - green gradient with pulse */
+  .badge--stock,
+  .badge--in-stock,
+  [class*="stock"]:not([class*="out"]) {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    animation: pulse-stock 2s ease-in-out infinite !important;
+  }
+  
+  /* Stock badge pulse animation */
+  @keyframes pulse-stock {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+    }
+  }
+  
+  /* Sale/discount badges - red gradient */
+  .badge--sale,
+  .badge--discount {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Desktop badges */
+.badge--sale {
+  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  color: white !important;
+}
+
+.badge--new {
+  background: linear-gradient(135deg, var(--color-accent, #22d3ee), var(--color-secondary-dark, #0284c7)) !important;
+  color: white !important;
+}
+
+.badge--featured {
+  background: linear-gradient(135deg, var(--color-primary, #fbbf24), var(--color-primary-dark, #f59e0b)) !important;
+  color: white !important;
+}
+
+/* =============================================================================
+   6. COOKIE BANNER & WHATSAPP FAB - Proper Z-Index Management
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Cookie banner - bottom positioned */
+  .cookie-banner,
+  .cookie-notice,
+  #cookie-banner {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important;
+    max-height: 35vh !important;
+    padding: 1rem !important;
+    overflow-y: auto !important;
+    background: rgba(15, 23, 42, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid rgba(148, 163, 184, 0.3) !important;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Add padding to body when cookie banner visible */
+  body.cookie-banner-visible {
+    padding-bottom: 120px !important;
+  }
+  
+  /* WhatsApp FAB - fixed bottom right */
+  .whatsapp-float,
+  .whatsapp-button-float,
+  [class*="whatsapp"][class*="float"],
+  #whatsapp-button {
+    position: fixed !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+    z-index: 9999 !important;
+    width: var(--mobile-fab-size) !important;
+    height: var(--mobile-fab-size) !important;
+    min-width: var(--mobile-fab-size) !important;
+    min-height: var(--mobile-fab-size) !important;
+    max-width: var(--mobile-fab-size) !important;
+    max-height: var(--mobile-fab-size) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: bottom 0.3s ease, transform 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4) !important;
+  }
+  
+  /* Adjust WhatsApp when cookie visible */
+  body.cookie-visible .whatsapp-float,
+  body.cookie-notice-visible .whatsapp-float,
+  body:has(.cookie-banner:not([style*="display: none"])) .whatsapp-float,
+  body:has(.cookie-notice:not([style*="display: none"])) .whatsapp-float {
+    bottom: calc(var(--cookie-banner-height, 100px) + 1rem) !important;
+  }
+  
+  /* WhatsApp SVG sizing */
+  .whatsapp-button svg,
+  .whatsapp-float svg {
+    width: 28px !important;
+    height: 28px !important;
+    display: block !important;
+  }
+  
+  /* Hide tooltip on mobile */
+  .whatsapp-tooltip {
+    display: none !important;
+  }
+}
+
+/* Desktop WhatsApp FAB */
+.whatsapp-float,
+.whatsapp-button-float,
+[class*="whatsapp"][class*="float"] {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: var(--z-whatsapp, 9999) !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  background: #25d366 !important;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.whatsapp-float:hover,
+.whatsapp-button-float:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5) !important;
+}
+
+/* =============================================================================
+   7. BENEFITS & ICON SECTIONS
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Benefits grid */
+  .benefits-grid,
+  .benefits-section,
+  .icon-with-text-section,
+  [class*="benefits"] .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding: 1.5rem 1rem !important;
+    align-items: start !important;
+  }
+  
+  /* Benefit items */
+  .benefit-item,
+  .icon-with-text,
+  [class*="benefit"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 1rem 0.5rem !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Benefit icons */
+  .benefit-item__icon,
+  .icon-with-text__icon,
+  [class*="benefit"] svg,
+  [class*="benefit"] img {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 0.5rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Benefit text */
+  .benefit-item__text,
+  .icon-with-text__text,
+  [class*="benefit"] .text {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+    color: rgba(226, 232, 240, 0.9) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =============================================================================
+   8. TESTIMONIALS & SLIDERS
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Slider containers */
+  .slider,
+  .slideshow,
+  .carousel {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Slider items */
+  .slider__slide,
+  .slideshow__slide,
+  .carousel__item {
+    min-width: 100% !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Testimonial cards */
+  .testimonial-card,
+  .testimonial-item,
+  [class*="testimonial"] .card {
+    display: block !important;
+    width: 100% !important;
+    min-height: 200px !important;
+    padding: 1.5rem !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(148, 163, 184, 0.25) !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Testimonial text */
+  .testimonial__text,
+  .testimonial__content {
+    font-size: 1.4rem !important;
+    line-height: 1.6 !important;
+    color: rgba(226, 232, 240, 0.9) !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Testimonial author */
+  .testimonial__author,
+  .testimonial__name {
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+    color: #fef3c7 !important;
+    margin-bottom: 0.3rem !important;
+  }
+}
+
+/* =============================================================================
+   9. PAGINATION & NAVIGATION
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Pagination wrapper */
+  .pagination-wrapper {
+    padding: 2rem 1.5rem var(--mobile-fab-bottom-clearance) 1.5rem !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  
+  /* Pagination items */
+  .pagination__item {
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0.8rem !important;
+    font-size: 1.3rem !important;
+  }
+}
+
+/* =============================================================================
+   10. ACCESSIBILITY - Touch Targets & Reduced Motion
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  /* Minimum touch targets */
+  a,
+  button,
+  .button,
+  input[type="submit"],
+  input[type="button"],
+  .header__icon,
+  .slider-button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Link tap targets in text */
+  p a,
+  .rte a {
+    padding: 0.2rem 0.4rem !important;
+    margin: -0.2rem -0.4rem !important;
+  }
+  
+  /* Tap highlight */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================================================
+   11. iOS SAFE AREA SUPPORT
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  @supports (padding: max(0px)) {
+    .whatsapp-float {
+      bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+      right: max(1rem, env(safe-area-inset-right)) !important;
+    }
+    
+    .cookie-banner {
+      padding-bottom: max(1.2rem, env(safe-area-inset-bottom)) !important;
+      padding-left: max(1rem, env(safe-area-inset-left)) !important;
+      padding-right: max(1rem, env(safe-area-inset-right)) !important;
+    }
+    
+    .header {
+      padding-top: max(1rem, env(safe-area-inset-top)) !important;
+    }
+  }
+}
+
+/* =============================================================================
+   END OF RESPONSIVE MOBILE UNIFIED STYLES
+   ============================================================================= */
