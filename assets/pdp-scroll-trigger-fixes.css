@@ -141,6 +141,8 @@
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
+  animation: none !important;
+  pointer-events: auto !important;
 }
 
 /* Primary submit button - use flex for consistent layout */
@@ -152,6 +154,17 @@
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
+  animation: none !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure button remains visible even when disabled (sold out state) */
+.product-form__submit:disabled,
+.product-form__submit[disabled] {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
 }
 
 /* Shopify payment buttons - ensure visibility while preserving button structure */
@@ -160,6 +173,7 @@
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
+  animation: none !important;
 }
 
 /* Variant selectors */

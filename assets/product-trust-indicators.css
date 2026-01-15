@@ -1,0 +1,106 @@
+/* =============================================================================
+   PRODUCT TRUST INDICATORS & PERSUASION ELEMENTS
+   ============================================================================= */
+
+/* Trust Indicators Grid - Before CTA */
+.product-trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 8px;
+}
+
+.trust-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: #e2e8f0;
+  line-height: 1.4;
+}
+
+.trust-indicator__icon {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.trust-indicator__text {
+  font-weight: 600;
+}
+
+/* Mobile: Stack vertically for better readability */
+@media screen and (max-width: 479px) {
+  .product-trust-indicators {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.8rem;
+  }
+  
+  .trust-indicator {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet: 2 columns */
+@media screen and (min-width: 480px) and (max-width: 749px) {
+  .product-trust-indicators {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 4 columns if space allows */
+@media screen and (min-width: 990px) {
+  .product-trust-indicators {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Smooth Scroll for Description Link */
+.product__view-details {
+  scroll-behavior: smooth;
+  transition: color 0.2s ease;
+}
+
+a[data-scroll-to-description] {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 600;
+  min-height: 44px;
+}
+
+a[data-scroll-to-description]:hover {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: rgba(251, 191, 36, 0.5);
+  transform: translateX(4px);
+}
+
+/* Ensure smooth scrolling globally for anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset for fixed headers when scrolling to anchors */
+#product-description {
+  scroll-margin-top: 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  #product-description {
+    scroll-margin-top: 1rem;
+  }
+}
