@@ -328,7 +328,7 @@ Shopify.CountryProvinceSelector.prototype = {
 
     this.clearOptions(this.provinceEl);
     if (provinces && provinces.length == 0) {
-      this.provinceContainer.style.display = 'none';
+      this.provinceContainer.classList.add('province-hidden');
     } else {
       for (var i = 0; i < provinces.length; i++) {
         var opt = document.createElement('option');
@@ -337,7 +337,7 @@ Shopify.CountryProvinceSelector.prototype = {
         this.provinceEl.appendChild(opt);
       }
 
-      this.provinceContainer.style.display = '';
+      this.provinceContainer.classList.remove('province-hidden');
     }
   },
 

@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTimer() {
       if (timeLeft <= 0) {
         urgencyEl.innerHTML = '⚡ ¡ÚLTIMA OPORTUNIDAD! Stock muy limitado ⚡';
-        urgencyEl.style.animation = 'pulse 1s infinite';
+        urgencyEl.classList.add('urgency-pulse');
         return;
       }
 
@@ -238,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     setTimeout(() => {
       if (document.body.contains(popup)) {
-        popup.style.animation = 'slideInRight 0.5s ease reverse';
-        setTimeout(() => popup.remove(), 500);
+        popup.classList.add('slide-out-animation');
+        setTimeout(() => popup.remove(), 300);
       }
     }, 10000);
   }
@@ -248,14 +248,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const buyButton = document.querySelector('.product-form__cart-submit');
     if (!buyButton) return;
     
-    buyButton.style.animation = 'pulse 2s infinite';
-    buyButton.style.transform = 'scale(1.02)';
-    buyButton.style.boxShadow = '0 0 0 4px rgba(102, 126, 234, 0.4)';
+    buyButton.classList.add('button-pulse-highlight');
     
     setTimeout(() => {
-      buyButton.style.animation = '';
-      buyButton.style.transform = '';
-      buyButton.style.boxShadow = '';
+      buyButton.classList.remove('button-pulse-highlight');
     }, 5000);
   }
 

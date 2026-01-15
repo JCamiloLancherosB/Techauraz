@@ -416,3 +416,24 @@
     transform: none;
   }
 }
+
+/* ================== UTILITY CLASSES FOR JS ANIMATION CONTROL ================== */
+
+/* Urgency pulse animation - used by product-enhancements.js */
+.urgency-pulse {
+  animation: pulse 1s infinite;
+}
+
+/* Slide out animation - used by cross-sell.js and product-enhancements.js
+   Uses slideInRight in reverse to create a slide-out-left effect */
+.slide-out-animation {
+  animation: slideInRight 0.3s ease reverse;
+}
+
+/* Button pulse highlight - used by product-enhancements.js */
+.button-pulse-highlight {
+  animation: pulse 2s infinite;
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.4);
+}
+

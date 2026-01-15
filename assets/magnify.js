@@ -5,13 +5,14 @@ function createOverlay(image) {
   overlay = document.createElement('div');
   prepareOverlay(overlay, overlayImage);
 
-  image.style.opacity = '50%';
+  image.classList.add('image-magnify-loading');
   toggleLoadingSpinner(image);
 
   overlayImage.onload = () => {
     toggleLoadingSpinner(image);
     image.parentElement.insertBefore(overlay, image);
-    image.style.opacity = '100%';
+    image.classList.remove('image-magnify-loading');
+    image.classList.add('image-magnify-ready');
   };
 
   return overlay;
@@ -21,7 +22,6 @@ function prepareOverlay(container, image) {
   container.setAttribute('class', 'image-magnify-full-size');
   container.setAttribute('aria-hidden', 'true');
   container.style.backgroundImage = `url('${image.src}')`;
-  container.style.backgroundColor = 'var(--gradient-background)';
 }
 
 function toggleLoadingSpinner(image) {

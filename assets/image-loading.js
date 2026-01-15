@@ -9,7 +9,7 @@
   // Function to mark image as loaded
   function markImageAsLoaded(img) {
     img.classList.add('loaded');
-    img.style.opacity = '1';
+    img.classList.add('image-opacity-full');
     
     // Also add class to parent media container to hide spinner
     const mediaContainer = img.closest('.card__media, .product__media');
@@ -29,7 +29,7 @@
       
       img.addEventListener('error', function() {
         // Handle error gracefully
-        img.style.opacity = '0.5';
+        img.classList.add('image-error');
         console.warn('Failed to load image:', img.src);
       });
     }
