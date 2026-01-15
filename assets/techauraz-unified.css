@@ -2,97 +2,96 @@
  * =============================================================================
  * TECHAURAZ UNIFIED STYLESHEET
  * =============================================================================
- * Version: 2.0.0
- * Date: 2024-12-20
+ * Version: 3.0.0
+ * Date: 2024-01-15
  * 
- * DEPENDENCIAS:
- * - base.css (estilos base, utilidades, focus-visible, grid)
- * - animations.css (keyframes y clases de animación)
+ * DEPENDENCIES:
+ * - base.css (unified design system, color variables, typography scale)
+ * - animations.css (keyframes and animation classes)
  * 
- * NOTA: Estilos base heredados, no duplicar aquí.
+ * MIGRATION NOTE:
+ * All --ta-* variables have been replaced with standardized --color-*, 
+ * --font-size-*, --space-*, etc. from base.css for consistency.
  * 
- * This file consolidates and optimizes:
+ * This file consolidates:
  * - techauraz-master.css (deprecated)
  * - techauraz-ui-enhancements.css (deprecated)
  * - techauraz-polish-2024.css (deprecated)
  * 
- * Key improvements:
- * - Normalized typography and spacing (no "zoom" effect)
+ * Key features:
+ * - Uses unified design system from base.css
+ * - Normalized typography (no "zoom" effect)
  * - Compact, aligned header for desktop and mobile
- * - Professional tech store color palette
- * - Resolved CSS conflicts and removed duplicate rules
+ * - Professional tech store aesthetic
+ * - Resolved CSS conflicts
  * - Persuasive visual elements with proper contrast
- * - Optimized file size and loading performance
- * 
- * DEPENDENCIAS:
- * - base.css (estilos base, utilidades, focus-visible, grid, reset)
- * - animations.css (keyframes y clases de animación)
  * =============================================================================
  */
 
 /* =============================================================================
-   CSS VARIABLES - Design System (Updated for Unified Color Palette)
+   CSS VARIABLE ALIASES - For backward compatibility
+   These alias the new standardized variables from base.css
    ============================================================================= */
 :root {
-  /* Tech Store Color Palette - Amber/Gold primary with Blue/Cyan accents */
-  --ta-primary: #fbbf24;           /* Amber - primary CTA */
-  --ta-primary-dark: #f59e0b;      /* Darker amber for hover */
-  --ta-accent: #0ea5e9;            /* Sky blue - accent highlights */
-  --ta-accent-dark: #0284c7;       /* Darker blue */
-  --ta-success: #10b981;           /* Green - success states */
-  --ta-warning: #f59e0b;           /* Amber - warnings */
+  /* Color aliases - map old --ta-* to new --color-* */
+  --ta-primary: var(--color-primary);
+  --ta-primary-dark: var(--color-primary-dark);
+  --ta-accent: var(--color-secondary);
+  --ta-accent-dark: var(--color-secondary-dark);
+  --ta-success: var(--color-success);
+  --ta-warning: var(--color-warning);
   
-  /* Backgrounds - Unified Dark Tech Theme */
-  --ta-bg-dark: #020617;           /* Deep navy - main background */
-  --ta-bg-card: #0f172a;           /* Slate - card background */
-  --ta-bg-card-hover: #1e293b;     /* Lighter slate - hover state */
-  --ta-bg-overlay: rgba(2, 6, 23, 0.95); /* Modal/drawer overlay */
+  /* Background aliases */
+  --ta-bg-dark: var(--color-bg-tertiary);
+  --ta-bg-card: var(--color-bg-card);
+  --ta-bg-card-hover: var(--color-bg-card-hover);
+  --ta-bg-overlay: var(--color-bg-overlay);
   
-  /* Text Colors - High Contrast */
-  --ta-text-primary: #f8fafc;      /* Almost white - headings */
-  --ta-text-secondary: #e2e8f0;    /* Light gray - body text */
-  --ta-text-muted: #94a3b8;        /* Slate - secondary info */
+  /* Text aliases */
+  --ta-text-primary: var(--color-text-primary);
+  --ta-text-secondary: var(--color-text-secondary);
+  --ta-text-muted: var(--color-text-muted);
   
-  /* Borders & Dividers */
-  --ta-border: rgba(148, 163, 184, 0.2);
-  --ta-border-hover: rgba(251, 191, 36, 0.4);
+  /* Border aliases */
+  --ta-border: var(--color-border);
+  --ta-border-hover: var(--color-border-hover);
   
-  /* Shadows - Amber/Gold Glow Effects */
-  --ta-shadow-sm: 0 2px 8px rgba(251, 191, 36, 0.15);
-  --ta-shadow-md: 0 4px 16px rgba(251, 191, 36, 0.25);
-  --ta-shadow-lg: 0 8px 24px rgba(251, 191, 36, 0.35);
-  --ta-shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --ta-shadow-card-hover: 0 8px 24px rgba(251, 191, 36, 0.3);
+  /* Shadow aliases */
+  --ta-shadow-sm: var(--shadow-sm);
+  --ta-shadow-md: var(--shadow-md);
+  --ta-shadow-lg: var(--shadow-lg);
+  --ta-shadow-card: var(--shadow-card);
+  --ta-shadow-card-hover: var(--shadow-card-hover);
   
-  /* Border Radius */
-  --ta-radius-sm: 6px;
-  --ta-radius-md: 10px;
-  --ta-radius-lg: 14px;
-  --ta-radius-xl: 18px;
-  --ta-radius-pill: 999px;
+  /* Border radius aliases */
+  --ta-radius-sm: var(--radius-sm);
+  --ta-radius-md: var(--radius-md);
+  --ta-radius-lg: var(--radius-lg);
+  --ta-radius-xl: var(--radius-xl);
+  --ta-radius-pill: var(--radius-pill);
   
-  /* Transitions */
-  --ta-transition-fast: 0.15s ease;
-  --ta-transition: 0.25s ease;
-  --ta-transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Transition aliases */
+  --ta-transition-fast: var(--transition-fast);
+  --ta-transition: var(--transition-base);
+  --ta-transition-slow: var(--transition-slow);
   
-  /* Spacing - Normalized Scale */
-  --ta-space-xs: 0.5rem;    /* 8px */
-  --ta-space-sm: 0.75rem;   /* 12px */
-  --ta-space-md: 1rem;      /* 16px */
-  --ta-space-lg: 1.5rem;    /* 24px */
-  --ta-space-xl: 2rem;      /* 32px */
-  --ta-space-2xl: 3rem;     /* 48px */
+  /* Spacing aliases */
+  --ta-space-xs: var(--space-xs);
+  --ta-space-sm: var(--space-sm);
+  --ta-space-md: var(--space-md);
+  --ta-space-lg: var(--space-lg);
+  --ta-space-xl: var(--space-xl);
+  --ta-space-2xl: var(--space-2xl);
   
-  /* Typography - Normalized Scale */
-  --ta-font-body: 1.6rem;      /* 16px - body text */
-  --ta-font-sm: 0.875rem;      /* 14px - small text */
-  --ta-font-xs: 0.75rem;       /* 12px - extra small */
-  --ta-font-lg: 1.125rem;      /* 18px - large text */
-  --ta-font-xl: 1.25rem;       /* 20px - extra large */
+  /* Typography aliases */
+  --ta-font-body: var(--font-size-base);
+  --ta-font-sm: var(--font-size-sm);
+  --ta-font-xs: var(--font-size-xs);
+  --ta-font-lg: var(--font-size-lg);
+  --ta-font-xl: var(--font-size-xl);
   
-  /* Header Dimensions */
-  --ta-header-height: 80px;
+  /* Layout constants */
+  --ta-header-height: var(--header-height);
   --ta-header-mobile: 60px;
   --ta-logo-max-height: 40px;
 }

@@ -22,8 +22,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* === UNIFIED COLOR SYSTEM === */
+/* === UNIFIED DESIGN SYSTEM === */
 :root {
+/* ============================================
+     COLOR SYSTEM - Single source of truth
+     ============================================ */
+  
   /* Primary Brand Colors - Amber/Gold for high contrast CTAs */
   --color-primary: #fbbf24;
   --color-primary-dark: #f59e0b;
@@ -33,11 +37,14 @@ html {
   --color-secondary: #0ea5e9;
   --color-secondary-dark: #0284c7;
   --color-accent: #22d3ee;
+  --color-accent-dark: #0891b2;
   
   /* Background Colors - Unified dark theme */
   --color-bg-primary: #0f172a;
   --color-bg-secondary: #1e293b;
   --color-bg-tertiary: #020617;
+  --color-bg-card: #0f172a;
+  --color-bg-card-hover: #1e293b;
   --color-bg-overlay: rgba(15, 23, 42, 0.95);
   
   /* Text Colors - High contrast on dark backgrounds */
@@ -50,14 +57,97 @@ html {
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
+  --color-info: #0ea5e9;
   
   /* Border Colors */
   --color-border: rgba(148, 163, 184, 0.2);
   --color-border-hover: rgba(251, 191, 36, 0.4);
+  --color-border-focus: #fbbf24;
   
-  /* Shadow Colors */
+  /* Shadow System */
   --shadow-primary: rgba(251, 191, 36, 0.3);
   --shadow-card: rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 8px rgba(251, 191, 36, 0.15);
+  --shadow-md: 0 4px 16px rgba(251, 191, 36, 0.25);
+  --shadow-lg: 0 8px 24px rgba(251, 191, 36, 0.35);
+  --shadow-card-hover: 0 8px 24px rgba(251, 191, 36, 0.3);
+  
+  /* ============================================
+     TYPOGRAPHY SCALE
+     Note: Based on 62.5% root font-size (1rem = 10px)
+     See line 20: html { font-size: 62.5%; }
+     ============================================ */
+  
+  /* Font Sizes */
+  --font-size-xs: 1.2rem;   /* 12px (1.2 * 10) */
+  --font-size-sm: 1.4rem;   /* 14px (1.4 * 10) */
+  --font-size-base: 1.6rem; /* 16px (1.6 * 10) */
+  --font-size-lg: 1.8rem;   /* 18px (1.8 * 10) */
+  --font-size-xl: 2rem;     /* 20px (2.0 * 10) */
+  --font-size-2xl: 2.4rem;  /* 24px (2.4 * 10) */
+  --font-size-3xl: 3rem;    /* 30px (3.0 * 10) */
+  --font-size-4xl: 3.6rem;  /* 36px (3.6 * 10) */
+  --font-size-5xl: 4.8rem;  /* 48px (4.8 * 10) */
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  
+/* ============================================
+     SPACING SYSTEM - Consistent spacing scale
+     ============================================ */
+  
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 0.75rem;  /* 12px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+  --space-3xl: 4rem;    /* 64px */
+  --space-4xl: 6rem;    /* 96px */
+  
+/* ============================================
+     BORDER RADIUS SYSTEM
+     ============================================ */
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+  
+/* ============================================
+     TRANSITION SYSTEM
+     ============================================ */
+  
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+/* ============================================
+     LAYOUT CONSTANTS
+     ============================================ */
+  
+  --page-width: 1200px;
+  --header-height: 80px;
+  --grid-gap: 2rem;
 }
 
 body {
