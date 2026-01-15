@@ -75,7 +75,7 @@ html {
   /* ============================================
      TYPOGRAPHY SCALE
      Note: Based on 62.5% root font-size (1rem = 10px)
-     Defined in html { font-size: 62.5%; }
+     See line 20: html { font-size: 62.5%; }
      ============================================ */
   
   /* Font Sizes */
