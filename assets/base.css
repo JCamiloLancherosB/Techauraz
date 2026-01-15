@@ -24,7 +24,7 @@ html {
 
 /* === UNIFIED DESIGN SYSTEM === */
 :root {
-  /* ============================================
+/* ============================================
      COLOR SYSTEM - Single source of truth
      ============================================ */
   
@@ -74,18 +74,20 @@ html {
   
   /* ============================================
      TYPOGRAPHY SCALE
+     Note: Based on 62.5% root font-size (1rem = 10px)
+     Defined in html { font-size: 62.5%; }
      ============================================ */
   
   /* Font Sizes */
-  --font-size-xs: 1.2rem;   /* 12px */
-  --font-size-sm: 1.4rem;   /* 14px */
-  --font-size-base: 1.6rem; /* 16px */
-  --font-size-lg: 1.8rem;   /* 18px */
-  --font-size-xl: 2rem;     /* 20px */
-  --font-size-2xl: 2.4rem;  /* 24px */
-  --font-size-3xl: 3rem;    /* 30px */
-  --font-size-4xl: 3.6rem;  /* 36px */
-  --font-size-5xl: 4.8rem;  /* 48px */
+  --font-size-xs: 1.2rem;   /* 12px (1.2 * 10) */
+  --font-size-sm: 1.4rem;   /* 14px (1.4 * 10) */
+  --font-size-base: 1.6rem; /* 16px (1.6 * 10) */
+  --font-size-lg: 1.8rem;   /* 18px (1.8 * 10) */
+  --font-size-xl: 2rem;     /* 20px (2.0 * 10) */
+  --font-size-2xl: 2.4rem;  /* 24px (2.4 * 10) */
+  --font-size-3xl: 3rem;    /* 30px (3.0 * 10) */
+  --font-size-4xl: 3.6rem;  /* 36px (3.6 * 10) */
+  --font-size-5xl: 4.8rem;  /* 48px (4.8 * 10) */
   
   /* Line Heights */
   --line-height-tight: 1.2;
@@ -106,7 +108,7 @@ html {
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
   
-  /* ============================================
+/* ============================================
      SPACING SYSTEM - Consistent spacing scale
      ============================================ */
   
@@ -119,7 +121,7 @@ html {
   --space-3xl: 4rem;    /* 64px */
   --space-4xl: 6rem;    /* 96px */
   
-  /* ============================================
+/* ============================================
      BORDER RADIUS SYSTEM
      ============================================ */
   
@@ -131,7 +133,7 @@ html {
   --radius-pill: 999px;
   --radius-circle: 50%;
   
-  /* ============================================
+/* ============================================
      TRANSITION SYSTEM
      ============================================ */
   
@@ -139,7 +141,7 @@ html {
   --transition-base: 0.25s ease;
   --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* ============================================
+/* ============================================
      LAYOUT CONSTANTS
      ============================================ */
   
