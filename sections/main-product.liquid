@@ -808,16 +808,19 @@
               scrollLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.getElementById('product-description');
-                if (target) {
-                  const headerOffset = 80; // Adjust for fixed headers
-                  const elementPosition = target.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                  });
-                }
+                if (!target) return;
+                
+                const headerOffset = 80; // Adjust for fixed headers
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                // Check user's motion preference
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: prefersReducedMotion ? 'auto' : 'smooth'
+                });
               });
             })();
           </script>

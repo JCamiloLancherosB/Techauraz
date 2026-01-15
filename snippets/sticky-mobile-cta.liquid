@@ -191,13 +191,24 @@
       
       if (!stickyCta || !mainButton) return;
       
-      // Handle sticky button click with error handling
+      // Handle sticky button click with error handling and fallback selector
       if (stickyButton) {
         stickyButton.addEventListener('click', function() {
-          if (mainButton && typeof mainButton.click === 'function') {
-            mainButton.click();
+          // Try primary selector first
+          let submitButton = mainButton;
+          
+          // Fallback: try alternative selectors if primary not found
+          if (!submitButton || typeof submitButton.click !== 'function') {
+            submitButton = document.querySelector('.product-form__submit');
+          }
+          if (!submitButton || typeof submitButton.click !== 'function') {
+            submitButton = document.querySelector('[name="add"]');
+          }
+          
+          if (submitButton && typeof submitButton.click === 'function') {
+            submitButton.click();
           } else {
-            console.error('Main product submit button not found or not clickable');
+            console.error('Product submit button not found. Tried multiple selectors.');
           }
         });
       }
@@ -249,21 +260,34 @@
       // This event is typically dispatched by product-form.js or variant picker components
       document.addEventListener('variant:change', function(event) {
         if (event.detail && event.detail.variant) {
-          // Update price
+          // Update price - using safe DOM manipulation to prevent XSS
           const priceContainer = stickyCta.querySelector('.sticky-mobile-cta__price');
           if (priceContainer && event.detail.variant.price) {
             const price = event.detail.variant.price;
             const comparePrice = event.detail.variant.compare_at_price;
             
+            // Clear existing content
+            priceContainer.innerHTML = '';
+            
             if (comparePrice && comparePrice > price) {
-              priceContainer.innerHTML = `
-                <span class="sticky-mobile-cta__price-sale">${formatMoney(price)}</span>
-                <span class="sticky-mobile-cta__price-compare">${formatMoney(comparePrice)}</span>
-              `;
+              // Create sale price elements
+              const salePriceSpan = document.createElement('span');
+              salePriceSpan.className = 'sticky-mobile-cta__price-sale';
+              salePriceSpan.textContent = formatMoney(price);
+              
+              const comparePriceSpan = document.createElement('span');
+              comparePriceSpan.className = 'sticky-mobile-cta__price-compare';
+              comparePriceSpan.textContent = formatMoney(comparePrice);
+              
+              priceContainer.appendChild(salePriceSpan);
+              priceContainer.appendChild(comparePriceSpan);
             } else {
-              priceContainer.innerHTML = `
-                <span class="sticky-mobile-cta__price-regular">${formatMoney(price)}</span>
-              `;
+              // Create regular price element
+              const regularPriceSpan = document.createElement('span');
+              regularPriceSpan.className = 'sticky-mobile-cta__price-regular';
+              regularPriceSpan.textContent = formatMoney(price);
+              
+              priceContainer.appendChild(regularPriceSpan);
             }
           }
           
@@ -283,13 +307,19 @@
       
       // Money formatter
       // Note: Shopify prices may be in cents or already formatted depending on store configuration
-      // This function assumes cents (divide by 100). If prices are already formatted, adjust accordingly.
+      // Uses store's currency settings from Shopify.currency or defaults to COP
       function formatMoney(priceValue) {
+        // Get currency from Shopify settings if available, otherwise default to COP
+        const currency = (typeof Shopify !== 'undefined' && Shopify.currency && Shopify.currency.active) 
+          ? Shopify.currency.active 
+          : 'COP';
+        const locale = 'es-CO'; // Could be made configurable via theme settings
+        
         // Check if price is a number (cents format)
         if (typeof priceValue === 'number') {
-          return new Intl.NumberFormat('es-CO', {
+          return new Intl.NumberFormat(locale, {
             style: 'currency',
-            currency: 'COP',
+            currency: currency,
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
           }).format(priceValue / 100);
