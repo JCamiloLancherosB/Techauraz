@@ -801,25 +801,25 @@
           
           <script>
             // Smooth scroll to product description
-            document.addEventListener('DOMContentLoaded', function() {
+            (function() {
               const scrollLink = document.querySelector('[data-scroll-to-description]');
-              if (scrollLink) {
-                scrollLink.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const target = document.getElementById('product-description');
-                  if (target) {
-                    const headerOffset = 80; // Adjust for fixed headers
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: 'smooth'
-                    });
-                  }
-                });
-              }
-            });
+              if (!scrollLink) return;
+              
+              scrollLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.getElementById('product-description');
+                if (target) {
+                  const headerOffset = 80; // Adjust for fixed headers
+                  const elementPosition = target.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              });
+            })();
           </script>
         </product-info>
       </div>

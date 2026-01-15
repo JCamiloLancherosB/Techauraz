@@ -35,7 +35,7 @@
       <button 
         type="button" 
         class="sticky-mobile-cta__button"
-        onclick="document.getElementById('ProductSubmitButton-{{ section_id }}').click()"
+        data-sticky-cta-trigger="{{ section_id }}"
         {%- if product.selected_or_first_available_variant.available == false -%}
           disabled
         {%- endif -%}
@@ -187,8 +187,20 @@
     (function() {
       const stickyCta = document.getElementById('sticky-mobile-cta');
       const mainButton = document.getElementById('ProductSubmitButton-{{ section_id }}');
+      const stickyButton = document.querySelector('[data-sticky-cta-trigger="{{ section_id }}"]');
       
       if (!stickyCta || !mainButton) return;
+      
+      // Handle sticky button click with error handling
+      if (stickyButton) {
+        stickyButton.addEventListener('click', function() {
+          if (mainButton && typeof mainButton.click === 'function') {
+            mainButton.click();
+          } else {
+            console.error('Main product submit button not found or not clickable');
+          }
+        });
+      }
       
       // Only activate on mobile
       if (window.innerWidth >= 750) return;
@@ -233,6 +245,8 @@
       });
       
       // Update when variant changes
+      // Expected event.detail format: { variant: { id, price, compare_at_price, available } }
+      // This event is typically dispatched by product-form.js or variant picker components
       document.addEventListener('variant:change', function(event) {
         if (event.detail && event.detail.variant) {
           // Update price
@@ -267,14 +281,21 @@
         }
       });
       
-      // Simple money formatter
-      function formatMoney(cents) {
-        return new Intl.NumberFormat('es-CO', {
-          style: 'currency',
-          currency: 'COP',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(cents / 100);
+      // Money formatter
+      // Note: Shopify prices may be in cents or already formatted depending on store configuration
+      // This function assumes cents (divide by 100). If prices are already formatted, adjust accordingly.
+      function formatMoney(priceValue) {
+        // Check if price is a number (cents format)
+        if (typeof priceValue === 'number') {
+          return new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(priceValue / 100);
+        }
+        // If already a formatted string, return as-is
+        return priceValue;
       }
     })();
   </script>

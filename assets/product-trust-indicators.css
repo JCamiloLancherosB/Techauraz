@@ -63,7 +63,6 @@
 
 /* Smooth Scroll for Description Link */
 .product__view-details {
-  scroll-behavior: smooth;
   transition: color 0.2s ease;
 }
 
@@ -89,10 +88,8 @@ a[data-scroll-to-description]:hover {
   transform: translateX(4px);
 }
 
-/* Ensure smooth scrolling globally for anchors */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scrolling - only applied to specific link to avoid conflicts */
+/* Use JavaScript for smooth scroll instead of global CSS to respect user preferences */
 
 /* Offset for fixed headers when scrolling to anchors */
 #product-description {
@@ -102,5 +99,13 @@ html {
 @media screen and (max-width: 749px) {
   #product-description {
     scroll-margin-top: 1rem;
+  }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  a[data-scroll-to-description] {
+    transition: none;
+    transform: none !important;
   }
 }
