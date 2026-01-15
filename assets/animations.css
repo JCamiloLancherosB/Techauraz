@@ -424,7 +424,8 @@
   animation: pulse 1s infinite;
 }
 
-/* Slide out animation - used by cross-sell.js and product-enhancements.js */
+/* Slide out animation - used by cross-sell.js and product-enhancements.js
+   Uses slideInRight in reverse to create a slide-out-left effect */
 .slide-out-animation {
   animation: slideInRight 0.3s ease reverse;
 }

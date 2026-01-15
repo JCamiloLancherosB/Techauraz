@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
       if (document.body.contains(popup)) {
         popup.classList.add('slide-out-animation');
-        setTimeout(() => popup.remove(), 500);
+        setTimeout(() => popup.remove(), 300);
       }
     }, 10000);
   }
