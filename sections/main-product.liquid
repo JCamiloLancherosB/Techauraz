@@ -8,6 +8,7 @@
   
   {{ 'section-main-product.css' | asset_url | stylesheet_tag: preload: true }}
   {{ 'global-button-styles.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'product-trust-indicators.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -525,6 +526,26 @@
                   </div>
                 </div>
 
+                {%- comment -%} Trust Indicators Before CTA {%- endcomment -%}
+                <div class="product-trust-indicators">
+                  <div class="trust-indicator">
+                    <span class="trust-indicator__icon">✓</span>
+                    <span class="trust-indicator__text">Envío Gratis</span>
+                  </div>
+                  <div class="trust-indicator">
+                    <span class="trust-indicator__icon">✓</span>
+                    <span class="trust-indicator__text">Pago Contra Entrega</span>
+                  </div>
+                  <div class="trust-indicator">
+                    <span class="trust-indicator__icon">✓</span>
+                    <span class="trust-indicator__text">Garantía 30 Días</span>
+                  </div>
+                  <div class="trust-indicator">
+                    <span class="trust-indicator__icon">✓</span>
+                    <span class="trust-indicator__text">Entrega 2-5 Días</span>
+                  </div>
+                </div>
+
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -777,6 +798,32 @@
             {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}
           </a>
+          
+          <script>
+            // Smooth scroll to product description
+            (function() {
+              const scrollLink = document.querySelector('[data-scroll-to-description]');
+              if (!scrollLink) return;
+              
+              scrollLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.getElementById('product-description');
+                if (!target) return;
+                
+                const headerOffset = 80; // Adjust for fixed headers
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                // Check user's motion preference
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: prefersReducedMotion ? 'auto' : 'smooth'
+                });
+              });
+            })();
+          </script>
         </product-info>
       </div>
 
@@ -833,6 +880,9 @@
     {%- endif -%}
 
     {%- comment -%}3D model scripts removed per requirements{%- endcomment -%}
+    
+    {%- comment -%} Sticky Mobile CTA Bar {%- endcomment -%}
+    {% render 'sticky-mobile-cta', product: product, section_id: section.id %}
   </div>
 </section>
 
