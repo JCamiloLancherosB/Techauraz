@@ -141,7 +141,7 @@
     const successMessages = document.querySelectorAll('.newsletter-form__success.is-visible');
     successMessages.forEach(msg => {
       // Success message is already visible via Liquid, just ensure proper styling
-      msg.style.display = 'flex';
+      msg.classList.add('success-visible');
     });
   }
   

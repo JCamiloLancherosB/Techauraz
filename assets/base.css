@@ -463,6 +463,20 @@ select:focus {
   transition: opacity 0.2s ease-in-out;
 }
 
+/* Image loading states */
+.image-opacity-full {
+  opacity: 1;
+}
+
+.image-error {
+  opacity: 0.5;
+}
+
+/* Newsletter form success message visibility */
+.success-visible {
+  display: flex !important;
+}
+
 /* =============================================================================
    END OF BASE STYLES
    All component-specific styles should be in their respective CSS files:
