@@ -468,31 +468,39 @@
    which have high specificity. This ensures visual consistency across all pages.
    ============================================================================= */
 
-/* Primary CTA button */
+/* Primary CTA button - Removed !important for proper cascade */
 .button--primary,
 .product-form__submit,
 .quick-add__submit {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker) 100%) !important;
-  color: var(--color-text-inverse) !important;
-  font-weight: 700 !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 1.2rem 2rem !important;
-  min-height: 48px !important;
-  font-size: 1.4rem !important;
-  transition: all 0.3s ease !important;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker) 100%);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 1.2rem 2rem;
+  min-height: 48px;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 12px var(--shadow-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  /* Ensure buttons are always visible and clickable */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
 }
 
 .button--primary:hover,
 .product-form__submit:hover,
 .quick-add__submit:hover {
-  background: linear-gradient(135deg, #fde68a 0%, var(--color-primary) 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5) !important;
-  color: var(--color-text-inverse) !important;
+  background: linear-gradient(135deg, #fde68a 0%, var(--color-primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+  color: var(--color-text-inverse);
 }
 
 .button--primary:focus-visible,
@@ -502,20 +510,23 @@
   outline-offset: 3px;
 }
 
-/* Secondary button */
+/* Secondary button - Removed !important for proper cascade */
 .button--secondary {
-  background: rgba(30, 41, 59, 0.6) !important;
-  color: #e2e8f0 !important;
-  border: 1px solid rgba(148, 163, 184, 0.4) !important;
+  background: rgba(30, 41, 59, 0.6);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.4);
   border-radius: 8px;
   transition: all 0.3s ease;
   backdrop-filter: blur(8px);
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
 }
 
 .button--secondary:hover {
-  background: rgba(30, 41, 59, 0.8) !important;
-  border-color: rgba(251, 191, 36, 0.6) !important;
-  color: var(--color-primary) !important;
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(251, 191, 36, 0.6);
+  color: var(--color-primary);
   transform: translateY(-2px);
 }
 

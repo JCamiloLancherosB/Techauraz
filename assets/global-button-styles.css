@@ -58,6 +58,12 @@ input[type="submit"] {
   text-decoration: none;
   appearance: none;
   -webkit-appearance: none;
+  
+  /* Ensure visibility - Critical for button display */
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Hover State - Enhanced visibility with brighter gradient */
