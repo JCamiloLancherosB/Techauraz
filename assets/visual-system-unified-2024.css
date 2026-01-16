@@ -484,7 +484,12 @@
   box-shadow: 0 4px 12px var(--shadow-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  /* Ensure buttons are always visible and clickable */
+  /* 
+   * Explicit visibility declarations to prevent buttons from being hidden by:
+   * - Scroll animations (animate--fade-in, animate--slide-in)
+   * - Modal overlays with high z-index
+   * - JavaScript-triggered visibility changes
+   */
   display: inline-flex;
   align-items: center;
   justify-content: center;

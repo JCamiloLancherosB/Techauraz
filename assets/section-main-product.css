@@ -1176,10 +1176,11 @@ a.product__text {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* Ensure button container is above sticky elements and always visible */
   position: relative;
   z-index: 10;
-  visibility: visible;
-  opacity: 1;
+  visibility: visible; /* Override scroll-trigger animations */
+  opacity: 1; /* Override fade-in animations */
 }
 
 .product .product-form__quantity {

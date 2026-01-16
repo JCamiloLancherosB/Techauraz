@@ -59,7 +59,14 @@ input[type="submit"] {
   appearance: none;
   -webkit-appearance: none;
   
-  /* Ensure visibility - Critical for button display */
+  /* 
+   * Ensure visibility - Critical safeguards for button display
+   * These explicit declarations override any conflicting styles from:
+   * - Scroll-triggered animations that may hide elements
+   * - Modal overlays that may set visibility: hidden
+   * - Third-party scripts that manipulate opacity
+   * Without these, buttons may not display on initial page load
+   */
   position: relative;
   visibility: visible;
   opacity: 1;
