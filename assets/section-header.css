@@ -187,6 +187,7 @@
 header-drawer {
   grid-area: drawer;
   justify-self: start;
+  margin-left: -1.2rem;
 }
 
 .header__heading-link {
