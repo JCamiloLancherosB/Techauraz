@@ -137,60 +137,60 @@
 /* Product form and CTA buttons - ensure proper display */
 .product-form,
 .product-form__buttons {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
-  pointer-events: auto !important;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  animation: none;
+  pointer-events: auto;
 }
 
 /* Primary submit button - use flex for consistent layout */
 /* Flex display ensures proper alignment of button content and loading states */
 .product-form__submit {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
-  pointer-events: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  animation: none;
+  pointer-events: auto;
 }
 
 /* Ensure button remains visible even when disabled (sold out state) */
 .product-form__submit:disabled,
 .product-form__submit[disabled] {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 0.6 !important;
-  cursor: not-allowed !important;
+  display: flex;
+  visibility: visible;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Shopify payment buttons - ensure visibility while preserving button structure */
 .shopify-payment-button {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 /* Variant selectors */
 .product-variant-picker,
 variant-selects,
 .product-form__input {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Quantity selector */
 .product-form__quantity,
 quantity-input {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* =============================================================================
