@@ -33,43 +33,6 @@
     margin-left: -1.2rem;
   }
 
-  /* Ensure proper hit area for menu toggle */
-  .header__icon--menu {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Improve header icon spacing and alignment */
-  .header__icons {
-    gap: 0.8rem;
-  }
-
-  .header__icon {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  /* Ensure consistent icon SVG sizing in header */
-  .header__icon svg,
-  .header__icon .icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Better focus states for header icons */
-  .header__icon:focus-visible {
-    outline: 2px solid rgba(var(--color-foreground), 0.8);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper {
       width: 75%;
