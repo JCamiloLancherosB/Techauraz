@@ -405,20 +405,6 @@
   object-position: center center; /* Center focal point for better composition */
 }
 
-/* =============================================================================
-   HERO BANNER RESPONSIVE IMPROVEMENTS
-   NOTE: !important required to override inline styles and framework defaults
-   ============================================================================= */
-
-:root {
-  --banner-height-large: 60rem;
-  --banner-height-medium: 45rem;
-  --banner-height-small: 35rem;
-  --banner-max-height-large: 70vh;
-  --banner-max-height-medium: 60vh;
-  --banner-max-height-small: 50vh;
-}
-
 /* Reduce excessive vertical height on banners */
 @media screen and (min-width: 750px) {
   .banner--large:not(.banner--adapt) {
