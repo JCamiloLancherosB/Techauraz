@@ -325,18 +325,6 @@
   }
 }
 
-.banner::after,
-.banner__media::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.5) 100%);
-  opacity: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
 .banner__box > * + .banner__text {
   margin-top: 1.5rem;
 }
