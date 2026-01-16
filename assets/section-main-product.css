@@ -219,6 +219,8 @@
 
 .product-form {
   display: block;
+  position: relative;
+  z-index: 5;
 }
 
 .product-form__error-message-wrapper:not([hidden]) {
@@ -1174,6 +1176,17 @@ a.product__text {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* 
+   * Ensure button container is above sticky elements and always visible
+   * Overrides:
+   * - .scroll-trigger.animate--fade-in { opacity: 0; }
+   * - .scroll-trigger.animate--slide-in { opacity: 0; }
+   * - .no-js-hidden { display: none; } (when JavaScript is disabled)
+   */
+  position: relative;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
 }
 
 .product .product-form__quantity {
@@ -1237,6 +1250,8 @@ a.product__text {
 /* Shopify payment buttons spacing */
 .product .shopify-payment-button {
   margin-top: 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .product .shopify-payment-button__more-options {
