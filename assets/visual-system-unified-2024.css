@@ -486,9 +486,19 @@
   letter-spacing: 0.05em;
   /* 
    * Explicit visibility declarations to prevent buttons from being hidden by:
-   * - Scroll animations (animate--fade-in, animate--slide-in)
-   * - Modal overlays with high z-index
-   * - JavaScript-triggered visibility changes
+   * 
+   * 1. Scroll animations:
+   *    - .scroll-trigger.animate--fade-in { opacity: 0; visibility: hidden; }
+   *    - .scroll-trigger.animate--slide-in { opacity: 0; transform: translateY(50px); }
+   * 
+   * 2. Modal overlays:
+   *    - .product-media-modal { visibility: hidden; z-index: -1; } (when closed)
+   *    - .product-media-modal[open] { visibility: visible; z-index: 101; } (when open)
+   * 
+   * 3. JavaScript behaviors:
+   *    - theme.js Shopify.ProductForm may toggle visibility during variant selection
+   *    - cart.js may hide buttons during cart updates
+   *    - Third-party review apps (Judge.me) may manipulate button display
    */
   display: inline-flex;
   align-items: center;

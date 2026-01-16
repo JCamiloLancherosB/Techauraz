@@ -61,11 +61,23 @@ input[type="submit"] {
   
   /* 
    * Ensure visibility - Critical safeguards for button display
-   * These explicit declarations override any conflicting styles from:
-   * - Scroll-triggered animations that may hide elements
-   * - Modal overlays that may set visibility: hidden
-   * - Third-party scripts that manipulate opacity
-   * Without these, buttons may not display on initial page load
+   * These explicit declarations override conflicting styles from:
+   * 
+   * 1. Scroll-triggered animations:
+   *    - .scroll-trigger.animate--fade-in (sets opacity: 0 initially)
+   *    - .scroll-trigger.animate--slide-in (sets transform + opacity)
+   * 
+   * 2. Modal overlays:
+   *    - .product-media-modal (z-index: -1 to 101, visibility: hidden)
+   *    - .modal-backdrop (may set pointer-events: none)
+   * 
+   * 3. Third-party scripts:
+   *    - Shopify's theme.js (may manipulate display/visibility)
+   *    - Review apps (Judge.me, Loox) that may hide elements
+   *    - A/B testing tools that toggle visibility
+   * 
+   * Without these safeguards, buttons may not display on initial page load
+   * or may become unclickable when modals/overlays are active.
    */
   position: relative;
   visibility: visible;
