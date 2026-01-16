@@ -573,23 +573,6 @@ img[loading="lazy"] {
   }
 }
 
-/* Footer - stack on mobile */
-@media screen and (max-width: 749px) {
-  .footer__content-top {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
-  .footer__column {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .footer__column--info {
-    order: -1;
-  }
-}
-
 /* Announcement bar - readable on mobile */
 @media screen and (max-width: 749px) {
   .announcement-bar__message {
@@ -749,23 +732,6 @@ section[id*="newsletter"] {
   section[id*="newsletter"] {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-  }
-}
-
-/* Footer - reduce excessive top spacing */
-.footer,
-.shopify-section-group-footer-group,
-footer {
-  padding-top: 2.5rem !important;
-  margin-top: 2rem;
-}
-
-@media screen and (max-width: 749px) {
-  .footer,
-  .shopify-section-group-footer-group,
-  footer {
-    padding-top: 2rem !important;
-    margin-top: 1.5rem;
   }
 }
 
