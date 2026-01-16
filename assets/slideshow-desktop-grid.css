@@ -2,19 +2,21 @@
    SLIDESHOW DESKTOP GRID LAYOUT
    =============================================================================
    Version: 1.0.1
-   Date: 2026-01-16
+   Date: 2024-01-16
    
    Purpose: Display slideshow slides side by side on desktop view
-   - Desktop (990px+): Two slides displayed horizontally
+   - Desktop (750px+): Two slides displayed horizontally
    - Tablet (750px-989px): Two slides with adjusted spacing
    - Mobile (<750px): Single slide carousel (existing behavior preserved)
    
    Note: Uses !important selectively to override existing slider/carousel styles
+   from component-slider.css and component-slideshow.css
    ============================================================================= */
 
 /* Desktop and Tablet: Display slides side by side */
 @media screen and (min-width: 750px) {
-  /* Convert slideshow from carousel to grid on desktop */
+  /* Convert slideshow from carousel to grid on desktop
+     !important needed to override .slider--everywhere styles */
   slideshow-component .slideshow.slider.slider--everywhere,
   slideshow-component .slideshow.banner.slider--everywhere {
     display: grid !important;
@@ -65,7 +67,7 @@
   }
 }
 
-/* Tablet-specific adjustments */
+/* Tablet-specific adjustments - refine spacing for medium screens */
 @media screen and (min-width: 750px) and (max-width: 989px) {
   slideshow-component .slideshow.slider.slider--everywhere,
   slideshow-component .slideshow.banner.slider--everywhere {
