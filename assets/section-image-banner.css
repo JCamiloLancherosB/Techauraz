@@ -316,14 +316,6 @@
     border-radius: 0;
     box-shadow: none;
   }
-
-  .banner--desktop-transparent .button--secondary {
-    --alpha-button-background: 0;
-  }
-
-  .banner--desktop-transparent .content-container:after {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 749px) {
@@ -395,92 +387,6 @@
 .banner__box .banner__heading + * {
   margin-top: 1rem;
 }
-
-/* Enhanced primary button styles with Techauraz brand colors 
-   NOTE: !important flags required to override Shopify theme button styles 
-   which are often defined with high specificity or inline styles */
-.banner .button--primary,
-.banner__buttons .button--primary {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-  color: #0f172a !important;
-  font-weight: 700 !important;
-  padding: 1.2rem 2.4rem !important;
-  border-radius: 8px !important;
-  border: none !important;
-  font-size: 1.5rem !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.banner .button--primary:hover,
-.banner__buttons .button--primary:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.6) !important;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-}
-
-.banner .button--primary:focus-visible,
-.banner__buttons .button--primary:focus-visible {
-  outline: 3px solid #fbbf24 !important;
-  outline-offset: 3px !important;
-}
-
-.banner .button--secondary {
-  background: transparent !important;
-  border: 2px solid rgba(254, 243, 199, 0.5) !important;
-  color: #fef3c7 !important;
-  font-weight: 600 !important;
-  padding: 1.2rem 2.4rem !important;
-  border-radius: 8px !important;
-  transition: all 0.2s ease !important;
-}
-
-.banner .button--secondary:hover {
-  background: rgba(254, 243, 199, 0.1) !important;
-  border-color: #fef3c7 !important;
-}
-
-.banner .button--secondary:focus-visible {
-  outline: 2px solid #fef3c7 !important;
-  outline-offset: 2px !important;
-}
-
-.banner__buttons {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  max-width: 45rem;
-  word-break: break-word;
-}
-
-@media screen and (max-width: 749px) {
-  .banner--content-align-mobile-right .banner__buttons--multiple {
-    justify-content: flex-end;
-  }
-
-  .banner--content-align-mobile-center .banner__buttons--multiple > * {
-    flex-grow: 1;
-    min-width: 22rem;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .banner--content-align-center .banner__buttons--multiple > * {
-    flex-grow: 1;
-    min-width: 22rem;
-  }
-
-  .banner--content-align-right .banner__buttons--multiple {
-    justify-content: flex-end;
-  }
-}
-
-.banner__box > * + .banner__buttons {
-  margin-top: 2rem;
-}
-
 @media screen and (max-width: 749px) {
   .banner:not(.slideshow) .rte a,
   .banner:not(.slideshow) .inline-richtext a:hover,
@@ -495,21 +401,6 @@
   .banner--desktop-transparent .rte a:hover {
     color: currentColor;
   }
-}
-
-/* Enhanced CTA button prominence and visibility */
-.banner__buttons .button {
-  padding: 1.4rem 2.8rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  min-height: 4.8rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.banner__buttons .button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Prevent banner media overflow */
@@ -573,53 +464,6 @@
   .banner__box {
     max-width: 75rem !important; /* Override framework max-width */
   }
-}
-
-/* Improve arrow/dot accessibility on dark backgrounds */
-/* NOTE: Overriding slideshow component defaults which may have inline styles */
-.banner .slider-button,
-.banner .slideshow__controls .slider-button {
-  background: rgba(255, 255, 255, 0.95) !important; /* Override component default */
-  border: 2px solid rgba(0, 0, 0, 0.1) !important; /* Override component default */
-  color: #1a202c !important; /* Override component default */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important; /* Override component default */
-  z-index: 101 !important; /* Ensure buttons are above all content */
-  position: relative !important;
-}
-
-.banner .slider-button:hover {
-  background: white !important; /* Override component default */
-  border-color: rgba(0, 0, 0, 0.2) !important; /* Override component default */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35) !important; /* Override component default */
-}
-
-/* Center slide dots and improve visibility */
-.banner .slideshow__controls {
-  display: flex !important; /* Override component default */
-  justify-content: center !important; /* Override component default */
-  align-items: center !important; /* Override component default */
-  bottom: 2rem !important; /* Override component positioning */
-  left: 50% !important; /* Override component positioning */
-  transform: translateX(-50%) !important; /* Override component transform */
-  width: auto !important; /* Override component width */
-  background: rgba(255, 255, 255, 0.9) !important; /* Override component background */
-  padding: 8px 16px !important; /* Override component padding */
-  border-radius: 20px !important; /* Override component border-radius */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; /* Override component shadow */
-  /* Ensure controls stay above text overlay */
-  z-index: 5 !important;
-}
-
-.banner .slideshow__controls .slider-counter__link {
-  background: #94a3b8 !important; /* Override component default */
-  border: 2px solid white !important; /* Override component default */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Override component default */
-}
-
-.banner .slideshow__controls .slider-counter__link--active,
-.banner .slideshow__controls .slider-counter__link[aria-current="true"] {
-  background: #667eea !important; /* Override component default */
-  border-color: #667eea !important; /* Override component default */
 }
 
 /* Mobile adjustments for better touch targets */
