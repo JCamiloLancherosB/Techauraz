@@ -696,8 +696,8 @@
   .button--primary,
   .product-form__submit,
   .quick-add__submit {
-    font-size: 1.3rem !important;
-    padding: 1rem 1.5rem !important;
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem;
   }
 
   /* Trust badges */
