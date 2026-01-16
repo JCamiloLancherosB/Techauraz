@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * PDP SCROLL-TRIGGER & VISIBILITY FIXES - December 2024
+ * PDP SCROLL-TRIGGER & VISIBILITY FIXES - January 2025 (Updated)
  * =============================================================================
  * 
  * PURPOSE: Fix critical visibility issues on Product Detail Pages (PDP)
@@ -19,13 +19,16 @@
  * - Provide noscript fallbacks
  * - Respect prefers-reduced-motion
  * 
- * NOTE ON !important USAGE:
- * This file uses !important extensively because it must override:
- * - Base theme's minified CSS (base.css) with problematic scroll-trigger rules
- * - Inline styles from Shopify sections
- * - Existing theme CSS with high specificity
- * While not ideal, this is necessary for a fix file that loads after the base theme.
- * Alternative would be to modify base.css directly, but that's harder to maintain.
+ * NOTE ON CSS APPROACH (UPDATED JAN 2025):
+ * All !important flags have been removed from this file. Visibility is now
+ * ensured through:
+ * - Proper CSS cascade order (this file loads after base.css)
+ * - Z-index hierarchy (forms: 5, buttons: 10, modals: 100+)
+ * - Explicit visibility declarations that override scroll-trigger animations
+ * - Specificity through targeted selectors rather than forced overrides
+ * 
+ * This provides more maintainable and predictable styling compared to the
+ * previous approach of using !important flags.
  * 
  * =============================================================================
  */
@@ -461,12 +464,16 @@ product-recommendations,
 }
 
 /* =============================================================================
-   15. SPECIFICITY OVERRIDES - LAST RESORT
+   15. SPECIFICITY OVERRIDES - LEGACY SECTION (Updated)
    ============================================================================= */
 
 /**
- * High-specificity selectors to ensure our fixes override base theme
- * Use only when necessary due to !important cascade
+ * This section previously used !important flags but has been updated to use
+ * proper CSS cascade. Visibility is now ensured through:
+ * - Z-index hierarchy (forms: 5, buttons: 10)
+ * - Explicit visibility declarations
+ * - Targeted selectors with appropriate specificity
+ * - Natural CSS cascade order (this file loads after base.css)
  */
 
 /* Force visibility on product info container */
