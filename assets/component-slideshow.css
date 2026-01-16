@@ -37,6 +37,100 @@ slideshow-component {
   object-position: center; /* Center images for better framing */
 }
 
+/* Adjust for large slides */
+@media screen and (min-width: 750px) {
+  .slideshow__media {
+    height: var(--slideshow-height-default, 600px);
+  }
+  
+  .slideshow__media img {
+    min-height: var(--slideshow-height-default, 600px);
+  }
+  
+  .banner--medium .slideshow__media,
+  .banner--medium .slideshow__media img {
+    height: var(--slideshow-height-medium, 500px);
+    min-height: var(--slideshow-height-medium, 500px);
+  }
+  
+  .banner--large .slideshow__media,
+  .banner--large .slideshow__media img {
+    height: var(--slideshow-height-large, 720px);
+    min-height: var(--slideshow-height-large, 720px);
+  }
+  
+  .banner--small .slideshow__media,
+  .banner--small .slideshow__media img {
+    height: var(--slideshow-height-small, 400px);
+    min-height: var(--slideshow-height-small, 400px);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .slideshow--placeholder.banner--mobile-bottom.banner--adapt_image .slideshow__media,
+  .slideshow--placeholder.banner--adapt_image:not(.banner--mobile-bottom) {
+    height: 28rem;
+  }
+  
+  /* Ensure slideshow images are visible on mobile */
+  .slideshow__media {
+    min-height: 250px; /* Minimum height for mobile to ensure images display properly */
+    position: relative;
+  }
+  
+  .slideshow__media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow--placeholder.banner--adapt_image {
+    height: 56rem;
+  }
+}
+
+/* Slideshow text overlay improvements for conversion - Enhanced for 2024 */
+.slideshow__text.banner__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 65rem;
+  padding: 3rem;
+  margin: 2rem; /* Add margin to prevent text from touching edges */
+  background: rgba(15, 15, 26, 0.90);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  gap: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  /* Ensure text is above media but below controls */
+  position: relative;
+  z-index: 2;
+}
+
+.slideshow__text .banner__text {
+  font-size: 1.7rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.slideshow__text .banner__buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  z-index: 999; /* Above cookie banner (998) and WhatsApp widget (997) */
+}
+
 /* Enhanced button styles for slideshow */
 .slideshow__text .button--primary {
   padding: 1.4rem 2.8rem;
@@ -85,8 +179,65 @@ slideshow-component {
   outline-offset: 3px;
 }
 
+@media screen and (max-width: 749px) {
+  .slideshow__text.banner__box {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    margin: 1.5rem 1rem; /* Reduced margin on mobile */
+  }
+  
+  .slideshow__text .banner__heading {
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+  
+  .slideshow__text .banner__text {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+  
+  .slideshow__text .button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 .slideshow__text > * {
   max-width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  slideshow-component.page-width .slideshow__text {
+    border-right: var(--text-boxes-border-width) solid rgba(var(--color-foreground), var(--text-boxes-border-opacity));
+    border-left: var(--text-boxes-border-width) solid rgba(var(--color-foreground), var(--text-boxes-border-opacity));
+  }
+
+  .banner--mobile-bottom .slideshow__text.banner__box {
+    max-width: 100%;
+  }
+
+  .banner--mobile-bottom .slideshow__text-wrapper {
+    flex-grow: 1;
+  }
+
+  .banner--mobile-bottom .slideshow__text.banner__box {
+    height: 100%;
+  }
+
+  .banner--mobile-bottom .slideshow__text .button {
+    flex-grow: 0;
+  }
+
+  .slideshow__text.slideshow__text-mobile--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .slideshow__text.slideshow__text-mobile--right {
+    align-items: flex-end;
+    text-align: right;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -98,6 +249,34 @@ slideshow-component {
   .slideshow__text.slideshow__text--right {
     align-items: flex-end;
     text-align: right;
+  }
+}
+
+.slideshow:not(.banner--mobile-bottom) .slideshow__text-wrapper {
+  height: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow__text-wrapper.banner__content {
+    /* Position text wrapper absolutely over the media on desktop */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 5rem;
+    /* Set z-index above media but allow controls to be on top */
+    z-index: 3;
+    /* Disable pointer events on wrapper so controls remain clickable */
+    pointer-events: none;
+    /* Remove background so media shows through */
+    background: transparent;
+  }
+  
+  /* Re-enable pointer events on the text box itself for CTA buttons */
+  .slideshow__text-wrapper.banner__content .slideshow__text.banner__box {
+    pointer-events: auto;
   }
 }
 
@@ -181,6 +360,13 @@ slideshow-component:not(.page-width) .slider-buttons {
 
 .slideshow.slider::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
+}
+
+/* Ensure banner doesn't create overflow */
+.banner,
+.slideshow.banner {
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 /* Prevent grid from causing overflow in slideshow */
