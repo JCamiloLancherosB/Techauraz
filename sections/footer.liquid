@@ -1,35 +1,9 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'footer-improved.css' | asset_url | stylesheet_tag }}
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
-{{ 'forms-techauraz.css' | asset_url | stylesheet_tag }}
-{{ 'product-page-visual-fixes-2024.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
-
-{%- style -%}
-  .footer {
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-  }
-
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
-
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {%- liquid
@@ -173,41 +147,43 @@
               {%- if section.settings.newsletter_heading != blank -%}
                 <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
               {%- endif -%}
-              <div class="footer__newsletter-incentive">
-                <span>🎁</span>
-                <span>Recibe ofertas exclusivas</span>
-              </div>
-              
-              <div class="newsletter-form">
-                {%- form 'customer', id: 'ContactFooter', class: 'newsletter-form__form' -%}
-                  <input type="hidden" name="contact[tags]" value="newsletter">
-                  <div class="newsletter-form__wrapper">
-                    <input 
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="newsletter-form__field-wrapper">
+                  <div class="field">
+                    <input
                       id="NewsletterForm--{{ section.id }}"
-                      type="email" 
-                      name="contact[email]" 
-                      class="newsletter-form__input" 
-                      placeholder="{{ 'newsletter.label' | t }}"
+                      type="email"
+                      name="contact[email]"
+                      class="field__input"
                       value="{{ form.email }}"
-                      required
-                      autocomplete="email"
+                      aria-required="true"
                       autocorrect="off"
                       autocapitalize="off"
+                      autocomplete="email"
                       {% if form.errors %}
+                        autofocus
                         aria-invalid="true"
                         aria-describedby="ContactFooter-error"
                       {% elsif form.posted_successfully? %}
                         aria-describedby="ContactFooter-success"
                       {% endif %}
+                      placeholder="{{ 'newsletter.label' | t }}"
+                      required
                     >
-                    <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">
+                    <label class="field__label" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
-                    <button type="submit" class="newsletter-form__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
-                      {{ 'newsletter.button_label' | t }}
+                    <button
+                      type="submit"
+                      class="newsletter-form__button field__button"
+                      name="commit"
+                      id="Subscribe"
+                      aria-label="{{ 'newsletter.button_label' | t }}"
+                    >
+                      {% render 'icon-arrow' %}
                     </button>
                   </div>
-                  
                   {%- if form.errors -%}
                     <small class="newsletter-form__message form__message" id="ContactFooter-error">
                       {%- render 'icon-error' -%}
@@ -215,41 +191,19 @@
                       {{ form.errors.messages.email -}}
                     </small>
                   {%- endif -%}
-                  
-                  {%- if form.posted_successfully? -%}
-                    <div class="newsletter-form__success is-visible" id="ContactFooter-success">
-                      <span class="newsletter-form__success-icon">✅</span>
-                      <span>{{- 'newsletter.success' | t }}</span>
-                    </div>
-                  {%- endif -%}
-                {%- endform -%}
-              </div>
-            </div>
-          {%- endif -%}
-
-          {%- comment -%} Trust Badges Section {%- endcomment -%}
-          <div class="footer__trust-badges">
-            <div class="footer__trust-badge">
-              <span class="footer__trust-badge-icon">✓</span>
-              <span>Pago Seguro</span>
-            </div>
-            <div class="footer__trust-badge">
-              <span class="footer__trust-badge-icon">✓</span>
-              <span>Envío Gratis</span>
-            </div>
-            <div class="footer__trust-badge">
-              <span class="footer__trust-badge-icon">✓</span>
-              <span>Garantía 100%</span>
-            </div>
-          </div>
-
-          {%- comment -%} WhatsApp CTA {%- endcomment -%}
-          {%- if section.settings.whatsapp_number != blank -%}
-            <div class="footer__whatsapp-wrapper">
-              <a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
-                {%- render 'icon-whatsapp' -%}
-                <span>Contáctanos por WhatsApp</span>
-              </a>
+                </div>
+                {%- if form.posted_successfully? -%}
+                  <h3
+                    class="newsletter-form__message newsletter-form__message--success form__message"
+                    id="ContactFooter-success"
+                    tabindex="-1"
+                    autofocus
+                  >
+                    {% render 'icon-success' -%}
+                    {{- 'newsletter.success' | t }}
+                  </h3>
+                {%- endif -%}
+              {%- endform -%}
             </div>
           {%- endif -%}
 
@@ -378,16 +332,20 @@
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
         <small class="copyright__content">{{ powered_by_link }}</small>
+        {%- if section.settings.show_policy -%}
+          <ul class="policies list-unstyled">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <small class="copyright__content"
+                    ><a href="{{ policy.url }}">{{ policy.title }}</a></small
+                  >
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
-      {%- if section.settings.show_policy -%}
-        <div class="footer__policies">
-          {%- for policy in shop.policies -%}
-            {%- if policy != blank -%}
-              <a href="{{ policy.url }}">{{ policy.title }}</a>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
     </div>
   </div>
 </footer>
@@ -587,17 +545,6 @@
       "id": "show_policy",
       "default": false,
       "label": "t:sections.footer.settings.show_policy.label"
-    },
-    {
-      "type": "header",
-      "content": "WhatsApp Contact"
-    },
-    {
-      "type": "text",
-      "id": "whatsapp_number",
-      "label": "WhatsApp Number",
-      "info": "Enter phone number with country code (e.g., 573102345678). Leave empty to hide WhatsApp button.",
-      "default": ""
     },
     {
       "type": "header",
