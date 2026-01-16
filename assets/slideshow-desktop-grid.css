@@ -1,0 +1,105 @@
+/* =============================================================================
+   SLIDESHOW DESKTOP GRID LAYOUT
+   =============================================================================
+   Version: 1.0.0
+   Date: 2026-01-16
+   
+   Purpose: Display slideshow slides side by side on desktop view
+   - Desktop (750px+): Two slides displayed horizontally
+   - Mobile (<750px): Single slide carousel (existing behavior preserved)
+   ============================================================================= */
+
+/* Desktop: Display slides side by side */
+@media screen and (min-width: 750px) {
+  /* Convert slideshow from carousel to grid on desktop */
+  slideshow-component .slideshow.slider,
+  slideshow-component .slideshow.slider--everywhere {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+    padding: 0 2rem !important;
+  }
+  
+  /* Make each slide take its grid column */
+  .slideshow__slide {
+    width: 100% !important;
+    scroll-snap-align: none !important;
+    position: relative !important;
+  }
+  
+  /* Ensure slide media fits properly in grid */
+  .slideshow__slide .slideshow__media {
+    height: 100% !important;
+    min-height: 500px !important;
+  }
+  
+  /* Adjust text wrapper for grid layout */
+  .slideshow__slide .slideshow__text-wrapper {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2rem !important;
+    pointer-events: none !important;
+  }
+  
+  /* Enable pointer events for text box */
+  .slideshow__slide .slideshow__text.banner__box {
+    pointer-events: auto !important;
+  }
+  
+  /* Hide carousel controls on desktop since we're showing both slides */
+  slideshow-component .slideshow__controls {
+    display: none !important;
+  }
+  
+  slideshow-component .slider-buttons {
+    display: none !important;
+  }
+  
+  slideshow-component .slider-counter {
+    display: none !important;
+  }
+}
+
+/* Tablet optimization - maintain grid layout */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  slideshow-component .slideshow.slider,
+  slideshow-component .slideshow.slider--everywhere {
+    gap: 1.5rem !important;
+    padding: 0 1.5rem !important;
+  }
+  
+  .slideshow__slide .slideshow__media {
+    min-height: 400px !important;
+  }
+}
+
+/* Mobile: Preserve existing carousel behavior */
+@media screen and (max-width: 749px) {
+  /* Keep carousel functionality on mobile */
+  slideshow-component .slideshow.slider,
+  slideshow-component .slideshow.slider--everywhere {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  
+  .slideshow__slide {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    scroll-snap-align: center !important;
+  }
+  
+  /* Show carousel controls on mobile */
+  slideshow-component .slideshow__controls {
+    display: flex !important;
+  }
+}
