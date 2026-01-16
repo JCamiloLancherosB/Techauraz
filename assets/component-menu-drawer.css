@@ -1,3 +1,7 @@
+/* =============================================================================
+   MENU DRAWER - HAMBURGER BUTTON STYLES
+   ============================================================================= */
+
 .header__icon--menu {
   position: initial;
   min-width: 44px;
@@ -33,10 +37,13 @@
      </span>
    </summary>
    Both icons are always rendered; CSS controls which is visible */
+
+/* Hide close icon by default */
 .header__icon--menu .icon-close {
   display: none;
 }
 
+/* When menu is open: hide hamburger, show close */
 .menu-drawer-container[open] .header__icon--menu .icon-hamburger {
   display: none;
 }

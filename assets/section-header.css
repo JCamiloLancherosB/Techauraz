@@ -93,11 +93,6 @@
     align-items: center !important;
     justify-content: center !important;
   }
-  
-  /* Menu drawer button */
-  .header__icon--menu {
-    margin-right: auto !important;
-  }
 }
 
 /* =============================================================================
@@ -192,6 +187,7 @@
 header-drawer {
   grid-area: drawer;
   justify-self: start;
+  margin-left: -1.2rem;
 }
 
 .header__heading-link {

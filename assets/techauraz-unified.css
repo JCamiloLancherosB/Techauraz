@@ -158,8 +158,8 @@
    ============================================================================= */
 
 /* Header wrapper - clean and compact */
+/* Note: position is controlled by section-header.css (fixed) */
 .header-wrapper {
-  position: relative;
   z-index: 100;
   background: var(--ta-bg-overlay);
   backdrop-filter: blur(12px);
