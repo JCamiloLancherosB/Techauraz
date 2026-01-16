@@ -464,11 +464,12 @@
 /* =============================================================================
    8. BUTTON AND CTA CONSISTENCY
    Aligned with dark theme palette
-   NOTE: !important flags required to override Shopify's default theme styles
-   which have high specificity. This ensures visual consistency across all pages.
+   NOTE: All !important flags have been removed to establish proper CSS cascade.
+   Visibility is now ensured through z-index hierarchy and explicit declarations
+   rather than forced overrides. This provides predictable styling across all pages.
    ============================================================================= */
 
-/* Primary CTA button - Removed !important for proper cascade */
+/* Primary CTA button - Uses proper cascade without !important */
 .button--primary,
 .product-form__submit,
 .quick-add__submit {
