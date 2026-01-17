@@ -1,8 +1,8 @@
 /* =============================================================================
    SLIDESHOW DESKTOP CAROUSEL LAYOUT
    =============================================================================
-   Version: 2.0.0
-   Date: 2024-01-17
+   Version: 2.1.0
+   Date: 2026-01-17
    
    Purpose: Ensure slideshow displays as a proper carousel on all devices
    - Desktop (750px+): Single slide carousel with navigation controls
@@ -13,31 +13,34 @@
    showing one image at a time with auto-rotation and navigation controls.
    ============================================================================= */
 
-/* Desktop: Ensure proper carousel/slider behavior */
-@media screen and (min-width: 750px) {
-  /* Ensure slideshow displays as carousel, not grid
-     Note: overflow-x: auto is required for JavaScript scrollTo() navigation,
-     scrollbars are hidden via scrollbar-width: none in component-slideshow.css */
-  slideshow-component .slideshow.slider.slider--everywhere,
-  slideshow-component .slideshow.banner.slider--everywhere {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Each slide takes full width for proper carousel display */
-  slideshow-component .slideshow__slide.slider__slide {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
-    position: relative;
-  }
-  
-  /* Ensure carousel controls are visible on desktop
-     (original grid layout hid them with display: none) */
-  slideshow-component .slideshow__controls,
-  slideshow-component .slider-buttons {
-    display: flex;
-  }
+/* Force carousel behavior on all screen sizes - override grid display */
+slideshow-component .slideshow.slider.slider--everywhere,
+slideshow-component .slideshow.banner.slider--everywhere {
+  display: flex !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+}
+
+/* Hide scrollbar in Chrome/Safari */
+slideshow-component .slideshow.slider.slider--everywhere::-webkit-scrollbar,
+slideshow-component .slideshow.banner.slider--everywhere::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each slide takes full width for proper carousel display */
+slideshow-component .slideshow__slide.slider__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  scroll-snap-align: center;
+  position: relative;
+}
+
+/* Ensure carousel controls are always visible */
+slideshow-component .slideshow__controls,
+slideshow-component .slider-buttons {
+  display: flex !important;
 }
