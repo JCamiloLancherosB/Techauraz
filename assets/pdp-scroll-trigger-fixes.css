@@ -107,14 +107,6 @@ noscript .scroll-trigger,
   }
 }
 
-.product__info-wrapper {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  transform: none !important;
-}
-
 /* =============================================================================
    7. TITLE SCROLLBAR FIXES
    ============================================================================= */
@@ -229,62 +221,3 @@ product-recommendations,
   visibility: visible !important;
   opacity: 1 !important;
 }
-
-/* =============================================================================
-   13. FALLBACK FOR BROWSERS WITHOUT INTERSECTION OBSERVER
-   ============================================================================= */
-
-/**
- * For older browsers without IntersectionObserver support
- * The JavaScript in animations.js handles the primary fallback by detecting
- * browser support and ensuring all elements are visible if IO is not available.
- * 
- * This CSS section provides additional defense-in-depth through the default
- * visible state defined in section 1, which applies to all browsers.
- * 
- * No additional CSS rules needed here since:
- * 1. Default state is visible (section 1)
- * 2. JavaScript fallback handles unsupported browsers
- * 3. Noscript tags in theme.liquid ensure CSS loads even with JS disabled
- */
-
-/* =============================================================================
-   14. MOBILE SPECIFIC FIXES
-   ============================================================================= */
-
-@media screen and (max-width: 749px) {
-  /* All critical elements visible on mobile */
-  .product__description,
-  .product__title,
-  .product__price,
-  .product-form,
-  .product-form__submit {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-  }
-  
-  /* No transforms on mobile that could hide content */
-  .scroll-trigger,
-  .product__info-wrapper {
-    transform: none !important;
-  }
-}
-
-.product__media-wrapper {
-  z-index: 1;
-}
-
-.product__info-wrapper {
-  z-index: 2;
-}
-
-.product-form,
-.product-form__buttons {
-  z-index: 3;
-  position: relative;
-}
-
-/* =============================================================================
-   END OF FILE
-   ============================================================================= */
