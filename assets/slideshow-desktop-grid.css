@@ -15,7 +15,9 @@
 
 /* Desktop: Ensure proper carousel/slider behavior */
 @media screen and (min-width: 750px) {
-  /* Ensure slideshow displays as carousel, not grid */
+  /* Ensure slideshow displays as carousel, not grid
+     Note: overflow-x: auto is required for JavaScript scrollTo() navigation,
+     scrollbars are hidden via scrollbar-width: none in component-slideshow.css */
   slideshow-component .slideshow.slider.slider--everywhere,
   slideshow-component .slideshow.banner.slider--everywhere {
     display: flex;
