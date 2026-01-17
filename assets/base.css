@@ -210,29 +210,11 @@ a {
 
 /* === IMAGES === */
 img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
   display: block;
 }
 
-/* === RESPONSIVE UTILITIES === */
-@media screen and (max-width: 749px) {
-  .small-hide {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .medium-hide {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .large-up-hide {
-    display: none !important;
-  }
-}
 
 /* === SECTION SPACING === */
 .section {
