@@ -157,6 +157,70 @@
           "padding_top": 36,
           "padding_bottom": 36
         }
+      },
+      "main-product": {
+        "type": "main-product",
+        "blocks": {
+          "price_QrbxPF": {
+            "type": "price",
+            "settings": {}
+          },
+          "quantity_selector_wnrxE8": {
+            "type": "quantity_selector",
+            "settings": {}
+          },
+          "buy_buttons_FNgTtK": {
+            "type": "buy_buttons",
+            "settings": {
+              "show_dynamic_checkout": true,
+              "show_gift_card_recipient": true
+            }
+          },
+          "share_yYxKCp": {
+            "type": "share",
+            "settings": {
+              "share_label": "Compartir"
+            }
+          }
+        },
+        "block_order": [
+          "price_QrbxPF",
+          "quantity_selector_wnrxE8",
+          "buy_buttons_FNgTtK",
+          "share_yYxKCp"
+        ],
+        "settings": {
+          "gallery_layout": "stacked",
+          "media_size": "large",
+          "constrain_to_viewport": "true",
+          "media_fit": "contain",
+          "media_position": "left",
+          "image_zoom": "click",
+          "mobile_thumbnails": "hide",
+          "hide_variants": false,
+          "enable_sticky_info": true,
+          "color_scheme": "background-1",
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "related-products": {
+        "type": "related-products",
+        "settings": {
+          "heading": "También te puede gustar",
+          "heading_size": "h1",
+          "products_to_show": 4,
+          "columns_desktop": 4,
+          "color_scheme": "",
+          "image_ratio": "adapt",
+          "image_shape": "default",
+          "show_secondary_image": false,
+          "show_vendor": false,
+          "show_rating": false,
+          "columns_mobile": "2",
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
       }
     },
     "content_for_index": [],
@@ -450,7 +514,9 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".card img { max-width: 100%; height: auto; object-fit: contain; } .card__media { aspect-ratio: 1 / 1; overflow: hidden; } .card__media img { width: 100%; height: 100%; object-fit: contain; }"
+      ".card img {max-width: 100%; height: auto; object-fit: contain;}",
+      ".card__media {aspect-ratio: 1 / 1; overflow: hidden;}",
+      ".card__media img {width: 100%; height: 100%; object-fit: contain;}"
     ]
   }
 }
