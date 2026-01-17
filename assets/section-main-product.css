@@ -1839,4 +1839,260 @@ a.product__text {
 
 /* ===== SELECTOR DE VARIANTES MEJORADO ===== */
 /* Variant selector styles moved to component-product-variant-picker.css to avoid duplication */
+
+/* =============================================================================
+   RATING VISIBILITY ENHANCEMENT
+   Consolidated from visual-system-unified-2024.css
+   ============================================================================= */
+
+.rating-star {
+  --color-rating-star: #fbbf24;
+  --color-rating-star-empty: rgba(148, 163, 184, 0.3);
+  letter-spacing: calc(var(--letter-spacing) * 1rem);
+  font-size: calc(var(--font-size) * 1rem);
+  line-height: 1;
+  display: inline-block;
+  font-family: Times, 'Times New Roman', serif;
+  margin: 0;
+}
+
+.rating-star::before {
+  content: '★★★★★';
+  background: linear-gradient(
+    90deg,
+    #fbbf24 var(--percent),
+    rgba(148, 163, 184, 0.3) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.rating-text {
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.rating-count {
+  color: #94a3b8;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.card-wrapper .rating-star {
+  --letter-spacing: 0.7;
+  --font-size: 1.5;
+}
+
+.product .rating-star {
+  --letter-spacing: 0.8;
+  --font-size: 1.8;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.card__information .rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+}
+
+.card__information .rating-text,
+.card__information .rating-count {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.card__information .rating,
+.product__info-container .rating {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* =============================================================================
+   BUTTON ENHANCEMENTS & CONSISTENCY
+   Consolidated from global-button-styles.css, button-visibility-enhancements.css
+   ============================================================================= */
+
+/* Ensure all buttons are visible and accessible */
+.product-form__submit,
+.button,
+.shopify-payment-button__button {
+  /* Ensure visibility above all overlays */
+  position: relative;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  
+  /* High contrast colors */
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  
+  /* Touch-friendly sizing */
+  min-height: 50px;
+  
+  /* Enhanced visual prominence */
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+/* Enhanced hover states */
+.product-form__submit:hover:not(:disabled),
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+/* Focus state for accessibility */
+.product-form__submit:focus-visible,
+.button:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+/* Disabled state clarity */
+.product-form__submit:disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =============================================================================
+   PRODUCT INFO SPACING IMPROVEMENTS
+   Consolidated from product-page-visual-fixes-2024.css
+   ============================================================================= */
+
+/* Tighter spacing for product info sections */
+.product__info-container > * + * {
+  margin-top: 1rem;
+}
+
+/* Product title spacing */
+.product__title {
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.product__title + .product__text.caption-with-letter-spacing {
+  margin-top: 0;
+}
+
+/* Price and tax spacing */
+.product__price {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product__tax {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Form spacing */
+.product-form__input {
+  margin-bottom: 1rem;
+}
+
+.product-form__quantity {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Prevent badge overflow */
+.product-urgency-badge,
+.product-offer-badge,
+.urgency-indicator,
+.product-shipping-eta {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Countdown timer spacing */
+.product-countdown {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.2rem;
+}
+
+.product-countdown__title {
+  margin-bottom: 0.8rem;
+}
+
+/* Trust elements spacing */
+.product-trust-payments,
+.product-delivery-steps {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Accordion spacing */
+.product__accordion {
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.product__accordion .accordion__content {
+  padding: 1.2rem 1.5rem;
+}
+
+/* Icon with text spacing */
+.icon-with-text--vertical .icon-with-text__item {
+  margin-bottom: 1rem;
+}
+
+.icon-with-text--vertical .icon-with-text__item:last-child {
+  margin-bottom: 0;
+}
+
+/* Description typography */
+.product__description .rte,
+.product-description-content {
+  line-height: 1.7;
+  font-size: 1.5rem;
+}
+
+.product__description p {
+  margin-bottom: 1rem;
+}
+
+.product__description h3 {
+  margin: 2rem 0 1rem;
+  line-height: 1.3;
+}
+
+.product__description h4 {
+  margin: 1.5rem 0 0.8rem;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 749px) {
+  .product__description .rte {
+    font-size: 1.4rem;
+  }
+  
+  .product__description h3 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  
+  .product__description h4 {
+    font-size: 1.5rem;
+    margin: 1.2rem 0 0.6rem;
+  }
+  
+  /* Mobile button sizing */
+  .product-form__submit,
+  .button {
+    font-size: 1.5rem;
+    padding: 1.3rem 2rem;
+  }
 }
