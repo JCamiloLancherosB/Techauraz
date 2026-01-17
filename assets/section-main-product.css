@@ -44,7 +44,7 @@
   .product__info-wrapper {
     order: 2;
     width: 100%;
-    padding: 0; /* Removed padding for mobile */
+    padding: 0 0.25rem; /* Minimal padding for mobile */
   }
   
   /* Two-column grid for product thumbnails/cards on mobile */

@@ -8,6 +8,7 @@
   
   {{ 'section-main-product.css' | asset_url | stylesheet_tag: preload: true }}
   {{ 'product-page-consolidated.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'product-description-compact.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -704,7 +705,7 @@
 
     {%- comment -%} Full-width product description below the gallery {%- endcomment -%}
     {%- if product.description != blank -%}
-      <div class="product-description-full-width" style="margin: 1rem 0; padding: 1.5rem 0;">
+      <div class="product-description-full-width product-description-full-width--compact">
         <div class="product-description-container">
           <h2 class="product-description-heading">{{ 'products.product.description' | t }}</h2>
           <div class="product-description-content rte">
