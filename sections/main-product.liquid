@@ -49,11 +49,6 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
 
-  {%- comment -%} Top Utility Bar {%- endcomment -%}
-  <div class="product-top-utility-bar">
-    ✅ Envíos GRATIS a toda Colombia • 💳 Pago Contra Entrega Disponible
-  </div>
-
   <div class="page-width">
     {%- comment -%} Check for warm_cro metafield {%- endcomment -%}
     {%- assign theme_style = product.metafields.techauraz.theme_style | default: '' -%}
@@ -81,11 +76,6 @@
   {%- endif -%}
 </product-hero-slider>
 
-        {%- comment -%}3D model block removed per requirements - space repurposed for trust badges{%- endcomment -%}
-        <div class="product-trust-section">
-          {% render 'trust-badges-conversion' %}
-        </div>
-
       <!-- COLUMNA DERECHA: INFO -->
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <product-info
@@ -110,11 +100,6 @@
                 </p>
 
               {%- when 'title' -%}
-                {%- comment -%} Urgency Badge {%- endcomment -%}
-                <div class="product-urgency-badge">
-                  🔥 ¡ÚLTIMAS UNIDADES DISPONIBLES! - STOCK MUY LIMITADO
-                </div>
-                
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                 </div>
@@ -127,24 +112,6 @@
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
-                  
-                  {%- comment -%} Offer Badge - Calculate Savings {%- endcomment -%}
-                  {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
-                    {%- assign savings = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price -%}
-                    {%- assign savings_percent = savings | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}
-                    <span class="product-offer-badge">
-                      💰 ¡AHORRA {{ savings_percent }}%! - Precio Especial Hoy
-                    </span>
-                  {%- endif -%}
-                </div>
-
-                {%- comment -%} Shipping/ETA Info {%- endcomment -%}
-                <div class="product-shipping-eta">
-                  🚚 <strong>Envío Gratis Express</strong> • Llega en 2-4 días hábiles
-                </div>
-
-                <div class="urgency-indicator">
-                  ⚡ <strong>Paga contra entrega</strong> si prefieres • ¡Oferta por tiempo limitado!
                 </div>
 
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -232,9 +199,6 @@
                     </div>
                   </div>
                 {%- endif -%}
-                
-                {%- comment -%} Beneficios del producto {%- endcomment -%}
-                {% render 'product-benefits' %}
 
               {%- when 'sku' -%}
                 <p
@@ -506,25 +470,6 @@
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 
               {%- when 'buy_buttons' -%}
-                {%- comment -%} Countdown Timer {%- endcomment -%}
-                <div class="product-countdown">
-                  <div class="product-countdown__title">⏰ ¡Esta Oferta Exclusiva Termina Pronto!</div>
-                  <div class="product-countdown__timer" data-countdown-timer>
-                    <div class="product-countdown__segment">
-                      <span class="product-countdown__number" data-countdown-hours>05</span>
-                      <span class="product-countdown__label">Horas</span>
-                    </div>
-                    <div class="product-countdown__segment">
-                      <span class="product-countdown__number" data-countdown-minutes>23</span>
-                      <span class="product-countdown__label">Min</span>
-                    </div>
-                    <div class="product-countdown__segment">
-                      <span class="product-countdown__number" data-countdown-seconds>45</span>
-                      <span class="product-countdown__label">Seg</span>
-                    </div>
-                  </div>
-                </div>
-
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -532,82 +477,6 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                
-                {%- comment -%} Trust Indicators After CTA {%- endcomment -%}
-                <div class="product-trust-indicators">
-                  <div class="trust-indicator">
-                    <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Envío Gratis</span>
-                  </div>
-                  <div class="trust-indicator">
-                    <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Pago Seguro</span>
-                  </div>
-                  <div class="trust-indicator">
-                    <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Garantía 30 Días</span>
-                  </div>
-                  <div class="trust-indicator">
-                    <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Contra Entrega</span>
-                  </div>
-                </div>
-                
-                {%- comment -%} Payment Trust Row {%- endcomment -%}
-                <div class="product-trust-payments">
-                  <div class="product-trust-payments__title">💳 Pago 100% Seguro - Todas las Formas</div>
-                  <div class="product-trust-payments__icons">
-                    <span style="font-size: 2rem;">💳</span>
-                    <span style="font-size: 2rem;">🏦</span>
-                    <span style="font-size: 2rem;">📱</span>
-                    <span>VISA • Mastercard • PSE • Efecty • Nequi</span>
-                  </div>
-                </div>
-
-                {%- comment -%} 3-Step Timeline {%- endcomment -%}
-                <div class="product-delivery-steps">
-                  <div class="product-delivery-steps__list">
-                    <div class="product-delivery-steps__item">
-                      <div class="product-delivery-steps__icon">1️⃣</div>
-                      <div class="product-delivery-steps__text">Haz tu Orden</div>
-                    </div>
-                    <div class="product-delivery-steps__item">
-                      <div class="product-delivery-steps__icon">📦</div>
-                      <div class="product-delivery-steps__text">Empacamos</div>
-                    </div>
-                    <div class="product-delivery-steps__item">
-                      <div class="product-delivery-steps__icon">✅</div>
-                      <div class="product-delivery-steps__text">Recíbelo</div>
-                    </div>
-                  </div>
-                </div>
-                
-                {%- comment -%} Promo badges {%- endcomment -%}
-                {% render 'promo-badges',
-                  show_discount: true,
-                  show_free_shipping: true,
-                  show_cod: true,
-                  show_warranty: true,
-                  show_low_stock: false
-                %}
-                
-                {%- comment -%} WhatsApp CTA {%- endcomment -%}
-                <div style="margin-top: 12px;">
-                  {% render 'whatsapp-cta',
-                    phone: '+573008602789',
-                    product_title: product.title,
-                    product_url: product.url,
-                    button_text: '💬 Personaliza tu Pedido por WhatsApp',
-                    style: 'secondary',
-                    size: 'medium'
-                  %}
-                </div>
-                
-                {%- comment -%} Why Buy Section - después de los botones de compra {%- endcomment -%}
-                {% render 'product-why-buy' %}
-                
-                {%- comment -%} FAQs del producto {%- endcomment -%}
-                {% render 'product-faqs' %}
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
@@ -879,9 +748,6 @@
     {%- endif -%}
 
     {%- comment -%}3D model scripts removed per requirements{%- endcomment -%}
-    
-    {%- comment -%} Sticky Mobile CTA Bar {%- endcomment -%}
-    {% render 'sticky-mobile-cta', product: product, section_id: section.id %}
   </div>
 </section>
 

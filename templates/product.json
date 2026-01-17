@@ -100,23 +100,7 @@
                 "padding_bottom": 24
             }
         },
-        "product_urgency_bar": {
-            "type": "product-urgency-bar",
-            "settings": {
-                "urgency_text": "⚡ Promoción exclusiva - Stock limitado disponible solo hoy",
-                "padding_top": 16,
-                "padding_bottom": 16
-            }
-        },
-        "product_views_counter": {
-            "type": "product-views-counter",
-            "settings": {
-                "min_views": 100,
-                "max_views": 999,
-                "padding_top": 16,
-                "padding_bottom": 16
-            }
-        },
+
         "product_benefits": {
             "type": "product-benefits",
             "blocks": {
@@ -156,65 +140,7 @@
                 "padding_bottom": 40
             }
         },
-        "product_testimonials": {
-            "type": "product-testimonials",
-            "blocks": {
-                "testimonial_1": {
-                    "type": "testimonial",
-                    "settings": {
-                        "rating": 5,
-                        "testimonial": "¡Increíble! La calidad es excepcional y llegó más rápido de lo esperado. Definitivamente vale cada peso invertido. Ya lo recomendé a mis amigos.",
-                        "customer_name": "María González",
-                        "customer_location": "Bogotá"
-                    }
-                },
-                "testimonial_2": {
-                    "type": "testimonial",
-                    "settings": {
-                        "rating": 5,
-                        "testimonial": "Mejor compra del año. El producto superó todas mis expectativas y el servicio fue impecable. Llegó en perfectas condiciones y muy bien empacado.",
-                        "customer_name": "Carlos Ramírez",
-                        "customer_location": "Medellín"
-                    }
-                },
-                "testimonial_3": {
-                    "type": "testimonial",
-                    "settings": {
-                        "rating": 5,
-                        "testimonial": "Excelente relación calidad-precio. El equipo de atención al cliente fue muy profesional y resolvió todas mis dudas al instante. Totalmente recomendado.",
-                        "customer_name": "Ana Torres",
-                        "customer_location": "Cali"
-                    }
-                }
-            },
-            "block_order": [
-                "testimonial_1",
-                "testimonial_2",
-                "testimonial_3"
-            ],
-            "settings": {
-                "heading": "⭐ Testimonios Reales de Clientes Satisfechos",
-                "padding_top": 40,
-                "padding_bottom": 40
-            }
-        },
-        "product_social_proof": {
-            "type": "product-social-proof",
-            "settings": {}
-        },
-        "countdown_timer": {
-            "type": "countdown-timer",
-            "settings": {
-                "enable_countdown": true,
-                "heading": "⏰ ¡OFERTA EXCLUSIVA TERMINA EN!",
-                "end_date": "2025-12-31",
-                "end_time": "23:59:59",
-                "fallback_text": "¡Nueva promoción disponible! Contáctanos para conocer las ofertas actuales.",
-                "color_scheme": "scheme-1",
-                "padding_top": 28,
-                "padding_bottom": 28
-            }
-        },
+
         "product_features": {
             "type": "product-features",
             "blocks": {
@@ -285,15 +211,7 @@
                 "padding_bottom": 36
             }
         },
-        "shipping_returns": {
-            "type": "shipping-returns",
-            "settings": {
-                "heading": "Envío y Garantía",
-                "show_timeline": true,
-                "padding_top": 36,
-                "padding_bottom": 36
-            }
-        },
+
         "product_faq": {
             "type": "product-faq",
             "blocks": {
@@ -338,15 +256,7 @@
                 "padding_bottom": 40
             }
         },
-        "payment_badges": {
-            "type": "payment-badges",
-            "settings": {
-                "heading": "💳 Métodos de Pago 100% Seguros y Confiables",
-                "show_payment_logos": true,
-                "padding_top": 36,
-                "padding_bottom": 36
-            }
-        },
+
         "sticky_mobile_cta": {
             "type": "sticky-mobile-cta",
             "settings": {
@@ -411,19 +321,12 @@
     },
     "order": [
         "main",
-        "product_urgency_bar",
-        "product_views_counter",
-        "countdown_timer",
         "product_benefits",
-        "payment_badges",
         "product_features",
         "product_includes",
-        "shipping_returns",
-        "product_testimonials",
-        "product_social_proof",
+        "product_faq",
         "171500672571a9dd42",
         "1759259835d66ec7b3",
-        "product_faq",
         "related-products",
         "sticky_mobile_cta",
         "purchase_notification"
