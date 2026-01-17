@@ -363,47 +363,6 @@
 }
 
 /* =============================================================================
-   12. MOBILE RESPONSIVE REFINEMENTS
-   ============================================================================= */
-
-@media screen and (max-width: 749px) {
-  /* Card adjustments */
-  .card {
-    min-height: 400px;
-  }
-
-  .card__information {
-    padding: 1rem 1.2rem;
-    min-height: 130px;
-  }
-
-  /* Badge sizing */
-  .card__badge {
-    font-size: 0.95rem;
-    padding: 0.4rem 0.85rem;
-  }
-
-  /* Product info */
-  .product__info-container {
-    padding: 1.5rem;
-  }
-
-  /* Button sizing */
-  .button--primary,
-  .product-form__submit,
-  .quick-add__submit {
-    font-size: 1.3rem;
-    padding: 1rem 1.5rem;
-  }
-
-  /* Trust badges */
-  .trust-badge {
-    font-size: 1.1rem;
-    padding: 0.5rem 0.8rem;
-  }
-}
-
-/* =============================================================================
    13. ACCESSIBILITY ENHANCEMENTS
    ============================================================================= */
 
@@ -433,12 +392,6 @@ textarea:focus-visible,
   .rating-star::before {
     font-weight: 900;
   }
-}
-
-/* Ensure sufficient color contrast */
-.card,
-.product__info-container {
-  color: #e2e8f0;
 }
 
 /* =============================================================================
