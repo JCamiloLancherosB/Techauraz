@@ -11,6 +11,12 @@
   margin-bottom: 1.5rem; /* Reduced from 2rem */
 }
 
+@media screen and (min-width: 750px) {
+  .product.grid {
+    gap: 2rem; /* Increase gap for desktop */
+  }
+}
+
 .product__info-wrapper {
   width: 100%;
   max-width: 100%;
@@ -117,11 +123,13 @@
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media) {
+    max-width: 65%;
     width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
   .product--large:not(.product--no-media) .product__info-wrapper {
     padding: 0 0 0 3rem;
+    max-width: 35%;
     width: calc(35% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
@@ -1376,6 +1384,13 @@ a.product__text {
 .product .shopify-payment-button__more-options {
   margin-top: 0.8rem;
   margin-bottom: 0.5rem;
+}
+
+/* Center product content and improve alignment */
+.product .product__info-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* CTA button alignment and sizing */
