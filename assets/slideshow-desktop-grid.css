@@ -9,9 +9,9 @@
    - Tablet (750px-989px): Single slide carousel with navigation controls  
    - Mobile (<750px): Single slide carousel (native behavior)
    
-   This file is loaded LAST in slideshow.liquid to ensure it has final say
-   over all other CSS rules. It overrides base.css grid display and any
-   other conflicting styles.
+   This file is loaded LAST in sections/slideshow.liquid (line 4) to ensure 
+   it has final say over all other CSS rules. It overrides base.css grid 
+   display and any other conflicting styles.
    ============================================================================= */
 
 /* Force carousel behavior - override ALL grid/flex conflicts */
