@@ -2,6 +2,18 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'slideshow-desktop-grid.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} Preload first hero image for better LCP - optimized for mobile {%- endcomment -%}
+{%- if section.blocks.first.settings.image and section.index == 0 -%}
+  <link 
+    rel="preload" 
+    as="image" 
+    href="{{ section.blocks.first.settings.image | image_url: width: 1920, format: 'pjpg' }}"
+    imagesrcset="{{ section.blocks.first.settings.image | image_url: width: 750, format: 'pjpg' }} 750w, {{ section.blocks.first.settings.image | image_url: width: 1100, format: 'pjpg' }} 1100w, {{ section.blocks.first.settings.image | image_url: width: 1500, format: 'pjpg' }} 1500w, {{ section.blocks.first.settings.image | image_url: width: 1920, format: 'pjpg' }} 1920w"
+    imagesizes="(max-width: 749px) 100vw, (max-width: 1200px) 85vw, 1920px"
+    fetchpriority="high">
+{%- endif -%}
+
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {
