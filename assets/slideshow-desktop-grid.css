@@ -27,7 +27,6 @@
   /* Each slide takes full width for proper carousel display */
   slideshow-component .slideshow__slide.slider__slide {
     flex: 0 0 100%;
-    width: 100%;
     scroll-snap-align: center;
     position: relative;
   }
