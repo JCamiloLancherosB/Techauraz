@@ -179,30 +179,28 @@ a[href*="wa.me"]:hover {
   }
 }
 
-/* =============================================================================
-   3. PRODUCT DESCRIPTION SPACING & TYPOGRAPHY
-   ============================================================================= */
+/* ===== 3. PRODUCT DESCRIPTION SPACING & TYPOGRAPHY ===== */
 
 /* Remove excessive vertical spacing in product info */
 .product__info-container > * + * {
-  margin-top: 1rem;
+  margin-top: 0.8rem; /* Reduced spacing */
 }
 
 .product__description {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem; /* Reduced spacing */
+  margin-bottom: 1rem;
 }
 
 /* Product description full-width section below product */
 .product-description-full-width {
-  margin: 2rem 0;
-  padding: 3rem 0;
+  margin: 1rem 0; /* Minimized spacing */
+  padding: 1.5rem 0;
 }
 
 @media screen and (min-width: 750px) {
   .product-description-full-width {
-    margin: 3rem 0;
-    padding: 4rem 0;
+    margin: 1.5rem 0; /* Reduced spacing */
+    padding: 2rem 0;
   }
 }
 
@@ -219,13 +217,13 @@ a[href*="wa.me"]:hover {
 
 /* Price section spacing */
 .product__price {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.8rem; /* Reduced spacing */
+  margin-bottom: 0.8rem;
 }
 
 .product__tax {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-top: 0.3rem; /* Reduced spacing */
+  margin-bottom: 0.8rem;
 }
 
 /* Product badges - prevent overflow */
@@ -240,49 +238,49 @@ a[href*="wa.me"]:hover {
 
 /* Product form spacing */
 .product-form__input {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Reduced spacing */
 }
 
 .product-form__quantity {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.8rem; /* Reduced spacing */
+  margin-bottom: 0.8rem;
 }
 
 .product-form__buttons {
-  margin-top: 1.5rem;
-  gap: 1rem;
+  margin-top: 1rem; /* Reduced spacing */
+  gap: 0.8rem;
 }
 
 /* Countdown timer tighter spacing */
 .product-countdown {
-  margin-bottom: 1.5rem;
-  padding: 1rem 1.2rem;
+  margin-bottom: 1rem; /* Reduced spacing */
+  padding: 0.8rem 1rem;
 }
 
 .product-countdown__title {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem; /* Reduced spacing */
 }
 
 /* Trust elements spacing */
 .product-trust-payments,
 .product-delivery-steps {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem; /* Reduced spacing */
+  margin-bottom: 1rem;
 }
 
 /* Product accordions spacing */
 .product__accordion {
-  margin-top: 1rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0.8rem; /* Reduced spacing */
+  margin-bottom: 0.5rem;
 }
 
 .product__accordion .accordion__content {
-  padding: 1.2rem 1.5rem;
+  padding: 1rem 1.2rem; /* Reduced padding */
 }
 
 /* Remove excessive gaps in product benefits/features */
 .icon-with-text--vertical .icon-with-text__item {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Reduced spacing */
 }
 
 .icon-with-text--vertical .icon-with-text__item:last-child {
@@ -312,12 +310,12 @@ a[href*="wa.me"]:hover {
 }
 
 .product__description h3 {
-  margin: 2rem 0 1rem;
+  margin: 1.5rem 0 0.8rem; /* Reduced spacing */
   line-height: 1.3;
 }
 
 .product__description h4 {
-  margin: 1.5rem 0 0.8rem;
+  margin: 1rem 0 0.5rem; /* Reduced spacing */
   line-height: 1.4;
 }
 
@@ -329,12 +327,12 @@ a[href*="wa.me"]:hover {
   
   .product__description h3 {
     font-size: 1.8rem;
-    margin: 1.5rem 0 0.8rem;
+    margin: 1.2rem 0 0.6rem; /* Reduced spacing */
   }
   
   .product__description h4 {
     font-size: 1.5rem;
-    margin: 1.2rem 0 0.6rem;
+    margin: 0.8rem 0 0.4rem; /* Reduced spacing */
   }
 }
 

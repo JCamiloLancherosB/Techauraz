@@ -1,0 +1,16 @@
+/* =============================================================================
+   PRODUCT DESCRIPTION COMPACT LAYOUT
+   Styles for compact product description section
+   ============================================================================= */
+
+.product-description-full-width--compact {
+  margin: 1rem 0;
+  padding: 1.5rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .product-description-full-width--compact {
+    margin: 1.5rem 0;
+    padding: 2rem 0;
+  }
+}
