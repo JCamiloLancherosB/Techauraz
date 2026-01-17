@@ -73,39 +73,39 @@
             "block_order": [
                 "vendor",
                 "title",
-                "variant_picker",
-                "description",
                 "price",
                 "pdp_conversion_badges",
+                "variant_picker",
                 "pdp_key_specs",
+                "description",
                 "quantity_selector",
                 "buy_buttons",
                 "pdp_whatsapp_cta",
-                "share",
-                "judge_me_reviews_preview_badge_nJBx3F"
+                "judge_me_reviews_preview_badge_nJBx3F",
+                "share"
             ],
             "custom_css": [],
             "settings": {
-                "gallery_layout": "thumbnail",
-                "media_size": "medium",
+                "gallery_layout": "thumbnail_slider",
+                "media_size": "large",
                 "constrain_to_viewport": "true",
                 "media_fit": "contain",
                 "media_position": "left",
                 "image_zoom": "hover",
-                "mobile_thumbnails": "hide",
+                "mobile_thumbnails": "show",
                 "hide_variants": true,
                 "enable_sticky_info": true,
                 "color_scheme": "scheme-1",
-                "padding_top": 84,
-                "padding_bottom": 12
+                "padding_top": 72,
+                "padding_bottom": 24
             }
         },
         "product_urgency_bar": {
             "type": "product-urgency-bar",
             "settings": {
-                "urgency_text": "⚡ Stock limitado - Solo quedan pocas unidades",
-                "padding_top": 12,
-                "padding_bottom": 12
+                "urgency_text": "⚡ Promoción exclusiva - Stock limitado disponible solo hoy",
+                "padding_top": 16,
+                "padding_bottom": 16
             }
         },
         "product_views_counter": {
@@ -124,24 +124,24 @@
                     "type": "benefit",
                     "settings": {
                         "emoji": "🔥",
-                        "title": "Calidad garantizada o te devolvemos tu dinero",
-                        "description": "Productos premium que superarán tus expectativas"
+                        "title": "Calidad Premium Garantizada",
+                        "description": "Si no supera tus expectativas, te devolvemos el 100% de tu dinero sin preguntas"
                     }
                 },
                 "benefit_2": {
                     "type": "benefit",
                     "settings": {
                         "emoji": "🚚",
-                        "title": "Recíbelo gratis en la puerta de tu casa",
-                        "description": "Envío sin costo a toda Colombia en 2-5 días hábiles"
+                        "title": "Envío Gratis Express",
+                        "description": "Recíbelo en 2-5 días hábiles sin costo adicional, directo a tu puerta"
                     }
                 },
                 "benefit_3": {
                     "type": "benefit",
                     "settings": {
                         "emoji": "✨",
-                        "title": "30 días para probarlo sin compromiso",
-                        "description": "Si no te convence, lo devuelves gratis. Sin preguntas."
+                        "title": "Garantía de Satisfacción 30 Días",
+                        "description": "Pruébalo sin riesgo. No te convence? Devolución gratis y reembolso completo"
                     }
                 }
             },
@@ -151,9 +151,9 @@
                 "benefit_3"
             ],
             "settings": {
-                "heading": "Compra con total confianza",
-                "padding_top": 36,
-                "padding_bottom": 36
+                "heading": "🛡️ Compra con Total Confianza y Seguridad",
+                "padding_top": 40,
+                "padding_bottom": 40
             }
         },
         "product_testimonials": {
@@ -163,25 +163,25 @@
                     "type": "testimonial",
                     "settings": {
                         "rating": 5,
-                        "testimonial": "Excelente producto, super\u00f3 mis expectativas. La calidad es incre\u00edble y el env\u00edo fue muy r\u00e1pido.",
-                        "customer_name": "Mar\u00eda Gonz\u00e1lez",
-                        "customer_location": "Bogot\u00e1"
+                        "testimonial": "¡Increíble! La calidad es excepcional y llegó más rápido de lo esperado. Definitivamente vale cada peso invertido. Ya lo recomendé a mis amigos.",
+                        "customer_name": "María González",
+                        "customer_location": "Bogotá"
                     }
                 },
                 "testimonial_2": {
                     "type": "testimonial",
                     "settings": {
                         "rating": 5,
-                        "testimonial": "Muy recomendado, el mejor producto que he comprado. Lleg\u00f3 en perfectas condiciones.",
-                        "customer_name": "Carlos Ram\u00edrez",
-                        "customer_location": "Medell\u00edn"
+                        "testimonial": "Mejor compra del año. El producto superó todas mis expectativas y el servicio fue impecable. Llegó en perfectas condiciones y muy bien empacado.",
+                        "customer_name": "Carlos Ramírez",
+                        "customer_location": "Medellín"
                     }
                 },
                 "testimonial_3": {
                     "type": "testimonial",
                     "settings": {
-                        "rating": 4,
-                        "testimonial": "Buena calidad y precio justo. El servicio al cliente fue excelente.",
+                        "rating": 5,
+                        "testimonial": "Excelente relación calidad-precio. El equipo de atención al cliente fue muy profesional y resolvió todas mis dudas al instante. Totalmente recomendado.",
                         "customer_name": "Ana Torres",
                         "customer_location": "Cali"
                     }
@@ -193,9 +193,9 @@
                 "testimonial_3"
             ],
             "settings": {
-                "heading": "Lo que dicen nuestros clientes",
-                "padding_top": 36,
-                "padding_bottom": 36
+                "heading": "⭐ Testimonios Reales de Clientes Satisfechos",
+                "padding_top": 40,
+                "padding_bottom": 40
             }
         },
         "product_social_proof": {
@@ -206,13 +206,13 @@
             "type": "countdown-timer",
             "settings": {
                 "enable_countdown": true,
-                "heading": "¡OFERTA TERMINA EN!",
+                "heading": "⏰ ¡OFERTA EXCLUSIVA TERMINA EN!",
                 "end_date": "2025-12-31",
                 "end_time": "23:59:59",
-                "fallback_text": "¡La oferta ha finalizado! Consulta nuestras promociones actuales.",
+                "fallback_text": "¡Nueva promoción disponible! Contáctanos para conocer las ofertas actuales.",
                 "color_scheme": "scheme-1",
-                "padding_top": 24,
-                "padding_bottom": 24
+                "padding_top": 28,
+                "padding_bottom": 28
             }
         },
         "product_features": {
@@ -300,29 +300,29 @@
                 "faq_1": {
                     "type": "faq",
                     "settings": {
-                        "question": "¿Cuál es el tiempo de entrega?",
-                        "answer": "<p>El tiempo de entrega es de 2 a 5 días hábiles en todo Colombia.</p>"
+                        "question": "¿Cuánto tarda en llegar mi pedido?",
+                        "answer": "<p>Tu pedido llegará en <strong>2 a 5 días hábiles</strong> a cualquier parte de Colombia. El envío es <strong>completamente GRATIS</strong> y recibirás un número de seguimiento para rastrear tu paquete en tiempo real.</p>"
                     }
                 },
                 "faq_2": {
                     "type": "faq",
                     "settings": {
-                        "question": "¿Puedo pagar contra entrega?",
-                        "answer": "<p>Sí, ofrecemos pago contra entrega en toda Colombia. Puedes pagar en efectivo o con tarjeta al momento de recibir tu producto.</p>"
+                        "question": "¿Puedo pagar cuando reciba el producto?",
+                        "answer": "<p>¡Por supuesto! Ofrecemos <strong>pago contra entrega</strong> en toda Colombia sin ningún costo adicional. Pagas en efectivo o con tarjeta directamente al mensajero cuando recibas tu producto. También aceptamos pagos en línea con tarjetas de crédito, débito, PSE y más.</p>"
                     }
                 },
                 "faq_3": {
                     "type": "faq",
                     "settings": {
-                        "question": "¿Cuál es la política de garantía?",
-                        "answer": "<p>Ofrecemos 15 días de garantía en todos nuestros productos. Si no estás satisfecho, puedes devolver o cambiar el producto sin preguntas.</p>"
+                        "question": "¿Qué garantía tiene el producto?",
+                        "answer": "<p>Todos nuestros productos incluyen <strong>garantía de 30 días</strong> por defectos de fabricación. Además, tienes <strong>30 días para devolución</strong> si no estás completamente satisfecho. Te devolvemos el 100% de tu dinero, sin complicaciones ni preguntas.</p>"
                     }
                 },
                 "faq_4": {
                     "type": "faq",
                     "settings": {
-                        "question": "¿El envío tiene costo?",
-                        "answer": "<p>No, el envío es completamente gratis a toda Colombia.</p>"
+                        "question": "¿Es seguro comprar aquí?",
+                        "answer": "<p><strong>¡Totalmente seguro!</strong> Procesamos todos los pagos a través de plataformas certificadas y encriptadas. Nunca almacenamos información sensible de tus tarjetas. Además, miles de clientes satisfechos respaldan nuestra tienda con excelentes reseñas.</p>"
                     }
                 }
             },
@@ -333,27 +333,27 @@
                 "faq_4"
             ],
             "settings": {
-                "heading": "Preguntas Frecuentes",
-                "padding_top": 36,
-                "padding_bottom": 36
+                "heading": "❓ Preguntas Frecuentes - Resolvemos tus Dudas",
+                "padding_top": 40,
+                "padding_bottom": 40
             }
         },
         "payment_badges": {
             "type": "payment-badges",
             "settings": {
-                "heading": "Métodos de pago seguros",
+                "heading": "💳 Métodos de Pago 100% Seguros y Confiables",
                 "show_payment_logos": true,
-                "padding_top": 32,
-                "padding_bottom": 32
+                "padding_top": 36,
+                "padding_bottom": 36
             }
         },
         "sticky_mobile_cta": {
             "type": "sticky-mobile-cta",
             "settings": {
                 "enable_sticky_cta": true,
-                "buy_button_text": "Comprar ahora",
+                "buy_button_text": "🛒 Comprar Ahora - Pago Contra Entrega",
                 "whatsapp_phone": "+573008602789",
-                "whatsapp_button_text": "WhatsApp"
+                "whatsapp_button_text": "💬 WhatsApp"
             }
         },
         "purchase_notification": {
@@ -393,8 +393,8 @@
             "type": "related-products",
             "custom_css": [],
             "settings": {
-                "heading": "Te puede gustar",
-                "heading_size": "h1",
+                "heading": "✨ Productos que también te Encantarán",
+                "heading_size": "h2",
                 "products_to_show": 8,
                 "columns_desktop": 4,
                 "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
@@ -402,10 +402,10 @@
                 "image_shape": "default",
                 "show_secondary_image": true,
                 "show_vendor": false,
-                "show_rating": false,
+                "show_rating": true,
                 "columns_mobile": "2",
-                "padding_top": 32,
-                "padding_bottom": 32
+                "padding_top": 40,
+                "padding_bottom": 40
             }
         }
     },
