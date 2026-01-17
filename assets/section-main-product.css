@@ -91,6 +91,7 @@
     text-align: center;
     align-content: center;
     justify-content: center;
+    justify-items: center;
   }
 
   .product--thumbnail .thumbnail-list {
