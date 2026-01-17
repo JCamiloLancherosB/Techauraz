@@ -2096,11 +2096,6 @@ a.product__text {
   margin-bottom: 1rem;
 }
 
-.product__tax {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
 /* Form spacing */
 .product-form__input {
   margin-bottom: 1rem;
@@ -2201,6 +2196,73 @@ a.product__text {
 .product .product-description__content li {
   margin-bottom: 0.5rem;
   color: #cbd5e1;
+}
+
+/* Product FAQs */
+.product .product-faqs {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.product .product-faqs__title {
+  text-align: center;
+  color: #fbbf24;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+}
+
+.product .product-faqs__item {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product .product-faqs__item:last-child {
+  margin-bottom: 0;
+}
+
+.product .product-faqs__question {
+  padding: 1rem 1.25rem;
+  background: rgba(15, 23, 42, 0.5);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #f1f5f9;
+  transition: background 0.2s ease;
+  list-style: none;
+}
+
+.product .product-faqs__question:hover {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.product .product-faqs__question::-webkit-details-marker {
+  display: none;
+}
+
+.product .product-faqs__icon {
+  font-size: 1.5rem;
+  color: #fbbf24;
+  transition: transform 0.2s ease;
+}
+
+.product .product-faqs__item[open] .product-faqs__icon {
+  transform: rotate(45deg);
+}
+
+.product .product-faqs__answer {
+  padding: 1rem 1.25rem;
+  background: rgba(30, 41, 59, 0.5);
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 /* Description typography */
