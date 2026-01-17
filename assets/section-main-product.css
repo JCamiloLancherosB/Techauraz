@@ -1278,7 +1278,7 @@ a.product__text {
 
 /* Product info container spacing */
 .product .product__info-container {
-  padding: 0;
+  padding-bottom: 5rem;
 }
 
 .product .product__description {
