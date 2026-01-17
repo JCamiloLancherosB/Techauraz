@@ -391,8 +391,6 @@
 [class*="section-"] {
   max-width: 1400px;
   margin: 0 auto;
-  padding-left: clamp(1.5rem, 3vw, 3rem);
-  padding-right: clamp(1.5rem, 3vw, 3rem);
 }
 
 /* Improve heading hierarchy */
