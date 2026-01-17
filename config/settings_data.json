@@ -167,6 +167,7 @@
           },
           "quantity_selector_wnrxE8": {
             "type": "quantity_selector",
+            "disabled": true,
             "settings": {}
           },
           "buy_buttons_FNgTtK": {
