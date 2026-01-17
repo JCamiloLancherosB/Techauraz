@@ -147,7 +147,6 @@ html {
   
   --page-width: 1200px;
   --header-height: 80px;
-  --grid-gap: 2rem;
 }
 
 body {
@@ -214,31 +213,6 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-/* === GRID SYSTEM === */
-.grid {
-  display: grid;
-  gap: var(--grid-gap, 2rem);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-@media screen and (min-width: 750px) {
-  .grid--2-col-tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .grid--3-col-desktop {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .grid--4-col-desktop {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 /* === RESPONSIVE UTILITIES === */
@@ -407,87 +381,6 @@ select:focus {
     margin: 2cm;
   }
 }
-
-/* =============================================================================
-   GRID AND COLLECTION LAYOUT IMPROVEMENTS
-   Responsive fixes for home/recommendations grids
-   NOTE: !important flags required to override Dawn theme framework defaults
-   which use high specificity selectors and inline styles
-   ============================================================================= */
-
-/* Reduce oversized gaps in grids */
-@media screen and (min-width: 990px) {
-  .grid {
-    gap: 2rem !important; /* Optimized spacing */
-  }
-  
-  /* Ensure 3-4 column layouts work properly */
-  .grid--3-col-desktop,
-  .grid--4-col-desktop {
-    gap: 2rem !important; /* Override framework default */
-  }
-  
-  /* Collection/product grids - normalized heights */
-  .collection .grid,
-  .product-grid.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    align-items: stretch;
-  }
-  
-  .collection .grid__item,
-  .product-grid .grid__item {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-/* Mobile: Touch-friendly carousel with side padding */
-@media screen and (max-width: 749px) {
-  .grid.slider--mobile {
-    padding-left: 1.5rem !important; /* Override framework padding */
-    padding-right: 1.5rem !important; /* Override framework padding */
-    gap: 1.2rem !important; /* Override framework gap */
-  }
-  
-  /* Ensure proper spacing at end of carousel */
-  .slider--mobile:after {
-    padding-left: 1.5rem !important; /* Override framework spacing */
-  }
-}
-
-/* Fix bullets/labels alignment in cards */
-.card__information ul,
-.card__information ol {
-  padding-left: 1.5rem !important; /* Override theme card padding */
-  margin: 0.5rem 0 !important; /* Override theme margins */
-}
-
-.card__information li {
-  margin-bottom: 0.3rem !important; /* Override theme list spacing */
-  line-height: 1.5 !important; /* Override theme line height */
-}
-
-/* Remove giant whitespace below cards */
-.card-wrapper {
-  margin-bottom: 0 !important; /* Override theme spacing */
-}
-
-.grid__item {
-  margin-bottom: 0 !important; /* Override theme spacing */
-}
-
-.product-grid {
-  margin-bottom: 2rem !important; /* Override theme spacing */
-}
-
-/* =============================================================================
-   Z-INDEX MANAGEMENT
-   Prevent overlaps between cookies bar, WhatsApp button, and other elements
-   NOTE: !important required to override third-party scripts and plugins
-   ============================================================================= */
 
 /* Floating elements z-index hierarchy */
 .whatsapp-float,
