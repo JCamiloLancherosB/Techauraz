@@ -57,13 +57,6 @@
   visibility: hidden;
 }
 
-/* When element enters viewport, ensure it's visible */
-.scroll-trigger:not(.scroll-trigger--offscreen).animate--fade-in,
-.scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
 /* Remove transform offset by default - only apply when offscreen */
 .scroll-trigger.animate--slide-in {
   transform: translateY(0) !important;
