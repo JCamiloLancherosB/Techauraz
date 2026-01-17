@@ -30,16 +30,16 @@
   /* Contenido centrado con ancho máximo - aligned with page-width */
   .related-products {
     max-width: var(--page-width, 1200px);
-    margin: 32px auto;
+    margin: 1.5rem auto; /* Reduced spacing */
     border-radius: 20px;
-    padding: 36px 20px;
+    padding: 2rem 1rem; /* Reduced padding */
     background: transparent;
   }
 
   @media screen and (min-width: 750px) {
     .related-products {
-      padding: 40px 24px;
-      margin: 40px auto;
+      padding: 2.5rem 1.5rem; /* Reduced padding */
+      margin: 2rem auto; /* Reduced spacing */
     }
   }
 
@@ -48,7 +48,7 @@
     font-size: 2.6rem;
     font-weight: 800;
     color: #e5e7eb;
-    margin-bottom: 40px;
+    margin-bottom: 2rem; /* Reduced spacing */
     position: relative;
     padding-bottom: 16px;
   }
@@ -67,19 +67,19 @@
 
   /* ===== Grid de productos ===== */
   .related-products .grid {
-    gap: 20px;
+    gap: 1rem; /* Reduced gap */
   }
 
   @media screen and (min-width: 750px) {
     .related-products .grid {
-      gap: 24px;
+      gap: 1.5rem; /* Reduced gap */
     }
   }
 
   @media (max-width: 749.98px) {
     .related-products .product-grid {
-      column-gap: 12px;
-      row-gap: 14px;
+      column-gap: 0.8rem; /* Reduced gap */
+      row-gap: 1rem;
     }
   }
 
@@ -150,7 +150,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.9rem 1rem 1.1rem;
+    padding: 0.8rem 1rem 1rem; /* Reduced padding */
     background: #020617;
   }
 
@@ -192,28 +192,28 @@
   /* ===== Responsive ===== */
   @media (max-width: 989.98px) {
     .related-products {
-      padding: 32px 16px;
-      margin: 32px auto;
+      padding: 2rem 1rem; /* Reduced padding */
+      margin: 1.5rem auto; /* Reduced spacing */
     }
 
     .related-products__heading {
       font-size: 2.2rem;
-      margin-bottom: 28px;
+      margin-bottom: 1.5rem; /* Reduced spacing */
     }
 
     .related-products .grid {
-      gap: 18px;
+      gap: 1rem; /* Reduced gap */
     }
   }
 
   @media (max-width: 749.98px) {
     .related-products {
-      padding: 24px 12px;
+      padding: 1.5rem 0.8rem; /* Reduced padding */
     }
 
     .related-products__heading {
       font-size: 2rem;
-      margin-bottom: 24px;
+      margin-bottom: 1.2rem; /* Reduced spacing */
     }
   }
 {%- endstyle -%}
@@ -384,7 +384,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 20
     },
     {
       "type": "range",
@@ -394,7 +394,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 20
     }
   ]
 }
