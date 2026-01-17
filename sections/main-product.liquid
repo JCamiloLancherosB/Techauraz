@@ -525,7 +525,15 @@
                   </div>
                 </div>
 
-                {%- comment -%} Trust Indicators Before CTA {%- endcomment -%}
+                {%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id,
+                  show_pickup_availability: true
+                -%}
+                
+                {%- comment -%} Trust Indicators After CTA {%- endcomment -%}
                 <div class="product-trust-indicators">
                   <div class="trust-indicator">
                     <span class="trust-indicator__icon">✓</span>
@@ -544,14 +552,6 @@
                     <span class="trust-indicator__text">Contra Entrega</span>
                   </div>
                 </div>
-
-                {%- render 'buy-buttons',
-                  block: block,
-                  product: product,
-                  product_form_id: product_form_id,
-                  section_id: section.id,
-                  show_pickup_availability: true
-                -%}
                 
                 {%- comment -%} Payment Trust Row {%- endcomment -%}
                 <div class="product-trust-payments">
