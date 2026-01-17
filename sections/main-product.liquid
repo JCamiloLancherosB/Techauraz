@@ -57,7 +57,7 @@
 
   {%- comment -%} Top Utility Bar {%- endcomment -%}
   <div class="product-top-utility-bar">
-    🚚 Envíos GRATIS y Pago Contra Entrega
+    ✅ Envíos GRATIS a toda Colombia • 💳 Pago Contra Entrega Disponible
   </div>
 
   <div class="page-width">
@@ -118,7 +118,7 @@
               {%- when 'title' -%}
                 {%- comment -%} Urgency Badge {%- endcomment -%}
                 <div class="product-urgency-badge">
-                  🔥 ÚLTIMAS 23 UNIDADES!! | POCO STOCK
+                  🔥 ¡ÚLTIMAS UNIDADES DISPONIBLES! - STOCK MUY LIMITADO
                 </div>
                 
                 <div class="product__title" {{ block.shopify_attributes }}>
@@ -139,18 +139,18 @@
                     {%- assign savings = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price -%}
                     {%- assign savings_percent = savings | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}
                     <span class="product-offer-badge">
-                      💰 ¡AHORRA {{ savings_percent }}%!
+                      💰 ¡AHORRA {{ savings_percent }}%! - Precio Especial Hoy
                     </span>
                   {%- endif -%}
                 </div>
 
                 {%- comment -%} Shipping/ETA Info {%- endcomment -%}
                 <div class="product-shipping-eta">
-                  🚚 Envío Gratis • Entrega en 2-4 días hábiles
+                  🚚 <strong>Envío Gratis Express</strong> • Llega en 2-4 días hábiles
                 </div>
 
                 <div class="urgency-indicator">
-                  ⚡ Pagas contra entrega si prefieres ¡Oferta por tiempo limitado!
+                  ⚡ <strong>Paga contra entrega</strong> si prefieres • ¡Oferta por tiempo limitado!
                 </div>
 
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -511,7 +511,7 @@
               {%- when 'buy_buttons' -%}
                 {%- comment -%} Countdown Timer {%- endcomment -%}
                 <div class="product-countdown">
-                  <div class="product-countdown__title">⏰ ¡Oferta por Tiempo Limitado!</div>
+                  <div class="product-countdown__title">⏰ ¡Esta Oferta Exclusiva Termina Pronto!</div>
                   <div class="product-countdown__timer" data-countdown-timer>
                     <div class="product-countdown__segment">
                       <span class="product-countdown__number" data-countdown-hours>05</span>
@@ -522,7 +522,7 @@
                       <span class="product-countdown__label">Min</span>
                     </div>
                     <div class="product-countdown__segment">
-                      <span class="product-countdown__number" data-countdown-seconds>45</span>
+                      <span class="product-countdown__number" data-countdown-seconds">45</span>
                       <span class="product-countdown__label">Seg</span>
                     </div>
                   </div>
@@ -536,7 +536,7 @@
                   </div>
                   <div class="trust-indicator">
                     <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Pago Contra Entrega</span>
+                    <span class="trust-indicator__text">Pago Seguro</span>
                   </div>
                   <div class="trust-indicator">
                     <span class="trust-indicator__icon">✓</span>
@@ -544,7 +544,7 @@
                   </div>
                   <div class="trust-indicator">
                     <span class="trust-indicator__icon">✓</span>
-                    <span class="trust-indicator__text">Entrega 2-5 Días</span>
+                    <span class="trust-indicator__text">Contra Entrega</span>
                   </div>
                 </div>
 
@@ -558,12 +558,12 @@
                 
                 {%- comment -%} Payment Trust Row {%- endcomment -%}
                 <div class="product-trust-payments">
-                  <div class="product-trust-payments__title">💳 Métodos de Pago Seguros</div>
+                  <div class="product-trust-payments__title">💳 Pago 100% Seguro - Todas las Formas</div>
                   <div class="product-trust-payments__icons">
                     <span style="font-size: 2rem;">💳</span>
                     <span style="font-size: 2rem;">🏦</span>
                     <span style="font-size: 2rem;">📱</span>
-                    <span>VISA • Mastercard • PSE • Efecty</span>
+                    <span>VISA • Mastercard • PSE • Efecty • Nequi</span>
                   </div>
                 </div>
 
@@ -572,15 +572,15 @@
                   <div class="product-delivery-steps__list">
                     <div class="product-delivery-steps__item">
                       <div class="product-delivery-steps__icon">1️⃣</div>
-                      <div class="product-delivery-steps__text">Orden</div>
+                      <div class="product-delivery-steps__text">Haz tu Orden</div>
                     </div>
                     <div class="product-delivery-steps__item">
                       <div class="product-delivery-steps__icon">📦</div>
-                      <div class="product-delivery-steps__text">Envío</div>
+                      <div class="product-delivery-steps__text">Empacamos</div>
                     </div>
                     <div class="product-delivery-steps__item">
                       <div class="product-delivery-steps__icon">✅</div>
-                      <div class="product-delivery-steps__text">Entrega</div>
+                      <div class="product-delivery-steps__text">Recíbelo</div>
                     </div>
                   </div>
                 </div>
@@ -600,7 +600,7 @@
                     phone: '+573008602789',
                     product_title: product.title,
                     product_url: product.url,
-                    button_text: 'Personaliza en WhatsApp',
+                    button_text: '💬 Personaliza tu Pedido por WhatsApp',
                     style: 'secondary',
                     size: 'medium'
                   %}

@@ -79,7 +79,7 @@
   id="ProductSubmitButton-{{ section_id }}"
   type="submit"
   name="add"
-  class="product-form__submit button button--full-width"
+  class="product-form__submit button button--full-width button--primary"
   {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
     disabled
   {% endif %}
@@ -88,7 +88,7 @@
     {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
       {{ 'products.product.sold_out' | t }}
     {%- else -%}
-      CLICK AQUÍ, PAGA EN CASA 🚚
+      🛒 COMPRAR AHORA - PAGA EN CASA 🚚
     {%- endif -%}
   </span>
   {%- render 'loading-spinner' -%}
@@ -112,7 +112,7 @@
   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
   disabled
 >
-  🛒 Agregar al carrito
+  🛒 Agregar al Carrito - Pago Seguro
 </button>
 
       </div>
