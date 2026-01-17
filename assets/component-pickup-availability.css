@@ -29,7 +29,6 @@ pickup-availability[available] {
   letter-spacing: 0.06rem;
   padding: 0 0 0.2rem;
   text-align: left;
-  text-decoration: underline;
 }
 
 .pickup-availability-button:hover {
