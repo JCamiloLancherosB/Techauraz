@@ -12,12 +12,18 @@
    ============================================================================= */
 
 /* Force all product form buttons to be visible and above all elements */
+/* Multiple selector variations to ensure maximum specificity */
 .product-form__submit,
 .button[name="add"],
 button[type="submit"][name="add"],
 .shopify-payment-button__button,
 .product-form__buttons button,
-#ProductSubmitButton {
+.product-form__buttons .product-form__submit,
+product-form .product-form__submit,
+#ProductSubmitButton,
+button.product-form__submit,
+.product-form button[type="submit"],
+form[data-type="add-to-cart-form"] button[type="submit"] {
   /* Visibility enforcement */
   display: inline-flex !important;
   visibility: visible !important;
@@ -40,6 +46,7 @@ button[type="submit"][name="add"],
   /* Size and spacing for touch targets */
   min-height: 50px !important;
   padding: 1.4rem 2.4rem !important;
+  width: auto !important;
   
   /* Visual prominence */
   border: 2px solid rgba(253, 230, 138, 0.5) !important;
@@ -56,7 +63,13 @@ button[type="submit"][name="add"],
 .button[name="add"]:hover,
 button[type="submit"][name="add"]:hover,
 .shopify-payment-button__button:hover,
-#ProductSubmitButton:hover {
+.product-form__buttons button:hover,
+.product-form__buttons .product-form__submit:hover,
+product-form .product-form__submit:hover,
+#ProductSubmitButton:hover,
+button.product-form__submit:hover,
+.product-form button[type="submit"]:hover,
+form[data-type="add-to-cart-form"] button[type="submit"]:hover {
   background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%) !important;
   color: #ffffff !important;
   transform: translateY(-3px) scale(1.02) !important;
@@ -69,7 +82,13 @@ button[type="submit"][name="add"]:hover,
 .product-form__submit:active,
 .button[name="add"]:active,
 button[type="submit"][name="add"]:active,
-#ProductSubmitButton:active {
+.product-form__buttons button:active,
+.product-form__buttons .product-form__submit:active,
+product-form .product-form__submit:active,
+#ProductSubmitButton:active,
+button.product-form__submit:active,
+.product-form button[type="submit"]:active,
+form[data-type="add-to-cart-form"] button[type="submit"]:active {
   transform: translateY(-1px) scale(0.98) !important;
   box-shadow: 0 3px 15px rgba(251, 191, 36, 0.5) !important;
 }
@@ -78,7 +97,13 @@ button[type="submit"][name="add"]:active,
 .product-form__submit:focus-visible,
 .button[name="add"]:focus-visible,
 button[type="submit"][name="add"]:focus-visible,
-#ProductSubmitButton:focus-visible {
+.product-form__buttons button:focus-visible,
+.product-form__buttons .product-form__submit:focus-visible,
+product-form .product-form__submit:focus-visible,
+#ProductSubmitButton:focus-visible,
+button.product-form__submit:focus-visible,
+.product-form button[type="submit"]:focus-visible,
+form[data-type="add-to-cart-form"] button[type="submit"]:focus-visible {
   outline: 3px solid #fbbf24 !important;
   outline-offset: 4px !important;
   box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6),
@@ -89,12 +114,20 @@ button[type="submit"][name="add"]:focus-visible,
 .product-form__submit:disabled,
 .product-form__submit[aria-disabled="true"],
 .button[name="add"]:disabled,
-#ProductSubmitButton:disabled {
+.product-form__buttons button:disabled,
+.product-form__buttons .product-form__submit:disabled,
+product-form .product-form__submit:disabled,
+#ProductSubmitButton:disabled,
+button.product-form__submit:disabled,
+.product-form button[type="submit"]:disabled,
+form[data-type="add-to-cart-form"] button[type="submit"]:disabled {
   opacity: 0.6 !important;
   cursor: not-allowed !important;
   transform: none !important;
   background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%) !important;
   color: #ffffff !important;
+  display: inline-flex !important;
+  visibility: visible !important;
 }
 
 /* =============================================================================
@@ -198,7 +231,13 @@ product-form {
 /* Apply pulse on page load to catch attention */
 .product-form__submit,
 .button[name="add"],
-#ProductSubmitButton {
+.product-form__buttons button,
+.product-form__buttons .product-form__submit,
+product-form .product-form__submit,
+#ProductSubmitButton,
+button.product-form__submit,
+.product-form button[type="submit"],
+form[data-type="add-to-cart-form"] button[type="submit"] {
   animation: button-pulse 2s ease-in-out 3 !important;
 }
 
@@ -209,6 +248,9 @@ product-form {
 .button[name="add"]:hover,
 .button[name="add"]:focus,
 .button[name="add"]:active,
+.product-form__buttons button:hover,
+.product-form__buttons button:focus,
+.product-form__buttons button:active,
 #ProductSubmitButton:hover,
 #ProductSubmitButton:focus,
 #ProductSubmitButton:active {
