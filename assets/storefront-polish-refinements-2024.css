@@ -397,7 +397,6 @@
 .section h2,
 .section .h2,
 [class*="__title"] {
-  color: var(--color-text-primary, #fef3c7);
   font-weight: 700;
   line-height: 1.2;
 }
