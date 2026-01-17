@@ -177,10 +177,6 @@ body {
   display: none !important;
 }
 
-.reviews-slider {
-  color: black;
-}
-
 .page-width {
   max-width: var(--page-width, 1200px);
   margin: 0 auto;
