@@ -25,12 +25,15 @@ slideshow-component .slideshow.grid--1-col {
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
+  overflow-y: hidden !important;
   scroll-snap-type: x mandatory !important;
   scroll-behavior: smooth !important;
   -webkit-overflow-scrolling: touch !important;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
   grid-template-columns: none !important; /* Disable grid layout */
+  gap: 0 !important; /* Remove grid gap that causes spacing */
+  position: relative !important;
 }
 
 /* Hide scrollbar in all browsers */
@@ -54,6 +57,7 @@ slideshow-component .slideshow .grid__item {
   scroll-snap-align: center !important;
   position: relative !important;
   flex-shrink: 0 !important;
+  margin: 0 !important; /* Remove any margins that might affect spacing */
 }
 
 /* Ensure carousel controls are always visible and functional */
