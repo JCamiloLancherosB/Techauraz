@@ -104,30 +104,6 @@ h1, h2, h3, h4, h5, h6,
     font-size: clamp(1.6rem, 4vw, 2rem);
   }
   
-  /* Card text legibility */
-  .card__heading {
-    font-size: 1.4rem;
-    line-height: 1.35;
-  }
-  
-  .card__description {
-    font-size: 1.2rem;
-    line-height: 1.5;
-  }
-  
-  /* Price legibility */
-  .price-item--regular,
-  .price-item--sale {
-    font-size: 1.6rem;
-  }
-  
-  /* Button text */
-  .button,
-  .btn,
-  [type="submit"] {
-    font-size: 1.4rem;
-  }
-  
   /* Form inputs - prevent iOS zoom on focus with higher specificity */
   input[type="text"],
   input[type="email"],
@@ -162,50 +138,6 @@ h1, h2, h3, h4, h5, h6,
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* =============================================================================
-   SMOOTH ANIMATIONS - Optimized Transitions
-   ============================================================================= */
-
-/* Note: Using existing transition variables from techauraz-unified.css:
-   --ta-transition-fast: 0.15s ease
-   --ta-transition: 0.25s ease  
-   --ta-transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1)
-*/
-
-/* Smooth hover transitions for interactive elements */
-a,
-button,
-.button,
-.btn,
-.card,
-.card-wrapper,
-input,
-select,
-textarea {
-  transition: all var(--ta-transition, 0.25s ease);
-}
-
-/* Card hover - smooth lift effect */
-.card-wrapper:hover .card {
-  transform: translateY(-4px);
-  transition: transform var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1)), box-shadow var(--ta-transition-slow, 0.4s cubic-bezier(0.4, 0, 0.2, 1));
-}
-
-/* Button hover animations */
-.button:hover,
-.btn:hover,
-[type="submit"]:hover {
-  transform: translateY(-2px);
-  transition: all var(--ta-transition, 0.25s ease);
-}
-
-.button:active,
-.btn:active,
-[type="submit"]:active {
-  transform: translateY(0);
-  transition: transform var(--ta-transition-fast, 0.15s ease);
 }
 
 /* Image hover zoom - smooth */
@@ -266,27 +198,6 @@ textarea {
 .stagger-animation > *:nth-child(6) { animation-delay: 0.3s; }
 .stagger-animation > *:nth-child(7) { animation-delay: 0.35s; }
 .stagger-animation > *:nth-child(8) { animation-delay: 0.4s; }
-
-/* Respect user preference for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  .card-wrapper:hover .card {
-    transform: none;
-  }
-  
-  .button:hover,
-  .btn:hover {
-    transform: none;
-  }
-}
 
 /* Performance optimization - use GPU acceleration wisely */
 /* Only apply will-change during interactions, not by default */
@@ -369,83 +280,6 @@ body {
   justify-content: center;
 }
 
-/* =============================================================================
-   TOUCH TARGETS - Minimum 44x44px
-   ============================================================================= */
-
-@media screen and (max-width: 989px) {
-  /* Buttons minimum size */
-  button,
-  .button,
-  .btn,
-  [type="submit"],
-  [type="button"] {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 1rem 1.5rem;
-  }
-  
-  /* Icon buttons */
-  .header__icon,
-  .icon-button,
-  [class*="icon-btn"] {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Links in navigation */
-  .header__menu-item,
-  .menu-drawer__menu-item,
-  nav a {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 1rem;
-  }
-  
-  /* Form inputs */
-  input,
-  select,
-  textarea {
-    min-height: 48px;
-    padding: 1rem;
-  }
-  
-  /* Quantity buttons */
-  .quantity__button {
-    min-width: 44px;
-    min-height: 44px;
-  }
-  
-  /* Close buttons */
-  .modal__close-button,
-  .drawer__close,
-  [aria-label*="close"],
-  [aria-label*="cerrar"] {
-    min-width: 44px;
-    min-height: 44px;
-  }
-}
-
-/* Adequate spacing between touch targets */
-@media screen and (max-width: 749px) {
-  .header__icons {
-    gap: 0.5rem;
-  }
-  
-  .button-group {
-    gap: 1rem;
-  }
-  
-  nav ul,
-  .menu-drawer__navigation ul {
-    gap: 0.25rem;
-  }
-}
-
 /* Maintain aspect ratio for media containers */
 .media {
   position: relative;
@@ -521,22 +355,6 @@ img[loading="lazy"] {
     font-size: 1.2rem;
     padding: 0.8rem 1rem;
   }
-}
-
-/* Quick add button - don't overlap card content */
-.card .quick-add {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity var(--ta-transition, 0.25s ease), transform var(--ta-transition, 0.25s ease);
-}
-
-.card-wrapper:hover .quick-add {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media screen and (max-width: 749px) {
