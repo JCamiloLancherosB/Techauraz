@@ -224,5 +224,5 @@ Los botones "Comprar ahora" y "Agregar al carrito" ahora están garantizados com
 
 ---
 
-**Fecha de completitud:** 17 de enero de 2026
+**Fecha de completitud:** 17 de enero de 2025
 **Autor:** GitHub Copilot Agent

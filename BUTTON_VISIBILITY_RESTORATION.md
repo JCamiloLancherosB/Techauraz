@@ -1,6 +1,6 @@
 # Restauración de Visibilidad de Botones - Página de Producto
 
-**Fecha:** 17 de enero de 2026
+**Fecha:** 17 de enero de 2025
 **Issue:** Botones "Comprar ahora" y "Agregar al carrito" ocultos en página de producto
 
 ## Problema Identificado
@@ -259,4 +259,4 @@ Si necesitas agregar nuevos elementos que deben estar siempre visibles:
 ## Autor
 
 GitHub Copilot Agent
-Fecha: 17 de enero de 2026
+Fecha: 17 de enero de 2025
