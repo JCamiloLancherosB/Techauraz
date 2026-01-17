@@ -94,6 +94,12 @@
     padding-right: var(--media-shadow-horizontal-offset);
   }
 
+  /* Balanced width enforcement - 50/50 split on desktop */
+  .product__media-wrapper,
+  .product__info-wrapper {
+    width: 50%;
+  }
+
   .product__info-wrapper {
     padding: 0 0 0 1.5rem; /* Reduced from 2rem */
   }
