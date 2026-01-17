@@ -11,12 +11,6 @@
   margin-bottom: 1.5rem; /* Reduced from 2rem */
 }
 
-@media screen and (min-width: 750px) {
-  .product.grid {
-    gap: 2rem; /* Increase gap for desktop */
-  }
-}
-
 .product__info-wrapper {
   width: 100%;
   max-width: 100%;
