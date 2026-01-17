@@ -319,38 +319,6 @@ h1.product__title {
   white-space: normal !important;
 }
 
-/* =============================================================================
-   9. MEDIA/IMAGE GALLERY - ALIGNMENT
-   ============================================================================= */
-
-/**
- * Ensure product media wrapper aligns correctly
- * No transforms that push content offscreen
- */
-
-.product__media-wrapper,
-.product-hero-slider {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  transform: none !important;
-}
-
-.product-hero-slide {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* =============================================================================
-   10. COUNTDOWN & TRUST ELEMENTS - VISIBLE
-   ============================================================================= */
-
-/**
- * CRO elements must be visible for conversion
- */
-
 .product-countdown,
 .product-trust-payments,
 .product-delivery-steps,
