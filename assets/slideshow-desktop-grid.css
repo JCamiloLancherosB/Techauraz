@@ -1,7 +1,7 @@
 /* =============================================================================
-   SLIDESHOW DESKTOP CAROUSEL LAYOUT
+   SLIDESHOW CAROUSEL LAYOUT - FINAL OVERRIDE
    =============================================================================
-   Version: 2.1.0
+   Version: 2.2.0
    Date: 2026-01-17
    
    Purpose: Ensure slideshow displays as a proper carousel on all devices
@@ -9,38 +9,61 @@
    - Tablet (750px-989px): Single slide carousel with navigation controls  
    - Mobile (<750px): Single slide carousel (native behavior)
    
-   Note: This file now ensures proper carousel behavior across all screen sizes,
-   showing one image at a time with auto-rotation and navigation controls.
+   This file is loaded LAST in sections/slideshow.liquid (line 4) to ensure 
+   it has final say over all other CSS rules. It overrides base.css grid 
+   display and any other conflicting styles.
    ============================================================================= */
 
-/* Force carousel behavior on all screen sizes - override grid display */
+/* Force carousel behavior - override ALL grid/flex conflicts */
+slideshow-component .slideshow.grid.grid--1-col.slider.slider--everywhere,
+slideshow-component .slideshow.banner.grid.grid--1-col.slider.slider--everywhere,
 slideshow-component .slideshow.slider.slider--everywhere,
-slideshow-component .slideshow.banner.slider--everywhere {
+slideshow-component .slideshow.banner.slider--everywhere,
+slideshow-component .slideshow.grid,
+slideshow-component .slideshow.grid--1-col {
   display: flex !important;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Hide scrollbar in Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  grid-template-columns: none !important; /* Disable grid layout */
+  gap: 0 !important; /* Remove grid gap that causes spacing */
+  position: relative !important;
 }
 
-/* Hide scrollbar in Chrome/Safari */
-slideshow-component .slideshow.slider.slider--everywhere::-webkit-scrollbar,
-slideshow-component .slideshow.banner.slider--everywhere::-webkit-scrollbar {
-  display: none;
+/* Hide scrollbar in all browsers */
+slideshow-component .slideshow::-webkit-scrollbar,
+slideshow-component .slideshow.slider::-webkit-scrollbar,
+slideshow-component .slideshow.slider--everywhere::-webkit-scrollbar,
+slideshow-component .slideshow.banner::-webkit-scrollbar {
+  display: none !important;
 }
 
-/* Each slide takes full width for proper carousel display */
-slideshow-component .slideshow__slide.slider__slide {
-  flex: 0 0 100%;
-  min-width: 100%;
-  scroll-snap-align: center;
-  position: relative;
+/* Each slide MUST take full width for proper carousel display */
+slideshow-component .slideshow__slide,
+slideshow-component .slideshow__slide.slider__slide,
+slideshow-component .slideshow__slide.grid__item,
+slideshow-component .slideshow .slider__slide,
+slideshow-component .slideshow .grid__item {
+  flex: 0 0 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  scroll-snap-align: center !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important; /* Remove any margins that might affect spacing */
 }
 
-/* Ensure carousel controls are always visible */
+/* Ensure carousel controls are always visible and functional */
 slideshow-component .slideshow__controls,
 slideshow-component .slider-buttons {
   display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
