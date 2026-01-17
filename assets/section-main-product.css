@@ -226,6 +226,17 @@
   opacity: 1 !important;
 }
 
+/* Ensure forms inside scroll-trigger wrappers are always visible */
+.scroll-trigger .product-form,
+.scroll-trigger.animate--slide-in .product-form,
+.scroll-trigger.animate--fade-in .product-form,
+.product__info-wrapper.scroll-trigger .product-form {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .product-form__error-message-wrapper:not([hidden]) {
   display: flex;
   align-items: flex-start;
@@ -1215,6 +1226,17 @@ a.product__text {
   opacity: 1 !important;
 }
 
+/* Ensure buttons inside scroll-trigger wrappers are always visible */
+.scroll-trigger .product-form__buttons,
+.scroll-trigger.animate--slide-in .product-form__buttons,
+.scroll-trigger.animate--fade-in .product-form__buttons,
+.product__info-wrapper.scroll-trigger .product-form__buttons {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .product .product-form__quantity {
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -1282,6 +1304,17 @@ a.product__text {
   opacity: 1 !important;
 }
 
+/* Ensure shopify payment button inside scroll-trigger wrappers is always visible */
+.scroll-trigger .shopify-payment-button,
+.scroll-trigger.animate--slide-in .shopify-payment-button,
+.scroll-trigger.animate--fade-in .shopify-payment-button,
+.product__info-wrapper.scroll-trigger .shopify-payment-button {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .product .shopify-payment-button__more-options {
   margin-top: 0.8rem;
   margin-bottom: 0.5rem;
@@ -1308,6 +1341,17 @@ a.product__text {
   opacity: 1 !important;
   position: relative;
   z-index: 10;
+}
+
+/* Ensure submit button inside scroll-trigger wrappers is always visible */
+.scroll-trigger .product-form__submit,
+.scroll-trigger.animate--slide-in .product-form__submit,
+.scroll-trigger.animate--fade-in .product-form__submit,
+.product__info-wrapper.scroll-trigger .product-form__submit {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Fix large gaps in product info sections */
