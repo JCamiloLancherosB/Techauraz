@@ -317,19 +317,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
 }
 
-/* === BUTTONS BASE (minimal to avoid conflicts) === */
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
 /* === FORMS BASE === */
 input,
 textarea,
@@ -459,16 +446,6 @@ select:focus {
 .success-visible {
   display: flex !important;
 }
-
-/* =============================================================================
-   END OF BASE STYLES
-   All component-specific styles should be in their respective CSS files:
-   - Buttons: component-*.css or techauraz-unified.css
-   - Cards: component-card.css
-   - Products: section-main-product.css, product-conversion.css
-   - Header/Footer: section-header.css, section-footer.css
-   ============================================================================= */
-
 
 #shopify-pc__banner{
  visibility: hidden;
