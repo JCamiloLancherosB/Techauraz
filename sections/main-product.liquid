@@ -229,7 +229,10 @@
 
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
-                  <div id="product-description" class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                  <div id="product-description" class="product__description rte quick-add-hidden product__description--enhanced" {{ block.shopify_attributes }}>
+                    <div class="product-description__header">
+                      <h3 class="product-description__title">✨ Descubre Todo Sobre Este Producto</h3>
+                    </div>
                     <div class="product-description__content">
                       {{ product.description }}
                     </div>
@@ -796,8 +799,8 @@
             {%- endcase -%}
           {%- endfor -%}
 
-          <a href="#product-description" class="link product__view-details animate-arrow" data-scroll-to-description>
-            {{ 'products.product.view_full_details' | t }}
+          <a href="#product-description" class="link product__view-details animate-arrow product__view-details--enhanced" data-scroll-to-description>
+            📖 {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}
           </a>
           

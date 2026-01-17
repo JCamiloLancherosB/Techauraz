@@ -853,6 +853,29 @@ a.product__text {
   text-decoration: none;
 }
 
+.product__view-details--enhanced {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  color: #fbbf24;
+  font-weight: 600;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+}
+
+.product__view-details--enhanced:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+  border-color: rgba(251, 191, 36, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+  text-decoration: none;
+}
+
 .product__view-details:hover {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
