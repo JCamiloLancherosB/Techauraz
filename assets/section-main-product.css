@@ -1760,6 +1760,60 @@ a.product__text {
   }
 }
 
+/* ===== INDICADORES DE CONFIANZA ANTES DE CTA ===== */
+.product-trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+  padding: 1rem;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.trust-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(30, 41, 59, 0.4);
+  border-radius: 6px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+}
+
+.trust-indicator:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+}
+
+.trust-indicator__icon {
+  color: #10b981;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.trust-indicator__text {
+  color: #e2e8f0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  .product-trust-indicators {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 0.8rem;
+  }
+  
+  .trust-indicator__text {
+    font-size: 1.1rem;
+  }
+}
+
 /* ===== SELECTOR DE VARIANTES MEJORADO ===== */
 /* Variant selector styles moved to component-product-variant-picker.css to avoid duplication */
 }
