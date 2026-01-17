@@ -1,81 +1,43 @@
 /* =============================================================================
-   SLIDESHOW DESKTOP GRID LAYOUT
+   SLIDESHOW DESKTOP CAROUSEL LAYOUT
    =============================================================================
-   Version: 1.0.1
-   Date: 2024-01-16
+   Version: 2.0.0
+   Date: 2024-01-17
    
-   Purpose: Display slideshow slides side by side on desktop view
-   - Desktop (750px+): Two slides displayed horizontally
-   - Tablet (750px-989px): Two slides with adjusted spacing
-   - Mobile (<750px): Single slide carousel (existing behavior preserved)
+   Purpose: Ensure slideshow displays as a proper carousel on all devices
+   - Desktop (750px+): Single slide carousel with navigation controls
+   - Tablet (750px-989px): Single slide carousel with navigation controls  
+   - Mobile (<750px): Single slide carousel (native behavior)
    
-   Note: Uses !important selectively to override existing slider/carousel styles
-   from component-slider.css and component-slideshow.css
+   Note: This file now ensures proper carousel behavior across all screen sizes,
+   showing one image at a time with auto-rotation and navigation controls.
    ============================================================================= */
 
-/* Desktop and Tablet: Display slides side by side */
+/* Desktop: Ensure proper carousel/slider behavior */
 @media screen and (min-width: 750px) {
-  /* Convert slideshow from carousel to grid on desktop
-     !important needed to override .slider--everywhere styles */
+  /* Ensure slideshow displays as carousel, not grid
+     Note: overflow-x: auto is required for JavaScript scrollTo() navigation,
+     scrollbars are hidden via scrollbar-width: none in component-slideshow.css */
   slideshow-component .slideshow.slider.slider--everywhere,
   slideshow-component .slideshow.banner.slider--everywhere {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    overflow: visible;
-    scroll-snap-type: none;
-    padding: 0 2rem;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   
-  /* Make each slide take its grid column */
+  /* Each slide takes full width for proper carousel display */
   slideshow-component .slideshow__slide.slider__slide {
-    width: 100%;
-    scroll-snap-align: none;
+    flex: 0 0 100%;
+    scroll-snap-align: center;
     position: relative;
   }
   
-  /* Ensure slide media fits properly in grid */
-  slideshow-component .slideshow__slide .slideshow__media {
-    height: 100%;
-    min-height: 500px;
-  }
-  
-  /* Adjust text wrapper for grid layout */
-  slideshow-component .slideshow__slide .slideshow__text-wrapper.banner__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    pointer-events: none;
-  }
-  
-  /* Enable pointer events for text box */
-  slideshow-component .slideshow__slide .slideshow__text.banner__box {
-    pointer-events: auto;
-  }
-  
-  /* Hide carousel controls on desktop since we're showing both slides */
+  /* Ensure carousel controls are visible on desktop
+     (original grid layout hid them with display: none) */
   slideshow-component .slideshow__controls,
-  slideshow-component .slider-buttons,
-  slideshow-component .slider-counter {
-    display: none;
-  }
-}
-
-/* Tablet-specific adjustments - refine spacing for medium screens */
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  slideshow-component .slideshow.slider.slider--everywhere,
-  slideshow-component .slideshow.banner.slider--everywhere {
-    gap: 1.5rem;
-    padding: 0 1.5rem;
-  }
-  
-  slideshow-component .slideshow__slide .slideshow__media {
-    min-height: 400px;
+  slideshow-component .slider-buttons {
+    display: flex;
   }
 }
