@@ -318,32 +318,6 @@ body {
   max-width: 100vw;
 }
 
-/* Ensure all sections respect viewport width */
-.shopify-section,
-section,
-.page-width {
-  max-width: 100%;
-}
-
-/* Page width container */
-.page-width {
-  padding-left: max(1.5rem, env(safe-area-inset-left));
-  padding-right: max(1.5rem, env(safe-area-inset-right));
-}
-
-@media screen and (min-width: 750px) {
-  .page-width {
-    padding-left: max(3rem, env(safe-area-inset-left));
-    padding-right: max(3rem, env(safe-area-inset-right));
-  }
-}
-
-/* Grid responsive fixes */
-.grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
 /* Mobile: 2 columns for products */
 @media screen and (max-width: 749px) {
   .grid--2-col-tablet-down {
@@ -852,25 +826,5 @@ h2.section-heading,
 @media screen and (max-width: 749px) {
   #MainContent > .shopify-section:last-child {
     padding-bottom: 1.5rem;
-  }
-}
-
-/* Page width - optimize horizontal padding */
-.page-width {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media screen and (min-width: 750px) {
-  .page-width {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .page-width {
-    padding-left: 3rem;
-    padding-right: 3rem;
   }
 }
