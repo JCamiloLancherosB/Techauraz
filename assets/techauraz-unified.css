@@ -443,7 +443,6 @@ body.menu-drawer-open {
 .product-card-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 /* Card container - tech store aesthetic */
