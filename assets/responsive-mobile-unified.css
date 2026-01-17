@@ -440,7 +440,7 @@
   }
 }
 .shopify-payment-button__button {
-  background: linear-gradient(135deg,rgb(11, 93, 245) 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg,rgb(11, 245, 70) 0%,rgb(6, 217, 154) 100%) !important;
   color: #0f172a !important;
   border: none !important;
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
