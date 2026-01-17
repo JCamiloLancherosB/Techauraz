@@ -84,10 +84,13 @@
 /* Desktop and larger - Start at 750px */
 @media screen and (min-width: 750px) {
   .product__column-sticky {
-    display: block;
+    display: grid;
     position: sticky;
     top: calc(var(--header-height) + 1rem); /* Minimized spacing */
     z-index: 2;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
   }
 
   .product--thumbnail .thumbnail-list {
