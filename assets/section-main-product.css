@@ -1253,11 +1253,6 @@ a.product__text {
     padding-top: 0.5rem; /* Minimized spacing */
   }
   
-  .product .product-form__buttons {
-    flex-direction: row;
-    align-items: center;
-  }
-  
   .product .product-form__submit {
     flex: 1;
   }
