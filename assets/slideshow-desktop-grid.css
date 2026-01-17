@@ -2,7 +2,7 @@
    SLIDESHOW DESKTOP CAROUSEL LAYOUT
    =============================================================================
    Version: 2.0.0
-   Date: 2026-01-17
+   Date: 2024-01-17
    
    Purpose: Ensure slideshow displays as a proper carousel on all devices
    - Desktop (750px+): Single slide carousel with navigation controls
@@ -16,7 +16,8 @@
 /* Desktop: Ensure proper carousel/slider behavior */
 @media screen and (min-width: 750px) {
   /* Ensure slideshow displays as carousel, not grid */
-  slideshow-component .slideshow.slider.slider--everywhere {
+  slideshow-component .slideshow.slider.slider--everywhere,
+  slideshow-component .slideshow.banner.slider--everywhere {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
