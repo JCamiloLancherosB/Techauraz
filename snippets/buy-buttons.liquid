@@ -88,7 +88,7 @@
     {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
       {{ 'products.product.sold_out' | t }}
     {%- else -%}
-      🛒 COMPRAR AHORA - PAGA EN CASA 🚚
+      🛒 COMPRAR AHORA
     {%- endif -%}
   </span>
   {%- render 'loading-spinner' -%}
@@ -112,7 +112,7 @@
   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
   disabled
 >
-  🛒 Agregar al Carrito - Pago Seguro
+  🛒 COMPRAR AHORA
 </button>
 
       </div>
