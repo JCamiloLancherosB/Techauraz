@@ -113,6 +113,7 @@
   .product--right .product__media-list {
     margin-bottom: 1.5rem; /* Reduced from 2rem */
   }
+}
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media) {
