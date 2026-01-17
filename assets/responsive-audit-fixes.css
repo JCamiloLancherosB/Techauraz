@@ -446,42 +446,10 @@ body {
   }
 }
 
-/* =============================================================================
-   IMAGE RESPONSIVE FIXES
-   ============================================================================= */
-
-/* All images responsive by default */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* Maintain aspect ratio for media containers */
 .media {
   position: relative;
   overflow: hidden;
-}
-
-.media img,
-.media video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Product images - contain to show full product */
-.product__media img,
-.product-media-container img {
-  object-fit: contain;
-}
-
-/* Card images - cover for consistency */
-.card__media img {
-  object-fit: cover;
 }
 
 /* Lazy loading placeholder - use theme colors */
