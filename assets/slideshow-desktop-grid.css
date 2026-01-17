@@ -32,13 +32,8 @@
     position: relative;
   }
   
-  /* Ensure slide media displays properly */
-  slideshow-component .slideshow__slide .slideshow__media {
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Ensure carousel controls are visible on desktop */
+  /* Ensure carousel controls are visible on desktop
+     (original grid layout hid them with display: none) */
   slideshow-component .slideshow__controls,
   slideshow-component .slider-buttons {
     display: flex;
