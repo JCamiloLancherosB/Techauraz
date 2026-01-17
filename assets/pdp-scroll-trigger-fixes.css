@@ -237,41 +237,12 @@ noscript .scroll-trigger,
   }
 }
 
-/* =============================================================================
-   6. PRODUCT INFO WRAPPER - ALIGNMENT FIX
-   ============================================================================= */
-
-/**
- * Fix alignment issues with product info container
- * Ensure proper grid layout and no unwanted transforms
- */
-
 .product__info-wrapper {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   position: relative !important;
   transform: none !important;
-}
-
-/* Grid layout for product page */
-.product.grid {
-  display: grid !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-@media screen and (min-width: 750px) {
-  .product.grid.grid--2-col-tablet {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 2rem !important;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .product.grid.grid--2-col-tablet {
-    grid-template-columns: 1.2fr 0.8fr !important;
-  }
 }
 
 /* =============================================================================
@@ -461,50 +432,6 @@ product-recommendations,
     transform: none !important;
   }
 }
-
-/* =============================================================================
-   15. SPECIFICITY OVERRIDES - LEGACY SECTION (Updated)
-   ============================================================================= */
-
-/**
- * This section previously used !important flags but has been updated to use
- * proper CSS cascade. Visibility is now ensured through:
- * - Z-index hierarchy (forms: 5, buttons: 10)
- * - Explicit visibility declarations
- * - Targeted selectors with appropriate specificity
- * - Natural CSS cascade order (this file loads after base.css)
- */
-
-/* Force visibility on product info container */
-.product .product__info-container,
-.product .product__info-wrapper .product__info-container,
-.product.grid .product__info-wrapper .product__info-container {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-/* Force visibility on description in any context */
-.product .product__description,
-.product .product__info-container .product__description,
-.product.grid .product__info-wrapper .product__description,
-.product .scroll-trigger .product__description {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
-  transform: none !important;
-  animation: none !important;
-}
-
-/* =============================================================================
-   16. Z-INDEX LAYERING
-   ============================================================================= */
-
-/**
- * Ensure proper stacking order
- * Prevents elements from being hidden behind others
- */
 
 .product__media-wrapper {
   z-index: 1;
