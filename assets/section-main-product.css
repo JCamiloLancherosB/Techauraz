@@ -219,9 +219,11 @@
 /* Product form */
 
 .product-form {
-  display: block;
+  display: block !important;
   position: relative;
   z-index: 5;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .product-form__error-message-wrapper:not([hidden]) {
@@ -1197,7 +1199,7 @@ a.product__text {
 .product .product-form__buttons {
   margin-top: 1.2rem;
   gap: 1rem;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   width: 100%;
   /* 
@@ -1209,8 +1211,8 @@ a.product__text {
    */
   position: relative;
   z-index: 10;
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .product .product-form__quantity {
@@ -1276,6 +1278,8 @@ a.product__text {
   margin-top: 1rem;
   position: relative;
   z-index: 10;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .product .shopify-payment-button__more-options {
@@ -1299,7 +1303,11 @@ a.product__text {
   min-height: 5rem;
   justify-content: center;
   align-items: center;
-  display: flex;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 10;
 }
 
 /* Fix large gaps in product info sections */
