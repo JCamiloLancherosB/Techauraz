@@ -289,6 +289,9 @@ body {
 /* Lazy loading placeholder - use theme colors */
 img[loading="lazy"] {
   background: linear-gradient(135deg, var(--ta-bg-card-hover, rgba(30, 41, 59, 0.5)) 0%, var(--ta-bg-card, rgba(15, 23, 42, 0.5)) 100%);
+}
+
+.global-media-settings {
   border-radius: 190px;
 }
 
