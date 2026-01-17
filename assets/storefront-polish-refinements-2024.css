@@ -414,7 +414,6 @@
 .section p,
 [class*="__description"],
 [class*="__text"] {
-  color: var(--color-text-secondary, rgba(226, 232, 240, 0.85));
   line-height: 1.6;
 }
 
