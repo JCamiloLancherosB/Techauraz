@@ -1438,10 +1438,10 @@ a.product__text {
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #ffffff;
   text-align: center;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 0.8rem; /* Reduced padding */
   font-weight: 600;
   font-size: 1.4rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem; /* Reduced spacing */
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
 }
