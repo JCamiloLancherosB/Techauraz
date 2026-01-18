@@ -488,3 +488,109 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
     margin-left: 0;
   }
 }
+
+/* COD Benefits Section */
+.cod-benefits {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  border-radius: 10px;
+}
+
+.cod-benefits__title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cod-benefits__title svg {
+  flex-shrink: 0;
+  color: #10b981;
+}
+
+.cod-benefits__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cod-benefits__item {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  font-size: 1.3rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  position: relative;
+}
+
+.cod-benefits__item:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 700;
+}
+
+.cod-benefits__item:last-child {
+  margin-bottom: 0;
+}
+
+/* COD Message */
+.cart__cod-message {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+}
+
+.cart__cod-message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.cart__cod-message-header svg {
+  flex-shrink: 0;
+  color: #fbbf24;
+}
+
+.cart__cod-message-body {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+/* Enhanced Checkout Button */
+.cart__checkout-button--cod {
+  position: relative;
+  overflow: hidden;
+}
+
+.cart__checkout-button--cod:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.cart__checkout-button--cod:hover:before {
+  transform: translateX(100%);
+}
