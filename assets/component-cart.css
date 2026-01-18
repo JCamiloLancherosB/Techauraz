@@ -378,10 +378,6 @@ cart-items {
   flex-shrink: 0;
 }
 
-.payment-option--featured .payment-option__icon {
-  color: #fbbf24;
-}
-
 .payment-option__badge {
   display: inline-block;
   padding: 0.4rem 1rem;
