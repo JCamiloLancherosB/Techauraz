@@ -76,6 +76,78 @@
                 </small>
               </div>
             {%- else -%}
+              {%- comment -%} Free Shipping Banner {%- endcomment -%}
+              {%- assign free_shipping_threshold = 150000 -%}
+              {%- assign cart_total = cart.total_price -%}
+              {%- assign remaining = free_shipping_threshold | minus: cart_total -%}
+              
+              <div class="cart__free-shipping-banner">
+                {%- if remaining > 0 -%}
+                  <svg class="free-shipping-banner__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
+                  <div class="free-shipping-banner__content">
+                    <p class="free-shipping-banner__text">
+                      <strong>¡Solo te faltan {{ remaining | money }} para envío GRATIS!</strong>
+                    </p>
+                    <p class="free-shipping-banner__subtext">Añade más productos para alcanzar el envío gratis</p>
+                  </div>
+                {%- else -%}
+                  <svg class="free-shipping-banner__icon free-shipping-banner__icon--success" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                  <div class="free-shipping-banner__content">
+                    <p class="free-shipping-banner__text free-shipping-banner__text--success">
+                      <strong>¡Felicidades! Tienes ENVÍO GRATIS</strong>
+                    </p>
+                    <p class="free-shipping-banner__subtext">Tu pedido califica para envío sin costo</p>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              {%- comment -%} Payment Options {%- endcomment -%}
+              <div class="cart__payment-options">
+                <h3 class="payment-options__heading">Elige cómo pagar:</h3>
+                <div class="payment-options__grid">
+                  <div class="payment-option payment-option--featured">
+                    <div class="payment-option__header">
+                      <svg class="payment-option__icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 8v8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                      <span class="payment-option__badge">Más Popular</span>
+                    </div>
+                    <h4 class="payment-option__title">Paga en Casa (Contraentrega)</h4>
+                    <ul class="payment-option__features">
+                      <li>✓ Paga cuando recibes tu pedido</li>
+                      <li>✓ Efectivo o tarjeta al recibir</li>
+                      <li>✓ Sin pagos anticipados</li>
+                      <li>✓ Entrega en 2-4 días hábiles</li>
+                    </ul>
+                  </div>
+                  <div class="payment-option">
+                    <div class="payment-option__header">
+                      <svg class="payment-option__icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect x="3" y="8" width="26" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3 13h26" stroke="currentColor" stroke-width="2"/>
+                        <rect x="6" y="18" width="8" height="3" rx="1" fill="currentColor"/>
+                      </svg>
+                    </div>
+                    <h4 class="payment-option__title">Pago con Tarjeta</h4>
+                    <ul class="payment-option__features">
+                      <li>✓ Débito o crédito</li>
+                      <li>✓ Pago 100% seguro</li>
+                      <li>✓ Procesamiento inmediato</li>
+                      <li>✓ PSE y otros métodos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <noscript>
                   <button type="submit" class="cart__update-button button button--secondary" form="cart">
@@ -93,28 +165,28 @@
                   {% endif %}
                   form="cart"
                 >
-                  {{ 'sections.cart.checkout' | t }}
+                  🛒 {{ 'sections.cart.checkout' | t }}
                 </button>
               </div>
 
               {%- comment -%} Trust Badges {%- endcomment -%}
               <div class="cart__trust-badges">
                 <div class="trust-badge">
-                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
                   <span>{{ 'sections.cart.trust_badges.free_shipping' | t }}</span>
                 </div>
                 <div class="trust-badge">
-                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
                   <span>{{ 'sections.cart.trust_badges.secure_payment' | t }}</span>
                 </div>
                 <div class="trust-badge">
-                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg class="trust-badge__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <polyline points="23 4 23 10 17 10"></polyline>
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                   </svg>
