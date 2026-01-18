@@ -1743,7 +1743,7 @@
       "payment_gateway": {
         "credit_card_label": "Tarjeta de crédito",
         "bank_deposit_label": "Deposito bancario",
-        "cash_on_delivery_label": "Pago contra entrega",
+        "cash_on_delivery_label": "Paga cuando recibes",
         "money_order_label": "Giro postal",
         "debit_card_label": "Tarjeta de débito",
         "deferred_payment_label": "Elija el método de pago más tarde",
@@ -2140,6 +2140,9 @@
         "merchandise_line_transformers": {
           "run_error": "Se produjo un error en su carrito."
         }
+      },
+      "order": {
+        "cash_on_delivery": "Paga cuando recibes"
       }
     },
     "cart": {
@@ -2311,13 +2314,16 @@
         },
         "manual_payment_methods": {
           "money_order": "Giro postal - {{formattedTransactionAmount}}",
-          "cash_on_delivery": "Pago contra entrega (COD) - {{formattedTransactionAmount}}",
+          "cash_on_delivery": "Paga cuando recibes (COD) - {{formattedTransactionAmount}}",
           "bank_deposit": "Depósito bancario - {{formattedTransactionAmount}}",
           "manual": "Manual-{{formattedTransactionAmount}}"
         },
         "transactions": {
           "show_all": "Mostrar todo",
           "show_less": "Muestra menos"
+        },
+        "payment_type": {
+          "cash_on_delivery": "Paga cuando recibes"
         }
       },
       "paid_with_shop_pay_installments_card": {
