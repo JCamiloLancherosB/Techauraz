@@ -1743,7 +1743,7 @@
       "payment_gateway": {
         "credit_card_label": "Tarjeta de crédito",
         "bank_deposit_label": "Deposito bancario",
-        "cash_on_delivery_label": "Contra reembolso (COD)",
+        "cash_on_delivery_label": "Pago contra entrega",
         "money_order_label": "Giro postal",
         "debit_card_label": "Tarjeta de débito",
         "deferred_payment_label": "Elija el método de pago más tarde",
@@ -2311,7 +2311,7 @@
         },
         "manual_payment_methods": {
           "money_order": "Giro postal - {{formattedTransactionAmount}}",
-          "cash_on_delivery": "Contra reembolso (COD) - {{formattedTransactionAmount}}",
+          "cash_on_delivery": "Pago contra entrega (COD) - {{formattedTransactionAmount}}",
           "bank_deposit": "Depósito bancario - {{formattedTransactionAmount}}",
           "manual": "Manual-{{formattedTransactionAmount}}"
         },
