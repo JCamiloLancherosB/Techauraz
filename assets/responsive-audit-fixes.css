@@ -295,6 +295,19 @@ img[loading="lazy"] {
   border-radius: 1rem;
 }
 
+._19gi7yt0 {
+  visibility: hidden; /* Oculta el texto original */
+  position: relative;
+}
+._19gi7yt0::before {
+  content: "A domicilio (Pago contra entrega disponible)";
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
 /* =============================================================================
    SAFE AREA INSETS - iPhone X+ Support
    ============================================================================= */
