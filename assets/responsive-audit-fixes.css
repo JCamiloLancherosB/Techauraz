@@ -295,11 +295,11 @@ img[loading="lazy"] {
   border-radius: 1rem;
 }
 
-._19gi7yt0 {
+._19gi7yt1p {
   visibility: hidden; /* Oculta el texto original */
   position: relative;
 }
-._19gi7yt0::before {
+._19gi7yt1p::before {
   content: "A domicilio (Pago contra entrega disponible)";
   visibility: visible;
   position: absolute;
