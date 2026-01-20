@@ -300,15 +300,15 @@ slideshow-component {
 }
 
 .banner__buttons .button--primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4),
-              0 0 10px rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4),
+              0 0 10px rgba(37, 99, 235, 0.2);
 }
 
 .banner__buttons .button--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5),
-              0 0 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5),
+              0 0 20px rgba(37, 99, 235, 0.3);
 }
 
 .banner__buttons .button--secondary {
@@ -471,7 +471,7 @@ slideshow-component {
 .card__hover-buttons .button {
   width: 100%;
   margin-top: var(--space-md, 1rem);
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: white;
   border: none;
   padding: var(--space-md, 1rem);
@@ -479,13 +479,13 @@ slideshow-component {
   font-weight: var(--font-weight-bold, 700);
   font-size: var(--font-size-base, 1.6rem);
   transition: all var(--transition-base, 0.25s ease);
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 .card .quick-add-button:hover,
 .card__hover-buttons .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 /* Product grid - responsive modern layout */
@@ -1069,7 +1069,7 @@ slideshow-component {
    BUTTONS - Premium Modern Design with Micro-interactions
    ============================================================================= */
 
-/* Primary button - gradient with glow */
+/* Primary button - gradient with glow - WCAG AA compliant */
 .button,
 .button--primary,
 button[type="submit"]:not(.newsletter-form__button),
@@ -1079,13 +1079,13 @@ button[type="submit"]:not(.newsletter-form__button),
   padding: var(--space-md, 1rem) var(--space-2xl, 3rem);
   border-radius: var(--radius-md, 10px);
   border: none;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: white;
   cursor: pointer;
   transition: all var(--transition-base, 0.25s ease);
   min-height: 48px;
   min-width: 120px;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
   position: relative;
   overflow: hidden;
 }
