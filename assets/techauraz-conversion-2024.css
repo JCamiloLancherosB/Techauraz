@@ -31,11 +31,11 @@
    ============================================================================= */
 :root {
   /* Use the global color system from base.css and techauraz-unified.css */
-  --ta-conv-primary: var(--ta-primary, #fbbf24);
-  --ta-conv-primary-hover: var(--ta-primary-dark, #f59e0b);
+  --ta-conv-primary: var(--ta-primary, #3b82f6);
+  --ta-conv-primary-hover: var(--ta-primary-dark, #2563eb);
   --ta-conv-secondary: var(--ta-accent, #0ea5e9);
   --ta-conv-secondary-hover: var(--ta-accent-dark, #0284c7);
-  --ta-conv-trust: var(--ta-text-primary, #f8fafc);
+  --ta-conv-trust: var(--ta-text-primary, #0f172a);
 }
 
 
@@ -115,7 +115,7 @@
   align-items: center;
 }
 
-/* Primary CTA - High conversion focus with amber gradient */
+/* Primary CTA - High conversion focus with blue gradient */
 .ta-conv-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -124,13 +124,13 @@
   padding: 1.2rem 2.4rem;
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--color-text-inverse, #0f172a);
+  color: var(--color-text-inverse, #ffffff);
   background: linear-gradient(135deg, var(--ta-conv-primary) 0%, var(--ta-conv-primary-hover) 100%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px var(--shadow-primary, rgba(251, 191, 36, 0.3));
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
   text-decoration: none;
   white-space: nowrap;
   position: relative;
@@ -139,8 +139,8 @@
 
 .ta-conv-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
-  background: linear-gradient(135deg, #fde68a 0%, var(--ta-conv-primary) 100%);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, #60a5fa 0%, var(--ta-conv-primary) 100%);
 }
 
 /* Secondary CTA - Subtle blue accent */
@@ -152,9 +152,9 @@
   padding: 1.2rem 2rem;
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--ta-text-primary, #ffffff);
-  background: rgba(14, 165, 233, 0.1);
-  border: 2px solid rgba(14, 165, 233, 0.4);
+  color: var(--color-primary, #3b82f6);
+  background: rgba(59, 130, 246, 0.05);
+  border: 2px solid rgba(59, 130, 246, 0.3);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -165,8 +165,8 @@
 }
 
 .ta-conv-btn-secondary:hover {
-  background: rgba(14, 165, 233, 0.15);
-  border-color: rgba(14, 165, 233, 0.6);
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
   transform: translateY(-1px);
 }
 
@@ -177,8 +177,8 @@
 /* Product card wrapper with tighter spacing */
 .ta-conv-product-card {
   position: relative;
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid var(--color-border, #e2e8f0);
   border-radius: 12px;
   padding: 1rem;
   transition: all 0.3s ease;
@@ -186,8 +186,8 @@
 }
 
 .ta-conv-product-card:hover {
-  border-color: rgba(251, 191, 36, 0.4);
-  box-shadow: 0 8px 24px var(--shadow-primary, rgba(251, 191, 36, 0.3));
+  border-color: var(--color-primary, #3b82f6);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
   transform: translateY(-4px);
 }
 
