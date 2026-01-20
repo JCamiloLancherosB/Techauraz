@@ -232,66 +232,14 @@
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
     %}
 
-<!-- CSS completo con preload + async -->
+<!-- =============================================================================
+     UNIFIED CSS - SINGLE FILE APPROACH
+     All styles from 91 CSS files consolidated into base.css
+     Modern Tech Store Theme - Optimized for Performance
+     Date: 2026-01-20
+     ============================================================================= -->
 <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
-
-{%- comment -%} Load animations CSS only if enabled {%- endcomment -%}
-{%- if settings.animations_reveal_on_scroll -%}
-  <link rel="preload" href="{{ 'animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'animations.css' | asset_url }}"></noscript>
-{%- endif -%}
-
-{%- comment -%} Load cross-sell CSS only on product pages {%- endcomment -%}
-{%- if template.name == 'product' -%}
-  <link rel="preload" href="{{ 'cross-sell.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="{{ 'cross-sell.css' | asset_url }}"></noscript>
-{%- endif -%}
-
-<!-- TechAura Unified CSS - Consolidated, optimized theme styles -->
-<link rel="preload" href="{{ 'techauraz-unified.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-unified.css' | asset_url }}"></noscript>
-
-<!-- TechAura Conversion 2024 CSS - Conversion-focused enhancements -->
-<link rel="preload" href="{{ 'techauraz-conversion-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-conversion-2024.css' | asset_url }}"></noscript>
-
-<!-- TechAura Forms CSS - Enhanced form styling -->
-<link rel="preload" href="{{ 'forms-techauraz.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'forms-techauraz.css' | asset_url }}"></noscript>
-
-<!-- TechAura Responsive Audit Fixes - Comprehensive responsive & accessibility improvements -->
-<link rel="preload" href="{{ 'responsive-audit-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'responsive-audit-fixes.css' | asset_url }}"></noscript>
-
-<!-- Card Clickable Fix - Full card area clickable for better mobile UX -->
-<link rel="preload" href="{{ 'card-clickable-fix.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'card-clickable-fix.css' | asset_url }}"></noscript>
-
-<!-- Product Page Visual Fixes 2024 - Banner, buttons, description, footer improvements -->
-<link rel="preload" href="{{ 'product-page-consolidated.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'product-page-consolidated.css' | asset_url }}"></noscript>
-
-<!-- Visual System Unified 2024 - Rating visibility, dark theme palette, badge system -->
-<link rel="preload" href="{{ 'visual-system-unified-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
-
-<!-- Responsive Mobile Unified 2024 - Consolidated mobile fixes (replaces 3 files) -->
-<!-- Replaces: storefront-visual-fixes-2024.css, mobile-view-fixes-2024.css, mobile-visual-fixes-jan-2024.css -->
-<link rel="preload" href="{{ 'responsive-mobile-unified.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'responsive-mobile-unified.css' | asset_url }}"></noscript>
-
-<!-- Storefront Polish Refinements 2024 - Final polish for sales-ready experience -->
-<link rel="preload" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}"></noscript>
-
-<!-- Visual Refinements 2026 - Style cleanup & consistency (NEW) -->
-<link rel="preload" href="{{ 'visual-refinements-2026.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'visual-refinements-2026.css' | asset_url }}"></noscript>
-
-<!-- PDP Scroll Trigger Fixes - Ensures buttons and critical elements are always visible -->
-<link rel="preload" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}"></noscript>
 
 <!-- 
   ============================================================================
@@ -402,7 +350,6 @@
 
     <!-- Componentes Adicionales -->
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
