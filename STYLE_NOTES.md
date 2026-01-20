@@ -350,6 +350,22 @@ pdp-scroll-trigger-fixes.css (4KB)
 - [x] Agregar utility classes comunes
 - [x] Actualizar theme.liquid con nuevo CSS
 
+### Fase 2.5: Mejoras Visuales Avanzadas (COMPLETADA ✅) - 2026-01-20
+- [x] Implementar gradientes modernos para fondos y overlays
+- [x] Agregar sistema de sombras premium con tonos azules
+- [x] Crear componentes de badges (new, featured, sale, premium)
+- [x] Implementar efectos glassmorphism en hero/banner
+- [x] Mejorar cards con hover effects y micro-interacciones
+- [x] Añadir animaciones suaves (fade-in, shimmer, pulse)
+- [x] Mejorar testimonials con diseño premium y quote marks
+- [x] Rediseñar newsletter con gradient background y glass inputs
+- [x] Optimizar footer con gradient text y hover effects
+- [x] Mejorar botones con shine effect y gradient backgrounds
+- [x] Añadir sección benefits/value props con iconos y hover
+- [x] Mejorar carousel/slideshow con controles modernos
+- [x] Implementar estados de accesibilidad mejorados (focus rings)
+- [x] Agregar soporte para reduced motion y high contrast
+
 ### Fase 3: Consolidación Adicional (PENDIENTE)
 - [ ] Consolidar storefront-polish-refinements-2024.css → techauraz-unified.css
 - [ ] Integrar card-clickable-fix.css → component-card.css
@@ -565,6 +581,29 @@ grep "^  --" assets/base.css
 - Sistema de diseño unificado
 - Tipografía consistente con design tokens
 - Espaciado estandarizado
+
+**Después Fase 2.5 (2026-01-20):**
+- visual-refinements-2026.css expandido a 1589 líneas
+- Añadidos componentes visuales modernos:
+  - Sistema de gradientes (primary, secondary, accent)
+  - Sombras premium con tonos azules
+  - Badges (new, featured, sale, premium, outline)
+  - Efectos glassmorphism y gradient overlays
+  - Animaciones suaves (fadeInUp, shimmer, pulse, scaleBounce)
+- Mejoras de componentes:
+  - Hero/Banner: gradientes, glassmorphism, glows
+  - Cards: hover effects premium, gradient pricing
+  - Testimonials: diseño premium con quote marks y avatares con anillos
+  - Newsletter: gradient background, glass inputs, inline button
+  - Footer: gradient text, hover underlines, social icons con glow
+  - Buttons: shine effect, gradient backgrounds, micro-interacciones
+  - Benefits/Value props: cards con hover effects e iconos
+  - Carousel: controles modernos, dots animados
+- Accesibilidad mejorada:
+  - Focus rings premium con blue glow
+  - Skip to content link
+  - High contrast mode support
+  - Reduced motion support
 
 **Próximos Pasos:**
 - Fase 3: Consolidar archivos adicionales (~22KB más)
