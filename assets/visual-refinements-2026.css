@@ -25,7 +25,7 @@
 h1, .h1,
 .heading-1,
 .banner__heading {
-  font-size: var(--font-size-4xl, 3.6rem) !important;
+  font-size: var(--font-size-4xl, 3.6rem);
   font-weight: var(--font-weight-bold, 700);
   line-height: var(--line-height-tight, 1.2);
   letter-spacing: var(--letter-spacing-tight, -0.025em);
@@ -35,7 +35,7 @@ h1, .h1,
 h2, .h2,
 .heading-2,
 .section-heading {
-  font-size: var(--font-size-3xl, 3rem) !important;
+  font-size: var(--font-size-3xl, 3rem);
   font-weight: var(--font-weight-bold, 700);
   line-height: var(--line-height-tight, 1.2);
   margin-bottom: var(--space-md, 1rem);
@@ -43,7 +43,7 @@ h2, .h2,
 
 h3, .h3,
 .heading-3 {
-  font-size: var(--font-size-2xl, 2.4rem) !important;
+  font-size: var(--font-size-2xl, 2.4rem);
   font-weight: var(--font-weight-semibold, 600);
   line-height: var(--line-height-normal, 1.5);
   margin-bottom: var(--space-md, 1rem);
@@ -61,15 +61,15 @@ p,
 /* Mobile typography adjustments */
 @media screen and (max-width: 749px) {
   h1, .h1, .heading-1, .banner__heading {
-    font-size: var(--font-size-3xl, 3rem) !important;
+    font-size: var(--font-size-3xl, 3rem);
   }
   
   h2, .h2, .heading-2, .section-heading {
-    font-size: var(--font-size-2xl, 2.4rem) !important;
+    font-size: var(--font-size-2xl, 2.4rem);
   }
   
   h3, .h3, .heading-3 {
-    font-size: var(--font-size-xl, 2rem) !important;
+    font-size: var(--font-size-xl, 2rem);
   }
 }
 
@@ -160,7 +160,10 @@ slideshow-component {
   border: 2px solid var(--color-border, #e2e8f0);
   border-radius: var(--radius-lg, 14px);
   padding: var(--space-lg, 1.5rem);
-  transition: all var(--transition-base, 0.25s ease);
+  /* Optimized transition - only properties that change */
+  transition: border-color var(--transition-base, 0.25s ease),
+              box-shadow var(--transition-base, 0.25s ease),
+              transform var(--transition-base, 0.25s ease);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -285,7 +288,9 @@ slideshow-component {
 
 /* Footer - consistent spacing */
 .footer {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(180deg, 
+    var(--color-bg-secondary, #1e293b) 0%, 
+    var(--color-bg-tertiary, #0f172a) 100%);
   padding-top: var(--space-3xl, 4rem);
   padding-bottom: var(--space-2xl, 3rem);
   margin-top: var(--space-4xl, 6rem);
@@ -370,7 +375,12 @@ button[type="submit"],
   font-weight: var(--font-weight-bold, 700);
   padding: var(--space-md, 1rem) var(--space-xl, 2rem);
   border-radius: var(--radius-md, 10px);
-  transition: all var(--transition-base, 0.25s ease);
+  /* Optimized transition - specific properties */
+  transition: background-color var(--transition-base, 0.25s ease),
+              color var(--transition-base, 0.25s ease),
+              border-color var(--transition-base, 0.25s ease),
+              box-shadow var(--transition-base, 0.25s ease),
+              transform var(--transition-base, 0.25s ease);
   min-height: 48px;
   min-width: 120px;
 }
@@ -401,6 +411,10 @@ textarea:focus-visible {
 /* =============================================================================
    UTILITY CLASSES - Common Patterns
    ============================================================================= */
+
+/* Note: Utility classes use !important by design to ensure they override
+   component styles when explicitly applied. This is standard practice for
+   utility-first CSS frameworks like Tailwind, Bootstrap, etc. */
 
 /* Spacing utilities */
 .mt-0 { margin-top: 0 !important; }
