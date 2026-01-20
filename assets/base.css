@@ -432,9 +432,146 @@ select:focus {
   opacity: 0.5;
 }
 
-/* Newsletter form success message visibility */
-.success-visible {
-  display: flex !important;
+/* =============================================================================
+   MODERN INTERACTIVE ENHANCEMENTS - White/Blue Theme
+   ============================================================================= */
+
+/* Gradient text for headings - adds modern flair */
+.gradient-text,
+h1.gradient-text,
+h2.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6) 0%, var(--color-secondary, #0ea5e9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Modern card hover effects */
+.interactive-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interactive-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.interactive-card:hover::before {
+  left: 100%;
+}
+
+.interactive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Badge/Chip styles for interactive elements */
+.chip,
+.badge-interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-pill, 999px);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-primary, #3b82f6);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chip:hover,
+.badge-interactive:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(14, 165, 233, 0.15) 100%);
+  border-color: var(--color-primary, #3b82f6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Icon containers with blue accent */
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 2px solid var(--color-primary, #3b82f6);
+  border-radius: var(--radius-circle, 50%);
+  color: var(--color-primary, #3b82f6);
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.icon-circle:hover {
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6) 0%, var(--color-primary-dark, #2563eb) 100%);
+  color: white;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Divider with blue accent */
+.divider-gradient {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-primary, #3b82f6) 50%, transparent 100%);
+  margin: 3rem 0;
+  border: none;
+}
+
+/* Info boxes with blue accent */
+.info-box {
+  padding: 2rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left: 4px solid var(--color-primary, #3b82f6);
+  border-radius: var(--radius-md, 10px);
+  margin: 2rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-box h3,
+.info-box h4 {
+  color: var(--color-primary, #3b82f6);
+  margin-bottom: 1rem;
+}
+
+/* Pulse animation for attention */
+@keyframes pulse-blue {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse-blue 2s infinite;
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
 }
 
 #shopify-pc__banner{

@@ -642,7 +642,7 @@
 .card__cta .button--primary:hover {
   background: linear-gradient(135deg, #60a5fa, #3b82f6);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .card__cta .button--secondary {
