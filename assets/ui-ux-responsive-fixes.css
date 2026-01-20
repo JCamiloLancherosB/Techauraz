@@ -1,7 +1,7 @@
 /* =============================================================================
    UI/UX AND RESPONSIVENESS FIXES FOR TECHAURAZ
    Version: 1.0.0
-   Date: 2026-01-20
+   Date: 2024-01-20
    
    This file contains all the fixes for:
    - Slideshow/slider functionality (working properly on all devices)
@@ -46,11 +46,15 @@
   z-index: 3;
 }
 
-/* Improve card hover effects */
+/* Improve card hover effects - enhances base.css styles */
 .card-wrapper:hover .card {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
   transition: all 0.3s ease;
+}
+
+/* Only apply additional shadow if not already defined in base.css */
+.card-wrapper:not([style*="box-shadow"]):hover .card {
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
 }
 
 .card-wrapper .card {
@@ -59,78 +63,37 @@
 
 /* =============================================================================
    2. SLIDESHOW/SLIDER FIXES - Ensure proper horizontal slider
+   Note: This replaces JS-based fixes in mobile-fixes-handler.js for better performance
    ============================================================================= */
 
-/* Desktop slideshow - horizontal slider */
-@media screen and (min-width: 750px) {
-  slideshow-component .slideshow,
-  slideshow-component .slider {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 0 !important;
-  }
-  
-  slideshow-component .slideshow__slide,
-  slideshow-component .slider__slide {
-    min-width: 100% !important;
-    width: 100% !important;
-    flex: 0 0 100% !important;
-    flex-shrink: 0 !important;
-    scroll-snap-align: start !important;
-  }
-  
-  /* Hide scrollbar but keep functionality */
-  slideshow-component .slideshow::-webkit-scrollbar,
-  slideshow-component .slider::-webkit-scrollbar {
-    display: none;
-  }
-  
-  slideshow-component .slideshow,
-  slideshow-component .slider {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
+/* Slideshow - horizontal slider for all screen sizes */
+slideshow-component .slideshow,
+slideshow-component .slider {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  gap: 0 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Mobile slideshow - horizontal slider */
-@media screen and (max-width: 749px) {
-  slideshow-component .slideshow,
-  slideshow-component .slider {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 0 !important;
-  }
-  
-  slideshow-component .slideshow__slide,
-  slideshow-component .slider__slide {
-    min-width: 100% !important;
-    width: 100% !important;
-    flex: 0 0 100% !important;
-    flex-shrink: 0 !important;
-    scroll-snap-align: start !important;
-  }
-  
-  /* Hide scrollbar */
-  slideshow-component .slideshow::-webkit-scrollbar,
-  slideshow-component .slider::-webkit-scrollbar {
-    display: none;
-  }
-  
-  slideshow-component .slideshow,
-  slideshow-component .slider {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
+slideshow-component .slideshow__slide,
+slideshow-component .slider__slide {
+  min-width: 100% !important;
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  flex-shrink: 0 !important;
+  scroll-snap-align: start !important;
+}
+
+/* Hide scrollbar but keep functionality */
+slideshow-component .slideshow::-webkit-scrollbar,
+slideshow-component .slider::-webkit-scrollbar {
+  display: none;
 }
 
 /* Slideshow controls positioning */
@@ -585,16 +548,6 @@ a:hover {
   }
 }
 
-/* Prevent text selection on interactive elements */
-.button,
-.slider-button,
-.header__icon {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 /* Smooth scrolling for all */
 html {
   scroll-behavior: smooth;
@@ -642,8 +595,10 @@ textarea:focus-visible {
   will-change: transform;
 }
 
-/* Optimize images */
-img {
+/* Optimize icon and logo images for crisp rendering */
+.header__logo img,
+.footer__social-icon svg,
+.icon {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
