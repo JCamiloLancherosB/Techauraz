@@ -46,16 +46,13 @@
   z-index: 3;
 }
 
-/* Improve card hover effects - enhances base.css styles */
+/* Card hover effects - complementary to base.css styles */
 .card-wrapper:hover .card {
-  transform: translateY(-4px);
-  transition: all 0.3s ease;
+  /* Base transform and shadow defined in base.css */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Only apply additional shadow if not already defined in base.css */
-.card-wrapper:not([style*="box-shadow"]):hover .card {
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
-}
+/* Remove redundant box-shadow - let base.css handle it */
 
 .card-wrapper .card {
   transition: all 0.3s ease;
@@ -108,25 +105,7 @@ slideshow-component .slider::-webkit-scrollbar {
   align-items: center;
 }
 
-.slider-button {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.slider-button:hover {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
-}
+/* Slider button styles are defined in base.css - no override needed here */
 
 /* =============================================================================
    3. RESPONSIVE DESIGN IMPROVEMENTS
@@ -595,6 +574,12 @@ textarea:focus-visible {
   will-change: transform;
 }
 
+/* Missing motion-reduce class for accessibility */
+.motion-reduce {
+  animation: none !important;
+  transition: none !important;
+}
+
 /* Optimize icon and logo images for crisp rendering */
 .header__logo img,
 .footer__social-icon svg,
@@ -604,7 +589,146 @@ textarea:focus-visible {
 }
 
 /* =============================================================================
-   10. CLEANUP - Remove duplicate styles
+   10. TECH THEME ENHANCEMENTS - Modern Tech Store Visual Improvements
+   ============================================================================= */
+
+/* Tech glow effect on primary CTAs and interactive elements */
+.button--primary,
+.btn-primary,
+.newsletter-form__button {
+  position: relative;
+  overflow: hidden;
+}
+
+.button--primary::before,
+.btn-primary::before,
+.newsletter-form__button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.button--primary:hover::before,
+.btn-primary:hover::before,
+.newsletter-form__button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Enhanced product card tech aesthetics */
+.card__information {
+  position: relative;
+}
+
+.card__information::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-primary, #2563eb) 50%, 
+    transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-wrapper:hover .card__information::after {
+  opacity: 0.3;
+}
+
+/* Tech-style newsletter section */
+.newsletter__wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter__wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Header tech enhancements - subtle gradient on scroll */
+.header.scrolled {
+  background: linear-gradient(180deg, 
+    var(--color-bg-primary, #ffffff) 0%, 
+    rgba(248, 250, 252, 0.98) 100%);
+}
+
+/* Footer tech styling - gradient background */
+.footer {
+  background: linear-gradient(180deg, 
+    var(--color-bg-tertiary, #f1f5f9) 0%, 
+    var(--color-bg-secondary, #f8fafc) 100%);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-border, #e2e8f0) 20%, 
+    var(--color-border, #e2e8f0) 80%, 
+    transparent 100%);
+}
+
+/* Enhanced focus states for tech aesthetic */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary, #2563eb);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Slideshow tech overlay effect */
+.slideshow__slide {
+  position: relative;
+}
+
+.slideshow__slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(0deg, 
+    rgba(15, 23, 42, 0.4) 0%, 
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* =============================================================================
+   11. CLEANUP - Remove duplicate styles
    ============================================================================= */
 
 /* This file replaces and consolidates:
