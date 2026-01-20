@@ -2351,9 +2351,10 @@ body {
   inset: 0;
   border-radius: 16px;
   padding: 2px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0) 0%, rgba(37, 99, 235, 0) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.35s ease;
