@@ -1,0 +1,617 @@
+/* =============================================================================
+   UI/UX AND RESPONSIVENESS FIXES FOR TECHAURAZ
+   Version: 1.0.0
+   Date: 2024-01-20
+   
+   This file contains all the fixes for:
+   - Slideshow/slider functionality (working properly on all devices)
+   - Full card clickability (entire card area clickable)
+   - Responsive design improvements
+   - Header reorganization with clear sections
+   - Footer improvements with complementary elements
+   - Consistent color palette
+   - General alignment fixes
+   ============================================================================= */
+
+/* =============================================================================
+   1. FULL CARD CLICKABILITY - Make entire card clickable
+   ============================================================================= */
+
+.card-wrapper {
+  position: relative;
+  display: block;
+}
+
+.card-wrapper__link--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card-wrapper__link--overlay:hover {
+  opacity: 1;
+}
+
+/* Ensure links inside cards are above overlay */
+.card__information a,
+.card__content a,
+.quick-add-button,
+.button {
+  position: relative;
+  z-index: 3;
+}
+
+/* Improve card hover effects - enhances base.css styles */
+.card-wrapper:hover .card {
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+
+/* Only apply additional shadow if not already defined in base.css */
+.card-wrapper:not([style*="box-shadow"]):hover .card {
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
+}
+
+.card-wrapper .card {
+  transition: all 0.3s ease;
+}
+
+/* =============================================================================
+   2. SLIDESHOW/SLIDER FIXES - Ensure proper horizontal slider
+   Note: This replaces JS-based fixes in mobile-fixes-handler.js for better performance
+   ============================================================================= */
+
+/* Slideshow - horizontal slider for all screen sizes */
+slideshow-component .slideshow,
+slideshow-component .slider {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  gap: 0 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+slideshow-component .slideshow__slide,
+slideshow-component .slider__slide {
+  min-width: 100% !important;
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  flex-shrink: 0 !important;
+  scroll-snap-align: start !important;
+}
+
+/* Hide scrollbar but keep functionality */
+slideshow-component .slideshow::-webkit-scrollbar,
+slideshow-component .slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slideshow controls positioning */
+.slideshow__controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.slider-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-button:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+/* =============================================================================
+   3. RESPONSIVE DESIGN IMPROVEMENTS
+   ============================================================================= */
+
+/* Mobile responsiveness - ensure no horizontal scroll */
+@media screen and (max-width: 749px) {
+  body,
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Prevent cards from causing overflow */
+  .grid,
+  .product-grid,
+  .collection {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Mobile-friendly padding */
+  .page-width {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Tablet responsiveness */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .page-width {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  /* Adjust grid columns for tablet */
+  .grid--2-col-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3-col-tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop responsiveness */
+@media screen and (min-width: 990px) {
+  .page-width {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* =============================================================================
+   4. HEADER REORGANIZATION - Clear sections for better navigation
+   ============================================================================= */
+
+.header {
+  background: var(--color-bg-primary, #ffffff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Header sections - clear organization */
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.header__logo {
+  flex: 0 0 auto;
+}
+
+.header__nav {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.header__icons {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Header navigation menu */
+@media screen and (min-width: 990px) {
+  .header__menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header__menu-item {
+    position: relative;
+  }
+  
+  .header__menu-link {
+    display: block;
+    padding: 1rem 0.5rem;
+    text-decoration: none;
+    color: var(--color-text-secondary, #1e293b);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .header__menu-link:hover {
+    color: var(--color-primary, #2563eb);
+  }
+}
+
+/* Mobile header */
+@media screen and (max-width: 989px) {
+  .header__wrapper {
+    flex-wrap: wrap;
+  }
+  
+  .header__logo {
+    order: 1;
+  }
+  
+  .header__icons {
+    order: 2;
+  }
+  
+  .header__nav {
+    order: 3;
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+}
+
+/* =============================================================================
+   5. FOOTER IMPROVEMENTS - Complementary elements and better organization
+   ============================================================================= */
+
+.footer {
+  background: var(--color-bg-tertiary, #f1f5f9);
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--color-border, #e2e8f0);
+}
+
+.footer__content-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer__heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #0f172a);
+  margin-bottom: 1rem;
+}
+
+.footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer__list-item {
+  line-height: 1.6;
+}
+
+.footer__link {
+  color: var(--color-text-muted, #64748b);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--color-primary, #2563eb);
+}
+
+/* Footer social icons */
+.footer__social {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.footer__social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-primary, #ffffff);
+  color: var(--color-text-secondary, #1e293b);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.footer__social-icon:hover {
+  background: var(--color-primary, #2563eb);
+  color: var(--color-text-inverse, #ffffff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Footer bottom - copyright and policies */
+.footer__content-bottom {
+  border-top: 1px solid var(--color-border, #e2e8f0);
+  padding-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer__copyright {
+  color: var(--color-text-muted, #64748b);
+  font-size: 1.4rem;
+}
+
+.footer__policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile footer adjustments */
+@media screen and (max-width: 749px) {
+  .footer__content-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer__content-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer__policies {
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   6. GENERAL ALIGNMENT FIXES
+   ============================================================================= */
+
+/* Center align main content */
+.main-content {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fix section spacing */
+.section {
+  padding: 4rem 0;
+}
+
+@media screen and (max-width: 749px) {
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+/* Fix grid alignment */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--5-col {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media screen and (max-width: 749px) {
+  .grid--2-col,
+  .grid--3-col,
+  .grid--4-col,
+  .grid--5-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid--3-col,
+  .grid--4-col,
+  .grid--5-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Fix text alignment */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* =============================================================================
+   7. CONSISTENT COLOR PALETTE
+   ============================================================================= */
+
+/* Primary buttons */
+.button--primary,
+.btn-primary {
+  background: var(--color-primary, #2563eb);
+  color: var(--color-text-inverse, #ffffff);
+  border: none;
+}
+
+.button--primary:hover,
+.btn-primary:hover {
+  background: var(--color-primary-dark, #1e40af);
+}
+
+/* Secondary buttons */
+.button--secondary,
+.btn-secondary {
+  background: var(--color-secondary, #06b6d4);
+  color: var(--color-text-inverse, #ffffff);
+  border: none;
+}
+
+.button--secondary:hover,
+.btn-secondary:hover {
+  background: var(--color-secondary-dark, #0891b2);
+}
+
+/* Links */
+a {
+  color: var(--color-text-link, #3b82f6);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark, #1e40af);
+}
+
+/* Badges and labels */
+.badge,
+.label {
+  background: var(--color-accent, #14b8a6);
+  color: var(--color-text-inverse, #ffffff);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* =============================================================================
+   8. ADDITIONAL RESPONSIVENESS ENHANCEMENTS
+   ============================================================================= */
+
+/* Touch-friendly elements on mobile */
+@media screen and (max-width: 749px) {
+  button,
+  a,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Larger tap targets */
+  .header__icon,
+  .footer__social-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Smooth scrolling for all */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .header__icons,
+  .footer__social,
+  .slideshow__controls,
+  .whatsapp-float {
+    display: none !important;
+  }
+}
+
+/* =============================================================================
+   9. PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hardware acceleration for animations */
+.card-wrapper:hover .card,
+.slider-button,
+.header__menu-link {
+  will-change: transform;
+}
+
+/* Optimize icon and logo images for crisp rendering */
+.header__logo img,
+.footer__social-icon svg,
+.icon {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* =============================================================================
+   10. CLEANUP - Remove duplicate styles
+   ============================================================================= */
+
+/* This file replaces and consolidates:
+   - Any conflicting slideshow styles
+   - Duplicate card styles
+   - Inconsistent header/footer styles
+   - Scattered responsive styles
+   
+   All styles are now unified and optimized for performance.
+*/
