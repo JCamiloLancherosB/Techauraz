@@ -73,6 +73,66 @@
         "padding_bottom": 32
       }
     },
+    "category_navigation": {
+      "type": "category-navigation",
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "icon": "🎧",
+            "title": "Audífonos",
+            "product_count": "25",
+            "link": "shopify://collections/diademas-gamer-techaura"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "icon": "⌚",
+            "title": "Smart Watches",
+            "product_count": "18",
+            "link": "shopify://collections/productos-inteligentes-electronicos"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "icon": "💾",
+            "title": "Memorias USB",
+            "product_count": "30",
+            "link": "shopify://pages/usb-al-gusto-personalizada"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "icon": "📱",
+            "title": "Accesorios",
+            "product_count": "40",
+            "link": "shopify://collections/varios-productos-tecnologicos-techaura-utiles"
+          }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "icon": "💡",
+            "title": "Iluminación",
+            "product_count": "15",
+            "link": "shopify://collections/iluminacion"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4",
+        "category_5"
+      ],
+      "settings": {
+        "heading": "Explora por Categoría"
+      }
+    },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
@@ -218,6 +278,7 @@
   "order": [
     "slideshow_iqMhTA",
     "trust_badges_section",
+    "category_navigation",
     "featured_collection_9GzLFt",
     "benefits_conversion_home",
     "featured_collection_gY3DF9",
