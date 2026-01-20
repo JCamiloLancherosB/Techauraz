@@ -41,18 +41,18 @@ html {
      WHITE/BLUE MODERN TECH PREMIUM THEME
      ============================================ */
   
-  /* Primary Brand Colors - Blue gradients for modern tech look */
-  --color-primary: #3b82f6;        /* Blue-500 - Primary CTAs */
-  --color-primary-dark: #2563eb;   /* Blue-600 - Hover states */
-  --color-primary-darker: #1d4ed8; /* Blue-700 - Active states */
-  --color-primary-light: #60a5fa;  /* Blue-400 - Lighter accents */
+  /* Primary Brand Colors - Vibrant Blue gradients for modern tech look */
+  --color-primary: #2563eb;        /* Blue-600 - Primary CTAs - More vibrant */
+  --color-primary-dark: #1e40af;   /* Blue-700 - Hover states */
+  --color-primary-darker: #1e3a8a; /* Blue-800 - Active states */
+  --color-primary-light: #3b82f6;  /* Blue-500 - Lighter accents */
   
-  /* Secondary Colors - Cyan/Sky accents */
-  --color-secondary: #0ea5e9;      /* Sky-500 - Secondary CTAs */
-  --color-secondary-dark: #0284c7; /* Sky-600 - Hover */
-  --color-accent: #06b6d4;         /* Cyan-500 - Highlights */
-  --color-accent-dark: #0891b2;    /* Cyan-600 - Deeper accent */
-  --color-accent-light: #22d3ee;   /* Cyan-400 - Bright highlights */
+  /* Secondary Colors - Electric Cyan/Sky accents */
+  --color-secondary: #06b6d4;      /* Cyan-500 - Secondary CTAs - More electric */
+  --color-secondary-dark: #0891b2; /* Cyan-600 - Hover */
+  --color-accent: #14b8a6;         /* Teal-500 - Highlights - More modern */
+  --color-accent-dark: #0d9488;    /* Teal-600 - Deeper accent */
+  --color-accent-light: #2dd4bf;   /* Teal-400 - Bright highlights */
   
   /* Background Colors - Clean white theme */
   --color-bg-primary: #ffffff;           /* Pure white main background */
@@ -83,15 +83,15 @@ html {
   --color-border-hover: #3b82f6;          /* Blue-500 - Hover borders */
   --color-border-focus: #3b82f6;          /* Blue-500 - Focus borders */
   
-  /* Shadow System - Blue tinted shadows */
-  --shadow-primary: rgba(59, 130, 246, 0.25);      /* Blue shadow */
+  /* Shadow System - Modern blue tinted shadows with depth */
+  --shadow-primary: rgba(37, 99, 235, 0.3);        /* Vibrant blue shadow */
   --shadow-card: rgba(15, 23, 42, 0.08);           /* Subtle card shadow */
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --shadow-card-hover: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
-  --shadow-button: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+  --shadow-card-hover: 0 20px 30px -5px rgba(37, 99, 235, 0.2), 0 10px 15px -6px rgba(37, 99, 235, 0.15);
+  --shadow-button: 0 4px 14px 0 rgba(37, 99, 235, 0.4);
   
   /* ============================================
      TYPOGRAPHY SCALE
@@ -175,10 +175,11 @@ body {
   font-size: 1.6rem;
   line-height: 1.6;
   color: var(--color-text-secondary);
-  background: linear-gradient(180deg, var(--color-bg-gradient-start) 0%, var(--color-bg-primary) 50%, var(--color-bg-gradient-end) 100%);
+  background: linear-gradient(180deg, var(--color-bg-gradient-start) 0%, var(--color-bg-primary) 40%, var(--color-bg-gradient-end) 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
 }
 
 /* === ESSENTIAL UTILITIES === */
@@ -231,7 +232,7 @@ a {
 
 /* === IMAGES === */
 img {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -256,11 +257,12 @@ img {
 }
 
 .section-header__title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
   color: var(--color-text-primary);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 1rem;
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .section-header__subtitle {
@@ -749,12 +751,13 @@ h2.gradient-text {
   grid-template-areas: 'drawer heading icons';
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
+  gap: 1.5rem;
+  padding: 1.2rem 2rem;
   max-width: 100%;
   background-color: #020617;
   text-decoration: none;
-  --header-height: 60px;  
+  --header-height: 60px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (min-width: 990px) {
@@ -895,20 +898,23 @@ body {
 
 .header__menu-item {
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   color: rgba(241, 245, 249, 0.9);
-  transition: color 0.2s ease, background-color 0.2s ease;
-  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .header__menu-item:hover {
-  color: #fbbf24;
-  background-color: rgba(251, 191, 36, 0.1);
+  color: var(--color-primary-light);
+  background-color: rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
 }
 
 .header__active-menu-item {
-  color: #fbbf24;
+  color: var(--color-primary-light);
   font-weight: 600;
+  background-color: rgba(59, 130, 246, 0.15);
 }
 
 /* Submenu improvements */
@@ -924,8 +930,8 @@ body {
 }
 
 .header__submenu .header__menu-item:hover {
-  color: #fbbf24;
-  background-color: rgba(251, 191, 36, 0.1);
+  color: var(--color-primary-light);
+  background-color: rgba(59, 130, 246, 0.15);
 }
 
 /* =============================================================================
@@ -934,20 +940,21 @@ body {
 
 .header__icon {
   color: rgba(241, 245, 249, 0.9) !important;
-  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
   position: relative;
+  padding: 0.5rem;
 }
 
 .header__icon:hover {
-  color: #fbbf24 !important;
-  background-color: rgba(251, 191, 36, 0.1) !important;
-  transform: scale(1.05);
+  color: var(--color-primary-light) !important;
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  transform: scale(1.1);
 }
 
 .header__icon:focus-visible {
-  outline: 2px solid #fbbf24;
-  outline-offset: 2px;
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 3px;
 }
 
 /* Search icon specific */
@@ -979,7 +986,7 @@ body {
   stroke-width: 1.5;
 }
 
-/* Cart count bubble - highly visible */
+/* Cart count bubble - highly visible with tech blue */
 .cart-count-bubble {
   position: absolute;
   top: 4px;
@@ -990,14 +997,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0 6px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   border-radius: 999px;
   line-height: 1;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
-  border: 2px solid rgba(15, 23, 42, 0.98);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
 }
 
 .cart-count-bubble span {
@@ -1835,6 +1841,7 @@ body {
 
 .banner__box {
   text-align: center;
+  padding: 2rem 1.5rem;
 }
 
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
@@ -2192,11 +2199,12 @@ body {
 
 .banner__heading {
   margin-bottom: 0;
-  font-size: clamp(2.4rem, 5vw, 4.8rem) !important;
-  font-weight: 700 !important;
+  font-size: clamp(2.8rem, 5.5vw, 5.6rem) !important;
+  font-weight: 800 !important;
   color: #fef3c7 !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  line-height: 1.2 !important;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em;
 }
 
 .banner__box .banner__heading + * {
@@ -2299,7 +2307,7 @@ body {
   border-radius: 16px;
   border: 2px solid var(--color-border, #e2e8f0);
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
   display: flex;
   flex-direction: column;
@@ -2308,9 +2316,9 @@ body {
 }
 
 .card-wrapper:hover .card {
-  border-color: var(--color-primary, #3b82f6);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+  border-color: var(--color-primary-light, #3b82f6);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.2), 0 10px 15px -6px rgba(37, 99, 235, 0.15);
 }
 
 .card:not(.ratio) {
@@ -6247,14 +6255,14 @@ body.menu-drawer-open {
   border-radius: var(--ta-radius-lg);
   border: 1px solid var(--ta-border);
   overflow: hidden;
-  transition: transform var(--ta-transition), box-shadow var(--ta-transition), border-color var(--ta-transition);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
   will-change: transform;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--ta-shadow-card-hover);
-  border-color: var(--ta-border-hover);
+  border-color: var(--color-primary-light);
 }
 
 /* Card media - proper aspect ratio */
@@ -6272,11 +6280,12 @@ body.menu-drawer-open {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform var(--ta-transition-slow);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
 }
 
 .card:hover .card__media img {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: brightness(1.05);
 }
 
 /* Card content - compact padding */
@@ -6349,19 +6358,22 @@ body.menu-drawer-open {
 .quick-add__submit {
   width: 100%;
   padding: 0.75rem;
-  background: var(--ta-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: white;
   font-size: 0.875rem;
   font-weight: 600;
   border: none;
   border-radius: var(--ta-radius-sm);
   cursor: pointer;
-  transition: background-color var(--ta-transition-fast), transform var(--ta-transition-fast);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .quick-add__submit:hover {
-  background: var(--ta-primary-dark);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 /* Collection card variations */
@@ -7033,14 +7045,56 @@ body.menu-drawer-open {
 }
 
 /* =============================================================================
-   BENEFITS SECTION - Scannable Blocks
+   BENEFITS SECTION - Scannable Blocks with Modern Tech Styling
    ============================================================================= */
 
 .ta-conv-benefits {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ta-conv-benefits__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 16px;
+  border: 2px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.ta-conv-benefits__item:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-primary-light);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
+  background: white;
+}
+
+.ta-conv-benefits__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.ta-conv-benefits__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.ta-conv-benefits__description {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
 }
 
 .ta-conv-benefit {
@@ -8516,26 +8570,28 @@ body.menu-drawer-open {
   min-height: 44px !important;
 }
 
-/* Desktop button styles - consistent branding */
+/* Desktop button styles - modern tech branding */
 .button--primary,
 .button[type="submit"]:not(.quick-add__submit) {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-  color: #0f172a !important;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
+  color: white !important;
   border: none !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
   padding: 1.2rem 2.4rem !important;
-  min-height: 44px !important;
+  min-height: 48px !important;
+  border-radius: 10px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .button--primary:hover,
 .button[type="submit"]:not(.quick-add__submit):hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
-  transform: translateY(-2px) !important;
-  color: #0f172a !important;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%) !important;
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5) !important;
+  transform: translateY(-3px) !important;
+  color: white !important;
 }
 
 .button--primary:focus-visible,
@@ -8546,20 +8602,23 @@ body.menu-drawer-open {
 
 .button--secondary {
   background: transparent !important;
-  border: 2px solid rgba(148, 163, 184, 0.4) !important;
-  color: #e2e8f0 !important;
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
   font-weight: 600 !important;
   padding: 1.2rem 2.4rem !important;
-  min-height: 44px !important;
+  min-height: 48px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
+  border-radius: 10px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .button--secondary:hover {
-  background: rgba(148, 163, 184, 0.15) !important;
-  border-color: rgba(251, 191, 36, 0.6) !important;
-  color: #fbbf24 !important;
-  transform: translateY(-1px) !important;
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
 }
 
 .button--secondary:focus-visible {
@@ -9197,26 +9256,36 @@ button.icon-button:focus-visible {
   position: relative;
   z-index: 2;
   
-  /* Enhanced contrast with semi-transparent background */
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.95) 100%);
+  /* Modern tech blue gradient with strong visibility */
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   backdrop-filter: blur(4px);
-  border: 2px solid rgba(253, 230, 138, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   color: #ffffff !important;
+  padding: 1.4rem 3rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.45) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .banner__buttons .button:hover,
 .image-banner__buttons .button:hover,
 .hero__button:hover {
-  background: linear-gradient(135deg, rgba(253, 230, 138, 0.95) 0%, rgba(251, 191, 36, 0.95) 100%);
-  border-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff !important;
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 10px 35px rgba(37, 99, 235, 0.55) !important;
 }
 
 /* =============================================================================
    RESPONSIVE ADJUSTMENTS
    ============================================================================= */
 
-/* Mobile (<640px) */
+/* Mobile (<640px) - Touch-optimized sizing */
 @media screen and (max-width: 639px) {
   .button,
   .product-form__submit,
@@ -9224,8 +9293,9 @@ button.icon-button:focus-visible {
   .cart__submit,
   input[type="submit"] {
     font-size: 1.5rem;
-    padding: 1.2rem 2rem;
-    min-height: 48px;
+    padding: 1.3rem 2rem;
+    min-height: 52px;
+    border-radius: 10px;
   }
   
   /* Stack buttons vertically on mobile */
@@ -9238,6 +9308,18 @@ button.icon-button:focus-visible {
   .product-form__buttons .button,
   .banner__buttons .button {
     width: 100%;
+  }
+  
+  /* Mobile benefits grid */
+  .ta-conv-benefits {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  
+  /* Mobile card grid */
+  .product-grid {
+    gap: 1.25rem;
   }
 }
 
