@@ -285,6 +285,10 @@
 <link rel="preload" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'storefront-polish-refinements-2024.css' | asset_url }}"></noscript>
 
+<!-- Visual Refinements 2026 - Style cleanup & consistency (NEW) -->
+<link rel="preload" href="{{ 'visual-refinements-2026.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'visual-refinements-2026.css' | asset_url }}"></noscript>
+
 <!-- PDP Scroll Trigger Fixes - Ensures buttons and critical elements are always visible -->
 <link rel="preload" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'pdp-scroll-trigger-fixes.css' | asset_url }}"></noscript>
@@ -346,11 +350,11 @@
   9. visual-system-unified-2024.css
      - Rating visibility, dark theme palette, badge system
   
-  10. responsive-mobile-unified.css ✨ NEW (2024-01-15)
+  10. responsive-mobile-unified.css ✨ (2024-01-15 - Consolidated)
       - CONSOLIDATED mobile fixes (replaces 3 previous files):
-        • Replaces: storefront-visual-fixes-2024.css
-        • Replaces: mobile-view-fixes-2024.css
-        • Replaces: mobile-visual-fixes-jan-2024.css
+        • Replaces: storefront-visual-fixes-2024.css ❌ REMOVED 2026-01-20
+        • Replaces: mobile-view-fixes-2024.css ❌ REMOVED 2026-01-20
+        • Replaces: mobile-visual-fixes-jan-2024.css ❌ REMOVED 2026-01-20
       - Complete mobile fixes including:
         • Hero/slider - single slide display (no double images)
         • Product grid - strict 2-column layout with proper spacing
@@ -366,8 +370,24 @@
   11. storefront-polish-refinements-2024.css
       - Final polish for sales-ready experience
   
-  12. Component-specific CSS files loaded per section as needed
+  12. pdp-scroll-trigger-fixes.css
+      - Product page scroll trigger fixes
+  
+  13. Component-specific CSS files loaded per section as needed
       - component-*.css files loaded dynamically by sections
+  
+  ============================================================================
+  REMOVED FILES (2026-01-20 Cleanup):
+  ============================================================================
+  ❌ button-visibility-enhancements.css - Duplicate of global-button-styles.css
+  ❌ product-page-visual-fixes-2024.css - Not referenced, consolidated
+  ❌ product-conversion.css - Not referenced, consolidated
+  ❌ mobile-view-fixes-2024.css - Consolidated into responsive-mobile-unified.css
+  ❌ mobile-visual-fixes-jan-2024.css - Consolidated into responsive-mobile-unified.css
+  ❌ storefront-visual-fixes-2024.css - Consolidated into responsive-mobile-unified.css
+  
+  Total reduction: ~55KB CSS removed
+  See STYLE_NOTES.md for complete cleanup documentation
   
   ============================================================================
 -->
