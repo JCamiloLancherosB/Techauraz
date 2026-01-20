@@ -603,7 +603,9 @@ textarea:focus-visible {
   overflow: hidden;
 }
 
-/* Ripple effect - only activates on hover to reduce memory overhead */
+/* Ripple effect - only activates on hover to reduce memory overhead
+   Note: Fixed 300px size works for standard button sizes. For dynamic sizing,
+   consider using CSS custom properties: var(--ripple-size, 300px) */
 .button--primary:hover::before,
 .btn-primary:hover::before,
 .newsletter-form__button:hover::before {
@@ -621,7 +623,7 @@ textarea:focus-visible {
 
 @keyframes tech-ripple {
   to {
-    width: 300px;
+    width: 300px;  /* Consider var(--ripple-size, 300px) for responsive sizing */
     height: 300px;
     opacity: 0;
   }
@@ -651,13 +653,16 @@ textarea:focus-visible {
   opacity: 0.3;
 }
 
-/* Tech-style newsletter section - reduced performance impact */
+/* Tech-style newsletter section - reduced performance impact 
+   Performance Note: For optimal performance on mobile, consider using JavaScript
+   to add/remove animation class based on viewport intersection */
 .newsletter__wrapper {
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle pulsing glow - only on viewport intersection recommended */
+/* Subtle pulsing glow - background effect for visual enhancement 
+   Note: Large pseudo-element optimized with will-change and limited to newsletter only */
 .newsletter__wrapper::before {
   content: '';
   position: absolute;
@@ -669,6 +674,7 @@ textarea:focus-visible {
     rgba(59, 130, 246, 0.1) 0%, 
     transparent 70%);
   animation: tech-newsletter-pulse 4s ease-in-out infinite;
+  /* will-change for animation optimization - consider JS toggle on viewport intersection */
   will-change: transform, opacity;
 }
 
@@ -678,7 +684,8 @@ textarea:focus-visible {
 }
 
 /* Header tech enhancements - subtle gradient on scroll 
-   Note: Requires JavaScript to add .scrolled class on scroll event */
+   JavaScript Dependency: Requires theme.js or header.js to add .scrolled class
+   on window scroll event (typically: window.scrollY > 0) */
 .header.scrolled {
   background: linear-gradient(180deg, 
     var(--color-bg-primary, #ffffff) 0%, 
