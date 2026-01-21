@@ -198,10 +198,10 @@
       "settings": {
         "title": "<strong>Productos destacados</strong>",
         "heading_size": "h2",
-        "description": "<h4>¡Descubre una gama única de audífonos inalámbricos y con cable diseñados para elevar tu experiencia sonora en cada momento de tu día!</h4>",
+        "description": "<h4>¡Descubre una gama única de productos inalámbricos y con cable diseñados para elevar tu experiencia sonora en cada momento de tu día!</h4>",
         "show_description": false,
         "description_style": "body",
-        "collection": "diademas-gamer-techaura",
+        "collection": "carga-energia-techaura",
         "products_to_show": 13,
         "columns_desktop": 5,
         "full_width": true,
@@ -275,7 +275,7 @@
         "description": "<h4>Este conjunto de productos representa soluciones tecnológicas innovadoras y prácticas diseñadas para mejorar la calidad de vida y optimizar las experiencias cotidianas. Incluye dispositivos inteligentes y herramientas de alto rendimiento que combinan funcionalidad avanzada con diseño moderno.</h4>",
         "show_description": false,
         "description_style": "body",
-        "collection": "varios-productos-tecnologicos-techaura-utiles",
+        "collection": "conectividad-hubs-y-adaptadores-techaura",
         "products_to_show": 25,
         "columns_desktop": 5,
         "full_width": true,
@@ -298,12 +298,68 @@
     "featured_collection_wXX7kY": {
       "type": "featured-collection",
       "settings": {
-        "title": "Relojes inteligentes para diferentes estilos",
+        "title": "Accesorios escritorio y portátil",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "productos-inteligentes-electronicos",
+        "collection": "escritorio-minimal-techaura",
+        "products_to_show": 25,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_zcQFem": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Setup TV Y Conectividad",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "setup-tv-consolas-techaura",
+        "products_to_show": 25,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_8ibGYN": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Power Bank con tapa transparente",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "edicion-transparente-techaura",
         "products_to_show": 25,
         "columns_desktop": 5,
         "full_width": true,
@@ -364,6 +420,8 @@
         "heading_size": "h1",
         "color_scheme": "background-1",
         "show_view_all": false,
+        "view_all_link": "",
+        "view_all_text": "Ver más reseñas",
         "padding_top": 60,
         "padding_bottom": 60
       }
@@ -385,7 +443,8 @@
           }
         },
         "email_form": {
-          "type": "email_form"
+          "type": "email_form",
+          "settings": {}
         }
       },
       "block_order": [
@@ -410,6 +469,8 @@
     "benefits_conversion_home",
     "featured_collection_gY3DF9",
     "featured_collection_wXX7kY",
+    "featured_collection_zcQFem",
+    "featured_collection_8ibGYN",
     "testimonials_home",
     "newsletter_home"
   ]
