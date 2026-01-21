@@ -67,7 +67,7 @@
   overflow: hidden;
   min-height: 180px;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
-  will-change: transform;
+  animation: fadeInUp 0.5s ease-out backwards;
 }
 
 .category-card::before {
@@ -86,6 +86,7 @@
 
 .category-card:hover,
 .category-card:focus-visible {
+  will-change: transform;
   transform: translate3d(0, -8px, 0) scale(1.02);
   border-color: var(--color-primary);
   box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
@@ -168,10 +169,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.category-card {
-  animation: fadeInUp 0.5s ease-out backwards;
 }
 
 .category-card:nth-child(1) { animation-delay: 0.05s; }
