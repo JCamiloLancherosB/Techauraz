@@ -2549,18 +2549,18 @@ body {
 
 .card__information {
   padding: 1.2rem 1.4rem;
-  min-height: 150px; /* Balanced height for consistent card appearance */
+  min-height: 160px; /* Consistent height for uniform cards */
   display: flex;
   flex-direction: column;
   gap: 0.6rem; /* Reduced spacing for less clutter */
-  justify-content: flex-start;
+  justify-content: space-between; /* Space between to push price to bottom */
   flex-grow: 1; /* Allow content to grow */
 }
 
 @media screen and (min-width: 750px) {
   .card__information {
     padding: 1.5rem 1.8rem;
-    min-height: 165px; /* Balanced height on desktop */
+    min-height: 175px; /* Consistent height on desktop for uniform appearance */
     gap: 0.9rem; /* Improved spacing for readability */
   }
 }
@@ -12141,8 +12141,8 @@ textarea:focus-visible,
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
-  padding: 1rem 0;
+  margin-top: 2rem; /* Increased slightly for better visual separation while keeping reasonably close */
+  padding: 0.5rem 0; /* Reduced padding for tighter layout */
 }
 
 .pagination {
@@ -12682,4 +12682,137 @@ select:focus {
 
 /* =============================================================================
    END OF MODERN TECH ENHANCEMENTS
+   ============================================================================= */
+
+/* =============================================================================
+   PRODUCT GRID LAYOUT IMPROVEMENTS
+   Ensures consistent grid behavior: 2 cols mobile, 3 cols tablet, 4-5 cols desktop
+   
+   Note: Using .grid.product-grid selector for higher specificity because:
+   - ui-ux-responsive-fixes.css (loaded after base.css) sets .grid gap to 2rem
+   - We need tighter gaps for product grids without modifying ui-ux-responsive-fixes.css
+   - This maintains the single CSS file modification constraint
+   ============================================================================= */
+
+/* Base grid styles - tighter gaps for better space usage */
+.grid.product-grid,
+.product-grid {
+  display: grid;
+  gap: 1.6rem; /* Reduced from 2rem for tighter layout */
+  width: 100%;
+}
+
+/* Mobile: 2 columns (default on most devices) */
+.grid--2-col-tablet-down {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--1-col-tablet-down {
+  grid-template-columns: 1fr;
+}
+
+/* Very small mobile: 1 column (optional, for tiny screens) */
+@media screen and (max-width: 420px) {
+  .grid--2-col-tablet-down {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  
+  .grid.product-grid,
+  .product-grid {
+    gap: 1.2rem;
+  }
+}
+
+/* Tablet: 3 columns */
+@media screen and (min-width: 750px) {
+  .grid--2-col-tablet-down,
+  .grid--1-col-tablet-down {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid.product-grid,
+  .product-grid {
+    gap: 1.8rem;
+  }
+}
+
+/* Desktop: 4 or 5 columns based on setting */
+@media screen and (min-width: 990px) {
+  .grid--1-col-desktop {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid--2-col-desktop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3-col-desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4-col-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid--5-col-desktop {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .grid.product-grid,
+  .product-grid {
+    gap: 2rem; /* Standard gap on desktop */
+  }
+}
+
+/* Large desktop: maintain columns but with slightly larger gaps */
+@media screen and (min-width: 1280px) {
+  .grid.product-grid,
+  .product-grid {
+    gap: 2.2rem;
+  }
+}
+
+/* Prevent horizontal overflow on all screen sizes */
+.collection,
+.product-grid-container,
+.grid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.grid__item {
+  min-width: 0; /* Prevent grid blowout */
+}
+
+/* Price positioning - ensure it stays at bottom of card */
+.card-information {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-information .price {
+  margin-top: auto; /* Push price to bottom */
+}
+
+/* Ensure consistent card heights within grid */
+.card-wrapper {
+  height: 100%;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* =============================================================================
+   END OF PRODUCT GRID LAYOUT IMPROVEMENTS
    ============================================================================= */
