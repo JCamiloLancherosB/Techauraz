@@ -32,6 +32,7 @@
     font-weight: 700;
     text-align: center;
     margin-bottom: 1rem;
+    color: #0ea5e9; /* Fallback color for unsupported browsers */
     background: linear-gradient(135deg, #0ea5e9, #22c55e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -84,7 +85,7 @@
     -%}
 
     <ul
-      class="product-grid grid grid--2-col-mobile grid--3-col-tablet grid--{{ section.settings.columns_desktop }}-col-desktop"
+      class="product-grid grid grid--2-col-mobile grid--{{ section.settings.columns_desktop }}-col-desktop"
       role="list"
     >
       {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
