@@ -1871,11 +1871,18 @@ body {
 .banner {
   display: flex;
   position: relative;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-direction: column;
   z-index: auto;
   isolation: isolate;
   min-height: 50rem;
+}
+
+/* Desktop layout for 2 images side by side */
+@media screen and (min-width: 750px) {
+  .banner:not(.banner--stacked) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
 }
 
 .banner__box {
@@ -2086,7 +2093,7 @@ body {
 }
 
 .banner__content {
-  padding: 2.5rem 1.5rem; /* Improved mobile padding */
+  padding: 2.5rem 1.5rem;
   display: flex;
   position: absolute;
   width: 100%;
@@ -2096,8 +2103,12 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  /* Background for mobile - will be overridden on desktop for slideshow */
   background-color: transparent;
+  pointer-events: none; /* Allow clicking through to images */
+}
+
+.banner__content > * {
+  pointer-events: auto; /* Re-enable pointer events for content */
 }
 
 /* Neutralize background on desktop for slideshow to show media through */
@@ -2178,6 +2189,17 @@ body {
   width: 100%;
   word-wrap: break-word;
   z-index: 1;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 749px) {
+  .banner__box {
+    padding: 2rem 1.5rem;
+    background: rgba(15, 23, 42, 0.85);
+  }
 }
 
 /* Improved banner text visibility */
@@ -2336,10 +2358,6 @@ body {
   .banner .slideshow__controls {
     bottom: 1rem !important; /* Override component positioning */
     padding: 6px 12px !important; /* Override component padding */
-  }
-
-  .banner__box {
-    padding: 1.5rem !important; /* Override framework padding */
   }
 }
 
