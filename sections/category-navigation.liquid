@@ -86,8 +86,7 @@
 
 .category-card:hover,
 .category-card:focus-visible {
-  will-change: transform;
-  transform: translate3d(0, -8px, 0) scale(1.02);
+  transform: translate3d(0, -8px, 0);
   border-color: var(--color-primary);
   box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
 }
@@ -177,6 +176,23 @@
 .category-card:nth-child(4) { animation-delay: 0.2s; }
 .category-card:nth-child(5) { animation-delay: 0.25s; }
 .category-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .category-card {
+    animation: none;
+  }
+  
+  .category-card:hover,
+  .category-card:focus-visible {
+    transform: none;
+  }
+  
+  .category-card:hover .category-icon,
+  .category-card:focus-visible .category-icon {
+    transform: none;
+  }
+}
 </style>
 
 <div class="category-nav-section">
