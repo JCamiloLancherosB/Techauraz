@@ -9,12 +9,13 @@
 (function() {
   'use strict';
 
-  /* =============================================================================
-     MOBILE HEADER HIDE/SHOW ON SCROLL
-     ============================================================================= */
+  // Query header element once and reuse
   const header = document.querySelector('.section-header, .header-wrapper');
   if (!header) return;
   
+  /* =============================================================================
+     MOBILE HEADER HIDE/SHOW ON SCROLL
+     ============================================================================= */
   function isMobileLike() {
     return window.matchMedia('(max-width: 989.98px)').matches;
   }
@@ -80,10 +81,9 @@
 
   /* =============================================================================
      STICKY HEADER SHRINK ON SCROLL
+     =============================================================================
+     Uses the same header element from above
      ============================================================================= */
-  const headerWrapper = document.querySelector('.header-wrapper, .section-header');
-  if (!headerWrapper) return;
-  
   let lastScrollY = 0;
   let scrollTicking = false;
   
@@ -92,9 +92,9 @@
     
     // Add 'scrolled' class when scrolled down more than 50px
     if (scrollY > 50) {
-      headerWrapper.classList.add('scrolled');
+      header.classList.add('scrolled');
     } else {
-      headerWrapper.classList.remove('scrolled');
+      header.classList.remove('scrolled');
     }
     
     lastScrollY = scrollY;
