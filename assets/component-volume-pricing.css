@@ -1,0 +1,59 @@
+/* ============================================================
+   COMPONENT: Volume Pricing
+   Bulk purchase discount indicators
+   ============================================================ */
+
+.card__information-volume-pricing-note {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+  border-radius: 4px;
+}
+
+.card__information-volume-pricing-note .caption {
+  font-size: 1.1rem;
+  color: #3b82f6;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Desktop styling */
+@media screen and (min-width: 990px) {
+  .card__information-volume-pricing-note {
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .card__information-volume-pricing-note .caption {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 749px) {
+  .card__information-volume-pricing-note {
+    padding: 0.3rem 0.5rem;
+  }
+  
+  .card__information-volume-pricing-note .caption {
+    font-size: 1rem;
+  }
+}
+
+/* Volume pricing badge */
+.volume-pricing--sale-badge {
+  position: relative;
+}
+
+/* Visual indicator for volume pricing - using SVG data URI for accessibility */
+.volume-pricing--sale-badge::after {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2310b981"><path d="M12 2L2 7v10c0 5.5 3.8 10.7 10 12 6.2-1.3 10-6.5 10-12V7l-10-5zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}

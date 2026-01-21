@@ -1,0 +1,95 @@
+/* ============================================================
+   COMPONENT: Rating System
+   Product star ratings and review counts
+   ============================================================ */
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.rating {
+  --rating: 0;
+  --rating-max: 5;
+  --rating-decimal: 0;
+  --star-size: 1.4rem;
+  --star-color: #fbbf24;
+  --star-background: #e5e7eb;
+  
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--star-size);
+  line-height: 1;
+}
+
+.rating-star {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--star-color) calc(var(--rating) / var(--rating-max) * 100%),
+    var(--star-background) calc(var(--rating) / var(--rating-max) * 100%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rating-star::before {
+  content: '★★★★★';
+  letter-spacing: 0.1em;
+}
+
+.rating-text {
+  font-size: 1.2rem;
+  color: #64748b;
+  font-weight: 600;
+  margin: 0;
+}
+
+.rating-count {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 749px) {
+  .rating {
+    --star-size: 1.2rem;
+  }
+  
+  .rating-text {
+    font-size: 1.1rem;
+  }
+  
+  .rating-count {
+    font-size: 1rem;
+  }
+  
+  .rating-wrapper {
+    gap: 0.4rem;
+  }
+}
+
+/* Desktop enhancements */
+@media screen and (min-width: 990px) {
+  .rating {
+    --star-size: 1.5rem;
+  }
+  
+  .rating-wrapper {
+    gap: 0.7rem;
+  }
+}
+
+/* Shopify product reviews badge integration */
+.card-product-rating {
+  margin: 0.5rem 0;
+}
+
+.shopify-product-reviews-badge {
+  display: inline-flex;
+  align-items: center;
+}

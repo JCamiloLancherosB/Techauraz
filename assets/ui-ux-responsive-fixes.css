@@ -108,10 +108,67 @@ slideshow-component .slider::-webkit-scrollbar {
 /* Slider button styles are defined in base.css - no override needed here */
 
 /* =============================================================================
-   3. RESPONSIVE DESIGN IMPROVEMENTS
+   3. RESPONSIVE DESIGN IMPROVEMENTS - Target breakpoints: 360px, 768px, 1280px
    ============================================================================= */
 
-/* Mobile responsiveness - ensure no horizontal scroll */
+/* Extra Small Mobile (360px+) - Minimum supported width */
+@media screen and (min-width: 360px) and (max-width: 749px) {
+  body,
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Prevent cards from causing overflow */
+  .grid,
+  .product-grid,
+  .collection {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Mobile-friendly padding */
+  .page-width {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  
+  /* Product grid - 1 column on small mobile */
+  .page-width .grid--5-col-desktop,
+  .collection .grid--5-col-desktop {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Card styling for mobile */
+  .card-wrapper.product-card-wrapper {
+    border-radius: 10px;
+  }
+  
+  .card__heading .full-unstyled-link {
+    font-size: 1.3rem;
+    line-height: 1.3;
+  }
+  
+  /* Pricing on mobile */
+  .price .price-item--regular {
+    font-size: 1.7rem;
+  }
+  
+  /* Quick-add button sizing for mobile */
+  .quick-add__submit {
+    min-height: 44px;
+    font-size: 1.3rem;
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* Mobile responsiveness - general (up to 749px) */
 @media screen and (max-width: 749px) {
   body,
   html {
@@ -139,14 +196,14 @@ slideshow-component .slider::-webkit-scrollbar {
   }
 }
 
-/* Tablet responsiveness */
+/* Tablet responsiveness (768px+) - Target 768px specifically */
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .page-width {
     padding-left: 2rem;
     padding-right: 2rem;
   }
   
-  /* Adjust grid columns for tablet */
+  /* Adjust grid columns for tablet - 3 columns */
   .grid--2-col-tablet {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -154,15 +211,84 @@ slideshow-component .slider::-webkit-scrollbar {
   .grid--3-col-tablet {
     grid-template-columns: repeat(3, 1fr);
   }
+  
+  /* Featured collection on tablet - 3 columns */
+  .grid--5-col-desktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+  }
+  
+  /* Card heading sizing for tablet */
+  .card__heading .full-unstyled-link {
+    font-size: 1.4rem;
+  }
+  
+  /* Pricing on tablet */
+  .price .price-item--regular {
+    font-size: 1.8rem;
+  }
+  
+  /* Quick-add button for tablet */
+  .quick-add__submit {
+    font-size: 1.35rem;
+    padding: 0.95rem 1.3rem;
+  }
 }
 
-/* Desktop responsiveness */
-@media screen and (min-width: 990px) {
+/* Desktop responsiveness (990px-1279px) */
+@media screen and (min-width: 990px) and (max-width: 1279px) {
+  .page-width {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  
+  /* Featured collection - 4 columns on smaller desktop */
+  .grid--5-col-desktop {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Large Desktop (1280px+) - Target 1280px specifically */
+@media screen and (min-width: 1280px) {
   .page-width {
     max-width: 1400px;
     margin: 0 auto;
     padding-left: 3rem;
     padding-right: 3rem;
+  }
+  
+  /* Featured collection - full 5 columns on large desktop */
+  .grid--5-col-desktop {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+  
+  /* Enhanced card styling for large screens */
+  .card__heading .full-unstyled-link {
+    font-size: 1.6rem;
+  }
+  
+  .price .price-item--regular {
+    font-size: 2.1rem;
+  }
+  
+  .quick-add__submit {
+    font-size: 1.5rem;
+    padding: 1.1rem 1.6rem;
+  }
+}
+
+/* Ultra-wide (1920px+) */
+@media screen and (min-width: 1920px) {
+  .page-width {
+    max-width: 1600px;
+  }
+  
+  .grid--5-col-desktop {
+    gap: 2.4rem;
   }
 }
 
