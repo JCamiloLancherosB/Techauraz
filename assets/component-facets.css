@@ -6,7 +6,7 @@
 /* === CSS CUSTOM PROPERTIES === */
 :root {
   --facets-primary-color: var(--color-primary, #2563eb);
-  --facets-icon-size: 1.2rem;
+  --facets-icon-size: 1.6rem;
   --collection-description-max-width: 75rem; /* ~750px - prevents pushing layout */
 }
 

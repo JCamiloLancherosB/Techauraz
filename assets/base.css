@@ -251,18 +251,53 @@ img {
 /* Global icon sizing to prevent inheritance of large dimensions */
 .icon,
 svg.icon {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.6rem !important;
+  height: 1.6rem !important;
   flex: 0 0 auto;
   display: inline-block;
   vertical-align: middle;
+  max-width: 1.6rem;
+  max-height: 1.6rem;
 }
 
 /* Specific icon-caret normalization with !important to override any problematic inheritance */
 .icon-caret,
 svg.icon-caret {
-  width: 1.4rem !important;
-  height: 1.4rem !important;
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  max-width: 1.6rem !important;
+  max-height: 1.6rem !important;
+}
+
+/* Ensure icon-arrow has consistent sizing */
+.icon-arrow,
+svg.icon-arrow {
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  max-width: 1.6rem !important;
+  max-height: 1.6rem !important;
+}
+
+/* Isolate SVGs within .media containers to prevent them from inheriting giant dimensions */
+/* Note: .media containers can be large, so we force icon sizing even in those contexts */
+.media > svg:not(.placeholder-svg),
+.media svg.icon {
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  max-width: 1.6rem !important;
+  max-height: 1.6rem !important;
+  object-fit: contain;
+}
+
+/* Ensure icons in disclosure controls (country selector, etc.) are properly sized */
+.disclosure__button .icon,
+.disclosure__button svg.icon,
+.localization-form__select .icon,
+.localization-form__select svg.icon {
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  max-width: 1.6rem !important;
+  max-height: 1.6rem !important;
 }
 
 
