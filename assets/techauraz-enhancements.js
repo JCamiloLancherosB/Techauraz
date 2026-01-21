@@ -131,7 +131,7 @@ if (!customElements.get('slider-component')) {
     }
 
     update() {
-      if (!this.slider) return;
+      if (!this.slider || !this.sliderItemOffset) return;
       const currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset);
       
       this.sliderControlButtons.forEach((button, index) => {
