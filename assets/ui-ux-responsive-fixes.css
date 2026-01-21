@@ -1094,3 +1094,34 @@ textarea:focus-visible {
     margin-bottom: 1.5rem;
   }
 }
+
+/* =============================================================================
+   13. FACET/FILTER ICON SIZE FIX - Fix oversized chevron icons
+   ============================================================================= */
+
+/* Fix oversized icon-caret in filter dropdowns and facets */
+.facets__summary .icon-caret,
+.facets__summary-label + .icon-caret,
+.facets details summary .icon-caret,
+.select .icon-caret,
+details.facets__disclosure summary .icon-caret {
+  width: 1.4rem !important;
+  height: 1.4rem !important;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Ensure consistent icon sizing in all facet contexts */
+.facets-container .icon,
+.facets-wrapper .icon {
+  max-width: 2rem;
+  max-height: 2rem;
+}
+
+/* Specific fix for icon-filter in facet controls */
+.facets__heading .icon-filter,
+.mobile-facets__wrapper .icon-filter {
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+}
