@@ -75,29 +75,33 @@
               assign quantity_rule_soldout = true
             endif
           -%}
-          <button
-  id="ProductSubmitButton-{{ section_id }}"
-  type="submit"
-  name="add"
-  class="product-form__submit button button--full-width button--primary"
-  {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
-    disabled
-  {% endif %}
->
-  <span>
-    {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-      {{ 'products.product.sold_out' | t }}
-    {%- else -%}
-      Agregar al carrito
-    {%- endif -%}
-  </span>
-  {%- render 'loading-spinner' -%}
-</button>
-
-
+          
+          {%- comment -%} PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout) {%- endcomment -%}
           {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
+            <div class="product-form__cta-primary">
+              {{ form | payment_button }}
+            </div>
           {%- endif -%}
+          
+          {%- comment -%} SECONDARY CTA: AGREGAR AL CARRITO {%- endcomment -%}
+          <button
+            id="ProductSubmitButton-{{ section_id }}"
+            type="submit"
+            name="add"
+            class="product-form__submit button button--full-width button--secondary"
+            {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+              disabled
+            {% endif %}
+          >
+            <span>
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                Agregar al carrito
+              {%- endif -%}
+            </span>
+            {%- render 'loading-spinner' -%}
+          </button>
         </div>
       {%- endform -%}
     </product-form>
