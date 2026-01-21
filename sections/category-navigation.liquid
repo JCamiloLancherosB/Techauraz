@@ -67,6 +67,7 @@
   overflow: hidden;
   min-height: 180px;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  will-change: transform;
 }
 
 .category-card::before {
@@ -85,11 +86,9 @@
 
 .category-card:hover,
 .category-card:focus-visible {
-  transform: translateY(-8px) scale(1.02);
+  transform: translate3d(0, -8px, 0) scale(1.02);
   border-color: var(--color-primary);
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15), 
-              0 10px 20px rgba(37, 99, 235, 0.1),
-              0 0 0 1px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
 }
 
 .category-icon {
