@@ -86,8 +86,8 @@
             </p>
             {% if section.settings.whatsapp_phone != blank %}
               {% assign phone = section.settings.whatsapp_phone %}
-              {% assign message = section.settings.whatsapp_message | default: "Hola! Necesito ayuda con un producto" %}
-              {% assign whatsapp_url = "https://wa.me/" | append: phone | append: "?text=" | append: message | url_encode %}
+              {% assign message = section.settings.whatsapp_message | default: "Hola! Necesito ayuda con un producto" | url_encode %}
+              {% assign whatsapp_url = "https://wa.me/" | append: phone | append: "?text=" | append: message %}
               <a href="{{ whatsapp_url }}" 
                  class="product-usage-warranty__whatsapp-button" 
                  target="_blank" 
