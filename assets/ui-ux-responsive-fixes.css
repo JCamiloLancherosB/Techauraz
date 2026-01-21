@@ -754,3 +754,217 @@ textarea:focus-visible {
    
    All styles are now unified and optimized for performance.
 */
+
+/* =============================================================================
+   12. HERO + TRUST BADGES - Modern store look
+   ============================================================================= */
+
+/* Hero banner buttons - 2 CTAs layout */
+.banner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Responsive button layout for mobile */
+@media screen and (max-width: 749px) {
+  .banner__buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .banner__buttons .button {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Desktop: side by side buttons */
+@media screen and (min-width: 750px) {
+  .banner__buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .banner__buttons .button {
+    min-width: 180px;
+  }
+}
+
+/* Ensure proper image cropping - no stretching */
+.slideshow__media img,
+.banner__media img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Trust badges section - modern card style */
+.ta-conv-trust-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+  border-radius: 16px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.ta-conv-trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ta-conv-trust-badge:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.ta-conv-trust-badge__icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.ta-conv-trust-badge__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.ta-conv-trust-badge__text {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Responsive: Trust badges */
+@media screen and (max-width: 1024px) {
+  .ta-conv-trust-section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .ta-conv-trust-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .ta-conv-trust-badge {
+    padding: 1.25rem 1rem;
+  }
+  
+  .ta-conv-trust-badge__icon {
+    font-size: 2rem;
+  }
+}
+
+/* Benefits section - ensure proper responsive grid */
+.ta-conv-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ta-conv-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: white;
+  border-radius: 16px;
+  border: 2px solid rgba(148, 163, 184, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ta-conv-benefit:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+}
+
+.ta-conv-benefit__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.ta-conv-benefit__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.ta-conv-benefit__description {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive: Benefits section */
+@media screen and (max-width: 768px) {
+  .ta-conv-benefits {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  
+  .ta-conv-benefit {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+/* Section spacing improvements */
+.ta-conv-section-spacing {
+  padding: 3rem 1.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .ta-conv-section-spacing {
+    padding: 2rem 1rem;
+  }
+}
+
+.ta-conv-section-heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .ta-conv-section-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
