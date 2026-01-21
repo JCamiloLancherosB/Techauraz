@@ -9772,6 +9772,10 @@ details[open].menu-opening > .menu-drawer__submenu {
   border-bottom: 1px solid rgba(148, 163, 184, 0.08);
   transition: all 0.2s ease;
   position: relative;
+  /* Android touch optimization */
+  -webkit-tap-highlight-color: rgba(251, 191, 36, 0.2);
+  touch-action: manipulation;
+  cursor: pointer;
 }
 
 .no-js .menu-drawer__menu-item {
