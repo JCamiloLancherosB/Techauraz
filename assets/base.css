@@ -12141,7 +12141,7 @@ textarea:focus-visible,
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem; /* Reduced from excessive spacing to bring pagination closer to grid */
+  margin-top: 2rem; /* Increased slightly for better visual separation while keeping reasonably close */
   padding: 0.5rem 0; /* Reduced padding for tighter layout */
 }
 
@@ -12687,10 +12687,14 @@ select:focus {
 /* =============================================================================
    PRODUCT GRID LAYOUT IMPROVEMENTS
    Ensures consistent grid behavior: 2 cols mobile, 3 cols tablet, 4-5 cols desktop
+   
+   Note: Using .grid.product-grid selector for higher specificity because:
+   - ui-ux-responsive-fixes.css (loaded after base.css) sets .grid gap to 2rem
+   - We need tighter gaps for product grids without modifying ui-ux-responsive-fixes.css
+   - This maintains the single CSS file modification constraint
    ============================================================================= */
 
 /* Base grid styles - tighter gaps for better space usage */
-/* Using .grid.product-grid for higher specificity to override ui-ux-responsive-fixes.css */
 .grid.product-grid,
 .product-grid {
   display: grid;
