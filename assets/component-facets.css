@@ -219,9 +219,9 @@ details.facets__disclosure summary .icon-caret {
 
 /* === COLLECTION BANNER DESCRIPTION === */
 
-/* Limit description width and spacing */
+/* Limit description width and spacing to prevent layout push */
 .collection-hero__description {
-  max-width: 75rem;
+  max-width: 75rem; /* ~750px */
   margin-top: 1.2rem;
   margin-bottom: 0;
   font-size: 1.5rem;
@@ -229,8 +229,21 @@ details.facets__disclosure summary .icon-caret {
   color: rgba(0, 0, 0, 0.7);
 }
 
+/* Override .rte default spacing for collection descriptions */
 .collection-hero__description.rte > * + * {
-  margin-top: 1rem;
+  margin-top: 1rem; /* Tighter spacing between paragraphs */
+}
+
+/* Ensure collection hero doesn't take too much vertical space */
+.collection-hero__inner {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Text wrapper: Control width */
+.collection-hero__text-wrapper {
+  max-width: 100%;
+  margin-bottom: 0;
 }
 
 /* === MOBILE/DRAWER LAYOUT === */
