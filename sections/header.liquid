@@ -92,7 +92,7 @@
   }
 
   .section-header {
-    position: sticky;
+    position: sticky; /* Safari z-index fix - maintains proper stacking context */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.5 | round: 0 }}px;
   }
 

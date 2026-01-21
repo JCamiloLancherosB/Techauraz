@@ -465,11 +465,52 @@ select:focus {
 }
 
 /* Floating elements z-index hierarchy - UPDATED */
+/* Announcement bar */
 .announcement-bar__container,
 .announcement-bar__container--sticky {
   z-index: 99 !important;
 }
 
+/* Announcement bar styles - compact design */
+.announcement-bar__container {
+  background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+  color: #fff;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  position: relative;
+}
+
+.announcement-bar__container--sticky {
+  position: sticky;
+  top: 0;
+}
+
+.announcement-bar__message {
+  margin: 0;
+  padding: 0;
+}
+
+.announcement-bar__message a {
+  color: #60a5fa;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.announcement-bar__message a:hover {
+  color: #93c5fd;
+}
+
+@media screen and (max-width: 749px) {
+  .announcement-bar__container {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Header */
 .header-wrapper,
 .section-header {
   z-index: 100 !important;
