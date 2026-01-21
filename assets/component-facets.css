@@ -1,0 +1,391 @@
+/* =============================================================================
+   COMPONENT: Facets (Filters and Sorting)
+   Purpose: Compact, aligned, and responsive filter UI/UX for collection pages
+   ============================================================================= */
+
+/* === HORIZONTAL LAYOUT IMPROVEMENTS === */
+
+/* Container: Compact and well-aligned */
+.facets-container {
+  margin-bottom: 2rem;
+}
+
+/* Horizontal form: Flexbox layout for "Filtrar" and "Ordenar por" alignment */
+.facets__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Facets wrapper: Filters section */
+.facets__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Filtrar heading: Compact and aligned */
+.facets__heading {
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Individual filter disclosure: Compact */
+.facets__disclosure {
+  margin: 0;
+  position: relative;
+}
+
+/* Filter summary: Aligned with icon */
+.facets__summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.4rem;
+  background: #fff;
+  transition: all 0.2s ease;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.facets__summary:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.facets__summary-label {
+  white-space: nowrap;
+}
+
+/* Icon-caret in facets: Consistent sizing */
+.facets__summary .icon-caret,
+.facets details summary .icon-caret,
+details.facets__disclosure summary .icon-caret {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.facets__disclosure[open] .icon-caret {
+  transform: rotate(180deg);
+}
+
+/* Filter display (dropdown): Prevent layout shift */
+.facets__display {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 20rem;
+  max-width: 30rem;
+  max-height: 40rem;
+  overflow-y: auto;
+}
+
+/* === SORTING SECTION === */
+
+/* Sorting container: Aligned with filters */
+.facet-filters.sorting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.facet-filters__field {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.facet-filters__label {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.facet-filters__label label {
+  margin: 0;
+}
+
+/* Select dropdown: Compact and consistent */
+.select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.select__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.8rem 3rem 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  line-height: 1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.4rem;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 16rem;
+}
+
+.select__select:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.select__select:focus {
+  outline: 2px solid var(--color-primary, #2563eb);
+  outline-offset: 2px;
+  border-color: var(--color-primary, #2563eb);
+}
+
+/* Icon-caret in select: Positioned correctly */
+.select .icon-caret {
+  position: absolute;
+  right: 1rem;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* === PRODUCT COUNT === */
+
+.product-count {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: 2rem;
+}
+
+.product-count__text {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* === ACTIVE FACETS (PILLS) === */
+
+.active-facets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.active-facets-desktop {
+  margin-top: 1.5rem;
+}
+
+.active-facets__button {
+  text-decoration: none;
+}
+
+.active-facets__button-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 1.3rem;
+  line-height: 1;
+  border-radius: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+/* === COLLECTION BANNER DESCRIPTION === */
+
+/* Limit description width and spacing */
+.collection-hero__description {
+  max-width: 75rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.collection-hero__description.rte > * + * {
+  margin-top: 1rem;
+}
+
+/* === MOBILE/DRAWER LAYOUT === */
+
+@media screen and (max-width: 749px) {
+  /* Mobile: Drawer takes full screen */
+  .mobile-facets__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
+  
+  .mobile-facets {
+    height: 100%;
+    overflow-y: auto;
+    padding: 2rem;
+  }
+  
+  /* Collection description: More compact on mobile */
+  .collection-hero__description {
+    max-width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-top: 1rem;
+  }
+}
+
+/* === TABLET LAYOUT === */
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .facets__form {
+    gap: 1.5rem;
+  }
+  
+  .facets__wrapper {
+    gap: 1.2rem;
+  }
+  
+  .product-count {
+    margin-left: 1.5rem;
+  }
+}
+
+/* === DESKTOP LAYOUT === */
+
+@media screen and (min-width: 990px) {
+  /* Horizontal layout: Ensure proper alignment */
+  .facets__form {
+    align-items: center;
+  }
+  
+  .facets__wrapper {
+    gap: 2rem;
+  }
+  
+  /* Sorting stays on the right */
+  .facet-filters.sorting {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+}
+
+/* === VERTICAL FILTER TYPE === */
+
+/* Vertical layout (sidebar): Different structure */
+.facets__form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.facets__disclosure-vertical {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.facets__disclosure-vertical summary {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.facets__display-vertical {
+  position: static;
+  margin-top: 1rem;
+  border: none;
+  box-shadow: none;
+  max-height: none;
+  padding: 0;
+}
+
+.facets__heading--vertical {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+/* === ACCESSIBILITY === */
+
+/* Focus visible states */
+.facets__summary:focus-visible,
+.select__select:focus-visible {
+  outline: 2px solid var(--color-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.facets-container[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* === FIX LAYOUT JUMPS === */
+
+/* Prevent accordion/disclosure from causing layout shift */
+.facets__disclosure {
+  contain: layout;
+}
+
+.facets__display {
+  will-change: transform;
+}
+
+/* Smooth transitions */
+.facets__summary,
+.select__select,
+.facets__display {
+  transition: all 0.2s ease;
+}
+
+/* === EXTRA SMALL SCREENS (360px) === */
+
+@media screen and (max-width: 360px) {
+  .facets__heading {
+    font-size: 1.3rem;
+  }
+  
+  .facets__summary {
+    padding: 0.7rem 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .select__select {
+    padding: 0.7rem 2.5rem 0.7rem 1rem;
+    font-size: 1.3rem;
+    min-width: 14rem;
+  }
+  
+  .product-count__text {
+    font-size: 1.3rem;
+  }
+  
+  .collection-hero__description {
+    font-size: 1.3rem;
+  }
+}
