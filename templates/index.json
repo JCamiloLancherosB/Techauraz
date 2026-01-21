@@ -23,7 +23,7 @@
             "link": "shopify://collections/all",
             "button_style_secondary": false,
             "button_label_2": "Contactar",
-            "link_2": "shopify://pages/contact",
+            "link_2": "shopify://pages/contacto-techaura",
             "box_align": "middle-center",
             "show_text_box": true,
             "text_alignment": "center",
@@ -135,6 +135,61 @@
       ],
       "settings": {
         "heading": "Explora por Categoría"
+      }
+    },
+    "modern_feature_cards_home": {
+      "type": "modern-feature-cards",
+      "blocks": {
+        "feature_card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "🚀",
+            "title": "Envío Ultra Rápido",
+            "description": "Recibe tus productos en 2-5 días hábiles en toda Colombia. Procesamos tu pedido el mismo día para que lo recibas lo antes posible.",
+            "cta_text": "Ver envíos",
+            "cta_link": "shopify://collections/all"
+          }
+        },
+        "feature_card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "💎",
+            "title": "Calidad Premium Garantizada",
+            "description": "Productos seleccionados con los más altos estándares de calidad internacional. Cada artículo pasa rigurosos controles antes de llegar a ti.",
+            "cta_text": "Ver productos",
+            "cta_link": "shopify://collections/all"
+          }
+        },
+        "feature_card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "🔒",
+            "title": "Compra 100% Segura",
+            "description": "Pago seguro y protegido con tecnología de encriptación. Opción de pago contra entrega disponible en todo el país.",
+            "cta_text": "Más información",
+            "cta_link": "shopify://pages/contacto-techaura"
+          }
+        },
+        "feature_card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "⚡",
+            "title": "Soporte Inmediato",
+            "description": "Equipo de atención al cliente disponible para resolver todas tus dudas y ayudarte en cada paso de tu compra.",
+            "cta_text": "Contáctanos",
+            "cta_link": "shopify://pages/contacto-techaura"
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_1",
+        "feature_card_2",
+        "feature_card_3",
+        "feature_card_4"
+      ],
+      "settings": {
+        "heading": "¿Por Qué Elegir TechAura?",
+        "subheading": "Descubre las ventajas que hacen de TechAura tu mejor opción para productos tecnológicos premium"
       }
     },
     "featured_collection_9GzLFt": {
@@ -350,6 +405,7 @@
     "slideshow_iqMhTA",
     "trust_badges_section",
     "category_navigation",
+    "modern_feature_cards_home",
     "featured_collection_9GzLFt",
     "benefits_conversion_home",
     "featured_collection_gY3DF9",
