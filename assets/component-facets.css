@@ -370,13 +370,19 @@ details.facets__disclosure summary .icon-caret {
 /* Prevent accordion/disclosure from causing layout shift */
 /* Using transform for hardware acceleration as fallback for contain property */
 .facets__disclosure {
-  contain: layout;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
 
+/* Use contain property only where supported */
+@supports (contain: layout) {
+  .facets__disclosure {
+    contain: layout;
+  }
+}
+
 .facets__display {
-  will-change: transform;
+  /* will-change removed to improve performance - apply dynamically if needed */
 }
 
 /* Smooth transitions */
