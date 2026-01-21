@@ -3,6 +3,13 @@
    Purpose: Compact, aligned, and responsive filter UI/UX for collection pages
    ============================================================================= */
 
+/* === CSS CUSTOM PROPERTIES === */
+:root {
+  --facets-primary-color: var(--color-primary, #2563eb);
+  --facets-icon-size: 1.2rem;
+  --collection-description-max-width: 75rem; /* ~750px - prevents pushing layout */
+}
+
 /* === HORIZONTAL LAYOUT IMPROVEMENTS === */
 
 /* Container: Compact and well-aligned */
@@ -74,8 +81,8 @@
 .facets__summary .icon-caret,
 .facets details summary .icon-caret,
 details.facets__disclosure summary .icon-caret {
-  width: 1.2rem !important;
-  height: 1.2rem !important;
+  width: var(--facets-icon-size) !important;
+  height: var(--facets-icon-size) !important;
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -156,17 +163,17 @@ details.facets__disclosure summary .icon-caret {
 }
 
 .select__select:focus {
-  outline: 2px solid var(--color-primary, #2563eb);
+  outline: 2px solid var(--facets-primary-color);
   outline-offset: 2px;
-  border-color: var(--color-primary, #2563eb);
+  border-color: var(--facets-primary-color);
 }
 
 /* Icon-caret in select: Positioned correctly */
 .select .icon-caret {
   position: absolute;
   right: 1rem;
-  width: 1.2rem !important;
-  height: 1.2rem !important;
+  width: var(--facets-icon-size) !important;
+  height: var(--facets-icon-size) !important;
   pointer-events: none;
   flex-shrink: 0;
 }
@@ -221,7 +228,7 @@ details.facets__disclosure summary .icon-caret {
 
 /* Limit description width and spacing to prevent layout push */
 .collection-hero__description {
-  max-width: 75rem; /* ~750px */
+  max-width: var(--collection-description-max-width);
   margin-top: 1.2rem;
   margin-bottom: 0;
   font-size: 1.5rem;
@@ -348,7 +355,7 @@ details.facets__disclosure summary .icon-caret {
 /* Focus visible states */
 .facets__summary:focus-visible,
 .select__select:focus-visible {
-  outline: 2px solid var(--color-primary, #2563eb);
+  outline: 2px solid var(--facets-primary-color);
   outline-offset: 2px;
 }
 
@@ -361,8 +368,11 @@ details.facets__disclosure summary .icon-caret {
 /* === FIX LAYOUT JUMPS === */
 
 /* Prevent accordion/disclosure from causing layout shift */
+/* Using transform for hardware acceleration as fallback for contain property */
 .facets__disclosure {
   contain: layout;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .facets__display {
