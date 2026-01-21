@@ -137,6 +137,27 @@
         "heading": "Explora por Categoría"
       }
     },
+    "modern_featured_grid_new": {
+      "type": "modern-featured-grid",
+      "settings": {
+        "title": "<strong>Nuestra Colección Premium</strong>",
+        "heading_size": "h1",
+        "description": "<p>Los mejores productos de tecnología seleccionados para ti</p>",
+        "collection": "diademas-gamer-techaura",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
@@ -350,6 +371,7 @@
     "slideshow_iqMhTA",
     "trust_badges_section",
     "category_navigation",
+    "modern_featured_grid_new",
     "featured_collection_9GzLFt",
     "benefits_conversion_home",
     "featured_collection_gY3DF9",
