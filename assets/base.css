@@ -9581,7 +9581,6 @@ button.icon-button:focus-visible {
 
 .menu-drawer-container summary {
   -webkit-tap-highlight-color: transparent;
-  tap-highlight-color: transparent;
 }
 
 /* When menu is open: hide hamburger, show close */
