@@ -1118,8 +1118,6 @@ details.facets__disclosure summary .icon-caret {
 .facets-wrapper .icon {
   width: 1.6rem !important;
   height: 1.6rem !important;
-  max-width: 1.6rem;
-  max-height: 1.6rem;
 }
 
 /* Specific fix for icon-filter in facet controls */
