@@ -81,6 +81,42 @@
     line-height: 1.6;
   }
 
+  /* Modern product card styling with hover effects */
+  .collection-{{ section.id }} .card-wrapper {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .collection-{{ section.id }} .card {
+    border: 1px solid rgba(14, 165, 233, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .collection-{{ section.id }} .card:hover {
+    border-color: rgba(14, 165, 233, 0.3);
+    box-shadow: 0 12px 32px rgba(14, 165, 233, 0.15);
+    transform: translateY(-8px);
+  }
+
+  /* Modern view-all button styling */
+  .collection-{{ section.id }} .collection__view-all a.button {
+    background: linear-gradient(135deg, #0ea5e9, #22c55e);
+    border: none;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+  }
+
+  .collection-{{ section.id }} .collection__view-all a.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
+  }
+
   .collection-{{ section.id }} .grid {
     gap: 20px;
   }
@@ -145,6 +181,54 @@
 
     .collection-{{ section.id }} .grid {
       gap: 20px;
+    }
+  }
+
+  /* Responsive breakpoints: 360px (mobile), 768px (tablet), 1280px (desktop) */
+  @media screen and (max-width: 360px) {
+    .collection-{{ section.id }} .title {
+      font-size: 2rem;
+    }
+
+    .collection-{{ section.id }} .grid {
+      gap: 12px;
+    }
+
+    .collection-{{ section.id }} .collection__view-all a.button {
+      padding: 12px 28px;
+      font-size: 0.9rem;
+    }
+
+    .collection-{{ section.id }} .card:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .collection-{{ section.id }} .title {
+      font-size: 2.4rem;
+    }
+
+    .collection-{{ section.id }} .grid {
+      gap: 18px;
+    }
+
+    .collection-{{ section.id }} .card:hover {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .collection-{{ section.id }} .title {
+      font-size: 3rem;
+    }
+
+    .collection-{{ section.id }} .grid {
+      gap: 24px;
+    }
+
+    .collection-{{ section.id }} .collection__view-all a.button {
+      padding: 16px 42px;
     }
   }
 {%- endstyle -%}
