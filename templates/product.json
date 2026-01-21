@@ -71,18 +71,18 @@
                 }
             },
             "block_order": [
-                "vendor",
                 "title",
                 "price",
                 "pdp_conversion_badges",
+                "buy_buttons",
                 "variant_picker",
+                "quantity_selector",
                 "pdp_key_specs",
                 "description",
-                "quantity_selector",
-                "buy_buttons",
                 "pdp_whatsapp_cta",
                 "judge_me_reviews_preview_badge_nJBx3F",
-                "share"
+                "share",
+                "vendor"
             ],
             "custom_css": [],
             "settings": {
