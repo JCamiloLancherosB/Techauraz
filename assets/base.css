@@ -2104,11 +2104,7 @@ body {
   justify-content: center;
   z-index: 2;
   background-color: transparent;
-  pointer-events: none; /* Allow clicking through to images */
-}
-
-.banner__content > * {
-  pointer-events: auto; /* Re-enable pointer events for content */
+  /* Note: Content inside (buttons, links) remain fully interactive */
 }
 
 /* Neutralize background on desktop for slideshow to show media through */
@@ -12083,8 +12079,9 @@ textarea:focus-visible,
   transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   z-index: 101; /* Ensure buttons are clickable and above all content */
+  /* Use margin for centering to avoid transform conflicts */
+  margin-top: -24px; /* Half of height (48px / 2) */
 }
 
 .slider-button--prev {
@@ -12099,7 +12096,7 @@ textarea:focus-visible,
   background: rgba(37, 99, 235, 0.9);
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Collection pagination */
