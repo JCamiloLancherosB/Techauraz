@@ -212,6 +212,63 @@
             }
         },
 
+        "product_usage_warranty": {
+            "type": "product-usage-warranty",
+            "blocks": {
+                "step_1": {
+                    "type": "usage_step",
+                    "settings": {
+                        "title": "Conecta el dispositivo",
+                        "description": "Conecta el cable USB al puerto correspondiente de tu computadora o adaptador de corriente"
+                    }
+                },
+                "step_2": {
+                    "type": "usage_step",
+                    "settings": {
+                        "title": "Enciende el producto",
+                        "description": "Presiona el botón de encendido durante 3 segundos hasta que veas la luz indicadora"
+                    }
+                },
+                "step_3": {
+                    "type": "usage_step",
+                    "settings": {
+                        "title": "Configura según tus necesidades",
+                        "description": "Sigue las instrucciones en pantalla o en el manual de usuario para personalizar el producto"
+                    }
+                }
+            },
+            "block_order": [
+                "step_1",
+                "step_2",
+                "step_3"
+            ],
+            "settings": {
+                "show_usage_section": true,
+                "usage_heading": "🔧 Cómo se usa",
+                "show_warranty_section": true,
+                "warranty_heading": "🛡️ Garantía y Soporte",
+                "warranty_period_label": "Garantía de 1 mes",
+                "warranty_description": "Todos nuestros productos incluyen garantía de 1 mes contra defectos de fabricación. Si algo falla, te lo reemplazamos sin costo.",
+                "whatsapp_label": "Soporte por WhatsApp",
+                "whatsapp_description": "¿Dudas o necesitas ayuda? Escríbenos por WhatsApp y te atendemos de inmediato.",
+                "whatsapp_phone": "+573008602789",
+                "whatsapp_message": "Hola! Necesito ayuda con un producto",
+                "whatsapp_button_text": "Contactar por WhatsApp",
+                "padding_top": 40,
+                "padding_bottom": 40
+            }
+        },
+
+        "shipping-returns": {
+            "type": "shipping-returns",
+            "settings": {
+                "heading": "📦 Envío y Pago",
+                "show_timeline": true,
+                "padding_top": 40,
+                "padding_bottom": 40
+            }
+        },
+
         "product_faq": {
             "type": "product-faq",
             "blocks": {
@@ -322,8 +379,10 @@
     "order": [
         "main",
         "product_benefits",
-        "product_features",
         "product_includes",
+        "product_usage_warranty",
+        "product_features",
+        "shipping-returns",
         "product_faq",
         "171500672571a9dd42",
         "1759259835d66ec7b3",
