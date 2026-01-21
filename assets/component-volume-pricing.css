@@ -1,0 +1,54 @@
+/* ============================================================
+   COMPONENT: Volume Pricing
+   Bulk purchase discount indicators
+   ============================================================ */
+
+.card__information-volume-pricing-note {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+  border-radius: 4px;
+}
+
+.card__information-volume-pricing-note .caption {
+  font-size: 1.1rem;
+  color: #3b82f6;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Desktop styling */
+@media screen and (min-width: 990px) {
+  .card__information-volume-pricing-note {
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .card__information-volume-pricing-note .caption {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 749px) {
+  .card__information-volume-pricing-note {
+    padding: 0.3rem 0.5rem;
+  }
+  
+  .card__information-volume-pricing-note .caption {
+    font-size: 1rem;
+  }
+}
+
+/* Volume pricing badge */
+.volume-pricing--sale-badge {
+  position: relative;
+}
+
+.volume-pricing--sale-badge::after {
+  content: '💰';
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  font-size: 1.4rem;
+}
