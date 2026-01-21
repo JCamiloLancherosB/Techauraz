@@ -464,19 +464,29 @@ select:focus {
   }
 }
 
-/* Floating elements z-index hierarchy */
+/* Floating elements z-index hierarchy - UPDATED */
+.announcement-bar__container,
+.announcement-bar__container--sticky {
+  z-index: 99 !important;
+}
+
+.header-wrapper,
+.section-header {
+  z-index: 100 !important;
+}
+
 .whatsapp-float,
 .whatsapp-button-float,
 [class*="whatsapp"][class*="float"],
 [class*="floating-whatsapp"] {
-  z-index: 999 !important; /* Override third-party defaults */
+  z-index: 999 !important;
 }
 
 .cookie-banner,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: 1000 !important; /* Override third-party defaults */
+  z-index: 1000 !important;
 }
 
 /* Modals and overlays */
@@ -484,13 +494,15 @@ select:focus {
 .product-media-modal,
 .product-popup-modal,
 [role="dialog"] {
-  z-index: 1001 !important; /* Override framework modals */
+  z-index: 1001 !important;
 }
 
-/* Cart drawer */
+/* Cart drawer and menu drawer */
 .cart-drawer,
-.drawer {
-  z-index: 1001 !important; /* Override framework drawer */
+.drawer,
+.menu-drawer,
+menu-drawer {
+  z-index: 1001 !important;
 }
 
 /* Mobile-specific z-index adjustments */
@@ -701,7 +713,7 @@ h2.gradient-text {
 .header-wrapper {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%) !important;
   border-bottom: 1px solid rgba(148, 163, 184, 0.2) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
   backdrop-filter: blur(10px) !important;
   position: fixed !important;
   top: 0 !important;
@@ -710,9 +722,10 @@ h2.gradient-text {
   width: 100% !important;
   max-width: 100vw !important;
   z-index: 100 !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
   overflow-x: hidden !important;
   contain: layout style paint;
+  will-change: transform;
 }
 
 /* Prevent layout shift when header becomes fixed */
@@ -738,8 +751,9 @@ h2.gradient-text {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 1rem 1.5rem !important;
-    gap: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    gap: 0.75rem !important;
+    min-height: 56px !important;
   }
   
   /* Logo alignment */
@@ -756,6 +770,7 @@ h2.gradient-text {
     right: 80px;
     width: auto !important;
     max-width: 100% !important;
+    max-height: 40px !important;
     object-fit: contain !important;
     border-radius: 100px;
   }
@@ -769,13 +784,13 @@ h2.gradient-text {
   .header__icons {
     display: flex !important;
     align-items: center !important;
-    gap: 1rem !important;
+    gap: 0.5rem !important;
     flex-shrink: 0 !important;
   }
   
   .header__icon {
-    min-width: 44px !important;
-    min-height: 44px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -833,16 +848,17 @@ h2.gradient-text {
 }
 
 
-/* Header grid - proper alignment */
+/* Header grid - proper alignment - COMPACT VERSION */
 .header {
   display: grid;
-  height: 8rem;
+  height: auto;
+  min-height: 60px;
   overflow: hidden;
   grid-template-areas: 'drawer heading icons';
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.2rem 2rem;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
   max-width: 100%;
   background-color: #020617;
   text-decoration: none;
@@ -852,10 +868,12 @@ h2.gradient-text {
 
 @media screen and (min-width: 990px) {
   .header {
-    height: var(--ta-header-height);
+    min-height: 70px;
+    height: auto;
     grid-template-areas: 'drawer heading navigation icons';
     grid-template-columns: auto minmax(0, 1fr) auto auto;
     gap: 1.5rem;
+    padding: 1rem 2rem;
   }
   
   .header--middle-center {
@@ -900,33 +918,44 @@ header-drawer {
   }
 }
 
-/* Define header height CSS variable */
+/* Define header height CSS variable - COMPACT */
 :root {
-  --header-height: 80px;
+  --header-height: 70px;
 }
 
-/* Add padding to body to prevent content from going under fixed header
-   Note: Header has position:fixed !important applied to .header-wrapper,
-   so all pages need this padding to compensate for the fixed header */
+/* Add padding to body to prevent content from going under fixed header */
 body {
   padding-top: var(--header-height);
 }
 
 @media screen and (max-width: 749px) {
   :root {
-    --header-height: 70px;
+    --header-height: 56px;
   }
 }
 
-/* Enhanced sticky header transition */
+/* Enhanced sticky header transition - SMOOTHER */
 .header-wrapper.shopify-section-header-sticky {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   transform: translateY(0);
 }
 
-/* Hidden state for scroll behavior */
+/* Hidden state for scroll behavior - SMOOTHER */
 .header-wrapper.shopify-section-header-hidden {
   transform: translateY(-100%);
+}
+
+.header-wrapper.animate {
+  animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* =============================================================================

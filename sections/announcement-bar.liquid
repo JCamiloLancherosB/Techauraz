@@ -11,8 +11,48 @@
   endif
 -%}
 
-{% if social_icons %}
-  {% endif %}
+<style>
+  .announcement-bar__container {
+    background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+    color: #fff;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    position: relative;
+    z-index: 99;
+  }
+  
+  .announcement-bar__container--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+  
+  .announcement-bar__message {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .announcement-bar__message a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .announcement-bar__message a:hover {
+    color: #93c5fd;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .announcement-bar__container {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+</style>
+
 <div class="announcement-bar__container{% if section.settings.sticky_promo %} announcement-bar__container--sticky{% endif %}">
   <div class="announcement-bar__message">
     🚚 <strong>Envío GRATIS</strong> | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 📞 WhatsApp: <a href="https://wa.me/573008602789">+57 300 860 2789</a>
