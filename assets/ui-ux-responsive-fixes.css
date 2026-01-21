@@ -139,8 +139,9 @@ slideshow-component .slider::-webkit-scrollbar {
   }
   
   /* Product grid - 1 column on small mobile */
-  .grid--5-col-desktop {
-    grid-template-columns: 1fr !important;
+  .page-width .grid--5-col-desktop,
+  .collection .grid--5-col-desktop {
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   

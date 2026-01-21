@@ -332,7 +332,7 @@
 }
 
 /* Loading state */
-.quick-add__submit loading-spinner {
+.quick-add__submit .loading-spinner {
   position: absolute;
   top: 50%;
   left: 50%;
