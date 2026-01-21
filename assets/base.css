@@ -9536,6 +9536,12 @@ button.icon-button:focus-visible {
   align-items: center;
   justify-content: center;
   color: #f1f5f9;
+  /* Android touch optimization */
+  -webkit-tap-highlight-color: rgba(251, 191, 36, 0.2);
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .header__icon--menu:hover {
@@ -9566,6 +9572,16 @@ button.icon-button:focus-visible {
 /* Hide close icon by default */
 .header__icon--menu .icon-close {
   display: none;
+}
+
+/* Android-specific menu drawer container optimizations */
+.menu-drawer-container {
+  position: relative;
+}
+
+.menu-drawer-container summary {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 /* When menu is open: hide hamburger, show close */
