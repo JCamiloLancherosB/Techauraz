@@ -6470,7 +6470,7 @@ body.menu-drawer-open {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
+  gap: 1rem;
   padding: 0;
 }
 
