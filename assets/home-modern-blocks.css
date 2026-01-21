@@ -5,6 +5,21 @@
  */
 
 /* ==============================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================== */
+
+:root {
+  --home-primary-blue: #0ea5e9;
+  --home-primary-green: #22c55e;
+  --home-gradient-primary: linear-gradient(135deg, var(--home-primary-blue), var(--home-primary-green));
+  --home-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --home-shadow-medium: 0 8px 24px rgba(14, 165, 233, 0.2);
+  --home-shadow-heavy: 0 12px 32px rgba(14, 165, 233, 0.2);
+  --home-border-radius: 12px;
+  --home-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==============================================
    TESTIMONIALS SECTION ENHANCEMENTS
    ============================================== */
 
@@ -13,7 +28,7 @@
 }
 
 .testimonials-section__title {
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  background: var(--home-gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -22,13 +37,13 @@
 
 .testimonial-card__content {
   border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--home-transition);
 }
 
 .testimonial-card__content:hover {
-  border-color: #0ea5e9;
+  border-color: var(--home-primary-blue);
   transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.2);
+  box-shadow: var(--home-shadow-heavy);
 }
 
 .testimonial-card__rating {
@@ -48,7 +63,7 @@
   left: 0;
   top: -10px;
   font-size: 48px;
-  color: #0ea5e9;
+  color: var(--home-primary-blue);
   opacity: 0.3;
   font-family: Georgia, serif;
   line-height: 1;
@@ -68,7 +83,7 @@
   z-index: 1;
   border-radius: 16px;
   padding: 60px 40px !important;
-  background: linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%);
+  background: var(--home-gradient-primary);
   box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
 }
 
@@ -79,7 +94,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* Simplified geometric pattern for better maintainability */
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
   opacity: 0.5;
   z-index: -1;
 }
@@ -124,7 +143,7 @@
 }
 
 .newsletter-form__button {
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  background: var(--home-gradient-primary);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -133,7 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: var(--home-transition);
   flex-shrink: 0;
 }
 
@@ -152,7 +171,7 @@
   color: white !important;
   background: rgba(255, 255, 255, 0.2);
   padding: 16px 24px;
-  border-radius: 12px;
+  border-radius: var(--home-border-radius);
   margin-top: 16px;
   backdrop-filter: blur(10px);
 }
@@ -185,20 +204,20 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background: linear-gradient(90deg, #0ea5e9, #22c55e);
+  background: var(--home-gradient-primary);
   border-radius: 2px;
 }
 
 .footer-block__details-content a,
 .list-menu__item {
   color: rgba(255, 255, 255, 0.8) !important;
-  transition: all 0.3s ease;
+  transition: var(--home-transition);
   display: inline-block;
 }
 
 .footer-block__details-content a:hover,
 .list-menu__item:hover {
-  color: #0ea5e9 !important;
+  color: var(--home-primary-blue) !important;
   transform: translateX(4px);
 }
 
@@ -221,7 +240,7 @@
 }
 
 .footer__newsletter .newsletter-form__button {
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  background: var(--home-gradient-primary);
   border: none;
   border-radius: 50%;
   width: 44px;
@@ -237,12 +256,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: var(--home-transition);
   margin: 0 6px;
 }
 
 .footer__list-social a:hover {
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  background: var(--home-gradient-primary);
   transform: translateY(-4px);
 }
 
@@ -262,44 +281,12 @@
 }
 
 .copyright__content a:hover {
-  color: #0ea5e9 !important;
+  color: var(--home-primary-blue) !important;
 }
 
 /* ==============================================
    RESPONSIVE DESIGN
    ============================================== */
-
-/* Mobile First - 360px base */
-@media screen and (max-width: 749px) {
-  .newsletter__wrapper {
-    padding: 40px 24px !important;
-    border-radius: 12px;
-  }
-
-  .newsletter-form .field__input {
-    font-size: 14px;
-    padding: 14px 18px;
-  }
-
-  .newsletter-form__button {
-    width: 44px;
-    height: 44px;
-  }
-
-  .testimonial-card__text::before {
-    font-size: 36px;
-    top: -8px;
-  }
-
-  .footer-block__heading::after {
-    width: 30px;
-    height: 2px;
-  }
-
-  .newsletter__subheading {
-    font-size: 1rem;
-  }
-}
 
 /* Tablet - 768px */
 @media screen and (min-width: 750px) and (max-width: 989px) {
@@ -332,7 +319,39 @@
   }
 }
 
-/* Extra small devices - 360px */
+/* Mobile adjustments - below 750px */
+@media screen and (max-width: 749px) {
+  .newsletter__wrapper {
+    padding: 40px 24px !important;
+    border-radius: var(--home-border-radius);
+  }
+
+  .newsletter-form .field__input {
+    font-size: 14px;
+    padding: 14px 18px;
+  }
+
+  .newsletter-form__button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .testimonial-card__text::before {
+    font-size: 36px;
+    top: -8px;
+  }
+
+  .footer-block__heading::after {
+    width: 30px;
+    height: 2px;
+  }
+
+  .newsletter__subheading {
+    font-size: 1rem;
+  }
+}
+
+/* Extra small devices - adjustments for very small screens */
 @media screen and (max-width: 360px) {
   .testimonials-section__title {
     font-size: 1.4rem;
@@ -386,14 +405,14 @@
 .newsletter-form__button:focus,
 .slider-button:focus,
 .footer__newsletter .newsletter-form__button:focus {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid var(--home-primary-blue);
   outline-offset: 2px;
 }
 
 /* Focus visible for better keyboard navigation */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid var(--home-primary-blue);
   outline-offset: 2px;
   border-radius: 4px;
 }
