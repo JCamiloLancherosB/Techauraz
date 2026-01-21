@@ -1,0 +1,471 @@
+/* 
+ * Home Modern Blocks - Testimonials + Newsletter + Footer Styling
+ * Purpose: Enhanced modern styling for home page sections
+ * Responsive: 360px, 768px, 1280px breakpoints
+ */
+
+/* ==============================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================== */
+
+:root {
+  --home-primary-blue: #0ea5e9;
+  --home-primary-green: #22c55e;
+  --home-gradient-primary: linear-gradient(135deg, var(--home-primary-blue), var(--home-primary-green));
+  --home-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --home-shadow-medium: 0 8px 24px rgba(14, 165, 233, 0.2);
+  --home-shadow-heavy: 0 12px 32px rgba(14, 165, 233, 0.2);
+  --home-border-radius: 12px;
+  --home-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==============================================
+   TESTIMONIALS SECTION ENHANCEMENTS
+   ============================================== */
+
+.testimonials-section {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.testimonials-section__title {
+  background: var(--home-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.testimonial-card__content {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--home-transition);
+}
+
+.testimonial-card__content:hover {
+  border-color: var(--home-primary-blue);
+  transform: translateY(-6px);
+  box-shadow: var(--home-shadow-heavy);
+}
+
+.testimonial-card__rating {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-start;
+}
+
+.testimonial-card__text {
+  position: relative;
+  padding-left: 20px;
+}
+
+.testimonial-card__text::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 48px;
+  color: var(--home-primary-blue);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ==============================================
+   NEWSLETTER SECTION ENHANCEMENTS
+   ============================================== */
+
+.newsletter {
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter__wrapper {
+  position: relative;
+  z-index: 1;
+  border-radius: 16px;
+  padding: 60px 40px !important;
+  background: var(--home-gradient-primary);
+  box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
+}
+
+.newsletter__wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Simplified single gradient for better performance */
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.newsletter .inline-richtext,
+.newsletter h2 {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter__subheading {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 1.1rem;
+  margin-top: 12px;
+}
+
+.newsletter-form__field-wrapper {
+  max-width: 540px;
+  margin: 24px auto 0;
+}
+
+.newsletter-form .field {
+  background: white;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+}
+
+.newsletter-form .field__input {
+  border: none;
+  border-radius: 50px;
+  padding: 16px 24px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.newsletter-form .field__input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.newsletter-form__button {
+  background: var(--home-gradient-primary);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--home-transition);
+  flex-shrink: 0;
+}
+
+.newsletter-form__button:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+}
+
+.newsletter-form__button svg {
+  fill: white;
+  width: 20px;
+  height: 20px;
+}
+
+.newsletter-form__message--success {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 16px 24px;
+  border-radius: var(--home-border-radius);
+  margin-top: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.newsletter-form__message {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ==============================================
+   FOOTER ENHANCEMENTS
+   ============================================== */
+
+.footer {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-block__heading {
+  color: white !important;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.footer-block__heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--home-gradient-primary);
+  border-radius: 2px;
+}
+
+.footer-block__details-content a,
+.list-menu__item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: var(--home-transition);
+  display: inline-block;
+}
+
+.footer-block__details-content a:hover,
+.list-menu__item:hover {
+  color: var(--home-primary-blue) !important;
+  transform: translateX(4px);
+}
+
+.footer__newsletter .field {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+}
+
+.footer__newsletter .field__input {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+}
+
+.footer__newsletter .field__input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__newsletter .newsletter-form__button {
+  background: var(--home-gradient-primary);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-right: 4px;
+}
+
+.footer__list-social a {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--home-transition);
+  margin: 0 6px;
+}
+
+.footer__list-social a:hover {
+  background: var(--home-gradient-primary);
+  transform: translateY(-4px);
+}
+
+.footer__content-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 32px;
+  margin-top: 48px;
+}
+
+.copyright__content {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.copyright__content a {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.3s ease;
+}
+
+.copyright__content a:hover {
+  color: var(--home-primary-blue) !important;
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN - Mobile First Approach
+   ============================================== */
+
+/* Base styles are mobile-first (360px+) */
+
+/* Tablet - 750px and up */
+@media screen and (min-width: 750px) {
+  .newsletter__wrapper {
+    padding: 50px 32px !important;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(50% - 12px);
+  }
+
+  .footer__blocks-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+/* Desktop - 990px and up */
+@media screen and (min-width: 990px) {
+  .newsletter__wrapper {
+    padding: 70px 60px !important;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 16px);
+  }
+
+  .footer__blocks-wrapper {
+    gap: 48px;
+  }
+}
+
+/* Mobile adjustments - below 750px */
+@media screen and (max-width: 749px) {
+  .newsletter__wrapper {
+    padding: 40px 24px !important;
+    border-radius: var(--home-border-radius);
+  }
+
+  .newsletter-form .field__input {
+    font-size: 14px;
+    padding: 14px 18px;
+  }
+
+  .newsletter-form__button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .testimonial-card__text::before {
+    font-size: 36px;
+    top: -8px;
+  }
+
+  .footer-block__heading::after {
+    width: 30px;
+    height: 2px;
+  }
+
+  .newsletter__subheading {
+    font-size: 1rem;
+  }
+}
+
+/* Extra small devices - adjustments for very small screens (below 360px) */
+@media screen and (max-width: 359px) {
+  .testimonials-section__title {
+    font-size: 1.4rem;
+  }
+
+  .newsletter .inline-richtext,
+  .newsletter h2 {
+    font-size: 1.5rem;
+  }
+
+  .newsletter__subheading {
+    font-size: 0.95rem;
+  }
+
+  .newsletter-form .field__input {
+    font-size: 13px;
+    padding: 12px 16px;
+  }
+
+  .newsletter-form__button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonial-card__content {
+    padding: 20px;
+  }
+
+  .testimonial-card__text {
+    font-size: 14px;
+    padding-left: 16px;
+  }
+}
+
+/* ==============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================== */
+
+.field__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.newsletter-form__button:focus,
+.slider-button:focus,
+.footer__newsletter .newsletter-form__button:focus {
+  outline: 2px solid var(--home-primary-blue);
+  outline-offset: 2px;
+}
+
+/* Focus visible for better keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--home-primary-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Improve contrast for accessibility */
+.testimonial-card__author-type {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ==============================================
+   ANIMATIONS & TRANSITIONS
+   ============================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-trigger.animate--slide-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Smooth scrolling for slider */
+.testimonials-slider {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shift */
+.testimonial-card__avatar,
+.testimonial-card__avatar--placeholder {
+  min-width: 50px;
+  min-height: 50px;
+}
+
+/* ==============================================
+   PRINT STYLES
+   ============================================== */
+
+@media print {
+  .newsletter,
+  .slider-buttons {
+    display: none;
+  }
+
+  .testimonial-card__content {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+}
