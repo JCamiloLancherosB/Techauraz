@@ -254,17 +254,15 @@ svg.icon {
   width: 1.4rem;
   height: 1.4rem;
   flex: 0 0 auto;
-  flex-shrink: 0;
   display: inline-block;
   vertical-align: middle;
 }
 
-/* Specific icon-caret normalization */
+/* Specific icon-caret normalization with !important to override any problematic inheritance */
 .icon-caret,
 svg.icon-caret {
   width: 1.4rem !important;
   height: 1.4rem !important;
-  flex-shrink: 0;
 }
 
 
