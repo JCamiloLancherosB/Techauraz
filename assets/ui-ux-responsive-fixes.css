@@ -1447,7 +1447,8 @@ details.facets__disclosure summary .icon-caret {
   user-select: none;
   transition: background-color 0.2s ease;
   min-height: 44px;
-  /* Ensure proper touch target size */
+  /* Ensure proper touch target size - 1.125rem is the question text font-size */
+  /* Formula: max(default-padding, (min-touch-target - font-size) / 2) */
   padding-top: max(1.25rem, calc((44px - 1.125rem) / 2));
   padding-bottom: max(1.25rem, calc((44px - 1.125rem) / 2));
 }
@@ -1732,7 +1733,8 @@ details.facets__disclosure summary .icon-caret {
   box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
   min-height: 44px;
   min-width: 44px;
-  /* Ensure proper touch target size with adequate padding */
+  /* Ensure proper touch target size - 0.9375rem is the button text font-size */
+  /* Formula: max(default-padding, (min-touch-target - font-size) / 2) */
   padding-top: max(0.875rem, calc((44px - 0.9375rem) / 2));
   padding-bottom: max(0.875rem, calc((44px - 0.9375rem) / 2));
 }
