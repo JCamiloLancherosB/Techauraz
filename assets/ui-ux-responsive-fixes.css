@@ -2325,12 +2325,6 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   margin: 0 auto;
 }
 
-/* Ensure product grid is centered with proper spacing */
-.template-product .tech-related-products.product-grid {
-  justify-content: center;
-  gap: 1.5rem;
-}
-
 /* Desktop: optimal spacing and centering for 3-4 items */
 @media screen and (min-width: 990px) {
   .template-product .tech-related-products {
@@ -2372,7 +2366,7 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
     overflow-x: hidden;
   }
   
-  /* Ensure cards fit properly in 2-column layout */
+  /* Ensure cards fit properly in 2-column layout - 0.5rem = column-gap/2 */
   .template-product .tech-related-products .grid__item {
     max-width: calc(50% - 0.5rem);
   }
