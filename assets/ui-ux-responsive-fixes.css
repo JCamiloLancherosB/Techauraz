@@ -684,9 +684,6 @@ a:hover {
   align-items: center;
   gap: 0.4rem;
 }
-  font-size: 1.2rem;
-  font-weight: 600;
-}
 
 /* =============================================================================
    8. ADDITIONAL RESPONSIVENESS ENHANCEMENTS
@@ -2640,12 +2637,12 @@ details-modal,
   /* Menu items in mobile drawer should also be readable */
   .menu-drawer .list-menu__item--link,
   .menu-drawer__navigation a {
-    color: var(--tech-ink, #111111) !important;
+    color: var(--tech-ink, #0B1220) !important;
   }
   
   .menu-drawer .list-menu__item--link:hover,
   .menu-drawer__navigation a:hover {
-    color: #2563eb !important;
+    color: var(--tech-primary, #2563eb) !important;
   }
 }
 
