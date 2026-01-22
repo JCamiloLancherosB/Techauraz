@@ -3260,7 +3260,7 @@ body {
   .card__media {
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 1 / 1;
+    /* Removed hardcoded aspect-ratio to respect dynamic --ratio-percent from Liquid */
     overflow: hidden;
   }
   
