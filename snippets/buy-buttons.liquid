@@ -76,19 +76,19 @@
             endif
           -%}
           
-          {%- comment -%} PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout) {%- endcomment -%}
+          {%- comment -%} PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout) - NOW FIRST {%- endcomment -%}
           {%- if show_dynamic_checkout -%}
-            <div class="product-form__cta-primary">
+            <div class="product-form__cta-primary tech-cta-primary">
               {{ form | payment_button }}
             </div>
           {%- endif -%}
           
-          {%- comment -%} SECONDARY CTA: AGREGAR AL CARRITO {%- endcomment -%}
+          {%- comment -%} SECONDARY CTA: AGREGAR AL CARRITO - NOW SECOND {%- endcomment -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width button--secondary"
+            class="product-form__submit button button--full-width button--secondary tech-cta-secondary"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
             {% endif %}
