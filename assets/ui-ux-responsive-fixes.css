@@ -1976,3 +1976,42 @@ details.facets__disclosure summary .icon-caret {
     margin-bottom: 2rem !important;
   }
 }
+
+/* =============================================================================
+   PDP HERO GALLERY - VISUAL FIXES FOR MOBILE
+   Fix grey sidebars and image height issues on product detail pages
+   ============================================================================= */
+
+/* Mobile: Override base.css object-fit to eliminate grey bars */
+@media screen and (max-width: 749px) {
+  /* Scope specifically to product pages using attribute selector */
+  section[id^="MainProduct-"] .product-hero-slider {
+    max-height: 60vh;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  section[id^="MainProduct-"] .product-hero-slide {
+    max-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+  }
+
+  /* Override object-fit: contain from base.css with cover to eliminate grey bars */
+  section[id^="MainProduct-"] .product-hero-slide img,
+  section[id^="MainProduct-"] .product-hero-slide .global-media-settings {
+    max-height: 60vh;
+    width: 100%;
+    object-fit: cover !important;
+    object-position: center;
+    background: transparent;
+  }
+
+  /* Ensure video/model media also respects the height limit */
+  section[id^="MainProduct-"] .product-hero-slide .deferred-media,
+  section[id^="MainProduct-"] .product-hero-slide .product-model {
+    max-height: 60vh;
+  }
+}
