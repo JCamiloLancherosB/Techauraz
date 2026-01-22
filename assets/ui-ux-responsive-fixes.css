@@ -2371,3 +2371,211 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
     max-width: calc(50% - 0.5rem);
   }
 }
+
+/* =============================================================================
+   HEADER UI FIXES - Menu Legibility, Sticky Offset, Z-Index
+   Date: 2026-01-22
+   
+   Fixes three critical UI issues:
+   1. Menu text is white on white background (illegible)
+   2. Benefits bar hidden by sticky header
+   3. Vertical misalignment due to inconsistent offsets
+   ============================================================================= */
+
+/* --- CSS VARIABLES FOR HEADER HEIGHT --- */
+:root {
+  /* Header height variable for consistent sticky offset management */
+  --tech-header-height: 60px; /* Mobile default */
+  --tech-ink: #111111; /* Dark text for readability on light backgrounds */
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    --tech-header-height: 68px; /* Tablet */
+  }
+}
+
+@media screen and (min-width: 990px) {
+  :root {
+    --tech-header-height: 72px; /* Desktop */
+  }
+}
+
+/* --- SCROLL PADDING FOR STICKY HEADER --- */
+/* Prevents content from being hidden under sticky header when jumping to anchors */
+body {
+  scroll-padding-top: var(--tech-header-height);
+}
+
+/* --- MENU TEXT LEGIBILITY FIX --- */
+/* Override white text on white background - make menu readable */
+.header__menu-item,
+.list-menu__item--link,
+.list-menu__item > a,
+.header-menu > li > a,
+.header__inline-menu a {
+  color: var(--tech-ink, #111111) !important;
+  font-weight: 500;
+}
+
+/* Hover state - make it obvious with color change and underline */
+.header__menu-item:hover,
+.list-menu__item--link:hover,
+.list-menu__item > a:hover,
+.header-menu > li > a:hover,
+.header__inline-menu a:hover {
+  color: #2563eb !important; /* Blue primary color */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Focus state for accessibility */
+.header__menu-item:focus-visible,
+.list-menu__item--link:focus-visible,
+.list-menu__item > a:focus-visible,
+.header-menu > li > a:focus-visible,
+.header__inline-menu a:focus-visible {
+  color: #1e40af !important; /* Darker blue */
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Active/current menu item */
+.header__active-menu-item,
+.list-menu__item--active,
+.header-menu > li.active > a {
+  color: #2563eb !important;
+  font-weight: 600;
+}
+
+/* Do NOT affect header icons - they should keep their own color */
+.header__icon,
+.header__icon svg,
+.header__icon .icon {
+  color: inherit;
+}
+
+/* --- BENEFITS BAR / SHIPPING BANNER OFFSET FIX --- */
+/* Ensure benefits bar and free shipping banner are not hidden by sticky header */
+
+/* If benefits bar is the first section after header */
+.shopify-section:first-of-type .benefits-bar,
+.shopify-section:first-of-type .free-shipping-banner,
+section.benefits-bar:first-child,
+section.free-shipping-banner:first-child {
+  margin-top: var(--tech-header-height);
+}
+
+/* Alternative: padding-top approach for first main section */
+.template-index main > .shopify-section:first-child,
+body:not(.template-index) main > .shopify-section:first-child {
+  padding-top: var(--tech-header-height);
+}
+
+/* For overlay headers (like on homepage hero), add offset to main content */
+.header-wrapper--overlay + main,
+.shopify-section-header-sticky + main {
+  padding-top: 0; /* Reset - header is sticky/fixed so no padding needed on main */
+}
+
+/* Specific fix: ensure benefits/shipping bars appear below header */
+.section-benefits-bar,
+.free-shipping-banner,
+.benefits-bar {
+  position: relative;
+  top: 0;
+  /* Remove any negative margins that might hide content */
+  margin-top: 0;
+}
+
+/* If sticky banner is used, adjust its top position */
+.free-shipping-banner--sticky {
+  top: var(--tech-header-height) !important;
+  /* 
+   * Z-index: 90 - Below header (100) but above regular content 
+   * This ensures banner sticks below header, not overlapping it
+   */
+  z-index: 90 !important;
+}
+
+/* --- Z-INDEX HIERARCHY DOCUMENTATION --- */
+/*
+ * Z-INDEX LAYERING SYSTEM:
+ * 
+ * Layer 5 (Highest): Modals, Drawers, Overlays (z-index: 200+)
+ *   - Cart drawer: 200
+ *   - Search modal: 200
+ *   - Menu drawer: 200
+ *   - Overlay backgrounds: 150
+ * 
+ * Layer 4: Sticky Header (z-index: 100)
+ *   - Main navigation header: 100
+ *   - Fixed/sticky position
+ *   - Must stay below modals/drawers
+ * 
+ * Layer 3: Sticky Elements (z-index: 90-99)
+ *   - Sticky benefits bar: 90
+ *   - Sticky announcements: 90
+ *   - Floating buttons (WhatsApp): 95
+ * 
+ * Layer 2: Interactive Content (z-index: 10-50)
+ *   - Dropdowns: 50
+ *   - Tooltips: 40
+ *   - Product quick-view: 30
+ * 
+ * Layer 1 (Lowest): Regular Content (z-index: 0-9)
+ *   - Cards: 1-3
+ *   - Regular sections: auto or 0
+ */
+
+/* Enforce header z-index to stay below modals but above content */
+.header-wrapper,
+.section-header,
+.shopify-section-header-sticky {
+  z-index: 100 !important; /* Below modals (200+) but above content */
+}
+
+/* Ensure modals and drawers are above header */
+.drawer,
+.cart-drawer,
+.menu-drawer,
+modal-dialog,
+details-modal,
+.modal-overlay,
+[role="dialog"] {
+  z-index: 200 !important; /* Above header */
+}
+
+/* Floating WhatsApp button - should be visible but not cover modals */
+.whatsapp-float,
+.floating-whatsapp,
+.wa-chat-box,
+[class*="whatsapp"][class*="float"] {
+  z-index: 95 !important; /* Above sticky banners, below modals */
+}
+
+/* --- MOBILE SPECIFIC ADJUSTMENTS --- */
+@media screen and (max-width: 749px) {
+  /* Menu items in mobile drawer should also be readable */
+  .menu-drawer .list-menu__item--link,
+  .menu-drawer__navigation a {
+    color: var(--tech-ink, #111111) !important;
+  }
+  
+  .menu-drawer .list-menu__item--link:hover,
+  .menu-drawer__navigation a:hover {
+    color: #2563eb !important;
+  }
+}
+
+/* --- DESKTOP SPECIFIC ADJUSTMENTS --- */
+@media screen and (min-width: 990px) {
+  /* Desktop menu hover effects - more subtle */
+  .header__menu-item:hover,
+  .list-menu__item--link:hover {
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
