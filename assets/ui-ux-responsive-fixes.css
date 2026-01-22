@@ -2465,7 +2465,6 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 :root {
   /* Header height variable for consistent sticky offset management */
   --tech-header-height: 60px; /* Mobile default */
-  --tech-ink: #111111; /* Dark text for readability on light backgrounds */
 }
 
 @media screen and (min-width: 750px) {
