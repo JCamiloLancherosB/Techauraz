@@ -53,6 +53,12 @@
                         "show_gift_card_recipient": true
                     }
                 },
+                "pdp_micro_trust": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-micro-trust' %}"
+                    }
+                },
                 "pdp_whatsapp_cta": {
                     "type": "custom_liquid",
                     "settings": {
@@ -75,6 +81,7 @@
                 "price",
                 "pdp_conversion_badges",
                 "buy_buttons",
+                "pdp_micro_trust",
                 "variant_picker",
                 "quantity_selector",
                 "pdp_key_specs",
