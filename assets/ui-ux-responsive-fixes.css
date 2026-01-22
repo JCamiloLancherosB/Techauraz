@@ -1269,25 +1269,33 @@ details.facets__disclosure summary .icon-caret {
     font-size: 2.4rem !important;
   }
   
+  /* ATF Optimization: Reduce spacing in conversion badges */
+  .pdp-atf-availability {
+    margin-bottom: 0.6rem;
+    font-size: 1.3rem;
+  }
+  
   .pdp-atf-trust-messages {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
+    gap: 0.5rem;
   }
   
   .pdp-atf-trust-message {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .pdp-atf-benefits {
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    gap: 0.4rem;
   }
   
   .pdp-atf-benefit {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .product-form__buttons {
-    gap: 0.8rem;
+    gap: 0.6rem;
     margin-bottom: 1.2rem;
   }
   
