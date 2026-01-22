@@ -342,7 +342,7 @@
   display: block;
 }
 
-@supports selector(:has(*)) {
+@supports (selector(:has(*))) {
   .template-index .section:has(slideshow-component) {
     padding-bottom: 2rem;
   }
