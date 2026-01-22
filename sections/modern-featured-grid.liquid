@@ -11,7 +11,9 @@
 {{ 'home-modern-blocks.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  /* Standardized section padding for consistent alignment */
+  /* Standardized section padding for consistent alignment across all home sections */
+  /* Note: Overrides padding_top/padding_bottom settings for consistency */
+  /* Desktop: 56px (3.5rem), Mobile: 32px (2rem) - matches tech-section standards */
   .section-{{ section.id }}-padding {
     padding-top: 2rem; /* Mobile: 32px */
     padding-bottom: 2rem;
