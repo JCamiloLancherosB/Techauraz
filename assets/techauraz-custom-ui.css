@@ -230,3 +230,100 @@
     display: none;
   }
 }
+
+/* =============================================================================
+   GLOBAL ELEMENT CONSISTENCY - Apply tokens across common elements
+   ============================================================================= */
+
+/* Ensure all headings use consistent color */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: var(--tech-ink, #0B1220);
+}
+
+/* Product titles and card titles */
+.product__title,
+.card__title,
+.card-title {
+  color: var(--tech-ink, #0B1220);
+}
+
+/* Price elements consistency */
+.price,
+.price__regular,
+.price__sale {
+  color: var(--tech-ink, #0B1220);
+}
+
+/* Ensure form inputs have consistent borders */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  border: 1px solid var(--tech-border, #e2e8f0);
+  border-radius: var(--tech-button-radius, 8px);
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--tech-primary, #2563eb);
+  outline: none;
+}
+
+/* Ensure cards have consistent styling */
+.card,
+.product-card {
+  background: var(--tech-bg, #ffffff);
+  border: 1px solid var(--tech-border-light, #f1f5f9);
+  border-radius: var(--tech-button-radius, 8px);
+}
+
+/* Pagination and navigation */
+.pagination__item,
+.pagination__link {
+  border-color: var(--tech-border, #e2e8f0);
+  color: var(--tech-ink, #0B1220);
+}
+
+.pagination__item--current,
+.pagination__link--active {
+  background: var(--tech-primary, #2563eb);
+  color: var(--tech-primary-contrast, #ffffff);
+  border-color: var(--tech-primary, #2563eb);
+}
+
+/* Breadcrumbs */
+.breadcrumb a {
+  color: var(--tech-muted, #64748b);
+}
+
+.breadcrumb a:hover {
+  color: var(--tech-primary, #2563eb);
+}
+
+/* Tags and chips */
+.tag,
+.chip,
+.pill {
+  background: var(--tech-surface, #f8fafc);
+  color: var(--tech-ink, #0B1220);
+  border: 1px solid var(--tech-border, #e2e8f0);
+  border-radius: 6px;
+}
+
+/* Collection filters */
+.facet-checkbox input:checked + label,
+.facet-checkbox input:checked + label::before {
+  background: var(--tech-primary, #2563eb);
+  border-color: var(--tech-primary, #2563eb);
+}
+

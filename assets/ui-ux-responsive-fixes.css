@@ -662,12 +662,12 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Links */
 a {
-  color: var(--color-text-link, #3b82f6);
+  color: var(--tech-primary, #2563eb);
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--color-primary-dark, #1e40af);
+  color: var(--tech-primary-hover, #1e40af);
 }
 
 /* Badges and labels */
@@ -1264,19 +1264,20 @@ details.facets__disclosure summary .icon-caret {
 }
 
 .product-form__cta-primary .shopify-payment-button__button {
-  background: #2563eb !important;
-  border-radius: 8px !important;
+  background: var(--tech-primary, #2563eb) !important;
+  border-radius: var(--tech-button-radius, 8px) !important;
   font-size: 1.6rem !important;
   font-weight: 700 !important;
   padding: 1.4rem 2rem !important;
   min-height: 52px !important;
   transition: all 0.2s ease !important;
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
 }
 
 .product-form__cta-primary .shopify-payment-button__button:hover {
-  background: #1e40af !important;
+  background: var(--tech-primary-hover, #1e40af) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
 }
 
 .product-form__submit.button--secondary {
@@ -2159,10 +2160,10 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 }
 
 .tech-cta-primary .shopify-payment-button__button {
-  background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%) !important;
+  background: var(--tech-primary, #2563eb) !important;
   border: none !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 150, 199, 0.3) !important;
+  border-radius: var(--tech-button-radius, 8px) !important;
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
   font-weight: 600 !important;
   font-size: 16px !important;
   letter-spacing: 0.5px !important;
@@ -2170,11 +2171,13 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   transition: all 0.3s ease !important;
   min-height: 52px !important;
   padding: 14px 24px !important;
+  color: var(--tech-primary-contrast, #ffffff) !important;
 }
 
 .tech-cta-primary .shopify-payment-button__button:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(0, 150, 199, 0.4) !important;
+  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
+  background: var(--tech-primary-hover, #1e40af) !important;
 }
 
 .tech-cta-primary .shopify-payment-button__button:active {
