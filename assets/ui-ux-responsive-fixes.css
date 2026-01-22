@@ -2313,3 +2313,61 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 .tech-card-product .card__details-link {
   margin-top: 0.5rem;
 }
+
+/* =============================================================================
+   RELATED PRODUCTS - CENTER GRID WITH PREMIUM STYLING
+   ============================================================================= */
+
+/* Center the product grid on product pages */
+.template-product .tech-related-products {
+  justify-content: center;
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+}
+
+/* Desktop: optimal spacing and centering for 3-4 items */
+@media screen and (min-width: 990px) {
+  .template-product .tech-related-products {
+    column-gap: 2rem;
+    row-gap: 2rem;
+    justify-content: center;
+  }
+  
+  /* Ensure grid container is centered */
+  .template-product .related-products {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Tablet: balanced columns */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .template-product .tech-related-products {
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+/* Mobile: 2 columns with clean spacing, no horizontal overflow */
+@media screen and (max-width: 749px) {
+  .template-product .tech-related-products {
+    column-gap: 1rem;
+    row-gap: 1.2rem;
+    justify-content: center;
+  }
+  
+  /* Prevent overflow on mobile */
+  .template-product .related-products {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure cards fit properly in 2-column layout - 0.5rem = column-gap/2 */
+  .template-product .tech-related-products .grid__item {
+    max-width: calc(50% - 0.5rem);
+  }
+}
