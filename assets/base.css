@@ -5401,7 +5401,7 @@ a.product__text {
 @media screen and (max-width: 749px) {
   .product-hero-slider {
     max-height: 60vh;
-    /* Control gallery height on mobile ~55-65vh */
+    /* Set to 60vh (middle of 55-65vh range) to balance image visibility with ATF space */
   }
 
   .product-hero-slide {
@@ -5412,7 +5412,7 @@ a.product__text {
     max-height: 60vh;
     width: 100%;
     object-fit: contain;
-    /* Fix aspect-ratio to eliminate gray bars */
+    /* Fix image scaling to eliminate gray bars/side spaces */
     object-position: center;
   }
 }
