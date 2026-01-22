@@ -1993,15 +1993,11 @@ details.facets__disclosure summary .icon-caret {
 
   section[id^="MainProduct-"] .product-hero-slide {
     max-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: transparent;
   }
 
   /* Override object-fit: contain from base.css with cover to eliminate grey bars */
-  section[id^="MainProduct-"] .product-hero-slide img,
-  section[id^="MainProduct-"] .product-hero-slide .global-media-settings {
+  section[id^="MainProduct-"] .product-hero-slide img {
     max-height: 60vh;
     width: 100%;
     object-fit: cover !important;
