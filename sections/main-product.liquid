@@ -45,7 +45,7 @@
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}{% if theme_style == 'warm_cro' %} pdp--warm{% endif %}">
 
       <!-- COLUMNA IZQUIERDA: GALERÍA + 3D/GIF -->
-      <product-hero-slider class="product-hero-slider">
+      <product-hero-slider class="product-hero-slider tech-pdp-media">
   {% for media in product.media %}
     <div class="product-hero-slide" id="Slide--{{ forloop.index }}">
       {% render 'product-media', media: media %}

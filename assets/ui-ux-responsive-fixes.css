@@ -1978,36 +1978,68 @@ details.facets__disclosure summary .icon-caret {
 }
 
 /* =============================================================================
-   PDP HERO GALLERY - VISUAL FIXES FOR MOBILE
-   Fix grey sidebars and image height issues on product detail pages
+   PDP HERO GALLERY - VISUAL FIXES
+   Drastically reduce hero image height and eliminate gray side bars
+   Scoped to product pages only using tech-pdp-media class
    ============================================================================= */
 
-/* Mobile: Override base.css object-fit to eliminate grey bars */
+/* Scope all changes to product pages using MainProduct section ID */
+section[id^="MainProduct-"] .tech-pdp-media {
+  max-height: 60vh;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Ensure all child elements have transparent background */
+section[id^="MainProduct-"] .tech-pdp-media,
+section[id^="MainProduct-"] .tech-pdp-media * {
+  background: transparent !important;
+}
+
+/* Individual slide containers */
+section[id^="MainProduct-"] .tech-pdp-media .product-hero-slide {
+  max-height: 60vh;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Images: use contain to preserve aspect ratio, eliminate gray bars */
+section[id^="MainProduct-"] .tech-pdp-media img {
+  max-height: 60vh;
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center;
+  background: transparent !important;
+}
+
+/* Media wrappers for images */
+section[id^="MainProduct-"] .tech-pdp-media .global-media-settings {
+  background: transparent !important;
+}
+
+/* Ensure video/model media also respects the height limit */
+section[id^="MainProduct-"] .tech-pdp-media .deferred-media,
+section[id^="MainProduct-"] .tech-pdp-media .product-model,
+section[id^="MainProduct-"] .tech-pdp-media deferred-media,
+section[id^="MainProduct-"] .tech-pdp-media product-model {
+  max-height: 60vh;
+  background: transparent !important;
+}
+
+/* Mobile specific: ensure 60vh is enforced */
 @media screen and (max-width: 749px) {
-  /* Scope specifically to product pages using attribute selector */
-  section[id^="MainProduct-"] .product-hero-slider {
-    max-height: 60vh;
-    background: transparent;
-    overflow: hidden;
+  section[id^="MainProduct-"] .tech-pdp-media {
+    max-height: 60vh !important;
   }
-
-  section[id^="MainProduct-"] .product-hero-slide {
-    max-height: 60vh;
-    background: transparent;
+  
+  section[id^="MainProduct-"] .tech-pdp-media .product-hero-slide {
+    max-height: 60vh !important;
   }
-
-  /* Override object-fit: contain from base.css with cover to eliminate grey bars */
-  section[id^="MainProduct-"] .product-hero-slide img {
-    max-height: 60vh;
-    width: 100%;
-    object-fit: cover !important;
-    object-position: center;
-    background: transparent;
-  }
-
-  /* Ensure video/model media also respects the height limit */
-  section[id^="MainProduct-"] .product-hero-slide .deferred-media,
-  section[id^="MainProduct-"] .product-hero-slide .product-model {
-    max-height: 60vh;
+  
+  section[id^="MainProduct-"] .tech-pdp-media img {
+    max-height: 60vh !important;
   }
 }
