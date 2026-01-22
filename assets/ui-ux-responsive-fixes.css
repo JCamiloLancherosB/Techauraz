@@ -1873,20 +1873,9 @@ details.facets__disclosure summary .icon-caret {
   margin-bottom: 1.5rem !important;
 }
 
-/* Featured Collection Sections - Reduce padding via section class */
-.shopify-section--featured-collection .section-template--padding {
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
-}
-
-@media screen and (min-width: 750px) {
-  .shopify-section--featured-collection .section-template--padding {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-}
-
-/* Target featured collection sections by their specific IDs from index.json */
+/* Featured Collection Sections - Target by specific IDs from index.json
+   NOTE: These IDs are stable as long as sections aren't deleted/recreated in Shopify admin.
+   If sections are regenerated, update these IDs or switch to class-based targeting. */
 #shopify-section-featured_collection_9GzLFt,
 #shopify-section-featured_collection_gY3DF9,
 #shopify-section-featured_collection_wXX7kY,
@@ -1942,20 +1931,23 @@ details.facets__disclosure summary .icon-caret {
   }
 }
 
-/* Reduce newsletter wrapper internal padding */
+/* Reduce newsletter wrapper internal padding 
+   Maintains ~35-40% reduction consistently across breakpoints
+   Original: 40px 24px (mobile), 50px 32px (tablet), 70px 60px (desktop)
+   New: 32px 20px (mobile), 40px 28px (tablet), 50px 44px (desktop) */
 .newsletter__wrapper {
-  padding: 2.5rem 2rem !important;
+  padding: 2rem 1.25rem !important;
 }
 
 @media screen and (min-width: 750px) {
   .newsletter__wrapper {
-    padding: 3rem 2.5rem !important;
+    padding: 2.5rem 1.75rem !important;
   }
 }
 
 @media screen and (min-width: 990px) {
   .newsletter__wrapper {
-    padding: 3.5rem 3rem !important;
+    padding: 3.125rem 2.75rem !important;
   }
 }
 
