@@ -2295,20 +2295,8 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   object-position: center;
 }
 
-/* Ensure media wrapper respects the aspect ratio */
-.tech-card-product .card__media .media {
-  aspect-ratio: 1 / 1;
-  display: block;
-}
-
 /* Mobile: Prevent horizontal overflow on grid */
 @media screen and (max-width: 749px) {
-  /* Target grids in collection and featured sections where our cards are used */
-  .collection .product-grid,
-  .featured-collection .product-grid {
-    overflow-x: visible;
-  }
-  
   /* Slightly reduce min-height for title on mobile */
   .tech-card-product .card__heading {
     min-height: calc(1.2em * 2);
