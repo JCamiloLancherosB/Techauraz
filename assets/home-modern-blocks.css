@@ -357,6 +357,8 @@ button:focus-visible {
    ANIMATIONS & TRANSITIONS
    ============================================== */
 
+/* NOTE: fadeInUp with 20px translateY - slightly subtler than base.css version (30px)
+   for smoother home page scroll animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;

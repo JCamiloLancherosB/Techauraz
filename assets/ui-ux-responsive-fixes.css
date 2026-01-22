@@ -155,11 +155,6 @@ slideshow-component .slider::-webkit-scrollbar {
     line-height: 1.3;
   }
   
-  /* Pricing on mobile */
-  .price .price-item--regular {
-    font-size: 1.7rem;
-  }
-  
   /* Quick-add button sizing for mobile */
   .quick-add__submit {
     min-height: 44px;
@@ -223,11 +218,6 @@ slideshow-component .slider::-webkit-scrollbar {
     font-size: 1.4rem;
   }
   
-  /* Pricing on tablet */
-  .price .price-item--regular {
-    font-size: 1.8rem;
-  }
-  
   /* Quick-add button for tablet */
   .quick-add__submit {
     font-size: 1.35rem;
@@ -269,10 +259,6 @@ slideshow-component .slider::-webkit-scrollbar {
   /* Enhanced card styling for large screens */
   .card__heading .full-unstyled-link {
     font-size: 1.6rem;
-  }
-  
-  .price .price-item--regular {
-    font-size: 2.1rem;
   }
   
   .quick-add__submit {
