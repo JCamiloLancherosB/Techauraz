@@ -1093,7 +1093,7 @@ textarea:focus-visible {
 details.facets__disclosure summary .icon-caret {
   width: 1.6rem !important;
   height: 1.6rem !important;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
   display: inline-block;
   vertical-align: middle;
   transition: transform 0.2s ease;
@@ -1104,6 +1104,7 @@ details.facets__disclosure summary .icon-caret {
 .facets-wrapper .icon {
   width: 1.6rem !important;
   height: 1.6rem !important;
+  flex: 0 0 auto !important;
 }
 
 /* Specific fix for icon-filter in facet controls */
@@ -1111,6 +1112,7 @@ details.facets__disclosure summary .icon-caret {
 .mobile-facets__wrapper .icon-filter {
   width: 1.6rem !important;
   height: 1.6rem !important;
+  flex: 0 0 auto !important;
 }
 
 /* =============================================================================

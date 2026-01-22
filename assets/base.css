@@ -305,7 +305,7 @@ img {
 svg.icon {
   width: 1.6rem !important;
   height: 1.6rem !important;
-  flex: 0 0 auto;
+  flex: 0 0 auto !important;
   display: inline-block;
   vertical-align: middle;
   max-width: 1.6rem;
@@ -319,6 +319,7 @@ svg.icon-caret {
   height: 1.6rem !important;
   max-width: 1.6rem !important;
   max-height: 1.6rem !important;
+  flex: 0 0 auto !important;
 }
 
 /* Ensure icon-arrow has consistent sizing */
@@ -328,6 +329,7 @@ svg.icon-arrow {
   height: 1.6rem !important;
   max-width: 1.6rem !important;
   max-height: 1.6rem !important;
+  flex: 0 0 auto !important;
 }
 
 /* Isolate SVGs within .media containers to prevent them from inheriting giant dimensions */
@@ -338,6 +340,7 @@ svg.icon-arrow {
   height: 1.6rem !important;
   max-width: 1.6rem !important;
   max-height: 1.6rem !important;
+  flex: 0 0 auto !important;
   object-fit: contain;
 }
 
@@ -350,6 +353,7 @@ svg.icon-arrow {
   height: 1.6rem !important;
   max-width: 1.6rem !important;
   max-height: 1.6rem !important;
+  flex: 0 0 auto !important;
 }
 
 

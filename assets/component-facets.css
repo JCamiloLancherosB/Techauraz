@@ -83,7 +83,7 @@
 details.facets__disclosure summary .icon-caret {
   width: var(--facets-icon-size) !important;
   height: var(--facets-icon-size) !important;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
   transition: transform 0.2s ease;
 }
 
@@ -175,7 +175,7 @@ details.facets__disclosure summary .icon-caret {
   width: var(--facets-icon-size) !important;
   height: var(--facets-icon-size) !important;
   pointer-events: none;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
 }
 
 /* === PRODUCT COUNT === */
