@@ -2,7 +2,7 @@
    UI/UX AND RESPONSIVENESS FIXES FOR TECHAURAZ
    Version: 1.0.0
    Date: 2024-01-20
-   
+
    This file contains all the fixes for:
    - Slideshow/slider functionality (working properly on all devices)
    - Full card clickability (entire card area clickable)
@@ -118,43 +118,43 @@ slideshow-component .slider::-webkit-scrollbar {
     overflow-x: hidden;
     max-width: 100vw;
   }
-  
+
   /* Prevent cards from causing overflow */
   .grid,
   .product-grid,
   .collection {
     overflow-x: hidden;
   }
-  
+
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
     height: auto;
   }
-  
+
   /* Mobile-friendly padding */
   .page-width {
     padding-left: 1.2rem;
     padding-right: 1.2rem;
   }
-  
+
   /* Product grid - 1 column on small mobile */
   .page-width .grid--5-col-desktop,
   .collection .grid--5-col-desktop {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   /* Card styling for mobile */
   .card-wrapper.product-card-wrapper {
     border-radius: 10px;
   }
-  
+
   .card__heading .full-unstyled-link {
     font-size: 1.3rem;
     line-height: 1.3;
   }
-  
+
   /* Quick-add button sizing for mobile */
   .quick-add__submit {
     min-height: 44px;
@@ -170,20 +170,20 @@ slideshow-component .slider::-webkit-scrollbar {
     overflow-x: hidden;
     max-width: 100vw;
   }
-  
+
   /* Prevent cards from causing overflow */
   .grid,
   .product-grid,
   .collection {
     overflow-x: hidden;
   }
-  
+
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
     height: auto;
   }
-  
+
   /* Mobile-friendly padding */
   .page-width {
     padding-left: 1.5rem;
@@ -197,27 +197,27 @@ slideshow-component .slider::-webkit-scrollbar {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-  
+
   /* Adjust grid columns for tablet - 3 columns */
   .grid--2-col-tablet {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .grid--3-col-tablet {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   /* Featured collection on tablet - 3 columns */
   .grid--5-col-desktop {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.8rem;
   }
-  
+
   /* Card heading sizing for tablet */
   .card__heading .full-unstyled-link {
     font-size: 1.4rem;
   }
-  
+
   /* Quick-add button for tablet */
   .quick-add__submit {
     font-size: 1.35rem;
@@ -233,7 +233,7 @@ slideshow-component .slider::-webkit-scrollbar {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
-  
+
   /* Featured collection - 4 columns on smaller desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(4, 1fr);
@@ -249,18 +249,18 @@ slideshow-component .slider::-webkit-scrollbar {
     padding-left: 3rem;
     padding-right: 3rem;
   }
-  
+
   /* Featured collection - full 5 columns on large desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
   }
-  
+
   /* Enhanced card styling for large screens */
   .card__heading .full-unstyled-link {
     font-size: 1.6rem;
   }
-  
+
   .quick-add__submit {
     font-size: 1.5rem;
     padding: 1.1rem 1.6rem;
@@ -272,7 +272,7 @@ slideshow-component .slider::-webkit-scrollbar {
   .page-width {
     max-width: 1600px;
   }
-  
+
   .grid--5-col-desktop {
     gap: 2.4rem;
   }
@@ -331,11 +331,11 @@ slideshow-component .slider::-webkit-scrollbar {
     margin: 0;
     padding: 0;
   }
-  
+
   .header__menu-item {
     position: relative;
   }
-  
+
   .header__menu-link {
     display: block;
     padding: 1rem 0.5rem;
@@ -344,7 +344,7 @@ slideshow-component .slider::-webkit-scrollbar {
     font-weight: 500;
     transition: color 0.2s ease;
   }
-  
+
   .header__menu-link:hover {
     color: var(--color-primary, #2563eb);
   }
@@ -355,15 +355,15 @@ slideshow-component .slider::-webkit-scrollbar {
   .header__wrapper {
     flex-wrap: wrap;
   }
-  
+
   .header__logo {
     order: 1;
   }
-  
+
   .header__icons {
     order: 2;
   }
-  
+
   .header__nav {
     order: 3;
     flex-basis: 100%;
@@ -482,12 +482,12 @@ slideshow-component .slider::-webkit-scrollbar {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .footer__content-bottom {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .footer__policies {
     justify-content: center;
   }
@@ -630,7 +630,7 @@ a:hover {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Larger tap targets */
   .header__icon,
   .footer__social-icon {
@@ -753,9 +753,9 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--color-primary, #2563eb) 50%, 
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-primary, #2563eb) 50%,
     transparent 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -765,7 +765,7 @@ textarea:focus-visible {
   opacity: 0.3;
 }
 
-/* Tech-style newsletter section - reduced performance impact 
+/* Tech-style newsletter section - reduced performance impact
    Performance Note: For optimal performance on mobile, consider using JavaScript
    to add/remove animation class based on viewport intersection */
 .newsletter__wrapper {
@@ -773,7 +773,7 @@ textarea:focus-visible {
   overflow: hidden;
 }
 
-/* Subtle pulsing glow - background effect for visual enhancement 
+/* Subtle pulsing glow - background effect for visual enhancement
    Note: Large pseudo-element optimized with will-change and limited to newsletter only */
 .newsletter__wrapper::before {
   content: '';
@@ -782,8 +782,8 @@ textarea:focus-visible {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, 
-    rgba(59, 130, 246, 0.1) 0%, 
+  background: radial-gradient(circle,
+    rgba(59, 130, 246, 0.1) 0%,
     transparent 70%);
   animation: tech-newsletter-pulse 4s ease-in-out infinite;
   /* will-change for animation optimization - consider JS toggle on viewport intersection */
@@ -795,19 +795,19 @@ textarea:focus-visible {
   50% { transform: scale(1.1); opacity: 0.8; }
 }
 
-/* Header tech enhancements - subtle gradient on scroll 
+/* Header tech enhancements - subtle gradient on scroll
    JavaScript Dependency: Requires theme.js or header.js to add .scrolled class
    on window scroll event (typically: window.scrollY > 0) */
 .header.scrolled {
-  background: linear-gradient(180deg, 
-    var(--color-bg-primary, #ffffff) 0%, 
+  background: linear-gradient(180deg,
+    var(--color-bg-primary, #ffffff) 0%,
     rgba(248, 250, 252, 0.98) 100%);
 }
 
 /* Footer tech styling - gradient background */
 .footer {
-  background: linear-gradient(180deg, 
-    var(--color-bg-tertiary, #f1f5f9) 0%, 
+  background: linear-gradient(180deg,
+    var(--color-bg-tertiary, #f1f5f9) 0%,
     var(--color-bg-secondary, #f8fafc) 100%);
   position: relative;
 }
@@ -819,10 +819,10 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--color-border, #e2e8f0) 20%, 
-    var(--color-border, #e2e8f0) 80%, 
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-border, #e2e8f0) 20%,
+    var(--color-border, #e2e8f0) 80%,
     transparent 100%);
 }
 
@@ -848,8 +848,8 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   height: 30%;
-  background: linear-gradient(0deg, 
-    rgba(15, 23, 42, 0.4) 0%, 
+  background: linear-gradient(0deg,
+    rgba(15, 23, 42, 0.4) 0%,
     transparent 100%);
   pointer-events: none;
 }
@@ -863,7 +863,7 @@ textarea:focus-visible {
    - Duplicate card styles
    - Inconsistent header/footer styles
    - Scattered responsive styles
-   
+
    All styles are now unified and optimized for performance.
 */
 
@@ -888,7 +888,7 @@ textarea:focus-visible {
     gap: 0.75rem;
     width: 100%;
   }
-  
+
   .banner__buttons .button {
     width: 100%;
     max-width: 100%;
@@ -901,7 +901,7 @@ textarea:focus-visible {
     flex-direction: row;
     gap: 1rem;
   }
-  
+
   .banner__buttons .button {
     min-width: 180px;
   }
@@ -982,11 +982,11 @@ textarea:focus-visible {
     gap: 1rem;
     padding: 1.5rem 1rem;
   }
-  
+
   .ta-conv-trust-badge {
     padding: 1.25rem 1rem;
   }
-  
+
   .ta-conv-trust-badge__icon {
     font-size: 2rem;
   }
@@ -1049,7 +1049,7 @@ textarea:focus-visible {
     gap: 1.5rem;
     padding: 2rem 0;
   }
-  
+
   .ta-conv-benefit {
     padding: 1.5rem 1.25rem;
   }
@@ -1260,70 +1260,70 @@ details.facets__disclosure summary .icon-caret {
   .product__info-container {
     padding-top: 0.5rem;
   }
-  
+
   .product__title h1 {
     font-size: 2rem;
     line-height: 1.3;
     margin-bottom: 1rem;
   }
-  
+
   .price--large {
     font-size: 2.4rem !important;
   }
-  
+
   /* ATF Optimization: Reduce spacing in conversion badges */
   .pdp-atf-availability {
     margin-bottom: 0.6rem;
     font-size: 1.3rem;
   }
-  
+
   .pdp-atf-trust-messages {
     margin-bottom: 0.8rem;
     gap: 0.5rem;
   }
-  
+
   .pdp-atf-trust-message {
     font-size: 1.2rem;
   }
-  
+
   .pdp-atf-benefits {
     padding: 0.8rem;
     margin-bottom: 1rem;
     gap: 0.4rem;
   }
-  
+
   .pdp-atf-benefit {
     font-size: 1.2rem;
   }
-  
+
   .product-form__buttons {
     gap: 0.6rem;
     margin-bottom: 1.2rem;
   }
-  
+
   .product-form__cta-primary .shopify-payment-button__button {
     font-size: 1.5rem !important;
     padding: 1.3rem 1.8rem !important;
     min-height: 50px !important;
   }
-  
+
   .product-form__submit.button--secondary {
     font-size: 1.4rem;
     padding: 1.1rem 1.8rem;
     min-height: 46px;
   }
-  
+
   .pdp-atf-micro-trust {
     font-size: 1.1rem;
     gap: 0.3rem 0.6rem;
     margin-bottom: 1.5rem;
   }
-  
+
   /* Ensure description/variants don't push CTAs below fold */
   .product-form {
     margin-top: 0;
   }
-  
+
   /* Move less critical blocks below fold on mobile */
   .product__description,
   .product-form .quantity-selector {
@@ -1336,29 +1336,29 @@ details.facets__disclosure summary .icon-caret {
   .product__title h1 {
     font-size: 1.8rem;
   }
-  
+
   .price--large {
     font-size: 2.2rem !important;
   }
-  
+
   .pdp-atf-trust-message {
     font-size: 1.25rem;
   }
-  
+
   .pdp-atf-benefit {
     font-size: 1.25rem;
   }
-  
+
   .product-form__cta-primary .shopify-payment-button__button {
     font-size: 1.4rem !important;
     padding: 1.2rem 1.5rem !important;
   }
-  
+
   .product-form__submit.button--secondary {
     font-size: 1.3rem;
     padding: 1rem 1.5rem;
   }
-  
+
   .pdp-atf-micro-trust {
     font-size: 1rem;
   }
@@ -1370,11 +1370,11 @@ details.facets__disclosure summary .icon-caret {
     flex-direction: row;
     gap: 1.5rem;
   }
-  
+
   .pdp-atf-benefits {
     margin-bottom: 2rem;
   }
-  
+
   .product-form__buttons {
     gap: 1.2rem;
   }
@@ -1484,7 +1484,7 @@ details.facets__disclosure summary .icon-caret {
   .product-faq__icon {
     transition: none;
   }
-  
+
   .product-faq__item[open] .product-faq__icon {
     transform: rotate(180deg);
   }
@@ -1933,7 +1933,7 @@ details.facets__disclosure summary .icon-caret {
   }
 }
 
-/* Reduce newsletter wrapper internal padding 
+/* Reduce newsletter wrapper internal padding
    Maintains ~35-40% reduction consistently across breakpoints
    Original: 40px 24px (mobile), 50px 32px (tablet), 70px 60px (desktop)
    New: 32px 20px (mobile), 40px 28px (tablet), 50px 44px (desktop) */
@@ -2036,11 +2036,11 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   section[id^="MainProduct-"] .tech-pdp-media {
     max-height: 60vh !important;
   }
-  
+
   section[id^="MainProduct-"] .tech-pdp-media .product-hero-slide {
     max-height: 60vh !important;
   }
-  
+
   section[id^="MainProduct-"] .tech-pdp-media img {
     max-height: 60vh !important;
   }
@@ -2138,44 +2138,44 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   .tech-pdp-purchase {
     margin-top: 0.75rem !important;
   }
-  
+
   .product__price {
     margin-bottom: 0.5rem !important;
   }
-  
+
   .product-variant-picker {
     margin-bottom: 0.75rem !important;
   }
-  
+
   .product-form__buttons {
     margin-top: 1rem !important;
     gap: 0.625rem;
   }
-  
+
   /* Ensure buttons are full width on mobile */
   .tech-cta-primary,
   .tech-cta-primary .shopify-payment-button,
   .tech-cta-primary .shopify-payment-button__button {
     width: 100% !important;
   }
-  
+
   .tech-cta-secondary {
     width: 100% !important;
   }
-  
+
   /* Ensure minimum touch target height (48px) */
   .tech-cta-primary .shopify-payment-button__button {
     min-height: 50px !important;
     padding: 14px 20px !important;
     font-size: 15px !important;
   }
-  
+
   .tech-cta-secondary {
     min-height: 48px !important;
     padding: 12px 20px !important;
     font-size: 14px !important;
   }
-  
+
   /* Reduce spacing even more on very small screens */
   @media screen and (max-width: 479px) {
     .product-form__buttons {
@@ -2219,7 +2219,7 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   .template-index .shopify-section:first-child {
     padding-bottom: 28px !important;
   }
-  
+
   .template-index #shopify-section-newsletter_home,
   .template-index #shopify-section-testimonials_home {
     padding-top: 50px !important;
@@ -2237,7 +2237,7 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   .template-index .shopify-section:first-child {
     padding-bottom: 20px !important;
   }
-  
+
   .template-index #shopify-section-newsletter_home,
   .template-index #shopify-section-testimonials_home {
     padding-top: 40px !important;
