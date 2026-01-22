@@ -1809,3 +1809,168 @@ details.facets__disclosure summary .icon-caret {
     font-size: 0.875rem;
   }
 }
+
+/* =============================================================================
+   HOME PAGE VERTICAL SPACING OPTIMIZATION
+   Added: 2026-01-22
+   Purpose: Reduce excessive white space between sections on Home page
+   Target: Category navigation, feature cards, benefits, featured collections,
+           testimonials, and newsletter sections
+   ============================================================================= */
+
+/* Category Navigation Section - Reduce vertical padding */
+.category-nav-section {
+  padding: 2rem 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .category-nav-section {
+    padding: 2.5rem 0 !important;
+  }
+}
+
+/* Modern Feature Cards Section - Reduce vertical padding */
+.modern-feature-cards {
+  padding: 2rem 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards {
+    padding: 3rem 0 !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .modern-feature-cards {
+    padding: 3.5rem 0 !important;
+  }
+}
+
+/* Reduce header margin bottom within modern feature cards */
+.modern-feature-cards__header {
+  margin-bottom: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards__header {
+    margin-bottom: 2rem !important;
+  }
+}
+
+/* Benefits Conversion Section - Reduce vertical padding */
+.ta-conv-section-spacing {
+  padding: 2rem 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .ta-conv-section-spacing {
+    padding: 2.5rem 0 !important;
+  }
+}
+
+/* Reduce heading margin in benefits section */
+.ta-conv-section-heading {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Featured Collection Sections - Target by specific IDs from index.json
+   NOTE: These IDs are stable as long as sections aren't deleted/recreated in Shopify admin.
+   If sections are regenerated, update these IDs or switch to class-based targeting. */
+#shopify-section-featured_collection_9GzLFt,
+#shopify-section-featured_collection_gY3DF9,
+#shopify-section-featured_collection_wXX7kY,
+#shopify-section-featured_collection_zcQFem,
+#shopify-section-featured_collection_8ibGYN {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  #shopify-section-featured_collection_9GzLFt,
+  #shopify-section-featured_collection_gY3DF9,
+  #shopify-section-featured_collection_wXX7kY,
+  #shopify-section-featured_collection_zcQFem,
+  #shopify-section-featured_collection_8ibGYN {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Testimonials Section - Reduce vertical padding */
+.testimonials-section {
+  padding: 2.5rem 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .testimonials-section {
+    padding: 3rem 0 !important;
+  }
+}
+
+/* Reduce title margin in testimonials */
+.testimonials-section__title {
+  margin-bottom: 2rem !important;
+}
+
+@media screen and (max-width: 749px) {
+  .testimonials-section__title {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Newsletter Section - Reduce padding (targets home-modern-blocks.css styles) */
+.newsletter {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Reduce newsletter wrapper internal padding 
+   Maintains ~35-40% reduction consistently across breakpoints
+   Original: 40px 24px (mobile), 50px 32px (tablet), 70px 60px (desktop)
+   New: 32px 20px (mobile), 40px 28px (tablet), 50px 44px (desktop) */
+.newsletter__wrapper {
+  padding: 2rem 1.25rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__wrapper {
+    padding: 2.5rem 1.75rem !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .newsletter__wrapper {
+    padding: 3.125rem 2.75rem !important;
+  }
+}
+
+/* Trust Badges Section - Reduce padding if present */
+#shopify-section-trust_badges_section {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  #shopify-section-trust_badges_section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Category nav - reduce subtitle margin */
+.category-nav-subtitle {
+  margin-bottom: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .category-nav-subtitle {
+    margin-bottom: 2rem !important;
+  }
+}
