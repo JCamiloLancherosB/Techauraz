@@ -2471,7 +2471,7 @@ section.free-shipping-banner:first-child {
 /* Alternative: padding-top approach for first main section */
 .template-index main > .shopify-section:first-child,
 body:not(.template-index) main > .shopify-section:first-child {
-  padding-top: calc(var(--tech-header-height) + 0px);
+  padding-top: var(--tech-header-height);
 }
 
 /* For overlay headers (like on homepage hero), add offset to main content */
@@ -2558,11 +2558,6 @@ details-modal,
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
 @media screen and (max-width: 749px) {
-  /* Smaller header on mobile */
-  :root {
-    --tech-header-height: 60px;
-  }
-  
   /* Menu items in mobile drawer should also be readable */
   .menu-drawer .list-menu__item--link,
   .menu-drawer__navigation a {
@@ -2575,19 +2570,8 @@ details-modal,
   }
 }
 
-/* --- TABLET SPECIFIC ADJUSTMENTS --- */
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  :root {
-    --tech-header-height: 68px;
-  }
-}
-
 /* --- DESKTOP SPECIFIC ADJUSTMENTS --- */
 @media screen and (min-width: 990px) {
-  :root {
-    --tech-header-height: 72px;
-  }
-  
   /* Desktop menu hover effects - more subtle */
   .header__menu-item:hover,
   .list-menu__item--link:hover {
