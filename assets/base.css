@@ -2623,7 +2623,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  aspect-ratio: 1 / 1; /* Enforce square aspect ratio */
+  /* Removed hardcoded aspect-ratio to respect dynamic --ratio-percent from Liquid */
 }
 
 .card__media::after {
@@ -3168,8 +3168,8 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 0.75rem;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
@@ -4728,15 +4728,61 @@ a.product__text {
 
 .product-media-container .media {
   padding-top: var(--ratio-percent);
+  aspect-ratio: var(--aspect-ratio); /* Modern browsers: use CSS aspect-ratio */
+}
+
+@supports (aspect-ratio: 1) {
+  .product-media-container .media {
+    padding-top: 0; /* Remove padding-top when aspect-ratio is supported */
+  }
 }
 
 .product-media-container.constrain-height .media {
   padding-top: min(var(--constrained-height), var(--ratio-percent));
+  aspect-ratio: var(--aspect-ratio); /* Modern browsers: use CSS aspect-ratio */
+}
+
+@supports (aspect-ratio: 1) {
+  .product-media-container.constrain-height .media {
+    padding-top: 0; /* Remove padding-top when aspect-ratio is supported */
+    max-height: var(--constrained-height);
+  }
 }
 
 .product-media-container .product__modal-opener {
   display: block;
   position: relative;
+}
+
+/* Deferred media (videos, models) - prevent CLS with aspect-ratio */
+.deferred-media.media {
+  position: relative;
+  aspect-ratio: var(--aspect-ratio, 1);
+}
+
+@supports not (aspect-ratio: 1) {
+  .deferred-media.media {
+    padding-top: calc(100% / var(--aspect-ratio, 1));
+  }
+}
+
+.product-model.deferred-media.media {
+  aspect-ratio: 1; /* 3D models are typically square */
+}
+
+@supports not (aspect-ratio: 1) {
+  .product-model.deferred-media.media {
+    padding-top: 100%;
+  }
+}
+
+/* Product media images - consistent object-fit to avoid weird crops */
+.product-media-container img,
+.global-media-settings img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 /* Recipient form */
@@ -6470,11 +6516,11 @@ body.menu-drawer-open {
   border-color: var(--color-primary-light);
 }
 
-/* Card media - proper aspect ratio */
+/* Card media - respect dynamic aspect ratio from --ratio-percent */
 .card__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  /* Removed hardcoded aspect-ratio to respect dynamic --ratio-percent from Liquid */
   overflow: hidden;
   background: var(--ta-bg-dark);
 }
@@ -8641,10 +8687,10 @@ body.menu-drawer-open {
     flex-direction: column !important;
   }
   
-  /* Card media - square aspect ratio */
+  /* Card media - respect dynamic aspect ratio from --ratio-percent */
   .card__media,
   .card .media {
-    aspect-ratio: 1 / 1 !important;
+    /* Removed hardcoded aspect-ratio to respect dynamic --ratio-percent from Liquid */
     width: 100% !important;
     overflow: hidden !important;
   }
