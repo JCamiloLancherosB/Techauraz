@@ -337,9 +337,15 @@
   }
 }
 
-/* Adjust slideshow section spacing */
-.template-index .section:has(slideshow-component) {
-  padding-bottom: 2rem;
+/* Adjust slideshow section spacing - fallback for browsers without :has() support */
+.template-index .section slideshow-component {
+  display: block;
+}
+
+@supports selector(:has(*)) {
+  .template-index .section:has(slideshow-component) {
+    padding-bottom: 2rem;
+  }
 }
 
 /* =============================================================================
@@ -351,6 +357,7 @@
 .template-index slideshow-component .slider-counter__link,
 .template-index slideshow-component .slideshow-cta {
   -webkit-tap-highlight-color: rgba(37, 99, 235, 0.3);
+  tap-highlight-color: rgba(37, 99, 235, 0.3);
 }
 
 /* High contrast mode support */
