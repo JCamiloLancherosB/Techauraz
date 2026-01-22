@@ -150,7 +150,7 @@
               </div>
             {%- endif -%}
             {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
-              <div class="banner__buttons">
+              <div class="banner__buttons slideshow-ctas">
                 {%- if block.settings.button_label != blank -%}
                   <a
                     {% if block.settings.link %}
@@ -158,7 +158,7 @@
                     {% else %}
                       role="link" aria-disabled="true"
                     {% endif %}
-                    class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
+                    class="button slideshow-cta {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
                   >
                     {{- block.settings.button_label | escape -}}
                   </a>
@@ -170,7 +170,7 @@
                     {% else %}
                       role="link" aria-disabled="true"
                     {% endif %}
-                    class="button button--secondary"
+                    class="button slideshow-cta button--secondary"
                   >
                     {{- block.settings.button_label_2 | escape -}}
                   </a>

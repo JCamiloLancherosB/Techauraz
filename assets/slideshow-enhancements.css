@@ -1,0 +1,374 @@
+/*
+ * Slideshow Enhancements - Slider Controls & CTAs
+ * Purpose: Improve visibility and positioning of slideshow controls and call-to-action buttons
+ * Scoped to: .template-index (home page) slideshow component
+ */
+
+/* =============================================================================
+   SLIDESHOW CONTROLS - Desktop & Mobile Positioning
+   ============================================================================= */
+
+/* Desktop: Arrow buttons centered vertically on hero */
+@media screen and (min-width: 750px) {
+  .template-index slideshow-component .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 102;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .template-index slideshow-component .slider-button--prev {
+    left: 2rem;
+  }
+
+  .template-index slideshow-component .slider-button--next {
+    right: 2rem;
+  }
+
+  .template-index slideshow-component .slider-button:hover {
+    background: rgba(37, 99, 235, 0.95);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  }
+
+  .template-index slideshow-component .slider-button:focus {
+    outline: 3px solid rgba(37, 99, 235, 0.6);
+    outline-offset: 3px;
+  }
+
+  .template-index slideshow-component .slider-button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.8);
+    outline-offset: 3px;
+  }
+}
+
+/* Mobile: Hide arrows, show dots below hero */
+@media screen and (max-width: 749px) {
+  .template-index slideshow-component .slideshow__controls--top .slider-button {
+    display: none;
+  }
+
+  .template-index slideshow-component .slideshow__controls {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin: 1.5rem auto 0;
+    padding: 1rem 0;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* Dots container */
+  .template-index slideshow-component .slider-counter {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .template-index slideshow-component .slideshow__control-wrapper {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Desktop: Position dots at bottom of hero, not overlapping next section */
+@media screen and (min-width: 750px) {
+  .template-index slideshow-component .slideshow__controls {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When controls are at top (with autoplay), position differently */
+  .template-index slideshow-component .slideshow__controls--top {
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .template-index slideshow-component .slideshow__controls--top .slider-button {
+    pointer-events: all;
+  }
+}
+
+/* =============================================================================
+   SLIDER DOTS - Improved Visibility & Touch Targets
+   ============================================================================= */
+
+.template-index slideshow-component .slider-counter__link--dots {
+  padding: 0.7rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.template-index slideshow-component .slider-counter__link--dots:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.template-index slideshow-component .slider-counter__link--dots:focus {
+  outline: 2px solid rgba(37, 99, 235, 0.8);
+  outline-offset: 2px;
+}
+
+.template-index slideshow-component .slider-counter__link--dots:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.8);
+  outline-offset: 2px;
+}
+
+.template-index slideshow-component .slider-counter__link--dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(226, 232, 240, 0.5);
+  border: 2px solid rgba(226, 232, 240, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
+  background: #2563eb;
+  border-color: #2563eb;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
+}
+
+.template-index slideshow-component .slider-counter__link--dots:hover .dot {
+  background: rgba(37, 99, 235, 0.7);
+  border-color: rgba(37, 99, 235, 0.9);
+  transform: scale(1.15);
+}
+
+/* Mobile specific dot styling */
+@media screen and (max-width: 749px) {
+  .template-index slideshow-component .slider-counter__link--dots {
+    padding: 0.6rem;
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .template-index slideshow-component .slider-counter__link--dots .dot {
+    width: 11px;
+    height: 11px;
+  }
+
+  .template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* =============================================================================
+   SLIDESHOW CTAs - Real Buttons with Accessibility
+   ============================================================================= */
+
+.template-index slideshow-component .slideshow-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.template-index slideshow-component .slideshow-cta {
+  min-height: 48px;
+  padding: 14px 32px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Primary CTA */
+.template-index slideshow-component .slideshow-cta.button--primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:focus {
+  outline: 3px solid rgba(37, 99, 235, 0.5);
+  outline-offset: 3px;
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.7);
+  outline-offset: 3px;
+}
+
+/* Secondary CTA */
+.template-index slideshow-component .slideshow-cta.button--secondary {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.template-index slideshow-component .slideshow-cta.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.template-index slideshow-component .slideshow-cta.button--secondary:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+}
+
+.template-index slideshow-component .slideshow-cta.button--secondary:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+/* Disabled state */
+.template-index slideshow-component .slideshow-cta[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Mobile: Full-width stacked buttons */
+@media screen and (max-width: 749px) {
+  .template-index slideshow-component .slideshow-ctas {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .template-index slideshow-component .slideshow-cta {
+    width: 100%;
+    max-width: 100%;
+    min-height: 52px;
+    padding: 16px 24px;
+  }
+}
+
+/* Desktop: Side-by-side buttons */
+@media screen and (min-width: 750px) {
+  .template-index slideshow-component .slideshow-ctas {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+
+  .template-index slideshow-component .slideshow-cta {
+    min-width: 180px;
+  }
+}
+
+/* =============================================================================
+   PREVENT CONTROL OVERLAP - Ensure controls stay within slideshow bounds
+   ============================================================================= */
+
+/* Container for slideshow to prevent overflow */
+.template-index slideshow-component {
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Ensure slideshow controls don't overlap next section */
+.template-index slideshow-component .slideshow {
+  margin-bottom: 0;
+  padding-bottom: 4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .template-index slideshow-component .slideshow {
+    padding-bottom: 2rem;
+  }
+
+  /* Add extra spacing after slideshow on mobile to prevent overlap */
+  .template-index slideshow-component + * {
+    margin-top: 2rem;
+  }
+}
+
+/* Adjust slideshow section spacing */
+.template-index .section:has(slideshow-component) {
+  padding-bottom: 2rem;
+}
+
+/* =============================================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================================================= */
+
+/* Ensure all interactive elements are keyboard accessible */
+.template-index slideshow-component .slider-button,
+.template-index slideshow-component .slider-counter__link,
+.template-index slideshow-component .slideshow-cta {
+  -webkit-tap-highlight-color: rgba(37, 99, 235, 0.3);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .template-index slideshow-component .slider-button,
+  .template-index slideshow-component .slideshow-cta {
+    border-width: 3px;
+  }
+
+  .template-index slideshow-component .slider-counter__link--dots .dot {
+    border-width: 3px;
+  }
+}
+
+/* Print styles - hide controls */
+@media print {
+  .template-index slideshow-component .slideshow__controls,
+  .template-index slideshow-component .slider-button {
+    display: none !important;
+  }
+}
