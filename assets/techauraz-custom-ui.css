@@ -7,6 +7,33 @@
  */
 
 /* =============================================================================
+   COLOR SYSTEM TOKENS - Premium Tech Palette
+   ============================================================================= */
+:root {
+  /* Background colors */
+  --tech-bg: #ffffff;
+  --tech-surface: #f8fafc;
+  
+  /* Text colors */
+  --tech-ink: #0B1220;
+  --tech-muted: #64748b;
+  
+  /* Primary brand color - Deep Blue */
+  --tech-primary: #2563eb;
+  --tech-primary-hover: #1e40af;
+  --tech-primary-contrast: #ffffff;
+  
+  /* Borders */
+  --tech-border: #e2e8f0;
+  --tech-border-light: #f1f5f9;
+  
+  /* Button styling tokens */
+  --tech-button-radius: 8px;
+  --tech-button-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  --tech-button-shadow-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+/* =============================================================================
    ANNOUNCEMENT BAR STYLES
    ============================================================================= */
 .announcement-bar__container {
