@@ -4728,7 +4728,7 @@ a.product__text {
 
 .product-media-container .media {
   padding-top: var(--ratio-percent);
-  aspect-ratio: var(--aspect-ratio); /* Modern browsers: use CSS aspect-ratio */
+  aspect-ratio: var(--aspect-ratio, 1); /* Modern browsers: use CSS aspect-ratio with fallback */
 }
 
 @supports (aspect-ratio: 1) {
@@ -4739,7 +4739,7 @@ a.product__text {
 
 .product-media-container.constrain-height .media {
   padding-top: min(var(--constrained-height), var(--ratio-percent));
-  aspect-ratio: var(--aspect-ratio); /* Modern browsers: use CSS aspect-ratio */
+  aspect-ratio: var(--aspect-ratio, 1); /* Modern browsers: use CSS aspect-ratio with fallback */
 }
 
 @supports (aspect-ratio: 1) {
@@ -4778,7 +4778,7 @@ a.product__text {
 }
 
 /* Product media images - consistent object-fit to avoid weird crops */
-/* Use contain for PDP to show full product without cropping */
+/* Note: Cards use object-fit: cover (see .card .media img), this rule is for PDP only */
 .product-media-container img,
 .global-media-settings img,
 .product__media img {
