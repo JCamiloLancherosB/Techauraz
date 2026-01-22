@@ -52,6 +52,7 @@ html {
   --color-primary-light: #3b82f6;
   /* Blue-500 - Lighter accents */
   --color-primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --color-primary-gradient-light: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
 
   /* Secondary Colors - Electric Cyan/Sky accents */
   --color-secondary: #06b6d4;
@@ -3212,7 +3213,7 @@ body {
 }
 
 .badge--new {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: var(--color-primary-gradient);
   color: #fff;
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
 }
@@ -3239,14 +3240,14 @@ body {
 }
 
 .card__cta .button--primary {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: var(--color-primary-gradient);
   color: #fff;
   border: none;
   box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
 }
 
 .card__cta .button--primary:hover {
-  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  background: var(--color-primary-gradient-light);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
   transform: translateY(-4px);
 }
@@ -3281,7 +3282,7 @@ body {
    NOTE: !important flags required here to override Shopify theme defaults 
    and ensure consistent button styling across all product cards */
 .quick-add__submit {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  background: var(--color-primary-gradient) !important;
   color: #ffffff !important;
   border-radius: 10px !important;
   font-size: 1.3rem !important;
@@ -3297,7 +3298,7 @@ body {
 }
 
 .quick-add__submit:hover {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+  background: var(--color-primary-gradient-light) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
   color: #ffffff !important;
@@ -7395,7 +7396,7 @@ body.menu-drawer-open {
 .ta-conv-btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-  background: linear-gradient(135deg, #60a5fa 0%, var(--ta-conv-primary) 100%);
+  background: var(--color-primary-gradient-light);
 }
 
 /* Secondary CTA - Subtle blue accent */
@@ -9710,7 +9711,7 @@ input[type="submit"] {
 button[type="submit"]:hover:not(:disabled),
 .cart__submit:hover:not(:disabled),
 input[type="submit"]:hover:not(:disabled) {
-  background: linear-gradient(135deg, #60a5fa 0%, var(--color-primary, #3b82f6) 100%);
+  background: var(--color-primary-gradient-light);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
   border-color: rgba(96, 165, 250, 0.4);
@@ -11852,20 +11853,7 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   line-height: 1.4;
 }
 
-/* Badge animation for stock warnings - component-specific */
-@keyframes pulse-badge {
-
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.6);
-  }
-}
+/* pulse-badge animation defined earlier in this file */
 
 /* Note: This is a component-specific animation, different from the generic pulse in animations.css */
 

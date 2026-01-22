@@ -185,13 +185,13 @@
 
 /* Primary button - "Agregar al carrito" */
 .quick-add__submit.button--secondary {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: var(--color-primary-gradient, linear-gradient(135deg, #3b82f6 0%, #2563eb 100%));
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .quick-add__submit.button--secondary:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: var(--color-primary-gradient-light, linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%));
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
   transform: translateY(-2px);
 }

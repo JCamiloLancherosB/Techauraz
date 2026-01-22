@@ -22,52 +22,9 @@
 /* ==============================================
    TESTIMONIALS SECTION ENHANCEMENTS
    ============================================== */
-
-.testimonials-section {
-  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-}
-
-.testimonials-section__title {
-  background: var(--home-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-.testimonial-card__content {
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: var(--home-transition);
-}
-
-.testimonial-card__content:hover {
-  border-color: var(--home-primary-blue);
-  transform: translateY(-6px);
-  box-shadow: var(--home-shadow-heavy);
-}
-
-.testimonial-card__rating {
-  display: flex;
-  gap: 4px;
-  justify-content: flex-start;
-}
-
-.testimonial-card__text {
-  position: relative;
-  padding-left: 20px;
-}
-
-.testimonial-card__text::before {
-  content: '"';
-  position: absolute;
-  left: 0;
-  top: -10px;
-  font-size: 48px;
-  color: var(--home-primary-blue);
-  opacity: 0.3;
-  font-family: Georgia, serif;
-  line-height: 1;
-}
+   
+/* NOTE: Base testimonials styling is in testimonials-slider.css
+   This file only provides additional enhancements */
 
 /* ==============================================
    NEWSLETTER SECTION ENHANCEMENTS
@@ -293,10 +250,6 @@
     padding: 50px 32px !important;
   }
 
-  .testimonial-card {
-    flex: 0 0 calc(50% - 12px);
-  }
-
   .footer__blocks-wrapper {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
@@ -307,10 +260,6 @@
 @media screen and (min-width: 990px) {
   .newsletter__wrapper {
     padding: 70px 60px !important;
-  }
-
-  .testimonial-card {
-    flex: 0 0 calc(33.333% - 16px);
   }
 
   .footer__blocks-wrapper {
@@ -335,11 +284,6 @@
     height: 44px;
   }
 
-  .testimonial-card__text::before {
-    font-size: 36px;
-    top: -8px;
-  }
-
   .footer-block__heading::after {
     width: 30px;
     height: 2px;
@@ -352,10 +296,6 @@
 
 /* Extra small devices - adjustments for very small screens (below 360px) */
 @media screen and (max-width: 359px) {
-  .testimonials-section__title {
-    font-size: 1.4rem;
-  }
-
   .newsletter .inline-richtext,
   .newsletter h2 {
     font-size: 1.5rem;
@@ -373,15 +313,6 @@
   .newsletter-form__button {
     width: 40px;
     height: 40px;
-  }
-
-  .testimonial-card__content {
-    padding: 20px;
-  }
-
-  .testimonial-card__text {
-    font-size: 14px;
-    padding-left: 16px;
   }
 }
 
@@ -426,6 +357,8 @@ button:focus-visible {
    ANIMATIONS & TRANSITIONS
    ============================================== */
 
+/* NOTE: fadeInUp with 20px translateY - slightly subtler than base.css version (30px)
+   for smoother home page scroll animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
