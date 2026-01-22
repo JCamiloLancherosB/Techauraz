@@ -79,40 +79,42 @@
 
 {%- style -%}
   .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 2rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 2rem;
+    padding: {{ section.settings.padding_top | times: 0.4 | round: 0 }}px 1.5rem {{ section.settings.padding_bottom | times: 0.4 | round: 0 }}px 1.5rem;
   }
 
   @media screen and (min-width: 750px) {
     .header {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
     }
   }
 
   .section-header {
-    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+    position: sticky; /* Safari z-index fix - maintains proper stacking context */
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.5 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
     .section-header {
-      margin-bottom: {{ section.settings.margin_bottom }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
     }
   }
 
   @media screen and (min-width: 990px) {
     .header {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-      padding-left: 3rem;
-      padding-right: 3rem;
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
     }
   }
 
   @media screen and (min-width: 1400px) {
     .header {
-      padding-left: 4rem;
-      padding-right: 4rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
     }
   }
 {%- endstyle -%}
@@ -390,12 +392,13 @@
       this.currentScrollTop = 0;
       this.preventReveal = false;
       this.predictiveSearch = this.querySelector('predictive-search');
+      this.scrollThreshold = 5; // Prevent jitter on small scroll movements
 
       this.onScrollHandler = this.onScroll.bind(this);
       this.hideHeaderOnScrollUp = () => this.preventReveal = true;
 
       this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
-      window.addEventListener('scroll', this.onScrollHandler, false);
+      window.addEventListener('scroll', this.onScrollHandler, { passive: true });
 
       this.createObserver();
     }
@@ -418,6 +421,10 @@
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
       if (this.predictiveSearch && this.predictiveSearch.isOpen) return;
+
+      // Use threshold to prevent jitter
+      const scrollDiff = Math.abs(scrollTop - this.currentScrollTop);
+      if (scrollDiff < this.scrollThreshold) return;
 
       if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
         this.header.classList.add('scrolled-past-header');
