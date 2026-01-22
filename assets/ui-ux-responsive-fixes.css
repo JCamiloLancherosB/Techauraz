@@ -14,6 +14,57 @@
    ============================================================================= */
 
 /* =============================================================================
+   0. HOME PAGE SECTION ALIGNMENT - Standardized spacing and alignment
+   ============================================================================= */
+
+/* 
+ * Utility class for consistent section spacing across Home page
+ * Desktop: 56px (3.5rem) vertical spacing
+ * Mobile: 32px (2rem) vertical spacing
+ */
+.tech-section {
+  padding-block: 2rem; /* Mobile: 32px */
+  padding-inline: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .tech-section {
+    padding-block: 3.5rem; /* Desktop: 56px */
+    padding-inline: 2rem;
+  }
+}
+
+/* Ensure all sections use consistent page-width container */
+.tech-section .page-width,
+.tech-section__wrapper {
+  max-width: var(--page-width, 1200px);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .tech-section .page-width,
+  .tech-section__wrapper {
+    padding-inline: 2rem;
+  }
+}
+
+/* Standardize H2 heading spacing and alignment */
+.tech-section h2,
+.tech-section .section-heading {
+  text-align: center;
+  margin-bottom: 2rem; /* Mobile: 32px */
+  padding-inline: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .tech-section h2,
+  .tech-section .section-heading {
+    margin-bottom: 3rem; /* Desktop: 48px */
+  }
+}
+
+/* =============================================================================
    1. FULL CARD CLICKABILITY - Make entire card clickable
    ============================================================================= */
 
@@ -992,14 +1043,20 @@ textarea:focus-visible {
   }
 }
 
-/* Benefits section - ensure proper responsive grid */
+/* Benefits section - ensure proper responsive grid with standardized spacing */
 .ta-conv-benefits {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 3rem 0;
-  max-width: 1200px;
+  gap: 1.5rem; /* Mobile: 24px */
+  padding: 0; /* Padding handled by ta-conv-section-spacing */
+  max-width: var(--page-width, 1200px);
   margin: 0 auto;
+}
+
+@media screen and (min-width: 750px) {
+  .ta-conv-benefits {
+    gap: 2rem; /* Desktop: 32px - Standardized */
+  }
 }
 
 .ta-conv-benefit {
@@ -1043,11 +1100,9 @@ textarea:focus-visible {
 }
 
 /* Responsive: Benefits section */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 749px) {
   .ta-conv-benefits {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0;
   }
 
   .ta-conv-benefit {
@@ -1055,14 +1110,14 @@ textarea:focus-visible {
   }
 }
 
-/* Section spacing improvements */
+/* Section spacing improvements - Updated to match tech-section standards */
 .ta-conv-section-spacing {
-  padding: 3rem 1.5rem;
+  padding: 3.5rem 2rem; /* Desktop: 56px vertical, consistent gutters */
 }
 
 @media screen and (max-width: 749px) {
   .ta-conv-section-spacing {
-    padding: 2rem 1rem;
+    padding: 2rem 1rem; /* Mobile: 32px vertical */
   }
 }
 
@@ -1071,13 +1126,13 @@ textarea:focus-visible {
   font-size: 2rem;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem; /* Desktop: 48px - consistent with tech-section */
 }
 
 @media screen and (max-width: 749px) {
   .ta-conv-section-heading {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem; /* Mobile: 32px - consistent with tech-section */
   }
 }
 

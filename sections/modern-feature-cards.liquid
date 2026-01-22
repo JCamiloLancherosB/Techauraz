@@ -12,19 +12,37 @@
 
 <style>
 .modern-feature-cards {
-  padding: clamp(3rem, 6vw, 6rem) 0;
+  padding: 2rem 0; /* Mobile: 32px - Standardized */
   background: linear-gradient(180deg, var(--color-bg-primary, #ffffff) 0%, var(--color-bg-secondary, #f9fafb) 100%);
 }
 
+@media screen and (min-width: 750px) {
+  .modern-feature-cards {
+    padding: 3.5rem 0; /* Desktop: 56px - Standardized */
+  }
+}
+
 .modern-feature-cards__wrapper {
-  max-width: var(--page-width, 1280px);
+  max-width: var(--page-width, 1200px);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 2rem);
+  padding: 0 1rem; /* Mobile: consistent gutters */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards__wrapper {
+    padding: 0 2rem; /* Desktop: consistent gutters */
+  }
 }
 
 .modern-feature-cards__header {
   text-align: center;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2rem; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards__header {
+    margin-bottom: 3rem; /* Desktop: 48px - Standardized */
+  }
 }
 
 .modern-feature-cards__heading {
@@ -47,7 +65,13 @@
 .modern-feature-cards__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2rem);
+  gap: 1.5rem; /* Mobile: 24px */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards__grid {
+    gap: 2rem; /* Desktop: 32px - Standardized */
+  }
 }
 
 /* Single column on very small screens */
