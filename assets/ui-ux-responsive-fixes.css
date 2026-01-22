@@ -1093,7 +1093,7 @@ textarea:focus-visible {
 details.facets__disclosure summary .icon-caret {
   width: 1.6rem !important;
   height: 1.6rem !important;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
   display: inline-block;
   vertical-align: middle;
   transition: transform 0.2s ease;
