@@ -4778,8 +4778,10 @@ a.product__text {
 }
 
 /* Product media images - consistent object-fit to avoid weird crops */
+/* Use contain for PDP to show full product without cropping */
 .product-media-container img,
-.global-media-settings img {
+.global-media-settings img,
+.product__media img {
   object-fit: contain;
   object-position: center;
   width: 100%;
