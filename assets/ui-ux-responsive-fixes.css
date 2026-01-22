@@ -2303,7 +2303,9 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 
 /* Mobile: Prevent horizontal overflow on grid */
 @media screen and (max-width: 749px) {
-  .product-grid {
+  /* Target grids in collection and featured sections where our cards are used */
+  .collection .product-grid,
+  .featured-collection .product-grid {
     overflow-x: visible;
   }
   
