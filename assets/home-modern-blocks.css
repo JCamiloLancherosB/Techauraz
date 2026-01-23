@@ -20,6 +20,77 @@
 }
 
 /* ==============================================
+   SLIDESHOW CTA ENHANCEMENTS
+   ============================================== */
+
+/* Ensure slideshow CTAs are professional and clickable */
+.slideshow-cta,
+.banner__buttons .button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: var(--home-transition);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.slideshow-cta.button--primary,
+.banner__buttons .button--primary {
+  background: var(--home-gradient-primary);
+  color: white;
+  box-shadow: var(--home-shadow-medium);
+}
+
+.slideshow-cta.button--secondary,
+.banner__buttons .button--secondary {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e293b;
+  border-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.slideshow-cta:hover,
+.banner__buttons .button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.slideshow-cta.button--primary:hover {
+  filter: brightness(1.1);
+}
+
+.slideshow-cta.button--secondary:hover {
+  background: white;
+  border-color: var(--home-primary-blue);
+}
+
+.slideshow-cta:focus,
+.banner__buttons .button:focus {
+  outline: 3px solid var(--home-primary-blue);
+  outline-offset: 3px;
+}
+
+/* Ensure CTAs wrapper doesn't block interactions */
+.slideshow-ctas,
+.banner__buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==============================================
    TESTIMONIALS SECTION ENHANCEMENTS
    ============================================== */
    
