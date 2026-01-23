@@ -9,6 +9,7 @@
 {%- endif -%}
 
 {{ 'home-modern-blocks.css' | asset_url | stylesheet_tag }}
+{{ 'techauraz-custom-ui.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   /* Standardized section padding for consistent alignment across all home sections */
@@ -132,14 +133,14 @@
         {%- endfor -%}
       </ul>
     {%- else -%}
-      <div style="text-align: center; padding: 60px 20px; background: rgba(14, 165, 233, 0.05); border-radius: 12px; border: 2px dashed rgba(14, 165, 233, 0.3); margin: 20px 0;">
-        <svg style="width: 80px; height: 80px; margin: 0 auto 20px; opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="collection-placeholder">
+        <svg class="collection-placeholder__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
         </svg>
-        <h3 style="font-size: 1.8rem; color: #0ea5e9; margin-bottom: 12px; font-weight: 600;">
+        <h3 class="collection-placeholder__title">
           📦 Selecciona una colección
         </h3>
-        <p style="color: #64748b; font-size: 1.4rem; max-width: 500px; margin: 0 auto;">
+        <p class="collection-placeholder__text">
           Para mostrar productos aquí, ve al <strong>Theme Editor</strong> y selecciona una colección en la configuración de esta sección.
         </p>
       </div>
