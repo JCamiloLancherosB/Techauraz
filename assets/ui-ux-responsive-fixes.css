@@ -2421,58 +2421,74 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
    Scope: Only affects homepage (template-index), not PDP or collection pages
    ============================================================================= */
 
-/* Desktop: Target 40-56px range - using 48px as optimal value */
-.template-index .shopify-section {
-  padding-top: 48px !important;
-  padding-bottom: 48px !important;
+/* Desktop: 56px baseline for consistent vertical rhythm */
+body.template-index .shopify-section {
+  padding-block: 56px !important;
 }
 
-/* Exclude newsletter and testimonials - they have custom spacing that works well */
-.template-index #shopify-section-newsletter_home,
-.template-index #shopify-section-testimonials_home {
+/* Hero (slideshow) - reduce bottom padding to tighten gap to next section */
+body.template-index .shopify-section:first-child {
+  padding-top: 0 !important;
+  padding-bottom: 28px !important;
+}
+
+/* Newsletter and testimonials - maintain adequate separation from content above */
+body.template-index #shopify-section-newsletter_home,
+body.template-index #shopify-section-testimonials_home {
   padding-top: 60px !important;
   padding-bottom: 60px !important;
 }
 
-/* Slideshow section should have minimal bottom padding */
-.template-index .shopify-section:first-child {
-  padding-top: 0 !important;
-  padding-bottom: 32px !important;
+/* Tighten spacing for specific sections to eliminate empty gaps */
+body.template-index #shopify-section-category_navigation,
+body.template-index #shopify-section-featured_collection_9GzLFt,
+body.template-index #shopify-section-featured_collection_bestsellers {
+  padding-block: 48px !important;
 }
 
 /* Tablet adjustments (750px - 989px) */
 @media screen and (min-width: 750px) and (max-width: 989px) {
-  .template-index .shopify-section {
-    padding-top: 42px !important;
-    padding-bottom: 42px !important;
+  body.template-index .shopify-section {
+    padding-block: 48px !important;
   }
 
-  .template-index .shopify-section:first-child {
-    padding-bottom: 28px !important;
+  body.template-index .shopify-section:first-child {
+    padding-bottom: 24px !important;
   }
 
-  .template-index #shopify-section-newsletter_home,
-  .template-index #shopify-section-testimonials_home {
+  body.template-index #shopify-section-newsletter_home,
+  body.template-index #shopify-section-testimonials_home {
     padding-top: 50px !important;
     padding-bottom: 50px !important;
   }
+
+  body.template-index #shopify-section-category_navigation,
+  body.template-index #shopify-section-featured_collection_9GzLFt,
+  body.template-index #shopify-section-featured_collection_bestsellers {
+    padding-block: 40px !important;
+  }
 }
 
-/* Mobile: Target 24-36px range - using 30px as optimal value */
+/* Mobile: 32px for tight, clean spacing */
 @media screen and (max-width: 749px) {
-  .template-index .shopify-section {
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
+  body.template-index .shopify-section {
+    padding-block: 32px !important;
   }
 
-  .template-index .shopify-section:first-child {
+  body.template-index .shopify-section:first-child {
     padding-bottom: 20px !important;
   }
 
-  .template-index #shopify-section-newsletter_home,
-  .template-index #shopify-section-testimonials_home {
+  body.template-index #shopify-section-newsletter_home,
+  body.template-index #shopify-section-testimonials_home {
     padding-top: 40px !important;
     padding-bottom: 40px !important;
+  }
+
+  body.template-index #shopify-section-category_navigation,
+  body.template-index #shopify-section-featured_collection_9GzLFt,
+  body.template-index #shopify-section-featured_collection_bestsellers {
+    padding-block: 28px !important;
   }
 }
 
