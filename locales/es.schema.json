@@ -959,6 +959,13 @@
             "label": "Izquierda"
           }
         },
+        "show_mobile_promo": {
+          "label": "Mostrar barra promocional en menú móvil",
+          "info": "Muestra un mensaje promocional en la parte superior del menú móvil"
+        },
+        "mobile_promo_text": {
+          "label": "Texto promocional del menú móvil"
+        },
         "logo_help": {
           "content": "Edita tu logotipo en [configuración del tema](/editor?context=theme&category=logo)."
         },

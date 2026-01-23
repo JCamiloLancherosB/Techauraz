@@ -28,9 +28,11 @@
         </div>
 
         {%- comment -%} Barra de promo {%- endcomment -%}
-        <div class="menu-drawer__promo">
-          🚚 Envío Gratis + Pago Contra Entrega
-        </div>
+        {%- if section.settings.show_mobile_promo and section.settings.mobile_promo_text != blank -%}
+          <div class="menu-drawer__promo">
+            {{ section.settings.mobile_promo_text }}
+          </div>
+        {%- endif -%}
 
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">

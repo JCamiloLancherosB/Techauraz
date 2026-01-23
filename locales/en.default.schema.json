@@ -1154,6 +1154,13 @@
           "options__2": {
             "label": "Left"
           }
+        },
+        "show_mobile_promo": {
+          "label": "Show promotional bar in mobile menu",
+          "info": "Displays a promotional message at the top of the mobile menu"
+        },
+        "mobile_promo_text": {
+          "label": "Mobile menu promotional text"
         }
       }
     },
