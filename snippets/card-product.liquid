@@ -108,12 +108,19 @@
             </div>
 
             {%- comment -%} Clean Badges: Max 1 badge - Priority: Oferta > Nuevo > Agotado {%- endcomment -%}
+            {%- liquid
+              assign is_new_tag = false
+              assign tags_lower = card_product.tags | map: 'downcase'
+              if tags_lower contains 'nuevo'
+                assign is_new_tag = true
+              endif
+            -%}
             <div class="card__badges">
               {%- comment -%} Show "Oferta" badge ONLY when compare_at_price exists AND is greater than price {%- endcomment -%}
               {%- if card_product.compare_at_price and card_product.compare_at_price > card_product.price -%}
                 <span class="card__badge card__badge--sale">OFERTA</span>
-              {%- comment -%} Show "Nuevo" badge only if product has "Nuevo" tag (don't invent) {%- endcomment -%}
-              {%- elsif card_product.tags contains 'Nuevo' -%}
+              {%- comment -%} Show "Nuevo" badge only if product has "nuevo" tag (case-insensitive) {%- endcomment -%}
+              {%- elsif is_new_tag -%}
                 <span class="card__badge card__badge--new">Nuevo</span>
               {%- comment -%} Show "Agotado" only if not available {%- endcomment -%}
               {%- elsif card_product.available == false -%}
