@@ -343,11 +343,12 @@ select:focus {
   margin: 0;
 }
 
-.collection-placeholder__icon {
+.collection-placeholder .icon-collection {
   width: 80px;
   height: 80px;
   margin: 0 auto 20px;
   opacity: 0.6;
+  display: block;
 }
 
 .collection-placeholder__title {
@@ -369,7 +370,7 @@ select:focus {
     padding: 40px 16px;
   }
   
-  .collection-placeholder__icon {
+  .collection-placeholder .icon-collection {
     width: 60px;
     height: 60px;
   }
