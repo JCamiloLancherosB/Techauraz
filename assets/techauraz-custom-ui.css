@@ -327,3 +327,60 @@ select:focus {
   border-color: var(--tech-primary, #2563eb);
 }
 
+/* =============================================================================
+   COLLECTION PLACEHOLDER MESSAGE
+   ============================================================================= */
+.collection-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(14, 165, 233, 0.05);
+  border-radius: 12px;
+  border: 2px dashed rgba(14, 165, 233, 0.3);
+  margin: 20px 0;
+}
+
+.collection-placeholder--full-width {
+  margin: 0;
+}
+
+.collection-placeholder .icon-collection {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  opacity: 0.6;
+  display: block;
+}
+
+.collection-placeholder__title {
+  font-size: 1.8rem;
+  color: #0ea5e9;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.collection-placeholder__text {
+  color: #64748b;
+  font-size: 1.4rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 749px) {
+  .collection-placeholder {
+    padding: 40px 16px;
+  }
+  
+  .collection-placeholder .icon-collection {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .collection-placeholder__title {
+    font-size: 1.6rem;
+  }
+  
+  .collection-placeholder__text {
+    font-size: 1.3rem;
+  }
+}
+
