@@ -27,9 +27,10 @@
     assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price | round
   endif
   
-  # Check if product is new based on tags (nuevo or Nuevo)
+  # Check if product is new based on tags (case-insensitive check for "nuevo")
   assign is_new = false
-  if product.tags contains 'nuevo' or product.tags contains 'Nuevo'
+  assign tags_lower = product.tags | map: 'downcase' | join: ','
+  if tags_lower contains 'nuevo'
     assign is_new = true
   endif
   
