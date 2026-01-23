@@ -10,6 +10,7 @@
    ============================================================================= */
 
 /* Force placeholder SVGs in slideshow to be visible and fill container */
+/* Note: !important needed to override base.css icon sizing rules which also use !important */
 .slideshow__media.placeholder .placeholder-svg,
 .banner__media.placeholder .placeholder-svg {
   width: 100% !important;
@@ -19,8 +20,8 @@
   min-height: 340px; /* Mobile minimum */
   object-fit: cover;
   display: block;
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Ensure slideshow media containers have consistent minimum height */
@@ -53,14 +54,14 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Override any lazy loading opacity that might hide images */
+/* Explicitly ensure lazy loading doesn't affect slideshow images */
 .slideshow__media img[loading="lazy"],
 .banner__media img[loading="lazy"] {
-  opacity: 1 !important;
+  opacity: 1;
 }
 
 /* Ensure slideshow slide containers maintain consistent height */

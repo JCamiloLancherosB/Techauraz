@@ -37,12 +37,23 @@
 
   // Process all images on page (exclude slideshow/banner images to prevent interference)
   function processImages() {
-    // Select product and card images, but exclude slideshow/banner to prevent interference
+    // Select product and card images
     const cardImages = document.querySelectorAll('.card__media img, .product__media img');
-    const otherImages = document.querySelectorAll('.media:not(.banner__media):not(.slideshow__media) img');
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]:not(.banner__media img):not(.slideshow__media img)');
     
-    const images = [...cardImages, ...otherImages, ...lazyImages];
+    // Select other images but filter out slideshow/banner ones
+    const allMediaImages = document.querySelectorAll('.media img');
+    const filteredMediaImages = Array.from(allMediaImages).filter(img => {
+      return !img.closest('.banner__media') && !img.closest('.slideshow__media');
+    });
+    
+    // Select lazy images but filter out slideshow/banner ones
+    const allLazyImages = document.querySelectorAll('img[loading="lazy"]');
+    const filteredLazyImages = Array.from(allLazyImages).filter(img => {
+      return !img.closest('.banner__media') && !img.closest('.slideshow__media');
+    });
+    
+    // Combine all images (use Set to avoid duplicates)
+    const images = [...new Set([...cardImages, ...filteredMediaImages, ...filteredLazyImages])];
     
     images.forEach(function(img) {
       // If image has src, process it
