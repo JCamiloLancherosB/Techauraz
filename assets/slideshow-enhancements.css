@@ -5,6 +5,89 @@
  */
 
 /* =============================================================================
+   SLIDESHOW IMAGE VISIBILITY & HEIGHT CONSISTENCY FIXES
+   Critical: Ensure all slides show images and maintain consistent height
+   ============================================================================= */
+
+/* Force placeholder SVGs in slideshow to be visible and fill container */
+/* 
+ * Note: !important on width/height/max properties is required to override base.css line 337-345
+ * which forces all SVGs in .media containers to 1.6rem using !important.
+ * This is a justified use since we're specifically overriding another !important rule.
+ */
+.slideshow__media.placeholder .placeholder-svg,
+.banner__media.placeholder .placeholder-svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-height: 340px; /* Mobile minimum */
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure slideshow media containers have consistent minimum height */
+.slideshow__media,
+.banner__media {
+  min-height: 340px; /* Mobile: 340px minimum */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #f1f5f9; /* Light gray fallback background */
+}
+
+/* Desktop: Increase minimum height for better visual impact */
+@media screen and (min-width: 750px) {
+  .slideshow__media,
+  .banner__media {
+    min-height: 480px; /* Desktop: 480px minimum */
+  }
+
+  .slideshow__media.placeholder .placeholder-svg,
+  .banner__media.placeholder .placeholder-svg {
+    min-height: 480px;
+  }
+}
+
+/* Ensure all images in slideshow are visible */
+.slideshow__media img,
+.banner__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Explicitly ensure lazy loading doesn't affect slideshow images */
+.slideshow__media img[loading="lazy"],
+.banner__media img[loading="lazy"] {
+  opacity: 1;
+}
+
+/* Ensure slideshow slide containers maintain consistent height */
+.slideshow__slide {
+  min-height: 340px;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow__slide {
+    min-height: 480px;
+  }
+}
+
+/* Overlay styling is controlled per-slide via section settings (inline styles) */
+/* This ensures text content stays above the overlay */
+.slideshow__text-wrapper,
+.banner__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* =============================================================================
    SLIDESHOW CONTROLS - Desktop & Mobile Positioning
    ============================================================================= */
 

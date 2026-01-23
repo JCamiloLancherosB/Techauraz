@@ -35,9 +35,25 @@
     }
   }
 
-  // Process all images on page
+  // Process all images on page (exclude slideshow/banner images to prevent interference)
   function processImages() {
-    const images = document.querySelectorAll('.card__media img, .product__media img, .media img, img[loading="lazy"]');
+    // Select product and card images
+    const cardImages = document.querySelectorAll('.card__media img, .product__media img');
+    
+    // Select other images but filter out slideshow/banner ones
+    const allMediaImages = document.querySelectorAll('.media img');
+    const filteredMediaImages = Array.from(allMediaImages).filter(img => {
+      return !img.closest('.banner__media') && !img.closest('.slideshow__media');
+    });
+    
+    // Select lazy images but filter out slideshow/banner ones
+    const allLazyImages = document.querySelectorAll('img[loading="lazy"]');
+    const filteredLazyImages = Array.from(allLazyImages).filter(img => {
+      return !img.closest('.banner__media') && !img.closest('.slideshow__media');
+    });
+    
+    // Combine and deduplicate (Set works with DOM element references)
+    const images = [...new Set([...cardImages, ...filteredMediaImages, ...filteredLazyImages])];
     
     images.forEach(function(img) {
       // If image has src, process it
