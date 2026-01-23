@@ -2426,7 +2426,8 @@ body.template-index .shopify-section {
   padding-block: 56px !important;
 }
 
-/* Hero (slideshow) - reduce bottom padding to tighten gap to next section */
+/* Hero (slideshow) - reduce bottom padding to tighten gap to next section
+   28px chosen to maintain breathing room while eliminating excessive space */
 body.template-index .shopify-section:first-child {
   padding-top: 0 !important;
   padding-bottom: 28px !important;
