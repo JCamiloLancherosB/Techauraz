@@ -18,28 +18,24 @@
   assign show_badges = show_badges | default: true
   assign cta_text = cta_text | default: 'Ver producto'
   
-  # Calculate discount percentage if on sale
+  # Calculate discount percentage if on sale - only when compare_at_price > price
   assign on_sale = false
   assign discount_percent = 0
-  if product.compare_at_price > product.price
+  if product.compare_at_price and product.compare_at_price > product.price
     assign on_sale = true
     assign discount = product.compare_at_price | minus: product.price
     assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price | round
   endif
   
-  # Check if product is new (published in last 30 days)
+  # Check if product is new based on tags (nuevo or Nuevo)
   assign is_new = false
-  assign days_old = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400
-  if days_old <= 30
+  if product.tags contains 'nuevo' or product.tags contains 'Nuevo'
     assign is_new = true
   endif
   
   # Check stock level
-  assign low_stock = false
   assign in_stock = true
-  if product.selected_or_first_available_variant.inventory_quantity <= 10 and product.selected_or_first_available_variant.inventory_quantity > 0
-    assign low_stock = true
-  elsif product.available == false
+  if product.available == false
     assign in_stock = false
   endif
 -%}
@@ -66,20 +62,14 @@
     
     {%- if show_badges -%}
       <div class="ta-conv-product-card__badges">
+        {%- comment -%} Priority: OFERTA > NUEVO > Agotado - Max 1 badge {%- endcomment -%}
         {%- if on_sale and discount_percent > 0 -%}
           <span class="ta-conv-badge ta-conv-badge--sale">-{{ discount_percent }}%</span>
-        {%- endif -%}
-        
-        {%- if is_new -%}
+        {%- elsif is_new -%}
           <span class="ta-conv-badge ta-conv-badge--new">Nuevo</span>
+        {%- elsif in_stock == false -%}
+          <span class="ta-conv-badge ta-conv-badge--sold-out">Agotado</span>
         {%- endif -%}
-        
-        {%- if low_stock -%}
-          <span class="ta-conv-badge ta-conv-badge--stock">Pocas unidades</span>
-        {%- endif -%}
-        
-        {%- comment -%} Always show free shipping badge as per business requirement {%- endcomment -%}
-        <span class="ta-conv-badge ta-conv-badge--free-shipping">Envío gratis</span>
       </div>
     {%- endif -%}
   </div>
@@ -111,10 +101,16 @@
 </div>
 
 <style>
-  /* Additional badge style for sale */
+  /* Badge styles for conversion product cards */
   .ta-conv-badge--sale {
     background: rgba(239, 68, 68, 0.9);
     color: #ffffff;
     font-weight: 700;
+  }
+  
+  .ta-conv-badge--sold-out {
+    background: rgba(107, 114, 128, 0.9);
+    color: #ffffff;
+    font-weight: 600;
   }
 </style>

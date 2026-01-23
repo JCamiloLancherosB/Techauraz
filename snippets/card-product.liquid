@@ -112,8 +112,8 @@
               {%- comment -%} Show "Oferta" badge ONLY when compare_at_price exists AND is greater than price {%- endcomment -%}
               {%- if card_product.compare_at_price and card_product.compare_at_price > card_product.price -%}
                 <span class="card__badge card__badge--sale">OFERTA</span>
-              {%- comment -%} Show "Nuevo" badge only if product has "Nuevo" tag (don't invent) {%- endcomment -%}
-              {%- elsif card_product.tags contains 'Nuevo' -%}
+              {%- comment -%} Show "Nuevo" badge only if product has "nuevo" or "Nuevo" tag {%- endcomment -%}
+              {%- elsif card_product.tags contains 'nuevo' or card_product.tags contains 'Nuevo' -%}
                 <span class="card__badge card__badge--new">Nuevo</span>
               {%- comment -%} Show "Agotado" only if not available {%- endcomment -%}
               {%- elsif card_product.available == false -%}
