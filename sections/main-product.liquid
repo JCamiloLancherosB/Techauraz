@@ -74,6 +74,9 @@
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
+          
+          {%- comment -%} Above-the-fold wrapper starts {%- endcomment -%}
+          <div class="tech-pdp-atf">
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}
@@ -647,8 +650,23 @@
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
 
+              {%- when 'trust_line' -%}
+                <div class="tech-trust-line" {{ block.shopify_attributes }}>
+                  <div class="tech-trust-line__item">
+                    <span class="tech-trust-line__icon" aria-hidden="true">💵</span>
+                    <span class="tech-trust-line__text">{{ block.settings.text_1 | default: "Contraentrega en Colombia" }}</span>
+                  </div>
+                  <div class="tech-trust-line__item">
+                    <span class="tech-trust-line__icon" aria-hidden="true">✅</span>
+                    <span class="tech-trust-line__text">{{ block.settings.text_2 | default: "Garantía 30 días" }}</span>
+                  </div>
+                </div>
+
             {%- endcase -%}
           {%- endfor -%}
+          
+          {%- comment -%} Close above-the-fold wrapper {%- endcomment -%}
+          </div>
 
           <a href="#product-description" class="link product__view-details animate-arrow product__view-details--enhanced" data-scroll-to-description>
             📖 {{ 'products.product.view_full_details' | t }}
@@ -2088,6 +2106,25 @@
           "default": "Heading",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "trust_line",
+      "name": "Línea de Confianza",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Texto 1",
+          "default": "Contraentrega en Colombia"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Texto 2",
+          "default": "Garantía 30 días"
         }
       ]
     }
