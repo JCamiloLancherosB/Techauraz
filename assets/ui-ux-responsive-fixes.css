@@ -2548,13 +2548,25 @@ main {
   padding-top: 0;
 }
 
-/* Also apply when sticky header is explicitly used */
-.shopify-section-header-sticky + main:not(.header-wrapper--overlay + main) {
+/* Also apply padding when sticky header is used (unless overlay mode) */
+.shopify-section-header-sticky + main {
   padding-top: var(--tech-header-offset);
+}
+
+/* Overlay header exception - reset padding when header is transparent over hero */
+.shopify-section-header-sticky.header-wrapper--overlay + main {
+  padding-top: 0;
 }
 
 /* --- ANNOUNCEMENT BAR & HEADER STICKY COORDINATION --- */
 /* When both announcement bar and header are sticky, stack them properly */
+/* 
+ * NOTE: !important is used intentionally for z-index values because:
+ * 1. Shopify's Dawn theme has complex CSS cascade with inline styles
+ * 2. Base.css and other theme files may try to override these critical stacking values
+ * 3. Z-index hierarchy must be strictly enforced for proper visual layering
+ * 4. Future theme updates should not accidentally break the stacking order
+ */
 
 /* Announcement bar - sticks to top of viewport with highest priority in header group */
 .announcement-bar-section,
