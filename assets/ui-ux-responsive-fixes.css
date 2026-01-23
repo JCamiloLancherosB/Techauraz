@@ -14,6 +14,35 @@
    ============================================================================= */
 
 /* =============================================================================
+   TOPBAR + HEADER STACK STABILIZATION
+   Version: 1.1.0
+   Date: 2026-01-23
+   
+   Fixes positioning and stacking of:
+   - Announcement bar (topbar with benefits/shipping/phone)
+   - Header (main navigation)
+   - Prevents overlapping and ensures proper z-index hierarchy
+   ============================================================================= */
+
+/* Ensure announcement bar container has proper background and visibility */
+.announcement-bar-section,
+.announcement-bar__container,
+.utility-bar {
+  width: 100%;
+  background-color: inherit;
+  /* Ensure it's not hidden */
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Prevent the topbar from being "pushed under" the header */
+/* Position relative for non-sticky state, actual sticky positioning is handled below */
+.announcement-bar__container {
+  /* Ensure min-height so content is always visible */
+  min-height: var(--tech-topbar-height);
+}
+
+/* =============================================================================
    0. HOME PAGE SECTION ALIGNMENT - Standardized spacing and alignment
    ============================================================================= */
 
@@ -2748,29 +2777,37 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
-  /* Header offset variable for consistent sticky positioning and spacing */
-  --tech-header-offset: 64px; /* Mobile: base header + announcement bar */
-  --tech-header-height: 60px; /* Mobile default - kept for backward compatibility */
+  /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
+  --tech-topbar-height: 40px; /* Mobile */
+  
+  /* Header (main navigation) height */
+  --tech-header-height: 60px; /* Mobile */
+  
+  /* Total stack height (announcement bar + header) */
+  --tech-stack-height: calc(var(--tech-topbar-height) + var(--tech-header-height));
+  
+  /* Legacy variable for backward compatibility */
+  --tech-header-offset: var(--tech-stack-height);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --tech-header-offset: 68px; /* Tablet */
-    --tech-header-height: 68px; /* Tablet */
+    --tech-topbar-height: 44px; /* Tablet */
+    --tech-header-height: 64px; /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-header-offset: 72px; /* Desktop */
-    --tech-header-height: 72px; /* Desktop */
+    --tech-topbar-height: 48px; /* Desktop */
+    --tech-header-height: 68px; /* Desktop */
   }
 }
 
 /* --- SCROLL PADDING FOR STICKY HEADER --- */
 /* Prevents content from being hidden under sticky header when jumping to anchors */
 body {
-  scroll-padding-top: var(--tech-header-offset);
+  scroll-padding-top: var(--tech-stack-height);
 }
 
 /* --- MENU TEXT LEGIBILITY FIX --- */
@@ -2826,19 +2863,21 @@ body {
 
 /* --- MAIN CONTENT OFFSET FOR STICKY HEADER --- */
 /* Apply offset to main content to prevent header from covering first section */
+/* This applies by default since both announcement bar and header are configured as sticky in header-group.json */
 main {
-  /* Add padding only if header is NOT in overlay mode */
-  padding-top: var(--tech-header-offset);
+  /* Add padding equal to the full stack height (topbar + header) */
+  padding-top: var(--tech-stack-height);
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
+/* Using adjacent sibling selector for better specificity */
 .header-wrapper--overlay + main {
   padding-top: 0;
 }
 
-/* Also apply padding when sticky header is used (unless overlay mode) */
+/* Also ensure sticky header has proper offset */
 .shopify-section-header-sticky + main {
-  padding-top: var(--tech-header-offset);
+  padding-top: var(--tech-stack-height);
 }
 
 /* Overlay header exception - reset padding when header is transparent over hero */
@@ -2859,23 +2898,38 @@ main {
 /* Announcement bar - sticks to top of viewport with highest priority in header group */
 .announcement-bar-section,
 .announcement-bar__container,
-.announcement-bar__container--sticky {
-  position: sticky;
+.announcement-bar__container--sticky,
+.utility-bar {
+  position: sticky !important;
   top: 0 !important;
   z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
+  background-color: inherit; /* Ensure it has a background */
 }
 
-/* Header - also sticks to top, but appears below announcement bar due to lower z-index */
+/* Ensure announcement bar message container has proper height */
+.announcement-bar__message {
+  min-height: var(--tech-topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+}
+
+/* Header - also sticks to top, but appears BELOW announcement bar */
+/* When both are sticky, header should be pushed down by topbar height */
 .section-header,
 .header-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 100; /* Below announcement bar (101), above content, below modals (200+) */
+  position: sticky !important;
+  /* Position header below the announcement bar when both are sticky */
+  top: var(--tech-topbar-height) !important;
+  z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
+  background-color: inherit; /* Ensure it has a background */
 }
 
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
+  top: var(--tech-topbar-height) !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
@@ -2891,13 +2945,13 @@ main {
   margin-top: 0;
 }
 
-/* If sticky banner is used, position it below the header */
+/* If sticky banner is used, position it below the entire header stack */
 .free-shipping-banner--sticky {
   position: sticky;
-  top: var(--tech-header-offset) !important;
+  top: var(--tech-stack-height) !important;
   /* 
    * Z-index: 98 - Below announcement bar (101) and header (100) 
-   * This ensures banner sticks below header, not overlapping it
+   * This ensures banner sticks below header stack, not overlapping it
    */
   z-index: 98 !important;
 }
@@ -2913,14 +2967,13 @@ main {
  *   - Overlay backgrounds: 150
  * 
  * Layer 4: Sticky Header Group (z-index: 100-101)
- *   - Sticky announcement bar: 101 (topmost in header group)
+ *   - Announcement bar/topbar (shipping, benefits): 101 (topmost in header group)
  *   - Main navigation header: 100
  *   - Fixed/sticky position
  *   - Must stay below modals/drawers
  * 
  * Layer 3: Sticky Elements (z-index: 90-99)
- *   - Sticky announcement bar: 101
- *   - Sticky benefits bar: 98
+ *   - Sticky benefits bar (if separate from announcement bar): 98
  *   - Floating buttons (WhatsApp): 95
  * 
  * Layer 2: Interactive Content (z-index: 10-50)
