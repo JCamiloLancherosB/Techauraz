@@ -55,6 +55,8 @@
   text-align: center;
   margin-bottom: 2rem; /* Mobile: 32px */
   padding-inline: 1rem;
+  color: var(--tech-ink, #0B1220);
+  font-weight: 700;
 }
 
 @media screen and (min-width: 750px) {
@@ -625,48 +627,62 @@ slideshow-component .slider::-webkit-scrollbar {
 /* Primary buttons */
 .button--primary,
 .btn-primary {
-  background: var(--color-primary, #2563eb);
-  color: var(--color-text-inverse, #ffffff);
+  background: var(--tech-primary, #2563eb);
+  color: var(--tech-primary-contrast, #ffffff);
   border: none;
+  border-radius: var(--tech-button-radius, 8px);
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
+  transition: all 0.2s ease;
 }
 
 .button--primary:hover,
 .btn-primary:hover {
-  background: var(--color-primary-dark, #1e40af);
+  background: var(--tech-primary-hover, #1e40af);
+  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+  transform: translateY(-1px);
 }
 
 /* Secondary buttons */
 .button--secondary,
 .btn-secondary {
-  background: var(--color-secondary, #06b6d4);
-  color: var(--color-text-inverse, #ffffff);
-  border: none;
+  background: transparent;
+  color: var(--tech-primary, #2563eb);
+  border: 2px solid var(--tech-primary, #2563eb);
+  border-radius: var(--tech-button-radius, 8px);
+  transition: all 0.2s ease;
 }
 
 .button--secondary:hover,
 .btn-secondary:hover {
-  background: var(--color-secondary-dark, #0891b2);
+  background: var(--tech-surface, #f8fafc);
+  color: var(--tech-primary-hover, #1e40af);
+  border-color: var(--tech-primary-hover, #1e40af);
+  transform: translateY(-1px);
 }
 
 /* Links */
 a {
-  color: var(--color-text-link, #3b82f6);
+  color: var(--tech-primary, #2563eb);
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--color-primary-dark, #1e40af);
+  color: var(--tech-primary-hover, #1e40af);
 }
 
 /* Badges and labels */
 .badge,
 .label {
-  background: var(--color-accent, #14b8a6);
-  color: var(--color-text-inverse, #ffffff);
+  background: var(--tech-surface, #f8fafc);
+  color: var(--tech-ink, #0B1220);
+  border: 1px solid var(--tech-border, #e2e8f0);
   padding: 0.4rem 0.8rem;
   border-radius: 0.4rem;
   font-size: 1.2rem;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /* =============================================================================
@@ -985,17 +1001,17 @@ textarea:focus-visible {
   align-items: center;
   text-align: center;
   padding: 1.5rem 1rem;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--tech-bg, #ffffff);
+  border-radius: var(--tech-button-radius, 8px);
+  border: 1px solid var(--tech-border, #e2e8f0);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .ta-conv-trust-badge:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
+  border-color: var(--tech-primary, #2563eb);
 }
 
 .ta-conv-trust-badge__icon {
@@ -1007,14 +1023,14 @@ textarea:focus-visible {
 .ta-conv-trust-badge__title {
   font-size: 1rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--tech-ink, #0B1220);
   margin-bottom: 0.25rem;
   line-height: 1.3;
 }
 
 .ta-conv-trust-badge__text {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--tech-muted, #64748b);
   line-height: 1.4;
   margin: 0;
 }
@@ -1125,7 +1141,7 @@ textarea:focus-visible {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--tech-ink, #0B1220);
   margin-bottom: 3rem; /* Desktop: 48px - consistent with tech-section */
 }
 
@@ -1245,40 +1261,43 @@ details.facets__disclosure summary .icon-caret {
 }
 
 .product-form__cta-primary .shopify-payment-button__button {
-  background: #2563eb !important;
-  border-radius: 8px !important;
+  background: var(--tech-primary, #2563eb) !important;
+  border-radius: var(--tech-button-radius, 8px) !important;
   font-size: 1.6rem !important;
   font-weight: 700 !important;
   padding: 1.4rem 2rem !important;
   min-height: 52px !important;
   transition: all 0.2s ease !important;
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
 }
 
 .product-form__cta-primary .shopify-payment-button__button:hover {
-  background: #1e40af !important;
+  background: var(--tech-primary-hover, #1e40af) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
 }
 
 .product-form__submit.button--secondary {
   order: 2;
-  background: #ffffff;
-  color: #2563eb;
-  border: 2px solid #2563eb;
+  background: transparent;
+  color: var(--tech-primary, #2563eb);
+  border: 2px solid var(--tech-primary, #2563eb);
   font-size: 1.5rem;
   font-weight: 600;
   padding: 1.2rem 2rem;
   min-height: 48px;
-  border-radius: 8px;
+  border-radius: var(--tech-button-radius, 8px);
   transition: all 0.2s ease;
   width: 100%;
   display: block;
 }
 
 .product-form__submit.button--secondary:hover {
-  background: #eff6ff;
+  background: var(--tech-surface, #f8fafc);
+  color: var(--tech-primary-hover, #1e40af);
+  border-color: var(--tech-primary-hover, #1e40af);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
 }
 
 /* Micro-trust Icons (below CTAs) */
@@ -2138,10 +2157,10 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 }
 
 .tech-cta-primary .shopify-payment-button__button {
-  background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%) !important;
+  background: var(--tech-primary, #2563eb) !important;
   border: none !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 150, 199, 0.3) !important;
+  border-radius: var(--tech-button-radius, 8px) !important;
+  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
   font-weight: 600 !important;
   font-size: 16px !important;
   letter-spacing: 0.5px !important;
@@ -2149,11 +2168,13 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   transition: all 0.3s ease !important;
   min-height: 52px !important;
   padding: 14px 24px !important;
+  color: var(--tech-primary-contrast, #ffffff) !important;
 }
 
 .tech-cta-primary .shopify-payment-button__button:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(0, 150, 199, 0.4) !important;
+  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
+  background: var(--tech-primary-hover, #1e40af) !important;
 }
 
 .tech-cta-primary .shopify-payment-button__button:active {
@@ -2441,7 +2462,6 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 :root {
   /* Header height variable for consistent sticky offset management */
   --tech-header-height: 60px; /* Mobile default */
-  --tech-ink: #111111; /* Dark text for readability on light backgrounds */
 }
 
 @media screen and (min-width: 750px) {
@@ -2469,8 +2489,9 @@ body {
 .list-menu__item > a,
 .header-menu > li > a,
 .header__inline-menu a {
-  color: var(--tech-ink, #111111) !important;
+  color: var(--tech-ink, #0B1220) !important;
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 /* Hover state - make it obvious with color change and underline */
@@ -2479,7 +2500,7 @@ body {
 .list-menu__item > a:hover,
 .header-menu > li > a:hover,
 .header__inline-menu a:hover {
-  color: #2563eb !important; /* Blue primary color */
+  color: var(--tech-primary, #2563eb) !important;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -2490,8 +2511,8 @@ body {
 .list-menu__item > a:focus-visible,
 .header-menu > li > a:focus-visible,
 .header__inline-menu a:focus-visible {
-  color: #1e40af !important; /* Darker blue */
-  outline: 2px solid #2563eb;
+  color: var(--tech-primary-hover, #1e40af) !important;
+  outline: 2px solid var(--tech-primary, #2563eb);
   outline-offset: 2px;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -2616,12 +2637,12 @@ details-modal,
   /* Menu items in mobile drawer should also be readable */
   .menu-drawer .list-menu__item--link,
   .menu-drawer__navigation a {
-    color: var(--tech-ink, #111111) !important;
+    color: var(--tech-ink, #0B1220) !important;
   }
   
   .menu-drawer .list-menu__item--link:hover,
   .menu-drawer__navigation a:hover {
-    color: #2563eb !important;
+    color: var(--tech-primary, #2563eb) !important;
   }
 }
 
