@@ -121,6 +121,7 @@ slideshow-component {
   position: relative;
   display: block;
   margin-bottom: 2rem;
+  overflow: visible;
 }
 
 slideshow-component .slideshow,
@@ -136,6 +137,7 @@ slideshow-component .slider {
   scrollbar-width: none;
   -ms-overflow-style: none;
   position: relative;
+  overflow-y: visible;
 }
 
 slideshow-component .slideshow__slide,
@@ -166,6 +168,36 @@ slideshow-component .slider::-webkit-scrollbar {
   justify-content: center;
   margin-top: 1.5rem;
   padding: 0 1rem 1.5rem;
+}
+
+/* Dots styling for professional look */
+.slider-counter__link .dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.slider-counter__link.is-active .dot,
+.slider-counter__link:hover .dot {
+  background: var(--home-primary-blue, #0ea5e9);
+  transform: scale(1.2);
+}
+
+.slider-counter__link {
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.slider-counter__link:focus {
+  outline: 2px solid var(--home-primary-blue, #0ea5e9);
+  outline-offset: 2px;
+  border-radius: 50%;
 }
 
 /* Arrow buttons - centered vertically on hero (desktop) */
@@ -1091,12 +1123,19 @@ textarea:focus-visible {
 }
 
 /* Ensure proper image cropping - no stretching */
+.slideshow__media,
+.banner__media {
+  pointer-events: none;
+  position: relative;
+}
+
 .slideshow__media img,
 .banner__media img {
   object-fit: cover;
   object-position: center;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 /* Trust badges section - modern card style */
