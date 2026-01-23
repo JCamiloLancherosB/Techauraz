@@ -155,7 +155,7 @@
     left: auto;
     transform: none;
     margin: 1.5rem auto 0;
-    padding: 1rem 0 2rem;
+    padding: 1rem 0 2rem; /* Extra bottom padding to prevent overlap with next section */
     justify-content: center;
     gap: 0.5rem;
   }
@@ -203,8 +203,6 @@
     pointer-events: none;
     justify-content: space-between;
     padding: 0 1rem;
-    width: 100%;
-    max-width: 100%;
   }
 
   .template-index slideshow-component .slideshow__controls--top .slider-button,
