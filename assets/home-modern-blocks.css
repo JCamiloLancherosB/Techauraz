@@ -100,12 +100,6 @@ body.template-index slideshow-component {
   display: block;
 }
 
-/* Ensure the slideshow banner itself is position relative */
-body.template-index slideshow-component .slideshow.banner {
-  position: relative;
-  padding-bottom: 48px; /* Desktop: room for controls at bottom */
-}
-
 /* Position controls wrapper at bottom of hero, centered */
 body.template-index .tech-slideshow-controls {
   position: absolute;
@@ -415,10 +409,6 @@ body.template-index .tech-slideshow-controls.slideshow__controls--top .slider-bu
   }
 
   /* Mobile: Slideshow controls positioning */
-  body.template-index slideshow-component .slideshow.banner {
-    padding-bottom: 56px; /* Mobile: more room for controls */
-  }
-
   body.template-index .tech-slideshow-controls {
     position: relative;
     bottom: auto;
