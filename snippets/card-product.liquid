@@ -107,46 +107,17 @@
               {%- endif -%}
             </div>
 
-            {%- comment -%} CRO: Stock & Discount Badges {%- endcomment -%}
+            {%- comment -%} Clean Badges: Max 1 badge - Priority: Oferta > Nuevo > Agotado {%- endcomment -%}
             <div class="card__badges">
-              {%- comment -%} New product badge - show for products published in last 30 days {%- endcomment -%}
-              {%- assign current_timestamp = 'now' | date: '%s' | plus: 0 -%}
-              {%- assign published_timestamp = card_product.published_at | date: '%s' | plus: 0 -%}
-              {%- assign days_since_published = current_timestamp | minus: published_timestamp | divided_by: 86400 -%}
-              {%- if days_since_published <= 30 -%}
-                <span class="card__badge card__badge--new">Nuevo</span>
-              {%- endif -%}
-              
-              {%- comment -%} Bestseller badge - based on metafield or tag {%- endcomment -%}
-              {%- if card_product.tags contains 'bestseller' or card_product.tags contains 'más vendido' or card_product.metafields.custom.bestseller -%}
-                <span class="card__badge card__badge--bestseller">Más vendido</span>
-              {%- endif -%}
-              
-              {%- comment -%} Discount percentage badge AND "En Oferta" badge {%- endcomment -%}
+              {%- comment -%} Show "Oferta" badge ONLY when compare_at_price > price {%- endcomment -%}
               {%- if card_product.compare_at_price > card_product.price -%}
-                {%- assign discount_percentage = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
-                <span class="card__badge card__badge--sale">En Oferta</span>
-                <span class="card__badge card__badge--discount">-{{ discount_percentage }}%</span>
-              {%- endif -%}
-              
-              {%- comment -%} Only show stock warning if inventory is being tracked {%- endcomment -%}
-              {%- assign total_inventory = 0 -%}
-              {%- assign tracking_inventory = false -%}
-              {%- for variant in card_product.variants -%}
-                {%- if variant.inventory_management -%}
-                  {%- assign tracking_inventory = true -%}
-                  {%- if variant.inventory_quantity > 0 -%}
-                    {%- assign total_inventory = total_inventory | plus: variant.inventory_quantity -%}
-                  {%- endif -%}
-                {%- endif -%}
-              {%- endfor -%}
-              
-              {%- if tracking_inventory -%}
-                {%- if total_inventory > 0 and total_inventory <= 10 -%}
-                  <span class="card__badge card__badge--stock">¡Últimas {{ total_inventory }} unidades!</span>
-                {%- elsif card_product.available == false -%}
-                  <span class="card__badge card__badge--sold-out">Agotado</span>
-                {%- endif -%}
+                <span class="card__badge card__badge--sale">OFERTA</span>
+              {%- comment -%} Show "Nuevo" badge only if product has "Nuevo" tag (don't invent) {%- endcomment -%}
+              {%- elsif card_product.tags contains 'Nuevo' -%}
+                <span class="card__badge card__badge--new">Nuevo</span>
+              {%- comment -%} Show "Agotado" only if not available {%- endcomment -%}
+              {%- elsif card_product.available == false -%}
+                <span class="card__badge card__badge--sold-out">Agotado</span>
               {%- endif -%}
             </div>
           </div>
@@ -254,13 +225,7 @@
               </div>
             {%- endif -%}
             
-            {%- comment -%} Trust indicators - compact single line {%- endcomment -%}
-            {%- if card_product.available -%}
-              <div class="card__trust-indicators">
-                <span class="card__trust-indicator">✓ Envío rápido</span>
-                <span class="card__trust-indicator">✓ En stock</span>
-              </div>
-            {%- endif -%}
+            {%- comment -%} Removed trust indicators from cards - keep for PDP only {%- endcomment -%}
           </div>
         </div>
         
@@ -367,23 +332,7 @@
             {%- endif -%}
           </div>
         {%- endif -%}
-        <div class="card__badge {{ settings.badge_position }}">
-          {%- if card_product.available == false -%}
-            <span
-              id="Badge-{{ section_id }}-{{ card_product.id }}"
-              class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-            >
-              {{- 'products.product.sold_out' | t -}}
-            </span>
-          {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-            <span
-              id="Badge-{{ section_id }}-{{ card_product.id }}"
-              class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-            >
-              {{- 'products.product.on_sale' | t -}}
-            </span>
-          {%- endif -%}
-        </div>
+        {%- comment -%} Duplicate badge section removed - badges now only shown at top of card {%- endcomment -%}
       </div>
     </div>
   </div>
