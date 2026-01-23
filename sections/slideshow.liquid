@@ -9,16 +9,16 @@
     fetchpriority="high">
 {%- endif -%}
 
+{%- comment -%} Find first slide with an image to determine if slideshow has images {%- endcomment -%}
+{%- assign reference_image = nil -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.image != blank -%}
+    {%- assign reference_image = block.settings.image -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
 {%- if section.settings.slide_height == 'adapt_image' -%}
-  {%- comment -%} Find first slide with an image to determine aspect ratio {%- endcomment -%}
-  {%- assign reference_image = nil -%}
-  {%- for block in section.blocks -%}
-    {%- if block.settings.image != blank -%}
-      {%- assign reference_image = block.settings.image -%}
-      {%- break -%}
-    {%- endif -%}
-  {%- endfor -%}
-  
   {%- if reference_image -%}
     {%- style -%}
       @media screen and (max-width: 749px) {
@@ -110,7 +110,7 @@
   {%- endif -%}
 
   <div
-    class="slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank %} slideshow--placeholder{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% unless reference_image %} slideshow--placeholder{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
     id="Slider-{{ section.id }}"
     aria-live="polite"
     aria-atomic="true"

@@ -52,8 +52,13 @@
       return !img.closest('.banner__media') && !img.closest('.slideshow__media');
     });
     
-    // Combine all images (use Set to avoid duplicates)
-    const images = [...new Set([...cardImages, ...filteredMediaImages, ...filteredLazyImages])];
+    // Combine all images and deduplicate using a Map with element as key
+    const imageMap = new Map();
+    [...cardImages, ...filteredMediaImages, ...filteredLazyImages].forEach(img => {
+      imageMap.set(img, true);
+    });
+    
+    const images = Array.from(imageMap.keys());
     
     images.forEach(function(img) {
       // If image has src, process it

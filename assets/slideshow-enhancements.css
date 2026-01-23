@@ -10,7 +10,11 @@
    ============================================================================= */
 
 /* Force placeholder SVGs in slideshow to be visible and fill container */
-/* Note: !important needed to override base.css icon sizing rules which also use !important */
+/* 
+ * Note: !important on width/height/max properties is required to override base.css line 337-345
+ * which forces all SVGs in .media containers to 1.6rem using !important.
+ * This is a justified use since we're specifically overriding another !important rule.
+ */
 .slideshow__media.placeholder .placeholder-svg,
 .banner__media.placeholder .placeholder-svg {
   width: 100% !important;
