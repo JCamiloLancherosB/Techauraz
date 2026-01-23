@@ -68,13 +68,50 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "trust_badges_section": {
-      "type": "custom-liquid",
+    "benefits_conversion_home": {
+      "type": "benefits-conversion",
+      "blocks": {
+        "benefit_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
+          }
+        },
+        "benefit_payment": {
+          "type": "benefit",
+          "settings": {
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
+          }
+        },
+        "benefit_guarantee": {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Garantía de 30 días",
+            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
+          }
+        },
+        "benefit_delivery": {
+          "type": "benefit",
+          "settings": {
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_shipping",
+        "benefit_payment",
+        "benefit_guarantee",
+        "benefit_delivery"
+      ],
       "settings": {
-        "custom_liquid": "{% render 'trust-badges-conversion' %}",
-        "color_scheme": "",
-        "padding_top": 32,
-        "padding_bottom": 32
+        "heading": ""
       }
     },
     "category_navigation": {
@@ -137,6 +174,63 @@
         "heading": "Explora por Categoría"
       }
     },
+    "featured_collection_9GzLFt": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "settings": {
+        "title": "<strong>Productos Destacados</strong>",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "diademas-gamer-techaura",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "featured_collection_bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "<strong>Más Vendidos</strong>",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "carga-energia-techaura",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "modern_feature_cards_home": {
       "type": "modern-feature-cards",
       "blocks": {
@@ -188,195 +282,8 @@
         "feature_card_4"
       ],
       "settings": {
-        "heading": "¿Por Qué Elegir TechAura?",
+        "heading": "¿Por Qué Comprar con TechAura?",
         "subheading": "Descubre las ventajas que hacen de TechAura tu mejor opción para productos tecnológicos premium"
-      }
-    },
-    "featured_collection_9GzLFt": {
-      "type": "featured-collection",
-      "custom_css": [],
-      "settings": {
-        "title": "<strong>Productos destacados</strong>",
-        "heading_size": "h2",
-        "description": "<h4>¡Descubre una gama única de productos inalámbricos y con cable diseñados para elevar tu experiencia sonora en cada momento de tu día!</h4>",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "carga-energia-techaura",
-        "products_to_show": 13,
-        "columns_desktop": 5,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 32,
-        "padding_bottom": 52
-      }
-    },
-    "benefits_conversion_home": {
-      "type": "benefits-conversion",
-      "blocks": {
-        "benefit_shipping": {
-          "type": "benefit",
-          "settings": {
-            "icon": "🚚",
-            "title": "Recibe gratis en tu casa",
-            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
-          }
-        },
-        "benefit_payment": {
-          "type": "benefit",
-          "settings": {
-            "icon": "💳",
-            "title": "Paga cuando recibes",
-            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
-          }
-        },
-        "benefit_guarantee": {
-          "type": "benefit",
-          "settings": {
-            "icon": "✨",
-            "title": "Garantía de 30 días",
-            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
-          }
-        },
-        "benefit_delivery": {
-          "type": "benefit",
-          "settings": {
-            "icon": "⚡",
-            "title": "Entrega en 2-5 días",
-            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_shipping",
-        "benefit_payment",
-        "benefit_guarantee",
-        "benefit_delivery"
-      ],
-      "settings": {
-        "heading": "¿Por qué comprar con TechAura?"
-      }
-    },
-    "featured_collection_gY3DF9": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "<strong>TecnoAccesorios Premium - Herramientas y Dispositivos Inteligentes para Vida Moderna</strong>",
-        "heading_size": "h2",
-        "description": "<h4>Este conjunto de productos representa soluciones tecnológicas innovadoras y prácticas diseñadas para mejorar la calidad de vida y optimizar las experiencias cotidianas. Incluye dispositivos inteligentes y herramientas de alto rendimiento que combinan funcionalidad avanzada con diseño moderno.</h4>",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "conectividad-hubs-y-adaptadores-techaura",
-        "products_to_show": 25,
-        "columns_desktop": 5,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection_wXX7kY": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Accesorios escritorio y portátil",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "escritorio-minimal-techaura",
-        "products_to_show": 25,
-        "columns_desktop": 5,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection_zcQFem": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Setup TV Y Conectividad",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "setup-tv-consolas-techaura",
-        "products_to_show": 25,
-        "columns_desktop": 5,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection_8ibGYN": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Power Bank con tapa transparente",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "edicion-transparente-techaura",
-        "products_to_show": 25,
-        "columns_desktop": 5,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "testimonials_home": {
@@ -425,19 +332,49 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "newsletter_home": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "heading": "Suscríbete a nuestro newsletter",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_block": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Recibe ofertas exclusivas, novedades y consejos tecnológicos directamente en tu correo.</p>"
+          }
+        },
+        "email_form_block": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_block",
+        "paragraph_block",
+        "email_form_block"
+      ],
+      "settings": {
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "slideshow_iqMhTA",
-    "trust_badges_section",
-    "category_navigation",
-    "modern_feature_cards_home",
-    "featured_collection_9GzLFt",
     "benefits_conversion_home",
-    "featured_collection_gY3DF9",
-    "featured_collection_wXX7kY",
-    "featured_collection_zcQFem",
-    "featured_collection_8ibGYN",
-    "testimonials_home"
+    "category_navigation",
+    "featured_collection_9GzLFt",
+    "featured_collection_bestsellers",
+    "modern_feature_cards_home",
+    "testimonials_home",
+    "newsletter_home"
   ]
 }
