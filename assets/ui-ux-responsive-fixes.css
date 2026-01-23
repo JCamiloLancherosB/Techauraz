@@ -2777,13 +2777,13 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
-  /* Topbar (announcement-bar) height - the benefits/shipping/phone bar */
+  /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
   --tech-topbar-height: 40px; /* Mobile */
   
   /* Header (main navigation) height */
   --tech-header-height: 60px; /* Mobile */
   
-  /* Total stack height (topbar + header) */
+  /* Total stack height (announcement bar + header) */
   --tech-stack-height: calc(var(--tech-topbar-height) + var(--tech-header-height));
   
   /* Legacy variable for backward compatibility */
@@ -2967,13 +2967,13 @@ main {
  *   - Overlay backgrounds: 150
  * 
  * Layer 4: Sticky Header Group (z-index: 100-101)
- *   - Sticky announcement bar (topbar): 101 (topmost in header group)
+ *   - Announcement bar/topbar (shipping, benefits): 101 (topmost in header group)
  *   - Main navigation header: 100
  *   - Fixed/sticky position
  *   - Must stay below modals/drawers
  * 
  * Layer 3: Sticky Elements (z-index: 90-99)
- *   - Sticky benefits bar: 98
+ *   - Sticky benefits bar (if separate from announcement bar): 98
  *   - Floating buttons (WhatsApp): 95
  * 
  * Layer 2: Interactive Content (z-index: 10-50)
