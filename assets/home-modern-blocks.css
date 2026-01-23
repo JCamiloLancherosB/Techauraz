@@ -91,6 +91,56 @@
 }
 
 /* ==============================================
+   SLIDESHOW CONTROLS POSITIONING FIX
+   ============================================== */
+
+/* Ensure slideshow component is positioned relatively for absolute children */
+body.template-index slideshow-component {
+  position: relative;
+  display: block;
+}
+
+/* Ensure the slideshow banner itself is position relative */
+body.template-index slideshow-component .slideshow.banner {
+  position: relative;
+  padding-bottom: 48px; /* Desktop: room for controls at bottom */
+}
+
+/* Position controls wrapper at bottom of hero, centered */
+body.template-index .tech-slideshow-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: auto;
+  max-width: 90%;
+}
+
+/* Arrows should be positioned vertically centered on image (when controls are at top) */
+body.template-index .tech-slideshow-controls.slideshow__controls--top {
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  justify-content: space-between;
+  pointer-events: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+body.template-index .tech-slideshow-controls.slideshow__controls--top .slider-button {
+  pointer-events: auto;
+}
+
+/* ==============================================
    TESTIMONIALS SECTION ENHANCEMENTS
    ============================================== */
    
@@ -362,6 +412,26 @@
 
   .newsletter__subheading {
     font-size: 1rem;
+  }
+
+  /* Mobile: Slideshow controls positioning */
+  body.template-index slideshow-component .slideshow.banner {
+    padding-bottom: 56px; /* Mobile: more room for controls */
+  }
+
+  body.template-index .tech-slideshow-controls {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 1.5rem;
+    padding: 1rem 0 2rem;
+    justify-content: center;
+  }
+
+  /* Hide arrow buttons on mobile when at top */
+  body.template-index .tech-slideshow-controls.slideshow__controls--top .slider-button {
+    display: none;
   }
 }
 
