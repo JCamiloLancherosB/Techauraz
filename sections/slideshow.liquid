@@ -11,7 +11,7 @@
 
 {%- if section.settings.slide_height == 'adapt_image' -%}
   {%- comment -%} Find first slide with an image to determine aspect ratio {%- endcomment -%}
-  {%- assign reference_image = null -%}
+  {%- assign reference_image = nil -%}
   {%- for block in section.blocks -%}
     {%- if block.settings.image != blank -%}
       {%- assign reference_image = block.settings.image -%}
@@ -19,7 +19,7 @@
     {%- endif -%}
   {%- endfor -%}
   
-  {%- if reference_image != blank -%}
+  {%- if reference_image -%}
     {%- style -%}
       @media screen and (max-width: 749px) {
         #Slider-{{ section.id }}::before,

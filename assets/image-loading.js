@@ -37,7 +37,12 @@
 
   // Process all images on page (exclude slideshow/banner images to prevent interference)
   function processImages() {
-    const images = document.querySelectorAll('.card__media img, .product__media img, .media:not(.banner__media):not(.slideshow__media) img, img[loading="lazy"]:not(.banner__media img):not(.slideshow__media img)');
+    // Select product and card images, but exclude slideshow/banner to prevent interference
+    const cardImages = document.querySelectorAll('.card__media img, .product__media img');
+    const otherImages = document.querySelectorAll('.media:not(.banner__media):not(.slideshow__media) img');
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]:not(.banner__media img):not(.slideshow__media img)');
+    
+    const images = [...cardImages, ...otherImages, ...lazyImages];
     
     images.forEach(function(img) {
       // If image has src, process it
