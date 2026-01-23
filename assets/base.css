@@ -529,7 +529,7 @@ select:focus {
 /* Announcement bar */
 .announcement-bar__container,
 .announcement-bar__container--sticky {
-  z-index: 99 !important;
+  z-index: 101 !important;
 }
 
 /* Announcement bar styles - compact design */
