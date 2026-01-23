@@ -93,6 +93,8 @@
 
   .section-header {
     position: sticky; /* Safari z-index fix - maintains proper stacking context */
+    top: 0; /* Stick to top of viewport */
+    z-index: 100; /* Above content and announcements (99), below modals (200+) */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.5 | round: 0 }}px;
   }
 

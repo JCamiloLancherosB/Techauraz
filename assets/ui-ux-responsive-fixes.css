@@ -2458,20 +2458,23 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
    3. Vertical misalignment due to inconsistent offsets
    ============================================================================= */
 
-/* --- CSS VARIABLES FOR HEADER HEIGHT --- */
+/* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
-  /* Header height variable for consistent sticky offset management */
-  --tech-header-height: 60px; /* Mobile default */
+  /* Header offset variable for consistent sticky positioning and spacing */
+  --tech-header-offset: 64px; /* Mobile: base header + announcement bar */
+  --tech-header-height: 60px; /* Mobile default - kept for backward compatibility */
 }
 
 @media screen and (min-width: 750px) {
   :root {
+    --tech-header-offset: 68px; /* Tablet */
     --tech-header-height: 68px; /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
+    --tech-header-offset: 72px; /* Desktop */
     --tech-header-height: 72px; /* Desktop */
   }
 }
@@ -2479,7 +2482,7 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 /* --- SCROLL PADDING FOR STICKY HEADER --- */
 /* Prevents content from being hidden under sticky header when jumping to anchors */
 body {
-  scroll-padding-top: var(--tech-header-height);
+  scroll-padding-top: var(--tech-header-offset);
 }
 
 /* --- MENU TEXT LEGIBILITY FIX --- */
@@ -2533,30 +2536,52 @@ body {
   color: inherit;
 }
 
-/* --- BENEFITS BAR / SHIPPING BANNER OFFSET FIX --- */
-/* Ensure benefits bar and free shipping banner are not hidden by sticky header */
-
-/* If benefits bar is the first section after header */
-.shopify-section:first-of-type .benefits-bar,
-.shopify-section:first-of-type .free-shipping-banner,
-section.benefits-bar:first-child,
-section.free-shipping-banner:first-child {
-  margin-top: var(--tech-header-height);
+/* --- MAIN CONTENT OFFSET FOR STICKY HEADER --- */
+/* Apply offset to main content to prevent header from covering first section */
+main {
+  /* Add padding only if header is NOT in overlay mode */
+  padding-top: var(--tech-header-offset);
 }
 
-/* Alternative: padding-top approach for first main section */
-.template-index main > .shopify-section:first-child,
-body:not(.template-index) main > .shopify-section:first-child {
-  padding-top: var(--tech-header-height);
+/* Reset padding when header is in overlay mode (transparent over hero) */
+.header-wrapper--overlay + main {
+  padding-top: 0;
 }
 
-/* For overlay headers (like on homepage hero), add offset to main content */
-.header-wrapper--overlay + main,
-.shopify-section-header-sticky + main {
-  padding-top: 0; /* Reset - header is sticky/fixed so no padding needed on main */
+/* Also apply when sticky header is explicitly used */
+.shopify-section-header-sticky + main:not(.header-wrapper--overlay + main) {
+  padding-top: var(--tech-header-offset);
 }
 
-/* Specific fix: ensure benefits/shipping bars appear below header */
+/* --- ANNOUNCEMENT BAR & HEADER STICKY COORDINATION --- */
+/* When both announcement bar and header are sticky, stack them properly */
+
+/* Announcement bar - sticks to top of viewport with highest priority in header group */
+.announcement-bar-section,
+.announcement-bar__container,
+.announcement-bar__container--sticky {
+  position: sticky;
+  top: 0 !important;
+  z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
+}
+
+/* Header - also sticks to top, but appears below announcement bar due to lower z-index */
+.section-header,
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Below announcement bar (101), above content, below modals (200+) */
+}
+
+/* Ensure both sticky elements work together */
+.shopify-section-header-sticky {
+  z-index: 100 !important;
+}
+
+/* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
+/* Ensure benefits bar and shipping banner are not hidden by sticky header */
+
+/* Benefits bar positioning */
 .section-benefits-bar,
 .free-shipping-banner,
 .benefits-bar {
@@ -2566,14 +2591,15 @@ body:not(.template-index) main > .shopify-section:first-child {
   margin-top: 0;
 }
 
-/* If sticky banner is used, adjust its top position */
+/* If sticky banner is used, position it below the header */
 .free-shipping-banner--sticky {
-  top: var(--tech-header-height) !important;
+  position: sticky;
+  top: var(--tech-header-offset) !important;
   /* 
-   * Z-index: 90 - Below header (100) but above regular content 
+   * Z-index: 98 - Below announcement bar (101) and header (100) 
    * This ensures banner sticks below header, not overlapping it
    */
-  z-index: 90 !important;
+  z-index: 98 !important;
 }
 
 /* --- Z-INDEX HIERARCHY DOCUMENTATION --- */
@@ -2586,14 +2612,15 @@ body:not(.template-index) main > .shopify-section:first-child {
  *   - Menu drawer: 200
  *   - Overlay backgrounds: 150
  * 
- * Layer 4: Sticky Header (z-index: 100)
+ * Layer 4: Sticky Header Group (z-index: 100-101)
+ *   - Sticky announcement bar: 101 (topmost in header group)
  *   - Main navigation header: 100
  *   - Fixed/sticky position
  *   - Must stay below modals/drawers
  * 
  * Layer 3: Sticky Elements (z-index: 90-99)
- *   - Sticky benefits bar: 90
- *   - Sticky announcements: 90
+ *   - Sticky announcement bar: 101
+ *   - Sticky benefits bar: 98
  *   - Floating buttons (WhatsApp): 95
  * 
  * Layer 2: Interactive Content (z-index: 10-50)
