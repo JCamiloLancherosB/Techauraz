@@ -23,8 +23,14 @@
   if currencies.size > 1
     assign show_currencies = true
   endif
+
+  assign show_selector = true
+  if localization.available_countries.size <= 1
+    assign show_selector = false
+  endif
 %}
 
+{%- if show_selector -%}
 <div class="disclosure">
   <button
     type="button"
@@ -157,4 +163,13 @@
   </div>
   <div class="country-selector__overlay"></div>
 </div>
+{%- else -%}
+<div class="localization-form__select">
+  <span class="link link--text caption-large">
+    {{- localization.country.name }} |
+    {{ localization.country.currency.iso_code }}
+    {{ localization.country.currency.symbol -}}
+  </span>
+</div>
+{%- endif -%}
 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
