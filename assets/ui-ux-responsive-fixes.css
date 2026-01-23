@@ -2871,8 +2871,8 @@ main {
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
-.header-wrapper--overlay ~ main,
-body:has(.header-wrapper--overlay) main {
+/* Using sibling selector for better browser compatibility */
+.header-wrapper--overlay ~ main {
   padding-top: 0;
 }
 
@@ -2882,8 +2882,7 @@ body:has(.header-wrapper--overlay) main {
 }
 
 /* Overlay header exception - reset padding when header is transparent over hero */
-.shopify-section-header-sticky.header-wrapper--overlay ~ main,
-body:has(.shopify-section-header-sticky.header-wrapper--overlay) main {
+.shopify-section-header-sticky.header-wrapper--overlay ~ main {
   padding-top: 0;
 }
 
@@ -2926,12 +2925,6 @@ body:has(.shopify-section-header-sticky.header-wrapper--overlay) main {
   top: var(--tech-topbar-height) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
   background-color: inherit; /* Ensure it has a background */
-}
-
-/* Special case: when announcement bar is NOT sticky, header goes to top */
-body:not(:has(.announcement-bar__container--sticky)) .section-header,
-body:not(:has(.announcement-bar__container--sticky)) .header-wrapper {
-  top: 0 !important;
 }
 
 /* Ensure both sticky elements work together */
