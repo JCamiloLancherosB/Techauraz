@@ -35,9 +35,9 @@
     }
   }
 
-  // Process all images on page
+  // Process all images on page (exclude slideshow/banner images to prevent interference)
   function processImages() {
-    const images = document.querySelectorAll('.card__media img, .product__media img, .media img, img[loading="lazy"]');
+    const images = document.querySelectorAll('.card__media img, .product__media img, .media:not(.banner__media):not(.slideshow__media) img, img[loading="lazy"]:not(.banner__media img):not(.slideshow__media img)');
     
     images.forEach(function(img) {
       // If image has src, process it

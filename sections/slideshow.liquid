@@ -9,27 +9,60 @@
     fetchpriority="high">
 {%- endif -%}
 
-{%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
-  {%- style -%}
-    @media screen and (max-width: 749px) {
-      #Slider-{{ section.id }}::before,
-      #Slider-{{ section.id }} .media::before,
-      #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-        padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
+{%- if section.settings.slide_height == 'adapt_image' -%}
+  {%- comment -%} Find first slide with an image to determine aspect ratio {%- endcomment -%}
+  {%- assign reference_image = null -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.image != blank -%}
+      {%- assign reference_image = block.settings.image -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  
+  {%- if reference_image != blank -%}
+    {%- style -%}
+      @media screen and (max-width: 749px) {
+        #Slider-{{ section.id }}::before,
+        #Slider-{{ section.id }} .media::before,
+        #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+          padding-bottom: {{ 1 | divided_by: reference_image.aspect_ratio | times: 100 }}%;
+          content: '';
+          display: block;
+        }
       }
-    }
 
-    @media screen and (min-width: 750px) {
-      #Slider-{{ section.id }}::before,
-      #Slider-{{ section.id }} .media::before {
-        padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
+      @media screen and (min-width: 750px) {
+        #Slider-{{ section.id }}::before,
+        #Slider-{{ section.id }} .media::before {
+          padding-bottom: {{ 1 | divided_by: reference_image.aspect_ratio | times: 100 }}%;
+          content: '';
+          display: block;
+        }
       }
-    }
-  {%- endstyle -%}
+    {%- endstyle -%}
+  {%- else -%}
+    {%- comment -%} No images found, use default aspect ratio (16:9) {%- endcomment -%}
+    {%- style -%}
+      @media screen and (max-width: 749px) {
+        #Slider-{{ section.id }}::before,
+        #Slider-{{ section.id }} .media::before,
+        #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+          padding-bottom: 56.25%; /* 16:9 aspect ratio */
+          content: '';
+          display: block;
+        }
+      }
+
+      @media screen and (min-width: 750px) {
+        #Slider-{{ section.id }}::before,
+        #Slider-{{ section.id }} .media::before {
+          padding-bottom: 56.25%; /* 16:9 aspect ratio */
+          content: '';
+          display: block;
+        }
+      }
+    {%- endstyle -%}
+  {%- endif -%}
 {%- endif -%}
 
 <slideshow-component

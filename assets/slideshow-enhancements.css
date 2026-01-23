@@ -74,20 +74,8 @@
   }
 }
 
-/* Ensure overlay doesn't completely hide the image */
-.banner__media::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2); /* Default subtle overlay */
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Keep text content above overlay */
+/* Overlay styling is controlled per-slide via section settings (inline styles) */
+/* This ensures text content stays above the overlay */
 .slideshow__text-wrapper,
 .banner__content {
   position: relative;
