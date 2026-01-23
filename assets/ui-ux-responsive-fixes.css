@@ -117,6 +117,13 @@
    ============================================================================= */
 
 /* Slideshow - horizontal slider for all screen sizes */
+slideshow-component {
+  position: relative;
+  display: block;
+  margin-bottom: 2rem;
+  overflow: visible;
+}
+
 slideshow-component .slideshow,
 slideshow-component .slider {
   display: flex !important;
@@ -129,6 +136,8 @@ slideshow-component .slider {
   gap: 0 !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  position: relative;
+  overflow-y: visible;
 }
 
 slideshow-component .slideshow__slide,
@@ -146,16 +155,73 @@ slideshow-component .slider::-webkit-scrollbar {
   display: none;
 }
 
-/* Slideshow controls positioning */
+/* Slideshow controls positioning - FIXED for professional layout */
 .slideshow__controls {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
   z-index: 5;
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 0 1rem 1.5rem;
+}
+
+/* Dots styling for professional look */
+.slider-counter__link .dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.slider-counter__link.is-active .dot,
+.slider-counter__link:hover .dot {
+  background: var(--home-primary-blue, #0ea5e9);
+  transform: scale(1.2);
+}
+
+.slider-counter__link {
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.slider-counter__link:focus {
+  outline: 2px solid var(--home-primary-blue, #0ea5e9);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Arrow buttons - centered vertically on hero (desktop) */
+.slideshow__controls--top {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.slideshow__controls--top .slider-button {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin: 0 1rem;
 }
 
 /* Slider button styles are defined in base.css - no override needed here */
@@ -903,7 +969,7 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
-/* Slideshow tech overlay effect */
+/* Slideshow tech overlay effect - FIXED to not interfere with CTAs */
 .slideshow__slide {
   position: relative;
 }
@@ -919,6 +985,43 @@ textarea:focus-visible {
     rgba(15, 23, 42, 0.4) 0%,
     transparent 100%);
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure slideshow content (text + CTAs) is above overlay */
+.slideshow__text-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ensure CTAs are clickable and above all overlays */
+.banner__buttons,
+.slideshow-ctas {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.banner__buttons .button,
+.slideshow-cta {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 11;
+}
+
+/* Ensure visible hover states for CTAs */
+.banner__buttons .button:hover,
+.slideshow-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.banner__buttons .button:focus,
+.slideshow-cta:focus {
+  outline: 2px solid var(--color-primary, #2563eb);
+  outline-offset: 3px;
 }
 
 /* =============================================================================
@@ -960,6 +1063,28 @@ textarea:focus-visible {
     width: 100%;
     max-width: 100%;
   }
+
+  /* Mobile: controls below slideshow with proper spacing */
+  .slideshow__controls {
+    margin-top: 1.5rem;
+    padding: 0 1rem 2rem;
+  }
+
+  .slideshow__controls--top {
+    top: 50%;
+    padding: 0;
+  }
+
+  .slideshow__controls--top .slider-button {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.5rem;
+  }
+
+  /* Ensure dots are below hero, not overlapping next section */
+  slideshow-component {
+    margin-bottom: 2rem;
+  }
 }
 
 /* Desktop: side by side buttons */
@@ -972,15 +1097,45 @@ textarea:focus-visible {
   .banner__buttons .button {
     min-width: 180px;
   }
+
+  /* Desktop: dots centered below slideshow */
+  .slideshow__controls {
+    margin-top: 2rem;
+    padding: 0 2rem 2rem;
+  }
+
+  /* Desktop: arrow buttons stay on hero sides */
+  .slideshow__controls--top {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+  }
+
+  .slideshow__controls--top .slider-button {
+    width: 52px;
+    height: 52px;
+    margin: 0 1.5rem;
+  }
 }
 
 /* Ensure proper image cropping - no stretching */
+.slideshow__media,
+.banner__media {
+  pointer-events: none;
+  position: relative;
+}
+
 .slideshow__media img,
 .banner__media img {
   object-fit: cover;
   object-position: center;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 /* Trust badges section - modern card style */
