@@ -29,7 +29,7 @@
   
   # Check if product is new based on tags (case-insensitive check for "nuevo")
   assign is_new = false
-  assign tags_lower = product.tags | map: 'downcase' | join: ','
+  assign tags_lower = product.tags | map: 'downcase'
   if tags_lower contains 'nuevo'
     assign is_new = true
   endif

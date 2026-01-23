@@ -110,7 +110,7 @@
             {%- comment -%} Clean Badges: Max 1 badge - Priority: Oferta > Nuevo > Agotado {%- endcomment -%}
             {%- liquid
               assign is_new_tag = false
-              assign tags_lower = card_product.tags | map: 'downcase' | join: ','
+              assign tags_lower = card_product.tags | map: 'downcase'
               if tags_lower contains 'nuevo'
                 assign is_new_tag = true
               endif
