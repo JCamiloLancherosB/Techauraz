@@ -2871,18 +2871,18 @@ main {
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
-/* Using sibling selector for better browser compatibility */
-.header-wrapper--overlay ~ main {
+/* Using adjacent sibling selector for better specificity */
+.header-wrapper--overlay + main {
   padding-top: 0;
 }
 
 /* Also ensure sticky header has proper offset */
-.shopify-section-header-sticky ~ main {
+.shopify-section-header-sticky + main {
   padding-top: var(--tech-stack-height);
 }
 
 /* Overlay header exception - reset padding when header is transparent over hero */
-.shopify-section-header-sticky.header-wrapper--overlay ~ main {
+.shopify-section-header-sticky.header-wrapper--overlay + main {
   padding-top: 0;
 }
 
