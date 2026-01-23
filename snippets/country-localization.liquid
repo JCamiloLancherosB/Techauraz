@@ -33,6 +33,8 @@
   if localization.available_countries.size <= 1
     assign show_selector = false
   endif
+
+  assign country_label = localization.country.name | append: ' | ' | append: localization.country.currency.iso_code | append: ' ' | append: localization.country.currency.symbol
 %}
 
 {%- if show_selector -%}
@@ -44,11 +46,7 @@
     aria-controls="{{ localPosition }}-country-results"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>
-      {{- localization.country.name }} |
-      {{ localization.country.currency.iso_code }}
-      {{ localization.country.currency.symbol -}}
-    </span>
+    <span>{{ country_label }}</span>
     {% render 'icon-caret' %}
   </button>
   <div class="disclosure__list-wrapper country-selector" hidden>
@@ -170,11 +168,7 @@
 </div>
 {%- else -%}
 <div class="localization-form__select">
-  <span class="link link--text caption-large">
-    {{- localization.country.name }} |
-    {{ localization.country.currency.iso_code }}
-    {{ localization.country.currency.symbol -}}
-  </span>
+  <span class="link link--text caption-large">{{ country_label }}</span>
 </div>
 {%- endif -%}
 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
