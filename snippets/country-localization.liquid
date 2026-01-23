@@ -3,6 +3,11 @@
 
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
+
+  Note: If only one country is available (configured in Shopify Markets),
+  this will render a static text instead of a dropdown selector.
+  For multi-country setup, ensure each country in Markets has the correct
+  currency configured to avoid showing invalid combinations like "Portugal | COP".
 {%- endcomment -%}
 
 {%- liquid
