@@ -3354,7 +3354,8 @@ body.template-index .tech-hero-slideshow .banner__media img {
 }
 
 /* Controls wrapper - positioned absolutely within hero */
-body.template-index .tech-hero-slideshow .tech-hero-controls {
+/* For manual mode (with counter/dots): controls at bottom center */
+body.template-index .tech-hero-slideshow .tech-hero-controls:not(.slideshow__controls--top) {
   position: absolute;
   bottom: 24px;
   left: 50%;
@@ -3365,6 +3366,20 @@ body.template-index .tech-hero-slideshow .tech-hero-controls {
   justify-content: center;
   gap: 1.5rem;
   pointer-events: auto;
+}
+
+/* For auto-rotate mode (arrows only): keep arrows on sides */
+body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls--top {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 1.5rem;
 }
 
 /* Arrow buttons - ensure they're clickable and visible */
@@ -3431,9 +3446,15 @@ body.template-index .tech-hero-slideshow slideshow-component {
 
 /* Mobile adjustments */
 @media screen and (max-width: 749px) {
-  body.template-index .tech-hero-slideshow .tech-hero-controls {
+  /* Manual mode controls */
+  body.template-index .tech-hero-slideshow .tech-hero-controls:not(.slideshow__controls--top) {
     bottom: 16px;
     gap: 1rem;
+  }
+  
+  /* Auto-rotate mode controls */
+  body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls--top {
+    padding: 0 1rem;
   }
   
   body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
