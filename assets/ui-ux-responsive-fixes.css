@@ -2915,13 +2915,14 @@ main {
   padding: 0.75rem 1rem;
 }
 
-/* Header - also sticks to top, but appears BELOW announcement bar */
-/* When both are sticky, header should be pushed down by topbar height */
+/* Header positioning */
+/* Note: Position (sticky/fixed) is controlled by sections/header.liquid inline styles (lines 94-122) */
+/* We only ensure z-index hierarchy and that header appears below announcement bar */
 .section-header,
 .header-wrapper {
-  position: sticky !important;
+  /* Removed conflicting position: sticky override - controlled by section */
   /* Position header below the announcement bar when both are sticky */
-  top: var(--tech-topbar-height) !important;
+  top: var(--tech-topbar-height, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
   background-color: inherit; /* Ensure it has a background */
 }
@@ -2929,7 +2930,7 @@ main {
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
-  top: var(--tech-topbar-height) !important;
+  top: var(--tech-topbar-height, 0) !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
