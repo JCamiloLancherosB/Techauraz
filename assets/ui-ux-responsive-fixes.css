@@ -3181,7 +3181,7 @@ details-modal,
 /* =============================================================================
    HOME PAGE COMPACT SPACING - Reduced spacing between sections
    Version: 2.0.0
-   Date: 2026-01-24
+   Date: 2024-01-24
    
    Optimized spacing for conversion-focused home page:
    - Desktop: 56px (3.5rem) between sections
@@ -3202,6 +3202,8 @@ details-modal,
 }
 
 /* Specific compact spacing for sections with custom padding classes */
+/* Note: Shopify generates dynamic classes like "section-{id}-padding" for sections,
+   so we use attribute selectors to target all variations */
 .template-index .section-padding,
 .template-index [class*="section-"][class*="-padding"] {
   padding-top: 2rem !important; /* Mobile: 32px */
