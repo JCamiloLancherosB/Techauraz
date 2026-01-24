@@ -23,7 +23,7 @@
    SLIDESHOW CTA ENHANCEMENTS
    ============================================== */
 
-/* Ensure slideshow CTAs are professional and clickable */
+/* Ensure slideshow CTAs are professional and clickable - exceeds 44px min height */
 .slideshow-cta,
 .banner__buttons .button {
   position: relative;
@@ -33,6 +33,7 @@
   align-items: center;
   justify-content: center;
   padding: 14px 32px;
+  min-height: 48px; /* Exceeds 44px requirement */
   font-weight: 600;
   border-radius: 50px;
   text-decoration: none;
