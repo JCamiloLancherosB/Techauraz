@@ -4,10 +4,24 @@
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
 
-  Note: If only one country is available (configured in Shopify Markets),
-  this will render a static text instead of a dropdown selector.
-  For multi-country setup, ensure each country in Markets has the correct
-  currency configured to avoid showing invalid combinations like "Portugal | COP".
+  Behavior:
+    - DEFAULT: Colombia + COP (configured via Shopify Markets as primary market)
+    - SINGLE COUNTRY: Renders static text (no selector) - e.g., "Colombia | COP $"
+    - MULTI COUNTRY: Renders dropdown selector with all available markets
+
+  Implementation:
+    - Uses Shopify's localization.available_countries (from Markets configuration)
+    - Each country displays with its assigned currency from Markets
+    - Currency coherence is guaranteed by Shopify Markets configuration
+    - To avoid invalid combinations (e.g., "Portugal | COP"):
+      → Go to Shopify Admin → Settings → Markets
+      → Ensure each country has the correct currency assigned
+      → Example: Colombia=COP, Portugal=EUR, USA=USD
+
+  Security:
+    - This snippet ONLY displays data from Shopify Markets
+    - It does NOT perform validation (Shopify Markets is source of truth)
+    - Invalid currency assignments must be fixed in Shopify Admin, not in theme code
 {%- endcomment -%}
 
 {%- liquid
@@ -34,6 +48,14 @@
     assign show_selector = false
   endif
 
+  comment
+    Create country label with format: "Country | CURRENCY SYMBOL"
+    Uses localization.country.currency from Shopify Markets to ensure correct currency
+    Example outputs:
+      - "Colombia | COP $"
+      - "Portugal | EUR €"
+      - "United States | USD $"
+  endcomment
   assign country_label = localization.country.name | append: ' | ' | append: localization.country.currency.iso_code | append: ' ' | append: localization.country.currency.symbol
 %}
 
