@@ -2938,10 +2938,13 @@ main {
   position: sticky !important;
   top: 0 !important;
   z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
-  /* Ensure it has a solid background - use theme color scheme */
+  /* Ensure it has a solid background */
   width: 100%;
   /* Remove any margins that might cause gaps */
   margin: 0;
+  /* Ensure opaque background - the child elements have their own backgrounds from base.css */
+  /* This is just a safety fallback */
+  background-color: rgb(var(--color-background, 255 255 255));
 }
 
 /* Ensure announcement bar section gets background from its color scheme */
@@ -2979,14 +2982,15 @@ main {
   top: var(--tech-topbar-height, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
   /* Ensure solid background - prevents transparency issues */
-  background-color: var(--color-background, #fff) !important;
+  /* Use rgb format for Shopify color system compatibility */
+  background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
 
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
   top: var(--tech-topbar-height, 0) !important;
-  background-color: var(--color-background, #fff) !important;
+  background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
