@@ -12,31 +12,17 @@
 {{ 'techauraz-custom-ui.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  /* Standardized section padding for consistent alignment across all home sections */
-  /* Note: Overrides padding_top/padding_bottom settings for consistency */
-  /* Desktop: 56px (3.5rem), Mobile: 32px (2rem) - matches tech-section standards */
-  .section-{{ section.id }}-padding {
-    padding-top: 2rem; /* Mobile: 32px */
-    padding-bottom: 2rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: 3.5rem; /* Desktop: 56px - Standardized */
-      padding-bottom: 3.5rem;
-    }
-  }
-
+  /* Modern Featured Grid - Normalized for Home Layout */
+  /* Section padding handled by body.template-index .shopify-section in ui-ux-responsive-fixes.css */
+  
   .modern-grid-{{ section.id }} {
     background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
   }
 
-  /* Standardized heading spacing */
+  /* Heading and subtitle styling - alignment and spacing handled by normalization */
   .modern-grid-{{ section.id }} .title {
     font-size: 2.8rem;
     font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem; /* Mobile: 32px - Standardized */
     color: #0ea5e9; /* Fallback color for unsupported browsers */
     background: linear-gradient(135deg, #0ea5e9, #22c55e);
     -webkit-background-clip: text;
@@ -44,24 +30,17 @@
     background-clip: text;
   }
 
-  @media screen and (min-width: 750px) {
-    .modern-grid-{{ section.id }} .title {
-      margin-bottom: 3rem; /* Desktop: 48px - Standardized */
-    }
-  }
-
   .modern-grid-{{ section.id }} .subtitle {
-    text-align: center;
     color: #64748b;
     font-size: 1.4rem;
     max-width: 600px;
-    margin: 0 auto 2rem; /* Mobile: 32px */
+    margin: 0 auto 2rem;
     line-height: 1.6;
   }
 
   @media screen and (min-width: 750px) {
     .modern-grid-{{ section.id }} .subtitle {
-      margin-bottom: 3rem; /* Desktop: 48px */
+      margin-bottom: 3rem;
     }
   }
 
@@ -71,17 +50,6 @@
     }
     .modern-grid-{{ section.id }} .subtitle {
       font-size: 1.3rem;
-    }
-  }
-
-  /* Ensure consistent page-width gutters */
-  .modern-grid-{{ section.id }} .page-width {
-    padding-inline: 1rem; /* Mobile: consistent gutters */
-  }
-
-  @media screen and (min-width: 750px) {
-    .modern-grid-{{ section.id }} .page-width {
-      padding-inline: 2rem; /* Desktop: consistent gutters */
     }
   }
 {%- endstyle -%}
