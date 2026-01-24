@@ -2803,10 +2803,11 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
   /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
-  /* Based on actual measured heights from base.css:
-   * - .announcement-bar__container: padding 0.5rem (8px) * 2 + content (~20px) = ~36px mobile
-   * - .utility-bar: empty or minimal when no blocks/social = ~0-10px
-   * Total estimate: ~40-45px on mobile
+  /* These are ESTIMATED values based on analysis of base.css styling:
+   * - base.css sets .announcement-bar__container padding: 0.5rem (8px) top/bottom
+   * - Font size: 0.875rem (~14px) with line-height 1.4 = ~20px text height
+   * - Total estimated: 8px + 20px + 8px = ~36px + borders/margins = ~40-45px
+   * NOTE: Actual height may vary based on content. Adjust if needed.
    */
   --tech-topbar-height: 45px; /* Mobile - conservative estimate */
   
@@ -2942,8 +2943,10 @@ main {
   width: 100%;
   /* Remove any margins that might cause gaps */
   margin: 0;
-  /* Ensure opaque background - the child elements have their own backgrounds from base.css */
-  /* This is just a safety fallback */
+  /* Fallback background color - white is used as it matches most Shopify themes' default
+   * The child elements (.announcement-bar__container) have their own backgrounds from base.css
+   * which will be visible on top of this fallback
+   */
   background-color: rgb(var(--color-background, 255 255 255));
 }
 
@@ -2961,13 +2964,14 @@ main {
   width: 100%;
 }
 
-/* Ensure announcement bar message container has proper height */
+/* Ensure announcement bar message container has proper layout */
 .announcement-bar__message {
   /* Remove fixed min-height - let content and padding determine height naturally */
+  /* Base.css sets padding on .announcement-bar__container, not on __message */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Padding already defined in base.css - don't override unless necessary */
+  /* Add flexbox utilities for responsive text wrapping */
   flex-wrap: wrap;
   gap: 0.5rem;
 }
