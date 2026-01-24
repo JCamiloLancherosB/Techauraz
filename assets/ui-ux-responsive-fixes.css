@@ -3298,3 +3298,160 @@ details-modal,
 .price.price--on-sale .price__regular {
   display: none;
 }
+
+/* =============================================================================
+   HOME SLIDESHOW NORMALIZATION - Consistent Heights & Professional Controls
+   ============================================================================= */
+
+/* 
+ * Scoped to home page slideshow only (template-index)
+ * OBJECTIVES:
+ * 1. Consistent height: Desktop 520px (±40), Mobile 380px (±40)
+ * 2. Images fill container without deforming (object-fit: cover)
+ * 3. Controls live inside hero, not floating between sections
+ * 4. Centered overlay and content
+ */
+
+/* Wrapper for home page slideshow */
+body.template-index .tech-hero-slideshow {
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Fixed minimum heights for slides - prevents jumping between slides */
+body.template-index .tech-hero-slideshow .slideshow__slide {
+  min-height: 520px;
+  max-height: 520px;
+  height: 520px;
+}
+
+/* Mobile: reduce height for better mobile experience */
+@media screen and (max-width: 749px) {
+  body.template-index .tech-hero-slideshow .slideshow__slide {
+    min-height: 380px;
+    max-height: 380px;
+    height: 380px;
+  }
+}
+
+/* Ensure images fill container with object-fit: cover */
+body.template-index .tech-hero-slideshow .slideshow__media,
+body.template-index .tech-hero-slideshow .banner__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.template-index .tech-hero-slideshow .slideshow__media img,
+body.template-index .tech-hero-slideshow .banner__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Controls wrapper - positioned absolutely within hero */
+body.template-index .tech-hero-slideshow .tech-hero-controls {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  pointer-events: auto;
+}
+
+/* Arrow buttons - ensure they're clickable and visible */
+body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:hover {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+/* Counter/dots styling - centered within hero */
+body.template-index .tech-hero-slideshow .slider-counter {
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+/* Dots styling */
+body.template-index .tech-hero-slideshow .slider-counter__link--dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+body.template-index .tech-hero-slideshow .slider-counter__link--dots:hover .dot,
+body.template-index .tech-hero-slideshow .slider-counter__link--dots.is-selected .dot {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Ensure overlay is centered and consistent */
+body.template-index .tech-hero-slideshow .slideshow__text-wrapper {
+  position: relative;
+  z-index: 5;
+}
+
+/* Remove any conflicting bottom margins */
+body.template-index .tech-hero-slideshow slideshow-component {
+  margin-bottom: 0;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 749px) {
+  body.template-index .tech-hero-slideshow .tech-hero-controls {
+    bottom: 16px;
+    gap: 1rem;
+  }
+  
+  body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  body.template-index .tech-hero-slideshow .slider-counter {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Ensure no pointer-events blocking clicks on controls */
+body.template-index .tech-hero-slideshow .slideshow {
+  pointer-events: none;
+}
+
+body.template-index .tech-hero-slideshow .slideshow * {
+  pointer-events: auto;
+}
