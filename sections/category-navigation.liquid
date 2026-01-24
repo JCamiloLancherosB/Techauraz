@@ -1,17 +1,24 @@
 <style>
-/* Category Navigation Section - Normalized for Home Layout */
+/* Category Navigation Section - Normalized for Home Layout 
+   Global normalization in ui-ux-responsive-fixes.css handles:
+   - Section padding: 56px desktop, 32px mobile (body.template-index .shopify-section)
+   - Wrapper: max-width 1200px, padding-inline 2rem desktop / 1rem mobile (body.template-index .category-nav-wrapper)
+   - Title: margin-bottom 2rem desktop / 1.5rem mobile + text-align center (body.template-index .category-nav-title)
+   - Grid gap: 2rem desktop, 1.5rem mobile (body.template-index .category-nav-grid)
+   
+   This section only contains visual styling specific to category navigation.
+*/
 .category-nav-section {
-  /* Padding handled by body.template-index .shopify-section in ui-ux-responsive-fixes.css */
   background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   border-bottom: 1px solid var(--color-border-light);
 }
 
 .category-nav-wrapper {
-  /* max-width and padding-inline handled by normalization in ui-ux-responsive-fixes.css */
+  /* Handled by global normalization */
 }
 
 .category-nav-title {
-  /* text-align, margin-bottom handled by normalization in ui-ux-responsive-fixes.css */
+  /* Alignment and spacing handled by global normalization */
   font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 700;
   color: var(--color-text-primary);

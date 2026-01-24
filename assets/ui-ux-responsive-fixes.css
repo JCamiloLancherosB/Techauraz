@@ -2621,6 +2621,8 @@ body.template-index .shopify-section:first-child {
 }
 
 /* Normalize page-width containers for consistent alignment */
+/* Applies to: page-width, category-nav-wrapper, ta-conv-section-spacing, modern-feature-cards__wrapper */
+/* Desktop: max-width 1200px, padding-inline 2rem | Mobile: padding-inline 1rem */
 body.template-index .page-width,
 body.template-index .category-nav-wrapper,
 body.template-index .ta-conv-section-spacing,
@@ -2640,6 +2642,8 @@ body.template-index .modern-feature-cards__wrapper {
 }
 
 /* Normalize all H2 headings for consistent alignment and spacing */
+/* Applies to: h2, title, category-nav-title, ta-conv-section-heading, modern-feature-cards__heading, testimonials-section__title */
+/* Desktop: margin-bottom 2rem (32px) | Mobile: margin-bottom 1.5rem (24px) */
 body.template-index h2,
 body.template-index .title,
 body.template-index .category-nav-title,
@@ -2662,6 +2666,8 @@ body.template-index .testimonials-section__title {
 }
 
 /* Normalize grid gaps across all sections */
+/* Applies to: product-grid, category-nav-grid, ta-conv-benefits, modern-feature-cards__grid */
+/* Desktop: gap 2rem (32px) | Mobile: gap 1.5rem (24px) */
 body.template-index .product-grid,
 body.template-index .category-nav-grid,
 body.template-index .ta-conv-benefits,
