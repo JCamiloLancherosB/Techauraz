@@ -3408,17 +3408,16 @@ body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:hove
 /* Counter/dots styling - centered within hero */
 body.template-index .tech-hero-slideshow .slider-counter {
   pointer-events: auto;
-  background: rgba(0, 0, 0, 0.6);
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
-  /* Fallback for browsers without backdrop-filter support */
-  background: rgba(0, 0, 0, 0.75);
+  /* Fallback for browsers without backdrop-filter support - more opaque */
+  background: rgba(0, 0, 0, 0.85);
 }
 
-/* Enhanced background blur for modern browsers */
+/* Enhanced background blur for modern browsers - semi-transparent with blur */
 @supports (backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px)) {
   body.template-index .tech-hero-slideshow .slider-counter {
     background: rgba(0, 0, 0, 0.6);
@@ -3476,18 +3475,4 @@ body.template-index .tech-hero-slideshow slideshow-component {
     padding: 6px 12px;
     font-size: 12px;
   }
-}
-
-/* Ensure no pointer-events blocking clicks on controls */
-body.template-index .tech-hero-slideshow .slideshow {
-  pointer-events: none;
-}
-
-/* Re-enable pointer events for interactive elements */
-body.template-index .tech-hero-slideshow .slideshow button,
-body.template-index .tech-hero-slideshow .slideshow a,
-body.template-index .tech-hero-slideshow .slideshow input,
-body.template-index .tech-hero-slideshow .slideshow .slider-button,
-body.template-index .tech-hero-slideshow .slideshow .banner__buttons {
-  pointer-events: auto;
 }
