@@ -820,7 +820,7 @@ h2.gradient-text {
 
 /* =============================================================================
    HEADER WRAPPER - Enhanced with gradient and separation
-   Note: Position is controlled by sections/header.liquid inline styles
+   Note: Position is controlled by sections/header.liquid inline styles (lines 94-122)
    ============================================================================= */
 
 .header-wrapper {
@@ -828,12 +828,13 @@ h2.gradient-text {
   border-bottom: 1px solid rgba(148, 163, 184, 0.2) !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
   backdrop-filter: blur(10px) !important;
-  /* Removed conflicting position, top, left, right rules - now controlled by section */
+  /* Removed conflicting position, top, left, right rules - now controlled by sections/header.liquid */
   width: 100% !important;
   max-width: 100vw !important;
   z-index: 100 !important;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
   overflow-x: hidden !important;
+  /* Performance optimizations retained for sticky header animations */
   contain: layout style paint;
   will-change: transform;
 }
