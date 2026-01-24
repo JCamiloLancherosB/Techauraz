@@ -3,6 +3,11 @@
 
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
+
+  Note: If only one country is available (configured in Shopify Markets),
+  this will render a static text instead of a dropdown selector.
+  For multi-country setup, ensure each country in Markets has the correct
+  currency configured to avoid showing invalid combinations like "Portugal | COP".
 {%- endcomment -%}
 
 {%- liquid
@@ -23,8 +28,16 @@
   if currencies.size > 1
     assign show_currencies = true
   endif
+
+  assign show_selector = true
+  if localization.available_countries.size <= 1
+    assign show_selector = false
+  endif
+
+  assign country_label = localization.country.name | append: ' | ' | append: localization.country.currency.iso_code | append: ' ' | append: localization.country.currency.symbol
 %}
 
+{%- if show_selector -%}
 <div class="disclosure">
   <button
     type="button"
@@ -33,11 +46,7 @@
     aria-controls="{{ localPosition }}-country-results"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>
-      {{- localization.country.name }} |
-      {{ localization.country.currency.iso_code }}
-      {{ localization.country.currency.symbol -}}
-    </span>
+    <span>{{ country_label }}</span>
     {% render 'icon-caret' %}
   </button>
   <div class="disclosure__list-wrapper country-selector" hidden>
@@ -157,4 +166,9 @@
   </div>
   <div class="country-selector__overlay"></div>
 </div>
+{%- else -%}
+<div class="localization-form__select">
+  <span class="link link--text caption-large">{{ country_label }}</span>
+</div>
+{%- endif -%}
 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
