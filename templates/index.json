@@ -231,6 +231,34 @@
         "padding_bottom": 16
       }
     },
+    "featured_collection_nuevos": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "<strong>Nuevos</strong>",
+        "heading_size": "h2",
+        "description": "Lo último en tecnología para ti",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "productos-inteligentes-electronicos",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
     "trust_badges_home": {
       "type": "trust-badges",
       "blocks": {
@@ -366,6 +394,7 @@
     "category_navigation",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
+    "featured_collection_nuevos",
     "trust_badges_home",
     "testimonials_home",
     "newsletter_home"
