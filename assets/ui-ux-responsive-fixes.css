@@ -29,17 +29,45 @@
 .announcement-bar__container,
 .utility-bar {
   width: 100%;
-  background-color: inherit;
   /* Ensure it's not hidden */
   display: block !important;
   visibility: visible !important;
 }
 
-/* Prevent the topbar from being "pushed under" the header */
-/* Position relative for non-sticky state, actual sticky positioning is handled below */
+/* Announcement bar section wrapper - contains both custom promo and utility bar */
+.announcement-bar-section {
+  position: relative;
+  /* Ensure it has a solid background to prevent transparency */
+  /* Use the theme's color scheme background */
+}
+
+/* Color scheme backgrounds for announcement bar */
+.announcement-bar-section .color-scheme-1,
+.announcement-bar-section.color-scheme-1 {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+/* Custom announcement container - sticky positioning */
 .announcement-bar__container {
+  width: 100%;
   /* Ensure min-height so content is always visible */
   min-height: var(--tech-topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Solid background */
+  background-color: var(--color-background, #fff);
+  padding: 0.5rem 1rem;
+}
+
+/* Utility bar should NOT be sticky if announcement-bar__container is already sticky */
+/* Only the announcement-bar-section should be sticky as a whole */
+.utility-bar {
+  position: relative !important;
+  width: 100%;
+  /* Ensure it has background from color scheme */
+  background-color: inherit;
 }
 
 /* =============================================================================
@@ -2778,6 +2806,7 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
   /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
+  /* These values should match the actual measured heights of .announcement-bar-section */
   --tech-topbar-height: 40px; /* Mobile */
   
   /* Header (main navigation) height */
@@ -2806,6 +2835,13 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 
 /* --- SCROLL PADDING FOR STICKY HEADER --- */
 /* Prevents content from being hidden under sticky header when jumping to anchors */
+html {
+  /* Apply to html for better cross-browser support */
+  scroll-padding-top: var(--tech-stack-height);
+  /* Smooth scroll behavior */
+  scroll-behavior: smooth;
+}
+
 body {
   scroll-padding-top: var(--tech-stack-height);
 }
@@ -2896,14 +2932,29 @@ main {
  */
 
 /* Announcement bar - sticks to top of viewport with highest priority in header group */
-.announcement-bar-section,
-.announcement-bar__container,
-.announcement-bar__container--sticky,
-.utility-bar {
+/* The entire announcement-bar-section becomes sticky, not the individual child elements */
+.announcement-bar-section {
   position: sticky !important;
   top: 0 !important;
   z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
-  background-color: inherit; /* Ensure it has a background */
+  /* Ensure it has a solid background - use theme color scheme */
+  width: 100%;
+  /* Remove any margins that might cause gaps */
+  margin: 0;
+}
+
+/* Ensure announcement bar section gets background from its color scheme */
+.announcement-bar-section[class*="color-"] {
+  background-color: inherit;
+}
+
+/* When sticky_promo setting is enabled, make announcement-bar__container sticky within the section */
+.announcement-bar__container--sticky {
+  position: relative; /* Changed from sticky - parent section handles stickiness */
+  top: 0;
+  z-index: 1; /* Local stacking within parent */
+  background-color: inherit;
+  width: 100%;
 }
 
 /* Ensure announcement bar message container has proper height */
@@ -2924,13 +2975,15 @@ main {
   /* Position header below the announcement bar when both are sticky */
   top: var(--tech-topbar-height, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
-  background-color: inherit; /* Ensure it has a background */
+  /* Ensure solid background - prevents transparency issues */
+  background-color: var(--color-background, #fff) !important;
 }
 
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
   top: var(--tech-topbar-height, 0) !important;
+  background-color: var(--color-background, #fff) !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
