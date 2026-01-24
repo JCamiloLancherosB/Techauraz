@@ -11,11 +11,6 @@
   endif
 -%}
 
-<div class="announcement-bar__container{% if section.settings.sticky_promo %} announcement-bar__container--sticky{% endif %}">
-  <div class="announcement-bar__message">
-    🚚 <strong>Envío GRATIS</strong> | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 📞 WhatsApp: <a href="https://wa.me/573008602789">+57 300 860 2789</a>
-  </div>
-</div>
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
   {{ block.shopify_attributes }}
