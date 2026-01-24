@@ -29,17 +29,42 @@
 .announcement-bar__container,
 .utility-bar {
   width: 100%;
-  background-color: inherit;
   /* Ensure it's not hidden */
   display: block !important;
   visibility: visible !important;
 }
 
-/* Prevent the topbar from being "pushed under" the header */
-/* Position relative for non-sticky state, actual sticky positioning is handled below */
+/* Announcement bar section wrapper - contains both custom promo and utility bar */
+.announcement-bar-section {
+  position: relative;
+  /* Ensure it has a solid background to prevent transparency */
+  /* Use the theme's color scheme background */
+}
+
+/* Color scheme backgrounds for announcement bar */
+.announcement-bar-section .color-scheme-1,
+.announcement-bar-section.color-scheme-1 {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+/* Custom announcement container - display settings */
 .announcement-bar__container {
-  /* Ensure min-height so content is always visible */
-  min-height: var(--tech-topbar-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Background defined in base.css - don't override */
+  /* min-height not needed - content determines height naturally */
+}
+
+/* Utility bar should NOT be sticky if announcement-bar__container is already sticky */
+/* Only the announcement-bar-section should be sticky as a whole */
+.utility-bar {
+  position: relative !important;
+  width: 100%;
+  /* Ensure it has background from color scheme */
+  background-color: inherit;
 }
 
 /* =============================================================================
@@ -2778,7 +2803,13 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
   /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
-  --tech-topbar-height: 40px; /* Mobile */
+  /* These are ESTIMATED values based on analysis of base.css styling:
+   * - base.css sets .announcement-bar__container padding: 0.5rem (8px) top/bottom
+   * - Font size: 0.875rem (~14px) with line-height 1.4 = ~20px text height
+   * - Total estimated: 8px + 20px + 8px = ~36px + borders/margins = ~40-45px
+   * NOTE: Actual height may vary based on content. Adjust if needed.
+   */
+  --tech-topbar-height: 45px; /* Mobile - conservative estimate */
   
   /* Header (main navigation) height */
   --tech-header-height: 60px; /* Mobile */
@@ -2792,20 +2823,27 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 
 @media screen and (min-width: 750px) {
   :root {
-    --tech-topbar-height: 44px; /* Tablet */
+    --tech-topbar-height: 48px; /* Tablet */
     --tech-header-height: 64px; /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-topbar-height: 48px; /* Desktop */
+    --tech-topbar-height: 52px; /* Desktop */
     --tech-header-height: 68px; /* Desktop */
   }
 }
 
 /* --- SCROLL PADDING FOR STICKY HEADER --- */
 /* Prevents content from being hidden under sticky header when jumping to anchors */
+html {
+  /* Apply to html for better cross-browser support */
+  scroll-padding-top: var(--tech-stack-height);
+  /* Smooth scroll behavior */
+  scroll-behavior: smooth;
+}
+
 body {
   scroll-padding-top: var(--tech-stack-height);
 }
@@ -2896,23 +2934,46 @@ main {
  */
 
 /* Announcement bar - sticks to top of viewport with highest priority in header group */
-.announcement-bar-section,
-.announcement-bar__container,
-.announcement-bar__container--sticky,
-.utility-bar {
+/* The entire announcement-bar-section becomes sticky, not the individual child elements */
+.announcement-bar-section {
   position: sticky !important;
   top: 0 !important;
   z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
-  background-color: inherit; /* Ensure it has a background */
+  /* Ensure it has a solid background */
+  width: 100%;
+  /* Remove any margins that might cause gaps */
+  margin: 0;
+  /* Fallback background color - white is used as it matches most Shopify themes' default
+   * The child elements (.announcement-bar__container) have their own backgrounds from base.css
+   * which will be visible on top of this fallback
+   */
+  background-color: rgb(var(--color-background, 255 255 255));
 }
 
-/* Ensure announcement bar message container has proper height */
+/* Ensure announcement bar section gets background from its color scheme */
+.announcement-bar-section[class*="color-"] {
+  background-color: inherit;
+}
+
+/* When sticky_promo setting is enabled, make announcement-bar__container sticky within the section */
+.announcement-bar__container--sticky {
+  position: relative; /* Changed from sticky - parent section handles stickiness */
+  top: 0;
+  z-index: 1; /* Local stacking within parent */
+  background-color: inherit;
+  width: 100%;
+}
+
+/* Ensure announcement bar message container has proper layout */
 .announcement-bar__message {
-  min-height: var(--tech-topbar-height);
+  /* Remove fixed min-height - let content and padding determine height naturally */
+  /* Base.css sets padding on .announcement-bar__container, not on __message */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
+  /* Add flexbox utilities for responsive text wrapping */
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Header positioning */
@@ -2924,13 +2985,16 @@ main {
   /* Position header below the announcement bar when both are sticky */
   top: var(--tech-topbar-height, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
-  background-color: inherit; /* Ensure it has a background */
+  /* Ensure solid background - prevents transparency issues */
+  /* Use rgb format for Shopify color system compatibility */
+  background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
 
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
   top: var(--tech-topbar-height, 0) !important;
+  background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
