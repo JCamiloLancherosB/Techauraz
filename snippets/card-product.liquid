@@ -151,9 +151,6 @@
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-              <div class="card-product-rating">
-  <span class="shopify-product-reviews-badge" data-id="{{ card_product.id }}"></span>
-</div>
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
             {%- comment -%}
@@ -201,25 +198,6 @@
                       {{- card_product.metafields.reviews.rating_count }}
                       {{ 'accessibility.total_reviews' | t -}}
                     </span>
-                  </p>
-                {%- else -%}
-                  {%- comment -%} Default rating when no reviews exist (4.5 out of 5) {%- endcomment -%}
-                  <div
-                    class="rating"
-                    role="img"
-                    aria-label="Rating: 4.5 out of 5 stars"
-                  >
-                    <span
-                      aria-hidden="true"
-                      class="rating-star"
-                      style="--rating: 4; --rating-max: 5; --rating-decimal: 0.5;"
-                    ></span>
-                  </div>
-                  <p class="rating-text caption">
-                    <span aria-hidden="true">4.5 / 5</span>
-                  </p>
-                  <p class="rating-count caption">
-                    <span aria-hidden="true">(Nuevo)</span>
                   </p>
                 {%- endif -%}
               </div>
