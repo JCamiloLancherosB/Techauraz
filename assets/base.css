@@ -1032,10 +1032,8 @@ header-drawer {
   --header-height: 70px;
 }
 
-/* Add padding to body to prevent content from going under fixed header */
-body {
-  padding-top: var(--header-height);
-}
+/* Note: Body padding removed - header uses position: sticky (not fixed)
+   Main element handles the offset in ui-ux-responsive-fixes.css */
 
 @media screen and (max-width: 749px) {
   :root {

@@ -4,6 +4,18 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_shipping": {
+          "type": "announcement",
+          "settings": {
+            "text": "🚚 Envío GRATIS | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 📞 WhatsApp: +57 300 860 2789",
+            "link": "https://wa.me/573008602789"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_shipping"
+      ],
       "settings": {
         "sticky_promo": true,
         "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
