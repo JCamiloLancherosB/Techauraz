@@ -3177,3 +3177,133 @@ details-modal,
 .price.price--on-sale .price__regular {
   display: none;
 }
+
+/* =============================================================================
+   HOME PAGE COMPACT SPACING - Reduced spacing between sections
+   Version: 2.0.0
+   Date: 2026-01-24
+   
+   Optimized spacing for conversion-focused home page:
+   - Desktop: 56px (3.5rem) between sections
+   - Mobile: 32px (2rem) between sections
+   ============================================================================= */
+
+/* Override default section padding for template-index (home page) */
+.template-index .section {
+  padding-top: 2rem; /* Mobile: 32px */
+  padding-bottom: 2rem; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .section {
+    padding-top: 3.5rem; /* Desktop: 56px */
+    padding-bottom: 3.5rem; /* Desktop: 56px */
+  }
+}
+
+/* Specific compact spacing for sections with custom padding classes */
+.template-index .section-padding,
+.template-index [class*="section-"][class*="-padding"] {
+  padding-top: 2rem !important; /* Mobile: 32px */
+  padding-bottom: 2rem !important; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .section-padding,
+  .template-index [class*="section-"][class*="-padding"] {
+    padding-top: 3.5rem !important; /* Desktop: 56px */
+    padding-bottom: 3.5rem !important; /* Desktop: 56px */
+  }
+}
+
+/* Remove extra top padding from first section (slideshow) on home */
+.template-index .shopify-section:first-child .section,
+.template-index .shopify-section:first-child [class*="-padding"] {
+  padding-top: 0 !important;
+}
+
+/* Reduce gap between sections */
+.template-index .shopify-section + .shopify-section {
+  margin-top: 0;
+}
+
+/* Compact spacing for benefits conversion section */
+.template-index .ta-conv-section-spacing {
+  padding: 2rem 0 !important; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .ta-conv-section-spacing {
+    padding: 3.5rem 0 !important; /* Desktop: 56px */
+  }
+}
+
+/* Compact spacing for category navigation */
+.template-index .category-nav-section {
+  padding: 2rem 0 !important; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .category-nav-section {
+    padding: 3.5rem 0 !important; /* Desktop: 56px */
+  }
+}
+
+/* Compact spacing for trust badges */
+.template-index .trust-badges {
+  padding-top: 2rem !important; /* Mobile: 32px */
+  padding-bottom: 2rem !important; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .trust-badges {
+    padding-top: 3.5rem !important; /* Desktop: 56px */
+    padding-bottom: 3.5rem !important; /* Desktop: 56px */
+  }
+}
+
+/* Compact spacing for testimonials section */
+.template-index .testimonials-section {
+  padding-top: 2rem !important; /* Mobile: 32px */
+  padding-bottom: 2rem !important; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .testimonials-section {
+    padding-top: 3.5rem !important; /* Desktop: 56px */
+    padding-bottom: 3.5rem !important; /* Desktop: 56px */
+  }
+}
+
+/* Ensure section headings have consistent bottom margin */
+.template-index .section h2,
+.template-index .section .title,
+.template-index .section-heading {
+  margin-bottom: 1.5rem; /* Mobile: 24px */
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .section h2,
+  .template-index .section .title,
+  .template-index .section-heading {
+    margin-bottom: 2rem; /* Desktop: 32px */
+  }
+}
+
+/* Ensure descriptions are concise and visible */
+.template-index .collection__description,
+.template-index .section__description {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: rgba(var(--color-foreground), 0.75);
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .collection__description,
+  .template-index .section__description {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+}
