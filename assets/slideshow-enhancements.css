@@ -108,6 +108,7 @@
 }
 
 /* Ensure overlay is positioned correctly with consistent background */
+/* Note: Inline styles control opacity per slide; this provides the background color */
 .slideshow__media::after,
 .banner__media::after {
   position: absolute;
@@ -115,7 +116,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Default overlay - overridden by inline styles */
+  background: rgba(0, 0, 0, 0.4); /* Default: Black overlay at 40% opacity */
   content: '';
   z-index: 1; /* Above image (z-index: 0) */
   pointer-events: none; /* Don't block clicks */
@@ -456,6 +457,7 @@
 }
 
 /* Ensure slideshow has proper positioning context for absolute controls */
+/* Arrow positioning: lines 95-142, Dot positioning: lines 180-212 */
 .template-index slideshow-component .slideshow {
   position: relative; /* Positioning context for arrows and dots */
   margin-bottom: 0;
