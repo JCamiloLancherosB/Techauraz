@@ -1,22 +1,27 @@
 <style>
+/* Category Navigation Section - Normalized for Home Layout 
+   Global normalization in ui-ux-responsive-fixes.css handles:
+   - Section padding: 56px desktop, 32px mobile (body.template-index .shopify-section)
+   - Wrapper: max-width 1200px, padding-inline 2rem desktop / 1rem mobile (body.template-index .category-nav-wrapper)
+   - Title: margin-bottom 2rem desktop / 1.5rem mobile + text-align center (body.template-index .category-nav-title)
+   - Grid gap: 2rem desktop, 1.5rem mobile (body.template-index .category-nav-grid)
+   
+   This section only contains visual styling specific to category navigation.
+*/
 .category-nav-section {
-  padding: 2.2rem 0;
   background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   border-bottom: 1px solid var(--color-border-light);
 }
 
 .category-nav-wrapper {
-  max-width: var(--page-width);
-  margin: 0 auto;
-  padding: 0 2rem;
+  /* Handled by global normalization */
 }
 
 .category-nav-title {
-  text-align: center;
+  /* Alignment and spacing handled by global normalization */
   font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -33,22 +38,20 @@
 }
 
 .category-nav-grid {
+  /* gap handled by normalization in ui-ux-responsive-fixes.css */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
 }
 
 @media screen and (min-width: 750px) {
   .category-nav-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
   }
 }
 
 @media screen and (min-width: 990px) {
   .category-nav-grid {
     grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
   }
 }
 
@@ -126,14 +129,6 @@
 
 /* Mobile optimizations */
 @media screen and (max-width: 749px) {
-  .category-nav-section {
-    padding: 2rem 0;
-  }
-  
-  .category-nav-wrapper {
-    padding: 0 1.5rem;
-  }
-  
   .category-card {
     padding: 2rem 1rem;
     min-height: 140px;
