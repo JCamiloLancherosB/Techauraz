@@ -1032,10 +1032,15 @@ header-drawer {
   --header-height: 70px;
 }
 
-/* Add padding to body to prevent content from going under fixed header */
-body {
+/* 
+ * REMOVED: Body padding for fixed header
+ * The header uses position: sticky (not fixed), and the main element
+ * already has proper padding-top in ui-ux-responsive-fixes.css
+ * Keeping this would cause double padding and a "giant white block" issue
+ */
+/* body {
   padding-top: var(--header-height);
-}
+} */
 
 @media screen and (max-width: 749px) {
   :root {
