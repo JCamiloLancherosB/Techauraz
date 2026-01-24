@@ -3318,18 +3318,14 @@ body.template-index .tech-hero-slideshow {
   margin-bottom: 0;
 }
 
-/* Fixed minimum heights for slides - prevents jumping between slides */
+/* Fixed heights for slides - prevents jumping between slides */
 body.template-index .tech-hero-slideshow .slideshow__slide {
-  min-height: 520px;
-  max-height: 520px;
   height: 520px;
 }
 
 /* Mobile: reduce height for better mobile experience */
 @media screen and (max-width: 749px) {
   body.template-index .tech-hero-slideshow .slideshow__slide {
-    min-height: 380px;
-    max-height: 380px;
     height: 380px;
   }
 }
@@ -3413,7 +3409,7 @@ body.template-index .tech-hero-slideshow .slider-counter {
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
-  /* Fallback for browsers without backdrop-filter support - more opaque */
+  /* Fallback for browsers that don't support backdrop-filter - more opaque */
   background: rgba(0, 0, 0, 0.85);
 }
 
