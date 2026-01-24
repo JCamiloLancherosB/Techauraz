@@ -21,33 +21,44 @@
   height: 100% !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  min-height: 340px; /* Mobile minimum */
+  min-height: 380px; /* Mobile: 380px */
   object-fit: cover;
   display: block;
   opacity: 1;
   visibility: visible;
 }
 
-/* Ensure slideshow media containers have consistent minimum height */
+@media screen and (min-width: 750px) {
+  .slideshow__media.placeholder .placeholder-svg,
+  .banner__media.placeholder .placeholder-svg {
+    min-height: 520px; /* Desktop: 520px */
+    height: 520px;
+  }
+}
+
+/* Ensure slideshow media containers have consistent height - per requirements */
 .slideshow__media,
 .banner__media {
-  min-height: 340px; /* Mobile: 340px minimum */
+  min-height: 380px; /* Mobile: 380px (±40 = 340-420px range) */
+  height: 380px;
   width: 100%;
   position: relative;
   overflow: hidden;
   background: #f1f5f9; /* Light gray fallback background */
 }
 
-/* Desktop: Increase minimum height for better visual impact */
+/* Desktop: Set height to 520px as per requirements */
 @media screen and (min-width: 750px) {
   .slideshow__media,
   .banner__media {
-    min-height: 480px; /* Desktop: 480px minimum */
+    min-height: 520px; /* Desktop: 520px (±40 = 480-560px range) */
+    height: 520px;
   }
 
   .slideshow__media.placeholder .placeholder-svg,
   .banner__media.placeholder .placeholder-svg {
-    min-height: 480px;
+    min-height: 520px;
+    height: 520px;
   }
 }
 
@@ -68,23 +79,53 @@
   opacity: 1;
 }
 
-/* Ensure slideshow slide containers maintain consistent height */
+/* Ensure slideshow slide containers maintain consistent height - per requirements */
 .slideshow__slide {
-  min-height: 340px;
+  min-height: 380px; /* Mobile: 380px */
+  height: 380px;
 }
 
 @media screen and (min-width: 750px) {
   .slideshow__slide {
-    min-height: 480px;
+    min-height: 520px; /* Desktop: 520px */
+    height: 520px;
   }
 }
 
 /* Overlay styling is controlled per-slide via section settings (inline styles) */
-/* This ensures text content stays above the overlay */
+/* This ensures text content stays above the overlay - z-index layering */
 .slideshow__text-wrapper,
 .banner__content {
   position: relative;
-  z-index: 2;
+  z-index: 3; /* Above overlay (z-index: 2) */
+  pointer-events: none; /* Allow clicks to pass through wrapper */
+}
+
+/* Re-enable pointer events for interactive elements */
+.slideshow__text-wrapper .banner__box,
+.banner__content .banner__box {
+  pointer-events: auto;
+}
+
+/* Ensure overlay is positioned correctly with consistent background */
+.slideshow__media::after,
+.banner__media::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Default overlay - overridden by inline styles */
+  content: '';
+  z-index: 1; /* Above image (z-index: 0) */
+  pointer-events: none; /* Don't block clicks */
+}
+
+/* Ensure the image stays at base z-index */
+.slideshow__media img,
+.banner__media img {
+  position: relative;
+  z-index: 0;
 }
 
 /* =============================================================================
@@ -294,10 +335,13 @@
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  position: relative;
+  z-index: 10; /* Ensure CTAs are above overlay */
+  pointer-events: auto; /* Ensure clickability */
 }
 
 .template-index slideshow-component .slideshow-cta {
-  min-height: 48px;
+  min-height: 48px; /* Exceeds 44px requirement for better touch targets */
   padding: 14px 32px;
   cursor: pointer;
   font-weight: 600;
@@ -311,6 +355,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  pointer-events: auto; /* Ensure clickability */
 }
 
 /* Primary CTA */
@@ -370,7 +415,7 @@
   pointer-events: none;
 }
 
-/* Mobile: Full-width stacked buttons */
+/* Mobile: Full-width stacked buttons with 44px+ min height */
 @media screen and (max-width: 749px) {
   .template-index slideshow-component .slideshow-ctas {
     flex-direction: column;
@@ -382,7 +427,7 @@
   .template-index slideshow-component .slideshow-cta {
     width: 100%;
     max-width: 100%;
-    min-height: 52px;
+    min-height: 52px; /* Exceeds 44px requirement */
     padding: 16px 24px;
   }
 }
@@ -403,17 +448,18 @@
    PREVENT CONTROL OVERLAP - Ensure controls stay within slideshow bounds
    ============================================================================= */
 
-/* Container for slideshow to prevent overflow */
+/* Container for slideshow to prevent overflow and ensure proper positioning */
 .template-index slideshow-component {
   position: relative;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-/* Ensure slideshow controls don't overlap next section */
+/* Ensure slideshow has proper positioning context for absolute controls */
 .template-index slideshow-component .slideshow {
+  position: relative; /* Positioning context for arrows and dots */
   margin-bottom: 0;
-  padding-bottom: 4rem;
+  padding-bottom: 4rem; /* Space for dots */
 }
 
 @media screen and (max-width: 749px) {
