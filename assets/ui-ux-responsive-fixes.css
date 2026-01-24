@@ -48,17 +48,14 @@
   color: rgb(var(--color-foreground));
 }
 
-/* Custom announcement container - sticky positioning */
+/* Custom announcement container - display settings */
 .announcement-bar__container {
   width: 100%;
-  /* Ensure min-height so content is always visible */
-  min-height: var(--tech-topbar-height);
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Solid background */
-  background-color: var(--color-background, #fff);
-  padding: 0.5rem 1rem;
+  /* Background defined in base.css - don't override */
+  /* min-height not needed - content determines height naturally */
 }
 
 /* Utility bar should NOT be sticky if announcement-bar__container is already sticky */
@@ -2806,8 +2803,12 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
   /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
-  /* These values should match the actual measured heights of .announcement-bar-section */
-  --tech-topbar-height: 40px; /* Mobile */
+  /* Based on actual measured heights from base.css:
+   * - .announcement-bar__container: padding 0.5rem (8px) * 2 + content (~20px) = ~36px mobile
+   * - .utility-bar: empty or minimal when no blocks/social = ~0-10px
+   * Total estimate: ~40-45px on mobile
+   */
+  --tech-topbar-height: 45px; /* Mobile - conservative estimate */
   
   /* Header (main navigation) height */
   --tech-header-height: 60px; /* Mobile */
@@ -2821,14 +2822,14 @@ body.template-index #shopify-section-featured_collection_bestsellers {
 
 @media screen and (min-width: 750px) {
   :root {
-    --tech-topbar-height: 44px; /* Tablet */
+    --tech-topbar-height: 48px; /* Tablet */
     --tech-header-height: 64px; /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-topbar-height: 48px; /* Desktop */
+    --tech-topbar-height: 52px; /* Desktop */
     --tech-header-height: 68px; /* Desktop */
   }
 }
@@ -2959,11 +2960,13 @@ main {
 
 /* Ensure announcement bar message container has proper height */
 .announcement-bar__message {
-  min-height: var(--tech-topbar-height);
+  /* Remove fixed min-height - let content and padding determine height naturally */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
+  /* Padding already defined in base.css - don't override unless necessary */
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Header positioning */
