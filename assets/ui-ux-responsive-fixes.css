@@ -2617,12 +2617,13 @@ body.template-index .shopify-section:first-child {
 }
 
 /* Normalize page-width containers for consistent alignment */
-/* Applies to: page-width, category-nav-wrapper, ta-conv-section-spacing, modern-feature-cards__wrapper */
+/* Applies to: page-width, category-nav-wrapper, ta-conv-section-spacing, modern-feature-cards__wrapper, trust-badges__container */
 /* Desktop: max-width 1200px, padding-inline 2rem | Mobile: padding-inline 1rem */
 body.template-index .page-width,
 body.template-index .category-nav-wrapper,
 body.template-index .ta-conv-section-spacing,
-body.template-index .modern-feature-cards__wrapper {
+body.template-index .modern-feature-cards__wrapper,
+body.template-index .trust-badges__container {
   max-width: var(--page-width, 1200px);
   margin-inline: auto;
   padding-inline: 2rem; /* Desktop: consistent gutters */
@@ -2632,20 +2633,22 @@ body.template-index .modern-feature-cards__wrapper {
   body.template-index .page-width,
   body.template-index .category-nav-wrapper,
   body.template-index .ta-conv-section-spacing,
-  body.template-index .modern-feature-cards__wrapper {
+  body.template-index .modern-feature-cards__wrapper,
+  body.template-index .trust-badges__container {
     padding-inline: 1rem; /* Mobile: consistent gutters */
   }
 }
 
 /* Normalize all H2 headings for consistent alignment and spacing */
-/* Applies to: h2, title, category-nav-title, ta-conv-section-heading, modern-feature-cards__heading, testimonials-section__title */
+/* Applies to: h2, title, category-nav-title, ta-conv-section-heading, modern-feature-cards__heading, testimonials-section__title, trust-badges__heading */
 /* Desktop: margin-bottom 2rem (32px) | Mobile: margin-bottom 1.5rem (24px) */
 body.template-index h2,
 body.template-index .title,
 body.template-index .category-nav-title,
 body.template-index .ta-conv-section-heading,
 body.template-index .modern-feature-cards__heading,
-body.template-index .testimonials-section__title {
+body.template-index .testimonials-section__title,
+body.template-index .trust-badges__heading {
   margin-bottom: 2rem; /* Desktop: 32px - consistent heading spacing */
   text-align: center;
 }
@@ -2656,18 +2659,20 @@ body.template-index .testimonials-section__title {
   body.template-index .category-nav-title,
   body.template-index .ta-conv-section-heading,
   body.template-index .modern-feature-cards__heading,
-  body.template-index .testimonials-section__title {
+  body.template-index .testimonials-section__title,
+  body.template-index .trust-badges__heading {
     margin-bottom: 1.5rem; /* Mobile: 24px */
   }
 }
 
 /* Normalize grid gaps across all sections */
-/* Applies to: product-grid, category-nav-grid, ta-conv-benefits, modern-feature-cards__grid */
+/* Applies to: product-grid, category-nav-grid, ta-conv-benefits, modern-feature-cards__grid, trust-badges__grid */
 /* Desktop: gap 2rem (32px) | Mobile: gap 1.5rem (24px) */
 body.template-index .product-grid,
 body.template-index .category-nav-grid,
 body.template-index .ta-conv-benefits,
-body.template-index .modern-feature-cards__grid {
+body.template-index .modern-feature-cards__grid,
+body.template-index .trust-badges__grid {
   gap: 2rem; /* Desktop: 32px */
 }
 
@@ -2675,7 +2680,8 @@ body.template-index .modern-feature-cards__grid {
   body.template-index .product-grid,
   body.template-index .category-nav-grid,
   body.template-index .ta-conv-benefits,
-  body.template-index .modern-feature-cards__grid {
+  body.template-index .modern-feature-cards__grid,
+  body.template-index .trust-badges__grid {
     gap: 1.5rem; /* Mobile: 24px */
   }
 }
@@ -2683,7 +2689,10 @@ body.template-index .modern-feature-cards__grid {
 /* Remove extra padding from sections that have their own wrappers */
 body.template-index .category-nav-section,
 body.template-index .ta-conv-section-spacing,
-body.template-index .modern-feature-cards {
+body.template-index .modern-feature-cards,
+body.template-index .trust-badges,
+body.template-index .testimonials-section,
+body.template-index .newsletter {
   padding-inline: 0 !important;
 }
 
