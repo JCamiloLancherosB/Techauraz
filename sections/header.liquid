@@ -423,11 +423,17 @@
 
     setHeaderHeight() {
       if (!this.header) return;
-      
+
+      const headerPosition = window.getComputedStyle(this.header).position;
+      if (headerPosition !== 'fixed') {
+        document.documentElement.style.removeProperty('--tech-header-h');
+        return;
+      }
+
       // Get the actual rendered height of the header
       const headerHeight = this.header.offsetHeight;
-      
-      // Update CSS variable for dynamic use (using established naming convention)
+
+      // Update CSS variable only when header is fixed
       document.documentElement.style.setProperty('--tech-header-h', `${headerHeight}px`);
     }
 
