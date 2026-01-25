@@ -87,8 +87,6 @@ function setupMagnify(zoomRatio) {
   update();
   if (mql.addEventListener) {
     mql.addEventListener('change', update);
-  } else if (mql.addListener) {
-    mql.addListener(update);
   }
 }
 
