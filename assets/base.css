@@ -4570,9 +4570,16 @@ a.product__text {
   overflow: hidden;
 }
 
+.tech-pdp-gallery[data-zoom-enabled='true'] .product__modal-opener--image .product__media {
+  cursor: zoom-in;
+}
+
 .thumbnail-list {
   flex-wrap: wrap;
   grid-gap: 1rem;
+  max-height: 32rem;
+  overflow-y: auto;
+  align-content: flex-start;
 }
 
 /* Fix to show some space at the end of our sliders in all browsers to be applied on thumbnails */
@@ -4611,11 +4618,26 @@ a.product__text {
 }
 
 .image-magnify-full-size {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   cursor: zoom-out;
   z-index: 1;
   margin: 0;
   border-radius: calc(var(--media-radius) - var(--media-border-width));
   background-color: var(--gradient-background);
+  background-repeat: no-repeat;
+}
+
+.image-magnify-full-size::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0) 55%);
+  pointer-events: none;
 }
 
 .image-magnify-hover {
@@ -4642,6 +4664,7 @@ a.product__text {
 
 .js .product__media {
   overflow: hidden !important;
+  position: relative;
 }
 
 .thumbnail[aria-current]:focus-visible {
@@ -4682,12 +4705,23 @@ a.product__text {
 
 .thumbnail-list__item {
   position: relative;
+  width: 6.8rem;
 }
 
 .thumbnail-list__item::before {
   content: '';
   display: block;
   padding-bottom: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  .thumbnail-list__item {
+    width: 6rem;
+  }
+
+  .thumbnail-list {
+    max-height: none;
+  }
 }
 
 .product:not(.featured-product) .product__view-details {
