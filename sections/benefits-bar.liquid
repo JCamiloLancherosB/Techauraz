@@ -4,7 +4,7 @@
 {% endcomment %}
 
 <div class="benefits-bar{% if section.settings.scroll_on_mobile %} benefits-bar--scrollable{% endif %}">
-  <div class="{% if section.settings.full_width %}page-width-full{% else %}container{% endif %}">
+  <div class="page-width">
     <div class="benefits-bar__grid">
       {% for block in section.blocks %}
         {% if block.type == 'benefit' %}

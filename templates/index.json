@@ -68,6 +68,53 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
+    "benefits_bar_home": {
+      "type": "benefits-bar",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon_emoji": "🚚",
+            "title": "Envío rápido",
+            "description": "Recibe tus pedidos en 2-5 días hábiles en toda Colombia."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon_emoji": "💳",
+            "title": "Pago contraentrega",
+            "description": "Paga cuando recibes tu producto y comprueba la calidad."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon_emoji": "✅",
+            "title": "Garantía 30 días",
+            "description": "Compra con tranquilidad gracias a nuestra garantía extendida."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon_emoji": "💬",
+            "title": "Soporte inmediato",
+            "description": "Atención por WhatsApp para resolver tus dudas al instante."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "full_width": false,
+        "scroll_on_mobile": true
+      }
+    },
     "category_navigation": {
       "type": "category-navigation",
       "blocks": {
@@ -128,41 +175,6 @@
         "heading": "Categorías Destacadas"
       }
     },
-    "cta_midpage": {
-      "type": "rich-text",
-      "blocks": {
-        "cta_heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Explora lo mejor en tecnología",
-            "heading_size": "h2"
-          }
-        },
-        "cta_buttons": {
-          "type": "button",
-          "settings": {
-            "button_label": "Ver catálogo",
-            "button_link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "button_label_2": "WhatsApp",
-            "button_link_2": "https://wa.me/573008602789?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": [
-        "cta_heading",
-        "cta_buttons"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
@@ -175,7 +187,7 @@
         "collection": "diademas-gamer-techaura",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "full_width": true,
+        "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
@@ -188,8 +200,8 @@
         "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "featured_collection_bestsellers": {
@@ -203,7 +215,7 @@
         "collection": "carga-energia-techaura",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "full_width": true,
+        "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
@@ -216,36 +228,8 @@
         "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 16,
-        "padding_bottom": 16
-      }
-    },
-    "featured_collection_nuevos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "<strong>Nuevos</strong>",
-        "heading_size": "h2",
-        "description": "Lo último en tecnología para ti",
-        "show_description": true,
-        "description_style": "body",
-        "collection": "productos-inteligentes-electronicos",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "trust_badges_home": {
@@ -292,8 +276,8 @@
       ],
       "settings": {
         "heading": "Comprar con confianza",
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "testimonials_home": {
@@ -339,53 +323,29 @@
         "show_view_all": false,
         "view_all_link": "",
         "view_all_text": "Ver más reseñas",
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
-    "newsletter_home": {
-      "type": "newsletter",
-      "blocks": {
-        "heading_block": {
-          "type": "heading",
-          "settings": {
-            "heading": "Ofertas Exclusivas para Ti",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph_block": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Recibe descuentos especiales y novedades tech en tu correo</p>"
-          }
-        },
-        "email_form_block": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading_block",
-        "paragraph_block",
-        "email_form_block"
-      ],
+    "newsletter_conversion_home": {
+      "type": "newsletter-conversion",
       "settings": {
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "full_width": true,
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "heading": "Ofertas Exclusivas para Ti",
+        "subheading": "Recibe descuentos especiales y novedades tech en tu correo",
+        "button_text": "Suscribirme"
       }
     }
   },
   "order": [
     "slideshow_iqMhTA",
+    "benefits_bar_home",
     "category_navigation",
-    "cta_midpage",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
-    "featured_collection_nuevos",
     "trust_badges_home",
     "testimonials_home",
-    "newsletter_home"
+    "newsletter_conversion_home"
   ]
 }
