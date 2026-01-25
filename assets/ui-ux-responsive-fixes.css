@@ -2702,21 +2702,21 @@ body.template-index .newsletter {
    ============================================================================= */
 
 /* Apply flexbox layout to card content for proper alignment */
-.tech-card-product .card__content {
+.tech-card .card__content {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 /* Ensure card information grows to fill available space */
-.tech-card-product .card__information {
+.tech-card .card__information {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 /* Title: max 2 lines with ellipsis */
-.tech-card-product .card__heading {
+.tech-card .card__heading {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2727,19 +2727,19 @@ body.template-index .newsletter {
 }
 
 /* Price and button area: push to bottom */
-.tech-card-product .card-information {
+.tech-card .card-information {
   margin-top: auto;
   padding-top: 0.8rem;
 }
 
 /* Consistent image aspect ratio (1:1 square) */
-.tech-card-product .card__media {
+.tech-card .card__media {
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
 /* Image sizing within the media container */
-.tech-card-product .card__media img {
+.tech-card .card__media img {
   width: 100%;
   height: 100%;
   object-fit: contain; /* Prevent cropping, show full product */
@@ -2749,19 +2749,19 @@ body.template-index .newsletter {
 /* Mobile: Prevent horizontal overflow on grid */
 @media screen and (max-width: 749px) {
   /* Slightly reduce min-height for title on mobile */
-  .tech-card-product .card__heading {
+  .tech-card .card__heading {
     min-height: calc(1.2em * 2);
     line-height: 1.2;
   }
 }
 
 /* Ensure quick-add button stays at the bottom */
-.tech-card-product .quick-add {
+.tech-card .quick-add {
   margin-top: 0.5rem;
 }
 
 /* Fix for card details link positioning */
-.tech-card-product .card__details-link {
+.tech-card .card__details-link {
   margin-top: 0.5rem;
 }
 
