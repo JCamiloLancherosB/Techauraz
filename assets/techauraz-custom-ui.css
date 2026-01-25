@@ -28,9 +28,9 @@
   --tech-border-light: #f1f5f9;
   
   /* Spacing scale */
-  --tech-space-2xs: 0.4rem;
+  --tech-space-2xs: 0.3rem;
   --tech-space-xs: 0.6rem;
-  --tech-space-sm: 0.8rem;
+  --tech-space-sm: 1rem;
   --tech-space-md: 1.2rem;
   --tech-space-lg: 1.6rem;
   --tech-space-xl: 2.4rem;
@@ -40,8 +40,10 @@
   --tech-button-radius: 8px;
   --tech-button-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   --tech-button-shadow-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
-  --tech-button-padding-y: var(--tech-space-sm);
-  --tech-button-padding-x: var(--tech-space-lg);
+  --tech-button-padding-y: 1rem;
+  --tech-button-padding-x: 1.5rem;
+  --tech-secondary-bg: transparent;
+  --tech-secondary-hover-bg: var(--tech-surface, #f8fafc);
   
   /* Heading consistency */
   --tech-heading-line-height: 1.2;
@@ -272,7 +274,7 @@ h1, h2, h3, h4, h5, h6,
 .btn-secondary,
 .banner__buttons .button,
 .slideshow-cta {
-  padding: var(--tech-button-padding-y, 0.8rem) var(--tech-button-padding-x, 1.6rem);
+  padding: var(--tech-button-padding-y, 1rem) var(--tech-button-padding-x, 1.5rem);
   min-height: 48px;
   border-radius: var(--tech-button-radius, 8px);
   font-weight: 600;

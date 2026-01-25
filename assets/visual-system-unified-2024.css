@@ -148,7 +148,7 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: var(--tech-space-2xs, 0.3rem);
+  gap: var(--tech-space-2xs, 0.4rem);
 }
 
 .card__details-link .link:hover {
