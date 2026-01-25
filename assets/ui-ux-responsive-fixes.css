@@ -2646,7 +2646,8 @@ body.template-index .page-width,
 body.template-index .category-nav-wrapper,
 body.template-index .ta-conv-section-spacing,
 body.template-index .modern-feature-cards__wrapper,
-body.template-index .trust-badges__container {
+body.template-index .trust-badges__container,
+body.template-index .ta-conv-newsletter-section {
   max-width: var(--page-width, 1200px);
   margin-inline: auto;
   padding-inline: 2rem; /* Desktop: consistent gutters */
@@ -2657,7 +2658,8 @@ body.template-index .trust-badges__container {
   body.template-index .category-nav-wrapper,
   body.template-index .ta-conv-section-spacing,
   body.template-index .modern-feature-cards__wrapper,
-  body.template-index .trust-badges__container {
+  body.template-index .trust-badges__container,
+  body.template-index .ta-conv-newsletter-section {
     padding-inline: 1rem; /* Mobile: consistent gutters */
   }
 }
