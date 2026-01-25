@@ -2952,10 +2952,9 @@ body {
   color: inherit;
 }
 
-/* --- MAIN CONTENT OFFSET FOR STICKY HEADER --- */
-/* Apply offset to main content to prevent header from covering first section */
-/* This applies by default since both announcement bar and header are configured as sticky in header-group.json */
-main {
+/* --- MAIN CONTENT OFFSET FOR FIXED HEADER STACK --- */
+/* Apply offset only when header/topbar are fixed (not sticky) */
+body.header-stack-fixed main {
   /* Add padding equal to the full stack height (topbar + header) */
   padding-top: var(--tech-stack-h);
   /* Remove any top margin that could create gaps */
@@ -2968,8 +2967,8 @@ main {
   padding-top: 0;
 }
 
-/* Also ensure sticky header has proper offset */
-.shopify-section-header-sticky + main {
+/* Also ensure fixed header has proper offset when sticky class is present */
+body.header-stack-fixed .shopify-section-header-sticky + main {
   padding-top: var(--tech-stack-h);
 }
 
