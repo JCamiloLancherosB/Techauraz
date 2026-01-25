@@ -425,8 +425,8 @@
       // Get the actual rendered height of the header
       const headerHeight = this.header.offsetHeight;
       
-      // Update CSS variable for dynamic use
-      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+      // Update CSS variable for dynamic use (using established naming convention)
+      document.documentElement.style.setProperty('--tech-header-h', `${headerHeight}px`);
     }
 
     onScroll() {
