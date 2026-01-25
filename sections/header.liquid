@@ -93,7 +93,7 @@
 
   .section-header {
     position: sticky; /* Safari z-index fix - maintains proper stacking context */
-    top: var(--tech-topbar-height, 0); /* Position below announcement bar (topbar) */
+    top: var(--tech-topbar-h, 0); /* Position below announcement bar (topbar) */
     z-index: 100; /* Above content and announcements (99), below modals (200+) */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.5 | round: 0 }}px;
   }
@@ -417,6 +417,16 @@
       });
 
       observer.observe(this.header);
+    }
+
+    setHeaderHeight() {
+      if (!this.header) return;
+      
+      // Get the actual rendered height of the header
+      const headerHeight = this.header.offsetHeight;
+      
+      // Update CSS variable for dynamic use
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
     }
 
     onScroll() {

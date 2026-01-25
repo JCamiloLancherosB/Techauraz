@@ -2830,36 +2830,33 @@ body.template-index .modern-feature-cards {
 
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
-  /* Announcement bar (topbar) height - displays shipping, benefits, and contact info */
-  /* These are ESTIMATED values based on analysis of base.css styling:
-   * - base.css sets .announcement-bar__container padding: 0.5rem (8px) top/bottom
-   * - Font size: 0.875rem (~14px) with line-height 1.4 = ~20px text height
-   * - Total estimated: 8px + 20px + 8px = ~36px + borders/margins = ~40-45px
-   * NOTE: Actual height may vary based on content. Adjust if needed.
-   */
-  --tech-topbar-height: 45px; /* Mobile - conservative estimate */
+  /* Topbar (announcement bar) height - displays shipping, benefits, and contact info */
+  --tech-topbar-h: 36px; /* Mobile */
   
   /* Header (main navigation) height */
-  --tech-header-height: 60px; /* Mobile */
+  --tech-header-h: 72px; /* Mobile */
   
-  /* Total stack height (announcement bar + header) */
-  --tech-stack-height: calc(var(--tech-topbar-height) + var(--tech-header-height));
+  /* Total stack height (topbar + header) */
+  --tech-stack-h: calc(var(--tech-topbar-h) + var(--tech-header-h));
   
-  /* Legacy variable for backward compatibility */
-  --tech-header-offset: var(--tech-stack-height);
+  /* Legacy variables for backward compatibility */
+  --tech-topbar-height: var(--tech-topbar-h);
+  --tech-header-height: var(--tech-header-h);
+  --tech-stack-height: var(--tech-stack-h);
+  --tech-header-offset: var(--tech-stack-h);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --tech-topbar-height: 48px; /* Tablet */
-    --tech-header-height: 64px; /* Tablet */
+    --tech-topbar-h: 40px; /* Tablet */
+    --tech-header-h: 76px; /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-topbar-height: 52px; /* Desktop */
-    --tech-header-height: 68px; /* Desktop */
+    --tech-topbar-h: 44px; /* Desktop */
+    --tech-header-h: 80px; /* Desktop */
   }
 }
 
@@ -2867,13 +2864,13 @@ body.template-index .modern-feature-cards {
 /* Prevents content from being hidden under sticky header when jumping to anchors */
 html {
   /* Apply to html for better cross-browser support */
-  scroll-padding-top: var(--tech-stack-height);
+  scroll-padding-top: var(--tech-stack-h);
   /* Smooth scroll behavior */
   scroll-behavior: smooth;
 }
 
 body {
-  scroll-padding-top: var(--tech-stack-height);
+  scroll-padding-top: var(--tech-stack-h);
 }
 
 /* --- MENU TEXT LEGIBILITY FIX --- */
@@ -2932,7 +2929,7 @@ body {
 /* This applies by default since both announcement bar and header are configured as sticky in header-group.json */
 main {
   /* Add padding equal to the full stack height (topbar + header) */
-  padding-top: var(--tech-stack-height);
+  padding-top: var(--tech-stack-h);
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
@@ -2943,7 +2940,7 @@ main {
 
 /* Also ensure sticky header has proper offset */
 .shopify-section-header-sticky + main {
-  padding-top: var(--tech-stack-height);
+  padding-top: var(--tech-stack-h);
 }
 
 /* Overlay header exception - reset padding when header is transparent over hero */
@@ -3011,7 +3008,7 @@ main {
 .header-wrapper {
   /* Removed conflicting position: sticky override - controlled by section */
   /* Position header below the announcement bar when both are sticky */
-  top: var(--tech-topbar-height, 0) !important;
+  top: var(--tech-topbar-h, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
   /* Ensure solid background - prevents transparency issues */
   /* Use rgb format for Shopify color system compatibility */
