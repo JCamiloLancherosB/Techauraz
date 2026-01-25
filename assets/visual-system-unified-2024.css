@@ -26,7 +26,7 @@
 .card__media {
   position: relative;
   overflow: hidden;
-  background: #f8fafc;
+  background: var(--tech-surface, #f8fafc);
 }
 
 .card__media .media {
@@ -50,7 +50,7 @@
 
 .card__heading {
   min-height: 2.6em; /* Reserve space for 2 lines */
-  margin-bottom: 0.6rem;
+  margin-bottom: var(--tech-space-xs, 0.6rem);
 }
 
 .card__heading .full-unstyled-link {
@@ -137,7 +137,7 @@
 
 /* Details link - secondary action */
 .card__details-link {
-  margin: 0.6rem 0 0.8rem;
+  margin: var(--tech-space-xs, 0.6rem) 0 var(--tech-space-sm, 0.8rem);
 }
 
 .card__details-link .link {
@@ -148,7 +148,7 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--tech-space-2xs, 0.4rem);
 }
 
 .card__details-link .link:hover {
@@ -159,15 +159,15 @@
 
 /* Quick-add button - primary action */
 .quick-add {
-  margin-top: 0.8rem;
+  margin-top: var(--tech-space-sm, 0.8rem);
 }
 
 .quick-add__submit {
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: var(--tech-button-padding-y, 1rem) var(--tech-button-padding-x, 1.5rem);
   font-size: 1.4rem;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: var(--tech-button-radius, 8px);
   border: none;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
