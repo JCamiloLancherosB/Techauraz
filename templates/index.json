@@ -68,52 +68,6 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "benefits_conversion_home": {
-      "type": "benefits-conversion",
-      "blocks": {
-        "benefit_shipping": {
-          "type": "benefit",
-          "settings": {
-            "icon": "🚚",
-            "title": "Envío Gratis",
-            "description": "Sin costos ocultos. Envío incluido a toda Colombia."
-          }
-        },
-        "benefit_payment": {
-          "type": "benefit",
-          "settings": {
-            "icon": "💳",
-            "title": "Pago Contra Entrega",
-            "description": "Inspecciona antes de pagar en todo el país."
-          }
-        },
-        "benefit_guarantee": {
-          "type": "benefit",
-          "settings": {
-            "icon": "✨",
-            "title": "Garantía 30 Días",
-            "description": "Devolución sin preguntas. Tu satisfacción garantizada."
-          }
-        },
-        "benefit_delivery": {
-          "type": "benefit",
-          "settings": {
-            "icon": "⚡",
-            "title": "Entrega 2-5 Días",
-            "description": "Procesamiento el mismo día en toda Colombia."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_shipping",
-        "benefit_payment",
-        "benefit_guarantee",
-        "benefit_delivery"
-      ],
-      "settings": {
-        "heading": ""
-      }
-    },
     "category_navigation": {
       "type": "category-navigation",
       "blocks": {
