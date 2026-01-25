@@ -68,52 +68,6 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "benefits_conversion_home": {
-      "type": "benefits-conversion",
-      "blocks": {
-        "benefit_shipping": {
-          "type": "benefit",
-          "settings": {
-            "icon": "🚚",
-            "title": "Envío Gratis",
-            "description": "Sin costos ocultos. Envío incluido a toda Colombia."
-          }
-        },
-        "benefit_payment": {
-          "type": "benefit",
-          "settings": {
-            "icon": "💳",
-            "title": "Pago Contra Entrega",
-            "description": "Inspecciona antes de pagar en todo el país."
-          }
-        },
-        "benefit_guarantee": {
-          "type": "benefit",
-          "settings": {
-            "icon": "✨",
-            "title": "Garantía 30 Días",
-            "description": "Devolución sin preguntas. Tu satisfacción garantizada."
-          }
-        },
-        "benefit_delivery": {
-          "type": "benefit",
-          "settings": {
-            "icon": "⚡",
-            "title": "Entrega 2-5 Días",
-            "description": "Procesamiento el mismo día en toda Colombia."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_shipping",
-        "benefit_payment",
-        "benefit_guarantee",
-        "benefit_delivery"
-      ],
-      "settings": {
-        "heading": ""
-      }
-    },
     "category_navigation": {
       "type": "category-navigation",
       "blocks": {
@@ -172,6 +126,41 @@
       ],
       "settings": {
         "heading": "Categorías Destacadas"
+      }
+    },
+    "cta_midpage": {
+      "type": "rich-text",
+      "blocks": {
+        "cta_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Explora lo mejor en tecnología",
+            "heading_size": "h2"
+          }
+        },
+        "cta_buttons": {
+          "type": "button",
+          "settings": {
+            "button_label": "Ver catálogo",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "WhatsApp",
+            "button_link_2": "https://wa.me/573008602789?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "cta_heading",
+        "cta_buttons"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 24,
+        "padding_bottom": 24
       }
     },
     "featured_collection_9GzLFt": {
@@ -266,16 +255,16 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "🔒",
-            "text": "Pago 100% Seguro"
+            "emoji": "💵",
+            "text": "Contraentrega"
           }
         },
         "trust_delivery": {
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "💵",
-            "text": "Pago Contra Entrega"
+            "emoji": "🚚",
+            "text": "Envío 2-5 días"
           }
         },
         "trust_guarantee": {
@@ -283,15 +272,15 @@
           "settings": {
             "icon_type": "emoji",
             "emoji": "✅",
-            "text": "Garantía 30 Días"
+            "text": "Garantía 30 días"
           }
         },
         "trust_support": {
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "⭐",
-            "text": "+1000 Clientes"
+            "emoji": "💬",
+            "text": "Soporte por WhatsApp"
           }
         }
       },
@@ -302,7 +291,7 @@
         "trust_support"
       ],
       "settings": {
-        "heading": "Compra con Confianza",
+        "heading": "Comprar con confianza",
         "padding_top": 16,
         "padding_bottom": 16
       }
@@ -390,8 +379,8 @@
   },
   "order": [
     "slideshow_iqMhTA",
-    "benefits_conversion_home",
     "category_navigation",
+    "cta_midpage",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
     "featured_collection_nuevos",
