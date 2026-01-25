@@ -35,11 +35,7 @@
 }
 
 /* Announcement bar section wrapper - contains both custom promo and utility bar */
-.announcement-bar-section {
-  position: relative;
-  /* Ensure it has a solid background to prevent transparency */
-  /* Use the theme's color scheme background */
-}
+/* Position is set to sticky in the ANNOUNCEMENT BAR & HEADER STICKY COORDINATION section below */
 
 /* Color scheme backgrounds for announcement bar */
 .announcement-bar-section .color-scheme-1,
@@ -2930,6 +2926,8 @@ body {
 main {
   /* Add padding equal to the full stack height (topbar + header) */
   padding-top: var(--tech-stack-h);
+  /* Remove any top margin that could create gaps */
+  margin-top: 0 !important;
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
@@ -2946,6 +2944,18 @@ main {
 /* Overlay header exception - reset padding when header is transparent over hero */
 .shopify-section-header-sticky.header-wrapper--overlay + main {
   padding-top: 0;
+}
+
+/* Ensure first section in main has no extra top margin/padding that could create gaps */
+main > .shopify-section:first-child,
+main > section:first-child {
+  margin-top: 0 !important;
+}
+
+/* Specifically target slideshow as it's often the first section */
+main > .shopify-section:first-child .slideshow,
+main > section:first-child .slideshow {
+  margin-top: 0 !important;
 }
 
 /* --- ANNOUNCEMENT BAR & HEADER STICKY COORDINATION --- */
@@ -3013,13 +3023,16 @@ main {
   /* Ensure solid background - prevents transparency issues */
   /* Use rgb format for Shopify color system compatibility */
   background-color: rgb(var(--color-background, 255 255 255)) !important;
+  /* Remove any margins that might cause gaps */
+  margin: 0 !important;
 }
 
 /* Ensure both sticky elements work together */
 .shopify-section-header-sticky {
   z-index: 100 !important;
-  top: var(--tech-topbar-height, 0) !important;
+  top: var(--tech-topbar-h, 0) !important;
   background-color: rgb(var(--color-background, 255 255 255)) !important;
+  margin: 0 !important;
 }
 
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
@@ -3038,7 +3051,7 @@ main {
 /* If sticky banner is used, position it below the entire header stack */
 .free-shipping-banner--sticky {
   position: sticky;
-  top: var(--tech-stack-height) !important;
+  top: var(--tech-stack-h) !important;
   /* 
    * Z-index: 98 - Below announcement bar (101) and header (100) 
    * This ensures banner sticks below header stack, not overlapping it
