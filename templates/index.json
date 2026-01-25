@@ -174,6 +174,41 @@
         "heading": "Categorías Destacadas"
       }
     },
+    "cta_midpage": {
+      "type": "rich-text",
+      "blocks": {
+        "cta_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Explora lo mejor en tecnología",
+            "heading_size": "h1"
+          }
+        },
+        "cta_buttons": {
+          "type": "button",
+          "settings": {
+            "button_label": "Ver catálogo",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "WhatsApp",
+            "button_link_2": "https://wa.me/573008602789?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "cta_heading",
+        "cta_buttons"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "full_width": true,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
@@ -266,16 +301,16 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "🔒",
-            "text": "Pago 100% Seguro"
+            "emoji": "💵",
+            "text": "Contraentrega"
           }
         },
         "trust_delivery": {
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "💵",
-            "text": "Pago Contra Entrega"
+            "emoji": "🚚",
+            "text": "Envío 2-5 días"
           }
         },
         "trust_guarantee": {
@@ -283,15 +318,15 @@
           "settings": {
             "icon_type": "emoji",
             "emoji": "✅",
-            "text": "Garantía 30 Días"
+            "text": "Garantía 30 días"
           }
         },
         "trust_support": {
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "⭐",
-            "text": "+1000 Clientes"
+            "emoji": "💬",
+            "text": "Soporte por WhatsApp"
           }
         }
       },
@@ -302,7 +337,7 @@
         "trust_support"
       ],
       "settings": {
-        "heading": "Compra con Confianza",
+        "heading": "Comprar con confianza",
         "padding_top": 16,
         "padding_bottom": 16
       }
@@ -392,6 +427,7 @@
     "slideshow_iqMhTA",
     "benefits_conversion_home",
     "category_navigation",
+    "cta_midpage",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
     "featured_collection_nuevos",
