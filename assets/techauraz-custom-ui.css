@@ -27,10 +27,27 @@
   --tech-border: #e2e8f0;
   --tech-border-light: #f1f5f9;
   
+  /* Spacing scale */
+  --tech-space-2xs: 0.3rem;
+  --tech-space-xs: 0.6rem;
+  --tech-space-sm: 1rem;
+  --tech-space-md: 1.2rem;
+  --tech-space-lg: 1.6rem;
+  --tech-space-xl: 2.4rem;
+  --tech-space-2xl: 3.2rem;
+  
   /* Button styling tokens */
   --tech-button-radius: 8px;
   --tech-button-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   --tech-button-shadow-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
+  --tech-button-padding-y: 1rem;
+  --tech-button-padding-x: 1.5rem;
+  --tech-secondary-bg: transparent;
+  --tech-secondary-hover-bg: var(--tech-surface, #f8fafc);
+  
+  /* Heading consistency */
+  --tech-heading-line-height: 1.2;
+  --tech-heading-letter-spacing: -0.01em;
 }
 
 /* =============================================================================
@@ -239,6 +256,8 @@
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: var(--tech-ink, #0B1220);
+  line-height: var(--tech-heading-line-height, 1.2);
+  letter-spacing: var(--tech-heading-letter-spacing, -0.01em);
 }
 
 /* Product titles and card titles */
@@ -246,6 +265,20 @@ h1, h2, h3, h4, h5, h6,
 .card__title,
 .card-title {
   color: var(--tech-ink, #0B1220);
+}
+
+/* Consistent primary/secondary button sizing */
+.button--primary,
+.button--secondary,
+.btn-primary,
+.btn-secondary,
+.banner__buttons .button,
+.slideshow-cta {
+  padding: var(--tech-button-padding-y, 1rem) var(--tech-button-padding-x, 1.5rem);
+  min-height: 48px;
+  border-radius: var(--tech-button-radius, 8px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 /* Price elements consistency */
@@ -383,4 +416,3 @@ select:focus {
     font-size: 1.3rem;
   }
 }
-

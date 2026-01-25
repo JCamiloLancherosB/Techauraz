@@ -761,7 +761,7 @@ slideshow-component .slider::-webkit-scrollbar {
 /* Secondary buttons */
 .button--secondary,
 .btn-secondary {
-  background: transparent;
+  background: var(--tech-secondary-bg, transparent);
   color: var(--tech-primary, #2563eb);
   border: 2px solid var(--tech-primary, #2563eb);
   border-radius: var(--tech-button-radius, 8px);
@@ -770,7 +770,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 .button--secondary:hover,
 .btn-secondary:hover {
-  background: var(--tech-surface, #f8fafc);
+  background: var(--tech-secondary-hover-bg, var(--tech-surface, #f8fafc));
   color: var(--tech-primary-hover, #1e40af);
   border-color: var(--tech-primary-hover, #1e40af);
   transform: translateY(-1px);
@@ -2731,6 +2731,7 @@ body.template-index .newsletter {
   display: flex;
   flex-direction: column;
   height: 100%;
+  gap: var(--tech-space-xs, 0.6rem);
 }
 
 /* Ensure card information grows to fill available space */
@@ -2761,6 +2762,7 @@ body.template-index .newsletter {
 .tech-card .card__media {
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  background: var(--tech-surface, #f8fafc);
 }
 
 /* Image sizing within the media container */
@@ -3222,11 +3224,12 @@ details-modal,
 
 /* Cleaner card layout - flexbox for bottom-aligned content */
 .tech-card-product .card__content {
-  padding: 1rem;
+  padding: var(--tech-space-sm, 1rem);
   min-height: auto;
   display: flex;
   flex-direction: column;
   height: 100%;
+  gap: var(--tech-space-xs, 0.6rem);
 }
 
 .tech-card-product .card__heading {
@@ -3251,6 +3254,7 @@ details-modal,
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: var(--tech-space-xs, 0.6rem);
 }
 
 /* card-information (child container) grows to push price down to bottom */
