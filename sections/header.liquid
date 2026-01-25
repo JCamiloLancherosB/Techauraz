@@ -93,7 +93,7 @@
 
   .section-header {
     position: sticky; /* Safari z-index fix - maintains proper stacking context */
-    top: var(--tech-topbar-height, 0); /* Position below announcement bar (topbar) */
+    top: var(--tech-topbar-h, 0); /* Position below announcement bar (topbar) */
     z-index: 100; /* Above content and announcements (99), below modals (200+) */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.5 | round: 0 }}px;
   }
@@ -385,7 +385,9 @@
 
       this.setHeaderHeight();
 
-      window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
+      // Listen to breakpoint changes matching CSS media queries
+      window.matchMedia('(min-width: 750px)').addEventListener('change', this.setHeaderHeight.bind(this));
+      window.matchMedia('(min-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
 
       if (this.headerIsAlwaysSticky) {
         this.header.classList.add('shopify-section-header-sticky');
@@ -417,6 +419,16 @@
       });
 
       observer.observe(this.header);
+    }
+
+    setHeaderHeight() {
+      if (!this.header) return;
+      
+      // Get the actual rendered height of the header
+      const headerHeight = this.header.offsetHeight;
+      
+      // Update CSS variable for dynamic use (using established naming convention)
+      document.documentElement.style.setProperty('--tech-header-h', `${headerHeight}px`);
     }
 
     onScroll() {
