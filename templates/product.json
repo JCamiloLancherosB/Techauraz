@@ -79,11 +79,11 @@
             "block_order": [
                 "title",
                 "price",
-                "pdp_conversion_badges",
-                "buy_buttons",
                 "pdp_micro_trust",
                 "variant_picker",
+                "buy_buttons",
                 "quantity_selector",
+                "pdp_conversion_badges",
                 "pdp_key_specs",
                 "description",
                 "pdp_whatsapp_cta",
@@ -325,7 +325,7 @@
             "type": "sticky-mobile-cta",
             "settings": {
                 "enable_sticky_cta": true,
-                "buy_button_text": "🛒 Comprar Ahora - Pago Contra Entrega",
+                "buy_button_text": "Agregar",
                 "whatsapp_phone": "+573008602789",
                 "whatsapp_button_text": "💬 WhatsApp"
             }
