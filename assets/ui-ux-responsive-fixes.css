@@ -2958,21 +2958,19 @@ body {
 
 /* --- MAIN CONTENT OFFSET (ONLY FOR FIXED HEADERS) --- */
 /* Sticky headers should not push content down; keep padding only for fixed variants if they exist. */
-main {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+main.content-for-layout {
+  padding-top: 0;
 }
 
 /* Apply stack offset only when a fixed header variant is explicitly present */
-.header-wrapper--fixed + main,
-.shopify-section-header-sticky.header-wrapper--fixed + main {
+html.tech-header-fixed body .content-for-layout {
   padding-top: var(--tech-stack-h);
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
 /* Using adjacent sibling selector for better specificity */
-.header-wrapper--overlay + main,
-.shopify-section-header-sticky.header-wrapper--overlay + main {
+.header-wrapper--overlay + .content-for-layout,
+.shopify-section-header-sticky.header-wrapper--overlay + .content-for-layout {
   padding-top: 0;
 }
 
