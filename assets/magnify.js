@@ -60,4 +60,38 @@ function enableZoomOnHover(zoomRatio) {
   });
 }
 
-enableZoomOnHover(2);
+function disableZoomOnHover() {
+  document.querySelectorAll('.image-magnify-full-size').forEach((overlay) => overlay.remove());
+  document.querySelectorAll('.image-magnify-hover').forEach((image) => {
+    image.onclick = null;
+  });
+}
+
+function shouldEnableZoom() {
+  const gallery = document.querySelector('.tech-pdp-gallery');
+  if (!gallery) return false;
+  return gallery.dataset.zoomEnabled === 'true';
+}
+
+function setupMagnify(zoomRatio) {
+  const mql = window.matchMedia('(min-width: 990px)');
+
+  const update = () => {
+    if (mql.matches && shouldEnableZoom()) {
+      enableZoomOnHover(zoomRatio);
+    } else {
+      disableZoomOnHover();
+    }
+  };
+
+  update();
+  if (mql.addEventListener) {
+    mql.addEventListener('change', update);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setupMagnify(2));
+} else {
+  setupMagnify(2);
+}

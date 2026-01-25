@@ -46,11 +46,10 @@
 <media-gallery
   id="MediaGallery-{{ section.id }}{{ id_append }}"
   role="region"
-  {% if section.settings.enable_sticky_info %}
-    class="product__column-sticky"
-  {% endif %}
+  class="tech-pdp-gallery{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
+  data-zoom-enabled="{% if section.settings.image_zoom != 'none' %}true{% else %}false{% endif %}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   <slider-component id="GalleryViewer-{{ section.id }}{{ id_append }}" class="slider-mobile-gutter">
