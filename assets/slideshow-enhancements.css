@@ -9,6 +9,70 @@
    Critical: Ensure all slides show images and maintain consistent height
    ============================================================================= */
 
+/* Tech hero wrapper hooks (scoped to home page) */
+.template-index .tech-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.template-index .tech-hero__media {
+  position: relative;
+}
+
+.template-index .tech-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.template-index .tech-hero__overlay .banner__box,
+.template-index .tech-hero__overlay .slideshow-ctas {
+  pointer-events: auto;
+}
+
+.template-index .tech-hero__media,
+.template-index .tech-hero .slideshow__slide {
+  min-height: 380px;
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .tech-hero__media,
+  .template-index .tech-hero .slideshow__slide {
+    min-height: 520px;
+  }
+}
+
+.template-index .tech-hero__media img,
+.template-index .tech-hero__media .slideshow__media img,
+.template-index .tech-hero__media .banner__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body.template-index .tech-hero-slideshow .tech-hero__controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__controls--top {
+  bottom: auto;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__controls--top .slider-button {
+  pointer-events: auto;
+}
+
 /* Force placeholder SVGs in slideshow to be visible and fill container */
 /* 
  * Note: !important on width/height/max properties is required to override base.css line 337-345
