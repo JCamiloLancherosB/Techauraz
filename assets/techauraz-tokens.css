@@ -693,3 +693,313 @@ h4, .h4 {
     border-width: 3px;
   }
 }
+
+/* =============================================================================
+   11. UNIFIED FOCUS-VISIBLE STYLES
+   Consistent, accessible focus indicators for all interactive elements
+   WCAG 2.1 requires visible focus indicators with 3:1 contrast ratio
+   ============================================================================= */
+
+/* --- Default focus-visible style for all interactive elements --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 3px;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+/* Remove outline on mouse click, keep for keyboard */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible),
+[tabindex]:not([tabindex="-1"]):focus:not(:focus-visible),
+summary:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Links: Underline + outline for maximum visibility --- */
+a:focus-visible {
+  outline-color: var(--ta-primary, #2563eb);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* --- Buttons: High-contrast focus ring --- */
+.button:focus-visible,
+.btn:focus-visible,
+.ta-btn:focus-visible,
+[class*="button--"]:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.25);
+}
+
+/* Primary buttons on dark backgrounds need different focus color */
+.button--primary:focus-visible,
+.ta-btn--primary:focus-visible {
+  outline-color: var(--ta-warning-light, #fbbf24);
+}
+
+/* Secondary buttons can use primary color focus */
+.button--secondary:focus-visible,
+.ta-btn--secondary:focus-visible {
+  outline-color: var(--ta-primary, #2563eb);
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2);
+}
+
+/* --- Cards: Full card focus indication --- */
+.card:focus-visible,
+.card-wrapper:focus-visible,
+.product-card:focus-visible,
+.card__inner:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 4px;
+  border-radius: var(--ta-radius-card, 12px);
+}
+
+/* Card links that span the entire card */
+.card-wrapper__link--overlay:focus-visible,
+.full-unstyled-link:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 4px;
+}
+
+/* --- Form inputs: Visible border change + outline --- */
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="tel"]:focus-visible,
+input[type="number"]:focus-visible,
+input[type="search"]:focus-visible,
+input[type="password"]:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  border-color: var(--ta-primary, #2563eb);
+  box-shadow: var(--ta-ring-focus, 0 0 0 3px rgba(37, 99, 235, 0.4));
+}
+
+/* --- Icon buttons (header icons, close buttons) --- */
+.header__icon:focus-visible,
+.icon-button:focus-visible,
+.modal__toggle:focus-visible,
+.drawer__close:focus-visible,
+.cart-notification__close:focus-visible,
+[class*="__close"]:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 3px;
+  border-radius: var(--ta-radius-full, 50%);
+}
+
+/* --- Menu items and navigation links --- */
+.header__menu-item:focus-visible,
+.list-menu__item:focus-visible,
+.list-menu__item--link:focus-visible,
+.menu-drawer__menu-item:focus-visible,
+nav a:focus-visible,
+.footer__list-item a:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  background-color: rgba(37, 99, 235, 0.08);
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+/* --- Slider/carousel controls --- */
+.slider-button:focus-visible,
+.slider-counter__link:focus-visible,
+.slideshow-cta:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 3px;
+}
+
+/* --- Quick add buttons on product cards --- */
+.quick-add__submit:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.3);
+}
+
+/* --- Pagination --- */
+.pagination__item:focus-visible,
+.pagination__link:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+/* --- Disclosure/accordion toggles --- */
+details summary:focus-visible,
+.disclosure__button:focus-visible,
+.accordion__title:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+/* =============================================================================
+   12. CLS PREVENTION - Reserve space for dynamic elements
+   Prevents Cumulative Layout Shift from header/hero
+   ============================================================================= */
+
+/* --- Header height reservation --- */
+:root {
+  --ta-header-height-mobile: 60px;
+  --ta-header-height-desktop: 80px;
+  --ta-announcement-bar-height: 40px;
+}
+
+/* Sticky header wrapper - reserve minimum height */
+.header-wrapper,
+.shopify-section-header-sticky {
+  min-height: var(--ta-header-height-mobile);
+}
+
+@media screen and (min-width: 750px) {
+  .header-wrapper,
+  .shopify-section-header-sticky {
+    min-height: var(--ta-header-height-desktop);
+  }
+}
+
+/* --- Hero/Slideshow CLS prevention --- */
+.slideshow,
+.banner,
+.hero,
+[class*="slideshow"],
+[class*="banner--"],
+.shopify-section--slideshow,
+.shopify-section--image-banner {
+  /* Reserve minimum height to prevent CLS */
+  min-height: 300px;
+  contain: layout;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow,
+  .banner,
+  .hero,
+  [class*="slideshow"],
+  [class*="banner--"],
+  .shopify-section--slideshow,
+  .shopify-section--image-banner {
+    min-height: 400px;
+  }
+}
+
+/* Slideshow slides - fixed dimensions */
+.slideshow__slide,
+.banner__media {
+  min-height: inherit;
+  position: relative;
+}
+
+/* Images with aspect ratio to prevent CLS */
+.slideshow__media img,
+.banner__media img,
+.hero__media img {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 749px) {
+  .slideshow__media img,
+  .banner__media img,
+  .hero__media img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* =============================================================================
+   13. DARK SECTION CONTRAST - CTA buttons and text visibility
+   Ensures WCAG AA contrast (4.5:1) for text on dark backgrounds
+   ============================================================================= */
+
+/* --- Dark section text colors --- */
+.color-inverse,
+.color-scheme--inverse,
+[data-color-scheme="inverse"],
+.banner--dark,
+.slideshow--dark,
+.section--dark,
+.gradient--dark {
+  --ta-text: #ffffff;
+  --ta-text-secondary: rgba(255, 255, 255, 0.9);
+  --ta-text-muted: rgba(255, 255, 255, 0.7);
+}
+
+/* Primary CTA on dark backgrounds - high contrast */
+.color-inverse .button--primary,
+.banner--dark .button--primary,
+.slideshow--dark .button--primary,
+[data-color-scheme="inverse"] .button--primary {
+  background: var(--ta-primary-contrast, #ffffff);
+  color: var(--ta-primary, #2563eb);
+  border: 2px solid transparent;
+}
+
+.color-inverse .button--primary:hover,
+.banner--dark .button--primary:hover,
+.slideshow--dark .button--primary:hover,
+[data-color-scheme="inverse"] .button--primary:hover {
+  background: var(--ta-bg-secondary, #f8fafc);
+  color: var(--ta-primary-hover, #1e40af);
+  transform: translateY(-2px);
+}
+
+/* Secondary CTA on dark backgrounds */
+.color-inverse .button--secondary,
+.banner--dark .button--secondary,
+.slideshow--dark .button--secondary,
+[data-color-scheme="inverse"] .button--secondary {
+  background: transparent;
+  color: var(--ta-primary-contrast, #ffffff);
+  border: 2px solid var(--ta-primary-contrast, #ffffff);
+}
+
+.color-inverse .button--secondary:hover,
+.banner--dark .button--secondary:hover,
+.slideshow--dark .button--secondary:hover,
+[data-color-scheme="inverse"] .button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--ta-primary-contrast, #ffffff);
+}
+
+/* Focus states on dark backgrounds - use contrasting yellow */
+.color-inverse :focus-visible,
+.banner--dark :focus-visible,
+.slideshow--dark :focus-visible,
+[data-color-scheme="inverse"] :focus-visible {
+  outline-color: var(--ta-warning-light, #fbbf24);
+}
+
+/* Ensure hero/banner text meets contrast requirements */
+.banner__heading,
+.slideshow__heading,
+.banner__text,
+.slideshow__text,
+.hero__title,
+.hero__subtitle {
+  /* Text shadow for better readability on image backgrounds */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Banner box (overlay content) - ensure readable */
+.banner__box,
+.slideshow__text-wrapper {
+  /* Semi-transparent backdrop for text legibility */
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  padding: var(--ta-space-lg, 1.6rem);
+  border-radius: var(--ta-radius-lg, 12px);
+}

@@ -45,7 +45,8 @@ Improvement documentation:
 - Main README: [/README.md](../README.md)
 - README with Fixes: [README_FIXES.md](./README_FIXES.md)
 - README Performance: [README_PERFORMANCE.md](./README_PERFORMANCE.md)
-- QA Checklist: [QA_CHECKLIST.md](./QA_CHECKLIST.md)
+- QA Checklist (Visual): [QA_CHECKLIST.md](./QA_CHECKLIST.md)
+- QA Checklist (Manual): [qa-checklist.md](./qa-checklist.md) - Comprehensive UI/accessibility testing
 
 ## Documentation Updates
 
