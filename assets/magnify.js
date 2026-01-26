@@ -1,8 +1,14 @@
+let activeOverlay = null;
+let activeImage = null;
+let mql = null;
+let resizeHandler = null;
+
 // create a container and set the full-size image as its background
-function createOverlay(image) {
+function createOverlay(image, zoomSrc) {
   const overlayImage = document.createElement('img');
-  overlayImage.setAttribute('src', `${image.src}`);
-  overlay = document.createElement('div');
+  const overlaySource = zoomSrc || image.src;
+  overlayImage.setAttribute('src', `${overlaySource}`);
+  const overlay = document.createElement('div');
   prepareOverlay(overlay, overlayImage);
 
   image.classList.add('image-magnify-loading');
@@ -26,10 +32,12 @@ function prepareOverlay(container, image) {
 
 function toggleLoadingSpinner(image) {
   const loadingSpinner = image.parentElement.parentElement.querySelector(`.loading__spinner`);
-  loadingSpinner.classList.toggle('hidden');
+  if (loadingSpinner) {
+    loadingSpinner.classList.toggle('hidden');
+  }
 }
 
-function moveWithHover(image, event, zoomRatio) {
+function moveWithHover(image, overlay, event, zoomRatio) {
   // calculate mouse position
   const ratio = image.height / image.width;
   const container = event.target.getBoundingClientRect();
@@ -43,27 +51,78 @@ function moveWithHover(image, event, zoomRatio) {
   overlay.style.backgroundSize = `${image.width * zoomRatio}px`;
 }
 
+function removeOverlay() {
+  if (activeOverlay) {
+    activeOverlay.remove();
+    activeOverlay = null;
+  }
+  if (activeImage) {
+    activeImage.classList.remove('image-magnify-active');
+    activeImage = null;
+  }
+}
+
 function magnify(image, zoomRatio) {
-  const overlay = createOverlay(image);
-  overlay.onclick = () => overlay.remove();
-  overlay.onmousemove = (event) => moveWithHover(image, event, zoomRatio);
-  overlay.onmouseleave = () => overlay.remove();
+  removeOverlay();
+  const zoomSource = image.dataset.techZoomSrc || image.src;
+  const overlay = createOverlay(image, zoomSource);
+  activeOverlay = overlay;
+  activeImage = image;
+  image.classList.add('image-magnify-active');
+  overlay.onclick = () => removeOverlay();
+  overlay.onmousemove = (event) => moveWithHover(image, overlay, event, zoomRatio);
+  overlay.onmouseleave = () => removeOverlay();
+}
+
+function handlePointerEnter(event, zoomRatio) {
+  const image = event.target.closest('[data-tech-zoom="true"]');
+  if (!image) return;
+  magnify(image, zoomRatio);
+  if (activeOverlay) {
+    moveWithHover(image, activeOverlay, event, zoomRatio);
+  }
+}
+
+function handlePointerMove(event, zoomRatio) {
+  if (!activeOverlay || !activeImage) return;
+  moveWithHover(activeImage, activeOverlay, event, zoomRatio);
+}
+
+function handlePointerLeave() {
+  removeOverlay();
 }
 
 function enableZoomOnHover(zoomRatio) {
-  const images = document.querySelectorAll('.image-magnify-hover');
+  const images = document.querySelectorAll('[data-tech-zoom="true"]');
   images.forEach((image) => {
-    image.onclick = (event) => {
-      magnify(image, zoomRatio);
-      moveWithHover(image, event, zoomRatio);
-    };
+    image.removeEventListener('mouseenter', image.__magnifyEnter);
+    image.removeEventListener('mousemove', image.__magnifyMove);
+    image.removeEventListener('mouseleave', image.__magnifyLeave);
+    image.removeEventListener('click', image.__magnifyClick);
+    image.__magnifyEnter = (event) => handlePointerEnter(event, zoomRatio);
+    image.__magnifyMove = (event) => handlePointerMove(event, zoomRatio);
+    image.__magnifyLeave = handlePointerLeave;
+    image.__magnifyClick = removeOverlay;
+    image.addEventListener('mouseenter', image.__magnifyEnter);
+    image.addEventListener('mousemove', image.__magnifyMove);
+    image.addEventListener('mouseleave', image.__magnifyLeave);
+    image.addEventListener('click', image.__magnifyClick);
   });
 }
 
 function disableZoomOnHover() {
-  document.querySelectorAll('.image-magnify-full-size').forEach((overlay) => overlay.remove());
-  document.querySelectorAll('.image-magnify-hover').forEach((image) => {
-    image.onclick = null;
+  removeOverlay();
+  document.querySelectorAll('[data-tech-zoom="true"]').forEach((image) => {
+    if (image.__magnifyEnter) {
+      image.removeEventListener('mouseenter', image.__magnifyEnter);
+      image.removeEventListener('mousemove', image.__magnifyMove);
+      image.removeEventListener('mouseleave', image.__magnifyLeave);
+      image.removeEventListener('click', image.__magnifyClick);
+      image.__magnifyEnter = null;
+      image.__magnifyMove = null;
+      image.__magnifyLeave = null;
+      image.__magnifyClick = null;
+    }
   });
 }
 
@@ -74,7 +133,7 @@ function shouldEnableZoom() {
 }
 
 function setupMagnify(zoomRatio) {
-  const mql = window.matchMedia('(min-width: 990px)');
+  mql = window.matchMedia('(min-width: 990px)');
 
   const update = () => {
     if (mql.matches && shouldEnableZoom()) {
@@ -87,6 +146,15 @@ function setupMagnify(zoomRatio) {
   update();
   if (mql.addEventListener) {
     mql.addEventListener('change', update);
+  }
+
+  if (!resizeHandler) {
+    resizeHandler = () => {
+      if (!mql.matches) {
+        disableZoomOnHover();
+      }
+    };
+    window.addEventListener('resize', resizeHandler);
   }
 }
 

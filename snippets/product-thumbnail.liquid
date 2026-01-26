@@ -15,6 +15,7 @@
     - media_fit: {String} Method ("contain" or "cover") to fit image into container
     - media_width: {Float} The width percentage that the media column occupies on desktop.
     - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+    - tech_zoom: {Boolean} Enable tech zoom dataset on image (optional)
 
     Usage:
     {% render 'product-thumbnail',
@@ -92,12 +93,19 @@
     </span>
     {%- render 'loading-spinner' -%}
     <div class="product__media media media--transparent">
+      {%- if tech_zoom and media.preview_image.width >= 1600 -%}
+        {%- assign tech_zoom_image = media.preview_image | image_url: width: 1600 -%}
+      {%- elsif tech_zoom -%}
+        {%- assign tech_zoom_image = media.preview_image | image_url: width: media.preview_image.width -%}
+      {%- endif -%}
       {{ media.preview_image | image_url: width: 1946 | image_tag:
         class: image_class,
         loading: lazy,
         sizes: sizes,
         widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
-        data-image-id: media.id
+        data-image-id: media.id,
+        data-tech-zoom: tech_zoom,
+        data-tech-zoom-src: tech_zoom_image
       }}
     </div>
     <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
