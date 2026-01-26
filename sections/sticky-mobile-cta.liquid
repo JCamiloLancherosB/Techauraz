@@ -145,10 +145,10 @@
 <style>
   .sticky-cta-bar {
     position: fixed;
-    bottom: 92px;
+    bottom: 72px; /* Positioned to avoid WhatsApp (bottom: 15-20px) and cookie banner */
     left: 0;
     right: 0;
-    z-index: 998;
+    z-index: 996; /* Below cookie (998) and WhatsApp (997) */
     background: white;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(120%);
@@ -280,7 +280,7 @@
   /* Safe area for devices with notch */
   @supports (padding: max(0px)) {
     .sticky-cta-bar {
-      bottom: max(92px, calc(env(safe-area-inset-bottom) + 72px));
+      bottom: max(72px, calc(env(safe-area-inset-bottom) + 52px));
     }
   }
 </style>
