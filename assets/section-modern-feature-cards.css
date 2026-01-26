@@ -1,0 +1,267 @@
+/* Modern Feature Cards Section
+   A modern store look with clean cards, clear CTAs, and responsive grid.
+   Designed for conversion-focused product features and service highlights.
+   Scoped to .modern-feature-cards to avoid global leakage.
+*/
+
+.modern-feature-cards {
+  padding: 1.8rem 0; /* Mobile: reduced for tighter layout */
+  background: linear-gradient(180deg, var(--color-bg-primary, #ffffff) 0%, var(--color-bg-secondary, #f9fafb) 100%);
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards {
+    padding: 2.8rem 0; /* Desktop: reduced for tighter layout */
+  }
+}
+
+.modern-feature-cards .modern-feature-cards__wrapper {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1rem; /* Mobile: consistent gutters */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards .modern-feature-cards__wrapper {
+    padding: 0 2rem; /* Desktop: consistent gutters */
+  }
+}
+
+.modern-feature-cards .modern-feature-cards__header {
+  text-align: center;
+  margin-bottom: 2rem; /* Mobile: 32px */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards .modern-feature-cards__header {
+    margin-bottom: 3rem; /* Desktop: 48px - Standardized */
+  }
+}
+
+.modern-feature-cards .modern-feature-cards__heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-text-primary, #1a1a2e);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.modern-feature-cards .modern-feature-cards__subheading {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-text-muted, #6b7280);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.modern-feature-cards .modern-feature-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem; /* Mobile: 24px */
+}
+
+@media screen and (min-width: 750px) {
+  .modern-feature-cards .modern-feature-cards__grid {
+    gap: 2rem; /* Desktop: 32px - Standardized */
+  }
+}
+
+/* Single column on very small screens */
+@media screen and (max-width: 360px) {
+  .modern-feature-cards .modern-feature-cards__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 2 columns on tablet */
+@media screen and (min-width: 768px) {
+  .modern-feature-cards .modern-feature-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 columns on desktop */
+@media screen and (min-width: 990px) {
+  .modern-feature-cards .modern-feature-cards__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 columns on large desktop if more than 4 cards */
+@media screen and (min-width: 1280px) {
+  .modern-feature-cards .modern-feature-cards__grid--many {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.modern-feature-cards .modern-feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2rem, 4vw, 2.5rem);
+  background: var(--color-bg-card, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  animation: featureCardFadeInScale 0.5s ease-out both;
+}
+
+.modern-feature-cards .modern-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modern-feature-cards .modern-feature-card:hover,
+.modern-feature-cards .modern-feature-card:focus-within {
+  transform: translateY(-8px);
+  border-color: var(--color-primary, #6366f1);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.15), 0 6px 12px rgba(99, 102, 241, 0.08);
+}
+
+.modern-feature-cards .modern-feature-card:hover::before,
+.modern-feature-cards .modern-feature-card:focus-within::before {
+  opacity: 1;
+}
+
+.modern-feature-cards .modern-feature-card__icon {
+  font-size: clamp(3rem, 6vw, 4rem);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.modern-feature-cards .modern-feature-card:hover .modern-feature-card__icon,
+.modern-feature-cards .modern-feature-card:focus-within .modern-feature-card__icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.modern-feature-cards .modern-feature-card__title {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 600;
+  color: var(--color-text-primary, #1a1a2e);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.modern-feature-cards .modern-feature-card__description {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: var(--color-text-muted, #6b7280);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.modern-feature-cards .modern-feature-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary, #6366f1);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.modern-feature-cards .modern-feature-card__cta:hover,
+.modern-feature-cards .modern-feature-card__cta:focus {
+  background: var(--color-primary-dark, #4f46e5);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.modern-feature-cards .modern-feature-card__cta-arrow {
+  transition: transform 0.2s ease;
+}
+
+.modern-feature-cards .modern-feature-card__cta:hover .modern-feature-card__cta-arrow,
+.modern-feature-cards .modern-feature-card__cta:focus .modern-feature-card__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Animation for loading - scoped keyframes */
+@keyframes featureCardFadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modern-feature-cards .modern-feature-card:nth-child(1) { animation-delay: 0.05s; }
+.modern-feature-cards .modern-feature-card:nth-child(2) { animation-delay: 0.1s; }
+.modern-feature-cards .modern-feature-card:nth-child(3) { animation-delay: 0.15s; }
+.modern-feature-cards .modern-feature-card:nth-child(4) { animation-delay: 0.2s; }
+.modern-feature-cards .modern-feature-card:nth-child(5) { animation-delay: 0.25s; }
+.modern-feature-cards .modern-feature-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Accessibility */
+.modern-feature-cards .modern-feature-card__cta:focus-visible {
+  outline: 3px solid var(--color-primary, #6366f1);
+  outline-offset: 4px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .modern-feature-cards .modern-feature-card {
+    animation: none;
+    transition: none;
+  }
+  
+  .modern-feature-cards .modern-feature-card:hover,
+  .modern-feature-cards .modern-feature-card:focus-within {
+    transform: none;
+  }
+  
+  .modern-feature-cards .modern-feature-card:hover .modern-feature-card__icon,
+  .modern-feature-cards .modern-feature-card:focus-within .modern-feature-card__icon {
+    transform: none;
+  }
+  
+  .modern-feature-cards .modern-feature-card__cta:hover {
+    transform: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modern-feature-cards {
+    background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+  }
+  
+  .modern-feature-cards .modern-feature-card {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .modern-feature-cards .modern-feature-cards__heading {
+    color: #ffffff;
+  }
+  
+  .modern-feature-cards .modern-feature-card__title {
+    color: #ffffff;
+  }
+  
+  .modern-feature-cards .modern-feature-card__description {
+    color: #9ca3af;
+  }
+}

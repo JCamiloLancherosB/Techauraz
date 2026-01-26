@@ -1,0 +1,191 @@
+/* Category Navigation Section - Normalized for Home Layout 
+   Global normalization in ui-ux-responsive-fixes.css handles:
+   - Section padding: 56px desktop, 32px mobile (body.template-index .shopify-section)
+   - Wrapper: max-width 1200px, padding-inline 2rem desktop / 1rem mobile (body.template-index .category-nav-wrapper)
+   - Title: margin-bottom 2rem desktop / 1.5rem mobile + text-align center (body.template-index .category-nav-title)
+   - Grid gap: 2rem desktop, 1.5rem mobile (body.template-index .category-nav-grid)
+   
+   This section only contains visual styling specific to category navigation.
+   Scoped to .category-nav-section to avoid global leakage.
+*/
+
+.category-nav-section {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.category-nav-section .category-nav-wrapper {
+  /* Handled by global normalization */
+}
+
+.category-nav-section .category-nav-title {
+  /* Alignment and spacing handled by global normalization */
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.category-nav-section .category-nav-subtitle {
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.category-nav-section .category-nav-grid {
+  /* gap handled by normalization in ui-ux-responsive-fixes.css */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 750px) {
+  .category-nav-section .category-nav-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .category-nav-section .category-nav-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.category-nav-section .category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-height: 180px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  animation: categoryFadeInUp 0.5s ease-out both;
+}
+
+.category-nav-section .category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(37, 99, 235, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.category-nav-section .category-card:hover::before,
+.category-nav-section .category-card:focus-visible::before {
+  opacity: 1;
+}
+
+.category-nav-section .category-card:hover,
+.category-nav-section .category-card:focus-visible {
+  transform: translate3d(0, -8px, 0);
+  border-color: var(--color-primary);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
+}
+
+.category-nav-section .category-icon {
+  font-size: 4rem;
+  margin-bottom: 1.2rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.12));
+  position: relative;
+  z-index: 1;
+}
+
+.category-nav-section .category-card:hover .category-icon,
+.category-nav-section .category-card:focus-visible .category-icon {
+  transform: scale(1.15) translate3d(0, -4px, 0);
+  filter: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.2));
+}
+
+.category-nav-section .category-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+.category-nav-section .category-count {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 749px) {
+  .category-nav-section .category-card {
+    padding: 2rem 1rem;
+    min-height: 140px;
+  }
+  
+  .category-nav-section .category-icon {
+    font-size: 3.5rem;
+  }
+  
+  .category-nav-section .category-name {
+    font-size: 1.4rem;
+  }
+}
+
+/* Accessibility */
+.category-nav-section .category-card:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.category-nav-section .category-card:focus-visible .category-name {
+  color: var(--color-primary);
+}
+
+/* Animation for loading - scoped keyframes */
+@keyframes categoryFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-nav-section .category-card:nth-child(1) { animation-delay: 0.05s; }
+.category-nav-section .category-card:nth-child(2) { animation-delay: 0.1s; }
+.category-nav-section .category-card:nth-child(3) { animation-delay: 0.15s; }
+.category-nav-section .category-card:nth-child(4) { animation-delay: 0.2s; }
+.category-nav-section .category-card:nth-child(5) { animation-delay: 0.25s; }
+.category-nav-section .category-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .category-nav-section .category-card {
+    animation: none;
+  }
+  
+  .category-nav-section .category-card:hover,
+  .category-nav-section .category-card:focus-visible {
+    transform: none;
+  }
+  
+  .category-nav-section .category-card:hover .category-icon,
+  .category-nav-section .category-card:focus-visible .category-icon {
+    transform: none;
+  }
+}

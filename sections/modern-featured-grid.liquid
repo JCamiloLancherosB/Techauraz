@@ -9,7 +9,11 @@
 {%- endif -%}
 
 {{ 'home-modern-blocks.css' | asset_url | stylesheet_tag }}
-{{ 'techauraz-custom-ui.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Note: techauraz-custom-ui.css is loaded globally in theme.liquid
+  No need to load it again here to avoid duplicate CSS loads
+{%- endcomment -%}
 
 {%- style -%}
   /* Modern Featured Grid - Normalized for Home Layout 
