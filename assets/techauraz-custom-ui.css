@@ -420,3 +420,439 @@ select:focus {
 .shopify-section:has(.banner) {
   margin-top: 0;
 }
+
+/* =============================================================================
+   HOMEPAGE CONVERSION COMPONENT REFINEMENTS
+   Issue: Refine benefits, categories, collections, testimonials, newsletter
+   Goal: Premium look, better conversions, clear hierarchy, strong CTAs
+   ============================================================================= */
+
+/* =============================================================================
+   1. BENEFITS SECTION - "¿Por qué comprar con nosotros?"
+   Fix: Improve contrast, readability, consistent icons, tighter spacing
+   ============================================================================= */
+
+/* Override faint text colors for better contrast */
+.ta-conv-benefit {
+  background: var(--ta-surface, #ffffff);
+  border: 1px solid var(--ta-border, #e2e8f0);
+  border-radius: var(--ta-radius-card, 12px);
+  padding: var(--ta-space-xl, 2.4rem) var(--ta-space-lg, 1.6rem);
+  text-align: center;
+  transition: var(--ta-transition-normal);
+  box-shadow: var(--ta-shadow-sm);
+}
+
+.ta-conv-benefit:hover {
+  border-color: var(--ta-primary, #2563eb);
+  box-shadow: var(--ta-shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+/* Icon consistency - fixed size, better alignment */
+.ta-conv-benefit__icon {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: var(--ta-space-md, 1.2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.4rem;
+  height: 6.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--ta-gradient-bg-section, linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(34, 211, 238, 0.08)));
+  border-radius: var(--ta-radius-lg, 12px);
+}
+
+/* Title - strong contrast, readable */
+.ta-conv-benefit__title {
+  font-size: var(--ta-font-size-lg, 1.8rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+  margin: 0 0 var(--ta-space-sm, 0.8rem) 0;
+  line-height: var(--ta-leading-tight, 1.2);
+}
+
+/* Description - good contrast, not faint */
+.ta-conv-benefit__description {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-normal, 400);
+  color: var(--ta-text-secondary, #1e293b);
+  line-height: var(--ta-leading-relaxed, 1.625);
+  margin: 0;
+}
+
+/* Benefits grid - consistent sizing */
+.ta-conv-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: var(--ta-space-xl, 2.4rem);
+}
+
+/* Section heading style */
+.ta-conv-section-heading {
+  font-size: var(--ta-font-size-h2, 3.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+  text-align: center;
+  margin-bottom: var(--ta-space-2xl, 3.2rem);
+}
+
+@media screen and (max-width: 749px) {
+  .ta-conv-benefits {
+    grid-template-columns: 1fr;
+    gap: var(--ta-space-lg, 1.6rem);
+  }
+
+  .ta-conv-benefit {
+    padding: var(--ta-space-lg, 1.6rem);
+  }
+
+  .ta-conv-benefit__icon {
+    font-size: 3.2rem;
+    width: 5.6rem;
+    height: 5.6rem;
+  }
+
+  .ta-conv-section-heading {
+    font-size: var(--ta-font-size-h3, 2.4rem);
+    margin-bottom: var(--ta-space-xl, 2.4rem);
+  }
+}
+
+/* =============================================================================
+   2. CATEGORY NAVIGATION - Consistent cards with clear labels
+   ============================================================================= */
+
+/* Ensure consistent card sizing */
+.category-card {
+  min-height: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: auto;
+}
+
+/* Clear label styling */
+.category-name {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+  text-align: center;
+  margin: 0 0 var(--ta-space-xs, 0.4rem) 0;
+}
+
+/* Product count - muted but readable */
+.category-count {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
+  margin: 0;
+}
+
+/* Enhanced focus state for accessibility */
+.category-card:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 3px;
+  border-color: var(--ta-primary, #2563eb);
+}
+
+/* =============================================================================
+   3. FEATURED COLLECTIONS + BEST SELLERS - Buy-ready product cards
+   ============================================================================= */
+
+/* Product card badges - more visible */
+.card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wider, 0.05em);
+  border-radius: var(--ta-radius-badge, 6px);
+  line-height: 1;
+}
+
+.card__badge--sale {
+  background: var(--ta-error, #ef4444);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.card__badge--new {
+  background: var(--ta-success, #10b981);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.card__badge--sold-out {
+  background: var(--ta-text-muted, #64748b);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+/* Badges container - prevent layout shift */
+.card__badges {
+  position: absolute;
+  top: var(--ta-space-sm, 0.8rem);
+  left: var(--ta-space-sm, 0.8rem);
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-xs, 0.4rem);
+}
+
+/* Product card title - strong and readable */
+.card__heading .full-unstyled-link {
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+}
+
+/* Price prominence */
+.price .price-item--regular,
+.price__sale .price-item--regular {
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+}
+
+/* Compare at price */
+.price--on-sale .price-item--regular:not(.price-item--sale) {
+  color: var(--ta-text-muted, #64748b);
+  font-weight: var(--ta-font-medium, 500);
+}
+
+/* Primary CTA - visually dominant */
+.quick-add__submit.button--secondary {
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
+  color: var(--ta-primary-contrast, #ffffff);
+  border: none;
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  box-shadow: var(--ta-shadow-button);
+  transition: var(--ta-transition-fast);
+}
+
+.quick-add__submit.button--secondary:hover {
+  background: var(--ta-gradient-primary-hover);
+  box-shadow: var(--ta-shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+/* Image aspect ratio consistency - prevent overly tall images */
+.card__media .media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.card__media .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Trust badges for product cards (envío/garantía indicators) */
+.card__trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  color: var(--ta-success, #10b981);
+  font-weight: var(--ta-font-semibold, 600);
+}
+
+.card__trust-badge::before {
+  content: '✓';
+  font-size: 1rem;
+}
+
+/* =============================================================================
+   4. TESTIMONIALS - Improved readability, no layout shifts
+   ============================================================================= */
+
+/* Testimonial card - improved contrast */
+.testimonial-card__text {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: var(--ta-text-secondary, #1e293b);
+  line-height: var(--ta-leading-relaxed, 1.625);
+}
+
+/* Author info - readable */
+.testimonial-card__author-name {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+}
+
+.testimonial-card__author-type {
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  color: var(--ta-text-muted, #64748b);
+}
+
+/* Slider controls - fixed position to prevent layout shifts */
+.testimonials-slider-wrapper .slider-buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ta-space-md, 1.2rem);
+  margin-top: var(--ta-space-xl, 2.4rem);
+  min-height: var(--ta-touch-comfortable, 48px);
+}
+
+/* Slider buttons - consistent sizing */
+.testimonials-slider-wrapper .slider-button {
+  width: var(--ta-touch-comfortable, 48px);
+  height: var(--ta-touch-comfortable, 48px);
+  min-width: var(--ta-touch-comfortable, 48px);
+  min-height: var(--ta-touch-comfortable, 48px);
+  border-radius: var(--ta-radius-full, 50%);
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--ta-transition-fast);
+  flex-shrink: 0;
+}
+
+.testimonials-slider-wrapper .slider-button:hover {
+  background: var(--ta-bg-secondary, #f8fafc);
+  border-color: var(--ta-primary, #2563eb);
+}
+
+/* Dots - fixed size to prevent shifting */
+.testimonials-slider-wrapper .slider-counter {
+  display: flex;
+  gap: var(--ta-space-sm, 0.8rem);
+  align-items: center;
+}
+
+.testimonials-slider-wrapper .dot {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  border-radius: var(--ta-radius-full, 50%);
+  background: var(--ta-border, #e2e8f0);
+  transition: var(--ta-transition-fast);
+}
+
+.testimonials-slider-wrapper .slider-counter__link--active .dot {
+  background: var(--ta-primary, #2563eb);
+  transform: scale(1.2);
+}
+
+/* =============================================================================
+   5. NEWSLETTER - Consistent alignment and accessibility
+   ============================================================================= */
+
+/* Newsletter form container */
+.ta-conv-newsletter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-md, 1.2rem);
+  align-items: stretch;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+/* Email input - consistent height with button */
+.ta-conv-newsletter__input {
+  flex: 1 1 25rem;
+  min-height: var(--ta-touch-comfortable, 48px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: var(--ta-text, #0f172a);
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-border, #e2e8f0);
+  border-radius: var(--ta-radius-button, 8px);
+  transition: var(--ta-transition-fast);
+}
+
+.ta-conv-newsletter__input:focus {
+  outline: none;
+  border-color: var(--ta-primary, #2563eb);
+  box-shadow: var(--ta-ring-focus);
+}
+
+.ta-conv-newsletter__input::placeholder {
+  color: var(--ta-text-muted, #64748b);
+}
+
+/* Submit button - matches input height, visually dominant CTA */
+.ta-conv-newsletter__submit {
+  flex: 0 0 auto;
+  min-height: var(--ta-touch-comfortable, 48px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-xl, 2.4rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  color: var(--ta-primary-contrast, #ffffff);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
+  border: none;
+  border-radius: var(--ta-radius-button, 8px);
+  cursor: pointer;
+  transition: var(--ta-transition-fast);
+  box-shadow: var(--ta-shadow-button);
+}
+
+.ta-conv-newsletter__submit:hover {
+  background: var(--ta-gradient-primary-hover);
+  box-shadow: var(--ta-shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+.ta-conv-newsletter__submit:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 2px;
+}
+
+/* Mobile responsive newsletter */
+@media screen and (max-width: 749px) {
+  .ta-conv-newsletter {
+    flex-direction: column;
+  }
+
+  .ta-conv-newsletter__input {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+
+  .ta-conv-newsletter__submit {
+    width: 100%;
+  }
+}
+
+/* =============================================================================
+   6. GLOBAL CTA CONSISTENCY
+   ============================================================================= */
+
+/* Ensure all primary CTAs have consistent styling across sections */
+.collection__view-all a.button,
+.testimonials-section__view-all .button,
+.ta-conv-newsletter__submit,
+.quick-add__submit.button--secondary {
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  min-height: var(--ta-touch-comfortable, 48px);
+}
+
+/* View all buttons - consistent CTA style */
+.collection__view-all a.button {
+  background: var(--ta-gradient-cta, linear-gradient(135deg, #0ea5e9, #22c55e));
+  color: var(--ta-text-inverse, #ffffff);
+  border: none;
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-2xl, 3.2rem);
+  border-radius: var(--ta-radius-pill, 9999px);
+  box-shadow: var(--ta-shadow-button);
+  transition: var(--ta-transition-fast);
+}
+
+.collection__view-all a.button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--ta-shadow-button-hover);
+}
