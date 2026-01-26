@@ -3068,16 +3068,43 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 /* Header positioning */
 /* Note: Position (sticky/fixed) is controlled by sections/header.liquid inline styles (lines 94-122) */
 /* We only ensure z-index hierarchy and that header appears below announcement bar */
+
+/* IMPORTANT: Reset conflicting .section-header styles from base.css (lines 372-377)
+ * The .section-header class is shared between:
+ * 1. Header navigation section wrapper (from schema class in header.liquid)
+ * 2. Generic section title headers (like "Featured Products")
+ * 
+ * base.css has: .section-header { text-align: center; margin-bottom: 3rem; position: relative; }
+ * This causes a giant white space gap below the header navigation.
+ * 
+ * We use #shopify-section-header.section-header to specifically target the navigation header section.
+ */
+#shopify-section-header.section-header {
+  /* Reset text-align - header should have left-aligned layout, not centered */
+  text-align: left !important;
+  /* Reset margin - NO margin should push content down */
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+  /* Position: sticky is set by inline styles in header.liquid */
+  position: sticky !important;
+  top: var(--tech-topbar-h, 0) !important;
+  z-index: 100 !important;
+  /* Ensure solid background */
+  background-color: rgb(var(--color-background, 255 255 255)) !important;
+}
+
+/* Also target just .section-header and .header-wrapper for broader compatibility */
 .section-header,
 .header-wrapper {
-  /* Removed conflicting position: sticky override - controlled by section */
   /* Position header below the announcement bar when both are sticky */
   top: var(--tech-topbar-h, 0) !important;
   z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
   /* Ensure solid background - prevents transparency issues */
-  /* Use rgb format for Shopify color system compatibility */
   background-color: rgb(var(--color-background, 255 255 255)) !important;
-  /* Remove any margins that might cause gaps */
+}
+
+/* Specific reset for header-wrapper to prevent margin issues */
+.header-wrapper {
   margin: 0 !important;
 }
 
@@ -3115,30 +3142,38 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 
 /* --- Z-INDEX HIERARCHY DOCUMENTATION --- */
 /*
- * Z-INDEX LAYERING SYSTEM:
+ * Z-INDEX LAYERING SYSTEM (Updated 2026-01-26):
  * 
- * Layer 5 (Highest): Modals, Drawers, Overlays (z-index: 200+)
- *   - Cart drawer: 200
- *   - Search modal: 200
- *   - Menu drawer: 200
- *   - Overlay backgrounds: 150
+ * Order from lowest to highest (as specified in requirements):
+ * Announcement < Header < Modals (search/cart) < Cookie banner < WhatsApp
  * 
- * Layer 4: Sticky Header Group (z-index: 100-101)
+ * Layer 6 (Highest): WhatsApp FAB (z-index: 500)
+ *   - Always accessible for customer support
+ *   - Above all other elements
+ * 
+ * Layer 5: Cookie/GDPR Banner (z-index: 400)
+ *   - GDPR compliance requires visibility
+ *   - Above modals, below WhatsApp
+ * 
+ * Layer 4: Modals, Drawers, Overlays (z-index: 300)
+ *   - Cart drawer: 300
+ *   - Search modal: 300
+ *   - Menu drawer: 300
+ *   - Overlay backgrounds: 250
+ * 
+ * Layer 3: Sticky Header Group (z-index: 100-101)
  *   - Announcement bar/topbar (shipping, benefits): 101 (topmost in header group)
  *   - Main navigation header: 100
  *   - Fixed/sticky position
  *   - Must stay below modals/drawers
  * 
- * Layer 3: Sticky Elements (z-index: 90-99)
+ * Layer 2: Sticky Elements (z-index: 90-99)
  *   - Sticky benefits bar (if separate from announcement bar): 98
- *   - Floating buttons (WhatsApp): 95
  * 
- * Layer 2: Interactive Content (z-index: 10-50)
+ * Layer 1 (Lowest): Regular Content (z-index: 0-50)
  *   - Dropdowns: 50
  *   - Tooltips: 40
  *   - Product quick-view: 30
- * 
- * Layer 1 (Lowest): Regular Content (z-index: 0-9)
  *   - Cards: 1-3
  *   - Regular sections: auto or 0
  */
@@ -3147,7 +3182,7 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 .header-wrapper,
 .section-header,
 .shopify-section-header-sticky {
-  z-index: 100 !important; /* Below modals (200+) but above content */
+  z-index: 100 !important; /* Below modals (300) but above content */
 }
 
 /* Ensure modals and drawers are above header */
@@ -3158,15 +3193,23 @@ modal-dialog,
 details-modal,
 .modal-overlay,
 [role="dialog"] {
-  z-index: 200 !important; /* Above header */
+  z-index: 300 !important; /* Above header (100-101), below cookie banner (400) */
 }
 
-/* Floating WhatsApp button - should be visible but not cover modals */
+/* Cookie banner - should be above modals but below WhatsApp */
+.cookie-banner,
+.cookies-banner,
+[class*="cookie"][class*="banner"],
+[class*="gdpr"] {
+  z-index: 400 !important; /* Above modals (300), below WhatsApp (500) */
+}
+
+/* Floating WhatsApp button - highest z-index for always-visible support button */
 .whatsapp-float,
 .floating-whatsapp,
 .wa-chat-box,
 [class*="whatsapp"][class*="float"] {
-  z-index: 95 !important; /* Above sticky banners, below modals */
+  z-index: 500 !important; /* Highest - always accessible for customer support */
 }
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
