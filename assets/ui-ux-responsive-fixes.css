@@ -64,11 +64,49 @@
 }
 
 /* =============================================================================
-   0. HOME PAGE SECTION ALIGNMENT - Standardized spacing and alignment
+   0. LAYOUT NORMALIZATION - Unified Container & Vertical Rhythm System
    ============================================================================= */
 
 /* 
- * Utility class for consistent section spacing across Home page
+ * .ta-section - Main utility class for consistent vertical rhythm
+ * Uses design tokens from techauraz-tokens.css for standardized spacing
+ * Responsive: Mobile-first, scales up for tablet/desktop
+ */
+.ta-section {
+  padding-block: var(--ta-space-2xl, 3.2rem); /* 32px mobile */
+}
+
+@media screen and (min-width: 750px) {
+  .ta-section {
+    padding-block: var(--ta-space-3xl, 4.8rem); /* 48px tablet */
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .ta-section {
+    padding-block: calc(var(--ta-space-3xl, 4.8rem) + var(--ta-space-lg, 1.6rem)); /* 64px desktop */
+  }
+}
+
+/* Full-bleed sections (hero/slideshow) - intentionally no horizontal constraints */
+.ta-section--full-bleed {
+  padding-inline: 0;
+  width: 100%;
+}
+
+/* Standard sections with page-width alignment */
+.ta-section--contained {
+  padding-inline: var(--ta-space-lg, 1.6rem);
+}
+
+@media screen and (min-width: 750px) {
+  .ta-section--contained {
+    padding-inline: var(--ta-space-xl, 2.4rem);
+  }
+}
+
+/* 
+ * .tech-section - Legacy utility class (backward compatibility)
  * Desktop: 56px (3.5rem) vertical spacing
  * Mobile: 32px (2rem) vertical spacing
  */
@@ -84,36 +122,161 @@
   }
 }
 
-/* Ensure all sections use consistent page-width container */
+/* =============================================================================
+   0.1 UNIFIED CONTAINER ALIGNMENT POLICY
+   ============================================================================= */
+
+/*
+ * Container policy: Align all sections to Dawn's .page-width
+ * - Standard max-width: 1200px (defined in base.css as --page-width)
+ * - Consistent gutters: 1.5rem mobile, 2rem tablet, 2.5-3rem desktop
+ * - Auto centering via margin-inline: auto
+ */
+
+/* Ensure all sections using .page-width have consistent alignment */
+.page-width,
+.ta-section .page-width,
 .tech-section .page-width,
 .tech-section__wrapper {
   max-width: var(--page-width, 1200px);
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 750px) {
+  .page-width,
+  .ta-section .page-width,
   .tech-section .page-width,
   .tech-section__wrapper {
     padding-inline: 2rem;
   }
 }
 
-/* Standardize H2 heading spacing and alignment */
+@media screen and (min-width: 990px) {
+  .page-width,
+  .ta-section .page-width,
+  .tech-section .page-width,
+  .tech-section__wrapper {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .page-width,
+  .ta-section .page-width,
+  .tech-section .page-width,
+  .tech-section__wrapper {
+    padding-inline: 3rem;
+  }
+}
+
+/* Section heading alignment - consistent across all section types */
+.ta-section h2,
+.ta-section .section-heading,
 .tech-section h2,
 .tech-section .section-heading {
   text-align: center;
-  margin-bottom: 2rem; /* Mobile: 32px */
-  padding-inline: 1rem;
-  color: var(--tech-ink, #0B1220);
+  margin-bottom: var(--ta-space-xl, 2.4rem);
+  color: var(--ta-text, var(--tech-ink, #0B1220));
   font-weight: 700;
 }
 
 @media screen and (min-width: 750px) {
+  .ta-section h2,
+  .ta-section .section-heading,
   .tech-section h2,
   .tech-section .section-heading {
-    margin-bottom: 3rem; /* Desktop: 48px */
+    margin-bottom: var(--ta-space-2xl, 3.2rem);
   }
+}
+
+/* =============================================================================
+   0.2 OVERFLOW PREVENTION - Fix horizontal scroll on sliders/grids
+   ============================================================================= */
+
+/*
+ * Global overflow-x prevention for main content areas
+ * This ensures no horizontal scrollbars appear on any viewport size
+ */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Slider components - contained overflow */
+slider-component,
+.slider-component-desktop,
+.slider-mobile-gutter {
+  max-width: 100%;
+  overflow-x: clip; /* Modern: clips without affecting scrolling */
+}
+
+/* Fallback for older browsers */
+@supports not (overflow-x: clip) {
+  slider-component,
+  .slider-component-desktop,
+  .slider-mobile-gutter {
+    overflow-x: hidden;
+  }
+}
+
+/* Product grids - prevent overflow from card widths */
+.product-grid,
+.grid.product-grid,
+.collection .grid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Slider track - allow horizontal scroll within container */
+.slider,
+.slider--desktop,
+.slider--tablet {
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.slider::-webkit-scrollbar,
+.slider--desktop::-webkit-scrollbar,
+.slider--tablet::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+/* Featured collection slider - specific overflow handling */
+.collection .slider-component-desktop,
+.collection slider-component {
+  overflow: visible;
+}
+
+.collection .slider-component-desktop .slider,
+.collection slider-component .slider {
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+/* Related products section - ensure grid doesn't overflow */
+.related-products,
+.related-products .product-grid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* PDP recommendations - contained within viewport */
+.template-product .related-products {
+  overflow-x: hidden;
+}
+
+/* Home collections - prevent grid peek from causing overflow */
+.grid--peek {
+  padding-right: 1.5rem; /* Space for peek effect without overflow */
 }
 
 /* =============================================================================
@@ -282,29 +445,10 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Extra Small Mobile (360px+) - Minimum supported width */
 @media screen and (min-width: 360px) and (max-width: 749px) {
-  body,
-  html {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
-  /* Prevent cards from causing overflow */
-  .grid,
-  .product-grid,
-  .collection {
-    overflow-x: hidden;
-  }
-
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
     height: auto;
-  }
-
-  /* Mobile-friendly padding */
-  .page-width {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
   }
 
   /* Product grid - 1 column on small mobile */
@@ -334,39 +478,15 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Mobile responsiveness - general (up to 749px) */
 @media screen and (max-width: 749px) {
-  body,
-  html {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
-  /* Prevent cards from causing overflow */
-  .grid,
-  .product-grid,
-  .collection {
-    overflow-x: hidden;
-  }
-
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
     height: auto;
   }
-
-  /* Mobile-friendly padding */
-  .page-width {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
 }
 
 /* Tablet responsiveness (768px+) - Target 768px specifically */
 @media screen and (min-width: 750px) and (max-width: 989px) {
-  .page-width {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   /* Adjust grid columns for tablet - 3 columns */
   .grid--2-col-tablet {
     grid-template-columns: repeat(2, 1fr);
@@ -396,13 +516,6 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Desktop responsiveness (990px-1279px) */
 @media screen and (min-width: 990px) and (max-width: 1279px) {
-  .page-width {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
   /* Featured collection - 4 columns on smaller desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(4, 1fr);
@@ -412,13 +525,6 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Large Desktop (1280px+) - Target 1280px specifically */
 @media screen and (min-width: 1280px) {
-  .page-width {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
   /* Featured collection - full 5 columns on large desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(5, 1fr);
@@ -438,10 +544,6 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Ultra-wide (1920px+) */
 @media screen and (min-width: 1920px) {
-  .page-width {
-    max-width: 1600px;
-  }
-
   .grid--5-col-desktop {
     gap: 2.4rem;
   }

@@ -391,3 +391,32 @@ select:focus {
     font-size: var(--ta-font-size-xs);
   }
 }
+
+/* =============================================================================
+   LAYOUT NORMALIZATION - Unified Section Spacing
+   ============================================================================= */
+
+/*
+ * Ensures header stack doesn't create extra whitespace
+ * All sticky elements are properly offset
+ */
+
+/* First content section after header - no extra top margin */
+.shopify-section:first-of-type:not(.shopify-section--header) {
+  margin-top: 0;
+}
+
+/* Remove any mystery whitespace between header and content */
+.shopify-section--header + .shopify-section,
+.shopify-section--announcement-bar + .shopify-section--header + .shopify-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Hero/slideshow sections - full bleed with no top spacing after header */
+.shopify-section--slideshow,
+.shopify-section--image-banner,
+.shopify-section:has(.slideshow),
+.shopify-section:has(.banner) {
+  margin-top: 0;
+}
