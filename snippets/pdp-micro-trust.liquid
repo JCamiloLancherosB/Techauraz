@@ -2,41 +2,51 @@
   Product Detail Page - Micro-trust Icons
   
   Displays compact trust indicators below CTAs
-  Shows key benefits with minimal icons
+  Shows key benefits: envío gratis, pago seguro, garantía, calidad
   
   Usage in templates/product.json (after buy_buttons block):
   {% render 'pdp-micro-trust' %}
 {% endcomment %}
 
-{%- comment -%} Micro-trust Icons (below CTAs) {%- endcomment -%}
+{%- comment -%} Micro-trust Icons Row (below CTAs) {%- endcomment -%}
 <div class="pdp-atf-micro-trust">
+  {%- comment -%} Envío Gratis {%- endcomment -%}
   <span class="pdp-atf-micro-trust__item">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M2 5L7 2L12 5V10C12 10.5 11.8 11 11.4 11.4C11 11.8 10.5 12 10 12H4C3.5 12 3 11.8 2.6 11.4C2.2 11 2 10.5 2 10V5Z" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M1 3h8v7H1V3z" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M9 5h2l2 2v3h-4V5z" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="3.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="10.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
     </svg>
-    Contraentrega Colombia
+    Envío Gratis
   </span>
   <span class="pdp-atf-micro-trust__separator">•</span>
+  
+  {%- comment -%} Pago Seguro {%- endcomment -%}
   <span class="pdp-atf-micro-trust__item">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M7 3v4l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M7 1L2 3v4c0 3.5 2.5 5.5 5 6.5 2.5-1 5-3 5-6.5V3L7 1z" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M5 7l1.5 1.5L9.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    Envíos nacionales
+    Pago Seguro
   </span>
   <span class="pdp-atf-micro-trust__separator">•</span>
+  
+  {%- comment -%} Garantía {%- endcomment -%}
   <span class="pdp-atf-micro-trust__item">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M7 1L8.5 5L12.5 5.5L9.5 8.5L10.5 12.5L7 10L3.5 12.5L4.5 8.5L1.5 5.5L5.5 5L7 1Z" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M7 1L8.5 5L12.5 5.5L9.5 8.5L10.5 12.5L7 10L3.5 12.5L4.5 8.5L1.5 5.5L5.5 5L7 1Z" stroke="currentColor" stroke-width="1.2"/>
     </svg>
-    Garantía 1 mes
+    Garantía 30 días
   </span>
   <span class="pdp-atf-micro-trust__separator">•</span>
+  
+  {%- comment -%} Calidad {%- endcomment -%}
   <span class="pdp-atf-micro-trust__item">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="2" y="4" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M4 7h6M4 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M4.5 7l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    Soporte WhatsApp
+    Calidad Premium
   </span>
 </div>

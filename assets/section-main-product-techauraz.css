@@ -1,0 +1,549 @@
+/* =============================================================================
+   TECHAURAZ PDP PREMIUM UPGRADE
+   Version: 1.0.0
+   
+   Purpose: Fix layout width, reduce whitespace, enhance buy box hierarchy,
+   improve trust badges, and optimize recommendations grid.
+   ============================================================================= */
+
+/* =============================================================================
+   1. LAYOUT WIDTH & WHITESPACE FIXES
+   Remove excessive top whitespace, ensure proper page-width constraint
+   ============================================================================= */
+
+/* Main product section - reduce top padding for ATF optimization */
+#MainProduct-{{ section_id }},
+[id^="MainProduct-"] {
+  padding-top: 1rem;
+}
+
+/* Fix excessive whitespace on desktop */
+.product.grid {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Ensure product container uses full page width properly */
+.product.grid.grid--1-col.grid--2-col-tablet {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .product.grid.grid--1-col.grid--2-col-tablet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product.grid.grid--1-col.grid--2-col-tablet {
+    gap: 2.5rem;
+  }
+  
+  /* Large media setting */
+  .product--large.grid.grid--2-col-tablet {
+    grid-template-columns: 60% 40%;
+  }
+  
+  /* Medium media setting */
+  .product--medium.grid.grid--2-col-tablet {
+    grid-template-columns: 55% 45%;
+  }
+}
+
+/* =============================================================================
+   2. BUY BOX HIERARCHY REBUILD
+   Price + OFERTA label + installment/shipping highlights at top
+   Clear CTA hierarchy: Primary "Comprar ahora" + Secondary "Agregar al carrito"
+   ============================================================================= */
+
+/* Product info wrapper - tighter layout */
+.tech-pdp-atf {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Price area with OFERTA badge prominence */
+.product__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Make sale badge more prominent */
+.price__badge-sale,
+.badge.price__badge-sale {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Price styling */
+.price--large .price-item--regular {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--color-success, #10b981);
+}
+
+.price--large.price--on-sale .price-item--regular {
+  font-size: 1.4rem;
+  color: var(--color-text-muted, #64748b);
+  text-decoration: line-through;
+}
+
+.price--large .price-item--sale {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--color-success, #10b981);
+}
+
+/* Installment/shipping highlights */
+.installment {
+  font-size: 1.3rem;
+  color: var(--color-text-secondary, #334155);
+  margin-top: 0.25rem;
+}
+
+/* =============================================================================
+   3. CTA BUTTON HIERARCHY
+   Primary: "Comprar ahora" (dynamic checkout) - dominant
+   Secondary: "Agregar al carrito" - supportive
+   ============================================================================= */
+
+.tech-pdp-purchase {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Primary CTA wrapper - Comprar ahora */
+.tech-cta-primary,
+.product-form__cta-primary {
+  width: 100%;
+  order: 1;
+}
+
+/* Primary CTA - Shopify payment button override */
+.tech-cta-primary .shopify-payment-button,
+.product-form__cta-primary .shopify-payment-button {
+  width: 100%;
+}
+
+.tech-cta-primary .shopify-payment-button__button,
+.product-form__cta-primary .shopify-payment-button__button {
+  min-height: 5.2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: all 0.25s ease;
+}
+
+.tech-cta-primary .shopify-payment-button__button:hover,
+.product-form__cta-primary .shopify-payment-button__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+}
+
+/* Secondary CTA - Agregar al carrito */
+.tech-cta-secondary,
+.product-form__submit.tech-cta-secondary {
+  width: 100%;
+  order: 2;
+  min-height: 4.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: transparent;
+  border: 2px solid var(--color-primary, #3b82f6);
+  color: var(--color-primary, #3b82f6);
+  transition: all 0.25s ease;
+}
+
+.tech-cta-secondary:hover,
+.product-form__submit.tech-cta-secondary:hover {
+  background: var(--color-primary, #3b82f6);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Product form buttons container */
+.product-form__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* =============================================================================
+   4. TRUST BADGES ROW
+   Consistent styling for: envío gratis, pago seguro, garantía, calidad
+   ============================================================================= */
+
+.pdp-atf-micro-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--color-border-light, #f1f5f9);
+  border-bottom: 1px solid var(--color-border-light, #f1f5f9);
+}
+
+.pdp-atf-micro-trust__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 1.2rem;
+  color: var(--color-text-secondary, #475569);
+  font-weight: 500;
+}
+
+.pdp-atf-micro-trust__item svg {
+  color: var(--color-success, #10b981);
+  flex-shrink: 0;
+}
+
+.pdp-atf-micro-trust__separator {
+  color: var(--color-border, #e2e8f0);
+  font-size: 0.6rem;
+}
+
+@media screen and (max-width: 749px) {
+  .pdp-atf-micro-trust {
+    gap: 0.5rem 0.75rem;
+    padding: 0.5rem 0;
+  }
+  
+  .pdp-atf-micro-trust__item {
+    font-size: 1.1rem;
+  }
+  
+  .pdp-atf-micro-trust__separator {
+    display: none;
+  }
+}
+
+/* Trust messages below price */
+.pdp-atf-trust-messages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pdp-atf-trust-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: var(--color-text-secondary, #475569);
+  font-weight: 500;
+}
+
+.pdp-atf-trust-message svg {
+  color: var(--color-primary, #3b82f6);
+  flex-shrink: 0;
+}
+
+/* Availability status */
+.pdp-atf-availability {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.pdp-atf-availability__text {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.pdp-atf-availability__text--available {
+  color: var(--color-success, #10b981);
+}
+
+.pdp-atf-availability__text--unavailable {
+  color: var(--color-error, #ef4444);
+}
+
+/* Benefits bullets */
+.pdp-atf-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: 8px;
+  border-left: 3px solid var(--color-success, #10b981);
+}
+
+.pdp-atf-benefit {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary, #334155);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* =============================================================================
+   5. GALLERY & PRODUCT IMAGE RESPONSIVE ALIGNMENT
+   Desktop: 2-column layout with gallery aligned to buy box
+   ============================================================================= */
+
+.tech-pdp-media,
+.product-hero-slider {
+  width: 100%;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .tech-pdp-media,
+  .product-hero-slider {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 1rem);
+    align-self: start;
+  }
+}
+
+/* Gallery slider controls */
+.product-hero-slider .slider-prev,
+.product-hero-slider .slider-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--color-text-primary, #1e293b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-hero-slider .slider-prev:hover,
+.product-hero-slider .slider-next:hover {
+  background: var(--color-primary, #3b82f6);
+  color: #fff;
+  border-color: var(--color-primary, #3b82f6);
+}
+
+.product-hero-slider .slider-prev {
+  left: 0.5rem;
+}
+
+.product-hero-slider .slider-next {
+  right: 0.5rem;
+}
+
+/* Slider dots */
+.product-hero-slider .slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.product-hero-slider .slider-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--color-border, #e2e8f0);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.product-hero-slider .slider-dot.active {
+  background: var(--color-primary, #3b82f6);
+  transform: scale(1.2);
+}
+
+/* =============================================================================
+   6. "TAMBIÉN TE PUEDE GUSTAR" RECOMMENDATIONS GRID
+   Consistent grid, no overflow, consistent CTA behavior
+   ============================================================================= */
+
+.tech-related-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+  .tech-related-products {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .tech-related-products {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.8rem;
+  }
+}
+
+/* Ensure consistent card sizing */
+.tech-related-products .grid__item {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tech-related-products .card-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-related-products .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-related-products .card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Related products heading */
+.related-products__heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #0f172a);
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .related-products__heading {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* =============================================================================
+   7. STICKY MOBILE CTA - Positioning without blocking WhatsApp/Cookie
+   ============================================================================= */
+
+/* Sticky mobile bar positioning - above WhatsApp button */
+.sticky-cta-bar {
+  bottom: 72px; /* Leave room for WhatsApp and cookie banner */
+}
+
+@supports (padding: max(0px)) {
+  .sticky-cta-bar {
+    bottom: max(72px, calc(env(safe-area-inset-bottom) + 52px));
+  }
+}
+
+/* Ensure proper z-index hierarchy */
+.sticky-cta-bar {
+  z-index: 996; /* Below cookie (998) and WhatsApp (997) */
+}
+
+/* Mobile spacing optimization */
+@media screen and (max-width: 749px) {
+  .sticky-cta-bar--visible + .whatsapp-float {
+    bottom: 140px; /* Move WhatsApp up when sticky bar is visible */
+  }
+}
+
+/* =============================================================================
+   8. RESPONSIVE BREAKPOINT REFINEMENTS
+   ============================================================================= */
+
+/* Mobile-first adjustments */
+@media screen and (max-width: 749px) {
+  /* Reduce section padding on mobile */
+  [class*="section-"][class*="-padding"] {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  /* Compact product title */
+  .product__title h1 {
+    font-size: 2rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Tighter price display */
+  .price--large .price-item--regular {
+    font-size: 2rem;
+  }
+  
+  .price--large .price-item--sale {
+    font-size: 2.2rem;
+  }
+  
+  /* Compact CTAs */
+  .tech-cta-primary .shopify-payment-button__button,
+  .product-form__cta-primary .shopify-payment-button__button {
+    min-height: 4.8rem;
+    font-size: 1.4rem;
+  }
+  
+  .tech-cta-secondary,
+  .product-form__submit.tech-cta-secondary {
+    min-height: 4.4rem;
+    font-size: 1.3rem;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product__title h1 {
+    font-size: 2.4rem;
+  }
+  
+  .price--large .price-item--sale {
+    font-size: 2.4rem;
+  }
+}
+
+/* Desktop optimizations */
+@media screen and (min-width: 990px) {
+  .product__title h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.75rem;
+  }
+}
