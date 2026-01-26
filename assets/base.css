@@ -368,12 +368,31 @@ svg.icon-arrow {
   }
 }
 
-/* Section header utilities */
-.section-header {
+/* Section header utilities
+ * NOTE: These styles are for content section headers (e.g., "Featured Products", "Best Sellers")
+ * NOT for the navigation header. The navigation header has class .section-header via schema
+ * but is reset in ui-ux-responsive-fixes.css to prevent margin/z-index conflicts.
+ * 
+ * Using :has() selector to apply styles only to section headers with titles,
+ * excluding the navigation header which doesn't have .section-header__title child.
+ */
+.section-header:has(.section-header__title),
+.section-header:has(.title-wrapper),
+.section-header:has(h2.title),
+main .section-header:not(#shopify-section-header):not(.announcement-bar-section) {
   text-align: center;
   margin-bottom: 3rem;
-  z-index: 999;
   position: relative;
+}
+
+/* Navigation header section - reset conflicting styles
+ * The #shopify-section-header.section-header has its own styles in ui-ux-responsive-fixes.css
+ */
+#shopify-section-header.section-header,
+.announcement-bar-section.section-header {
+  text-align: left;
+  margin-bottom: 0;
+  /* z-index handled by ui-ux-responsive-fixes.css */
 }
 
 .section-header__title,
@@ -420,7 +439,11 @@ h2.title {
 }
 
 @media screen and (min-width: 750px) {
-  .section-header {
+  /* Content section headers only - exclude navigation header */
+  .section-header:has(.section-header__title),
+  .section-header:has(.title-wrapper),
+  .section-header:has(h2.title),
+  main .section-header:not(#shopify-section-header):not(.announcement-bar-section) {
     margin-bottom: 5rem;
   }
 
