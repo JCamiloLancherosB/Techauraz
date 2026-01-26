@@ -1,0 +1,692 @@
+/**
+ * =============================================================================
+ * TECHAURAZ DESIGN TOKENS
+ * Version: 1.0.0
+ * =============================================================================
+ * 
+ * Single source of truth for all design tokens.
+ * Load this file BEFORE other custom CSS to establish the design foundation.
+ * 
+ * Naming convention: --ta-* (TechAura prefix)
+ * 
+ * CONTENTS:
+ * 1. Brand Colors
+ * 2. Gradient Tokens
+ * 3. Typography Scale
+ * 4. Spacing Scale
+ * 5. Border Radii
+ * 6. Shadows
+ * 7. Layout Heights
+ * 8. Transitions
+ * 9. Legacy Compatibility Mapping
+ * 10. Global Button Styles
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. BRAND COLORS - Premium Tech Palette
+   ============================================================================= */
+:root {
+  /* ----------------------------------------
+     Primary Brand Colors - Deep Blue System
+     ---------------------------------------- */
+  --ta-primary: #2563eb;
+  --ta-primary-hover: #1e40af;
+  --ta-primary-active: #1e3a8a;
+  --ta-primary-light: #3b82f6;
+  --ta-primary-lighter: #60a5fa;
+  --ta-primary-contrast: #ffffff;
+
+  /* ----------------------------------------
+     Secondary Colors - Cyan/Teal Accents
+     ---------------------------------------- */
+  --ta-secondary: #06b6d4;
+  --ta-secondary-hover: #0891b2;
+  --ta-secondary-light: #22d3ee;
+
+  /* ----------------------------------------
+     Accent Colors - Teal for highlights
+     ---------------------------------------- */
+  --ta-accent: #14b8a6;
+  --ta-accent-hover: #0d9488;
+  --ta-accent-light: #2dd4bf;
+
+  /* ----------------------------------------
+     Background Colors
+     ---------------------------------------- */
+  --ta-bg: #ffffff;
+  --ta-bg-secondary: #f8fafc;
+  --ta-bg-tertiary: #f1f5f9;
+  --ta-surface: #ffffff;
+  --ta-surface-elevated: #ffffff;
+  --ta-bg-overlay: rgba(15, 23, 42, 0.75);
+
+  /* ----------------------------------------
+     Text Colors
+     ---------------------------------------- */
+  --ta-text: #0f172a;
+  --ta-text-secondary: #1e293b;
+  --ta-text-muted: #64748b;
+  --ta-text-inverse: #ffffff;
+  --ta-text-link: #3b82f6;
+
+  /* ----------------------------------------
+     Border Colors
+     ---------------------------------------- */
+  --ta-border: #e2e8f0;
+  --ta-border-light: #f1f5f9;
+  --ta-border-hover: #3b82f6;
+  --ta-border-focus: #3b82f6;
+
+  /* ----------------------------------------
+     State Colors
+     ---------------------------------------- */
+  --ta-success: #10b981;
+  --ta-success-light: #34d399;
+  --ta-warning: #f59e0b;
+  --ta-warning-light: #fbbf24;
+  --ta-error: #ef4444;
+  --ta-error-light: #f87171;
+  --ta-info: #3b82f6;
+}
+
+/* =============================================================================
+   2. GRADIENT TOKENS - Subtle Premium Effects
+   ============================================================================= */
+:root {
+  /* Primary gradients */
+  --ta-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --ta-gradient-primary-hover: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  --ta-gradient-primary-dark: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+
+  /* Secondary gradients */
+  --ta-gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  --ta-gradient-accent: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+
+  /* Premium background gradients */
+  --ta-gradient-bg-subtle: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%, #dbeafe 100%);
+  --ta-gradient-bg-section: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%);
+  --ta-gradient-bg-hero: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%);
+
+  /* Action gradients */
+  --ta-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --ta-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --ta-gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%);
+
+  /* Tech glow effect */
+  --ta-glow-primary: rgba(59, 130, 246, 0.3);
+  --ta-glow-secondary: rgba(6, 182, 212, 0.3);
+}
+
+/* =============================================================================
+   3. TYPOGRAPHY SCALE
+   Based on 62.5% root font-size (1rem = 10px) from base.css
+   ============================================================================= */
+:root {
+  /* ----------------------------------------
+     Font Families
+     ---------------------------------------- */
+  --ta-font-body: var(--font-body-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  --ta-font-heading: var(--font-heading-family, var(--ta-font-body));
+  --ta-font-mono: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* ----------------------------------------
+     Base Font Size
+     ---------------------------------------- */
+  --ta-font-size-base: 1.6rem; /* 16px */
+
+  /* ----------------------------------------
+     Heading Scale (modular scale ~1.25)
+     ---------------------------------------- */
+  --ta-font-size-h1: 4.8rem; /* 48px - Hero headlines */
+  --ta-font-size-h2: 3.6rem; /* 36px - Section titles */
+  --ta-font-size-h3: 2.4rem; /* 24px - Subsections */
+  --ta-font-size-h4: 2rem;   /* 20px - Card titles */
+
+  /* ----------------------------------------
+     Body Text Scale
+     ---------------------------------------- */
+  --ta-font-size-xs: 1.2rem;   /* 12px - Small labels */
+  --ta-font-size-sm: 1.4rem;   /* 14px - Secondary text */
+  --ta-font-size-md: 1.6rem;   /* 16px - Body text */
+  --ta-font-size-lg: 1.8rem;   /* 18px - Large body */
+  --ta-font-size-xl: 2rem;     /* 20px - Lead text */
+
+  /* ----------------------------------------
+     Line Heights
+     ---------------------------------------- */
+  --ta-leading-none: 1;
+  --ta-leading-tight: 1.2;
+  --ta-leading-snug: 1.375;
+  --ta-leading-normal: 1.5;
+  --ta-leading-relaxed: 1.625;
+  --ta-leading-loose: 1.8;
+
+  /* ----------------------------------------
+     Font Weights
+     ---------------------------------------- */
+  --ta-font-normal: 400;
+  --ta-font-medium: 500;
+  --ta-font-semibold: 600;
+  --ta-font-bold: 700;
+  --ta-font-extrabold: 800;
+
+  /* ----------------------------------------
+     Letter Spacing
+     ---------------------------------------- */
+  --ta-tracking-tighter: -0.05em;
+  --ta-tracking-tight: -0.025em;
+  --ta-tracking-normal: 0;
+  --ta-tracking-wide: 0.025em;
+  --ta-tracking-wider: 0.05em;
+  --ta-tracking-widest: 0.1em;
+}
+
+/* =============================================================================
+   4. SPACING SCALE
+   ============================================================================= */
+:root {
+  --ta-space-0: 0;
+  --ta-space-xs: 0.4rem;   /* 4px */
+  --ta-space-sm: 0.8rem;   /* 8px */
+  --ta-space-md: 1.2rem;   /* 12px */
+  --ta-space-lg: 1.6rem;   /* 16px */
+  --ta-space-xl: 2.4rem;   /* 24px */
+  --ta-space-2xl: 3.2rem;  /* 32px */
+  --ta-space-3xl: 4.8rem;  /* 48px */
+
+  /* Additional granular spacing */
+  --ta-space-1: 0.4rem;
+  --ta-space-2: 0.8rem;
+  --ta-space-3: 1.2rem;
+  --ta-space-4: 1.6rem;
+  --ta-space-5: 2rem;
+  --ta-space-6: 2.4rem;
+  --ta-space-8: 3.2rem;
+  --ta-space-10: 4rem;
+  --ta-space-12: 4.8rem;
+  --ta-space-16: 6.4rem;
+}
+
+/* =============================================================================
+   5. BORDER RADII
+   ============================================================================= */
+:root {
+  --ta-radius-none: 0;
+  --ta-radius-sm: 4px;
+  --ta-radius-md: 8px;
+  --ta-radius-lg: 12px;
+  --ta-radius-xl: 16px;
+  --ta-radius-2xl: 24px;
+  --ta-radius-pill: 9999px;
+  --ta-radius-full: 50%;
+
+  /* Specific component radii */
+  --ta-radius-button: 8px;
+  --ta-radius-card: 12px;
+  --ta-radius-input: 8px;
+  --ta-radius-badge: 6px;
+}
+
+/* =============================================================================
+   6. SHADOWS
+   ============================================================================= */
+:root {
+  /* Elevation shadows */
+  --ta-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --ta-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --ta-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --ta-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --ta-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --ta-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Blue-tinted shadows for tech aesthetic */
+  --ta-shadow-primary: 0 4px 14px 0 rgba(37, 99, 235, 0.4);
+  --ta-shadow-primary-lg: 0 8px 25px 0 rgba(37, 99, 235, 0.5);
+  --ta-shadow-card: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --ta-shadow-card-hover: 0 20px 30px -5px rgba(37, 99, 235, 0.2), 0 10px 15px -6px rgba(37, 99, 235, 0.15);
+
+  /* Button-specific shadows */
+  --ta-shadow-button: 0 4px 12px rgba(37, 99, 235, 0.3);
+  --ta-shadow-button-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
+  --ta-shadow-button-active: 0 2px 8px rgba(37, 99, 235, 0.3);
+
+  /* Focus rings */
+  --ta-ring-focus: 0 0 0 3px rgba(37, 99, 235, 0.4);
+  --ta-ring-focus-warning: 0 0 0 3px rgba(251, 191, 36, 0.5);
+}
+
+/* =============================================================================
+   7. LAYOUT HEIGHTS
+   ============================================================================= */
+:root {
+  /* Header system heights */
+  --ta-height-topbar: 40px;       /* Announcement bar */
+  --ta-height-header: 80px;       /* Main header */
+  --ta-height-header-mobile: 64px;
+  --ta-height-stack: 120px;       /* Topbar + header combined */
+  --ta-height-stack-mobile: 104px;
+
+  /* Page layout */
+  --ta-width-page: 1200px;
+  --ta-width-page-wide: 1400px;
+  --ta-width-content: 720px;
+
+  /* Minimum touch targets */
+  --ta-touch-min: 44px;
+  --ta-touch-comfortable: 48px;
+
+  /* Legacy compatibility - keep these for existing code */
+  --tech-topbar-h: var(--ta-height-topbar);
+  --tech-header-h: var(--ta-height-header);
+}
+
+/* =============================================================================
+   8. TRANSITIONS
+   ============================================================================= */
+:root {
+  /* Duration tokens */
+  --ta-duration-fast: 150ms;
+  --ta-duration-normal: 250ms;
+  --ta-duration-slow: 400ms;
+
+  /* Easing tokens */
+  --ta-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ta-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ta-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ta-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Composed transitions */
+  --ta-transition-fast: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ta-transition-normal: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ta-transition-slow: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ta-transition-colors: color, background-color, border-color 250ms ease;
+}
+
+/* =============================================================================
+   9. LEGACY COMPATIBILITY MAPPING
+   Maps old --color-*, --tech-* variables to new --ta-* tokens
+   ============================================================================= */
+:root {
+  /* Legacy color mappings (from base.css) */
+  --color-primary: var(--ta-primary);
+  --color-primary-dark: var(--ta-primary-hover);
+  --color-primary-darker: var(--ta-primary-active);
+  --color-primary-light: var(--ta-primary-light);
+  --color-primary-gradient: var(--ta-gradient-primary);
+  --color-primary-gradient-light: var(--ta-gradient-primary-hover);
+
+  --color-secondary: var(--ta-secondary);
+  --color-secondary-dark: var(--ta-secondary-hover);
+  --color-accent: var(--ta-accent);
+  --color-accent-dark: var(--ta-accent-hover);
+  --color-accent-light: var(--ta-accent-light);
+
+  --color-bg-primary: var(--ta-bg);
+  --color-bg-secondary: var(--ta-bg-secondary);
+  --color-bg-tertiary: var(--ta-bg-tertiary);
+  --color-bg-card: var(--ta-surface);
+  --color-bg-card-hover: var(--ta-bg-secondary);
+  --color-bg-overlay: var(--ta-bg-overlay);
+  --color-bg-gradient-start: #eff6ff;
+  --color-bg-gradient-end: #dbeafe;
+
+  --color-text-primary: var(--ta-text);
+  --color-text-secondary: var(--ta-text-secondary);
+  --color-text-muted: var(--ta-text-muted);
+  --color-text-inverse: var(--ta-text-inverse);
+  --color-text-link: var(--ta-text-link);
+
+  --color-success: var(--ta-success);
+  --color-warning: var(--ta-warning);
+  --color-error: var(--ta-error);
+  --color-info: var(--ta-info);
+
+  --color-border: var(--ta-border);
+  --color-border-light: var(--ta-border-light);
+  --color-border-hover: var(--ta-border-hover);
+  --color-border-focus: var(--ta-border-focus);
+
+  --shadow-primary: var(--ta-glow-primary);
+  --shadow-card: rgba(15, 23, 42, 0.08);
+  --shadow-sm: var(--ta-shadow-sm);
+  --shadow-md: var(--ta-shadow-md);
+  --shadow-lg: var(--ta-shadow-lg);
+  --shadow-xl: var(--ta-shadow-xl);
+  --shadow-card-hover: var(--ta-shadow-card-hover);
+  --shadow-button: var(--ta-shadow-button);
+
+  /* Legacy --tech-* mappings (from techauraz-custom-ui.css) */
+  --tech-bg: var(--ta-bg);
+  --tech-surface: var(--ta-bg-secondary);
+  --tech-ink: var(--ta-text);
+  --tech-muted: var(--ta-text-muted);
+  --tech-primary: var(--ta-primary);
+  --tech-primary-hover: var(--ta-primary-hover);
+  --tech-primary-contrast: var(--ta-primary-contrast);
+  --tech-border: var(--ta-border);
+  --tech-border-light: var(--ta-border-light);
+
+  --tech-space-2xs: var(--ta-space-xs);
+  --tech-space-xs: var(--ta-space-sm);
+  --tech-space-sm: var(--ta-space-md);
+  --tech-space-md: var(--ta-space-lg);
+  --tech-space-lg: var(--ta-space-xl);
+  --tech-space-xl: var(--ta-space-2xl);
+  --tech-space-2xl: var(--ta-space-3xl);
+
+  --tech-button-radius: var(--ta-radius-button);
+  --tech-button-shadow: var(--ta-shadow-button);
+  --tech-button-shadow-hover: var(--ta-shadow-button-hover);
+  --tech-button-padding-y: 1rem;
+  --tech-button-padding-x: 1.5rem;
+  --tech-secondary-bg: transparent;
+  --tech-secondary-hover-bg: var(--ta-bg-secondary);
+  --tech-heading-line-height: var(--ta-leading-tight);
+  --tech-heading-letter-spacing: var(--ta-tracking-tight);
+
+  /* Legacy spacing from base.css */
+  --space-xs: var(--ta-space-sm);
+  --space-sm: var(--ta-space-md);
+  --space-md: var(--ta-space-lg);
+  --space-lg: var(--ta-space-xl);
+  --space-xl: var(--ta-space-2xl);
+  --space-2xl: var(--ta-space-3xl);
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* Legacy radius from base.css */
+  --radius-sm: var(--ta-radius-sm);
+  --radius-md: var(--ta-radius-md);
+  --radius-lg: var(--ta-radius-lg);
+  --radius-xl: var(--ta-radius-xl);
+  --radius-2xl: var(--ta-radius-2xl);
+  --radius-pill: var(--ta-radius-pill);
+  --radius-circle: var(--ta-radius-full);
+
+  /* Legacy transitions */
+  --transition-fast: var(--ta-transition-fast);
+  --transition-base: var(--ta-transition-normal);
+  --transition-slow: var(--ta-transition-slow);
+
+  /* Legacy home-modern-blocks.css mappings */
+  --home-primary-blue: var(--ta-info);
+  --home-primary-green: var(--ta-success);
+  --home-gradient-primary: var(--ta-gradient-cta);
+  --home-shadow-light: var(--ta-shadow-sm);
+  --home-shadow-medium: var(--ta-shadow-md);
+  --home-shadow-heavy: var(--ta-shadow-lg);
+  --home-border-radius: var(--ta-radius-card);
+  --home-transition: var(--ta-transition-normal);
+}
+
+/* =============================================================================
+   10. GLOBAL BUTTON STYLES
+   Primary, Secondary, Ghost variants with hover/focus states
+   Ensures WCAG AA contrast (4.5:1 for normal text)
+   ============================================================================= */
+
+/* Base button reset and shared styles */
+.ta-btn,
+.button,
+.btn,
+[class*="button--"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm);
+  padding: var(--ta-space-md) var(--ta-space-xl);
+  min-height: var(--ta-touch-comfortable);
+  font-family: var(--ta-font-body);
+  font-size: var(--ta-font-size-sm);
+  font-weight: var(--ta-font-semibold);
+  line-height: var(--ta-leading-tight);
+  letter-spacing: var(--ta-tracking-wide);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: var(--ta-radius-button);
+  cursor: pointer;
+  transition: var(--ta-transition-fast);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Primary Button - High contrast CTA (AA compliant: white on blue = 4.65:1) */
+.ta-btn--primary,
+.button--primary {
+  background: var(--ta-gradient-primary);
+  color: var(--ta-primary-contrast);
+  border: none;
+  box-shadow: var(--ta-shadow-button);
+}
+
+.ta-btn--primary:hover,
+.button--primary:hover {
+  background: var(--ta-gradient-primary-hover);
+  box-shadow: var(--ta-shadow-button-hover);
+  transform: translateY(-2px);
+  color: var(--ta-primary-contrast);
+}
+
+.ta-btn--primary:active,
+.button--primary:active {
+  background: var(--ta-gradient-primary-dark);
+  box-shadow: var(--ta-shadow-button-active);
+  transform: translateY(0);
+}
+
+.ta-btn--primary:focus-visible,
+.button--primary:focus-visible {
+  outline: 3px solid var(--ta-warning-light);
+  outline-offset: 3px;
+}
+
+/* Secondary Button - Outlined style */
+.ta-btn--secondary,
+.button--secondary {
+  background: transparent;
+  color: var(--ta-primary);
+  border: 2px solid var(--ta-primary);
+  box-shadow: none;
+}
+
+.ta-btn--secondary:hover,
+.button--secondary:hover {
+  background: var(--ta-primary);
+  color: var(--ta-primary-contrast);
+  border-color: var(--ta-primary);
+  box-shadow: var(--ta-shadow-button);
+  transform: translateY(-2px);
+}
+
+.ta-btn--secondary:active,
+.button--secondary:active {
+  background: var(--ta-primary-hover);
+  border-color: var(--ta-primary-hover);
+  transform: translateY(0);
+}
+
+.ta-btn--secondary:focus-visible,
+.button--secondary:focus-visible {
+  outline: 2px solid var(--ta-warning-light);
+  outline-offset: 2px;
+}
+
+/* Ghost Button - Minimal/text style */
+.ta-btn--ghost,
+.button--ghost {
+  background: transparent;
+  color: var(--ta-primary);
+  border: none;
+  box-shadow: none;
+  padding: var(--ta-space-sm) var(--ta-space-md);
+}
+
+.ta-btn--ghost:hover,
+.button--ghost:hover {
+  background: var(--ta-bg-secondary);
+  color: var(--ta-primary-hover);
+  transform: none;
+}
+
+.ta-btn--ghost:active,
+.button--ghost:active {
+  background: var(--ta-bg-tertiary);
+}
+
+.ta-btn--ghost:focus-visible,
+.button--ghost:focus-visible {
+  outline: 2px solid var(--ta-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled state for all buttons */
+.ta-btn:disabled,
+.ta-btn[aria-disabled="true"],
+.button:disabled,
+.button[aria-disabled="true"],
+[class*="button--"]:disabled,
+[class*="button--"][aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Full-width variant */
+.ta-btn--full,
+.button--full-width {
+  width: 100%;
+}
+
+/* Small button variant */
+.ta-btn--sm,
+.button--small {
+  padding: var(--ta-space-sm) var(--ta-space-lg);
+  min-height: var(--ta-touch-min);
+  font-size: var(--ta-font-size-xs);
+}
+
+/* Large button variant */
+.ta-btn--lg,
+.button--large {
+  padding: var(--ta-space-lg) var(--ta-space-2xl);
+  min-height: 56px;
+  font-size: var(--ta-font-size-md);
+}
+
+/* =============================================================================
+   HEADINGS - Apply token styles to all headings
+   ============================================================================= */
+h1, .h1 {
+  font-size: var(--ta-font-size-h1);
+  font-weight: var(--ta-font-bold);
+  line-height: var(--ta-leading-tight);
+  letter-spacing: var(--ta-tracking-tight);
+  color: var(--ta-text);
+}
+
+h2, .h2 {
+  font-size: var(--ta-font-size-h2);
+  font-weight: var(--ta-font-bold);
+  line-height: var(--ta-leading-tight);
+  letter-spacing: var(--ta-tracking-tight);
+  color: var(--ta-text);
+}
+
+h3, .h3 {
+  font-size: var(--ta-font-size-h3);
+  font-weight: var(--ta-font-semibold);
+  line-height: var(--ta-leading-snug);
+  color: var(--ta-text);
+}
+
+h4, .h4 {
+  font-size: var(--ta-font-size-h4);
+  font-weight: var(--ta-font-semibold);
+  line-height: var(--ta-leading-snug);
+  color: var(--ta-text);
+}
+
+/* =============================================================================
+   SECTION BACKGROUNDS - Using tokens
+   ============================================================================= */
+.ta-section--primary {
+  background: var(--ta-bg);
+}
+
+.ta-section--secondary {
+  background: var(--ta-bg-secondary);
+}
+
+.ta-section--gradient {
+  background: var(--ta-gradient-bg-subtle);
+}
+
+.ta-section--accent {
+  background: var(--ta-gradient-bg-section);
+}
+
+/* =============================================================================
+   MOBILE RESPONSIVE TYPOGRAPHY
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  :root {
+    --ta-font-size-h1: 3.2rem;
+    --ta-font-size-h2: 2.4rem;
+    --ta-font-size-h3: 2rem;
+    --ta-font-size-h4: 1.8rem;
+  }
+
+  .ta-btn,
+  .button,
+  .btn,
+  [class*="button--"] {
+    padding: var(--ta-space-md) var(--ta-space-lg);
+    font-size: var(--ta-font-size-xs);
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY - Reduced motion support
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .ta-btn,
+  .button,
+  .btn,
+  [class*="button--"] {
+    transition: none;
+    transform: none !important;
+  }
+
+  .ta-btn:hover,
+  .button:hover,
+  .btn:hover,
+  [class*="button--"]:hover {
+    transform: none !important;
+  }
+}
+
+/* =============================================================================
+   HIGH CONTRAST MODE - Enhanced accessibility
+   ============================================================================= */
+@media (prefers-contrast: high) {
+  :root {
+    --ta-primary: #1d4ed8;
+    --ta-primary-contrast: #ffffff;
+    --ta-border: #1e293b;
+    --ta-shadow-button: none;
+    --ta-shadow-button-hover: none;
+  }
+
+  .ta-btn--primary,
+  .button--primary {
+    border: 2px solid var(--ta-primary-contrast);
+  }
+
+  .ta-btn--secondary,
+  .button--secondary {
+    border-width: 3px;
+  }
+}
