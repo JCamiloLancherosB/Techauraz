@@ -2745,6 +2745,7 @@ body.template-index .newsletter {
 .tech-card .card__heading {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3256,6 +3257,7 @@ details-modal,
   /* Line clamp - max 2 lines for consistent heights */
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

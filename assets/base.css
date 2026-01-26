@@ -1360,12 +1360,9 @@ header-drawer {
 
 /* =============================================================================
    COLOR SCHEME SUPPORT - Maintain Techauraz branding
+   Note: .header-wrapper.color-scheme-1 and .header-wrapper.color-scheme-2
+   inherit all styles from .header-wrapper (line ~826) - no overrides needed.
    ============================================================================= */
-
-.header-wrapper.color-scheme-1,
-.header-wrapper.color-scheme-2 {
-  /* Uses the gradient defined in .header-wrapper above */
-}
 
 /* Secondary accent color for special states */
 .header__icon:active {
@@ -2794,6 +2791,7 @@ header-drawer {
   /* Line-clamp descriptions to prevent height variations */
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2808,6 +2806,7 @@ header-drawer {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
@@ -2820,6 +2819,7 @@ header-drawer {
   transition: color 0.2s ease;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3337,6 +3337,7 @@ header-drawer {
   .card__description {
     font-size: 1.2rem;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .card__heading .full-unstyled-link {
@@ -5560,6 +5561,7 @@ a.product__text {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.4;
 }
@@ -5581,6 +5583,7 @@ a.product__text {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.4;
   min-height: 44px;
@@ -7612,6 +7615,7 @@ body.menu-drawer-open {
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -9065,6 +9069,7 @@ body.menu-drawer-open {
     margin-bottom: 0.4rem !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -12960,6 +12965,7 @@ textarea:focus-visible,
   min-height: 2.8em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
