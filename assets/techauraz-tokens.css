@@ -120,7 +120,10 @@
 
 /* =============================================================================
    3. TYPOGRAPHY SCALE
-   Based on 62.5% root font-size (1rem = 10px) from base.css
+   Note: base.css uses 62.5% root font-size, making 1rem = 10px
+   All rem values below are calculated with this in mind:
+   - 1.6rem = 16px (standard body text)
+   - 4.8rem = 48px (h1 headlines)
    ============================================================================= */
 :root {
   /* ----------------------------------------
@@ -131,9 +134,9 @@
   --ta-font-mono: 'SF Mono', Menlo, Monaco, Consolas, monospace;
 
   /* ----------------------------------------
-     Base Font Size
+     Base Font Size (body text = 16px)
      ---------------------------------------- */
-  --ta-font-size-base: 1.6rem; /* 16px */
+  --ta-font-size-base: 1.6rem; /* 16px at 62.5% root */
 
   /* ----------------------------------------
      Heading Scale (modular scale ~1.25)
@@ -451,7 +454,7 @@
   isolation: isolate;
 }
 
-/* Primary Button - High contrast CTA (AA compliant: white on blue = 4.65:1) */
+/* Primary Button - High contrast CTA (AA compliant: white #fff on blue #2563eb = 5.17:1) */
 .ta-btn--primary,
 .button--primary {
   background: var(--ta-gradient-primary);
