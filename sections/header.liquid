@@ -376,6 +376,8 @@
   class StickyHeader extends HTMLElement {
     constructor() {
       super();
+      // Initialize headerPosition to null (not fixed) to ensure proper state tracking
+      this.headerPosition = null;
     }
 
     connectedCallback() {
@@ -425,16 +427,18 @@
       if (!this.header) return;
 
       const position = window.getComputedStyle(this.header).position;
-      // Track previous position for comparison
+      // Track previous position for comparison (null/undefined treated as not-fixed)
       const wasFixed = this.headerPosition === 'fixed';
+      const isFirstCall = this.headerPosition === null;
       const isFixed = position === 'fixed';
       
-      if (position !== this.headerPosition) {
+      // Always update the state on first call or when position changes
+      if (isFirstCall || position !== this.headerPosition) {
         this.headerPosition = position;
         document.documentElement.classList.toggle('tech-header-fixed', isFixed);
         
-        // When transitioning away from fixed, ensure inline styles are cleaned up
-        if (wasFixed && !isFixed) {
+        // When transitioning away from fixed (or initializing as non-fixed), clean up inline styles
+        if ((wasFixed && !isFixed) || (isFirstCall && !isFixed)) {
           document.documentElement.style.removeProperty('--tech-header-h');
         }
       }
