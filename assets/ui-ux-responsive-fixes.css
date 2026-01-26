@@ -2957,32 +2957,53 @@ body {
 }
 
 /* --- MAIN CONTENT OFFSET (ONLY FOR FIXED HEADERS) --- */
-/* Sticky headers should not push content down; keep padding only for fixed variants if they exist. */
-main.content-for-layout {
-  padding-top: 0;
+/* 
+ * IMPORTANT: Sticky headers (position: sticky) do NOT require padding-top on main content.
+ * Only fixed headers (position: fixed) require padding-top to prevent content overlap.
+ * 
+ * The !important is necessary to override any conflicting rules from base.css or inline styles.
+ */
+
+/* DEFAULT: No padding-top on main - sticky headers don't need it */
+main.content-for-layout,
+main#MainContent,
+.content-for-layout {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
-/* Apply stack offset only when a fixed header variant is explicitly present */
-html.tech-header-fixed body .content-for-layout {
-  padding-top: var(--tech-stack-h);
+/* Apply stack offset ONLY when a fixed header variant is explicitly present */
+/* The tech-header-fixed class is added by StickyHeader JS when header position is fixed */
+html.tech-header-fixed body .content-for-layout,
+html.tech-header-fixed body main.content-for-layout,
+html.tech-header-fixed body main#MainContent {
+  padding-top: var(--tech-stack-h) !important;
 }
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
 /* Using adjacent sibling selector for better specificity */
 .header-wrapper--overlay + .content-for-layout,
 .shopify-section-header-sticky.header-wrapper--overlay + .content-for-layout {
-  padding-top: 0;
+  padding-top: 0 !important;
 }
 
 /* Ensure first section in main has no extra top margin/padding that could create gaps */
 main > .shopify-section:first-child,
-main > section:first-child {
+main > section:first-child,
+main.content-for-layout > .shopify-section:first-child,
+main#MainContent > .shopify-section:first-child {
   margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
-/* Specifically target slideshow as it's often the first section */
+/* Specifically target slideshow as it's often the first section on home page */
 main > .shopify-section:first-child .slideshow,
-main > section:first-child .slideshow {
+main > section:first-child .slideshow,
+main > .shopify-section:first-child .slideshow-wrapper,
+main > .shopify-section:first-child .tech-hero,
+.slideshow,
+.slideshow-wrapper,
+.tech-hero {
   margin-top: 0 !important;
 }
 

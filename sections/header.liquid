@@ -425,9 +425,18 @@
       if (!this.header) return;
 
       const position = window.getComputedStyle(this.header).position;
+      // Track previous position for comparison
+      const wasFixed = this.headerPosition === 'fixed';
+      const isFixed = position === 'fixed';
+      
       if (position !== this.headerPosition) {
         this.headerPosition = position;
-        document.documentElement.classList.toggle('tech-header-fixed', this.headerPosition === 'fixed');
+        document.documentElement.classList.toggle('tech-header-fixed', isFixed);
+        
+        // When transitioning away from fixed, ensure inline styles are cleaned up
+        if (wasFixed && !isFixed) {
+          document.documentElement.style.removeProperty('--tech-header-h');
+        }
       }
     }
 
@@ -439,8 +448,12 @@
     setHeaderHeight() {
       if (!this.header) return;
 
+      // For non-fixed headers (sticky, static, relative), remove any inline height variable
+      // This ensures no "giant gap" is created when header is sticky
       if (this.headerPosition !== 'fixed') {
         document.documentElement.style.removeProperty('--tech-header-h');
+        // Also remove the fixed class if somehow it was set
+        document.documentElement.classList.remove('tech-header-fixed');
         return;
       }
 
