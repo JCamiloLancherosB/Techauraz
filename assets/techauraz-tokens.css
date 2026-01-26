@@ -283,9 +283,6 @@
   --tech-topbar-h: var(--ta-height-topbar);
   --tech-header-h: var(--ta-height-header);
   --tech-stack-h: calc(var(--tech-topbar-h) + var(--tech-header-h));
-  
-  /* Alias for consistency with other naming conventions */
-  --ta-height-stack-calc: var(--tech-stack-h);
 }
 
 /* =============================================================================
