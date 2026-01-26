@@ -382,12 +382,12 @@
       this.header = document.querySelector('.section-header');
       this.headerIsAlwaysSticky = this.getAttribute('data-sticky-type') === 'always' || this.getAttribute('data-sticky-type') === 'reduce-logo-size';
       this.headerBounds = {};
-
+      this.updateHeaderPosition();
       this.setHeaderHeight();
 
       // Listen to breakpoint changes matching CSS media queries
-      window.matchMedia('(min-width: 750px)').addEventListener('change', this.setHeaderHeight.bind(this));
-      window.matchMedia('(min-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
+      window.matchMedia('(min-width: 750px)').addEventListener('change', this.handleMediaChange.bind(this));
+      window.matchMedia('(min-width: 990px)').addEventListener('change', this.handleMediaChange.bind(this));
 
       if (this.headerIsAlwaysSticky) {
         this.header.classList.add('shopify-section-header-sticky');
@@ -421,13 +421,33 @@
       observer.observe(this.header);
     }
 
+    updateHeaderPosition() {
+      if (!this.header) return;
+
+      const position = window.getComputedStyle(this.header).position;
+      if (position !== this.headerPosition) {
+        this.headerPosition = position;
+        document.documentElement.classList.toggle('tech-header-fixed', this.headerPosition === 'fixed');
+      }
+    }
+
+    handleMediaChange() {
+      this.updateHeaderPosition();
+      this.setHeaderHeight();
+    }
+
     setHeaderHeight() {
       if (!this.header) return;
-      
+
+      if (this.headerPosition !== 'fixed') {
+        document.documentElement.style.removeProperty('--tech-header-h');
+        return;
+      }
+
       // Get the actual rendered height of the header
       const headerHeight = this.header.offsetHeight;
-      
-      // Update CSS variable for dynamic use (using established naming convention)
+
+      // Update CSS variable only when header is fixed
       document.documentElement.style.setProperty('--tech-header-h', `${headerHeight}px`);
     }
 
