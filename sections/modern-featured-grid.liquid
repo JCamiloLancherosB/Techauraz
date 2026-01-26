@@ -15,56 +15,6 @@
   No need to load it again here to avoid duplicate CSS loads
 {%- endcomment -%}
 
-{%- style -%}
-  /* Modern Featured Grid - Normalized for Home Layout 
-     Global normalization in ui-ux-responsive-fixes.css handles:
-     - Section padding: 56px desktop, 32px mobile (body.template-index .shopify-section)
-     - Page-width: max-width 1200px, padding-inline 2rem desktop / 1rem mobile
-     - Title margins: 2rem desktop, 1.5rem mobile + text-align center
-     - Grid gaps: 2rem desktop, 1.5rem mobile
-     
-     This section only contains visual styling specific to featured grid.
-  */
-  
-  .modern-grid-{{ section.id }} {
-    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-  }
-
-  /* Heading and subtitle styling - alignment and spacing handled by normalization */
-  .modern-grid-{{ section.id }} .title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #0ea5e9; /* Fallback color for unsupported browsers */
-    background: linear-gradient(135deg, #0ea5e9, #22c55e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .modern-grid-{{ section.id }} .subtitle {
-    color: #64748b;
-    font-size: 1.4rem;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
-  }
-
-  @media screen and (min-width: 750px) {
-    .modern-grid-{{ section.id }} .subtitle {
-      margin-bottom: 3rem;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    .modern-grid-{{ section.id }} .title {
-      font-size: 2.2rem;
-    }
-    .modern-grid-{{ section.id }} .subtitle {
-      font-size: 1.3rem;
-    }
-  }
-{%- endstyle -%}
-
 <div class="modern-grid-{{ section.id }} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     {%- unless section.settings.title == blank -%}
@@ -124,7 +74,7 @@
     {%- endif -%}
 
     {%- if section.settings.show_view_all and more_in_collection -%}
-      <div class="center collection__view-all" style="margin-top: 3rem;">
+      <div class="center collection__view-all">
         <a
           href="{{ section.settings.collection.url }}"
           class="button button--primary"

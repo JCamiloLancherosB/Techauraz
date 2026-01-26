@@ -18,53 +18,6 @@
   {%- endif -%}
 {%- endfor -%}
 
-{%- if section.settings.slide_height == 'adapt_image' -%}
-  {%- if reference_image -%}
-    {%- style -%}
-      @media screen and (max-width: 749px) {
-        #Slider-{{ section.id }}::before,
-        #Slider-{{ section.id }} .media::before,
-        #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-          padding-bottom: {{ 1 | divided_by: reference_image.aspect_ratio | times: 100 }}%;
-          content: '';
-          display: block;
-        }
-      }
-
-      @media screen and (min-width: 750px) {
-        #Slider-{{ section.id }}::before,
-        #Slider-{{ section.id }} .media::before {
-          padding-bottom: {{ 1 | divided_by: reference_image.aspect_ratio | times: 100 }}%;
-          content: '';
-          display: block;
-        }
-      }
-    {%- endstyle -%}
-  {%- else -%}
-    {%- comment -%} No images found, use default aspect ratio (16:9) {%- endcomment -%}
-    {%- style -%}
-      @media screen and (max-width: 749px) {
-        #Slider-{{ section.id }}::before,
-        #Slider-{{ section.id }} .media::before,
-        #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-          padding-bottom: 56.25%; /* 16:9 aspect ratio */
-          content: '';
-          display: block;
-        }
-      }
-
-      @media screen and (min-width: 750px) {
-        #Slider-{{ section.id }}::before,
-        #Slider-{{ section.id }} .media::before {
-          padding-bottom: 56.25%; /* 16:9 aspect ratio */
-          content: '';
-          display: block;
-        }
-      }
-    {%- endstyle -%}
-  {%- endif -%}
-{%- endif -%}
-
 <section class="tech-hero tech-hero-slideshow">
 <slideshow-component
   class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}"
@@ -119,11 +72,6 @@
     data-speed="{{ section.settings.change_slides_speed }}"
   >
     {%- for block in section.blocks -%}
-      <style>
-        #Slide-{{ section.id }}-{{ forloop.index }} .banner__media::after {
-          opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.0 }};
-        }
-      </style>
       <div
         class="slideshow__slide grid__item grid--1-col slider__slide"
         id="Slide-{{ section.id }}-{{ forloop.index }}"

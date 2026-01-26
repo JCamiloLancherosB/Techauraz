@@ -42,7 +42,7 @@
 -%}
 
 <div class="ta-conv-product-card">
-  <a href="{{ product.url }}" class="ta-conv-product-card__link" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+  <a href="{{ product.url }}" class="ta-conv-product-card__link">
     <span class="visually-hidden">{{ product.title | escape }}</span>
   </a>
   
@@ -75,7 +75,7 @@
     {%- endif -%}
   </div>
   
-  <div class="ta-conv-product-card__content" style="position: relative; z-index: 2;">
+  <div class="ta-conv-product-card__content">
     <h3 class="ta-conv-product-card__title">{{ product.title }}</h3>
     
     <div class="ta-conv-product-card__price">
@@ -90,28 +90,13 @@
     </div>
     
     {%- if in_stock -%}
-      <a href="{{ product.url }}" class="ta-conv-product-card__cta" style="position: relative; z-index: 3;">
+      <a href="{{ product.url }}" class="ta-conv-product-card__cta">
         {{ cta_text }}
       </a>
     {%- else -%}
-      <button class="ta-conv-product-card__cta" disabled style="opacity: 0.6; cursor: not-allowed; position: relative; z-index: 3;">
+      <button class="ta-conv-product-card__cta" disabled>
         Agotado
       </button>
     {%- endif -%}
   </div>
 </div>
-
-<style>
-  /* Badge styles for conversion product cards */
-  .ta-conv-badge--sale {
-    background: rgba(239, 68, 68, 0.9);
-    color: #ffffff;
-    font-weight: 700;
-  }
-  
-  .ta-conv-badge--sold-out {
-    background: rgba(107, 114, 128, 0.9);
-    color: #ffffff;
-    font-weight: 600;
-  }
-</style>

@@ -11,12 +11,6 @@
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
-<style>
-  .drawer {
-    visibility: hidden;
-  }
-</style>
-
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
@@ -99,83 +93,9 @@
           </div>
           
           <div class="shipping-bar__progress">
-            <div class="shipping-bar__fill" style="width: {{ progress }}%"></div>
+            <div class="shipping-bar__fill"></div>
           </div>
         </div>
-        
-          <style>
-          .cart-drawer__shipping-bar {
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 8px;
-            margin: 0 1.5rem 1rem;
-          }
-          
-          .shipping-bar__message {
-            margin-bottom: 0.75rem;
-          }
-          
-          .shipping-bar__text {
-            margin: 0;
-            font-size: 0.875rem;
-            color: var(--text-secondary, #94a3b8);
-            text-align: center;
-          }
-          
-          .shipping-bar__text strong {
-            color: var(--text-primary, #f8fafc);
-          }
-          
-          .shipping-bar__text--success {
-            color: var(--success, #10b981);
-          }
-          
-          .shipping-bar__text--success strong {
-            color: var(--success, #10b981);
-          }
-          
-          .shipping-bar__progress {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 999px;
-            overflow: hidden;
-            position: relative;
-          }
-          
-          .shipping-bar__fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
-            border-radius: 999px;
-            transition: width 0.3s ease;
-            position: relative;
-            overflow: hidden;
-          }
-          
-          .shipping-bar__fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(90deg, 
-              transparent, 
-              rgba(255, 255, 255, 0.3), 
-              transparent
-            );
-            animation: shimmer 2s infinite;
-          }
-          
-          @keyframes shimmer {
-            0% {
-              transform: translateX(-100%);
-            }
-            100% {
-              transform: translateX(100%);
-            }
-          }
-        </style>
       {%- endif -%}
       
       <cart-drawer-items

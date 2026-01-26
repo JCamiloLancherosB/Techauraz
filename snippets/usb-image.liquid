@@ -10,7 +10,7 @@ assign is_priority = priority | default: false
 %}
 {% if img %}
 
-<figure class="usb-img-wrapper {{ class }}"> <div class="usb-img-ph" style="padding-top: {{ 100.0 | times: img.height | divided_by: img.width }}%;"> <img src="{{ img | image_url: width: 480 }}" srcset=" {{ img | image_url: width: 480 }} 480w, {{ img | image_url: width: 720 }} 720w, {{ img | image_url: width: 960 }} 960w, {{ img | image_url: width: 1200 }} 1200w, {{ img | image_url: width: 1600 }} 1600w " sizes="(max-width: 780px) 100vw, {{ mw }}px" width="{{ img.width }}" height="{{ img.height }}" {% unless is_priority %}loading="lazy"{% endunless %} alt="{{ alt | default: img.alt | escape }}" class="usb-img-el" > </div> {% if caption %} <figcaption class="usb-figcaption">{{ caption }}</figcaption> {% endif %} </figure> {% else %} <div class="usb-img-placeholder">Sube una imagen</div> {% endif %}
+<figure class="usb-img-wrapper {{ class }}"> <div class="usb-img-ph" >Sube una imagen</div> {% endif %}
 Añade al final de tu CSS (usb-landing.css):
 .usb-img-wrapper{position:relative;display:block;border-radius:var(--usb-r-md);overflow:hidden;background:#12171d;border:1px solid var(--usb-border);}
 .usb-img-ph{position:relative;width:100%;background:linear-gradient(110deg,#1b222a 8%,#242e38 18%,#1b222a 33%);background-size:200% 100%;animation:usb-shimmer 1.4s linear infinite;}

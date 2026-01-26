@@ -13,41 +13,27 @@
   assign button_text = section.settings.button_text | default: 'Suscribirme'
 -%}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-<div class="ta-conv-newsletter-section page-width section-{{ section.id }}-padding" style="text-align: center;">
-  <div class="ta-conv-newsletter__inner" style="max-width: 600px; margin: 0 auto;">
+<div class="ta-conv-newsletter-section page-width section-{{ section.id }}-padding">
+  <div class="ta-conv-newsletter__inner">
     {%- if heading and heading != blank -%}
-      <h2 style="font-size: 2.4rem; font-weight: 700; color: #f8fafc; margin: 0 0 0.75rem 0;">{{ heading }}</h2>
+      <h2>{{ heading }}</h2>
     {%- endif -%}
     
     {%- if subheading and subheading != blank -%}
-      <p style="font-size: 1.5rem; color: rgba(226, 232, 240, 0.85); margin: 0 0 2rem 0;">{{ subheading }}</p>
+      <p>{{ subheading }}</p>
     {%- endif -%}
     
     {%- form 'customer', class: 'ta-conv-newsletter', id: 'ContactFooter' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       
       {%- if form.posted_successfully? -%}
-        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #10b981; margin-bottom: 1rem;">
+        <div>
           ✓ ¡Gracias por suscribirte! Revisa tu correo para confirmar.
         </div>
       {%- endif -%}
       
       {%- if form.errors -%}
-        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; color: #ef4444; margin-bottom: 1rem;">
+        <div>
           {{ form.errors | default_errors }}
         </div>
       {%- endif -%}
@@ -69,7 +55,7 @@
       </button>
     {%- endform -%}
     
-    <p style="font-size: 1.2rem; color: rgba(148, 163, 184, 0.8); margin: 1rem 0 0 0;">
+    <p>
       No spam. Cancela cuando quieras.
     </p>
   </div>

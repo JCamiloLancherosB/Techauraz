@@ -24,7 +24,6 @@
 <span
   {% if swatch_value %}
     class="swatch{% if shape == 'square' %} swatch--square{% endif %}"
-    style="--swatch--background: {{ swatch_value }}"
   {% else %}
     class="swatch swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}"
   {% endif %}
