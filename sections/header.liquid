@@ -376,6 +376,8 @@
   class StickyHeader extends HTMLElement {
     constructor() {
       super();
+      // Initialize headerPosition to null (not fixed) to ensure proper state tracking
+      this.headerPosition = null;
     }
 
     connectedCallback() {
@@ -425,9 +427,20 @@
       if (!this.header) return;
 
       const position = window.getComputedStyle(this.header).position;
-      if (position !== this.headerPosition) {
+      // Track previous position for comparison (null/undefined treated as not-fixed)
+      const wasFixed = this.headerPosition === 'fixed';
+      const isFirstCall = this.headerPosition === null;
+      const isFixed = position === 'fixed';
+      
+      // Always update the state on first call or when position changes
+      if (isFirstCall || position !== this.headerPosition) {
         this.headerPosition = position;
-        document.documentElement.classList.toggle('tech-header-fixed', this.headerPosition === 'fixed');
+        document.documentElement.classList.toggle('tech-header-fixed', isFixed);
+        
+        // When transitioning away from fixed (or initializing as non-fixed), clean up inline styles
+        if ((wasFixed && !isFixed) || (isFirstCall && !isFixed)) {
+          document.documentElement.style.removeProperty('--tech-header-h');
+        }
       }
     }
 
@@ -439,8 +452,12 @@
     setHeaderHeight() {
       if (!this.header) return;
 
+      // For non-fixed headers (sticky, static, relative), remove any inline height variable
+      // This ensures no "giant gap" is created when header is sticky
       if (this.headerPosition !== 'fixed') {
         document.documentElement.style.removeProperty('--tech-header-h');
+        // Also remove the fixed class if somehow it was set
+        document.documentElement.classList.remove('tech-header-fixed');
         return;
       }
 
