@@ -1,7 +1,10 @@
 {% if section.settings.image_shape == 'blob' %}
   {%- endif -%}
 
-{{ 'techauraz-custom-ui.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Note: techauraz-custom-ui.css is loaded globally in theme.liquid
+  No need to load it again here to avoid duplicate CSS loads
+{%- endcomment -%}
 
 {%- if section.settings.enable_quick_add -%}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
