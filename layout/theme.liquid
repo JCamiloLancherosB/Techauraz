@@ -238,6 +238,11 @@
      Modern Tech Store Theme - Optimized for Performance
      Date: 2026-01-20
      ============================================================================= -->
+
+<!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
+<link rel="preload" href="{{ 'techauraz-tokens.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-tokens.css' | asset_url }}"></noscript>
+
 <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
 

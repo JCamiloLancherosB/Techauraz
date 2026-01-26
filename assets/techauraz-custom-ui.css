@@ -4,59 +4,18 @@
  * =============================================================================
  * Consolidated CSS for WhatsApp button and Announcement bar
  * Extracted from inline styles to improve maintainability
+ * 
+ * NOTE: This file now relies on tokens from techauraz-tokens.css
+ * All --tech-* variables are mapped from --ta-* tokens for backward compatibility
  */
-
-/* =============================================================================
-   COLOR SYSTEM TOKENS - Premium Tech Palette
-   ============================================================================= */
-:root {
-  /* Background colors */
-  --tech-bg: #ffffff;
-  --tech-surface: #f8fafc;
-  
-  /* Text colors */
-  --tech-ink: #0B1220;
-  --tech-muted: #64748b;
-  
-  /* Primary brand color - Deep Blue */
-  --tech-primary: #2563eb;
-  --tech-primary-hover: #1e40af;
-  --tech-primary-contrast: #ffffff;
-  
-  /* Borders */
-  --tech-border: #e2e8f0;
-  --tech-border-light: #f1f5f9;
-  
-  /* Spacing scale */
-  --tech-space-2xs: 0.3rem;
-  --tech-space-xs: 0.6rem;
-  --tech-space-sm: 1rem;
-  --tech-space-md: 1.2rem;
-  --tech-space-lg: 1.6rem;
-  --tech-space-xl: 2.4rem;
-  --tech-space-2xl: 3.2rem;
-  
-  /* Button styling tokens */
-  --tech-button-radius: 8px;
-  --tech-button-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  --tech-button-shadow-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
-  --tech-button-padding-y: 1rem;
-  --tech-button-padding-x: 1.5rem;
-  --tech-secondary-bg: transparent;
-  --tech-secondary-hover-bg: var(--tech-surface, #f8fafc);
-  
-  /* Heading consistency */
-  --tech-heading-line-height: 1.2;
-  --tech-heading-letter-spacing: -0.01em;
-}
 
 /* =============================================================================
    ANNOUNCEMENT BAR STYLES
    ============================================================================= */
 .announcement-bar__container {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(34, 211, 238, 0.15));
+  background: var(--ta-gradient-bg-section);
   border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-  padding: 0.8rem 0;
+  padding: var(--ta-space-sm) 0;
 }
 
 .announcement-bar__container--sticky {
@@ -67,21 +26,21 @@
 
 .announcement-bar__message {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: var(--ta-font-size-sm);
   color: rgba(226, 232, 240, 0.95);
-  font-weight: 500;
+  font-weight: var(--ta-font-medium);
   letter-spacing: 0.02rem;
 }
 
 .announcement-bar__message strong {
-  font-weight: 700;
-  color: #22d3ee;
+  font-weight: var(--ta-font-bold);
+  color: var(--ta-secondary-light);
 }
 
 .announcement-bar__message a {
-  color: #22c55e;
+  color: var(--ta-success-light);
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: var(--ta-transition-fast);
 }
 
 .announcement-bar__message a:hover {
@@ -90,8 +49,8 @@
 
 @media screen and (max-width: 749px) {
   .announcement-bar__message {
-    font-size: 1.2rem;
-    padding: 0 1rem;
+    font-size: var(--ta-font-size-xs);
+    padding: 0 var(--ta-space-lg);
   }
 }
 
@@ -124,11 +83,11 @@
   min-height: 60px;
   max-width: 60px;
   max-height: 60px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  border-radius: 50%;
+  background: var(--ta-gradient-success);
+  border-radius: var(--ta-radius-full);
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--ta-transition-normal);
   border: none;
   text-decoration: none;
   position: relative;
@@ -139,8 +98,8 @@
 .whatsapp-button svg {
   width: 32px;
   height: 32px;
-  fill: white;
-  transition: transform 0.3s ease;
+  fill: var(--ta-text-inverse);
+  transition: var(--ta-transition-fast);
   display: block;
   margin: auto;
 }
@@ -158,7 +117,7 @@
   content: '';
   position: absolute;
   inset: -5px;
-  border-radius: 50%;
+  border-radius: var(--ta-radius-full);
   background: rgba(37, 211, 102, 0.3);
   animation: pulse 2s infinite;
   z-index: -1;
@@ -169,19 +128,19 @@
   right: 70px;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
-  color: #1f2937;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
+  background: var(--ta-bg);
+  color: var(--ta-text-secondary);
+  padding: var(--ta-space-md) var(--ta-space-lg);
+  border-radius: var(--ta-radius-card);
+  font-size: var(--ta-font-size-sm);
+  font-weight: var(--ta-font-semibold);
   white-space: nowrap;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--ta-shadow-lg);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: var(--ta-transition-normal);
   pointer-events: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--ta-font-body);
 }
 
 .whatsapp-tooltip::after {
@@ -192,7 +151,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 8px solid white;
+  border-left: 8px solid var(--ta-bg);
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -255,16 +214,16 @@
 /* Ensure all headings use consistent color */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: var(--tech-ink, #0B1220);
-  line-height: var(--tech-heading-line-height, 1.2);
-  letter-spacing: var(--tech-heading-letter-spacing, -0.01em);
+  color: var(--ta-text);
+  line-height: var(--ta-leading-tight);
+  letter-spacing: var(--ta-tracking-tight);
 }
 
 /* Product titles and card titles */
 .product__title,
 .card__title,
 .card-title {
-  color: var(--tech-ink, #0B1220);
+  color: var(--ta-text);
 }
 
 /* Consistent primary/secondary button sizing */
@@ -274,18 +233,18 @@ h1, h2, h3, h4, h5, h6,
 .btn-secondary,
 .banner__buttons .button,
 .slideshow-cta {
-  padding: var(--tech-button-padding-y, 1rem) var(--tech-button-padding-x, 1.5rem);
-  min-height: 48px;
-  border-radius: var(--tech-button-radius, 8px);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  padding: var(--ta-space-md) var(--ta-space-xl);
+  min-height: var(--ta-touch-comfortable);
+  border-radius: var(--ta-radius-button);
+  font-weight: var(--ta-font-semibold);
+  letter-spacing: var(--ta-tracking-wide);
 }
 
 /* Price elements consistency */
 .price,
 .price__regular,
 .price__sale {
-  color: var(--tech-ink, #0B1220);
+  color: var(--ta-text);
 }
 
 /* Ensure form inputs have consistent borders */
@@ -296,9 +255,9 @@ input[type="number"],
 input[type="search"],
 textarea,
 select {
-  border: 1px solid var(--tech-border, #e2e8f0);
-  border-radius: var(--tech-button-radius, 8px);
-  transition: border-color 0.2s ease;
+  border: 1px solid var(--ta-border);
+  border-radius: var(--ta-radius-input);
+  transition: var(--ta-transition-fast);
 }
 
 input[type="text"]:focus,
@@ -308,56 +267,56 @@ input[type="number"]:focus,
 input[type="search"]:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--tech-primary, #2563eb);
+  border-color: var(--ta-primary);
   outline: none;
 }
 
 /* Ensure cards have consistent styling */
 .card,
 .product-card {
-  background: var(--tech-bg, #ffffff);
-  border: 1px solid var(--tech-border-light, #f1f5f9);
-  border-radius: var(--tech-button-radius, 8px);
+  background: var(--ta-bg);
+  border: 1px solid var(--ta-border-light);
+  border-radius: var(--ta-radius-card);
 }
 
 /* Pagination and navigation */
 .pagination__item,
 .pagination__link {
-  border-color: var(--tech-border, #e2e8f0);
-  color: var(--tech-ink, #0B1220);
+  border-color: var(--ta-border);
+  color: var(--ta-text);
 }
 
 .pagination__item--current,
 .pagination__link--active {
-  background: var(--tech-primary, #2563eb);
-  color: var(--tech-primary-contrast, #ffffff);
-  border-color: var(--tech-primary, #2563eb);
+  background: var(--ta-primary);
+  color: var(--ta-primary-contrast);
+  border-color: var(--ta-primary);
 }
 
 /* Breadcrumbs */
 .breadcrumb a {
-  color: var(--tech-muted, #64748b);
+  color: var(--ta-text-muted);
 }
 
 .breadcrumb a:hover {
-  color: var(--tech-primary, #2563eb);
+  color: var(--ta-primary);
 }
 
 /* Tags and chips */
 .tag,
 .chip,
 .pill {
-  background: var(--tech-surface, #f8fafc);
-  color: var(--tech-ink, #0B1220);
-  border: 1px solid var(--tech-border, #e2e8f0);
-  border-radius: 6px;
+  background: var(--ta-bg-secondary);
+  color: var(--ta-text);
+  border: 1px solid var(--ta-border);
+  border-radius: var(--ta-radius-badge);
 }
 
 /* Collection filters */
 .facet-checkbox input:checked + label,
 .facet-checkbox input:checked + label::before {
-  background: var(--tech-primary, #2563eb);
-  border-color: var(--tech-primary, #2563eb);
+  background: var(--ta-primary);
+  border-color: var(--ta-primary);
 }
 
 /* =============================================================================
@@ -365,11 +324,11 @@ select:focus {
    ============================================================================= */
 .collection-placeholder {
   text-align: center;
-  padding: 60px 20px;
+  padding: var(--ta-space-3xl) var(--ta-space-xl);
   background: rgba(14, 165, 233, 0.05);
-  border-radius: 12px;
+  border-radius: var(--ta-radius-card);
   border: 2px dashed rgba(14, 165, 233, 0.3);
-  margin: 20px 0;
+  margin: var(--ta-space-xl) 0;
 }
 
 .collection-placeholder--full-width {
@@ -379,21 +338,21 @@ select:focus {
 .collection-placeholder .icon-collection {
   width: 80px;
   height: 80px;
-  margin: 0 auto 20px;
+  margin: 0 auto var(--ta-space-xl);
   opacity: 0.6;
   display: block;
 }
 
 .collection-placeholder__title {
-  font-size: 1.8rem;
-  color: #0ea5e9;
-  margin-bottom: 12px;
-  font-weight: 600;
+  font-size: var(--ta-font-size-lg);
+  color: var(--ta-info);
+  margin-bottom: var(--ta-space-md);
+  font-weight: var(--ta-font-semibold);
 }
 
 .collection-placeholder__text {
-  color: #64748b;
-  font-size: 1.4rem;
+  color: var(--ta-text-muted);
+  font-size: var(--ta-font-size-sm);
   max-width: 500px;
   margin: 0 auto;
 }
@@ -410,13 +369,13 @@ select:focus {
 .tech-pdp-gallery .image-magnify-full-size {
   z-index: 20;
   border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 14px 26px rgba(15, 23, 42, 0.2);
+  box-shadow: var(--ta-shadow-xl);
   transition: background-position 0.12s ease-out;
 }
 
 @media screen and (max-width: 749px) {
   .collection-placeholder {
-    padding: 40px 16px;
+    padding: var(--ta-space-2xl) var(--ta-space-lg);
   }
   
   .collection-placeholder .icon-collection {
@@ -425,10 +384,10 @@ select:focus {
   }
   
   .collection-placeholder__title {
-    font-size: 1.6rem;
+    font-size: var(--ta-font-size-md);
   }
   
   .collection-placeholder__text {
-    font-size: 1.3rem;
+    font-size: var(--ta-font-size-xs);
   }
 }

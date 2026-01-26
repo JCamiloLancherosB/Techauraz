@@ -1,6 +1,8 @@
 /* ============================================================
    VISUAL SYSTEM UNIFIED 2024
    Modern product card styling and enhanced UX
+   
+   NOTE: This file now relies on tokens from techauraz-tokens.css
    ============================================================ */
 
 /* ============================================================
@@ -11,22 +13,22 @@
 .card-wrapper.product-card-wrapper {
   position: relative;
   height: 100%;
-  border-radius: 12px;
+  border-radius: var(--ta-radius-card);
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #ffffff;
+  transition: var(--ta-transition-normal);
+  background: var(--ta-bg);
 }
 
 .card-wrapper.product-card-wrapper:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--ta-shadow-card-hover);
 }
 
 /* Consistent image aspect ratio - enforced square */
 .card__media {
   position: relative;
   overflow: hidden;
-  background: var(--tech-surface, #f8fafc);
+  background: var(--ta-bg-secondary);
 }
 
 .card__media .media {
@@ -50,7 +52,7 @@
 
 .card__heading {
   min-height: 2.6em; /* Reserve space for 2 lines */
-  margin-bottom: var(--tech-space-xs, 0.6rem);
+  margin-bottom: var(--ta-space-sm);
 }
 
 .card__heading .full-unstyled-link {
@@ -60,15 +62,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.3;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--tech-ink, #0B1220);
-  transition: color 0.2s ease;
+  line-height: var(--ta-leading-snug);
+  font-size: var(--ta-font-size-sm);
+  font-weight: var(--ta-font-bold);
+  color: var(--ta-text);
+  transition: var(--ta-transition-fast);
 }
 
 .card__heading .full-unstyled-link:hover {
-  color: var(--tech-primary, #2563eb);
+  color: var(--ta-primary);
 }
 
 /* ============================================================
@@ -78,34 +80,34 @@
 .card-information .price {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  margin: 0.8rem 0;
+  gap: var(--ta-space-sm);
+  margin: var(--ta-space-sm) 0;
   flex-wrap: wrap;
 }
 
 /* Regular price - prominent green */
 .price .price-item--regular {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #10b981;
-  letter-spacing: -0.02em;
+  font-size: var(--ta-font-size-xl);
+  font-weight: var(--ta-font-extrabold);
+  color: var(--ta-success);
+  letter-spacing: var(--ta-tracking-tight);
 }
 
 /* Compare at price - crossed out */
 .price--on-sale .price-item--regular {
-  font-size: 1.6rem;
-  color: #94a3b8;
+  font-size: var(--ta-font-size-md);
+  color: var(--ta-text-muted);
   text-decoration: line-through;
   text-decoration-thickness: 2px;
-  font-weight: 600;
+  font-weight: var(--ta-font-semibold);
 }
 
 /* Sale price - prominent */
 .price--on-sale .price__sale .price-item--regular {
-  font-size: 2.2rem;
-  color: #ef4444;
+  font-size: var(--ta-font-size-h4);
+  color: var(--ta-error);
   text-decoration: none;
-  font-weight: 800;
+  font-weight: var(--ta-font-extrabold);
 }
 
 /* Sale badge integration with price */
@@ -119,15 +121,15 @@
 
 .card__trust-indicators {
   display: flex;
-  gap: 0.8rem;
-  margin: 0.6rem 0;
+  gap: var(--ta-space-sm);
+  margin: var(--ta-space-sm) 0;
   flex-wrap: wrap;
 }
 
 .card__trust-indicator {
-  font-size: 1.1rem;
-  color: #059669;
-  font-weight: 600;
+  font-size: var(--ta-font-size-xs);
+  color: var(--ta-success);
+  font-weight: var(--ta-font-semibold);
   display: inline-flex;
   align-items: center;
 }
@@ -138,47 +140,47 @@
 
 /* Details link - secondary action */
 .card__details-link {
-  margin: var(--tech-space-xs, 0.6rem) 0 var(--tech-space-sm, 0.8rem);
+  margin: var(--ta-space-sm) 0 var(--ta-space-md);
 }
 
 .card__details-link .link {
-  font-size: 1.3rem;
-  color: var(--tech-primary, #2563eb);
-  font-weight: 600;
-  transition: all 0.2s ease;
+  font-size: var(--ta-font-size-xs);
+  color: var(--ta-primary);
+  font-weight: var(--ta-font-semibold);
+  transition: var(--ta-transition-fast);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: var(--tech-space-2xs, 0.4rem);
+  gap: var(--ta-space-xs);
 }
 
 .card__details-link .link:hover {
-  color: var(--tech-primary-hover, #1e40af);
+  color: var(--ta-primary-hover);
   text-decoration: underline;
   transform: translateX(2px);
 }
 
 /* Quick-add button - primary action */
 .quick-add {
-  margin-top: var(--tech-space-sm, 0.8rem);
+  margin-top: var(--ta-space-md);
 }
 
 .quick-add__submit {
   width: 100%;
-  padding: var(--tech-button-padding-y, 1rem) var(--tech-button-padding-x, 1.5rem);
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: var(--tech-button-radius, 8px);
+  padding: var(--ta-space-md) var(--ta-space-xl);
+  font-size: var(--ta-font-size-sm);
+  font-weight: var(--ta-font-bold);
+  border-radius: var(--ta-radius-button);
   border: none;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--ta-transition-fast);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  min-height: 48px;
+  letter-spacing: var(--ta-tracking-wider);
+  min-height: var(--ta-touch-comfortable);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--ta-space-sm);
   position: relative;
   overflow: hidden;
   z-index: 3; /* Above overlay link */
@@ -186,21 +188,21 @@
 
 /* Primary button - "Agregar al carrito" */
 .quick-add__submit.button--secondary {
-  background: var(--tech-primary, #2563eb);
-  color: var(--tech-primary-contrast, #ffffff);
-  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
-  border-radius: var(--tech-button-radius, 8px);
+  background: var(--ta-primary);
+  color: var(--ta-primary-contrast);
+  box-shadow: var(--ta-shadow-button);
+  border-radius: var(--ta-radius-button);
 }
 
 .quick-add__submit.button--secondary:hover {
-  background: var(--tech-primary-hover, #1e40af);
-  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+  background: var(--ta-primary-hover);
+  box-shadow: var(--ta-shadow-button-hover);
   transform: translateY(-2px);
 }
 
 .quick-add__submit.button--secondary:active {
   transform: translateY(0);
-  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
+  box-shadow: var(--ta-shadow-button);
 }
 
 /* Sold out state */
@@ -215,10 +217,10 @@
    ============================================================ */
 
 .card__description {
-  font-size: 1.2rem;
-  color: #64748b;
-  line-height: 1.5;
-  margin: 0.5rem 0;
+  font-size: var(--ta-font-size-xs);
+  color: var(--ta-text-muted);
+  line-height: var(--ta-leading-normal);
+  margin: var(--ta-space-sm) 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -234,29 +236,29 @@
 /* Mobile (360px+) */
 @media screen and (max-width: 749px) {
   .card__heading .full-unstyled-link {
-    font-size: 1.3rem;
+    font-size: var(--ta-font-size-xs);
   }
   
   .price .price-item--regular {
-    font-size: 1.7rem;
+    font-size: 1.7rem; /* Slightly smaller than sale price for hierarchy */
   }
   
   .price--on-sale .price-item--regular {
-    font-size: 1.4rem;
+    font-size: var(--ta-font-size-sm);
   }
   
   .price--on-sale .price__sale .price-item--regular {
-    font-size: 1.9rem;
+    font-size: 1.9rem; /* Slightly larger than regular for emphasis */
   }
   
   .quick-add__submit {
-    padding: 0.9rem 1.2rem;
-    font-size: 1.3rem;
-    min-height: 44px;
+    padding: var(--ta-space-md) var(--ta-space-lg);
+    font-size: var(--ta-font-size-xs);
+    min-height: var(--ta-touch-min);
   }
   
   .card__details-link .link {
-    font-size: 1.2rem;
+    font-size: var(--ta-font-size-xs);
   }
   
   .card__trust-indicator {
@@ -271,51 +273,51 @@
 /* Tablet (768px+) */
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .card__heading .full-unstyled-link {
-    font-size: 1.4rem;
+    font-size: var(--ta-font-size-sm);
   }
   
   .price .price-item--regular {
-    font-size: 1.8rem;
+    font-size: var(--ta-font-size-lg);
   }
   
   .quick-add__submit {
-    padding: 0.95rem 1.3rem;
-    font-size: 1.35rem;
+    padding: var(--ta-space-md) var(--ta-space-lg);
+    font-size: var(--ta-font-size-xs);
   }
 }
 
 /* Desktop (1280px+) */
 @media screen and (min-width: 990px) {
   .card__heading .full-unstyled-link {
-    font-size: 1.6rem;
+    font-size: var(--ta-font-size-md);
   }
   
   .price .price-item--regular {
-    font-size: 2.1rem;
+    font-size: var(--ta-font-size-xl);
   }
   
   .price--on-sale .price__sale .price-item--regular {
-    font-size: 2.4rem;
+    font-size: var(--ta-font-size-h4);
   }
   
   .quick-add__submit {
-    padding: 1.1rem 1.6rem;
-    font-size: 1.5rem;
+    padding: var(--ta-space-md) var(--ta-space-lg);
+    font-size: var(--ta-font-size-sm);
   }
   
   .card__details-link .link {
-    font-size: 1.4rem;
+    font-size: var(--ta-font-size-sm);
   }
 }
 
 /* Ultra-wide (1920px+) */
 @media screen and (min-width: 1920px) {
   .card__heading .full-unstyled-link {
-    font-size: 1.7rem;
+    font-size: var(--ta-font-size-lg);
   }
   
   .price .price-item--regular {
-    font-size: 2.3rem;
+    font-size: var(--ta-font-size-h4);
   }
 }
 
@@ -324,14 +326,14 @@
    ============================================================ */
 
 .quick-add__submit:focus-visible {
-  outline: 3px solid var(--tech-primary, #2563eb);
+  outline: 3px solid var(--ta-primary);
   outline-offset: 2px;
 }
 
 .card__details-link .link:focus-visible {
-  outline: 2px solid var(--tech-primary, #2563eb);
+  outline: 2px solid var(--ta-primary);
   outline-offset: 2px;
-  border-radius: var(--tech-button-radius, 8px);
+  border-radius: var(--ta-radius-button);
 }
 
 /* Loading state */
@@ -390,7 +392,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.2rem;
+  padding: var(--ta-space-lg);
 }
 
 /* ============================================================
