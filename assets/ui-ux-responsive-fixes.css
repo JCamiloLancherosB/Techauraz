@@ -3084,7 +3084,6 @@ main#MainContent > .shopify-section:first-child .tech-hero,
   text-align: left !important;
   /* Reset margin - NO margin should push content down */
   margin: 0 !important;
-  margin-bottom: 0 !important;
   /* Position: sticky is set by inline styles in header.liquid */
   position: sticky !important;
   top: var(--tech-topbar-h, 0) !important;
