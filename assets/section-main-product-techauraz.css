@@ -460,29 +460,14 @@
 }
 
 /* =============================================================================
-   7. STICKY MOBILE CTA - Positioning without blocking WhatsApp/Cookie
+   7. STICKY MOBILE CTA - Additional mobile spacing optimization
+   Note: Main sticky-cta-bar styles are in sections/sticky-mobile-cta.liquid
    ============================================================================= */
 
-/* Sticky mobile bar positioning - above WhatsApp button */
-.sticky-cta-bar {
-  bottom: 72px; /* Leave room for WhatsApp and cookie banner */
-}
-
-@supports (padding: max(0px)) {
-  .sticky-cta-bar {
-    bottom: max(72px, calc(env(safe-area-inset-bottom) + 52px));
-  }
-}
-
-/* Ensure proper z-index hierarchy */
-.sticky-cta-bar {
-  z-index: 996; /* Below cookie (998) and WhatsApp (997) */
-}
-
-/* Mobile spacing optimization */
+/* Mobile spacing optimization - move WhatsApp up when sticky bar is visible */
 @media screen and (max-width: 749px) {
   .sticky-cta-bar--visible + .whatsapp-float {
-    bottom: 140px; /* Move WhatsApp up when sticky bar is visible */
+    bottom: 140px;
   }
 }
 
