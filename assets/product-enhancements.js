@@ -345,70 +345,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 6. Social proof dinámico
+  // DESHABILITADO: Esta función mostraba mensajes ficticios/aleatorios
+  // que dañan la confianza del cliente.
+  // 
+  // Para mostrar social proof real, use la sección "Social Proof Real"
+  // (product-views-counter.liquid) que muestra:
+  // - Stock bajo basado en inventario real de Shopify
+  // - Contador de reseñas basado en reseñas reales de Shopify
   function initSocialProof() {
-    const socialProofMessages = [
-      "🔥 María de Bogotá acaba de comprar este producto",
-      "⭐ Carlos de Medellín lo calificó con 5 estrellas",
-      "🚚 Ana de Cali recibió su pedido ayer",
-      "💯 Luis de Barranquilla lo recomendó a sus amigos",
-      "🎯 Sofia de Cartagena compró 2 unidades",
-      "✅ Diego de Bucaramanga confirmó su compra",
-      "🎮 Alejandro de Pereira mejoró su gaming",
-      "⚡ Camila de Manizales quedó impresionada",
-      "🏆 Andrés de Ibagué ganó más partidas"
-    ];
-
-    function showSocialProof() {
-      if (document.querySelector('.social-proof-popup')) return;
-      
-      const popup = document.createElement('div');
-      popup.className = 'social-proof-popup';
-      popup.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background: white;
-        border: 2px solid #e2e8f0;
-        border-radius: 15px;
-        padding: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        z-index: 1000;
-        max-width: 320px;
-        animation: slideInLeft 0.5s ease;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      `;
-      
-      const randomMessage = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
-      popup.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-          <p style="margin: 0; font-size: 14px; color: #2d3748; line-height: 1.4; font-weight: 500;">${randomMessage}</p>
-          <button onclick="this.parentElement.parentElement.remove()" 
-                  style="background: none; border: none; color: #a0aec0; font-size: 18px; cursor: pointer; margin-left: 10px; padding: 0;">&times;</button>
-        </div>
-        <div style="margin-top: 8px; font-size: 11px; color: #718096;">Hace ${Math.floor(Math.random() * 30) + 1} minutos</div>
-      `;
-      
-      document.body.appendChild(popup);
-      
-      setTimeout(() => {
-        if (document.body.contains(popup)) {
-          popup.style.animation = 'slideInLeft 0.5s ease reverse';
-          setTimeout(() => popup.remove(), 500);
-        }
-      }, 4000);
-    }
-
-    // Mostrar social proof cada 15-25 segundos
-    const socialProofInterval = setInterval(() => {
-      if (Math.random() > 0.3) { // 70% de probabilidad de mostrar
-        showSocialProof();
-      }
-    }, Math.random() * 10000 + 15000);
-
-    // Limpiar intervalo cuando se abandone la página
-    window.addEventListener('beforeunload', () => {
-      clearInterval(socialProofInterval);
-    });
+    // Función deshabilitada intencionalmente.
+    // Los mensajes ficticios de compras recientes han sido eliminados
+    // para mejorar la percepción de confianza del cliente.
+    //
+    // Si necesita social proof real, considere:
+    // 1. Integrar con la API de pedidos de Shopify
+    // 2. Usar un servicio de analytics verificado
+    // 3. Mostrar reseñas reales de clientes
+    return;
   }
 
   // 7. Optimización de imágenes lazy loading

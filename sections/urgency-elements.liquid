@@ -1,11 +1,22 @@
 {% comment %}
   Urgency Elements Section
   Elementos de urgencia y confianza para páginas de producto (CRO optimizado)
+  
+  ACTUALIZADO: Solo muestra datos reales del inventario de Shopify.
+  Los contadores de "personas viendo" han sido eliminados porque son datos ficticios.
 {% endcomment %}
 
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign inventory_qty = current_variant.inventory_quantity
+  assign inventory_managed = current_variant.inventory_management == 'shopify'
+  assign low_stock_threshold = section.settings.stock_threshold | default: 15
+-%}
+
 <div class="urgency-elements">
-  {% if section.settings.show_stock_counter %}
-    <div class="urgency-element urgency-stock">
+  {% if section.settings.show_stock_counter and inventory_managed %}
+    {%- if inventory_qty > 0 and inventory_qty <= low_stock_threshold -%}
+    <div class="urgency-element urgency-stock urgency-stock--low">
       <div class="urgency-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M10 2L2 7L10 12L18 7L10 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -14,24 +25,48 @@
       </div>
       <div class="urgency-content">
         <span class="urgency-label">Stock limitado:</span>
-        <span class="urgency-value stock-counter" data-stock="12">¡Solo quedan 12 unidades!</span>
+        <span class="urgency-value stock-counter" data-stock="{{ inventory_qty }}">
+          {%- if section.settings.show_exact_stock -%}
+            ¡Solo quedan {{ inventory_qty }} unidades!
+          {%- else -%}
+            ¡Últimas unidades disponibles!
+          {%- endif -%}
+        </span>
       </div>
     </div>
-  {% endif %}
-
-  {% if section.settings.show_viewing_counter %}
-    <div class="urgency-element urgency-viewers">
+    {%- elsif inventory_qty > low_stock_threshold -%}
+    <div class="urgency-element urgency-stock urgency-stock--available">
       <div class="urgency-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M1 10C1 10 4 4 10 4C16 4 19 10 19 10C19 10 16 16 10 16C4 16 1 10 1 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.667 5L7.5 14.167L3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="urgency-content">
-        <span class="urgency-value viewers-counter" data-viewers="8">8 personas están viendo este producto</span>
+        <span class="urgency-value">Disponible para envío inmediato</span>
       </div>
     </div>
+    {%- elsif inventory_qty <= 0 -%}
+    <div class="urgency-element urgency-stock urgency-stock--out">
+      <div class="urgency-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="urgency-content">
+        <span class="urgency-value">Agotado temporalmente</span>
+      </div>
+    </div>
+    {%- endif -%}
   {% endif %}
+
+  {%- comment -%}
+    ELIMINADO: Contador de "personas viendo este producto"
+    Razón: Mostraba números aleatorios/ficticios que dañan la confianza del cliente.
+    
+    Si necesita mostrar visualizaciones reales, integre Google Analytics 
+    o un servicio de tracking de visitantes real.
+  {%- endcomment -%}
 
   {% if section.settings.show_countdown and section.settings.countdown_end_date != blank %}
     <div class="urgency-element urgency-countdown">
@@ -73,36 +108,20 @@
         </svg>
       </div>
       <div class="urgency-content">
-        <span class="urgency-value">Ordena en las próximas <strong>2 horas</strong> y recíbelo en <strong>2-3 días</strong></span>
+        <span class="urgency-value">{{ section.settings.delivery_message | default: 'Envío en 2-3 días hábiles' }}</span>
       </div>
     </div>
   {% endif %}
 </div>
 
 <script>
-// Simular viewers counter dinámico
-function updateViewersCounter() {
-  const viewersEl = document.querySelector('.viewers-counter');
-  if (!viewersEl) return;
-  
-  const baseViewers = parseInt(viewersEl.dataset.viewers) || 5;
-  const variation = Math.floor(Math.random() * 5) - 2; // -2 a +2
-  const newViewers = Math.max(1, baseViewers + variation);
-  
-  viewersEl.textContent = `${newViewers} personas están viendo este producto`;
-  viewersEl.dataset.viewers = newViewers;
-}
-
-// Actualizar viewers cada 30 segundos
-setInterval(updateViewersCounter, 30000);
-
-// Countdown timer
+// Countdown timer - Solo si hay una fecha real configurada
 function initCountdown() {
   const countdownEl = document.querySelector('.countdown-timer');
   if (!countdownEl) return;
   
   const endDate = new Date(countdownEl.dataset.endDate);
-  if (!endDate || isNaN(endDate)) return;
+  if (!endDate || isNaN(endDate.getTime())) return;
   
   function updateCountdown() {
     const now = new Date();
@@ -137,6 +156,26 @@ if (document.readyState === 'loading') {
 }
 </script>
 
+<style>
+  .urgency-stock--low {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+    border-color: #fbbf24;
+    color: #92400e;
+  }
+  
+  .urgency-stock--available {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #22c55e;
+    color: #166534;
+  }
+  
+  .urgency-stock--out {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-color: #ef4444;
+    color: #991b1b;
+  }
+</style>
+
 {% schema %}
 {
   "name": "Elementos de Urgencia",
@@ -145,35 +184,42 @@ if (document.readyState === 'loading') {
   "settings": [
     {
       "type": "header",
-      "content": "Stock Counter"
+      "content": "Indicador de Stock (Datos Reales)"
     },
     {
       "type": "checkbox",
       "id": "show_stock_counter",
-      "label": "Mostrar contador de stock",
+      "label": "Mostrar indicador de stock",
       "default": true,
-      "info": "Muestra cuántas unidades quedan disponibles"
+      "info": "Muestra el estado real del inventario de Shopify"
     },
     {
-      "type": "header",
-      "content": "Viewing Counter"
+      "type": "range",
+      "id": "stock_threshold",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "Umbral de stock bajo",
+      "default": 15,
+      "info": "Cuando el inventario está por debajo de este número, se muestra como 'Stock limitado'"
     },
     {
       "type": "checkbox",
-      "id": "show_viewing_counter",
-      "label": "Mostrar contador de visualizaciones",
+      "id": "show_exact_stock",
+      "label": "Mostrar cantidad exacta",
       "default": true,
-      "info": "Muestra cuántas personas están viendo el producto"
+      "info": "Muestra '¡Solo quedan X unidades!' en lugar de solo 'Últimas unidades'"
     },
     {
       "type": "header",
-      "content": "Countdown Timer"
+      "content": "Temporizador de Oferta"
     },
     {
       "type": "checkbox",
       "id": "show_countdown",
       "label": "Mostrar temporizador de oferta",
-      "default": false
+      "default": false,
+      "info": "Solo use si tiene una promoción real con fecha de vencimiento"
     },
     {
       "type": "text",
@@ -183,13 +229,20 @@ if (document.readyState === 'loading') {
     },
     {
       "type": "header",
-      "content": "Delivery Estimate"
+      "content": "Estimado de Entrega"
     },
     {
       "type": "checkbox",
       "id": "show_delivery_estimate",
       "label": "Mostrar estimado de entrega",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "delivery_message",
+      "label": "Mensaje de entrega",
+      "default": "Envío en 2-3 días hábiles",
+      "info": "Configure un mensaje de entrega realista para su negocio"
     }
   ],
   "presets": [

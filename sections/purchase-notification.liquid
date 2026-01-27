@@ -1,6 +1,22 @@
+{%- comment -%}
+  Purchase Notification Section - DESHABILITADO POR DEFECTO
+  
+  Esta sección ha sido deshabilitada porque mostraba notificaciones de compras 
+  ficticias que pueden dañar la confianza del cliente.
+  
+  Para mostrar notificaciones de compras reales, integre:
+  - Shopify Flow con webhooks de pedidos
+  - Un servicio de analytics de terceros con datos verificados
+  - Una API de pedidos recientes de su tienda
+{%- endcomment -%}
+
 {%- if section.settings.enable_notifications -%}
+{%- comment -%}
+  ADVERTENCIA: Esta funcionalidad muestra datos de ejemplo (ficticios).
+  Solo habilite si tiene una integración real con datos de compras verificadas.
+{%- endcomment -%}
 <div 
-  class="purchase-notification" 
+  class="purchase-notification purchase-notification--deprecated" 
   data-notification-toast
   data-interval="{{ section.settings.interval }}"
   role="status"
@@ -44,37 +60,14 @@
       this.currentIndex = 0;
       this.isVisible = false;
       
-      // Sample notifications data
+      // ADVERTENCIA: Estos son datos de ejemplo ficticios
+      // Para una implementación real, conecte con su API de pedidos
       this.notifications = [
         {
           customerName: 'María G.',
           location: 'Bogotá',
-          product: 'Audífonos Bluetooth Premium',
+          product: 'Producto de ejemplo',
           timeAgo: '5 minutos'
-        },
-        {
-          customerName: 'Carlos R.',
-          location: 'Medellín',
-          product: 'Smartwatch Pro',
-          timeAgo: '12 minutos'
-        },
-        {
-          customerName: 'Ana T.',
-          location: 'Cali',
-          product: 'Cargador Rápido USB-C',
-          timeAgo: '18 minutos'
-        },
-        {
-          customerName: 'Juan M.',
-          location: 'Barranquilla',
-          product: 'Memoria USB 64GB',
-          timeAgo: '25 minutos'
-        },
-        {
-          customerName: 'Laura P.',
-          location: 'Cartagena',
-          product: 'Mouse Gaming RGB',
-          timeAgo: '32 minutos'
         }
       ];
 
@@ -140,11 +133,15 @@
   "class": "section",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "⚠️ IMPORTANTE: Esta sección muestra notificaciones de compras de ejemplo (datos ficticios). Solo habilite si tiene una integración real con datos de compras verificadas."
+    },
+    {
       "type": "checkbox",
       "id": "enable_notifications",
-      "label": "Activar notificaciones",
-      "default": true,
-      "info": "Muestra notificaciones de compras recientes (datos de ejemplo)"
+      "label": "Activar notificaciones (NO RECOMENDADO)",
+      "default": false,
+      "info": "Solo active si tiene datos de compras reales integrados"
     },
     {
       "type": "range",
