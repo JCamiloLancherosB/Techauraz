@@ -3618,6 +3618,59 @@ details-modal,
   color: #ffffff;
 }
 
+/* =============================================================================
+   VALUE BADGES - Shipping/COD indicators positioned at bottom of image
+   Max 1 value badge to avoid clutter, consistent with PR-09 tokens
+   ============================================================================= */
+
+.tech-card-product .card__value-badges {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: calc(100% - 24px);
+}
+
+.tech-card-product .card__value-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--ta-radius-badge, 6px);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.tech-card-product .card__value-badge-icon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.tech-card-product .card__value-badge-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Free Shipping badge - Primary blue for positive value */
+.tech-card-product .card__value-badge--shipping {
+  background: rgba(37, 99, 235, 0.92);
+  color: #ffffff;
+}
+
+/* Cash on Delivery badge - Teal for trust signal */
+.tech-card-product .card__value-badge--cod {
+  background: rgba(20, 184, 166, 0.92);
+  color: #ffffff;
+}
+
 /* Hide duplicate checkmark indicators */
 .tech-card-product .card__trust-indicators {
   display: none;
@@ -3718,6 +3771,24 @@ details-modal,
   
   .tech-card-product .card__heading {
     font-size: 0.875rem;
+  }
+
+  /* Value badges mobile adjustments */
+  .tech-card-product .card__value-badges {
+    bottom: 8px;
+    left: 8px;
+    max-width: calc(100% - 16px);
+  }
+
+  .tech-card-product .card__value-badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+    gap: 3px;
+  }
+
+  .tech-card-product .card__value-badge-icon {
+    width: 10px;
+    height: 10px;
   }
 }
 
