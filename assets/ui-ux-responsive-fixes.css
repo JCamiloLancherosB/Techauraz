@@ -1,7 +1,8 @@
 /* =============================================================================
    UI/UX AND RESPONSIVENESS FIXES FOR TECHAURAZ
-   Version: 1.0.0
+   Version: 1.1.0
    Date: 2024-01-20
+   Updated: 2026-01-27
 
    This file contains all the fixes for:
    - Slideshow/slider functionality (working properly on all devices)
@@ -11,6 +12,11 @@
    - Footer improvements with complementary elements
    - Consistent color palette
    - General alignment fixes
+   
+   PR-01 Fix (2026-01-27):
+   - Fixed layout width issue causing "white column" on right side of desktop
+   - Ensured html, body, #MainContent, and all sections span full viewport width
+   - Content containers use .page-width (max-width: 1200px) for proper centering
    ============================================================================= */
 
 /* =============================================================================
@@ -199,11 +205,53 @@
 /*
  * Global overflow-x prevention for main content areas
  * This ensures no horizontal scrollbars appear on any viewport size
+ * 
+ * FIX: PR-01 - Added width: 100% to ensure layout spans full viewport
+ * This prevents the "narrow layout with white column on right" issue on desktop.
  */
 html,
 body {
   overflow-x: hidden;
+  width: 100%;
   max-width: 100vw;
+}
+
+/* =============================================================================
+   0.2.1 GLOBAL LAYOUT WIDTH FIX - PR-01
+   Ensure all main containers span full viewport width on desktop
+   ============================================================================= */
+
+/*
+ * Main content containers must span full width.
+ * The .page-width class inside them constrains content to 1200px centered.
+ */
+#MainContent,
+main.content-for-layout,
+.content-for-layout {
+  width: 100%;
+}
+
+/* Shopify sections should span full width by default */
+.shopify-section {
+  width: 100%;
+}
+
+/* Full-bleed sections (hero/slideshow) - ensure full viewport width */
+.shopify-section:first-child,
+.tech-hero,
+.tech-hero-slideshow,
+.slideshow,
+slideshow-component {
+  width: 100%;
+}
+
+/* Header stack - must span full viewport width */
+.section-header,
+.announcement-bar-section,
+#shopify-section-header,
+.header-wrapper,
+sticky-header {
+  width: 100%;
 }
 
 /* Slider components - contained overflow
