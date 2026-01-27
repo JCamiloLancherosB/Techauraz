@@ -4292,3 +4292,208 @@ section.newsletter {
 .pdp--warm .delivery-estimate__icon {
   background-color: rgba(210, 180, 140, 0.15);
 }
+
+
+/* =============================================================================
+   STICKY CTA BAR WITH INLINE BENEFITS (Mobile PDP)
+   Added: 2026-01-27
+   
+   Features:
+   - Sticky CTA visible at bottom of screen on mobile
+   - Inline benefits (Envío / Contraentrega) above CTA button
+   - Respects cookie banner and WhatsApp positioning
+   - iOS safe-area support
+   - Does not overlap cart drawer or search
+   ============================================================================= */
+
+/* Sticky CTA Bar - base container */
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 450; /* Above content (100), below WhatsApp (9999 set via JS) and modals (999+) */
+  background: var(--ta-surface-elevated, #ffffff);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
+  /* iOS safe area support */
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.sticky-cta-bar--visible {
+  display: block;
+  transform: translateY(0);
+}
+
+/* Inline benefits row - above the main CTA container */
+.sticky-cta-bar__benefits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+  font-size: 1.1rem;
+  color: var(--ta-text, #1e293b);
+}
+
+.sticky-cta-bar__benefit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sticky-cta-bar__benefit-icon {
+  color: var(--ta-success, #10b981);
+  flex-shrink: 0;
+}
+
+.sticky-cta-bar__benefit-divider {
+  color: var(--ta-text-muted, #94a3b8);
+  font-size: 0.75rem;
+}
+
+/* Main CTA container with price and button */
+.sticky-cta-bar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  max-width: 100%;
+}
+
+/* Info section (price) */
+.sticky-cta-bar__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sticky-cta-bar__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sticky-cta-bar__price-sale {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ta-success, #10b981);
+}
+
+.sticky-cta-bar__price-compare {
+  font-size: 1.2rem;
+  color: var(--ta-text-muted, #64748b);
+  text-decoration: line-through;
+}
+
+.sticky-cta-bar__price-regular {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ta-text, #0f172a);
+}
+
+/* CTA Button */
+.sticky-cta-bar__button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  min-height: 44px; /* Touch target */
+  padding: 0.875rem 1.25rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: var(--ta-radius-button, 8px);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
+  color: var(--ta-text-inverse, #ffffff);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease;
+}
+
+.sticky-cta-bar__button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.sticky-cta-bar__button:disabled {
+  background: var(--ta-text-muted, #94a3b8);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.sticky-cta-bar__icon {
+  flex-shrink: 0;
+}
+
+.sticky-cta-bar__text {
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   COORDINATION WITH OTHER MOBILE ELEMENTS
+   Ensures sticky CTA doesn't overlap WhatsApp, cookie banner, cart drawer
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* When sticky CTA is visible, move WhatsApp button up */
+  body.sticky-cta-active .whatsapp-float,
+  body.sticky-cta-active .whatsapp-button-float,
+  body.sticky-cta-active [class*="whatsapp"][class*="float"],
+  body:has(.sticky-cta-bar--visible) .whatsapp-float,
+  body:has(.sticky-cta-bar--visible) .whatsapp-button-float,
+  body:has(.sticky-cta-bar--visible) [class*="whatsapp"][class*="float"] {
+    bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
+    transition: bottom 0.25s ease;
+  }
+  
+  /* When cookie banner is visible, move sticky CTA up */
+  body.cookie-visible .sticky-cta-bar,
+  body:has(.cookie-banner.is-visible) .sticky-cta-bar,
+  body:has(.cookie-banner:not([hidden])) .sticky-cta-bar {
+    bottom: var(--cookie-banner-height, 80px);
+  }
+  
+  /* When both cookie banner AND sticky CTA are visible, move WhatsApp even higher */
+  body.cookie-visible.sticky-cta-active .whatsapp-float,
+  body.cookie-visible.sticky-cta-active .whatsapp-button-float,
+  body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
+  body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-button-float {
+    bottom: calc(190px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  
+  /* Ensure sticky CTA doesn't interfere with cart drawer */
+  .cart-drawer.is-open ~ .sticky-cta-bar,
+  body:has(.cart-drawer.active) .sticky-cta-bar,
+  body:has(.cart-drawer[open]) .sticky-cta-bar,
+  body.cart-drawer-open .sticky-cta-bar {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  
+  /* Ensure sticky CTA doesn't interfere with search overlay */
+  body:has(.search-modal.is-open) .sticky-cta-bar,
+  body:has(.predictive-search--active) .sticky-cta-bar,
+  body.search-active .sticky-cta-bar {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+/* Hide sticky CTA on desktop/tablet */
+@media screen and (min-width: 750px) {
+  .sticky-cta-bar {
+    display: none !important;
+  }
+}

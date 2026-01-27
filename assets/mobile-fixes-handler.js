@@ -1,8 +1,9 @@
 /**
  * TechAuraz Mobile Fixes Handler
  * Handles dynamic positioning and interactions for mobile elements
- * Version: 1.0.0
+ * Version: 1.1.0
  * Date: 2024-01-14
+ * Updated: 2024-01-27 - Added sticky CTA collision handling
  */
 
 (function() {
@@ -11,6 +12,7 @@
   // Constants
   const MOBILE_BREAKPOINT = 749; // px
   const MIN_BOTTOM_PADDING = 100; // px
+  const STICKY_CTA_HEIGHT = 110; // px - approximate height of sticky CTA with benefits
   
   // Wait for DOM to be ready
   if (document.readyState === 'loading') {
@@ -23,6 +25,7 @@
     handleCookieBannerPosition();
     handleWhatsAppFABPosition();
     handleProductGridSpacing();
+    handleStickyCTACollisions();
   }
   
   /**
@@ -70,7 +73,7 @@
   }
   
   /**
-   * Handle WhatsApp FAB positioning based on cookie banner
+   * Handle WhatsApp FAB positioning based on cookie banner and sticky CTA
    */
   function handleWhatsAppFABPosition() {
     const whatsappFAB = document.querySelector('.whatsapp-float, .whatsapp-button-float, [class*="whatsapp"][class*="float"]');
@@ -80,18 +83,30 @@
     // Ensure proper z-index
     whatsappFAB.style.zIndex = '9999';
     
-    // Update position based on cookie banner
+    // Update position based on cookie banner and sticky CTA
     function updateFABPosition() {
       const cookieBannerHeight = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue('--cookie-banner-height') || '0'
       );
       
-      if (cookieBannerHeight > 0 && window.innerWidth <= MOBILE_BREAKPOINT) {
-        // Mobile - adjust for cookie banner
-        whatsappFAB.style.bottom = `calc(${cookieBannerHeight}px + 1rem)`;
-      } else if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        // Mobile - no cookie banner
-        whatsappFAB.style.bottom = '1rem';
+      // Check if sticky CTA is visible (check both body class and element class)
+      const stickyCTAElement = document.querySelector('.sticky-cta-bar--visible, [data-sticky-cta].sticky-cta-bar--visible');
+      const stickyCTAActive = document.body.classList.contains('sticky-cta-active') || stickyCTAElement !== null;
+      
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        let bottomOffset = 16; // Base 1rem
+        
+        // Add cookie banner offset if visible
+        if (cookieBannerHeight > 0) {
+          bottomOffset += cookieBannerHeight;
+        }
+        
+        // Add sticky CTA offset if visible
+        if (stickyCTAActive) {
+          bottomOffset += STICKY_CTA_HEIGHT;
+        }
+        
+        whatsappFAB.style.bottom = `${bottomOffset}px`;
       } else {
         // Desktop
         whatsappFAB.style.bottom = '1.5rem';
@@ -108,11 +123,91 @@
       resizeTimeout = setTimeout(updateFABPosition, 100);
     });
     
-    // Update when CSS variable changes
+    // Update when CSS variable changes (cookie banner)
     const styleObserver = new MutationObserver(updateFABPosition);
     styleObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['style']
+    });
+    
+    // Update when sticky-cta-active class changes on body
+    const bodyObserver = new MutationObserver(updateFABPosition);
+    bodyObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+  
+  /**
+   * Handle sticky CTA collisions with cart drawer and search
+   * Hides sticky CTA when modal/drawer elements are open
+   */
+  function handleStickyCTACollisions() {
+    // Skip on desktop but allow reinit on resize
+    const stickyCTA = document.querySelector('.sticky-cta-bar, [data-sticky-cta]');
+    if (!stickyCTA) return;
+    
+    function checkCollisions() {
+      // Skip collision handling on desktop
+      if (window.innerWidth > MOBILE_BREAKPOINT) return;
+      
+      const cartDrawer = document.querySelector('.cart-drawer, cart-drawer');
+      const searchModal = document.querySelector('.search-modal');
+      const predictiveSearch = document.querySelector('.predictive-search, [data-predictive-search]');
+      
+      // Check if cart drawer is open
+      const cartDrawerOpen = cartDrawer && (
+        cartDrawer.classList.contains('is-open') ||
+        cartDrawer.classList.contains('active') ||
+        cartDrawer.hasAttribute('open') ||
+        document.body.classList.contains('cart-drawer-open')
+      );
+      
+      // Check if search is active
+      const searchActive = (
+        (searchModal && searchModal.classList.contains('is-open')) ||
+        (predictiveSearch && (
+          predictiveSearch.classList.contains('predictive-search--active') ||
+          predictiveSearch.hasAttribute('open')
+        )) ||
+        document.body.classList.contains('search-active')
+      );
+      
+      // Hide sticky CTA if any modal/drawer is open
+      if (cartDrawerOpen || searchActive) {
+        stickyCTA.style.pointerEvents = 'none';
+        stickyCTA.style.opacity = '0';
+        stickyCTA.style.transform = 'translateY(100%)';
+      } else {
+        // Clear inline styles to let CSS classes control visibility
+        stickyCTA.style.pointerEvents = '';
+        stickyCTA.style.opacity = '';
+        stickyCTA.style.transform = '';
+      }
+    }
+    
+    // Initial check
+    checkCollisions();
+    
+    // Watch body for class changes (cart-drawer-open, search-active, etc.)
+    // This single observer covers most state changes
+    const bodyObserver = new MutationObserver(checkCollisions);
+    bodyObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    // Listen for custom events that might indicate drawer/modal state changes
+    document.addEventListener('cart:open', checkCollisions);
+    document.addEventListener('cart:close', checkCollisions);
+    document.addEventListener('search:open', checkCollisions);
+    document.addEventListener('search:close', checkCollisions);
+    
+    // Recheck on resize (e.g., crossing mobile breakpoint)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(checkCollisions, 100);
     });
   }
   
