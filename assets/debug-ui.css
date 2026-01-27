@@ -1,0 +1,297 @@
+/**
+ * =============================================================================
+ * DEBUG UI STYLES
+ * Version: 1.0.0
+ * =============================================================================
+ * 
+ * Activated via ?debug_ui=1 URL parameter
+ * Helps detect layout regressions by:
+ * - Displaying computed CSS custom property values
+ * - Outlining sticky/fixed positioned elements
+ * - Showing z-index information
+ * 
+ * NOTE: This file is only loaded when debug mode is active.
+ *       It has NO impact on production UI when disabled.
+ * =============================================================================
+ */
+
+/* =============================================================================
+   DEBUG PANEL - Fixed overlay showing CSS variable values
+   ============================================================================= */
+.debug-ui-panel {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00ff00;
+  font-family: 'SF Mono', Monaco, 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 16px 20px;
+  border-radius: 8px;
+  z-index: 999999;
+  max-width: 360px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+}
+
+.debug-ui-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.debug-ui-panel__title {
+  font-weight: bold;
+  color: #00ff00;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.debug-ui-panel__close {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.debug-ui-panel__close:hover {
+  color: #ff4444;
+}
+
+.debug-ui-panel__section {
+  margin-bottom: 12px;
+}
+
+.debug-ui-panel__section:last-child {
+  margin-bottom: 0;
+}
+
+.debug-ui-panel__section-title {
+  color: #888;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.debug-ui-panel__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 2px 0;
+}
+
+.debug-ui-panel__label {
+  color: #aaa;
+}
+
+.debug-ui-panel__value {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.debug-ui-panel__value--warning {
+  color: #ffaa00;
+}
+
+.debug-ui-panel__value--error {
+  color: #ff4444;
+}
+
+.debug-ui-panel__info {
+  color: #666;
+  font-size: 10px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+
+/* =============================================================================
+   STICKY/FIXED ELEMENT OUTLINING
+   ============================================================================= */
+
+/* Outline all sticky elements */
+[data-debug-ui] *[style*="position: sticky"],
+[data-debug-ui] *[style*="position:sticky"],
+[data-debug-ui] .sticky,
+[data-debug-ui] [class*="sticky"],
+[data-debug-ui] header,
+[data-debug-ui] .header,
+[data-debug-ui] .shopify-section-header {
+  outline: 2px dashed #00ff00 !important;
+  outline-offset: -2px;
+}
+
+/* Outline all fixed elements */
+[data-debug-ui] *[style*="position: fixed"],
+[data-debug-ui] *[style*="position:fixed"],
+[data-debug-ui] .fixed,
+[data-debug-ui] [class*="fixed"] {
+  outline: 2px dashed #ff00ff !important;
+  outline-offset: -2px;
+}
+
+/* Specific known fixed/sticky elements */
+[data-debug-ui] .announcement-bar,
+[data-debug-ui] .header-wrapper,
+[data-debug-ui] .shopify-section-header-sticky,
+[data-debug-ui] .cart-notification,
+[data-debug-ui] .cart-drawer,
+[data-debug-ui] .product-form__sticky,
+[data-debug-ui] .sticky-add-to-cart,
+[data-debug-ui] .whatsapp-float,
+[data-debug-ui] .cookie-banner {
+  outline: 3px solid #00ffff !important;
+  outline-offset: -3px;
+}
+
+/* Show element labels */
+[data-debug-ui] .announcement-bar::before,
+[data-debug-ui] .header-wrapper::before,
+[data-debug-ui] .cart-notification::before,
+[data-debug-ui] .cart-drawer::before,
+[data-debug-ui] .sticky-add-to-cart::before,
+[data-debug-ui] .whatsapp-float::before,
+[data-debug-ui] .cookie-banner::before {
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 255, 255, 0.9);
+  color: #000;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 2px 6px;
+  z-index: 999998;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =============================================================================
+   Z-INDEX VISUALIZATION
+   ============================================================================= */
+[data-debug-ui] [style*="z-index"]::after,
+[data-debug-ui] .header::after,
+[data-debug-ui] .modal::after,
+[data-debug-ui] .drawer::after {
+  content: "z:" attr(style);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 0, 255, 0.8);
+  color: #fff;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 2px 4px;
+  border-radius: 2px;
+  z-index: 999997;
+  pointer-events: none;
+}
+
+/* =============================================================================
+   LAYOUT GRID OVERLAY (toggle with keyboard shortcut)
+   ============================================================================= */
+[data-debug-ui][data-debug-grid]::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.05) 0px,
+    rgba(255, 0, 0, 0.05) calc((100% - 48px) / 12),
+    transparent calc((100% - 48px) / 12),
+    transparent calc((100% - 48px) / 12 + 24px)
+  );
+  pointer-events: none;
+  z-index: 999996;
+}
+
+/* =============================================================================
+   CONTENT AREA VISUALIZATION
+   ============================================================================= */
+[data-debug-ui] main,
+[data-debug-ui] .content-for-layout,
+[data-debug-ui] #MainContent {
+  outline: 2px solid rgba(255, 165, 0, 0.5) !important;
+  outline-offset: -2px;
+}
+
+/* =============================================================================
+   KEYBOARD SHORTCUT HINT
+   ============================================================================= */
+.debug-ui-shortcuts {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #888;
+  font-family: 'SF Mono', Monaco, 'Consolas', monospace;
+  font-size: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  z-index: 999998;
+  border: 1px solid #333;
+}
+
+.debug-ui-shortcuts__title {
+  color: #aaa;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.debug-ui-shortcuts__item {
+  display: flex;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.debug-ui-shortcuts__key {
+  background: #333;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+}
+
+/* =============================================================================
+   RESPONSIVE DEBUG INFO
+   ============================================================================= */
+@media (max-width: 749px) {
+  .debug-ui-panel {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    font-size: 11px;
+  }
+  
+  .debug-ui-shortcuts {
+    display: none; /* Hide on mobile - keyboard shortcuts don't apply */
+  }
+}
+
+/* =============================================================================
+   PRINT STYLES - Hide debug in print
+   ============================================================================= */
+@media print {
+  .debug-ui-panel,
+  .debug-ui-shortcuts,
+  [data-debug-ui]::before,
+  [data-debug-ui] *::before,
+  [data-debug-ui] *::after {
+    display: none !important;
+  }
+}
