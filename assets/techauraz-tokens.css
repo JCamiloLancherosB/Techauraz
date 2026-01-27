@@ -282,6 +282,7 @@
   /* Legacy compatibility - keep these for existing code */
   --tech-topbar-h: var(--ta-height-topbar);
   --tech-header-h: var(--ta-height-header);
+  --tech-stack-h: calc(var(--tech-topbar-h) + var(--tech-header-h));
 }
 
 /* =============================================================================

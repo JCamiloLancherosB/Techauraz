@@ -368,12 +368,44 @@ svg.icon-arrow {
   }
 }
 
-/* Section header utilities */
-.section-header {
+/* Section header utilities
+ * NOTE: These styles are for content section headers (e.g., "Featured Products", "Best Sellers")
+ * NOT for the navigation header. The navigation header has class .section-header via schema
+ * but is reset via the #shopify-section-header.section-header selector below.
+ *
+ * FALLBACK: For browsers without :has() support, the navigation header reset rule at
+ * the bottom takes precedence via higher specificity.
+ */
+
+/* Fallback: Apply to all .section-header, then reset for navigation header */
+main .section-header,
+.content-for-layout .section-header {
   text-align: center;
   margin-bottom: 3rem;
-  z-index: 999;
   position: relative;
+}
+
+/* Enhanced selectors for browsers with :has() support */
+@supports selector(:has(*)) {
+  .section-header:has(.section-header__title),
+  .section-header:has(.title-wrapper) {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+}
+
+/* Navigation header section - reset conflicting styles
+ * Higher specificity ensures navigation header doesn't get content section styles
+ * The #shopify-section-header.section-header has its own styles in ui-ux-responsive-fixes.css
+ */
+#shopify-section-header.section-header,
+.announcement-bar-section.section-header,
+.shopify-section.shopify-section-header-sticky,
+.shopify-section .header-wrapper {
+  text-align: left;
+  margin-bottom: 0;
+  /* z-index handled by ui-ux-responsive-fixes.css */
 }
 
 .section-header__title,
@@ -420,8 +452,27 @@ h2.title {
 }
 
 @media screen and (min-width: 750px) {
-  .section-header {
+  /* Content section headers - larger margin on desktop
+   * Fallback selectors for all browsers */
+  main .section-header,
+  .content-for-layout .section-header {
     margin-bottom: 5rem;
+  }
+  
+  /* Enhanced selectors for browsers with :has() support */
+  @supports selector(:has(*)) {
+    .section-header:has(.section-header__title),
+    .section-header:has(.title-wrapper) {
+      margin-bottom: 5rem;
+    }
+  }
+  
+  /* Navigation header reset - must not have margin */
+  #shopify-section-header.section-header,
+  .announcement-bar-section.section-header,
+  .shopify-section.shopify-section-header-sticky,
+  .shopify-section .header-wrapper {
+    margin-bottom: 0;
   }
 
   .section-header__subtitle {

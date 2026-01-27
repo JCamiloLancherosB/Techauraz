@@ -3198,8 +3198,10 @@ main#MainContent > .shopify-section:first-child .tech-hero,
   background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
 
-/* Also target just .section-header and .header-wrapper for broader compatibility */
-.section-header,
+/* Also target header-wrapper for broader compatibility
+ * NOTE: Only apply top/z-index to .header-wrapper, not generic .section-header 
+ * Content section headers (like "Featured Products") don't need these positioning rules
+ */
 .header-wrapper {
   /* Position header below the announcement bar when both are sticky */
   top: var(--tech-topbar-h, 0) !important;
@@ -3283,9 +3285,12 @@ main#MainContent > .shopify-section:first-child .tech-hero,
  *   - Regular sections: auto or 0
  */
 
-/* Enforce header z-index to stay below modals but above content */
+/* Enforce header z-index to stay below modals but above content
+ * NOTE: Only apply z-index enforcement to navigation header elements
+ * Content section headers (like "Featured Products") use normal stacking context
+ */
 .header-wrapper,
-.section-header,
+#shopify-section-header.section-header,
 .shopify-section-header-sticky {
   z-index: 100 !important; /* Below modals (300) but above content */
 }
