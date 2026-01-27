@@ -3249,24 +3249,29 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 
 /* --- Z-INDEX HIERARCHY DOCUMENTATION --- */
 /*
- * Z-INDEX LAYERING SYSTEM (Updated 2026-01-26):
+ * Z-INDEX LAYERING SYSTEM (Updated 2026-01-27):
  * 
  * Order from lowest to highest (as specified in requirements):
- * Announcement < Header < Modals (search/cart) < Cookie banner < WhatsApp
+ * Announcement < Header < Cart Notification < Modals (search/cart drawer) < Cookie banner < WhatsApp
  * 
- * Layer 6 (Highest): WhatsApp FAB (z-index: 500)
+ * Layer 7 (Highest): WhatsApp FAB (z-index: 500)
  *   - Always accessible for customer support
  *   - Above all other elements
  * 
- * Layer 5: Cookie/GDPR Banner (z-index: 400)
+ * Layer 6: Cookie/GDPR Banner (z-index: 400)
  *   - GDPR compliance requires visibility
  *   - Above modals, below WhatsApp
  * 
- * Layer 4: Modals, Drawers, Overlays (z-index: 300)
+ * Layer 5: Modals, Drawers, Overlays (z-index: 300)
  *   - Cart drawer: 300
  *   - Search modal: 300
  *   - Menu drawer: 300
  *   - Overlay backgrounds: 250
+ * 
+ * Layer 4: Cart Notification (z-index: 200)
+ *   - Fixed overlay positioned below header stack
+ *   - Above header, below modals
+ *   - Does not affect document flow (position: fixed)
  * 
  * Layer 3: Sticky Header Group (z-index: 100-101)
  *   - Announcement bar/topbar (shipping, benefits): 101 (topmost in header group)
@@ -3295,6 +3300,11 @@ main#MainContent > .shopify-section:first-child .tech-hero,
   z-index: 100 !important; /* Below modals (300) but above content */
 }
 
+/* Cart notification - fixed overlay above header, below modals */
+cart-notification {
+  z-index: 200 !important; /* Above header (100), below modals (300) */
+}
+
 /* Ensure modals and drawers are above header */
 .drawer,
 .cart-drawer,
@@ -3302,7 +3312,7 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 modal-dialog,
 details-modal,
 .modal-overlay,
-[role="dialog"] {
+[role="dialog"]:not(.cart-notification) {
   z-index: 300 !important; /* Above header (100-101), below cookie banner (400) */
 }
 

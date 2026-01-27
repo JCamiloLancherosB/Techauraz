@@ -1,0 +1,328 @@
+/**
+ * =============================================================================
+ * CART NOTIFICATION - OVERLAY COMPONENT
+ * =============================================================================
+ * Displays a notification panel when an item is added to cart.
+ * Uses fixed positioning to overlay content without affecting document flow.
+ * 
+ * Z-index scale (from ui-ux-responsive-fixes.css):
+ *   - WhatsApp: 500
+ *   - Cookie banner: 400
+ *   - Modals/Drawers: 300
+ *   - Cart notification: 200 (above header, below modals)
+ *   - Header: 100-101
+ */
+
+/* =============================================================================
+   WRAPPER - Fixed positioning container
+   ============================================================================= */
+cart-notification {
+  display: block;
+  position: fixed;
+  top: var(--tech-stack-h, 108px); /* Anchor below header stack (topbar + header) */
+  left: 0;
+  right: 0;
+  z-index: 200; /* Above header (100), below modals (300), below cookie banner (400) */
+  pointer-events: none; /* Allow clicks through when closed */
+}
+
+.cart-notification-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Align to right on desktop */
+  padding: 0 var(--ta-space-lg, 1.6rem);
+  pointer-events: none;
+}
+
+/* Full width container when using drawer menu type */
+.cart-notification-wrapper.page-width {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+/* =============================================================================
+   NOTIFICATION PANEL - The visible card
+   ============================================================================= */
+#cart-notification,
+.cart-notification {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px; /* Constrain width on desktop */
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border, #e2e8f0);
+  border-radius: var(--ta-radius-card, 12px);
+  box-shadow: var(--ta-shadow-xl, 0 20px 40px rgba(0, 0, 0, 0.15));
+  overflow: hidden;
+  pointer-events: auto; /* Re-enable clicks on the panel itself */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Active state - visible */
+#cart-notification.active,
+.cart-notification.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation class for smooth entrance */
+#cart-notification.animate,
+.cart-notification.animate {
+  display: flex;
+}
+
+/* =============================================================================
+   HEADER - Title and close button
+   ============================================================================= */
+.cart-notification__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
+  background: var(--ta-bg-secondary, #f8fafc);
+  border-bottom: 1px solid var(--ta-border-light, #f1f5f9);
+}
+
+.cart-notification__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  margin: 0;
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-success, #10b981);
+}
+
+.cart-notification__heading .icon-checkmark {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   CLOSE BUTTON - Accessibility and styling
+   ============================================================================= */
+.cart-notification__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; /* Touch-friendly minimum */
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--ta-radius-full, 50%);
+  color: var(--ta-text-muted, #64748b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cart-notification__close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ta-text, #0f172a);
+}
+
+.cart-notification__close:focus-visible {
+  outline: 3px solid var(--ta-warning-light, #fbbf24);
+  outline-offset: 2px;
+  border-color: var(--ta-primary, #2563eb);
+}
+
+.cart-notification__close .icon-close {
+  width: 18px;
+  height: 18px;
+}
+
+/* =============================================================================
+   PRODUCT CONTENT AREA
+   ============================================================================= */
+.cart-notification-product,
+#cart-notification-product {
+  padding: var(--ta-space-lg, 1.6rem);
+}
+
+/* Product item styling */
+.cart-notification-product .cart-item {
+  display: flex;
+  gap: var(--ta-space-md, 1.2rem);
+  align-items: flex-start;
+}
+
+.cart-notification-product__image {
+  flex-shrink: 0;
+  width: 70px;
+  border-radius: var(--ta-radius-sm, 4px);
+  overflow: hidden;
+}
+
+.cart-notification-product__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.cart-notification-product__name {
+  margin: 0 0 var(--ta-space-xs, 0.4rem) 0;
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-text, #0f172a);
+  line-height: var(--ta-leading-tight, 1.2);
+}
+
+/* Product options (variant info) */
+.cart-notification-product .product-option {
+  display: flex;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
+  margin-bottom: var(--ta-space-xs, 0.4rem);
+}
+
+.cart-notification-product .product-option dt {
+  font-weight: var(--ta-font-medium, 500);
+}
+
+.cart-notification-product .product-option dd {
+  margin: 0;
+}
+
+/* =============================================================================
+   ACTION BUTTONS AREA
+   ============================================================================= */
+.cart-notification__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-sm, 0.8rem);
+  padding: var(--ta-space-lg, 1.6rem);
+  border-top: 1px solid var(--ta-border-light, #f1f5f9);
+  background: var(--ta-bg, #ffffff);
+}
+
+/* View cart button (secondary) */
+.cart-notification__links .button--secondary {
+  background: var(--ta-bg, #ffffff);
+  color: var(--ta-primary, #2563eb);
+  border: 2px solid var(--ta-primary, #2563eb);
+}
+
+.cart-notification__links .button--secondary:hover {
+  background: var(--ta-primary, #2563eb);
+  color: var(--ta-primary-contrast, #ffffff);
+}
+
+/* Checkout button (primary) */
+.cart-notification__links .button--primary {
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
+  color: var(--ta-primary-contrast, #ffffff);
+  border: none;
+  font-weight: var(--ta-font-bold, 700);
+}
+
+.cart-notification__links .button--primary:hover {
+  background: var(--ta-gradient-primary-hover, linear-gradient(135deg, #60a5fa, #3b82f6));
+  transform: translateY(-2px);
+  box-shadow: var(--ta-shadow-button-hover, 0 6px 20px rgba(37, 99, 235, 0.35));
+}
+
+/* Continue shopping link */
+.cart-notification__links .button-label {
+  display: block;
+  padding: var(--ta-space-sm, 0.8rem);
+  text-align: center;
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cart-notification__links .button-label:hover {
+  color: var(--ta-primary, #2563eb);
+  text-decoration: underline;
+}
+
+.cart-notification__links .button-label:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+/* Form within links area */
+.cart-notification__links form {
+  margin: 0;
+}
+
+/* =============================================================================
+   RESPONSIVE - Mobile adjustments
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  cart-notification {
+    /* On mobile, ensure full width with padding */
+    top: var(--tech-stack-h, 108px);
+    padding: var(--ta-space-sm, 0.8rem);
+  }
+
+  .cart-notification-wrapper {
+    padding: 0;
+    justify-content: center; /* Center on mobile */
+  }
+
+  #cart-notification,
+  .cart-notification {
+    max-width: 100%; /* Full width on mobile */
+    border-radius: var(--ta-radius-card, 12px);
+    margin: 0;
+  }
+
+  .cart-notification__header {
+    padding: var(--ta-space-sm, 0.8rem) var(--ta-space-md, 1.2rem);
+  }
+
+  .cart-notification-product,
+  #cart-notification-product {
+    padding: var(--ta-space-md, 1.2rem);
+  }
+
+  .cart-notification__links {
+    padding: var(--ta-space-md, 1.2rem);
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY - Reduced motion preference
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  #cart-notification,
+  .cart-notification {
+    transition: none;
+  }
+
+  #cart-notification.animate,
+  .cart-notification.animate {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   COLOR SCHEME SUPPORT - Inherit from parent color scheme
+   ============================================================================= */
+.cart-notification.color-scheme-1 {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.cart-notification.color-scheme-2 {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+/* Gradient support */
+.cart-notification.gradient {
+  background: var(--gradient-background, var(--ta-bg, #ffffff));
+}
