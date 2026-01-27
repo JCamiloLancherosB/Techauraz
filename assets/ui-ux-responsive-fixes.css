@@ -3157,66 +3157,76 @@ body {
 
 /* =============================================================================
    STICKY HEADER STATES - Ensure contrast in all scroll states
+   Consolidated selectors for .scrolled-past-header, .shopify-section-header-sticky, and .header.scrolled
    ============================================================================= */
 
-/* Scrolled state - when user has scrolled past header */
+/* Menu text visibility - all sticky/scrolled states */
 .scrolled-past-header .header__menu-item,
 .scrolled-past-header .list-menu__item--link,
 .scrolled-past-header .list-menu__item > a,
-.scrolled-past-header .header__inline-menu a {
-  color: var(--tech-ink, #0B1220) !important;
-}
-
-.scrolled-past-header .header__menu-item:hover,
-.scrolled-past-header .list-menu__item--link:hover,
-.scrolled-past-header .header__inline-menu a:hover {
-  color: var(--tech-primary, #2563eb) !important;
-}
-
-/* Icons in scrolled state */
-.scrolled-past-header .header__icon,
-.scrolled-past-header .header__icon svg,
-.scrolled-past-header .header__icon .icon {
-  color: var(--tech-ink, #0B1220) !important;
-}
-
-.scrolled-past-header .header__icon:hover,
-.scrolled-past-header .header__icon:hover svg {
-  color: var(--tech-primary, #2563eb) !important;
-}
-
-/* Sticky header class - ensure visibility is maintained */
+.scrolled-past-header .header__inline-menu a,
 .shopify-section-header-sticky .header__menu-item,
 .shopify-section-header-sticky .list-menu__item--link,
-.shopify-section-header-sticky .list-menu__item > a {
-  color: var(--tech-ink, #0B1220) !important;
-}
-
-.shopify-section-header-sticky .header__menu-item:hover,
-.shopify-section-header-sticky .list-menu__item--link:hover {
-  color: var(--tech-primary, #2563eb) !important;
-}
-
-.shopify-section-header-sticky .header__icon,
-.shopify-section-header-sticky .header__icon svg {
-  color: var(--tech-ink, #0B1220) !important;
-}
-
-.shopify-section-header-sticky .header__icon:hover,
-.shopify-section-header-sticky .header__icon:hover svg {
-  color: var(--tech-primary, #2563eb) !important;
-}
-
-/* Header with .scrolled class (JS added) */
+.shopify-section-header-sticky .list-menu__item > a,
 .header.scrolled .header__menu-item,
 .header.scrolled .list-menu__item--link,
 .header.scrolled .header__inline-menu a {
   color: var(--tech-ink, #0B1220) !important;
 }
 
+/* Menu hover states - all sticky/scrolled states */
+.scrolled-past-header .header__menu-item:hover,
+.scrolled-past-header .list-menu__item--link:hover,
+.scrolled-past-header .header__inline-menu a:hover,
+.shopify-section-header-sticky .header__menu-item:hover,
+.shopify-section-header-sticky .list-menu__item--link:hover,
+.header.scrolled .header__menu-item:hover,
+.header.scrolled .list-menu__item--link:hover,
+.header.scrolled .header__inline-menu a:hover {
+  color: var(--tech-primary, #2563eb) !important;
+}
+
+/* Menu focus states - all sticky/scrolled states (accessibility) */
+.scrolled-past-header .header__menu-item:focus-visible,
+.scrolled-past-header .list-menu__item--link:focus-visible,
+.shopify-section-header-sticky .header__menu-item:focus-visible,
+.shopify-section-header-sticky .list-menu__item--link:focus-visible,
+.header.scrolled .header__menu-item:focus-visible,
+.header.scrolled .list-menu__item--link:focus-visible {
+  color: var(--tech-primary-hover, #1e40af) !important;
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Icons visibility - all sticky/scrolled states */
+.scrolled-past-header .header__icon,
+.scrolled-past-header .header__icon svg,
+.scrolled-past-header .header__icon .icon,
+.shopify-section-header-sticky .header__icon,
+.shopify-section-header-sticky .header__icon svg,
 .header.scrolled .header__icon,
 .header.scrolled .header__icon svg {
   color: var(--tech-ink, #0B1220) !important;
+  transition: color 0.2s ease;
+}
+
+/* Icons hover states - all sticky/scrolled states */
+.scrolled-past-header .header__icon:hover,
+.scrolled-past-header .header__icon:hover svg,
+.shopify-section-header-sticky .header__icon:hover,
+.shopify-section-header-sticky .header__icon:hover svg,
+.header.scrolled .header__icon:hover,
+.header.scrolled .header__icon:hover svg {
+  color: var(--tech-primary, #2563eb) !important;
+}
+
+/* Icons focus states - all sticky/scrolled states (accessibility) */
+.scrolled-past-header .header__icon:focus-visible,
+.shopify-section-header-sticky .header__icon:focus-visible,
+.header.scrolled .header__icon:focus-visible {
+  color: var(--tech-primary-hover, #1e40af) !important;
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
 }
 
 /* =============================================================================
@@ -3636,21 +3646,18 @@ details-modal,
   /* Menu items in mobile drawer should be readable with proper contrast */
   .menu-drawer .list-menu__item--link,
   .menu-drawer__navigation a,
-  .menu-drawer__menu-item,
-  .menu-drawer .menu-drawer__menu-item {
+  .menu-drawer__menu-item {
     color: var(--tech-ink, #0B1220) !important;
   }
   
   .menu-drawer .list-menu__item--link:hover,
   .menu-drawer__navigation a:hover,
-  .menu-drawer__menu-item:hover,
-  .menu-drawer .menu-drawer__menu-item:hover {
+  .menu-drawer__menu-item:hover {
     color: var(--tech-primary, #2563eb) !important;
   }
   
   /* Active state for mobile drawer */
-  .menu-drawer__menu-item--active,
-  .menu-drawer .menu-drawer__menu-item--active {
+  .menu-drawer__menu-item--active {
     color: var(--tech-primary, #2563eb) !important;
     font-weight: 600;
   }
