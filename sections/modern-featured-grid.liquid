@@ -3,6 +3,14 @@
   Responsive: 2 cols mobile, 3 cols tablet, 4 cols desktop
 {% endcomment %}
 
+{%- comment -%}
+  Load shared CSS assets once at section level (not per card)
+  These styles support rating, volume pricing, and visual system for product cards
+{%- endcomment -%}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+{{ 'visual-system-unified-2024.css' | asset_url | stylesheet_tag }}
+
 {%- if section.settings.enable_quick_add -%}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>

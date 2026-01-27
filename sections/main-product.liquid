@@ -10,6 +10,14 @@
     <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
   {%- endif -%}
 
+  {%- comment -%}
+    Load shared CSS assets once at section level (not per card)
+    These styles support rating, volume pricing, and visual system for product cards
+  {%- endcomment -%}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+  {{ 'visual-system-unified-2024.css' | asset_url | stylesheet_tag }}
+
   {{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
