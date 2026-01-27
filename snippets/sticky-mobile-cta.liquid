@@ -5,15 +5,21 @@
   - product: {Object} Product object
   - section_id: {String} Section ID for form targeting
   
+  Features:
+  - Appears only when primary CTA is out of viewport
+  - Does not overlap WhatsApp button or cookie banner
+  - Correctly triggers Buy Now vs Add to Cart action
+  - Updates with variant changes (price and availability)
+  
   Usage:
   {% render 'sticky-mobile-cta', product: product, section_id: section.id %}
 {% endcomment %}
 
 {%- if product != blank -%}
-  <div class="sticky-mobile-cta" id="sticky-mobile-cta">
+  <div class="sticky-mobile-cta" id="sticky-mobile-cta" aria-hidden="true" role="region" aria-label="Compra rápida">
     <div class="sticky-mobile-cta__container">
       <div class="sticky-mobile-cta__info">
-        <div class="sticky-mobile-cta__price">
+        <div class="sticky-mobile-cta__price" data-sticky-price>
           {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
             <span class="sticky-mobile-cta__price-sale">
               {{ product.selected_or_first_available_variant.price | money }}
@@ -36,9 +42,12 @@
         type="button" 
         class="sticky-mobile-cta__button"
         data-sticky-cta-trigger="{{ section_id }}"
+        data-action="buy-now"
         {%- if product.selected_or_first_available_variant.available == false -%}
           disabled
+          aria-disabled="true"
         {%- endif -%}
+        aria-label="{% if product.selected_or_first_available_variant.available == false %}Producto agotado{% else %}Comprar {{ product.title }} ahora{% endif %}"
       >
         {%- if product.selected_or_first_available_variant.available == false -%}
           Agotado
@@ -49,58 +58,271 @@
     </div>
   </div>
 
+  <style>
+    /* Sticky Mobile CTA - Premium styling with proper stacking */
+    .sticky-mobile-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 450; /* Above content, below WhatsApp (500) and modals */
+      background: var(--ta-surface-elevated, #ffffff);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: none;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    
+    .sticky-mobile-cta--visible {
+      display: block;
+      transform: translateY(0);
+    }
+    
+    .sticky-mobile-cta__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      max-width: 100%;
+    }
+    
+    .sticky-mobile-cta__info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .sticky-mobile-cta__price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .sticky-mobile-cta__price-sale {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ta-success, #10b981);
+    }
+    
+    .sticky-mobile-cta__price-compare {
+      font-size: 1.3rem;
+      color: var(--ta-text-muted, #64748b);
+      text-decoration: line-through;
+    }
+    
+    .sticky-mobile-cta__price-regular {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ta-text, #0f172a);
+    }
+    
+    .sticky-mobile-cta__delivery {
+      font-size: 1.1rem;
+      color: var(--ta-text-muted, #64748b);
+      margin-top: 0.25rem;
+    }
+    
+    .sticky-mobile-cta__button {
+      flex-shrink: 0;
+      min-height: 44px;
+      padding: 1rem 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      border-radius: var(--ta-radius-button, 8px);
+      background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
+      color: var(--ta-text-inverse, #ffffff);
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      transition: all 0.2s ease;
+    }
+    
+    .sticky-mobile-cta__button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+    
+    .sticky-mobile-cta__button:disabled {
+      background: var(--ta-text-muted, #94a3b8);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    /* Coordinate with WhatsApp button position */
+    @media screen and (max-width: 749px) {
+      body:has(.sticky-mobile-cta--visible) .whatsapp-float,
+      body:has(.sticky-mobile-cta--visible) .whatsapp-button-float,
+      body:has(.sticky-mobile-cta--visible) [class*="whatsapp"][class*="float"] {
+        bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
+        transition: bottom 0.25s ease;
+      }
+      
+      /* When cookie banner is visible, adjust sticky CTA position */
+      body:has(.cookie-banner.is-visible) .sticky-mobile-cta {
+        bottom: 80px;
+      }
+      
+      /* WhatsApp needs to move even higher when both are visible */
+      body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-float,
+      body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-button-float {
+        bottom: calc(160px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
+      }
+    }
+    
+    /* Hide on desktop/tablet */
+    @media screen and (min-width: 750px) {
+      .sticky-mobile-cta {
+        display: none !important;
+      }
+    }
+  </style>
+
   <script>
-    // Show sticky CTA when scrolling past the main buy button
+    /**
+     * Sticky Mobile CTA Controller
+     * - Shows when primary CTA scrolls out of viewport
+     * - Coordinates with WhatsApp and cookie banner
+     * - Handles Buy Now vs Add to Cart action intentionally
+     * - Updates on variant changes
+     */
     (function() {
       const stickyCta = document.getElementById('sticky-mobile-cta');
-      const mainButton = document.getElementById('ProductSubmitButton-{{ section_id }}');
-      const stickyButton = document.querySelector('[data-sticky-cta-trigger="{{ section_id }}"]');
+      if (!stickyCta) return;
       
-      if (!stickyCta || !mainButton) return;
+      // Find primary CTA elements - multiple fallback selectors
+      const primaryCtaSelectors = [
+        '#ProductSubmitButton-{{ section_id }}',
+        '.product-form__submit[id^="ProductSubmitButton-"]',
+        '.product-form__submit',
+        '.tech-cta-primary .shopify-payment-button__button',
+        '.shopify-payment-button__button',
+        '[name="add"]'
+      ];
       
-      // Handle sticky button click with error handling and fallback selector
+      let mainButton = null;
+      for (const selector of primaryCtaSelectors) {
+        mainButton = document.querySelector(selector);
+        if (mainButton) break;
+      }
+      
+      const stickyButton = stickyCta.querySelector('[data-sticky-cta-trigger]');
+      const priceContainer = stickyCta.querySelector('[data-sticky-price]');
+      
+      if (!mainButton) {
+        console.warn('Sticky CTA: Primary button not found');
+        return;
+      }
+      
+      // Determine if this is a Buy Now or Add to Cart action
+      const getBuyNowButton = () => {
+        return document.querySelector('.shopify-payment-button__button') ||
+               document.querySelector('.tech-cta-primary .shopify-payment-button__button');
+      };
+      
+      const getAddToCartButton = () => {
+        return document.querySelector('.product-form__submit') ||
+               document.querySelector('[name="add"]');
+      };
+      
+      // Handle sticky button click - triggers Buy Now action by default
       if (stickyButton) {
-        stickyButton.addEventListener('click', function() {
-          // Try primary selector first
-          let submitButton = mainButton;
+        stickyButton.addEventListener('click', function(e) {
+          e.preventDefault();
           
-          // Fallback: try alternative selectors if primary not found
-          if (!submitButton || typeof submitButton.click !== 'function') {
-            submitButton = document.querySelector('.product-form__submit');
-          }
-          if (!submitButton || typeof submitButton.click !== 'function') {
-            submitButton = document.querySelector('[name="add"]');
-          }
+          const action = this.dataset.action || 'buy-now';
+          let targetButton;
           
-          if (submitButton && typeof submitButton.click === 'function') {
-            submitButton.click();
+          if (action === 'buy-now') {
+            // Try Buy Now (accelerated checkout) first
+            targetButton = getBuyNowButton();
+            // Fall back to Add to Cart if no Buy Now available
+            if (!targetButton) {
+              targetButton = getAddToCartButton();
+            }
           } else {
-            console.error('Product submit button not found. Tried multiple selectors.');
+            // Add to Cart action
+            targetButton = getAddToCartButton();
+          }
+          
+          if (targetButton && typeof targetButton.click === 'function') {
+            // Scroll to product form for user context
+            const productForm = document.querySelector('product-form, .product-form');
+            if (productForm) {
+              productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            // Small delay to allow scroll before triggering action
+            setTimeout(() => {
+              targetButton.click();
+            }, 100);
+          } else {
+            console.error('Sticky CTA: No valid target button found');
           }
         });
       }
       
-      // Only activate on mobile
-      if (window.innerWidth >= 750) return;
+      // Only activate visibility logic on mobile
+      const isMobile = () => window.innerWidth < 750;
       
-      let lastScrollY = window.scrollY;
+      if (!isMobile()) {
+        stickyCta.style.display = 'none';
+        return;
+      }
+      
       let ticking = false;
       
       function updateStickyVisibility() {
-        const mainButtonRect = mainButton.getBoundingClientRect();
-        const isMainButtonVisible = mainButtonRect.top < window.innerHeight && mainButtonRect.bottom > 0;
+        if (!isMobile()) {
+          hideStickyBar();
+          ticking = false;
+          return;
+        }
         
-        if (window.scrollY > 200 && !isMainButtonVisible) {
-          stickyCta.style.display = 'block';
+        const mainButtonRect = mainButton.getBoundingClientRect();
+        const isMainButtonInViewport = mainButtonRect.top < window.innerHeight && mainButtonRect.bottom > 0;
+        
+        // Check if footer is visible (hide sticky when at bottom)
+        const footer = document.querySelector('footer');
+        const footerRect = footer ? footer.getBoundingClientRect() : null;
+        const isFooterVisible = footerRect ? footerRect.top < window.innerHeight : false;
+        
+        // Show sticky CTA only when:
+        // 1. Scrolled past threshold (200px)
+        // 2. Main CTA is NOT in viewport
+        // 3. Footer is NOT visible
+        if (window.scrollY > 200 && !isMainButtonInViewport && !isFooterVisible) {
+          showStickyBar();
         } else {
-          stickyCta.style.display = 'none';
+          hideStickyBar();
         }
         
         ticking = false;
       }
       
+      function showStickyBar() {
+        stickyCta.style.display = 'block';
+        stickyCta.classList.add('sticky-mobile-cta--visible');
+        stickyCta.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('sticky-cta-active');
+      }
+      
+      function hideStickyBar() {
+        stickyCta.classList.remove('sticky-mobile-cta--visible');
+        stickyCta.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('sticky-cta-active');
+        // Delay hiding to allow transition
+        setTimeout(() => {
+          if (!stickyCta.classList.contains('sticky-mobile-cta--visible')) {
+            stickyCta.style.display = 'none';
+          }
+        }, 250);
+      }
+      
       function onScroll() {
-        lastScrollY = window.scrollY;
         if (!ticking) {
           window.requestAnimationFrame(updateStickyVisibility);
           ticking = true;
@@ -110,79 +332,92 @@
       // Initial check
       updateStickyVisibility();
       
-      // Listen to scroll
+      // Listen to scroll with passive for better performance
       window.addEventListener('scroll', onScroll, { passive: true });
       
       // Update on resize
+      let resizeTimeout;
       window.addEventListener('resize', function() {
-        if (window.innerWidth >= 750) {
-          stickyCta.style.display = 'none';
-        } else {
-          updateStickyVisibility();
-        }
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (!isMobile()) {
+            hideStickyBar();
+          } else {
+            updateStickyVisibility();
+          }
+        }, 150);
       });
       
-      // Update when variant changes
-      // Expected event.detail format: { variant: { id, price, compare_at_price, available } }
-      // This event is typically dispatched by product-form.js or variant picker components
+      // Listen for variant changes to update price and availability
       document.addEventListener('variant:change', function(event) {
-        if (event.detail && event.detail.variant) {
-          // Update price - using safe DOM manipulation to prevent XSS
-          const priceContainer = stickyCta.querySelector('.sticky-mobile-cta__price');
-          if (priceContainer && event.detail.variant.price) {
-            const price = event.detail.variant.price;
-            const comparePrice = event.detail.variant.compare_at_price;
-            
-            // Clear existing content
-            priceContainer.innerHTML = '';
-            
-            if (comparePrice && comparePrice > price) {
-              // Create sale price elements
-              const salePriceSpan = document.createElement('span');
-              salePriceSpan.className = 'sticky-mobile-cta__price-sale';
-              salePriceSpan.textContent = formatMoney(price);
-              
-              const comparePriceSpan = document.createElement('span');
-              comparePriceSpan.className = 'sticky-mobile-cta__price-compare';
-              comparePriceSpan.textContent = formatMoney(comparePrice);
-              
-              priceContainer.appendChild(salePriceSpan);
-              priceContainer.appendChild(comparePriceSpan);
-            } else {
-              // Create regular price element
-              const regularPriceSpan = document.createElement('span');
-              regularPriceSpan.className = 'sticky-mobile-cta__price-regular';
-              regularPriceSpan.textContent = formatMoney(price);
-              
-              priceContainer.appendChild(regularPriceSpan);
-            }
-          }
-          
-          // Update button state
-          const button = stickyCta.querySelector('.sticky-mobile-cta__button');
-          if (button) {
-            if (event.detail.variant.available) {
-              button.disabled = false;
-              button.textContent = 'Comprar ahora';
-            } else {
-              button.disabled = true;
-              button.textContent = 'Agotado';
-            }
-          }
+        if (!event.detail || !event.detail.variant) return;
+        
+        const variant = event.detail.variant;
+        
+        // Update price display
+        if (priceContainer && variant.price !== undefined) {
+          updatePriceDisplay(variant.price, variant.compare_at_price);
+        }
+        
+        // Update button state and text
+        if (stickyButton) {
+          updateButtonState(variant.available);
         }
       });
       
-      // Money formatter
-      // Note: Shopify prices may be in cents or already formatted depending on store configuration
-      // Uses store's currency settings from Shopify.currency or defaults to COP
+      function updatePriceDisplay(price, comparePrice) {
+        priceContainer.innerHTML = '';
+        
+        if (comparePrice && comparePrice > price) {
+          const salePriceSpan = document.createElement('span');
+          salePriceSpan.className = 'sticky-mobile-cta__price-sale';
+          salePriceSpan.textContent = formatMoney(price);
+          
+          const comparePriceSpan = document.createElement('span');
+          comparePriceSpan.className = 'sticky-mobile-cta__price-compare';
+          comparePriceSpan.textContent = formatMoney(comparePrice);
+          
+          priceContainer.appendChild(salePriceSpan);
+          priceContainer.appendChild(comparePriceSpan);
+        } else {
+          const regularPriceSpan = document.createElement('span');
+          regularPriceSpan.className = 'sticky-mobile-cta__price-regular';
+          regularPriceSpan.textContent = formatMoney(price);
+          
+          priceContainer.appendChild(regularPriceSpan);
+        }
+      }
+      
+      function updateButtonState(isAvailable) {
+        if (isAvailable) {
+          stickyButton.disabled = false;
+          stickyButton.removeAttribute('aria-disabled');
+          stickyButton.textContent = 'Comprar ahora';
+          stickyButton.setAttribute('aria-label', 'Comprar ahora');
+        } else {
+          stickyButton.disabled = true;
+          stickyButton.setAttribute('aria-disabled', 'true');
+          stickyButton.textContent = 'Agotado';
+          stickyButton.setAttribute('aria-label', 'Producto agotado');
+        }
+      }
+      
+      /**
+       * Format price value to currency string
+       * Handles both cents (number) and pre-formatted strings
+       */
       function formatMoney(priceValue) {
-        // Get currency from Shopify settings if available, otherwise default to COP
+        // Use Shopify's formatter if available
+        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+          return Shopify.formatMoney(priceValue);
+        }
+        
+        // Fallback formatter
         const currency = (typeof Shopify !== 'undefined' && Shopify.currency && Shopify.currency.active) 
           ? Shopify.currency.active 
           : 'COP';
-        const locale = 'es-CO'; // Could be made configurable via theme settings
+        const locale = 'es-CO';
         
-        // Check if price is a number (cents format)
         if (typeof priceValue === 'number') {
           return new Intl.NumberFormat(locale, {
             style: 'currency',
@@ -191,9 +426,14 @@
             maximumFractionDigits: 0
           }).format(priceValue / 100);
         }
-        // If already a formatted string, return as-is
+        
         return priceValue;
       }
+      
+      // Cleanup on page hide
+      window.addEventListener('pagehide', function() {
+        window.removeEventListener('scroll', onScroll);
+      });
     })();
   </script>
 {%- endif -%}

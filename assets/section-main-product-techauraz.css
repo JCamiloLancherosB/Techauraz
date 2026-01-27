@@ -58,13 +58,14 @@
    2. BUY BOX HIERARCHY REBUILD
    Price + OFERTA label + installment/shipping highlights at top
    Clear CTA hierarchy: Primary "Comprar ahora" + Secondary "Agregar al carrito"
+   Uses design tokens from techauraz-tokens.css for consistency
    ============================================================================= */
 
-/* Product info wrapper - tighter layout */
+/* Product info wrapper - tighter layout using spacing tokens */
 .tech-pdp-atf {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--ta-space-lg, 1.6rem);
 }
 
 /* Price area with OFERTA badge prominence */
@@ -72,21 +73,22 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: var(--ta-space-md, 1.2rem);
+  margin-bottom: var(--ta-space-sm, 0.8rem);
 }
 
-/* Make sale badge more prominent */
+/* Make sale badge more prominent - premium tech store look */
 .price__badge-sale,
 .badge.price__badge-sale {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 700;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
+  background: linear-gradient(135deg, var(--ta-error, #ef4444) 0%, var(--ta-error-light, #dc2626) 100%);
+  color: var(--ta-text-inverse, #fff);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-bold, 700);
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-lg, 1rem);
+  border-radius: var(--ta-radius-badge, 6px);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  line-height: var(--ta-leading-normal, 1.5);
   animation: pulse-badge 2s infinite;
 }
 
@@ -95,43 +97,48 @@
   50% { transform: scale(1.02); }
 }
 
-/* Price styling */
+/* Price styling with improved contrast and readability */
 .price--large .price-item--regular {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--color-success, #10b981);
+  font-size: var(--ta-font-size-h2, 2.4rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+  line-height: var(--ta-leading-tight, 1.2);
 }
 
 .price--large.price--on-sale .price-item--regular {
-  font-size: 1.4rem;
-  color: var(--color-text-muted, #64748b);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
   text-decoration: line-through;
+  line-height: var(--ta-leading-normal, 1.5);
 }
 
 .price--large .price-item--sale {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: var(--color-success, #10b981);
+  font-size: var(--ta-font-size-h1, 2.8rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+  line-height: var(--ta-leading-tight, 1.2);
 }
 
 /* Installment/shipping highlights */
 .installment {
-  font-size: 1.3rem;
-  color: var(--color-text-secondary, #334155);
-  margin-top: 0.25rem;
+  font-size: var(--ta-font-size-sm, 1.3rem);
+  color: var(--ta-text-secondary, #334155);
+  margin-top: var(--ta-space-xs, 0.25rem);
+  line-height: var(--ta-leading-relaxed, 1.625);
 }
 
 /* =============================================================================
    3. CTA BUTTON HIERARCHY
    Primary: "Comprar ahora" (dynamic checkout) - dominant
    Secondary: "Agregar al carrito" - supportive
+   Using design tokens for consistent height/radius across breakpoints
    ============================================================================= */
 
 .tech-pdp-purchase {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: var(--ta-space-md, 1.2rem);
+  margin-top: var(--ta-space-sm, 0.8rem);
 }
 
 /* Primary CTA wrapper - Comprar ahora */
@@ -149,21 +156,22 @@
 
 .tech-cta-primary .shopify-payment-button__button,
 .product-form__cta-primary .shopify-payment-button__button {
-  min-height: 5.2rem;
-  font-size: 1.6rem;
-  font-weight: 700;
-  border-radius: 10px;
+  min-height: var(--ta-touch-comfortable, 52px);
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  border-radius: var(--ta-radius-button, 8px);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-  transition: all 0.25s ease;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  line-height: var(--ta-leading-normal, 1.5);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)) !important;
+  box-shadow: var(--ta-shadow-primary, 0 4px 14px rgba(37, 99, 235, 0.4));
+  transition: var(--ta-transition-normal, all 0.25s ease);
 }
 
 .tech-cta-primary .shopify-payment-button__button:hover,
 .product-form__cta-primary .shopify-payment-button__button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  box-shadow: var(--ta-shadow-primary-lg, 0 6px 20px rgba(37, 99, 235, 0.5));
 }
 
 /* Secondary CTA - Agregar al carrito */
@@ -171,22 +179,23 @@
 .product-form__submit.tech-cta-secondary {
   width: 100%;
   order: 2;
-  min-height: 4.8rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border-radius: 10px;
+  min-height: var(--ta-touch-min, 48px);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-semibold, 600);
+  border-radius: var(--ta-radius-button, 8px);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ta-tracking-normal, 0.02em);
+  line-height: var(--ta-leading-normal, 1.5);
   background: transparent;
-  border: 2px solid var(--color-primary, #3b82f6);
-  color: var(--color-primary, #3b82f6);
-  transition: all 0.25s ease;
+  border: 2px solid var(--ta-primary, #3b82f6);
+  color: var(--ta-primary, #3b82f6);
+  transition: var(--ta-transition-normal, all 0.25s ease);
 }
 
 .tech-cta-secondary:hover,
 .product-form__submit.tech-cta-secondary:hover {
-  background: var(--color-primary, #3b82f6);
-  color: #fff;
+  background: var(--ta-primary, #3b82f6);
+  color: var(--ta-text-inverse, #fff);
   transform: translateY(-1px);
 }
 
@@ -194,13 +203,14 @@
 .product-form__buttons {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--ta-space-md, 1.2rem);
   width: 100%;
 }
 
 /* =============================================================================
    4. TRUST BADGES ROW
    Consistent styling for: envío gratis, pago seguro, garantía, calidad
+   Premium tech store styling with token-based spacing and typography
    ============================================================================= */
 
 .pdp-atf-micro-trust {
@@ -208,36 +218,37 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem 1rem;
-  padding: 0.75rem 0;
-  margin-top: 0.5rem;
-  border-top: 1px solid var(--color-border-light, #f1f5f9);
-  border-bottom: 1px solid var(--color-border-light, #f1f5f9);
+  gap: var(--ta-space-sm, 0.8rem) var(--ta-space-lg, 1.6rem);
+  padding: var(--ta-space-md, 1.2rem) 0;
+  margin-top: var(--ta-space-sm, 0.8rem);
+  border-top: 1px solid var(--ta-border-light, #f1f5f9);
+  border-bottom: 1px solid var(--ta-border-light, #f1f5f9);
 }
 
 .pdp-atf-micro-trust__item {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 1.2rem;
-  color: var(--color-text-secondary, #475569);
-  font-weight: 500;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  color: var(--ta-text-secondary, #475569);
+  font-weight: var(--ta-font-medium, 500);
+  line-height: var(--ta-leading-normal, 1.5);
 }
 
 .pdp-atf-micro-trust__item svg {
-  color: var(--color-success, #10b981);
+  color: var(--ta-success, #10b981);
   flex-shrink: 0;
 }
 
 .pdp-atf-micro-trust__separator {
-  color: var(--color-border, #e2e8f0);
+  color: var(--ta-border, #e2e8f0);
   font-size: 0.6rem;
 }
 
 @media screen and (max-width: 749px) {
   .pdp-atf-micro-trust {
-    gap: 0.5rem 0.75rem;
-    padding: 0.5rem 0;
+    gap: var(--ta-space-sm, 0.5rem) var(--ta-space-md, 0.75rem);
+    padding: var(--ta-space-sm, 0.5rem) 0;
   }
   
   .pdp-atf-micro-trust__item {
@@ -253,21 +264,22 @@
 .pdp-atf-trust-messages {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: var(--ta-space-lg, 1rem);
+  margin-top: var(--ta-space-sm, 0.5rem);
 }
 
 .pdp-atf-trust-message {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.3rem;
-  color: var(--color-text-secondary, #475569);
-  font-weight: 500;
+  gap: var(--ta-space-sm, 0.5rem);
+  font-size: var(--ta-font-size-sm, 1.3rem);
+  color: var(--ta-text-secondary, #475569);
+  font-weight: var(--ta-font-medium, 500);
+  line-height: var(--ta-leading-normal, 1.5);
 }
 
 .pdp-atf-trust-message svg {
-  color: var(--color-primary, #3b82f6);
+  color: var(--ta-primary, #3b82f6);
   flex-shrink: 0;
 }
 
@@ -275,40 +287,41 @@
 .pdp-atf-availability {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.25rem;
+  gap: var(--ta-space-sm, 0.5rem);
+  margin-bottom: var(--ta-space-xs, 0.25rem);
 }
 
 .pdp-atf-availability__text {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: var(--ta-font-size-sm, 1.3rem);
+  font-weight: var(--ta-font-semibold, 600);
+  line-height: var(--ta-leading-normal, 1.5);
 }
 
 .pdp-atf-availability__text--available {
-  color: var(--color-success, #10b981);
+  color: var(--ta-success, #10b981);
 }
 
 .pdp-atf-availability__text--unavailable {
-  color: var(--color-error, #ef4444);
+  color: var(--ta-error, #ef4444);
 }
 
-/* Benefits bullets */
+/* Benefits bullets - urgency/trust indicators */
 .pdp-atf-benefits {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
-  padding: 0.75rem 1rem;
+  gap: var(--ta-space-xs, 0.4rem);
+  margin-top: var(--ta-space-sm, 0.5rem);
+  padding: var(--ta-space-md, 0.75rem) var(--ta-space-lg, 1rem);
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-  border-radius: 8px;
-  border-left: 3px solid var(--color-success, #10b981);
+  border-radius: var(--ta-radius-md, 8px);
+  border-left: 3px solid var(--ta-success, #10b981);
 }
 
 .pdp-atf-benefit {
-  font-size: 1.25rem;
-  color: var(--color-text-secondary, #334155);
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: var(--ta-font-size-xs, 1.25rem);
+  color: var(--ta-text-secondary, #334155);
+  font-weight: var(--ta-font-medium, 500);
+  line-height: var(--ta-leading-snug, 1.4);
 }
 
 /* =============================================================================
@@ -460,74 +473,154 @@
 }
 
 /* =============================================================================
-   7. STICKY MOBILE CTA - Additional mobile spacing optimization
-   Note: Main sticky-cta-bar styles are in sections/sticky-mobile-cta.liquid
+   7. STICKY MOBILE CTA - Coordination with WhatsApp and Cookie Banner
+   Ensures sticky CTA does not overlap with other floating elements
+   Uses safe area/bottom offset calculations for proper stacking
    ============================================================================= */
 
-/* Mobile spacing optimization - move WhatsApp up when sticky bar is visible */
-@media screen and (max-width: 749px) {
-  .sticky-cta-bar--visible + .whatsapp-float {
-    bottom: 140px;
+/* Sticky CTA bar base styles */
+.sticky-cta-bar,
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 450; /* Above content (100), below WhatsApp (500) */
+  background: var(--ta-surface-elevated, #ffffff);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
+  transform: translateY(100%);
+  transition: transform var(--ta-duration-normal, 0.25s) var(--ta-ease-out, ease-out);
+  display: none;
+}
+
+.sticky-cta-bar--visible,
+.sticky-mobile-cta--visible {
+  transform: translateY(0);
+  display: block;
+}
+
+/* Safe area offset for devices with notches/home indicators */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .sticky-cta-bar,
+  .sticky-mobile-cta {
+    padding-bottom: calc(var(--ta-space-md, 1.2rem) + env(safe-area-inset-bottom));
   }
+}
+
+/* Mobile spacing optimization - coordinate WhatsApp position when sticky bar is visible */
+@media screen and (max-width: 749px) {
+  /* When sticky CTA is visible, move WhatsApp button up */
+  .sticky-cta-bar--visible ~ .whatsapp-float,
+  .sticky-mobile-cta--visible ~ .whatsapp-float,
+  body:has(.sticky-cta-bar--visible) .whatsapp-float,
+  body:has(.sticky-mobile-cta--visible) .whatsapp-float {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px) + var(--ta-space-xl, 2.4rem));
+    transition: bottom var(--ta-duration-normal, 0.25s) var(--ta-ease-out, ease-out);
+  }
+  
+  /* When cookie banner is visible, adjust sticky CTA position */
+  body:has(.cookie-banner.is-visible) .sticky-cta-bar,
+  body:has(.cookie-banner.is-visible) .sticky-mobile-cta {
+    bottom: 80px; /* Cookie banner approximate height */
+  }
+  
+  /* When both cookie banner and sticky CTA visible, move WhatsApp higher */
+  body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
+  body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-float {
+    bottom: calc(160px + env(safe-area-inset-bottom, 0px) + var(--ta-space-xl, 2.4rem));
+  }
+}
+
+/* Sticky CTA button styling */
+.sticky-cta-bar__button,
+.sticky-mobile-cta__button {
+  min-height: var(--ta-touch-min, 44px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-xl, 2.4rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-semibold, 600);
+  border-radius: var(--ta-radius-button, 8px);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
+  color: var(--ta-text-inverse, #ffffff);
+  border: none;
+  cursor: pointer;
+  transition: var(--ta-transition-fast, all 0.15s ease);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+}
+
+.sticky-cta-bar__button:hover,
+.sticky-mobile-cta__button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+}
+
+.sticky-cta-bar__button:disabled,
+.sticky-mobile-cta__button:disabled {
+  background: var(--ta-text-muted, #94a3b8);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* =============================================================================
    8. RESPONSIVE BREAKPOINT REFINEMENTS
+   Using design tokens for consistency
    ============================================================================= */
 
 /* Mobile-first adjustments */
 @media screen and (max-width: 749px) {
   /* Reduce section padding on mobile */
   [class*="section-"][class*="-padding"] {
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    padding-top: var(--ta-space-sm, 0.5rem);
+    padding-bottom: var(--ta-space-lg, 1rem);
   }
   
   /* Compact product title */
   .product__title h1 {
-    font-size: 2rem;
-    line-height: 1.25;
-    margin-bottom: 0.5rem;
+    font-size: var(--ta-font-size-h4, 2rem);
+    line-height: var(--ta-leading-tight, 1.25);
+    margin-bottom: var(--ta-space-sm, 0.5rem);
   }
   
   /* Tighter price display */
   .price--large .price-item--regular {
-    font-size: 2rem;
+    font-size: var(--ta-font-size-h4, 2rem);
   }
   
   .price--large .price-item--sale {
-    font-size: 2.2rem;
+    font-size: var(--ta-font-size-h3, 2.2rem);
   }
   
-  /* Compact CTAs */
+  /* Compact CTAs - maintain touch targets */
   .tech-cta-primary .shopify-payment-button__button,
   .product-form__cta-primary .shopify-payment-button__button {
-    min-height: 4.8rem;
-    font-size: 1.4rem;
+    min-height: var(--ta-touch-comfortable, 48px);
+    font-size: var(--ta-font-size-sm, 1.4rem);
   }
   
   .tech-cta-secondary,
   .product-form__submit.tech-cta-secondary {
-    min-height: 4.4rem;
-    font-size: 1.3rem;
+    min-height: var(--ta-touch-min, 44px);
+    font-size: var(--ta-font-size-sm, 1.3rem);
   }
 }
 
 /* Tablet adjustments */
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .product__title h1 {
-    font-size: 2.4rem;
+    font-size: var(--ta-font-size-h3, 2.4rem);
   }
   
   .price--large .price-item--sale {
-    font-size: 2.4rem;
+    font-size: var(--ta-font-size-h3, 2.4rem);
   }
 }
 
 /* Desktop optimizations */
 @media screen and (min-width: 990px) {
   .product__title h1 {
-    font-size: 2.8rem;
-    margin-bottom: 0.75rem;
+    font-size: var(--ta-font-size-h2, 2.8rem);
+    margin-bottom: var(--ta-space-md, 0.75rem);
   }
 }
