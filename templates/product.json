@@ -332,6 +332,9 @@
             "type": "sticky-mobile-cta",
             "settings": {
                 "enable_sticky_cta": true,
+                "show_benefits": true,
+                "benefit_1_text": "Envío Gratis",
+                "benefit_2_text": "Pago Contraentrega",
                 "buy_button_text": "Agregar",
                 "whatsapp_phone": "+573008602789",
                 "whatsapp_button_text": "💬 WhatsApp"
