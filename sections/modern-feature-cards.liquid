@@ -1,12 +1,19 @@
 {% comment %}
-  Modern Feature Cards Section
+  Unified Benefits Section (Modern Feature Cards)
+  
+  CONSOLIDATED SECTION: This section replaces both benefits-conversion.liquid 
+  and the previous modern-feature-cards.liquid for better organization.
   
   A modern store look with clean cards, clear CTAs, and responsive grid.
   Designed for conversion-focused product features and service highlights.
+  Pattern: icon → title → 1 strong line → link (scannability optimized)
   
   Accepts:
   - heading: {String} Section heading
   - subheading: {String} Optional subheading
+  - show_main_cta: {Boolean} Show unified CTA button
+  - main_cta_text: {String} Main CTA button text
+  - main_cta_link: {URL} Main CTA link
   - cards: {Array} Array of feature card objects
 {% endcomment %}
 
@@ -57,12 +64,22 @@
         {%- endfor -%}
       </div>
     {%- endif -%}
+    
+    {%- comment -%} Unified CTA - Conversion focused {%- endcomment -%}
+    {%- if section.settings.show_main_cta and section.settings.main_cta_text != blank and section.settings.main_cta_link != blank -%}
+      <div class="modern-feature-cards__main-cta">
+        <a href="{{ section.settings.main_cta_link }}" class="modern-feature-cards__main-cta-button">
+          {{ section.settings.main_cta_text }}
+          <span class="modern-feature-cards__cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Modern Feature Cards",
+  "name": "Beneficios Unificados",
   "class": "section",
   "tag": "section",
   "settings": [
@@ -70,85 +87,127 @@
       "type": "text",
       "id": "heading",
       "label": "Título de la sección",
-      "default": "Características Premium"
+      "default": "¿Por qué comprar con nosotros?"
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subtítulo (opcional)",
       "default": "Descubre por qué miles de clientes confían en nosotros"
+    },
+    {
+      "type": "header",
+      "content": "CTA Principal"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_main_cta",
+      "label": "Mostrar botón CTA principal",
+      "default": true,
+      "info": "Un botón único de conversión al final de la sección"
+    },
+    {
+      "type": "text",
+      "id": "main_cta_text",
+      "label": "Texto del botón CTA",
+      "default": "Compra con contraentrega"
+    },
+    {
+      "type": "url",
+      "id": "main_cta_link",
+      "label": "Enlace del botón CTA",
+      "default": "shopify://collections/all"
     }
   ],
   "blocks": [
     {
       "type": "card",
-      "name": "Tarjeta de Característica",
+      "name": "Beneficio",
       "settings": [
         {
           "type": "text",
           "id": "icon",
-          "label": "Icono (emoji o símbolo)",
+          "label": "Icono (emoji)",
           "default": "✨",
-          "info": "Usa emojis como 🚀, 💎, ⚡, 🎯, 🔒, etc."
+          "info": "Usa emojis como 🚚, 💳, ✨, ⚡, 🔒, etc."
         },
         {
           "type": "text",
           "id": "title",
           "label": "Título",
-          "default": "Característica Destacada"
+          "default": "Beneficio Clave"
         },
         {
           "type": "textarea",
           "id": "description",
-          "label": "Descripción",
-          "default": "Describe el beneficio clave que obtiene el cliente con esta característica."
+          "label": "Descripción breve",
+          "default": "Una línea fuerte describiendo el beneficio para el cliente.",
+          "info": "Mantén la descripción corta y persuasiva (1-2 líneas)"
         },
         {
           "type": "text",
           "id": "cta_text",
-          "label": "Texto del botón",
-          "default": "Más información"
+          "label": "Texto del enlace (opcional)",
+          "default": "",
+          "info": "Enlace opcional para cada tarjeta"
         },
         {
           "type": "url",
           "id": "cta_link",
-          "label": "Enlace del botón"
+          "label": "Enlace (opcional)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Modern Feature Cards",
+      "name": "Beneficios Unificados",
+      "settings": {
+        "heading": "¿Por qué comprar con nosotros?",
+        "subheading": "Tecnología premium con la mejor experiencia de compra",
+        "show_main_cta": true,
+        "main_cta_text": "Compra con contraentrega",
+        "main_cta_link": "shopify://collections/all"
+      },
       "blocks": [
         {
           "type": "card",
           "settings": {
-            "icon": "🚀",
-            "title": "Envío Ultra Rápido",
-            "description": "Recibe tus productos en 2-5 días hábiles en toda Colombia. Procesamos tu pedido el mismo día.",
-            "cta_text": "Ver más",
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Envío sin costo a toda Colombia. El precio que ves es el que pagas.",
+            "cta_text": "Ver envíos",
             "cta_link": "shopify://collections/all"
           }
         },
         {
           "type": "card",
           "settings": {
-            "icon": "💎",
-            "title": "Calidad Premium",
-            "description": "Productos seleccionados con los más altos estándares de calidad. Garantía de satisfacción total.",
-            "cta_text": "Ver productos",
-            "cta_link": "shopify://collections/all"
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Pago contra entrega disponible. Inspecciona antes de pagar.",
+            "cta_text": "",
+            "cta_link": ""
           }
         },
         {
           "type": "card",
           "settings": {
-            "icon": "🔒",
-            "title": "Compra Segura",
-            "description": "Pago seguro y protegido. Paga cuando recibes tu producto con total confianza.",
-            "cta_text": "Saber más",
-            "cta_link": "shopify://pages/contacto-techaura"
+            "icon": "✅",
+            "title": "30 días de garantía",
+            "description": "Si no quedas satisfecho, devuélvelo sin preguntas.",
+            "cta_text": "",
+            "cta_link": ""
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido.",
+            "cta_text": "Más vendidos",
+            "cta_link": "shopify://collections/all"
           }
         }
       ]
