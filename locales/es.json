@@ -1912,11 +1912,11 @@
         "accept_shop_pay_marketing_checkbox_label": "Suscríbeme para recibir novedades y ofertas de esta tienda"
       },
       "shop_policies": {
-        "refund_policy": "Politica de reembolso",
+        "refund_policy": "Política de reembolso",
         "privacy_policy": "Política de privacidad",
         "terms_of_service": "Términos de servicio",
         "legal_notice": "Aviso Legal",
-        "shipping_policy": "Politica de envios",
+        "shipping_policy": "Política de envíos",
         "terms_of_sale": "Condiciones de venta",
         "subscription_policy": "Política de suscripción",
         "purchase_options_policy": "Política de opciones de compra",
@@ -2339,7 +2339,7 @@
         "ineligible_return_message": "Ningún artículo de este pedido es elegible para devolución.",
         "ineligible_return_message_when_returned": "Ningún artículo adicional en este pedido es elegible para devolución.",
         "print_shipping_label": "Imprimir etiqueta de envío",
-        "return_and_refund_modal_header": "Politica de reembolso",
+        "return_and_refund_modal_header": "Política de reembolso",
         "tracking_number": "El número de rastreo:"
       },
       "shipping": {
@@ -2699,8 +2699,8 @@
     "shop_policies": {
       "legal_notice": "Aviso Legal",
       "privacy_policy": "Política de privacidad",
-      "refund_policy": "Politica de reembolso",
-      "shipping_policy": "Politica de envios",
+      "refund_policy": "Política de reembolso",
+      "shipping_policy": "Política de envíos",
       "subscription_policy": "Política de suscripción",
       "terms_of_sale": "Condiciones de venta",
       "terms_of_service": "Términos de servicio"
