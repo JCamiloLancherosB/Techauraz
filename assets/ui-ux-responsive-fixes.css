@@ -3722,3 +3722,93 @@ body.template-index .tech-hero-slideshow slideshow-component {
     font-size: 12px;
   }
 }
+
+/* =============================================================================
+   PR-05 FIX: REDUCE EXCESSIVE VERTICAL SPACING (NEWSLETTER → FOOTER)
+   Version: 1.0.0
+   Date: 2026-01-27
+   
+   Fixes the "giant empty block" issue between newsletter and footer sections:
+   - Reduced footer padding-top/bottom from 4rem to 2.5rem
+   - Reduced footer__content-top padding from 4rem to 2rem
+   - Reduced footer__content-bottom margin-top from 3rem to 1.5rem
+   - Reduced newsletter wrapper padding for tighter layout
+   - Maintains readability and doesn't overlap with WhatsApp/cookie on mobile
+   ============================================================================= */
+
+/* Footer: Reduce excessive vertical spacing */
+.footer {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Footer content top: Reduce internal padding */
+.footer__content-top {
+  padding-top: 2rem !important;
+  padding-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Footer content bottom: Reduce gap from content-top */
+.footer__content-bottom {
+  padding-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
+}
+
+/* Newsletter section: Reduce wrapper padding for tighter layout */
+.newsletter__wrapper {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+/* Newsletter section spacing (the parent section element) */
+.newsletter.section,
+section.newsletter {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Mobile adjustments - keep footer compact but readable */
+@media screen and (max-width: 749px) {
+  .footer {
+    padding-top: 2rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .footer__content-top {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .footer__content-bottom {
+    padding-top: 1rem !important;
+    margin-top: 1rem !important;
+    /* Ensure space for WhatsApp/cookie floating elements */
+    padding-bottom: 1rem !important;
+  }
+  
+  .newsletter__wrapper {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .newsletter.section,
+  section.newsletter {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .footer__content-top {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .newsletter__wrapper {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
