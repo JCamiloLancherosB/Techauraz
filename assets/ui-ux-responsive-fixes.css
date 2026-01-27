@@ -3875,9 +3875,18 @@ body.template-index .tech-hero-slideshow .banner__media img {
   object-position: center;
 }
 
+/* =============================================================================
+   PR-02 FIX: SLIDESHOW CONTROLS - CONSOLIDATED
+   Version: 2.0.0
+   Date: 2026-01-27
+   
+   Note: Primary control styles are in slideshow-enhancements.css
+   These styles provide additional refinements scoped to home page
+   ============================================================================= */
+
 /* Controls wrapper - positioned absolutely within hero */
 /* For manual mode (with counter/dots): controls at bottom center */
-body.template-index .tech-hero-slideshow .tech-hero-controls:not(.slideshow__controls--top) {
+body.template-index .tech-hero-slideshow .slideshow__controls:not(.slideshow__controls--top) {
   position: absolute;
   bottom: 24px;
   left: 50%;
@@ -3891,7 +3900,7 @@ body.template-index .tech-hero-slideshow .tech-hero-controls:not(.slideshow__con
 }
 
 /* For auto-rotate mode (arrows only): keep arrows on sides */
-body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls--top {
+body.template-index .tech-hero-slideshow .slideshow__controls--top {
   position: absolute;
   top: 50%;
   left: 0;
@@ -3905,13 +3914,13 @@ body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls
 }
 
 /* Arrow buttons - ensure they're clickable and visible */
-body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
+body.template-index .tech-hero-slideshow .slideshow__controls .slider-button {
   pointer-events: auto;
   background: rgba(255, 255, 255, 0.95);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3922,7 +3931,7 @@ body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
   color: #1f2937;
 }
 
-body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:hover {
+body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:hover {
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transform: scale(1.08);
@@ -3930,13 +3939,13 @@ body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:hove
 }
 
 /* Focus states for accessibility - visible focus ring */
-body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:focus {
+body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:focus {
   outline: 3px solid rgba(37, 99, 235, 0.6);
   outline-offset: 2px;
   background: rgba(37, 99, 235, 0.1);
 }
 
-body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:focus-visible {
+body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:focus-visible {
   outline: 3px solid rgba(37, 99, 235, 0.8);
   outline-offset: 2px;
   background: rgba(37, 99, 235, 0.15);
@@ -4014,19 +4023,14 @@ body.template-index .tech-hero-slideshow slideshow-component {
 /* Mobile adjustments */
 @media screen and (max-width: 749px) {
   /* Manual mode controls */
-  body.template-index .tech-hero-slideshow .tech-hero-controls:not(.slideshow__controls--top) {
+  body.template-index .tech-hero-slideshow .slideshow__controls:not(.slideshow__controls--top) {
     bottom: 16px;
     gap: 1rem;
   }
   
-  /* Auto-rotate mode controls */
-  body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls--top {
-    padding: 0 1rem;
-  }
-  
-  body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
-    width: 40px;
-    height: 40px;
+  /* Auto-rotate mode: Hide arrows on mobile */
+  body.template-index .tech-hero-slideshow .slideshow__controls--top .slider-button {
+    display: none;
   }
   
   body.template-index .tech-hero-slideshow .slider-counter {
