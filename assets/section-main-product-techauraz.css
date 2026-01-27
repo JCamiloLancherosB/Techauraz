@@ -890,3 +890,366 @@
     justify-content: center;
   }
 }
+
+/* =============================================================================
+   11. MICROCOPY BELOW CTAS
+   Shows trust indicators: "Envío 2-5 días" + "Pago contra entrega disponible"
+   ============================================================================= */
+
+.product-form__microcopy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-xs, 0.4rem) var(--ta-space-md, 1rem);
+  padding: var(--ta-space-md, 1rem) 0;
+  margin-top: var(--ta-space-xs, 0.4rem);
+  border-top: 1px solid var(--ta-border-light, #f1f5f9);
+}
+
+.product-form__microcopy-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  color: var(--ta-text-secondary, #475569);
+  font-weight: var(--ta-font-medium, 500);
+  line-height: var(--ta-leading-normal, 1.5);
+}
+
+.product-form__microcopy-item svg {
+  color: var(--ta-success, #10b981);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.product-form__microcopy-separator {
+  color: var(--ta-border, #e2e8f0);
+  font-size: 0.6rem;
+}
+
+@media screen and (max-width: 749px) {
+  .product-form__microcopy {
+    gap: var(--ta-space-xs, 0.3rem) var(--ta-space-sm, 0.6rem);
+    padding: var(--ta-space-sm, 0.6rem) 0;
+  }
+
+  .product-form__microcopy-item {
+    font-size: 1.1rem;
+  }
+
+  .product-form__microcopy-separator {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   12. ENHANCED TRUST LINE - 4 ITEMS (Envío, Contraentrega, Garantía, Devolución)
+   Clean row with consistent chip styling and proper wrap behavior
+   ============================================================================= */
+
+.tech-trust-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.6rem) var(--ta-space-md, 1rem);
+  margin: var(--ta-space-md, 1rem) 0;
+  padding: var(--ta-space-md, 1rem) var(--ta-space-lg, 1.2rem);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: var(--ta-radius-lg, 12px);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+}
+
+.tech-trust-line__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-text-secondary, #1e293b);
+  white-space: nowrap;
+  padding: var(--ta-space-xs, 0.3rem) var(--ta-space-sm, 0.6rem);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--ta-radius-pill, 20px);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: var(--ta-transition-fast, all 0.15s ease);
+}
+
+.tech-trust-line__item:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--ta-primary-light, #60a5fa);
+  transform: translateY(-1px);
+}
+
+.tech-trust-line__icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.tech-trust-line__text {
+  font-size: inherit;
+}
+
+@media screen and (max-width: 749px) {
+  .tech-trust-line {
+    gap: var(--ta-space-xs, 0.4rem);
+    padding: var(--ta-space-sm, 0.8rem);
+  }
+
+  .tech-trust-line__item {
+    font-size: 1.1rem;
+    padding: var(--ta-space-xs, 0.25rem) var(--ta-space-sm, 0.5rem);
+  }
+
+  .tech-trust-line__icon {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .tech-trust-line {
+    flex-direction: column;
+    gap: var(--ta-space-xs, 0.35rem);
+    padding: var(--ta-space-sm, 0.6rem);
+  }
+
+  .tech-trust-line__item {
+    width: auto;
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   13. ENHANCED URGENCY BAR - Trustworthy Not Aggressive
+   Softer contrast, less "scammy" look, still creates urgency
+   ============================================================================= */
+
+.urgency-indicator,
+.pdp-urgency-bar {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: var(--ta-text, #1e293b);
+  padding: var(--ta-space-sm, 0.8rem) var(--ta-space-md, 1.2rem);
+  border-radius: var(--ta-radius-md, 8px);
+  font-weight: var(--ta-font-semibold, 600);
+  font-size: var(--ta-font-size-sm, 1.3rem);
+  text-align: center;
+  margin: var(--ta-space-md, 1rem) 0;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
+  line-height: var(--ta-leading-normal, 1.5);
+}
+
+.urgency-indicator.urgency-pulse,
+.pdp-urgency-bar.urgency-pulse {
+  animation: urgency-soft-pulse 3s ease-in-out infinite;
+}
+
+@keyframes urgency-soft-pulse {
+  0%, 100% { 
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 3px 12px rgba(251, 191, 36, 0.25);
+    transform: scale(1.005);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .urgency-indicator,
+  .pdp-urgency-bar {
+    font-size: 1.2rem;
+    padding: var(--ta-space-sm, 0.6rem) var(--ta-space-md, 0.8rem);
+  }
+}
+
+/* =============================================================================
+   14. ENHANCED A11Y - Focus States & Touch Targets
+   WCAG 2.1 AA compliant focus indicators and minimum 44px touch targets
+   ============================================================================= */
+
+/* Focus visible styles for all interactive elements */
+.tech-cta-primary .shopify-payment-button__button:focus-visible,
+.product-form__cta-primary .shopify-payment-button__button:focus-visible,
+.tech-cta-secondary:focus-visible,
+.product-form__submit.tech-cta-secondary:focus-visible,
+.sticky-mobile-cta__button:focus-visible {
+  outline: 3px solid var(--ta-primary, #3b82f6);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* High contrast focus for keyboard navigation */
+.tech-trust-line__item:focus-visible {
+  outline: 2px solid var(--ta-primary, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* Minimum touch target sizes (44x44px) */
+.tech-cta-primary .shopify-payment-button__button,
+.product-form__cta-primary .shopify-payment-button__button {
+  min-height: 52px;
+  min-width: 44px;
+  padding: var(--ta-space-md, 1rem) var(--ta-space-xl, 2rem);
+}
+
+.tech-cta-secondary,
+.product-form__submit.tech-cta-secondary {
+  min-height: 48px;
+  min-width: 44px;
+  padding: var(--ta-space-md, 0.9rem) var(--ta-space-lg, 1.6rem);
+}
+
+/* Touch-friendly tap targets for trust line items */
+.tech-trust-line__item {
+  min-height: 36px;
+  cursor: default;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .urgency-indicator.urgency-pulse,
+  .pdp-urgency-bar.urgency-pulse,
+  .price__badge-sale,
+  .badge.price__badge-sale {
+    animation: none;
+  }
+  
+  .tech-cta-primary .shopify-payment-button__button:hover,
+  .product-form__cta-primary .shopify-payment-button__button:hover,
+  .tech-cta-secondary:hover,
+  .product-form__submit.tech-cta-secondary:hover,
+  .tech-trust-line__item:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tech-trust-line {
+    border: 2px solid var(--ta-text, #0f172a);
+  }
+  
+  .tech-trust-line__item {
+    border: 1px solid var(--ta-text, #0f172a);
+  }
+  
+  .urgency-indicator,
+  .pdp-urgency-bar {
+    border: 2px solid var(--ta-text, #0f172a);
+  }
+}
+
+/* =============================================================================
+   15. CTA HIERARCHY REFINEMENTS
+   Primary: "Comprar ahora" - dominant, full width, consistent height
+   Secondary: "Agregar al carrito" - visible but less dominant
+   ============================================================================= */
+
+/* Ensure proper button ordering and full width */
+.product-form__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-md, 1rem);
+  width: 100%;
+}
+
+/* Primary CTA container */
+.tech-cta-primary,
+.product-form__cta-primary {
+  width: 100%;
+  order: 1;
+}
+
+/* Primary CTA button styling - full width, prominent */
+.tech-cta-primary .shopify-payment-button,
+.product-form__cta-primary .shopify-payment-button {
+  width: 100%;
+}
+
+.tech-cta-primary .shopify-payment-button__button,
+.product-form__cta-primary .shopify-payment-button__button {
+  width: 100%;
+  min-height: 52px;
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  border-radius: var(--ta-radius-button, 8px);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)) !important;
+  color: var(--ta-text-inverse, #ffffff) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: all 0.25s ease;
+  border: none;
+}
+
+.tech-cta-primary .shopify-payment-button__button:hover,
+.product-form__cta-primary .shopify-payment-button__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+.tech-cta-primary .shopify-payment-button__button:active,
+.product-form__cta-primary .shopify-payment-button__button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Secondary CTA - visible but less dominant */
+.tech-cta-secondary,
+.product-form__submit.tech-cta-secondary {
+  width: 100%;
+  order: 2;
+  min-height: 48px;
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-semibold, 600);
+  border-radius: var(--ta-radius-button, 8px);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: transparent;
+  border: 2px solid var(--ta-primary, #3b82f6);
+  color: var(--ta-primary, #3b82f6);
+  transition: all 0.25s ease;
+}
+
+.tech-cta-secondary:hover,
+.product-form__submit.tech-cta-secondary:hover {
+  background: var(--ta-primary, #3b82f6);
+  color: var(--ta-text-inverse, #ffffff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.tech-cta-secondary:active,
+.product-form__submit.tech-cta-secondary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Disabled state */
+.tech-cta-secondary:disabled,
+.product-form__submit.tech-cta-secondary:disabled {
+  background: var(--ta-bg-tertiary, #f1f5f9);
+  border-color: var(--ta-border, #e2e8f0);
+  color: var(--ta-text-muted, #94a3b8);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mobile CTA adjustments - maintain touch targets */
+@media screen and (max-width: 749px) {
+  .tech-cta-primary .shopify-payment-button__button,
+  .product-form__cta-primary .shopify-payment-button__button {
+    min-height: 48px;
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+
+  .tech-cta-secondary,
+  .product-form__submit.tech-cta-secondary {
+    min-height: 44px;
+    font-size: 1.3rem;
+  }
+}
