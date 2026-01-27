@@ -13,6 +13,12 @@
  * 
  * Relies on tokens from techauraz-tokens.css
  * 
+ * CASCADE ORDER:
+ * This file is loaded AFTER visual-system-unified-2024.css in theme.liquid.
+ * Some selectors intentionally override base styles from that file to provide
+ * a more comprehensive and unified card specification. The existing file
+ * serves as a fallback for any edge cases not covered here.
+ * 
  * CARD SPEC:
  * - Image: 1:1 aspect ratio, padded, no stretching
  * - Title: 2-line clamp, readable contrast
