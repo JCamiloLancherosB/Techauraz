@@ -2,9 +2,158 @@
  * =============================================================================
  * TECHAURAZ CUSTOM UI COMPONENTS - JAVASCRIPT
  * =============================================================================
- * Consolidated JS for WhatsApp button, Cookie banner, and scroll optimizations
+ * Consolidated JS for WhatsApp button, Cookie banner, Announcement ticker,
+ * and scroll optimizations.
  * Extracted from inline scripts to improve maintainability
  */
+
+/* =============================================================================
+   ANNOUNCEMENT TICKER - Rotating messages with fade animation
+   ============================================================================= */
+(function() {
+  'use strict';
+
+  /**
+   * AnnouncementTicker class
+   * Manages rotating announcement messages with accessibility support
+   */
+  class AnnouncementTicker {
+    constructor(container) {
+      this.container = container;
+      this.items = Array.from(container.querySelectorAll('.announcement-ticker__item'));
+      this.currentIndex = 0;
+      this.isPaused = false;
+      this.intervalId = null;
+      
+      // Get speed from data attribute (in seconds), default to 5 seconds
+      const speedAttr = container.getAttribute('data-ticker-speed');
+      this.speed = (speedAttr ? parseInt(speedAttr, 10) : 5) * 1000;
+      
+      // Ensure speed is within reasonable bounds (3-8 seconds)
+      this.speed = Math.max(3000, Math.min(8000, this.speed));
+      
+      // Check for reduced motion preference
+      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      this.init();
+    }
+    
+    init() {
+      if (this.items.length <= 1) {
+        // No rotation needed for single item
+        return;
+      }
+      
+      this.bindEvents();
+      this.startRotation();
+      
+      // Listen for reduced motion preference changes
+      this.prefersReducedMotion.addEventListener('change', () => {
+        // Restart with new preference
+        this.stopRotation();
+        this.startRotation();
+      });
+    }
+    
+    bindEvents() {
+      // Store bound references for cleanup
+      this.boundPause = () => this.pause();
+      this.boundResume = () => this.resume();
+      
+      // Pause on hover (desktop only)
+      this.container.addEventListener('mouseenter', this.boundPause);
+      this.container.addEventListener('mouseleave', this.boundResume);
+      
+      // Pause on focus for keyboard users
+      this.container.addEventListener('focusin', this.boundPause);
+      this.container.addEventListener('focusout', this.boundResume);
+    }
+    
+    startRotation() {
+      if (this.items.length <= 1) return;
+      
+      this.intervalId = setInterval(() => {
+        if (!this.isPaused) {
+          this.showNext();
+        }
+      }, this.speed);
+    }
+    
+    stopRotation() {
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      }
+    }
+    
+    pause() {
+      this.isPaused = true;
+      this.container.classList.add('announcement-ticker--paused');
+    }
+    
+    resume() {
+      this.isPaused = false;
+      this.container.classList.remove('announcement-ticker--paused');
+    }
+    
+    showNext() {
+      const prevIndex = this.currentIndex;
+      this.currentIndex = (this.currentIndex + 1) % this.items.length;
+      this.transition(prevIndex, this.currentIndex);
+    }
+    
+    transition(fromIndex, toIndex) {
+      const fromItem = this.items[fromIndex];
+      const toItem = this.items[toIndex];
+      
+      if (!fromItem || !toItem) return;
+      
+      // Remove active state from current
+      fromItem.classList.remove('announcement-ticker__item--active');
+      fromItem.setAttribute('aria-hidden', 'true');
+      
+      // Add active state to next
+      toItem.classList.add('announcement-ticker__item--active');
+      toItem.removeAttribute('aria-hidden');
+    }
+    
+    destroy() {
+      this.stopRotation();
+      this.container.removeEventListener('mouseenter', this.boundPause);
+      this.container.removeEventListener('mouseleave', this.boundResume);
+      this.container.removeEventListener('focusin', this.boundPause);
+      this.container.removeEventListener('focusout', this.boundResume);
+    }
+  }
+  
+  // Store ticker instances for cleanup
+  const tickerInstances = new WeakMap();
+  
+  // Initialize ticker on DOM ready
+  function initTickers() {
+    const tickers = document.querySelectorAll('.announcement-ticker');
+    tickers.forEach(ticker => {
+      // Destroy existing instance if present
+      if (tickerInstances.has(ticker)) {
+        tickerInstances.get(ticker).destroy();
+      }
+      // Create new instance
+      const instance = new AnnouncementTicker(ticker);
+      tickerInstances.set(ticker, instance);
+      ticker.setAttribute('data-ticker-initialized', 'true');
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTickers);
+  } else {
+    initTickers();
+  }
+  
+  // Re-init on Shopify section render (for theme editor)
+  document.addEventListener('shopify:section:load', initTickers);
+})();
 
 /* =============================================================================
    WHATSAPP BUTTON ANIMATIONS
