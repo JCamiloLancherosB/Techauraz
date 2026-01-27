@@ -156,23 +156,37 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   }
 }
 
-/* Overlay styling is controlled per-slide via section settings (inline styles) */
+/* Overlay styling - text content positioning for better centering */
 /* This ensures text content stays above the overlay - z-index layering */
 .slideshow__text-wrapper,
 .banner__content {
   position: relative;
   z-index: 3; /* Above overlay (z-index: 2) */
   pointer-events: none; /* Allow clicks to pass through wrapper */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Re-enable pointer events for interactive elements */
 .slideshow__text-wrapper .banner__box,
 .banner__content .banner__box {
   pointer-events: auto;
+  /* Premium glass morphism effect - subtle, not a "patch" */
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 2rem 2.5rem;
+  max-width: min(90%, 600px);
 }
 
-/* Ensure overlay is positioned correctly with consistent background */
-/* Note: Inline styles control opacity per slide; this provides the background color */
+/* Ensure overlay is positioned correctly with subtle gradient - not a "patch" look */
+/* Note: Uses gradient overlay for premium appearance instead of solid block */
 .slideshow__media::after,
 .banner__media::after {
   position: absolute;
@@ -180,7 +194,13 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Default: Black overlay at 40% opacity */
+  /* Gradient overlay: subtle at top, stronger at bottom for text readability */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.25) 40%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
   content: '';
   z-index: 1; /* Above image (z-index: 0) */
   pointer-events: none; /* Don't block clicks */
@@ -239,11 +259,18 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   .template-index slideshow-component .slider-button:focus {
     outline: 3px solid rgba(37, 99, 235, 0.6);
     outline-offset: 3px;
+    background: rgba(37, 99, 235, 0.95);
+    border-color: rgba(255, 255, 255, 0.6);
   }
 
   .template-index slideshow-component .slider-button:focus-visible {
     outline: 3px solid rgba(37, 99, 235, 0.8);
     outline-offset: 3px;
+    background: rgba(37, 99, 235, 0.95);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      0 0 0 4px rgba(37, 99, 235, 0.3),
+      0 6px 20px rgba(37, 99, 235, 0.5);
   }
 }
 

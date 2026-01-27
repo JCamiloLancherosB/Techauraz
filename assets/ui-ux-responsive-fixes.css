@@ -1174,6 +1174,7 @@ textarea:focus-visible {
 }
 
 /* Slideshow tech overlay effect - FIXED to not interfere with CTAs */
+/* Premium gradient overlay instead of "patch" look */
 .slideshow__slide {
   position: relative;
 }
@@ -1181,13 +1182,25 @@ textarea:focus-visible {
 .slideshow__slide::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 30%;
-  background: linear-gradient(0deg,
-    rgba(15, 23, 42, 0.4) 0%,
-    transparent 100%);
+  bottom: 0;
+  /* Subtle vignette gradient - premium appearance */
+  background: 
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.25) 60%,
+      rgba(0, 0, 0, 0.4) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.1) 0%,
+      transparent 30%,
+      transparent 60%,
+      rgba(15, 23, 42, 0.35) 100%
+    );
   pointer-events: none;
   z-index: 1;
 }
@@ -1196,6 +1209,10 @@ textarea:focus-visible {
 .slideshow__text-wrapper {
   position: relative;
   z-index: 2;
+  /* Better centering for content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Ensure CTAs are clickable and above all overlays */
@@ -1224,8 +1241,16 @@ textarea:focus-visible {
 
 .banner__buttons .button:focus,
 .slideshow-cta:focus {
-  outline: 2px solid var(--color-primary, #2563eb);
+  outline: 3px solid var(--color-primary, #2563eb);
   outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.25);
+}
+
+.banner__buttons .button:focus-visible,
+.slideshow-cta:focus-visible {
+  outline: 3px solid var(--color-primary, #2563eb);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.3);
 }
 
 /* =============================================================================
@@ -3632,7 +3657,7 @@ body.template-index .tech-hero-slideshow .tech-hero-controls.slideshow__controls
 body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
   pointer-events: auto;
   background: rgba(255, 255, 255, 0.95);
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -3643,12 +3668,30 @@ body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button {
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
+  color: #1f2937;
 }
 
 body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:hover {
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
+  transform: scale(1.08);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+/* Focus states for accessibility - visible focus ring */
+body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:focus {
+  outline: 3px solid rgba(37, 99, 235, 0.6);
+  outline-offset: 2px;
+  background: rgba(37, 99, 235, 0.1);
+}
+
+body.template-index .tech-hero-slideshow .tech-hero-controls .slider-button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.8);
+  outline-offset: 2px;
+  background: rgba(37, 99, 235, 0.15);
+  box-shadow: 
+    0 0 0 4px rgba(37, 99, 235, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Counter/dots styling - centered within hero */
@@ -3674,10 +3717,11 @@ body.template-index .tech-hero-slideshow .slider-counter {
 
 /* Dots styling */
 body.template-index .tech-hero-slideshow .slider-counter__link--dots .dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
   transition: all 0.3s ease;
 }
@@ -3685,13 +3729,30 @@ body.template-index .tech-hero-slideshow .slider-counter__link--dots .dot {
 body.template-index .tech-hero-slideshow .slider-counter__link--dots:hover .dot,
 body.template-index .tech-hero-slideshow .slider-counter__link--dots.is-selected .dot {
   background: white;
+  border-color: white;
   transform: scale(1.2);
+}
+
+/* Focus states for dots - accessibility */
+body.template-index .tech-hero-slideshow .slider-counter__link--dots:focus .dot {
+  outline: 2px solid rgba(37, 99, 235, 0.6);
+  outline-offset: 2px;
+}
+
+body.template-index .tech-hero-slideshow .slider-counter__link--dots:focus-visible .dot {
+  outline: 2px solid rgba(37, 99, 235, 0.8);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 /* Ensure overlay is centered and consistent */
 body.template-index .tech-hero-slideshow .slideshow__text-wrapper {
   position: relative;
   z-index: 5;
+  /* Better centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Remove any conflicting bottom margins */

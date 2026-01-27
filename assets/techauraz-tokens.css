@@ -995,12 +995,17 @@ details summary:focus-visible,
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* Banner box (overlay content) - ensure readable */
+/* Banner box (overlay content) - premium glass morphism, not a "patch" */
 .banner__box,
 .slideshow__text-wrapper {
-  /* Semi-transparent backdrop for text legibility */
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-  padding: var(--ta-space-lg, 1.6rem);
-  border-radius: var(--ta-radius-lg, 12px);
+  /* Premium glass morphism effect */
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: var(--ta-space-lg, 1.6rem) var(--ta-space-xl, 2rem);
+  border-radius: var(--ta-radius-lg, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
