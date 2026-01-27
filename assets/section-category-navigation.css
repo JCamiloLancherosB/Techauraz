@@ -99,7 +99,7 @@
   font-size: 4rem;
   margin-bottom: 1.2rem;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.12));
+  filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.15));
   position: relative;
   z-index: 1;
 }
@@ -113,7 +113,7 @@
 .category-nav-section .category-name {
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-text-primary, #0f172a);
   text-align: center;
   margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
@@ -123,7 +123,8 @@
 
 .category-nav-section .category-count {
   font-size: 1.3rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary, #334155);
+  font-weight: 500;
   position: relative;
   z-index: 1;
 }
