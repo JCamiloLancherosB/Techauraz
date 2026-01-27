@@ -3105,6 +3105,184 @@ body {
   color: inherit;
 }
 
+/* =============================================================================
+   HEADER CTA BUTTON
+   ============================================================================= */
+.header__cta {
+  display: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background: var(--tech-primary, #2563eb);
+  color: #fff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.header__cta:hover {
+  background: var(--tech-primary-hover, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.header__cta:focus-visible {
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+@media screen and (min-width: 990px) {
+  .header__cta {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* =============================================================================
+   DROPDOWN/MEGA MENU STABILITY - Prevents jitter on hover
+   ============================================================================= */
+
+/* Desktop dropdown menus - smooth appearance */
+@media screen and (min-width: 990px) {
+  /* Base submenu styling */
+  .header__submenu,
+  .mega-menu__content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: var(--color-background, #fff);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: 
+      opacity 0.2s ease,
+      visibility 0.2s ease,
+      transform 0.2s ease;
+    z-index: 100;
+    padding: 0.5rem 0;
+  }
+  
+  /* Open state - show dropdown */
+  details[open] > .header__submenu,
+  details[open] > .mega-menu__content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Prevent jitter - add invisible hover bridge */
+  header-menu details {
+    position: relative;
+  }
+  
+  header-menu details > summary::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+  }
+  
+  /* Nested submenus (third level) */
+  .header__submenu .header__submenu {
+    top: 0;
+    left: 100%;
+    margin-left: 2px;
+  }
+  
+  /* Submenu items styling */
+  .header__submenu .header__menu-item,
+  .header__submenu .list-menu__item {
+    padding: 0.65rem 1.2rem;
+    display: block;
+    color: var(--tech-ink, #0B1220);
+    font-size: 1.4rem;
+    transition: all 0.15s ease;
+  }
+  
+  .header__submenu .header__menu-item:hover,
+  .header__submenu .list-menu__item:hover {
+    background-color: rgba(37, 99, 235, 0.08);
+    color: var(--tech-primary, #2563eb);
+  }
+  
+  /* Mega menu specific styling */
+  .mega-menu__content {
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: auto;
+    min-width: 600px;
+    max-width: 90vw;
+    padding: 1.5rem;
+  }
+  
+  details[open] > .mega-menu__content {
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  .mega-menu__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  
+  .mega-menu__link--level-2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--tech-ink, #0B1220);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .mega-menu__link {
+    font-size: 1.4rem;
+    color: var(--tech-muted, #64748b);
+    padding: 0.4rem 0;
+    display: block;
+    transition: color 0.15s ease;
+  }
+  
+  .mega-menu__link:hover {
+    color: var(--tech-primary, #2563eb);
+  }
+}
+
+/* =============================================================================
+   FOCUS STATES FOR ACCESSIBILITY (A11y)
+   ============================================================================= */
+
+/* Visible focus ring for all interactive elements in header */
+.header__menu-item:focus-visible,
+.list-menu__item:focus-visible,
+.header__icon:focus-visible,
+.header__cta:focus-visible {
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Summary elements (dropdown triggers) */
+header-menu summary:focus-visible {
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip focus ring on mouse click (uses :focus-visible) */
+.header__menu-item:focus:not(:focus-visible),
+.list-menu__item:focus:not(:focus-visible),
+header-menu summary:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* --- MAIN CONTENT OFFSET (ONLY FOR FIXED HEADERS) --- */
 /* 
  * IMPORTANT: Sticky headers (position: sticky) do NOT require padding-top on main content.
