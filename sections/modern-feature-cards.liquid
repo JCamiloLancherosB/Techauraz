@@ -66,7 +66,7 @@
     {%- endif -%}
     
     {%- comment -%} Unified CTA - Conversion focused {%- endcomment -%}
-    {%- if section.settings.show_main_cta and section.settings.main_cta_text != blank -%}
+    {%- if section.settings.show_main_cta and section.settings.main_cta_text != blank and section.settings.main_cta_link != blank -%}
       <div class="modern-feature-cards__main-cta">
         <a href="{{ section.settings.main_cta_link }}" class="modern-feature-cards__main-cta-button">
           {{ section.settings.main_cta_text }}
@@ -195,7 +195,7 @@
           "settings": {
             "icon": "✅",
             "title": "30 días de garantía",
-            "description": "No quedas satisfecho, devuélvelo sin preguntas.",
+            "description": "Si no quedas satisfecho, devuélvelo sin preguntas.",
             "cta_text": "",
             "cta_link": ""
           }
