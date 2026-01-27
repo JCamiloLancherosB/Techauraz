@@ -1,6 +1,11 @@
 {% if section.settings.image_shape == 'blob' %}
   {%- endif -%}
 
+{%- if section.settings.enable_quick_add -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 <div class="color-{{ section.settings.color_scheme }} gradient no-js-hidden">
   <div class="related-products-section-{{ section.id }} section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <product-recommendations
@@ -24,7 +29,9 @@
                 image_shape: section.settings.image_shape,
                 show_secondary_image: section.settings.show_secondary_image,
                 show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating
+                show_rating: section.settings.show_rating,
+                show_quick_add: section.settings.enable_quick_add,
+                section_id: section.id
               %}
             </li>
           {% endfor %}
@@ -140,6 +147,12 @@
       "default": false,
       "label": "t:sections.related-products.settings.show_rating.label",
       "info": "t:sections.related-products.settings.show_rating.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.enable_quick_buy.label"
     },
     {
       "type": "header",

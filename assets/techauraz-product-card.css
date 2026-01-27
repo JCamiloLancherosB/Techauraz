@@ -1,0 +1,503 @@
+/**
+ * =============================================================================
+ * TECHAURAZ UNIFIED PRODUCT CARD STYLES
+ * Version: 1.0.0
+ * =============================================================================
+ * 
+ * Single premium card style for conversion optimization.
+ * Applies to:
+ * - Homepage bestseller slider/grid
+ * - Related products on PDP
+ * - Featured collection grids
+ * - All product grids across the site
+ * 
+ * Relies on tokens from techauraz-tokens.css
+ * 
+ * CASCADE ORDER:
+ * This file is loaded AFTER visual-system-unified-2024.css in theme.liquid.
+ * Some selectors intentionally override base styles from that file to provide
+ * a more comprehensive and unified card specification. The existing file
+ * serves as a fallback for any edge cases not covered here.
+ * 
+ * CARD SPEC:
+ * - Image: 1:1 aspect ratio, padded, no stretching
+ * - Title: 2-line clamp, readable contrast
+ * - Price: prominent, consistent formatting
+ * - CTA: Primary "Agregar al carrito" button style
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. CARD CONTAINER - Consistent wrapper styling
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ta-radius-card, 12px);
+  overflow: hidden;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #f1f5f9);
+  transition: var(--ta-transition-normal, all 250ms cubic-bezier(0.4, 0, 0.2, 1));
+  box-shadow: var(--ta-shadow-sm, 0 1px 3px 0 rgba(0, 0, 0, 0.1));
+}
+
+.card-wrapper.product-card-wrapper:hover {
+  border-color: var(--ta-border-hover, #3b82f6);
+  box-shadow: var(--ta-shadow-card-hover, 0 20px 30px -5px rgba(37, 99, 235, 0.2));
+  transform: translateY(-4px);
+}
+
+/* Mobile: disable hover lift */
+@media screen and (max-width: 749px) {
+  .card-wrapper.product-card-wrapper:hover {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   2. IMAGE AREA - 1:1 aspect ratio, padded, no stretching
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--ta-bg-secondary, #f8fafc);
+  padding: var(--ta-space-md, 1.2rem);
+}
+
+/* Force 1:1 aspect ratio */
+.card-wrapper.product-card-wrapper .card__media .media {
+  aspect-ratio: 1 / 1 !important;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ta-radius-md, 8px);
+  overflow: hidden;
+}
+
+/* Image styling - contain within ratio, no stretching */
+.card-wrapper.product-card-wrapper .card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease-out;
+}
+
+/* Subtle zoom on hover */
+.card-wrapper.product-card-wrapper:hover .card__media img {
+  transform: scale(1.03);
+}
+
+/* =============================================================================
+   3. BADGES - Clean, visible, positioned above image
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__badges {
+  position: absolute;
+  top: var(--ta-space-lg, 1.6rem);
+  left: var(--ta-space-lg, 1.6rem);
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-xs, 0.4rem);
+}
+
+.card-wrapper.product-card-wrapper .card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wider, 0.05em);
+  border-radius: var(--ta-radius-badge, 6px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.card-wrapper.product-card-wrapper .card__badge--sale {
+  background: var(--ta-error, #ef4444);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.card-wrapper.product-card-wrapper .card__badge--new {
+  background: var(--ta-success, #10b981);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.card-wrapper.product-card-wrapper .card__badge--sold-out {
+  background: var(--ta-text-muted, #64748b);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+/* =============================================================================
+   4. CARD CONTENT AREA - Flexbox layout for consistent heights
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--ta-space-lg, 1.6rem);
+  padding-top: var(--ta-space-md, 1.2rem);
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.card-wrapper.product-card-wrapper .card__information {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--ta-space-xs, 0.4rem);
+}
+
+/* =============================================================================
+   5. TITLE - 2-line clamp, readable contrast
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__heading {
+  margin: 0;
+  min-height: 2.8em; /* Reserve space for 2 lines */
+}
+
+.card-wrapper.product-card-wrapper .card__heading .full-unstyled-link {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  line-height: var(--ta-leading-snug, 1.375);
+  color: var(--ta-text, #0f172a);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link {
+  color: var(--ta-primary, #2563eb);
+}
+
+/* Ensure readable contrast - no dark overlays on titles */
+.card-wrapper.product-card-wrapper .card__heading a {
+  background: transparent;
+  text-shadow: none;
+}
+
+/* =============================================================================
+   6. PRICE - Prominent, consistent formatting
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card-information {
+  margin-top: auto; /* Push to bottom */
+}
+
+.card-wrapper.product-card-wrapper .price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--ta-space-sm, 0.8rem);
+  margin: var(--ta-space-sm, 0.8rem) 0;
+}
+
+/* Regular price - prominent success green */
+.card-wrapper.product-card-wrapper .price .price-item--regular {
+  font-size: var(--ta-font-size-xl, 2rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+  letter-spacing: var(--ta-tracking-tight, -0.025em);
+}
+
+/* Sale price styling */
+.card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: var(--ta-text-muted, #64748b);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+  font-size: var(--ta-font-size-xl, 2rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-error, #ef4444);
+  text-decoration: none;
+}
+
+/* =============================================================================
+   7. CTA BUTTON - Primary "Agregar al carrito" style
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .quick-add {
+  margin-top: auto;
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit {
+  width: 100%;
+  min-height: var(--ta-touch-comfortable, 48px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  border: none;
+  border-radius: var(--ta-radius-button, 8px);
+  cursor: pointer;
+  transition: var(--ta-transition-fast, all 150ms cubic-bezier(0.4, 0, 0.2, 1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  position: relative;
+  z-index: 3;
+}
+
+/* Primary button style */
+.card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
+  color: var(--ta-primary-contrast, #ffffff);
+  box-shadow: var(--ta-shadow-button, 0 4px 12px rgba(37, 99, 235, 0.3));
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
+  background: var(--ta-gradient-primary-hover, linear-gradient(135deg, #60a5fa, #3b82f6));
+  box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+  transform: translateY(-2px);
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:active {
+  transform: translateY(0);
+  box-shadow: var(--ta-shadow-button-active, 0 2px 8px rgba(37, 99, 235, 0.3));
+}
+
+/* Sold out / disabled state */
+.card-wrapper.product-card-wrapper .quick-add__submit[disabled] {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  color: var(--ta-text-inverse, #ffffff);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit[disabled]:hover {
+  transform: none;
+}
+
+/* Focus state for accessibility */
+.card-wrapper.product-card-wrapper .quick-add__submit:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   8. SECONDARY LINK - "Ver todos los detalles"
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__details-link {
+  display: none; /* Hide on card by default - button is primary CTA */
+}
+
+/* =============================================================================
+   9. CARD INNER STRUCTURE
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.card-wrapper.product-card-wrapper .card__inner {
+  flex: 0 0 auto;
+}
+
+/* =============================================================================
+   10. GRID CONSISTENCY - Uniform heights per row
+   ============================================================================= */
+
+/* Ensure grid items stretch to equal heights */
+.product-grid {
+  display: grid;
+  gap: var(--ta-space-xl, 2.4rem);
+}
+
+.product-grid .grid__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card-wrapper {
+  height: 100%;
+}
+
+.product-grid .card {
+  height: 100%;
+}
+
+/* =============================================================================
+   11. RELATED PRODUCTS SECTION STYLING
+   ============================================================================= */
+
+.related-products .product-grid,
+.tech-related-products {
+  display: grid;
+  gap: var(--ta-space-xl, 2.4rem);
+}
+
+.related-products .grid__item,
+.tech-related-products .grid__item {
+  display: flex;
+}
+
+.related-products .card-wrapper.product-card-wrapper,
+.tech-related-products .card-wrapper.product-card-wrapper {
+  height: 100%;
+}
+
+/* Related products heading enhancement */
+.related-products__heading {
+  text-align: center;
+  font-size: var(--ta-font-size-h2, 3.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+  margin-bottom: var(--ta-space-2xl, 3.2rem);
+}
+
+/* =============================================================================
+   12. RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+/* Mobile (up to 749px) */
+@media screen and (max-width: 749px) {
+  .card-wrapper.product-card-wrapper .card__media {
+    padding: var(--ta-space-sm, 0.8rem);
+  }
+
+  .card-wrapper.product-card-wrapper .card__content {
+    padding: var(--ta-space-md, 1.2rem);
+    padding-top: var(--ta-space-sm, 0.8rem);
+  }
+
+  .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link {
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+
+  .card-wrapper.product-card-wrapper .card__heading {
+    min-height: 2.5em;
+  }
+
+  .card-wrapper.product-card-wrapper .price .price-item--regular {
+    font-size: var(--ta-font-size-lg, 1.8rem);
+  }
+
+  .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+    font-size: var(--ta-font-size-lg, 1.8rem);
+  }
+
+  .card-wrapper.product-card-wrapper .quick-add__submit {
+    min-height: var(--ta-touch-min, 44px);
+    padding: var(--ta-space-sm, 0.8rem) var(--ta-space-md, 1.2rem);
+    font-size: var(--ta-font-size-xs, 1.2rem);
+  }
+
+  .card-wrapper.product-card-wrapper .card__badge {
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .card-wrapper.product-card-wrapper .card__badges {
+    top: var(--ta-space-md, 1.2rem);
+    left: var(--ta-space-md, 1.2rem);
+  }
+
+  .product-grid {
+    gap: var(--ta-space-md, 1.2rem);
+  }
+
+  .related-products__heading {
+    font-size: var(--ta-font-size-h3, 2.4rem);
+    margin-bottom: var(--ta-space-xl, 2.4rem);
+  }
+}
+
+/* Tablet (750px to 989px) */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link {
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+
+  .card-wrapper.product-card-wrapper .price .price-item--regular {
+    font-size: var(--ta-font-size-lg, 1.8rem);
+  }
+
+  .card-wrapper.product-card-wrapper .quick-add__submit {
+    font-size: var(--ta-font-size-xs, 1.2rem);
+  }
+}
+
+/* Desktop (990px+) */
+@media screen and (min-width: 990px) {
+  .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link {
+    font-size: var(--ta-font-size-md, 1.6rem);
+  }
+
+  .card-wrapper.product-card-wrapper .price .price-item--regular {
+    font-size: var(--ta-font-size-xl, 2rem);
+  }
+}
+
+/* =============================================================================
+   13. ACCESSIBILITY - Reduced motion support
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card-wrapper.product-card-wrapper,
+  .card-wrapper.product-card-wrapper .card__media img,
+  .card-wrapper.product-card-wrapper .quick-add__submit {
+    transition: none;
+  }
+
+  .card-wrapper.product-card-wrapper:hover {
+    transform: none;
+  }
+
+  .card-wrapper.product-card-wrapper:hover .card__media img {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   14. OVERLAY LINK - Full card clickability
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card-wrapper__link--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Ensure interactive elements are above overlay */
+.card-wrapper.product-card-wrapper .quick-add,
+.card-wrapper.product-card-wrapper .quick-add__submit,
+.card-wrapper.product-card-wrapper .card__badges {
+  position: relative;
+  z-index: 3;
+}
+
+/* =============================================================================
+   15. DESCRIPTION SNIPPET - Optional, hidden by default for cleaner cards
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__description {
+  display: none; /* Hide description to keep cards uniform height */
+}
