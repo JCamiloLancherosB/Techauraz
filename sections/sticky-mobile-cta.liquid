@@ -335,8 +335,12 @@
 
     formatMoney(priceValue) {
       if (typeof priceValue === 'number') {
-        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
-          return Shopify.formatMoney(priceValue);
+        try {
+          if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+            return Shopify.formatMoney(priceValue);
+          }
+        } catch (e) {
+          console.warn('Shopify.formatMoney failed, using fallback', e);
         }
 
         const currency = (typeof Shopify !== 'undefined' && Shopify.currency && Shopify.currency.active)
@@ -344,12 +348,16 @@
           : 'COP';
         const locale = 'es-CO';
 
-        return new Intl.NumberFormat(locale, {
-          style: 'currency',
-          currency: currency,
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(priceValue / 100);
+        try {
+          return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(priceValue / 100);
+        } catch (e) {
+          return '$' + Math.round(priceValue / 100).toLocaleString();
+        }
       }
 
       return priceValue;

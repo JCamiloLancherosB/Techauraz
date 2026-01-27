@@ -335,36 +335,6 @@
       // Listen to scroll with passive for better performance
       window.addEventListener('scroll', onScroll, { passive: true });
       
-      // Update on resize
-      let resizeTimeout;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          if (!isMobile()) {
-            hideStickyBar();
-          } else {
-            updateStickyVisibility();
-          }
-        }, 150);
-      });
-      
-      // Listen for variant changes to update price and availability
-      document.addEventListener('variant:change', function(event) {
-        if (!event.detail || !event.detail.variant) return;
-        
-        const variant = event.detail.variant;
-        
-        // Update price display
-        if (priceContainer && variant.price !== undefined) {
-          updatePriceDisplay(variant.price, variant.compare_at_price);
-        }
-        
-        // Update button state and text
-        if (stickyButton) {
-          updateButtonState(variant.available);
-        }
-      });
-      
       function updatePriceDisplay(price, comparePrice) {
         priceContainer.innerHTML = '';
         
@@ -408,8 +378,12 @@
        */
       function formatMoney(priceValue) {
         // Use Shopify's formatter if available
-        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
-          return Shopify.formatMoney(priceValue);
+        try {
+          if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+            return Shopify.formatMoney(priceValue);
+          }
+        } catch (e) {
+          console.warn('Shopify.formatMoney failed, using fallback', e);
         }
         
         // Fallback formatter
@@ -419,21 +393,65 @@
         const locale = 'es-CO';
         
         if (typeof priceValue === 'number') {
-          return new Intl.NumberFormat(locale, {
-            style: 'currency',
-            currency: currency,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          }).format(priceValue / 100);
+          try {
+            return new Intl.NumberFormat(locale, {
+              style: 'currency',
+              currency: currency,
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            }).format(priceValue / 100);
+          } catch (e) {
+            return '$' + Math.round(priceValue / 100).toLocaleString();
+          }
         }
         
         return priceValue;
       }
       
-      // Cleanup on page hide
-      window.addEventListener('pagehide', function() {
+      // Cleanup function - removes all event listeners
+      function cleanup() {
         window.removeEventListener('scroll', onScroll);
+        document.removeEventListener('variant:change', variantChangeHandler);
+        if (resizeTimeout) {
+          clearTimeout(resizeTimeout);
+        }
+      }
+      
+      // Store reference for cleanup
+      function variantChangeHandler(event) {
+        if (!event.detail || !event.detail.variant) return;
+        
+        const variant = event.detail.variant;
+        
+        // Update price display
+        if (priceContainer && variant.price !== undefined) {
+          updatePriceDisplay(variant.price, variant.compare_at_price);
+        }
+        
+        // Update button state and text
+        if (stickyButton) {
+          updateButtonState(variant.available);
+        }
+      }
+      
+      // Listen for variant changes
+      document.addEventListener('variant:change', variantChangeHandler);
+      
+      // Handle resize with debounce
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (!isMobile()) {
+            hideStickyBar();
+          } else {
+            updateStickyVisibility();
+          }
+        }, 150);
       });
+      
+      // Cleanup on page hide
+      window.addEventListener('pagehide', cleanup);
     })();
   </script>
 {%- endif -%}
