@@ -3,7 +3,7 @@
  * HEADER SCROLL HANDLER
  * =============================================================================
  * Mobile header hide/show on scroll + desktop sticky header shrink
- * Extracted from inline scripts in theme.liquid
+ * Consolidated into a single scroll listener for performance optimization
  */
 
 (function() {
@@ -13,26 +13,24 @@
   const header = document.querySelector('.section-header, .header-wrapper');
   if (!header) return;
   
-  /* =============================================================================
-     MOBILE HEADER HIDE/SHOW ON SCROLL
-     ============================================================================= */
+  // Shared state for scroll handling
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+  
   function isMobileLike() {
     return window.matchMedia('(max-width: 989.98px)').matches;
   }
   
-  let lastY = window.scrollY || 0;
-  let ticking = false;
-  
-  function onScroll() {
+  /* =============================================================================
+     MOBILE HEADER HIDE/SHOW ON SCROLL
+     ============================================================================= */
+  function handleMobileHeaderVisibility(y) {
     if (!isMobileLike()) {
       header.classList.remove('header--hide');
       header.classList.remove('header--show');
-      lastY = window.scrollY || 0;
-      ticking = false;
       return;
     }
     
-    const y = window.scrollY || 0;
     const delta = y - lastY;
     
     const menuOpen = document.querySelector('.menu-drawer[open]') ||
@@ -42,8 +40,6 @@
     if (menuOpen) {
       header.classList.remove('header--hide');
       header.classList.add('header--show');
-      lastY = y;
-      ticking = false;
       return;
     }
     
@@ -54,6 +50,31 @@
       header.classList.remove('header--show');
       header.classList.add('header--hide');
     }
+  }
+  
+  /* =============================================================================
+     STICKY HEADER SHRINK ON SCROLL
+     ============================================================================= */
+  function handleHeaderShrink(y) {
+    // Add 'scrolled' class when scrolled down more than 50px
+    if (y > 50) {
+      header.classList.add('scrolled');
+      document.body.classList.add('scrolled-past-header');
+    } else {
+      header.classList.remove('scrolled');
+      document.body.classList.remove('scrolled-past-header');
+    }
+  }
+  
+  /* =============================================================================
+     UNIFIED SCROLL HANDLER
+     ============================================================================= */
+  function onScroll() {
+    const y = window.scrollY || 0;
+    
+    // Handle both behaviors in one frame
+    handleMobileHeaderVisibility(y);
+    handleHeaderShrink(y);
     
     lastY = y;
     ticking = false;
@@ -69,6 +90,7 @@
     }
   }
   
+  // Single scroll listener for both behaviors (performance optimized)
   window.addEventListener('scroll', function() {
     if (!ticking) {
       window.requestAnimationFrame(onScroll);
@@ -77,39 +99,8 @@
   }, { passive: true });
   
   window.addEventListener('resize', onResize);
+  
+  // Initialize on load
   onResize();
-
-  /* =============================================================================
-     STICKY HEADER SHRINK ON SCROLL
-     =============================================================================
-     Uses the same header element from above
-     ============================================================================= */
-  let lastScrollY = 0;
-  let scrollTicking = false;
-  
-  function updateHeaderOnScroll() {
-    const scrollY = window.scrollY || window.pageYOffset;
-    
-    // Add 'scrolled' class when scrolled down more than 50px
-    if (scrollY > 50) {
-      header.classList.add('scrolled');
-      document.body.classList.add('scrolled-past-header');
-    } else {
-      header.classList.remove('scrolled');
-      document.body.classList.remove('scrolled-past-header');
-    }
-    
-    lastScrollY = scrollY;
-    scrollTicking = false;
-  }
-  
-  function requestTick() {
-    if (!scrollTicking) {
-      window.requestAnimationFrame(updateHeaderOnScroll);
-      scrollTicking = true;
-    }
-  }
-  
-  window.addEventListener('scroll', requestTick, { passive: true });
-  updateHeaderOnScroll(); // Initial check
+  onScroll(); // Initial state check
 })();
