@@ -628,18 +628,26 @@ select:focus {
   z-index: 100 !important;
 }
 
+/* 
+ * Z-INDEX HIERARCHY (follows ui-ux-responsive-fixes.css documentation):
+ * WhatsApp FAB: 500 (highest - always accessible)
+ * Cookie Banner: 400 (above modals, below WhatsApp)
+ * Modals/Drawers: 300 (above header, below cookie)
+ * Cart Notification: 200 (above header)
+ * Header: 100-101
+ */
 .whatsapp-float,
 .whatsapp-button-float,
 [class*="whatsapp"][class*="float"],
 [class*="floating-whatsapp"] {
-  z-index: 999 !important;
+  z-index: 500 !important;
 }
 
 .cookie-banner,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: 1000 !important;
+  z-index: 400 !important;
 }
 
 /* Modals and overlays */
@@ -647,7 +655,7 @@ select:focus {
 .product-media-modal,
 .product-popup-modal,
 [role="dialog"] {
-  z-index: 1001 !important;
+  z-index: 300 !important;
 }
 
 /* Cart drawer and menu drawer */
@@ -655,7 +663,7 @@ select:focus {
 .drawer,
 .menu-drawer,
 menu-drawer {
-  z-index: 1001 !important;
+  z-index: 300 !important;
 }
 
 /* Mobile-specific z-index adjustments */
