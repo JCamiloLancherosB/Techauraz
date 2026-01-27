@@ -672,24 +672,25 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.6rem;
+  gap: var(--ta-space-sm, 0.6rem);
   margin: var(--ta-space-md, 1rem) 0;
   padding: var(--ta-space-sm, 0.8rem) 0;
 }
 
+/* Trust indicators now use unified styles from techauraz-tokens.css (.ta-chip, .ta-trust-chip) */
 .trust-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--ta-space-xs, 0.4rem);
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
-  color: #047857;
-  padding: 0.5rem 0.9rem;
-  border-radius: 20px;
-  font-size: 1.25rem;
-  font-weight: 600;
+  color: var(--ta-success, #10b981);
+  padding: var(--ta-space-xs, 0.5rem) var(--ta-space-sm, 0.9rem);
+  border-radius: var(--ta-radius-pill, 20px);
+  font-size: var(--ta-font-size-xs, 1.25rem);
+  font-weight: var(--ta-font-semibold, 600);
   border: 1px solid rgba(16, 185, 129, 0.25);
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: var(--ta-transition-fast);
 }
 
 .trust-indicator:hover {
@@ -702,14 +703,14 @@
 .urgency-indicator {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
   color: #451a03;
-  padding: 0.9rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1.4rem;
+  padding: var(--ta-space-sm, 0.9rem) var(--ta-space-md, 1.2rem);
+  border-radius: var(--ta-radius-md, 8px);
+  font-weight: var(--ta-font-bold, 700);
+  font-size: var(--ta-font-size-sm, 1.4rem);
   text-align: center;
   margin: var(--ta-space-md, 1rem) 0;
   box-shadow: 0 3px 12px rgba(251, 191, 36, 0.35);
-  line-height: 1.4;
+  line-height: var(--ta-leading-normal, 1.4);
   border: 1px solid rgba(234, 179, 8, 0.3);
 }
 
