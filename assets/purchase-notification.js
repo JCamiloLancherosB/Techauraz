@@ -1,12 +1,22 @@
 /* ============================================
    TECHAURAZ - Purchase Notification JavaScript
    Sistema de Notificaciones de Compra Reciente
+   
+   ADVERTENCIA: Este sistema ha sido DESHABILITADO por defecto porque 
+   muestra datos ficticios/aleatorios que pueden dañar la confianza del cliente.
+   
+   Para notificaciones de compras reales, considere:
+   1. Integrar con la API de pedidos de Shopify via webhooks
+   2. Usar un servicio de analytics verificado como Fomo, Proof, etc.
+   3. Conectar con su sistema de CRM para datos de compras reales
    ============================================ */
 
 class PurchaseNotification {
   constructor(options = {}) {
+    // DESHABILITADO POR DEFECTO - Solo se activa si explícitamente se pasa enabled: true
+    // Y hay una integración real con datos de compras verificadas
     this.options = {
-      enabled: options.enabled !== false,
+      enabled: options.enabled === true, // Cambiado: ahora requiere enabled: true explícito
       delay: options.delay || 5000,
       displayDuration: options.displayDuration || 8000,
       maxNotifications: options.maxNotifications || 5,
@@ -19,9 +29,13 @@ class PurchaseNotification {
     this.currentNotification = null;
     this.notificationCount = 0;
     
-    if (this.options.enabled) {
+    // Solo inicializar si está explícitamente habilitado Y hay productos reales configurados
+    // Nota: Anteriormente el sistema era opt-out (había que deshabilitarlo explícitamente),
+    // ahora es opt-in (debe habilitarse explícitamente) para mejorar la confianza del usuario
+    if (this.options.enabled && this.options.products.length > 0) {
       this.init();
     }
+    // Si está habilitado pero sin productos reales, simplemente no inicializar (sin log público)
   }
 
   init() {
@@ -66,12 +80,21 @@ class PurchaseNotification {
 
   /**
    * Muestra una notificación
+   * Solo muestra si hay datos reales disponibles
    */
   showNotification() {
     const data = this.generateNotificationData();
+    
+    // No mostrar notificación si no hay datos reales - salir silenciosamente
+    if (!data) {
+      return;
+    }
+    
     const notification = this.createNotification(data);
     
     const container = document.getElementById('purchase-notifications');
+    if (!container) return;
+    
     container.appendChild(notification);
     
     // Animar entrada
@@ -92,9 +115,16 @@ class PurchaseNotification {
 
   /**
    * Genera datos de notificación
+   * Solo genera datos si hay productos reales configurados
    */
   generateNotificationData() {
     const product = this.getRandomProduct();
+    
+    // Si no hay producto real, no generar notificación
+    if (!product) {
+      return null;
+    }
+    
     const location = this.getRandomLocation();
     const timeAgo = this.getRandomTimeAgo();
     
@@ -260,15 +290,12 @@ class PurchaseNotification {
 
   /**
    * Obtiene un producto aleatorio
+   * NOTA: Solo devuelve productos reales configurados, nunca datos ficticios
    */
   getRandomProduct() {
     if (this.options.products.length === 0) {
-      // Return a default placeholder product
-      return {
-        name: 'Audífonos Bluetooth',
-        image: 'data:image/svg+xml,%3Csvg width="60" height="60" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="60" height="60" fill="%23ddd"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999"%3E?%3C/text%3E%3C/svg%3E',
-        url: '/products/audifonos-bluetooth'
-      };
+      // No devolver datos ficticios - retornar null para indicar que no hay productos reales
+      return null;
     }
     return this.options.products[Math.floor(Math.random() * this.options.products.length)];
   }

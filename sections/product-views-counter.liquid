@@ -1,92 +1,174 @@
-<div class="product-views-counter section-{{ section.id }}-padding">
-  <div class="product-views-counter__container page-width">
-    <div class="product-views-counter__content">
-      <span class="product-views-counter__badge">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M10 3C5 3 1.73 7.11 1 10c.73 2.89 4 7 9 7s8.27-4.11 9-7c-.73-2.89-4-7-9-7zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="currentColor"/>
+{%- comment -%}
+  Social Proof Configurable - Stock Bajo / Reseñas Reales
+  Solo muestra datos reales del inventario o reseñas de Shopify.
+  No hay números aleatorios/falsos.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign inventory_qty = current_variant.inventory_quantity
+  assign inventory_managed = current_variant.inventory_management == 'shopify'
+  assign low_stock_threshold = section.settings.low_stock_threshold | default: 10
+  assign show_low_stock = section.settings.show_low_stock
+  assign show_reviews = section.settings.show_reviews
+  assign has_reviews = product.metafields.reviews.rating_count != blank and product.metafields.reviews.rating_count > 0
+  assign review_count = product.metafields.reviews.rating_count | default: 0
+  
+  assign show_stock_indicator = false
+  if show_low_stock and inventory_managed and inventory_qty != blank and inventory_qty > 0 and inventory_qty <= low_stock_threshold
+    assign show_stock_indicator = true
+  endif
+  
+  assign show_review_indicator = false
+  if show_reviews and has_reviews
+    assign show_review_indicator = true
+  endif
+-%}
+
+{%- if show_stock_indicator or show_review_indicator -%}
+<div class="product-social-proof section-{{ section.id }}-padding">
+  <div class="product-social-proof__container page-width">
+    
+    {%- if show_stock_indicator -%}
+    <div class="product-social-proof__item product-social-proof__item--stock">
+      <span class="product-social-proof__badge product-social-proof__badge--warning">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 2L2 7L10 12L18 7L10 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L10 17L18 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Vistas
       </span>
-      <span class="product-views-counter__text">
-        En las últimas 24 horas, este producto ha sido visto 
-        <strong class="product-views-counter__number" data-views-count>0</strong> 
-        veces
+      <span class="product-social-proof__text">
+        {%- if section.settings.show_exact_quantity -%}
+          ¡Solo quedan <strong>{{ inventory_qty }}</strong> unidades!
+        {%- else -%}
+          ¡Stock bajo - Últimas unidades disponibles!
+        {%- endif -%}
       </span>
     </div>
+    {%- endif -%}
+
+    {%- if show_review_indicator -%}
+    <div class="product-social-proof__item product-social-proof__item--reviews">
+      <span class="product-social-proof__badge product-social-proof__badge--success">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 1L12.39 6.26L18 7.27L14 11.14L14.76 17L10 14.27L5.24 17L6 11.14L2 7.27L7.61 6.26L10 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="product-social-proof__text">
+        +{{ review_count }} {% if review_count == 1 %}reseña{% else %}reseñas{% endif %} de clientes verificados
+      </span>
+    </div>
+    {%- endif -%}
+    
   </div>
 </div>
+{%- endif -%}
 
-<script>
-(function() {
-  function generateRealisticViewCount(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+<style>
+  .product-social-proof {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
-
-  function animateCount(element, target) {
-    const duration = 1500;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    let step = 0;
-
-    const timer = setInterval(() => {
-      step++;
-      current = Math.min(Math.floor(increment * step), target);
-      element.textContent = current.toLocaleString('es-CO');
-
-      if (step >= steps) {
-        clearInterval(timer);
-        element.textContent = target.toLocaleString('es-CO');
-      }
-    }, duration / steps);
+  
+  .product-social-proof__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const viewsElement = document.querySelector('[data-views-count]');
-    if (!viewsElement) return;
-
-    // Obtener configuración
-    const minViews = {{ section.settings.min_views | default: 100 }};
-    const maxViews = {{ section.settings.max_views | default: 999 }};
-    
-    const viewCount = generateRealisticViewCount(minViews, maxViews);
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      viewsElement.textContent = viewCount.toLocaleString('es-CO');
-    } else {
-      setTimeout(() => {
-        animateCount(viewsElement, viewCount);
-      }, 300);
-    }
-  });
-})();
-</script>
+  
+  .product-social-proof__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .product-social-proof__item--stock {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+    border: 1px solid #fbbf24;
+    color: #92400e;
+  }
+  
+  .product-social-proof__item--reviews {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #22c55e;
+    color: #166534;
+  }
+  
+  .product-social-proof__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .product-social-proof__badge--warning {
+    color: #d97706;
+  }
+  
+  .product-social-proof__badge--success {
+    color: #16a34a;
+  }
+  
+  .product-social-proof__text {
+    line-height: 1.4;
+  }
+  
+  .product-social-proof__text strong {
+    font-weight: 700;
+  }
+</style>
 
 {% schema %}
 {
-  "name": "Contador de Vistas",
+  "name": "Social Proof Real",
   "tag": "section",
   "class": "section",
   "settings": [
     {
-      "type": "range",
-      "id": "min_views",
-      "min": 50,
-      "max": 500,
-      "step": 10,
-      "label": "Vistas mínimas",
-      "default": 100,
-      "info": "Número mínimo de vistas a mostrar"
+      "type": "header",
+      "content": "Indicador de Stock Bajo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_low_stock",
+      "label": "Mostrar indicador de stock bajo",
+      "default": true,
+      "info": "Solo se muestra cuando el inventario real está por debajo del umbral"
     },
     {
       "type": "range",
-      "id": "max_views",
-      "min": 200,
-      "max": 2000,
-      "step": 50,
-      "label": "Vistas máximas",
-      "default": 999,
-      "info": "Número máximo de vistas a mostrar"
+      "id": "low_stock_threshold",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "Umbral de stock bajo",
+      "default": 10,
+      "info": "Se muestra 'Stock bajo' cuando quedan menos de estas unidades"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_exact_quantity",
+      "label": "Mostrar cantidad exacta",
+      "default": true,
+      "info": "Muestra '¡Solo quedan X unidades!' en lugar de solo 'Stock bajo'"
+    },
+    {
+      "type": "header",
+      "content": "Indicador de Reseñas"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Mostrar contador de reseñas",
+      "default": true,
+      "info": "Solo se muestra si el producto tiene reseñas reales en Shopify"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
     },
     {
       "type": "range",
@@ -111,7 +193,7 @@
   ],
   "presets": [
     {
-      "name": "Contador de Vistas"
+      "name": "Social Proof Real"
     }
   ]
 }
