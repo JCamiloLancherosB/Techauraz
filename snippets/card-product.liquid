@@ -20,9 +20,11 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
-{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
-{{ 'visual-system-unified-2024.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  CSS assets (component-rating.css, component-volume-pricing.css, visual-system-unified-2024.css)
+  are now loaded once at the section level, not per card, to avoid duplicate CSS requests.
+  See: sections/related-products.liquid, sections/featured-collection.liquid, etc.
+{%- endcomment -%}
 {%- comment -%} product-layout-fixes-2024.css removed - styles in techauraz-unified.css {%- endcomment -%}
 {%- comment -%} premium-enhancements.css is deprecated - styles moved to techauraz-unified.css {%- endcomment -%}
 
