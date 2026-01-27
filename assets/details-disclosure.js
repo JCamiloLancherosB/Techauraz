@@ -26,7 +26,7 @@ class DetailsDisclosure extends HTMLElement {
 
   close() {
     this.mainDetailsToggle.removeAttribute('open');
-    this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
+    this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', 'false');
   }
 }
 
