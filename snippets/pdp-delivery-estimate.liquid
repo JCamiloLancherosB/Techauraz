@@ -1,0 +1,73 @@
+{% comment %}
+  Product Detail Page - Delivery Estimate Module
+  
+  Shows:
+  1. "Buy in the next HH:MM for your order to ship today" (if before cut-off)
+  2. "Estimated delivery: between [date] and [date]" 
+  
+  Rules:
+  - Cut-off: 2:00 PM Colombia time
+  - Excludes Sundays
+  - 2-5 business days delivery for Colombia
+  - Uses "Estimado" / "aprox." for honest messaging
+  
+  Usage:
+  {% render 'pdp-delivery-estimate' %}
+{% endcomment %}
+
+<div class="pdp-delivery-estimate" aria-live="polite" aria-atomic="true">
+  {%- comment -%} Cut-off countdown message {%- endcomment -%}
+  <div class="delivery-estimate__cutoff-message delivery-estimate__row">
+    <span class="delivery-estimate__icon delivery-estimate__icon--clock" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="delivery-estimate__text">
+      <span class="visually-hidden">Tiempo restante para envío hoy:</span>
+      Compra en las próximas 
+      <strong class="delivery-estimate__countdown-time" role="timer" aria-label="Tiempo restante">--:--:--</strong> 
+      para que tu pedido salga <strong>hoy</strong>
+    </span>
+  </div>
+
+  {%- comment -%} Estimated delivery date range {%- endcomment -%}
+  <div class="delivery-estimate__delivery-row delivery-estimate__row">
+    <span class="delivery-estimate__icon delivery-estimate__icon--truck" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 6h12v8H3V6z" stroke="currentColor" stroke-width="2"/>
+        <path d="M15 9h3l3 3v2h-6V9z" stroke="currentColor" stroke-width="2"/>
+        <circle cx="7" cy="14" r="2" stroke="currentColor" stroke-width="2"/>
+        <circle cx="18" cy="14" r="2" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 14h6" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 14h2" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 14h1" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </span>
+    <span class="delivery-estimate__text">
+      Entrega estimada: entre 
+      <strong class="delivery-estimate__date-range">--</strong>
+      <span class="delivery-estimate__aprox">(aprox.)</span>
+    </span>
+  </div>
+
+  {%- comment -%} Free shipping indicator {%- endcomment -%}
+  <div class="delivery-estimate__free-shipping delivery-estimate__row">
+    <span class="delivery-estimate__icon delivery-estimate__icon--check" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="delivery-estimate__text">
+      <strong>Envío gratis</strong> a todo Colombia
+    </span>
+  </div>
+</div>
+
+{%- comment -%} 
+  Load the JavaScript with defer for performance.
+  Script includes guard against multiple initializations.
+{%- endcomment -%}
+<script src="{{ 'delivery-estimate.js' | asset_url }}" defer="defer"></script>
