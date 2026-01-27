@@ -1009,3 +1009,204 @@ details summary:focus-visible,
     0 4px 24px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
+
+/* =============================================================================
+   14. UNIFIED CHIP/BADGE STYLES
+   Trust indicators: envío gratis, pago seguro, garantía, etc.
+   Consistent styling using design tokens
+   ============================================================================= */
+
+/* Base chip styles - works for trust indicators, tags, labels */
+.ta-chip,
+.trust-indicator,
+.ta-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-semibold, 600);
+  line-height: var(--ta-leading-tight, 1.2);
+  border-radius: var(--ta-radius-pill, 9999px);
+  white-space: nowrap;
+  transition: var(--ta-transition-fast);
+}
+
+/* Success chip - for positive indicators (envío gratis, garantía) */
+.ta-chip--success,
+.trust-indicator--success,
+.ta-trust-chip {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
+  color: var(--ta-success, #10b981);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.ta-chip--success:hover,
+.trust-indicator--success:hover,
+.ta-trust-chip:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Primary chip - for brand-related indicators */
+.ta-chip--primary {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+  color: var(--ta-primary, #2563eb);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.ta-chip--primary:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
+  border-color: rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Warning chip - for urgency/attention indicators */
+.ta-chip--warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+  color: #92400e;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.ta-chip--warning:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+/* Neutral chip - for general labels */
+.ta-chip--neutral {
+  background: var(--ta-bg-secondary, #f8fafc);
+  color: var(--ta-text-muted, #64748b);
+  border: 1px solid var(--ta-border, #e2e8f0);
+}
+
+.ta-chip--neutral:hover {
+  background: var(--ta-bg-tertiary, #f1f5f9);
+  border-color: var(--ta-border-hover, #3b82f6);
+}
+
+/* Chip with icon */
+.ta-chip__icon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+/* =============================================================================
+   15. UNIFIED SECTION HEADING STYLES
+   Consistent styling for "Productos destacados", "Más vendidos", etc.
+   ============================================================================= */
+
+/* Base section heading - unified across all pages */
+.ta-section-heading,
+.section-heading,
+.title-wrapper .title,
+h2.title {
+  font-family: var(--ta-font-heading);
+  font-size: var(--ta-font-size-h2, 3.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  line-height: var(--ta-leading-tight, 1.2);
+  letter-spacing: var(--ta-tracking-tight, -0.025em);
+  color: var(--ta-text, #0f172a);
+  text-align: center;
+  margin-bottom: var(--ta-space-xl, 2.4rem);
+}
+
+/* Section heading with subtitle support */
+.ta-section-header {
+  text-align: center;
+  margin-bottom: var(--ta-space-2xl, 3.2rem);
+}
+
+.ta-section-header .ta-section-heading {
+  margin-bottom: var(--ta-space-sm, 0.8rem);
+}
+
+.ta-section-subtitle {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: var(--ta-text-muted, #64748b);
+  line-height: var(--ta-leading-relaxed, 1.625);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* Mobile responsive typography for section headings */
+@media screen and (max-width: 749px) {
+  .ta-section-heading,
+  .section-heading,
+  .title-wrapper .title,
+  h2.title {
+    font-size: var(--ta-font-size-h2, 2.4rem);
+    margin-bottom: var(--ta-space-lg, 1.6rem);
+  }
+
+  .ta-section-header {
+    margin-bottom: var(--ta-space-xl, 2.4rem);
+  }
+
+  .ta-section-subtitle {
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+}
+
+/* Section heading variants for different color schemes */
+.ta-section-heading--inverse,
+[class*="color-scheme-d58c693b"] .ta-section-heading,
+[class*="color-scheme-d58c693b"] .section-heading,
+[class*="color-scheme-d58c693b"] .title-wrapper .title,
+[class*="color-scheme-d58c693b"] h2.title {
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.ta-section-subtitle--inverse,
+[class*="color-scheme-d58c693b"] .ta-section-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =============================================================================
+   16. UNIFIED CARD BASE STYLES
+   Ensures all card types use consistent tokens
+   ============================================================================= */
+
+/* Card base - applies to product cards, benefit cards, feature cards */
+.ta-card {
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #f1f5f9);
+  border-radius: var(--ta-radius-card, 12px);
+  box-shadow: var(--ta-shadow-sm);
+  transition: var(--ta-transition-normal);
+  overflow: hidden;
+}
+
+.ta-card:hover {
+  border-color: var(--ta-border-hover, #3b82f6);
+  box-shadow: var(--ta-shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+/* Card padding variants */
+.ta-card--padded {
+  padding: var(--ta-space-lg, 1.6rem);
+}
+
+.ta-card--padded-lg {
+  padding: var(--ta-space-xl, 2.4rem);
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ta-chip,
+  .trust-indicator,
+  .ta-trust-chip,
+  .ta-card {
+    transition: none;
+  }
+
+  .ta-chip:hover,
+  .trust-indicator:hover,
+  .ta-trust-chip:hover,
+  .ta-card:hover {
+    transform: none;
+  }
+}
