@@ -131,6 +131,7 @@
 .slideshow__media,
 .banner__media {
   min-height: 340px;
+  max-height: 450px; /* Cap mobile height */
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -142,6 +143,7 @@
   .slideshow__media,
   .banner__media {
     min-height: 420px;
+    max-height: 520px;
   }
 }
 
@@ -174,11 +176,13 @@
 /* Ensure slideshow slide containers maintain consistent height */
 .slideshow__slide {
   min-height: 340px; /* Mobile */
+  max-height: 450px; /* Cap mobile height to prevent excessive growth */
 }
 
 @media screen and (min-width: 750px) {
   .slideshow__slide {
     min-height: 420px; /* Tablet */
+    max-height: 520px;
   }
 }
 
@@ -249,6 +253,11 @@
 /* =============================================================================
    SLIDESHOW CONTROLS - Desktop & Mobile Positioning
    Unified control styling - removed duplicate class references
+   
+   Button size rationale:
+   - 52x52px exceeds WCAG 2.1 minimum touch target (44x44px) by ~18%
+   - Provides comfortable touch area without being visually dominant
+   - Consistent with common UI patterns for navigation controls
    ============================================================================= */
 
 /* Desktop: Arrow buttons centered vertically on hero (auto-rotate mode) */
@@ -260,6 +269,7 @@
     backdrop-filter: blur(12px);
     border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
+    /* 52px exceeds WCAG 2.1 minimum (44px) while maintaining visual balance */
     width: 52px;
     height: 52px;
     min-width: 52px;
@@ -302,20 +312,24 @@
   }
 }
 
-/* Mobile: Hide arrows for auto-rotate, show dots below hero for manual mode */
+/* 
+ * Mobile: Hide arrows for auto-rotate, show dots below hero for manual mode
+ * Arrows are hidden on mobile for better UX - users swipe to navigate slides
+ */
 @media screen and (max-width: 749px) {
-  /* Hide arrow buttons on mobile for auto-rotate mode */
+  /* Hide arrow buttons on mobile for auto-rotate mode - users swipe instead */
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     display: none;
   }
 
-  /* Controls positioning for mobile */
+  /* Controls positioning for mobile - spacing ensures no overlap with next section */
   .template-index slideshow-component .slideshow__controls {
     position: relative;
     bottom: auto;
     left: auto;
     transform: none;
     margin: 1rem auto 0;
+    /* Padding provides separation from next section content */
     padding: 0.75rem 0 1.5rem;
     justify-content: center;
     gap: 0.5rem;
