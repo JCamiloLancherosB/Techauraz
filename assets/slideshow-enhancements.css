@@ -2,11 +2,13 @@
  * Slideshow Enhancements - Slider Controls & CTAs
  * Purpose: Improve visibility and positioning of slideshow controls and call-to-action buttons
  * Scoped to: .template-index (home page) slideshow component
+ * Updated: 2026-01-27 - Consolidated control styles, removed duplicate class selectors
  */
 
 /* =============================================================================
    SLIDESHOW IMAGE VISIBILITY & HEIGHT CONSISTENCY FIXES
    Critical: Ensure all slides show images and maintain consistent height
+   Heights: Mobile 380px, Desktop 480px (reduced from 520px for better proportions)
    ============================================================================= */
 
 /* Tech hero wrapper hooks (scoped to home page) */
@@ -33,13 +35,21 @@
 
 .template-index .tech-hero__media,
 .template-index .tech-hero .slideshow__slide {
-  min-height: 380px;
+  min-height: 340px;
 }
 
 @media screen and (min-width: 750px) {
   .template-index .tech-hero__media,
   .template-index .tech-hero .slideshow__slide {
-    min-height: 520px;
+    min-height: 420px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .template-index .tech-hero__media,
+  .template-index .tech-hero .slideshow__slide {
+    min-height: 480px;
+    max-height: 560px;
   }
 }
 
@@ -51,26 +61,36 @@
   object-fit: cover;
 }
 
-body.template-index .tech-hero-slideshow .tech-hero__controls {
+/* =============================================================================
+   SLIDESHOW CONTROLS - Single unified control set
+   Position: Auto-rotate mode = arrows on sides (top), Manual mode = controls at bottom
+   ============================================================================= */
+
+/* Base control positioning for manual mode (dots/counter at bottom) */
+.template-index slideshow-component .slideshow__controls {
   position: absolute;
-  bottom: 16px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   pointer-events: auto;
 }
 
-body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__controls--top {
-  bottom: auto;
+/* Auto-rotate mode: arrows positioned on sides */
+.template-index slideshow-component .slideshow__controls--top {
+  position: absolute;
   top: 50%;
+  bottom: auto;
   left: 0;
   right: 0;
   transform: translateY(-50%);
   pointer-events: none;
-}
-
-body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__controls--top .slider-button {
-  pointer-events: auto;
+  justify-content: space-between;
+  padding: 0 1.5rem;
 }
 
 /* Force placeholder SVGs in slideshow to be visible and fill container */
@@ -85,7 +105,7 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   height: 100% !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  min-height: 380px; /* Mobile: 380px */
+  min-height: 340px; /* Mobile */
   object-fit: cover;
   display: block;
   opacity: 1;
@@ -95,34 +115,42 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
 @media screen and (min-width: 750px) {
   .slideshow__media.placeholder .placeholder-svg,
   .banner__media.placeholder .placeholder-svg {
-    min-height: 520px; /* Desktop: 520px */
-    height: 520px;
+    min-height: 420px; /* Tablet */
   }
 }
 
-/* Ensure slideshow media containers have consistent height - per requirements */
+@media screen and (min-width: 990px) {
+  .slideshow__media.placeholder .placeholder-svg,
+  .banner__media.placeholder .placeholder-svg {
+    min-height: 480px; /* Desktop */
+    max-height: 560px;
+  }
+}
+
+/* Ensure slideshow media containers have consistent height */
 .slideshow__media,
 .banner__media {
-  min-height: 380px; /* Mobile: 380px (±40 = 340-420px range) */
-  height: 380px;
+  min-height: 340px;
   width: 100%;
   position: relative;
   overflow: hidden;
   background: #f1f5f9; /* Light gray fallback background */
 }
 
-/* Desktop: Set height to 520px as per requirements */
+/* Tablet: Set height */
 @media screen and (min-width: 750px) {
   .slideshow__media,
   .banner__media {
-    min-height: 520px; /* Desktop: 520px (±40 = 480-560px range) */
-    height: 520px;
+    min-height: 420px;
   }
+}
 
-  .slideshow__media.placeholder .placeholder-svg,
-  .banner__media.placeholder .placeholder-svg {
-    min-height: 520px;
-    height: 520px;
+/* Desktop: Set height with max to prevent excessive height */
+@media screen and (min-width: 990px) {
+  .slideshow__media,
+  .banner__media {
+    min-height: 480px;
+    max-height: 560px;
   }
 }
 
@@ -143,16 +171,21 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   opacity: 1;
 }
 
-/* Ensure slideshow slide containers maintain consistent height - per requirements */
+/* Ensure slideshow slide containers maintain consistent height */
 .slideshow__slide {
-  min-height: 380px; /* Mobile: 380px */
-  height: 380px;
+  min-height: 340px; /* Mobile */
 }
 
 @media screen and (min-width: 750px) {
   .slideshow__slide {
-    min-height: 520px; /* Desktop: 520px */
-    height: 520px;
+    min-height: 420px; /* Tablet */
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .slideshow__slide {
+    min-height: 480px; /* Desktop */
+    max-height: 560px;
   }
 }
 
@@ -215,58 +248,53 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
 
 /* =============================================================================
    SLIDESHOW CONTROLS - Desktop & Mobile Positioning
+   Unified control styling - removed duplicate class references
    ============================================================================= */
 
-/* Desktop: Arrow buttons centered vertically on hero */
+/* Desktop: Arrow buttons centered vertically on hero (auto-rotate mode) */
 @media screen and (min-width: 750px) {
-  .template-index slideshow-component .slider-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  .template-index slideshow-component .slideshow__controls--top .slider-button {
+    position: relative;
     z-index: 102;
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
-    min-height: 56px;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    min-height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.95);
+    color: #1f2937;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
   }
 
-  .template-index slideshow-component .slider-button--prev {
-    left: 2rem;
-  }
-
-  .template-index slideshow-component .slider-button--next {
-    right: 2rem;
-  }
-
-  .template-index slideshow-component .slider-button:hover {
+  .template-index slideshow-component .slideshow__controls--top .slider-button:hover {
     background: rgba(37, 99, 235, 0.95);
+    color: #ffffff;
     border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-50%) scale(1.15);
+    transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
   }
 
-  .template-index slideshow-component .slider-button:focus {
+  .template-index slideshow-component .slideshow__controls--top .slider-button:focus {
     outline: 3px solid rgba(37, 99, 235, 0.6);
     outline-offset: 3px;
     background: rgba(37, 99, 235, 0.95);
+    color: #ffffff;
     border-color: rgba(255, 255, 255, 0.6);
   }
 
-  .template-index slideshow-component .slider-button:focus-visible {
+  .template-index slideshow-component .slideshow__controls--top .slider-button:focus-visible {
     outline: 3px solid rgba(37, 99, 235, 0.8);
     outline-offset: 3px;
     background: rgba(37, 99, 235, 0.95);
+    color: #ffffff;
     border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 
       0 0 0 4px rgba(37, 99, 235, 0.3),
@@ -274,21 +302,21 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   }
 }
 
-/* Mobile: Hide arrows, show dots below hero */
+/* Mobile: Hide arrows for auto-rotate, show dots below hero for manual mode */
 @media screen and (max-width: 749px) {
-  .template-index slideshow-component .slideshow__controls--top .slider-button,
-  .template-index slideshow-component .tech-slideshow-controls.slideshow__controls--top .slider-button {
+  /* Hide arrow buttons on mobile for auto-rotate mode */
+  .template-index slideshow-component .slideshow__controls--top .slider-button {
     display: none;
   }
 
-  .template-index slideshow-component .slideshow__controls,
-  .template-index slideshow-component .tech-slideshow-controls {
+  /* Controls positioning for mobile */
+  .template-index slideshow-component .slideshow__controls {
     position: relative;
     bottom: auto;
     left: auto;
     transform: none;
-    margin: 1.5rem auto 0;
-    padding: 1rem 0 2rem; /* Extra bottom padding to prevent overlap with next section */
+    margin: 1rem auto 0;
+    padding: 0.75rem 0 1.5rem;
     justify-content: center;
     gap: 0.5rem;
   }
@@ -309,12 +337,11 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
   }
 }
 
-/* Desktop: Position dots at bottom of hero, not overlapping next section */
+/* Desktop: Position controls at bottom of hero */
 @media screen and (min-width: 750px) {
-  .template-index slideshow-component .slideshow__controls,
-  .template-index slideshow-component .tech-slideshow-controls {
+  .template-index slideshow-component .slideshow__controls:not(.slideshow__controls--top) {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -324,9 +351,8 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
     justify-content: center;
   }
 
-  /* When controls are at top (with autoplay), position differently */
-  .template-index slideshow-component .slideshow__controls--top,
-  .template-index slideshow-component .tech-slideshow-controls.slideshow__controls--top {
+  /* When controls are at top (with autoplay), position arrows on sides */
+  .template-index slideshow-component .slideshow__controls--top {
     position: absolute;
     top: 50%;
     bottom: auto;
@@ -335,12 +361,7 @@ body.template-index .tech-hero-slideshow .tech-hero__controls.slideshow__control
     transform: translateY(-50%);
     pointer-events: none;
     justify-content: space-between;
-    padding: 0 1rem;
-  }
-
-  .template-index slideshow-component .slideshow__controls--top .slider-button,
-  .template-index slideshow-component .tech-slideshow-controls.slideshow__controls--top .slider-button {
-    pointer-events: all;
+    padding: 0 1.5rem;
   }
 }
 
