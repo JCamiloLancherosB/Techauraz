@@ -4312,7 +4312,7 @@ section.newsletter {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 450; /* Above content (100), below WhatsApp (500) and modals (999) */
+  z-index: 450; /* Above content (100), below WhatsApp (9999 set via JS) and modals (999+) */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
   transform: translateY(100%);
@@ -4468,7 +4468,7 @@ section.newsletter {
   body.cookie-visible.sticky-cta-active .whatsapp-button-float,
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-button-float {
-    bottom: calc(190px + env(safe-area-inset-bottom, 0px) + var(--cookie-banner-height, 0px)) !important;
+    bottom: calc(190px + env(safe-area-inset-bottom, 0px)) !important;
   }
   
   /* Ensure sticky CTA doesn't interfere with cart drawer */

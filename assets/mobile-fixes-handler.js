@@ -3,7 +3,7 @@
  * Handles dynamic positioning and interactions for mobile elements
  * Version: 1.1.0
  * Date: 2024-01-14
- * Updated: 2026-01-27 - Added sticky CTA collision handling
+ * Updated: 2024-01-27 - Added sticky CTA collision handling
  */
 
 (function() {
@@ -89,7 +89,9 @@
         getComputedStyle(document.documentElement).getPropertyValue('--cookie-banner-height') || '0'
       );
       
-      const stickyCTAActive = document.body.classList.contains('sticky-cta-active');
+      // Check if sticky CTA is visible (check both body class and element class)
+      const stickyCTAElement = document.querySelector('.sticky-cta-bar--visible, [data-sticky-cta].sticky-cta-bar--visible');
+      const stickyCTAActive = document.body.classList.contains('sticky-cta-active') || stickyCTAElement !== null;
       
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
         let bottomOffset = 16; // Base 1rem
@@ -141,21 +143,14 @@
    * Hides sticky CTA when modal/drawer elements are open
    */
   function handleStickyCTACollisions() {
-    if (window.innerWidth > MOBILE_BREAKPOINT) return;
-    
+    // Skip on desktop but allow reinit on resize
     const stickyCTA = document.querySelector('.sticky-cta-bar, [data-sticky-cta]');
     if (!stickyCTA) return;
     
-    // Elements that should hide the sticky CTA when open
-    const collisionSelectors = [
-      '.cart-drawer',
-      'cart-drawer',
-      '.search-modal',
-      '.predictive-search',
-      '[data-predictive-search]'
-    ];
-    
     function checkCollisions() {
+      // Skip collision handling on desktop
+      if (window.innerWidth > MOBILE_BREAKPOINT) return;
+      
       const cartDrawer = document.querySelector('.cart-drawer, cart-drawer');
       const searchModal = document.querySelector('.search-modal');
       const predictiveSearch = document.querySelector('.predictive-search, [data-predictive-search]');
@@ -184,29 +179,18 @@
         stickyCTA.style.opacity = '0';
         stickyCTA.style.transform = 'translateY(100%)';
       } else {
-        // Restore sticky CTA (only if it should be visible based on scroll)
+        // Clear inline styles to let CSS classes control visibility
         stickyCTA.style.pointerEvents = '';
         stickyCTA.style.opacity = '';
-        // Transform is handled by the --visible class
+        stickyCTA.style.transform = '';
       }
     }
     
     // Initial check
     checkCollisions();
     
-    // Watch for changes to collision elements
-    collisionSelectors.forEach(selector => {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(element => {
-        const observer = new MutationObserver(checkCollisions);
-        observer.observe(element, {
-          attributes: true,
-          attributeFilter: ['class', 'open', 'style']
-        });
-      });
-    });
-    
-    // Also watch body for class changes (cart-drawer-open, search-active, etc.)
+    // Watch body for class changes (cart-drawer-open, search-active, etc.)
+    // This single observer covers most state changes
     const bodyObserver = new MutationObserver(checkCollisions);
     bodyObserver.observe(document.body, {
       attributes: true,
@@ -218,6 +202,13 @@
     document.addEventListener('cart:close', checkCollisions);
     document.addEventListener('search:open', checkCollisions);
     document.addEventListener('search:close', checkCollisions);
+    
+    // Recheck on resize (e.g., crossing mobile breakpoint)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(checkCollisions, 100);
+    });
   }
   
   /**
