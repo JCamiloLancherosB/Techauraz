@@ -498,6 +498,21 @@
   }
 })();
 </script>
+
+{%- comment -%} DEBUG UI MODE - Activated via ?debug_ui=1 URL parameter {%- endcomment -%}
+{%- if request.design_mode == false -%}
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('debug_ui') === '1') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '{{ "debug-ui.css" | asset_url }}';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
+{%- endif -%}
 </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %}">
@@ -587,4 +602,19 @@
     {% render 'whatsapp-float' %}
 
 <script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
+
+{%- comment -%} DEBUG UI MODE - JS loaded conditionally via ?debug_ui=1 URL parameter {%- endcomment -%}
+{%- if request.design_mode == false -%}
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('debug_ui') === '1') {
+        var script = document.createElement('script');
+        script.src = '{{ "debug-ui.js" | asset_url }}';
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+    })();
+  </script>
+{%- endif -%}
 </body> </html>
