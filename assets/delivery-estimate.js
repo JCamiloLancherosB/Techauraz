@@ -8,16 +8,24 @@
  * - Configurable cut-off time (default: 2:00 PM Colombia time)
  * - Excludes Sundays from business days calculation
  * - Shows honest "estimated/aprox." delivery dates
- * - Updates countdown timer every second
+ * - Updates countdown timer every second (only when visible)
  * 
  * Usage: Initialize with DeliveryEstimate.init()
+ * Note: Module auto-initializes; cleanup via DeliveryEstimate.destroy() if needed
  */
 
 (function() {
   'use strict';
 
+  // Prevent multiple initializations
+  if (window.DeliveryEstimate && window.DeliveryEstimate.initialized) {
+    return;
+  }
+
   const DeliveryEstimate = {
-    // Configuration (Colombia timezone: UTC-5)
+    initialized: false,
+    
+    // Configuration for Colombia (UTC-5, no DST)
     config: {
       cutoffHour: 14, // 2:00 PM (24h format)
       cutoffMinute: 0,
@@ -31,6 +39,9 @@
      * Initialize the delivery estimate module
      */
     init: function() {
+      // Prevent multiple initializations
+      if (this.initialized) return;
+      
       const container = document.querySelector('.pdp-delivery-estimate');
       if (!container) return;
 
@@ -40,15 +51,55 @@
       this.dateRangeEl = container.querySelector('.delivery-estimate__date-range');
 
       this.update();
-      // Update every second for live countdown
-      this.intervalId = setInterval(() => this.update(), 1000);
+      this.startCountdown();
+      this.initialized = true;
+      
+      // Cleanup on page unload to prevent memory leaks
+      window.addEventListener('beforeunload', () => this.destroy());
+    },
+    
+    /**
+     * Start countdown timer (only when cutoff is applicable)
+     */
+    startCountdown: function() {
+      // Clear any existing interval
+      this.stopCountdown();
+      
+      // Only start interval if countdown is visible
+      if (this.isBeforeCutoff()) {
+        this.intervalId = setInterval(() => {
+          // Stop if no longer before cutoff
+          if (!this.isBeforeCutoff()) {
+            this.stopCountdown();
+            this.update();
+            return;
+          }
+          this.update();
+        }, 1000);
+      }
+    },
+    
+    /**
+     * Stop countdown timer
+     */
+    stopCountdown: function() {
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      }
     },
 
     /**
      * Get current time in Colombia timezone
+     * Uses toLocaleString for timezone conversion - widely supported across browsers
      */
     getNow: function() {
-      return new Date(new Date().toLocaleString('en-US', { timeZone: this.config.timezone }));
+      try {
+        return new Date(new Date().toLocaleString('en-US', { timeZone: this.config.timezone }));
+      } catch (e) {
+        // Fallback to local time if timezone conversion fails
+        return new Date();
+      }
     },
 
     /**
@@ -121,7 +172,7 @@
     /**
      * Get the shipping start date
      * If before cutoff on a non-Sunday, shipping starts today
-     * Otherwise, shipping starts next business day
+     * Otherwise, shipping starts next business day (Mon-Sat)
      */
     getShippingStartDate: function() {
       const now = this.getNow();
@@ -130,13 +181,19 @@
         return now;
       }
 
-      // If after cutoff or Sunday, find next business day
+      // After cutoff or on Sunday, find next business day
       const nextDay = new Date(now);
-      nextDay.setDate(nextDay.getDate() + 1);
       
-      // Skip Sunday if it falls on Sunday
-      while (this.isSunday(nextDay)) {
+      // If it's Sunday, start from Monday
+      if (this.isSunday(now)) {
         nextDay.setDate(nextDay.getDate() + 1);
+      } else {
+        // Not Sunday but after cutoff, try tomorrow
+        nextDay.setDate(nextDay.getDate() + 1);
+        // If tomorrow is Sunday, skip to Monday
+        if (this.isSunday(nextDay)) {
+          nextDay.setDate(nextDay.getDate() + 1);
+        }
       }
       
       return nextDay;
@@ -192,12 +249,11 @@
     },
 
     /**
-     * Clean up interval when needed
+     * Clean up interval when needed (for SPA navigation or manual cleanup)
      */
     destroy: function() {
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-      }
+      this.stopCountdown();
+      this.initialized = false;
     }
   };
 

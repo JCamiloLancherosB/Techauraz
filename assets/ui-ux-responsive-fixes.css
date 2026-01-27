@@ -4062,6 +4062,14 @@ section.newsletter {
    - Subtle urgency styling without being misleading
    ============================================================================= */
 
+/* Custom properties for delivery estimate colors (semantic colors) */
+.pdp-delivery-estimate {
+  --delivery-urgency-color: 238, 148, 65; /* Orange for urgency/clock */
+  --delivery-urgency-text: #d97706;
+  --delivery-success-color: 62, 214, 96; /* Green for success/check */
+  --delivery-success-text: #16a34a;
+}
+
 /* Container */
 .pdp-delivery-estimate {
   display: flex;
@@ -4104,8 +4112,8 @@ section.newsletter {
 
 /* Clock icon - subtle urgency color */
 .delivery-estimate__icon--clock {
-  background-color: rgba(238, 148, 65, 0.12);
-  color: #d97706;
+  background-color: rgba(var(--delivery-urgency-color), 0.12);
+  color: var(--delivery-urgency-text);
 }
 
 /* Truck icon - brand color */
@@ -4116,8 +4124,8 @@ section.newsletter {
 
 /* Check icon - success green */
 .delivery-estimate__icon--check {
-  background-color: rgba(62, 214, 96, 0.12);
-  color: #16a34a;
+  background-color: rgba(var(--delivery-success-color), 0.12);
+  color: var(--delivery-success-text);
 }
 
 /* Text styles */
@@ -4136,9 +4144,9 @@ section.newsletter {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.95em;
   padding: 0.15em 0.4em;
-  background-color: rgba(238, 148, 65, 0.1);
+  background-color: rgba(var(--delivery-urgency-color), 0.1);
   border-radius: 4px;
-  color: #d97706;
+  color: var(--delivery-urgency-text);
   font-weight: 700;
 }
 
@@ -4162,7 +4170,7 @@ section.newsletter {
 
 /* Free shipping row - slightly emphasized */
 .delivery-estimate__free-shipping .delivery-estimate__text strong {
-  color: #16a34a;
+  color: var(--delivery-success-text);
 }
 
 /* Mobile responsive adjustments */

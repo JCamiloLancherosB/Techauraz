@@ -25,8 +25,9 @@
       </svg>
     </span>
     <span class="delivery-estimate__text">
+      <span class="visually-hidden">Tiempo restante para envío hoy:</span>
       Compra en las próximas 
-      <strong class="delivery-estimate__countdown-time">--:--:--</strong> 
+      <strong class="delivery-estimate__countdown-time" role="timer" aria-label="Tiempo restante">--:--:--</strong> 
       para que tu pedido salga <strong>hoy</strong>
     </span>
   </div>
@@ -65,5 +66,8 @@
   </div>
 </div>
 
-{%- comment -%} Load the JavaScript with defer for performance {%- endcomment -%}
+{%- comment -%} 
+  Load the JavaScript with defer for performance.
+  Script includes guard against multiple initializations.
+{%- endcomment -%}
 <script src="{{ 'delivery-estimate.js' | asset_url }}" defer="defer"></script>
