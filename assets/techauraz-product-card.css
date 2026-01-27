@@ -135,6 +135,60 @@
 }
 
 /* =============================================================================
+   3.B VALUE BADGES - Shipping/COD badges positioned bottom of image
+   Note: z-index initially set to 2, overridden to 3 in overlay section (line ~563)
+   to ensure badges are above the full-card clickable link overlay.
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__value-badges {
+  position: absolute;
+  bottom: var(--ta-space-lg, 1.6rem);
+  left: var(--ta-space-lg, 1.6rem);
+  z-index: 2; /* Overridden to 3 in overlay section */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-xs, 0.4rem);
+  max-width: calc(100% - var(--ta-space-2xl, 3.2rem));
+}
+
+.card-wrapper.product-card-wrapper .card__value-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-semibold, 600);
+  border-radius: var(--ta-radius-badge, 6px);
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.card-wrapper.product-card-wrapper .card__value-badge-icon {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.card-wrapper.product-card-wrapper .card__value-badge-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Free Shipping badge - Uses primary blue to stand out positively */
+.card-wrapper.product-card-wrapper .card__value-badge--shipping {
+  background: rgba(37, 99, 235, 0.9);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+/* Cash on Delivery badge - Uses accent teal for trust signal */
+.card-wrapper.product-card-wrapper .card__value-badge--cod {
+  background: rgba(20, 184, 166, 0.9);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+/* =============================================================================
    4. CARD CONTENT AREA - Flexbox layout for consistent heights
    ============================================================================= */
 
@@ -417,6 +471,24 @@
     left: var(--ta-space-md, 1.2rem);
   }
 
+  /* Value badges mobile adjustments */
+  .card-wrapper.product-card-wrapper .card__value-badges {
+    bottom: var(--ta-space-md, 1.2rem);
+    left: var(--ta-space-md, 1.2rem);
+    max-width: calc(100% - var(--ta-space-xl, 2.4rem));
+  }
+
+  .card-wrapper.product-card-wrapper .card__value-badge {
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    gap: 0.3rem;
+  }
+
+  .card-wrapper.product-card-wrapper .card__value-badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
   .product-grid {
     gap: var(--ta-space-md, 1.2rem);
   }
@@ -489,7 +561,8 @@
 /* Ensure interactive elements are above overlay */
 .card-wrapper.product-card-wrapper .quick-add,
 .card-wrapper.product-card-wrapper .quick-add__submit,
-.card-wrapper.product-card-wrapper .card__badges {
+.card-wrapper.product-card-wrapper .card__badges,
+.card-wrapper.product-card-wrapper .card__value-badges {
   position: relative;
   z-index: 3;
 }

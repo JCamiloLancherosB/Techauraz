@@ -180,7 +180,12 @@
         "price_at_each": "a {{ price }} por unidad",
         "price_range": "{{ minimum }} - {{ maximum }}"
       },
-      "product_variants": "Variantes de producto"
+      "product_variants": "Variantes de producto",
+      "value_badges": "Beneficios del producto",
+      "free_shipping": "Envío gratis disponible",
+      "free_shipping_short": "Envío gratis",
+      "cash_on_delivery": "Pago contraentrega disponible",
+      "cash_on_delivery_short": "Contraentrega"
     },
     "modal": {
       "label": "Galería media"

@@ -107,16 +107,46 @@
               {%- endif -%}
             </div>
 
-            {%- comment -%} Clean Badges: Max 1 badge - Priority: Oferta > Nuevo > Agotado {%- endcomment -%}
+            {%- comment -%} 
+              Clean Badges: Max 1-2 badges
+              Status Badge Priority: Oferta > Nuevo > Agotado (max 1)
+              Value Badge: Envío Gratis / Contraentrega (max 1, shown below status)
+            {%- endcomment -%}
             {%- liquid
               assign is_new_tag = false
+              assign has_free_shipping = false
+              assign has_cod = false
               assign tags_lower = card_product.tags | map: 'downcase'
+              
               if tags_lower contains 'nuevo'
                 assign is_new_tag = true
               endif
+              
+              comment
+                Check for value proposition tags (case-insensitive)
+                Tags: "envio-gratis", "free-shipping"
+                Note: tags_lower is already lowercased, so no need for accented variants
+              endcomment
+              for tag in tags_lower
+                if tag contains 'envio-gratis' or tag contains 'free-shipping'
+                  assign has_free_shipping = true
+                  break
+                endif
+              endfor
+              
+              comment
+                Check for COD (contraentrega) tag
+                Tags: "contraentrega", "pago-al-recibir", "cod"
+              endcomment
+              for tag in tags_lower
+                if tag contains 'contraentrega' or tag contains 'pago-al-recibir' or tag == 'cod'
+                  assign has_cod = true
+                  break
+                endif
+              endfor
             -%}
             <div class="card__badges">
-              {%- comment -%} Show "Oferta" badge ONLY when compare_at_price exists AND is greater than price {%- endcomment -%}
+              {%- comment -%} STATUS BADGE: Show "Oferta" badge ONLY when compare_at_price exists AND is greater than price {%- endcomment -%}
               {%- if card_product.compare_at_price and card_product.compare_at_price > card_product.price -%}
                 <span class="card__badge card__badge--sale">OFERTA</span>
               {%- comment -%} Show "Nuevo" badge only if product has "nuevo" tag (case-insensitive) {%- endcomment -%}
@@ -127,6 +157,33 @@
                 <span class="card__badge card__badge--sold-out">Agotado</span>
               {%- endif -%}
             </div>
+            {%- comment -%} 
+              VALUE BADGES: Max 1 value badge to avoid clutter
+              Priority: Free Shipping > Cash on Delivery (elsif ensures only one shows)
+            {%- endcomment -%}
+            {%- if has_free_shipping or has_cod -%}
+              <div class="card__value-badges">
+                {%- if has_free_shipping -%}
+                  <span class="card__value-badge card__value-badge--shipping">
+                    <svg class="card__value-badge-icon" aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <span class="card__value-badge-text">{{ 'products.product.free_shipping_short' | t | default: 'Envío gratis' }}</span>
+                  </span>
+                {%- elsif has_cod -%}
+                  <span class="card__value-badge card__value-badge--cod">
+                    <svg class="card__value-badge-icon" aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                      <line x1="2" y1="10" x2="22" y2="10"></line>
+                    </svg>
+                    <span class="card__value-badge-text">{{ 'products.product.cash_on_delivery_short' | t | default: 'Contraentrega' }}</span>
+                  </span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           </div>
         {%- endif -%}
         
