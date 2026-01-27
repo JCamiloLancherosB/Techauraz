@@ -93,8 +93,10 @@
     // Add 'scrolled' class when scrolled down more than 50px
     if (scrollY > 50) {
       header.classList.add('scrolled');
+      document.body.classList.add('scrolled-past-header');
     } else {
       header.classList.remove('scrolled');
+      document.body.classList.remove('scrolled-past-header');
     }
     
     lastScrollY = scrollY;

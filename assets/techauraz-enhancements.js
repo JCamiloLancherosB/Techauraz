@@ -1,50 +1,15 @@
 /**
  * =============================================================================
- * TECHAURAZ HEADER ENHANCEMENTS
+ * TECHAURAZ ENHANCEMENTS
  * =============================================================================
- * Handles sticky header with shrink-on-scroll behavior
+ * NOTE: Header scroll handling has been consolidated into header-scroll-handler.js
+ * to avoid duplicate scroll listeners and conflicting state management.
+ * 
+ * This file now contains:
+ * - Image lazy loading handler
+ * - Metafield theme style handler
+ * - Testimonials slider component (fallback)
  */
-
-(function() {
-  'use strict';
-
-  // Sticky header shrink on scroll
-  const header = document.querySelector('.header');
-  
-  if (!header) return;
-
-  let lastScrollTop = 0;
-  let ticking = false;
-
-  function updateHeader() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Add scrolled class when user scrolls down more than 50px
-    if (scrollTop > 50) {
-      header.classList.add('scrolled');
-      document.body.classList.add('scrolled-past-header');
-    } else {
-      header.classList.remove('scrolled');
-      document.body.classList.remove('scrolled-past-header');
-    }
-    
-    lastScrollTop = scrollTop;
-    ticking = false;
-  }
-
-  function requestHeaderTick() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  }
-
-  // Listen for scroll events
-  window.addEventListener("scroll", requestHeaderTick, { passive: true });
-  
-  // Check initial state
-  updateHeader();
-})();
 
 /**
  * =============================================================================

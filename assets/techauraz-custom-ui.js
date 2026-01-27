@@ -77,6 +77,8 @@
   function showBanner() {
     if (!hasConsent()) {
       setTimeout(() => {
+        // Remove hidden class if present (from previous session)
+        banner.classList.remove('is-hidden');
         banner.classList.add('is-visible');
         updateWhatsAppPosition();
       }, BANNER_DELAY_MS);
