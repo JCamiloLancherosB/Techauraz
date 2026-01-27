@@ -528,3 +528,175 @@
   height: 100%;
   object-fit: contain;
 }
+
+/* =============================================================================
+   17. DARK COLOR SCHEME SUPPORT - Improved Contrast for Product Cards
+   =============================================================================
+   When product cards appear on sections with dark color schemes, ensure titles,
+   prices, and buttons maintain proper contrast and readability.
+   
+   This targets sections using Shopify's color scheme system, particularly:
+   - Home "Más Vendidos" section
+   - Home "Productos Destacados" section
+   - PDP "También te puede gustar" (related products)
+   - Any featured collection with a dark color scheme
+   
+   The dark scheme used is: scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71
+   Background: #202b3d (dark blue-gray)
+   ============================================================================= */
+
+/* 
+ * Target cards inside dark color scheme sections
+ * Shopify generates class like: color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71
+ * We use [class*="color-scheme-d58c693b"] to match partial class names
+ */
+
+/* Dark scheme card container - ensure white background for card content */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper {
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Hover state on dark backgrounds */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper:hover,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper:hover {
+  border-color: var(--ta-primary-light, #3b82f6);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Card inner area - ensure proper background */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__inner,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__inner {
+  background: var(--ta-bg-secondary, #f8fafc);
+}
+
+/* Card content area background */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__content,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__content {
+  background: var(--ta-bg, #ffffff);
+}
+
+/* Title text - ensure dark readable text on white card background */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link,
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__heading a,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__heading a {
+  color: var(--ta-text, #0f172a) !important;
+}
+
+/* Title hover state */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link {
+  color: var(--ta-primary, #2563eb) !important;
+}
+
+/* Price styling - keep it prominent and readable */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price-item--regular,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price-item--regular {
+  color: var(--ta-success, #10b981) !important;
+}
+
+/* Sale price - strikethrough for original price */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
+  color: var(--ta-text-muted, #64748b) !important;
+}
+
+/* Sale price - red for emphasis on discounted price */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+  color: var(--ta-error, #ef4444) !important;
+}
+
+/* Description text */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__description,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__description {
+  color: var(--ta-text-muted, #64748b) !important;
+}
+
+/* Vendor text */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .caption-with-letter-spacing,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .caption-with-letter-spacing {
+  color: var(--ta-text-muted, #64748b) !important;
+}
+
+/* Quick add button - ensure visibility and contrast */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb)) !important;
+  color: var(--ta-primary-contrast, #ffffff) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
+  background: var(--ta-gradient-primary-hover, linear-gradient(135deg, #60a5fa, #3b82f6)) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+/* Focus state for accessibility */
+[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit:focus-visible,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit:focus-visible {
+  outline: 3px solid var(--ta-primary-lighter, #60a5fa);
+  outline-offset: 2px;
+}
+
+/* Section title styling for dark schemes */
+[class*="color-scheme-d58c693b"] .title,
+[class*="color-scheme-d58c693b"] h2.title,
+[class*="color-scheme-d58c693b"] .inline-richtext,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .title,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 h2.title,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .inline-richtext {
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+/* Section description on dark background */
+[class*="color-scheme-d58c693b"] .collection__description,
+[class*="color-scheme-d58c693b"] .rte,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__description,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .rte {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* View all button on dark background */
+[class*="color-scheme-d58c693b"] .collection__view-all .button,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__view-all .button {
+  background: var(--ta-primary, #2563eb);
+  color: var(--ta-text-inverse, #ffffff);
+  border: none;
+}
+
+[class*="color-scheme-d58c693b"] .collection__view-all .button:hover,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__view-all .button:hover {
+  background: var(--ta-primary-hover, #1e40af);
+}
+
+/* Slider controls on dark backgrounds */
+[class*="color-scheme-d58c693b"] .slider-button,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-button {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ta-text, #0f172a);
+}
+
+[class*="color-scheme-d58c693b"] .slider-button:hover,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-button:hover {
+  background: var(--ta-bg, #ffffff);
+}
+
+[class*="color-scheme-d58c693b"] .slider-counter,
+.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-counter {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =============================================================================
+   18. RELATED PRODUCTS SECTION - Consistent card styling
+   ============================================================================= */
+
+/* Related products heading - inherits color from section's color scheme */
+.related-products__heading {
+  color: inherit;
+}
