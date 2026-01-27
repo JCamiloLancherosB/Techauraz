@@ -3098,11 +3098,26 @@ body {
   font-weight: 600;
 }
 
-/* Do NOT affect header icons - they should keep their own color */
+/* Header icons - ensure proper contrast with white header background */
 .header__icon,
 .header__icon svg,
 .header__icon .icon {
-  color: inherit;
+  color: var(--tech-ink, #0B1220) !important;
+  transition: color 0.2s ease;
+}
+
+/* Header icons hover state */
+.header__icon:hover,
+.header__icon:hover svg,
+.header__icon:hover .icon {
+  color: var(--tech-primary, #2563eb) !important;
+}
+
+/* Header icons focus state */
+.header__icon:focus-visible,
+.header__icon:focus-visible svg,
+.header__icon:focus-visible .icon {
+  color: var(--tech-primary-hover, #1e40af) !important;
 }
 
 /* =============================================================================
@@ -3138,6 +3153,80 @@ body {
     display: inline-flex;
     align-items: center;
   }
+}
+
+/* =============================================================================
+   STICKY HEADER STATES - Ensure contrast in all scroll states
+   Consolidated selectors for .scrolled-past-header, .shopify-section-header-sticky, and .header.scrolled
+   ============================================================================= */
+
+/* Menu text visibility - all sticky/scrolled states */
+.scrolled-past-header .header__menu-item,
+.scrolled-past-header .list-menu__item--link,
+.scrolled-past-header .list-menu__item > a,
+.scrolled-past-header .header__inline-menu a,
+.shopify-section-header-sticky .header__menu-item,
+.shopify-section-header-sticky .list-menu__item--link,
+.shopify-section-header-sticky .list-menu__item > a,
+.header.scrolled .header__menu-item,
+.header.scrolled .list-menu__item--link,
+.header.scrolled .header__inline-menu a {
+  color: var(--tech-ink, #0B1220) !important;
+}
+
+/* Menu hover states - all sticky/scrolled states */
+.scrolled-past-header .header__menu-item:hover,
+.scrolled-past-header .list-menu__item--link:hover,
+.scrolled-past-header .header__inline-menu a:hover,
+.shopify-section-header-sticky .header__menu-item:hover,
+.shopify-section-header-sticky .list-menu__item--link:hover,
+.header.scrolled .header__menu-item:hover,
+.header.scrolled .list-menu__item--link:hover,
+.header.scrolled .header__inline-menu a:hover {
+  color: var(--tech-primary, #2563eb) !important;
+}
+
+/* Menu focus states - all sticky/scrolled states (accessibility) */
+.scrolled-past-header .header__menu-item:focus-visible,
+.scrolled-past-header .list-menu__item--link:focus-visible,
+.shopify-section-header-sticky .header__menu-item:focus-visible,
+.shopify-section-header-sticky .list-menu__item--link:focus-visible,
+.header.scrolled .header__menu-item:focus-visible,
+.header.scrolled .list-menu__item--link:focus-visible {
+  color: var(--tech-primary-hover, #1e40af) !important;
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Icons visibility - all sticky/scrolled states */
+.scrolled-past-header .header__icon,
+.scrolled-past-header .header__icon svg,
+.scrolled-past-header .header__icon .icon,
+.shopify-section-header-sticky .header__icon,
+.shopify-section-header-sticky .header__icon svg,
+.header.scrolled .header__icon,
+.header.scrolled .header__icon svg {
+  color: var(--tech-ink, #0B1220) !important;
+  transition: color 0.2s ease;
+}
+
+/* Icons hover states - all sticky/scrolled states */
+.scrolled-past-header .header__icon:hover,
+.scrolled-past-header .header__icon:hover svg,
+.shopify-section-header-sticky .header__icon:hover,
+.shopify-section-header-sticky .header__icon:hover svg,
+.header.scrolled .header__icon:hover,
+.header.scrolled .header__icon:hover svg {
+  color: var(--tech-primary, #2563eb) !important;
+}
+
+/* Icons focus states - all sticky/scrolled states (accessibility) */
+.scrolled-past-header .header__icon:focus-visible,
+.shopify-section-header-sticky .header__icon:focus-visible,
+.header.scrolled .header__icon:focus-visible {
+  color: var(--tech-primary-hover, #1e40af) !important;
+  outline: 2px solid var(--tech-primary, #2563eb);
+  outline-offset: 2px;
 }
 
 /* =============================================================================
@@ -3554,15 +3643,28 @@ details-modal,
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
 @media screen and (max-width: 749px) {
-  /* Menu items in mobile drawer should also be readable */
+  /* Menu items in mobile drawer should be readable with proper contrast */
   .menu-drawer .list-menu__item--link,
-  .menu-drawer__navigation a {
+  .menu-drawer__navigation a,
+  .menu-drawer__menu-item {
     color: var(--tech-ink, #0B1220) !important;
   }
   
   .menu-drawer .list-menu__item--link:hover,
-  .menu-drawer__navigation a:hover {
+  .menu-drawer__navigation a:hover,
+  .menu-drawer__menu-item:hover {
     color: var(--tech-primary, #2563eb) !important;
+  }
+  
+  /* Active state for mobile drawer */
+  .menu-drawer__menu-item--active {
+    color: var(--tech-primary, #2563eb) !important;
+    font-weight: 600;
+  }
+  
+  /* Mobile drawer close button */
+  .menu-drawer__close-button {
+    color: var(--tech-ink, #0B1220) !important;
   }
 }
 
