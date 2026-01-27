@@ -1559,57 +1559,9 @@ details.facets__disclosure summary .icon-caret {
   line-height: 1.4;
 }
 
-/* CTA Hierarchy - Primary (COMPRAR AHORA) + Secondary (AGREGAR AL CARRITO) */
-.product-form__buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.product-form__cta-primary {
-  order: 1;
-}
-
-.product-form__cta-primary .shopify-payment-button__button {
-  background: var(--tech-primary, #2563eb) !important;
-  border-radius: var(--tech-button-radius, 8px) !important;
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  padding: 1.4rem 2rem !important;
-  min-height: 52px !important;
-  transition: all 0.2s ease !important;
-  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
-}
-
-.product-form__cta-primary .shopify-payment-button__button:hover {
-  background: var(--tech-primary-hover, #1e40af) !important;
-  transform: translateY(-1px);
-  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
-}
-
-.product-form__submit.button--secondary {
-  order: 2;
-  background: transparent;
-  color: var(--tech-primary, #2563eb);
-  border: 2px solid var(--tech-primary, #2563eb);
-  font-size: 1.5rem;
-  font-weight: 600;
-  padding: 1.2rem 2rem;
-  min-height: 48px;
-  border-radius: var(--tech-button-radius, 8px);
-  transition: all 0.2s ease;
-  width: 100%;
-  display: block;
-}
-
-.product-form__submit.button--secondary:hover {
-  background: var(--tech-surface, #f8fafc);
-  color: var(--tech-primary-hover, #1e40af);
-  border-color: var(--tech-primary-hover, #1e40af);
-  transform: translateY(-1px);
-  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3));
-}
+/* NOTE: CTA Hierarchy (Primary/Secondary) styles consolidated in 
+   "PDP BUY BUTTONS REORDERING & COMPACTING" section below (~line 2457)
+   and section-main-product-techauraz.css to avoid duplication */
 
 /* Micro-trust Icons (below CTAs) */
 .pdp-atf-micro-trust {
@@ -2455,142 +2407,162 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 }
 
 /* ========================================================================
-   PDP BUY BUTTONS REORDERING & COMPACTING - Visual Enhancement
+   PDP BUY BUTTONS REORDERING & COMPACTING - Consolidated Accelerated Checkout
+   Single source of truth for Shop Pay / accelerated checkout button styling
+   Uses design tokens for consistent height/radius across all breakpoints
    ======================================================================== */
 
 /* Wrapper for purchase block with compact spacing */
 .tech-pdp-purchase {
-  margin-top: 1rem !important;
+  margin-top: var(--ta-space-lg, 1rem) !important;
 }
 
 /* Reduce spacing between price and variant picker */
 .product__price {
-  margin-bottom: 0.75rem !important;
+  margin-bottom: var(--ta-space-md, 0.75rem) !important;
 }
 
 /* Reduce spacing in variant picker (chips) */
 .product-variant-picker {
-  margin-bottom: 1rem !important;
+  margin-bottom: var(--ta-space-lg, 1rem) !important;
 }
 
 /* Product form buttons container - compact spacing */
 .product-form__buttons {
-  margin-top: 1.25rem !important;
+  margin-top: var(--ta-space-lg, 1.25rem) !important;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--ta-space-md, 0.75rem);
 }
 
-/* PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout / PayPal Express) */
-.tech-cta-primary {
+/* PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout / Shop Pay / PayPal Express) */
+.tech-cta-primary,
+.product-form__cta-primary {
   order: -1; /* Ensure it appears first */
 }
 
-.tech-cta-primary .shopify-payment-button {
+.tech-cta-primary .shopify-payment-button,
+.product-form__cta-primary .shopify-payment-button {
   margin: 0;
+  width: 100%;
 }
 
-.tech-cta-primary .shopify-payment-button__button {
-  background: var(--tech-primary, #2563eb) !important;
+/* Accelerated checkout button - consistent styling across all breakpoints */
+.tech-cta-primary .shopify-payment-button__button,
+.product-form__cta-primary .shopify-payment-button__button {
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)) !important;
   border: none !important;
-  border-radius: var(--tech-button-radius, 8px) !important;
-  box-shadow: var(--tech-button-shadow, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
-  font-weight: 600 !important;
-  font-size: 16px !important;
-  letter-spacing: 0.5px !important;
+  border-radius: var(--ta-radius-button, 8px) !important;
+  box-shadow: var(--ta-shadow-button, 0 4px 12px rgba(37, 99, 235, 0.3)) !important;
+  font-weight: var(--ta-font-semibold, 600) !important;
+  font-size: var(--ta-font-size-md, 16px) !important;
+  letter-spacing: var(--ta-tracking-wide, 0.5px) !important;
+  line-height: var(--ta-leading-normal, 1.5) !important;
   text-transform: uppercase;
-  transition: all 0.3s ease !important;
-  min-height: 52px !important;
-  padding: 14px 24px !important;
-  color: var(--tech-primary-contrast, #ffffff) !important;
+  transition: var(--ta-transition-normal, all 0.25s ease) !important;
+  min-height: var(--ta-touch-comfortable, 52px) !important;
+  padding: var(--ta-space-md, 14px) var(--ta-space-xl, 24px) !important;
+  color: var(--ta-text-inverse, #ffffff) !important;
 }
 
-.tech-cta-primary .shopify-payment-button__button:hover {
+.tech-cta-primary .shopify-payment-button__button:hover,
+.product-form__cta-primary .shopify-payment-button__button:hover {
   transform: translateY(-2px) !important;
-  box-shadow: var(--tech-button-shadow-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
-  background: var(--tech-primary-hover, #1e40af) !important;
+  box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4)) !important;
+  background: var(--ta-primary-hover, #1e40af) !important;
 }
 
-.tech-cta-primary .shopify-payment-button__button:active {
+.tech-cta-primary .shopify-payment-button__button:active,
+.product-form__cta-primary .shopify-payment-button__button:active {
   transform: translateY(0) !important;
 }
 
 /* SECONDARY CTA: AGREGAR AL CARRITO */
-.tech-cta-secondary {
-  background: white !important;
-  color: #0096c7 !important;
-  border: 2px solid #0096c7 !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  font-size: 15px !important;
-  letter-spacing: 0.3px !important;
+.tech-cta-secondary,
+.product-form__submit.button--secondary {
+  background: var(--ta-bg, white) !important;
+  color: var(--ta-primary, #3b82f6) !important;
+  border: 2px solid var(--ta-primary, #3b82f6) !important;
+  border-radius: var(--ta-radius-button, 8px) !important;
+  font-weight: var(--ta-font-semibold, 600) !important;
+  font-size: var(--ta-font-size-sm, 15px) !important;
+  letter-spacing: var(--ta-tracking-normal, 0.3px) !important;
+  line-height: var(--ta-leading-normal, 1.5) !important;
   text-transform: uppercase;
-  transition: all 0.3s ease !important;
-  min-height: 48px !important;
-  padding: 12px 24px !important;
-  box-shadow: 0 2px 6px rgba(0, 150, 199, 0.1) !important;
+  transition: var(--ta-transition-normal, all 0.25s ease) !important;
+  min-height: var(--ta-touch-min, 48px) !important;
+  padding: var(--ta-space-md, 12px) var(--ta-space-xl, 24px) !important;
+  box-shadow: var(--ta-shadow-xs, 0 2px 6px rgba(0, 150, 199, 0.1)) !important;
 }
 
-.tech-cta-secondary:hover {
-  background: #f0f9ff !important;
-  border-color: #0077b6 !important;
-  color: #0077b6 !important;
+.tech-cta-secondary:hover,
+.product-form__submit.button--secondary:hover {
+  background: var(--ta-bg-secondary, #f0f9ff) !important;
+  border-color: var(--ta-primary-hover, #1e40af) !important;
+  color: var(--ta-primary-hover, #1e40af) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(0, 150, 199, 0.2) !important;
+  box-shadow: var(--ta-shadow-sm, 0 4px 12px rgba(0, 150, 199, 0.2)) !important;
 }
 
-.tech-cta-secondary:active {
+.tech-cta-secondary:active,
+.product-form__submit.button--secondary:active {
   transform: translateY(0) !important;
 }
 
-/* Mobile optimizations */
+/* Mobile optimizations - single consolidated block for accelerated checkout */
 @media screen and (max-width: 749px) {
   .tech-pdp-purchase {
-    margin-top: 0.75rem !important;
+    margin-top: var(--ta-space-md, 0.75rem) !important;
   }
 
   .product__price {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: var(--ta-space-sm, 0.5rem) !important;
   }
 
   .product-variant-picker {
-    margin-bottom: 0.75rem !important;
+    margin-bottom: var(--ta-space-md, 0.75rem) !important;
   }
 
   .product-form__buttons {
-    margin-top: 1rem !important;
-    gap: 0.625rem;
+    margin-top: var(--ta-space-lg, 1rem) !important;
+    gap: var(--ta-space-sm, 0.625rem);
   }
 
   /* Ensure buttons are full width on mobile */
   .tech-cta-primary,
+  .product-form__cta-primary,
   .tech-cta-primary .shopify-payment-button,
-  .tech-cta-primary .shopify-payment-button__button {
+  .product-form__cta-primary .shopify-payment-button,
+  .tech-cta-primary .shopify-payment-button__button,
+  .product-form__cta-primary .shopify-payment-button__button {
     width: 100% !important;
   }
 
-  .tech-cta-secondary {
+  .tech-cta-secondary,
+  .product-form__submit.button--secondary {
     width: 100% !important;
   }
 
-  /* Ensure minimum touch target height (48px) */
-  .tech-cta-primary .shopify-payment-button__button {
-    min-height: 50px !important;
-    padding: 14px 20px !important;
-    font-size: 15px !important;
+  /* Consistent touch targets on mobile (min 48px) */
+  .tech-cta-primary .shopify-payment-button__button,
+  .product-form__cta-primary .shopify-payment-button__button {
+    min-height: var(--ta-touch-comfortable, 50px) !important;
+    padding: var(--ta-space-md, 14px) var(--ta-space-lg, 20px) !important;
+    font-size: var(--ta-font-size-sm, 15px) !important;
   }
 
-  .tech-cta-secondary {
-    min-height: 48px !important;
-    padding: 12px 20px !important;
-    font-size: 14px !important;
+  .tech-cta-secondary,
+  .product-form__submit.button--secondary {
+    min-height: var(--ta-touch-min, 48px) !important;
+    padding: var(--ta-space-md, 12px) var(--ta-space-lg, 20px) !important;
+    font-size: var(--ta-font-size-sm, 14px) !important;
   }
+}
 
-  /* Reduce spacing even more on very small screens */
-  @media screen and (max-width: 479px) {
-    .product-form__buttons {
-      gap: 0.5rem;
-    }
+/* Extra small screens (< 480px) - reduced spacing only */
+@media screen and (max-width: 479px) {
+  .product-form__buttons {
+    gap: var(--ta-space-sm, 0.5rem);
   }
 }
 

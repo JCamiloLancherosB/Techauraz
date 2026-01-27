@@ -4,6 +4,7 @@
   data-sticky-cta
   role="region"
   aria-label="Botones de compra rápida"
+  aria-hidden="true"
 >
   <div class="sticky-cta-bar__container">
     <div class="sticky-cta-bar__price" data-sticky-price>
@@ -18,59 +19,282 @@
       type="button"
       class="sticky-cta-bar__button sticky-cta-bar__button--buy"
       data-sticky-buy
-      aria-label="Agregar {{ product.title }}"
+      data-action="buy-now"
+      {%- if product.selected_or_first_available_variant.available == false -%}
+        disabled
+        aria-disabled="true"
+      {%- endif -%}
+      aria-label="{% if product.selected_or_first_available_variant.available %}Comprar {{ product.title }} ahora{% else %}Producto agotado{% endif %}"
     >
       <svg class="sticky-cta-bar__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
         <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L19 6H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="9" cy="18" r="1" fill="currentColor"/>
         <circle cx="16" cy="18" r="1" fill="currentColor"/>
       </svg>
-      <span class="sticky-cta-bar__text">{{ section.settings.buy_button_text | default: 'Agregar' }}</span>
+      <span class="sticky-cta-bar__text">
+        {%- if product.selected_or_first_available_variant.available == false -%}
+          Agotado
+        {%- else -%}
+          {{ section.settings.buy_button_text | default: 'Comprar ahora' }}
+        {%- endif -%}
+      </span>
     </button>
   </div>
 </div>
 
+<style>
+  /* Sticky CTA Bar - Premium styling with safe area support */
+  .sticky-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 450; /* Above content (100), below WhatsApp (500) */
+    background: var(--ta-surface-elevated, #ffffff);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  .sticky-cta-bar--visible {
+    display: block;
+    transform: translateY(0);
+  }
+  
+  .sticky-cta-bar__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    max-width: 100%;
+  }
+  
+  .sticky-cta-bar__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .sticky-cta-bar__price-sale {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ta-success, #10b981);
+  }
+  
+  .sticky-cta-bar__price-compare {
+    font-size: 1.3rem;
+    color: var(--ta-text-muted, #64748b);
+    text-decoration: line-through;
+  }
+  
+  .sticky-cta-bar__price-regular {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ta-text, #0f172a);
+  }
+  
+  .sticky-cta-bar__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-radius: var(--ta-radius-button, 8px);
+    background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
+    color: var(--ta-text-inverse, #ffffff);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    transition: all 0.2s ease;
+  }
+  
+  .sticky-cta-bar__button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  }
+  
+  .sticky-cta-bar__button:disabled {
+    background: var(--ta-text-muted, #94a3b8);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .sticky-cta-bar__icon {
+    flex-shrink: 0;
+  }
+  
+  .sticky-cta-bar__text {
+    white-space: nowrap;
+  }
+  
+  /* Coordinate with WhatsApp and cookie banner */
+  @media screen and (max-width: 749px) {
+    body:has(.sticky-cta-bar--visible) .whatsapp-float,
+    body:has(.sticky-cta-bar--visible) .whatsapp-button-float,
+    body:has(.sticky-cta-bar--visible) [class*="whatsapp"][class*="float"] {
+      bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
+      transition: bottom 0.25s ease;
+    }
+    
+    /* When cookie banner is visible, adjust sticky CTA position */
+    body:has(.cookie-banner.is-visible) .sticky-cta-bar {
+      bottom: 80px;
+    }
+    
+    /* WhatsApp needs to move even higher when both are visible */
+    body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
+    body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-button-float {
+      bottom: calc(160px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
+    }
+  }
+  
+  /* Hide on desktop/tablet */
+  @media screen and (min-width: 750px) {
+    .sticky-cta-bar {
+      display: none !important;
+    }
+  }
+</style>
+
 <script>
+  /**
+   * StickyCTABar Class
+   * - Shows when primary CTA scrolls out of viewport
+   * - Coordinates with WhatsApp and cookie banner
+   * - Handles Buy Now vs Add to Cart action intentionally
+   * - Updates on variant changes
+   */
   class StickyCTABar {
     constructor(element) {
       this.element = element;
       this.buyButton = element.querySelector('[data-sticky-buy]');
-      this.productForm = document.querySelector('product-form');
-      this.submitButton = document.querySelector('.product-form__submit[id^="ProductSubmitButton-"]') ||
-                          document.querySelector('[id^="ProductSubmitButton-"]') ||
-                          document.querySelector('[name="add"]');
       this.priceContainer = element.querySelector('[data-sticky-price]');
       this.handleVariantChange = this.handleVariantChange.bind(this);
+      this.handleScroll = this.handleScroll.bind(this);
+      
+      // Find primary CTA elements - multiple fallback selectors
+      this.submitButton = this.findPrimaryButton();
+      this.buyNowButton = this.findBuyNowButton();
       
       this.init();
     }
+    
+    findPrimaryButton() {
+      const selectors = [
+        '.product-form__submit[id^="ProductSubmitButton-"]',
+        '[id^="ProductSubmitButton-"]',
+        '.product-form__submit',
+        '[name="add"]'
+      ];
+      
+      for (const selector of selectors) {
+        const button = document.querySelector(selector);
+        if (button) return button;
+      }
+      return null;
+    }
+    
+    findBuyNowButton() {
+      return document.querySelector('.shopify-payment-button__button') ||
+             document.querySelector('.tech-cta-primary .shopify-payment-button__button');
+    }
 
     init() {
+      // Only activate on mobile
+      if (window.innerWidth >= 750) {
+        this.element.style.display = 'none';
+        return;
+      }
+      
       // Show/hide based on scroll position
       this.handleScroll();
-      window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+      window.addEventListener('scroll', this.handleScroll, { passive: true });
       
-      // Handle buy button click
-      if (this.buyButton && this.submitButton) {
-        this.buyButton.addEventListener('click', () => {
-          this.submitButton.click();
+      // Handle buy button click - triggers Buy Now by default
+      if (this.buyButton) {
+        this.buyButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.handleBuyClick();
         });
       }
 
       document.addEventListener('variant:change', this.handleVariantChange);
+      
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (window.innerWidth >= 750) {
+            this.hideStickyBar();
+          } else {
+            this.handleScroll();
+          }
+        }, 150);
+      });
+      
       window.addEventListener('pagehide', () => this.destroy());
+    }
+    
+    handleBuyClick() {
+      const action = this.buyButton.dataset.action || 'buy-now';
+      let targetButton;
+      
+      if (action === 'buy-now') {
+        // Try Buy Now (accelerated checkout) first
+        targetButton = this.buyNowButton || this.submitButton;
+      } else {
+        // Add to Cart action
+        targetButton = this.submitButton;
+      }
+      
+      if (targetButton && typeof targetButton.click === 'function') {
+        // Scroll to product form for user context
+        const productForm = document.querySelector('product-form, .product-form');
+        if (productForm) {
+          productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Small delay to allow scroll before triggering action
+        setTimeout(() => {
+          targetButton.click();
+        }, 100);
+      } else {
+        console.error('Sticky CTA: No valid target button found');
+      }
     }
 
     destroy() {
       document.removeEventListener('variant:change', this.handleVariantChange);
+      window.removeEventListener('scroll', this.handleScroll);
     }
 
     handleVariantChange(event) {
-      if (!event.detail || !event.detail.variant || !this.priceContainer) {
-        return;
+      if (!event.detail || !event.detail.variant) return;
+      
+      const variant = event.detail.variant;
+      
+      // Update price display
+      if (this.priceContainer && variant.price !== undefined) {
+        this.updatePriceDisplay(variant.price, variant.compare_at_price);
       }
-
-      const { price, compare_at_price: compareAtPrice } = event.detail.variant;
+      
+      // Update button state
+      if (this.buyButton) {
+        this.updateButtonState(variant.available);
+      }
+    }
+    
+    updatePriceDisplay(price, compareAtPrice) {
       this.priceContainer.innerHTML = '';
 
       if (compareAtPrice && compareAtPrice > price) {
@@ -92,11 +316,31 @@
         this.priceContainer.appendChild(regularPriceSpan);
       }
     }
+    
+    updateButtonState(isAvailable) {
+      const textSpan = this.buyButton.querySelector('.sticky-cta-bar__text');
+      
+      if (isAvailable) {
+        this.buyButton.disabled = false;
+        this.buyButton.removeAttribute('aria-disabled');
+        if (textSpan) textSpan.textContent = '{{ section.settings.buy_button_text | default: "Comprar ahora" }}';
+        this.buyButton.setAttribute('aria-label', 'Comprar ahora');
+      } else {
+        this.buyButton.disabled = true;
+        this.buyButton.setAttribute('aria-disabled', 'true');
+        if (textSpan) textSpan.textContent = 'Agotado';
+        this.buyButton.setAttribute('aria-label', 'Producto agotado');
+      }
+    }
 
     formatMoney(priceValue) {
       if (typeof priceValue === 'number') {
-        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
-          return Shopify.formatMoney(priceValue);
+        try {
+          if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+            return Shopify.formatMoney(priceValue);
+          }
+        } catch (e) {
+          console.warn('Shopify.formatMoney failed, using fallback', e);
         }
 
         const currency = (typeof Shopify !== 'undefined' && Shopify.currency && Shopify.currency.active)
@@ -104,18 +348,27 @@
           : 'COP';
         const locale = 'es-CO';
 
-        return new Intl.NumberFormat(locale, {
-          style: 'currency',
-          currency: currency,
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(priceValue / 100);
+        try {
+          return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(priceValue / 100);
+        } catch (e) {
+          return '$' + Math.round(priceValue / 100).toLocaleString();
+        }
       }
 
       return priceValue;
     }
 
     handleScroll() {
+      if (window.innerWidth >= 750) {
+        this.hideStickyBar();
+        return;
+      }
+      
       const scrollPosition = window.scrollY;
       const mainButton = this.submitButton;
       const footer = document.querySelector('footer');
@@ -125,12 +378,34 @@
         ? mainButton.getBoundingClientRect().top < window.innerHeight && mainButton.getBoundingClientRect().bottom > 0
         : false;
 
-      if (footerVisible || (mainButton && mainButtonVisible) || scrollPosition <= 200) {
-        this.element.classList.remove('sticky-cta-bar--visible');
-        return;
+      // Show sticky CTA only when:
+      // 1. Scrolled past threshold (200px)
+      // 2. Main CTA is NOT in viewport
+      // 3. Footer is NOT visible
+      if (scrollPosition > 200 && !mainButtonVisible && !footerVisible) {
+        this.showStickyBar();
+      } else {
+        this.hideStickyBar();
       }
-
+    }
+    
+    showStickyBar() {
+      this.element.style.display = 'block';
       this.element.classList.add('sticky-cta-bar--visible');
+      this.element.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sticky-cta-active');
+    }
+    
+    hideStickyBar() {
+      this.element.classList.remove('sticky-cta-bar--visible');
+      this.element.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sticky-cta-active');
+      // Delay hiding to allow transition
+      setTimeout(() => {
+        if (!this.element.classList.contains('sticky-cta-bar--visible')) {
+          this.element.style.display = 'none';
+        }
+      }, 250);
     }
   }
 
@@ -155,7 +430,7 @@
       "id": "enable_sticky_cta",
       "label": "Activar barra sticky",
       "default": true,
-      "info": "Muestra botones fijos de compra y WhatsApp en móvil"
+      "info": "Muestra botones fijos de compra en móvil cuando el CTA principal está fuera de vista"
     },
     {
       "type": "text",
