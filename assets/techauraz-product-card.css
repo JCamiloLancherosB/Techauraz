@@ -693,19 +693,10 @@
 }
 
 /* =============================================================================
-   18. GENERIC DARK BACKGROUND SUPPORT - Works with any dark color scheme
-   =============================================================================
-   Additional support for any color scheme where background is dark.
-   Uses contrast-based approach for flexibility.
+   18. RELATED PRODUCTS SECTION - Consistent card styling
    ============================================================================= */
 
-/* Support for related products section which may use different scheme */
-.related-products .card-wrapper.product-card-wrapper,
-.tech-related-products .card-wrapper.product-card-wrapper {
-  background: var(--ta-bg, #ffffff);
-}
-
-/* Related products section heading */
+/* Related products heading - inherits color from section's color scheme */
 .related-products__heading {
-  color: rgb(var(--color-foreground, 255, 255, 255));
+  color: inherit;
 }
