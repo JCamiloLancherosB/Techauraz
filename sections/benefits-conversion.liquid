@@ -1,5 +1,12 @@
 {% comment %}
-  Conversion-Focused Benefits Section
+  ⚠️ DEPRECATED - Use "Beneficios Unificados" (modern-feature-cards) instead
+  
+  This section has been consolidated into modern-feature-cards.liquid for:
+  - Avoid duplicity
+  - Better scannability (icon → title → 1 line → link)
+  - Unified CTA for higher conversions
+  
+  Conversion-Focused Benefits Section (Legacy)
   
   Displays scannable benefit blocks with icons and outcome-driven headlines.
   
@@ -34,10 +41,14 @@
 
 {% schema %}
 {
-  "name": "Beneficios de Conversión",
+  "name": "⚠️ Beneficios (Deprecated)",
   "class": "section",
   "tag": "section",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "⚠️ Esta sección ha sido reemplazada por 'Beneficios Unificados'. Use la nueva sección para mejor diseño y CTA unificado."
+    },
     {
       "type": "text",
       "id": "heading",
@@ -74,7 +85,7 @@
   ],
   "presets": [
     {
-      "name": "Beneficios de Conversión",
+      "name": "⚠️ Beneficios (Deprecated)",
       "blocks": [
         {
           "type": "benefit",
