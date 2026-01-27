@@ -55,6 +55,105 @@
 }
 
 /* =============================================================================
+   ANNOUNCEMENT TICKER STYLES
+   Rotating announcement messages with fade effect
+   ============================================================================= */
+
+/* Fixed height to prevent CLS (Cumulative Layout Shift) */
+.announcement-ticker {
+  position: relative;
+  width: 100%;
+  min-height: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.announcement-ticker__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual ticker item */
+.announcement-ticker__item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.announcement-ticker__item--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Ticker message styling */
+.announcement-ticker__message {
+  margin: 0;
+  padding: 0 var(--ta-space-md, 1.2rem);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Link inside ticker - full clickable area */
+.announcement-ticker__item .announcement-bar__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Paused state - when hovering on desktop */
+.announcement-ticker--paused .announcement-ticker__item {
+  /* Transitions are paused but opacity/visibility stay */
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-ticker__item {
+    /* No fade animation, instant switch */
+    transition: none;
+    transform: none !important;
+  }
+  
+  .announcement-ticker__item--active {
+    transform: none;
+  }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 749px) {
+  .announcement-ticker {
+    min-height: 3.6rem;
+    height: 3.6rem;
+  }
+  
+  .announcement-ticker__message {
+    font-size: var(--ta-font-size-xs, 1.2rem);
+    padding: 0 var(--ta-space-sm, 0.8rem);
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+/* =============================================================================
    WHATSAPP FLOATING BUTTON
    ============================================================================= */
 .whatsapp-float {

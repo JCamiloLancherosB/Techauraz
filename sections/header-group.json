@@ -8,19 +8,45 @@
         "announcement_shipping": {
           "type": "announcement",
           "settings": {
-            "text": "🚚 Envío GRATIS | 💳 Paga contra entrega | ⚡ 2-5 días hábiles | 📞 WhatsApp: +57 300 860 2789",
+            "text": "🚚 Envío GRATIS a toda Colombia",
+            "link": ""
+          }
+        },
+        "announcement_payment": {
+          "type": "announcement",
+          "settings": {
+            "text": "💳 Pago contra entrega disponible",
+            "link": ""
+          }
+        },
+        "announcement_warranty": {
+          "type": "announcement",
+          "settings": {
+            "text": "🛡️ Garantía de 30 días",
+            "link": ""
+          }
+        },
+        "announcement_support": {
+          "type": "announcement",
+          "settings": {
+            "text": "📲 Soporte por WhatsApp",
             "link": "https://wa.me/573008602789"
           }
         }
       },
       "block_order": [
-        "announcement_shipping"
+        "announcement_shipping",
+        "announcement_payment",
+        "announcement_warranty",
+        "announcement_support"
       ],
       "settings": {
         "sticky_promo": true,
         "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
         "show_line_separator": true,
         "show_social": false,
+        "enable_ticker": true,
+        "ticker_speed": 5,
         "auto_rotate": false,
         "change_slides_speed": 5,
         "enable_country_selector": false,

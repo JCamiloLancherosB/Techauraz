@@ -364,7 +364,13 @@
       "next_announcement": "Anuncio siguiente",
       "carousel": "Carrusel",
       "announcement": "Anuncio",
-      "announcement_bar": "Barra de anuncios"
+      "announcement_bar": "Barra de anuncios",
+      "ticker": {
+        "free_shipping": "🚚 Envío GRATIS a toda Colombia",
+        "cash_on_delivery": "💳 Pago contra entrega disponible",
+        "warranty": "🛡️ Garantía de 30 días",
+        "whatsapp_support": "📲 Soporte por WhatsApp"
+      }
     },
     "quick_order_list": {
       "product_total": "Subtotal de productos",
