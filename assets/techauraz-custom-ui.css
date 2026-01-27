@@ -121,8 +121,9 @@
 }
 
 /* Paused state - when hovering on desktop */
-.announcement-ticker--paused .announcement-ticker__item {
-  /* Transitions are paused but opacity/visibility stay */
+.announcement-ticker--paused .announcement-ticker__item--active {
+  /* Keep current message visible, subtle visual indication */
+  cursor: default;
 }
 
 /* Accessibility: prefers-reduced-motion */

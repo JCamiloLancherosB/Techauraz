@@ -46,6 +46,29 @@
           {%- endif -%}
         {%- endif -%}
       </div>
+    {%- elsif section.blocks.size == 1 and enable_ticker -%}
+      {%- comment -%} Single message with ticker enabled - use simple bar (no rotation needed) {%- endcomment -%}
+      <div
+        class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
+        role="region"
+        aria-label="{{ 'sections.header.announcement' | t }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if section.blocks.first.settings.text != blank -%}
+          {%- if section.blocks.first.settings.link != blank -%}
+            <a
+              href="{{ section.blocks.first.settings.link }}"
+              class="announcement-bar__link link link--text focus-inset"
+            >
+          {%- endif -%}
+          <p class="announcement-bar__message h5">
+            <span>{{ section.blocks.first.settings.text | escape }}</span>
+          </p>
+          {%- if section.blocks.first.settings.link != blank -%}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
     {%- elsif section.blocks.size > 1 and enable_ticker == false -%}
       <slideshow-component
         class="announcement-bar"
@@ -302,7 +325,7 @@
       "unit": "s",
       "label": "Velocidad de rotación (ticker)",
       "default": 5,
-      "info": "Tiempo entre cada mensaje (4-6s recomendado)"
+      "info": "Tiempo entre cada mensaje (3-8s)"
     },
     {
       "type": "header",

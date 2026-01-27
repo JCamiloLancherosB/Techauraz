@@ -56,13 +56,17 @@
     }
     
     bindEvents() {
+      // Store bound references for cleanup
+      this.boundPause = () => this.pause();
+      this.boundResume = () => this.resume();
+      
       // Pause on hover (desktop only)
-      this.container.addEventListener('mouseenter', () => this.pause());
-      this.container.addEventListener('mouseleave', () => this.resume());
+      this.container.addEventListener('mouseenter', this.boundPause);
+      this.container.addEventListener('mouseleave', this.boundResume);
       
       // Pause on focus for keyboard users
-      this.container.addEventListener('focusin', () => this.pause());
-      this.container.addEventListener('focusout', () => this.resume());
+      this.container.addEventListener('focusin', this.boundPause);
+      this.container.addEventListener('focusout', this.boundResume);
     }
     
     startRotation() {
@@ -115,19 +119,28 @@
     
     destroy() {
       this.stopRotation();
-      // Remove event listeners if needed
+      this.container.removeEventListener('mouseenter', this.boundPause);
+      this.container.removeEventListener('mouseleave', this.boundResume);
+      this.container.removeEventListener('focusin', this.boundPause);
+      this.container.removeEventListener('focusout', this.boundResume);
     }
   }
+  
+  // Store ticker instances for cleanup
+  const tickerInstances = new WeakMap();
   
   // Initialize ticker on DOM ready
   function initTickers() {
     const tickers = document.querySelectorAll('.announcement-ticker');
     tickers.forEach(ticker => {
-      // Avoid reinitializing
-      if (!ticker.hasAttribute('data-ticker-initialized')) {
-        ticker.setAttribute('data-ticker-initialized', 'true');
-        new AnnouncementTicker(ticker);
+      // Destroy existing instance if present
+      if (tickerInstances.has(ticker)) {
+        tickerInstances.get(ticker).destroy();
       }
+      // Create new instance
+      const instance = new AnnouncementTicker(ticker);
+      tickerInstances.set(ticker, instance);
+      ticker.setAttribute('data-ticker-initialized', 'true');
     });
   }
   
