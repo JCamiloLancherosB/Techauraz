@@ -30,11 +30,12 @@ class PurchaseNotification {
     this.notificationCount = 0;
     
     // Solo inicializar si está explícitamente habilitado Y hay productos reales configurados
+    // Nota: Anteriormente el sistema era opt-out (había que deshabilitarlo explícitamente),
+    // ahora es opt-in (debe habilitarse explícitamente) para mejorar la confianza del usuario
     if (this.options.enabled && this.options.products.length > 0) {
       this.init();
-    } else if (this.options.enabled && this.options.products.length === 0) {
-      console.warn('PurchaseNotification: Habilitado pero sin productos reales configurados. No se mostrarán notificaciones ficticias.');
     }
+    // Si está habilitado pero sin productos reales, simplemente no inicializar (sin log público)
   }
 
   init() {
@@ -84,9 +85,8 @@ class PurchaseNotification {
   showNotification() {
     const data = this.generateNotificationData();
     
-    // No mostrar notificación si no hay datos reales
+    // No mostrar notificación si no hay datos reales - salir silenciosamente
     if (!data) {
-      console.warn('PurchaseNotification: No se puede mostrar notificación sin datos reales');
       return;
     }
     
@@ -295,7 +295,6 @@ class PurchaseNotification {
   getRandomProduct() {
     if (this.options.products.length === 0) {
       // No devolver datos ficticios - retornar null para indicar que no hay productos reales
-      console.warn('PurchaseNotification: No hay productos reales configurados');
       return null;
     }
     return this.options.products[Math.floor(Math.random() * this.options.products.length)];

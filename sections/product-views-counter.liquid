@@ -15,7 +15,7 @@
   assign review_count = product.metafields.reviews.rating_count | default: 0
   
   assign show_stock_indicator = false
-  if show_low_stock and inventory_managed and inventory_qty > 0 and inventory_qty <= low_stock_threshold
+  if show_low_stock and inventory_managed and inventory_qty != blank and inventory_qty > 0 and inventory_qty <= low_stock_threshold
     assign show_stock_indicator = true
   endif
   
@@ -55,7 +55,7 @@
         </svg>
       </span>
       <span class="product-social-proof__text">
-        +{{ review_count }} {{ review_count | pluralize: 'reseña', 'reseñas' }} de clientes verificados
+        +{{ review_count }} {% if review_count == 1 %}reseña{% else %}reseñas{% endif %} de clientes verificados
       </span>
     </div>
     {%- endif -%}

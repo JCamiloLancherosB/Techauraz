@@ -15,7 +15,7 @@
 
 <div class="urgency-elements">
   {% if section.settings.show_stock_counter and inventory_managed %}
-    {%- if inventory_qty > 0 and inventory_qty <= low_stock_threshold -%}
+    {%- if inventory_qty != blank and inventory_qty > 0 and inventory_qty <= low_stock_threshold -%}
     <div class="urgency-element urgency-stock urgency-stock--low">
       <div class="urgency-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -34,7 +34,7 @@
         </span>
       </div>
     </div>
-    {%- elsif inventory_qty > low_stock_threshold -%}
+    {%- elsif inventory_qty != blank and inventory_qty > low_stock_threshold -%}
     <div class="urgency-element urgency-stock urgency-stock--available">
       <div class="urgency-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -45,7 +45,7 @@
         <span class="urgency-value">Disponible para envío inmediato</span>
       </div>
     </div>
-    {%- elsif inventory_qty <= 0 -%}
+    {%- elsif inventory_qty != blank and inventory_qty <= 0 -%}
     <div class="urgency-element urgency-stock urgency-stock--out">
       <div class="urgency-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
