@@ -4048,3 +4048,163 @@ section.newsletter {
     padding-bottom: 2.5rem !important;
   }
 }
+
+/* =============================================================================
+   PDP DELIVERY ESTIMATE MODULE
+   Version: 1.0.0
+   Date: 2026-01-27
+   
+   Styles for the delivery estimate module on Product Detail Pages.
+   Features:
+   - Clean row layout with icons
+   - Proper alignment and spacing
+   - Responsive design
+   - Subtle urgency styling without being misleading
+   ============================================================================= */
+
+/* Container */
+.pdp-delivery-estimate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: rgba(var(--color-background), 0.95);
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Row layout */
+.delivery-estimate__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Icons */
+.delivery-estimate__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-foreground), 0.05);
+  color: rgb(var(--color-foreground));
+}
+
+.delivery-estimate__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Clock icon - subtle urgency color */
+.delivery-estimate__icon--clock {
+  background-color: rgba(238, 148, 65, 0.12);
+  color: #d97706;
+}
+
+/* Truck icon - brand color */
+.delivery-estimate__icon--truck {
+  background-color: rgba(var(--color-button), 0.1);
+  color: rgb(var(--color-button));
+}
+
+/* Check icon - success green */
+.delivery-estimate__icon--check {
+  background-color: rgba(62, 214, 96, 0.12);
+  color: #16a34a;
+}
+
+/* Text styles */
+.delivery-estimate__text {
+  flex: 1;
+  color: rgb(var(--color-foreground));
+}
+
+.delivery-estimate__text strong {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+/* Countdown timer styling */
+.delivery-estimate__countdown-time {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.95em;
+  padding: 0.15em 0.4em;
+  background-color: rgba(238, 148, 65, 0.1);
+  border-radius: 4px;
+  color: #d97706;
+  font-weight: 700;
+}
+
+/* Date range */
+.delivery-estimate__date-range {
+  color: rgb(var(--color-foreground));
+}
+
+/* Approximation note - subtle styling */
+.delivery-estimate__aprox {
+  font-size: 0.85em;
+  color: rgba(var(--color-foreground), 0.6);
+  font-weight: 400;
+  margin-left: 0.25em;
+}
+
+/* Hidden state for cutoff message when not applicable */
+.delivery-estimate--hidden {
+  display: none !important;
+}
+
+/* Free shipping row - slightly emphasized */
+.delivery-estimate__free-shipping .delivery-estimate__text strong {
+  color: #16a34a;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 749px) {
+  .pdp-delivery-estimate {
+    padding: 0.875rem 1rem;
+    gap: 0.625rem;
+    font-size: 0.85rem;
+  }
+
+  .delivery-estimate__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .delivery-estimate__icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .delivery-estimate__row {
+    gap: 0.625rem;
+  }
+
+  .delivery-estimate__countdown-time {
+    font-size: 0.9em;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .pdp-delivery-estimate {
+    padding: 1rem 1.125rem;
+  }
+}
+
+/* Dark mode / warm theme support */
+.pdp--warm .pdp-delivery-estimate {
+  background-color: rgba(255, 248, 241, 0.95);
+  border-color: rgba(210, 180, 140, 0.2);
+}
+
+.pdp--warm .delivery-estimate__icon {
+  background-color: rgba(210, 180, 140, 0.15);
+}

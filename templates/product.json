@@ -53,6 +53,12 @@
                         "show_gift_card_recipient": true
                     }
                 },
+                "pdp_delivery_estimate": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-delivery-estimate' %}"
+                    }
+                },
                 "pdp_micro_trust": {
                     "type": "custom_liquid",
                     "settings": {
@@ -82,6 +88,7 @@
                 "pdp_micro_trust",
                 "variant_picker",
                 "buy_buttons",
+                "pdp_delivery_estimate",
                 "quantity_selector",
                 "pdp_conversion_badges",
                 "pdp_key_specs",
