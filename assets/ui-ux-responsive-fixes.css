@@ -3621,6 +3621,11 @@ details-modal,
 /* =============================================================================
    VALUE BADGES - Shipping/COD indicators positioned at bottom of image
    Max 1 value badge to avoid clutter, consistent with PR-09 tokens
+   
+   Note: Styles intentionally duplicated from techauraz-product-card.css to ensure
+   compatibility with the .tech-card-product selector pattern used throughout this
+   file. Values may differ slightly (e.g., px vs rem) for consistency within each
+   selector context. Both files must be updated together when making changes.
    ============================================================================= */
 
 .tech-card-product .card__value-badges {
@@ -3773,7 +3778,7 @@ details-modal,
     font-size: 0.875rem;
   }
 
-  /* Value badges mobile adjustments */
+  /* Value badges mobile adjustments - see note above about duplication */
   .tech-card-product .card__value-badges {
     bottom: 8px;
     left: 8px;

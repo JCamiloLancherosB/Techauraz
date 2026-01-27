@@ -124,10 +124,11 @@
               
               comment
                 Check for value proposition tags (case-insensitive)
-                Tags: "envio-gratis", "envío-gratis", "free-shipping"
+                Tags: "envio-gratis", "free-shipping"
+                Note: tags_lower is already lowercased, so no need for accented variants
               endcomment
               for tag in tags_lower
-                if tag contains 'envio-gratis' or tag contains 'envío-gratis' or tag contains 'free-shipping'
+                if tag contains 'envio-gratis' or tag contains 'free-shipping'
                   assign has_free_shipping = true
                   break
                 endif
@@ -156,11 +157,14 @@
                 <span class="card__badge card__badge--sold-out">Agotado</span>
               {%- endif -%}
             </div>
-            {%- comment -%} VALUE BADGES: Max 1 value badge to avoid clutter {%- endcomment -%}
+            {%- comment -%} 
+              VALUE BADGES: Max 1 value badge to avoid clutter
+              Priority: Free Shipping > Cash on Delivery (elsif ensures only one shows)
+            {%- endcomment -%}
             {%- if has_free_shipping or has_cod -%}
-              <div class="card__value-badges" aria-label="{{ 'products.product.value_badges' | t | default: 'Beneficios del producto' }}">
+              <div class="card__value-badges">
                 {%- if has_free_shipping -%}
-                  <span class="card__value-badge card__value-badge--shipping" aria-label="{{ 'products.product.free_shipping' | t | default: 'Envío gratis' }}">
+                  <span class="card__value-badge card__value-badge--shipping">
                     <svg class="card__value-badge-icon" aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <rect x="1" y="3" width="15" height="13"></rect>
                       <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
@@ -170,7 +174,7 @@
                     <span class="card__value-badge-text">{{ 'products.product.free_shipping_short' | t | default: 'Envío gratis' }}</span>
                   </span>
                 {%- elsif has_cod -%}
-                  <span class="card__value-badge card__value-badge--cod" aria-label="{{ 'products.product.cash_on_delivery' | t | default: 'Pago contraentrega' }}">
+                  <span class="card__value-badge card__value-badge--cod">
                     <svg class="card__value-badge-icon" aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <rect x="2" y="5" width="20" height="14" rx="2"></rect>
                       <line x1="2" y1="10" x2="22" y2="10"></line>

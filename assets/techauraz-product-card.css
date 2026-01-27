@@ -136,13 +136,15 @@
 
 /* =============================================================================
    3.B VALUE BADGES - Shipping/COD badges positioned bottom of image
+   Note: z-index initially set to 2, overridden to 3 in overlay section (line ~563)
+   to ensure badges are above the full-card clickable link overlay.
    ============================================================================= */
 
 .card-wrapper.product-card-wrapper .card__value-badges {
   position: absolute;
   bottom: var(--ta-space-lg, 1.6rem);
   left: var(--ta-space-lg, 1.6rem);
-  z-index: 2;
+  z-index: 2; /* Overridden to 3 in overlay section */
   display: flex;
   flex-wrap: wrap;
   gap: var(--ta-space-xs, 0.4rem);
