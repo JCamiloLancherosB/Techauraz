@@ -1,11 +1,15 @@
 {% comment %}
   Renders a standard dropdown style menu for the header.
+  Enhanced with:
+  - Hover support on desktop (via JS)
+  - Descriptive subheadings support
+  - Improved accessibility (ARIA, focus management)
 
   Usage:
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
 
-<nav class="header__inline-menu">
+<nav class="header__inline-menu" aria-label="{{ 'sections.header.menu' | t }}">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
       <li>
@@ -15,6 +19,8 @@
               <summary
                 id="HeaderMenu-{{ link.handle }}"
                 class="header__menu-item list-menu__item link focus-inset"
+                aria-expanded="false"
+                aria-controls="HeaderMenu-MenuList-{{ forloop.index }}"
               >
                 <span
                   {%- if link.child_active %}
@@ -48,14 +54,16 @@
                       <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
                         <summary
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                          class="header__menu-item link link--text list-menu__item focus-inset caption-large"
+                          class="header__menu-item link link--text list-menu__item focus-inset caption-large header__menu-item--category"
+                          aria-expanded="false"
                         >
-                          <span>{{ childlink.title | escape }}</span>
+                          <span class="header__menu-item-title">{{ childlink.title | escape }}</span>
                           {% render 'icon-caret' %}
                         </summary>
                         <ul
-                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
                           class="header__submenu list-menu motion-reduce"
+                          role="list"
                         >
                           {%- for grandchildlink in childlink.links -%}
                             <li>
