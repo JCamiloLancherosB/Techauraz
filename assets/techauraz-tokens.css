@@ -1137,7 +1137,7 @@ h2.title {
   .section-heading,
   .title-wrapper .title,
   h2.title {
-    font-size: var(--ta-font-size-h3, 2.4rem);
+    font-size: var(--ta-font-size-h2, 2.4rem);
     margin-bottom: var(--ta-space-lg, 1.6rem);
   }
 
