@@ -3312,7 +3312,7 @@ cart-notification {
 modal-dialog,
 details-modal,
 .modal-overlay,
-[role="dialog"]:not(#cart-notification) {
+[role="dialog"]:not(.cart-notification) {
   z-index: 300 !important; /* Above header (100-101), below cookie banner (400) */
 }
 
