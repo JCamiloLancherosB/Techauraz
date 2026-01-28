@@ -146,39 +146,36 @@
         <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
     {%- elsif enable_ticker and section.blocks.size > 0 -%}
-      {%- comment -%} Ticker Mode: Rotating messages with fade animation {%- endcomment -%}
+      {%- comment -%} Ticker Mode: Continuous marquee scrolling left {%- endcomment -%}
       <div
         class="announcement-bar announcement-ticker{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
         aria-label="{{ 'sections.header.announcement' | t }}"
-        aria-live="polite"
-        aria-atomic="true"
         data-ticker-speed="{{ ticker_speed }}"
       >
-        <div class="announcement-ticker__wrapper">
-          {%- for block in section.blocks -%}
-            <div
-              class="announcement-ticker__item{% if forloop.first %} announcement-ticker__item--active{% endif %}"
-              data-ticker-index="{{ forloop.index0 }}"
-              {{ block.shopify_attributes }}
-              {% unless forloop.first %}aria-hidden="true"{% endunless %}
-            >
-              {%- if block.settings.text != blank -%}
-                {%- if block.settings.link != blank -%}
-                  <a
-                    href="{{ block.settings.link }}"
-                    class="announcement-bar__link link link--text focus-inset"
-                  >
+        <div class="announcement-ticker__viewport">
+          <div class="announcement-ticker__track">
+            {%- for block in section.blocks -%}
+              <span
+                class="announcement-ticker__item"
+                data-ticker-index="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.text != blank -%}
+                  {%- if block.settings.link != blank -%}
+                    <a
+                      href="{{ block.settings.link }}"
+                      class="announcement-bar__link link link--text focus-inset"
+                    >
+                      <span class="announcement-bar__message announcement-ticker__message h5">{{ block.settings.text | escape }}</span>
+                    </a>
+                  {%- else -%}
+                    <span class="announcement-bar__message announcement-ticker__message h5">{{ block.settings.text | escape }}</span>
+                  {%- endif -%}
                 {%- endif -%}
-                <p class="announcement-bar__message announcement-ticker__message h5">
-                  <span>{{ block.settings.text | escape }}</span>
-                </p>
-                {%- if block.settings.link != blank -%}
-                  </a>
-                {%- endif -%}
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
+              </span>
+            {%- endfor -%}
+          </div>
         </div>
       </div>
     {%- endif -%}
