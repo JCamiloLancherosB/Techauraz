@@ -2,16 +2,23 @@
  * =============================================================================
  * DELIVERY ESTIMATE MODULE
  * =============================================================================
- * Handles real-time countdown for cut-off shipping and delivery date estimates.
+ * Computes and displays dynamic delivery date range: "Llega entre {min} y {max}"
  * 
  * Features:
- * - Configurable cut-off time (default: 2:00 PM Colombia time)
- * - Excludes Sundays from business days calculation
- * - Shows honest "estimated/aprox." delivery dates
- * - Updates countdown timer every second (only when visible)
+ * - Configurable via data attributes on .ta-delivery-estimate element
+ * - Cut-off time: 2:00 PM America/Bogota (configurable)
+ * - Business days = Mon-Fri only (excludes Sat/Sun)
+ * - Locale-aware date formatting (es-CO, short month style)
+ * - Fallback text when JS is disabled (noscript in Liquid)
  * 
- * Usage: Initialize with DeliveryEstimate.init()
- * Note: Module auto-initializes; cleanup via DeliveryEstimate.destroy() if needed
+ * Data attributes:
+ * - data-min-days: Minimum delivery business days (default: 2)
+ * - data-max-days: Maximum delivery business days (default: 5)
+ * - data-cutoff-hour: Cut-off hour in 24h format (default: 14)
+ * - data-timezone: IANA timezone (default: America/Bogota)
+ * - data-locale: Locale for date formatting (default: es-CO)
+ * 
+ * Usage: Auto-initializes on DOMContentLoaded
  */
 
 (function() {
@@ -24,16 +31,8 @@
 
   const DeliveryEstimate = {
     initialized: false,
-    
-    // Configuration for Colombia (UTC-5, no DST)
-    config: {
-      cutoffHour: 14, // 2:00 PM (24h format)
-      cutoffMinute: 0,
-      minBusinessDays: 2,
-      maxBusinessDays: 5,
-      timezone: 'America/Bogota',
-      locale: 'es-CO'
-    },
+    container: null,
+    config: null,
 
     /**
      * Initialize the delivery estimate module
@@ -41,56 +40,28 @@
     init: function() {
       // Prevent multiple initializations
       if (this.initialized) return;
-      
-      const container = document.querySelector('.pdp-delivery-estimate');
+
+      const container = document.querySelector('.ta-delivery-estimate');
       if (!container) return;
 
       this.container = container;
-      this.countdownEl = container.querySelector('.delivery-estimate__countdown-time');
-      this.cutoffMessageEl = container.querySelector('.delivery-estimate__cutoff-message');
-      this.dateRangeEl = container.querySelector('.delivery-estimate__date-range');
+      this.dateRangeEl = container.querySelector('.ta-delivery-estimate__date-range');
+
+      // Read configuration from data attributes
+      this.config = {
+        minBusinessDays: parseInt(container.dataset.minDays, 10) || 2,
+        maxBusinessDays: parseInt(container.dataset.maxDays, 10) || 5,
+        cutoffHour: parseInt(container.dataset.cutoffHour, 10) || 14,
+        timezone: container.dataset.timezone || 'America/Bogota',
+        locale: container.dataset.locale || 'es-CO'
+      };
 
       this.update();
-      this.startCountdown();
       this.initialized = true;
-      
-      // Cleanup on page unload to prevent memory leaks
-      window.addEventListener('beforeunload', () => this.destroy());
-    },
-    
-    /**
-     * Start countdown timer (only when cutoff is applicable)
-     */
-    startCountdown: function() {
-      // Clear any existing interval
-      this.stopCountdown();
-      
-      // Only start interval if countdown is visible
-      if (this.isBeforeCutoff()) {
-        this.intervalId = setInterval(() => {
-          // Stop if no longer before cutoff
-          if (!this.isBeforeCutoff()) {
-            this.stopCountdown();
-            this.update();
-            return;
-          }
-          this.update();
-        }, 1000);
-      }
-    },
-    
-    /**
-     * Stop countdown timer
-     */
-    stopCountdown: function() {
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-        this.intervalId = null;
-      }
     },
 
     /**
-     * Get current time in Colombia timezone
+     * Get current time in the configured timezone
      * Uses toLocaleString for timezone conversion - widely supported across browsers
      */
     getNow: function() {
@@ -103,44 +74,47 @@
     },
 
     /**
-     * Check if a date is a Sunday
+     * Check if a date is a weekend (Saturday or Sunday)
      */
-    isSunday: function(date) {
-      return date.getDay() === 0;
+    isWeekend: function(date) {
+      const day = date.getDay();
+      return day === 0 || day === 6; // Sunday = 0, Saturday = 6
     },
 
     /**
      * Check if current time is before cut-off
+     * Returns true if:
+     * - Current time is before cutoff hour AND it's a weekday (Mon-Fri)
      */
     isBeforeCutoff: function() {
       const now = this.getNow();
       const cutoffToday = new Date(now);
-      cutoffToday.setHours(this.config.cutoffHour, this.config.cutoffMinute, 0, 0);
-      
-      // Also check it's not Sunday
-      return now < cutoffToday && !this.isSunday(now);
+      cutoffToday.setHours(this.config.cutoffHour, 0, 0, 0);
+
+      // Before cutoff AND not a weekend
+      return now < cutoffToday && !this.isWeekend(now);
     },
 
     /**
-     * Get time remaining until cut-off
+     * Get the starting date for delivery calculation
+     * If before cutoff on a weekday → start = today
+     * Else start = next calendar day (then we add business days from there)
      */
-    getTimeUntilCutoff: function() {
+    getStartDate: function() {
       const now = this.getNow();
-      const cutoffToday = new Date(now);
-      cutoffToday.setHours(this.config.cutoffHour, this.config.cutoffMinute, 0, 0);
 
-      const diff = cutoffToday - now;
-      if (diff <= 0) return null;
+      if (this.isBeforeCutoff()) {
+        return now;
+      }
 
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      return { hours, minutes, seconds };
+      // After cutoff or on weekend, start from next calendar day
+      const nextDay = new Date(now);
+      nextDay.setDate(nextDay.getDate() + 1);
+      return nextDay;
     },
 
     /**
-     * Add business days to a date (excluding Sundays)
+     * Add business days to a date (Mon-Fri only, skipping Sat/Sun)
      */
     addBusinessDays: function(startDate, days) {
       const result = new Date(startDate);
@@ -148,8 +122,8 @@
 
       while (added < days) {
         result.setDate(result.getDate() + 1);
-        // Skip Sundays (0 = Sunday)
-        if (result.getDay() !== 0) {
+        // Only count weekdays (Mon=1 to Fri=5)
+        if (!this.isWeekend(result)) {
           added++;
         }
       }
@@ -158,55 +132,31 @@
     },
 
     /**
-     * Format date for display
+     * Format date for display using Intl.DateTimeFormat
+     * Returns format like "30 ene" (day + short month)
      */
     formatDate: function(date) {
-      const options = { 
-        weekday: 'short', 
-        day: 'numeric', 
-        month: 'short'
-      };
-      return date.toLocaleDateString(this.config.locale, options);
-    },
-
-    /**
-     * Get the shipping start date
-     * If before cutoff on a non-Sunday, shipping starts today
-     * Otherwise, shipping starts next business day (Mon-Sat)
-     */
-    getShippingStartDate: function() {
-      const now = this.getNow();
-      
-      if (this.isBeforeCutoff()) {
-        return now;
+      try {
+        const options = {
+          day: 'numeric',
+          month: 'short'
+        };
+        return date.toLocaleDateString(this.config.locale, options);
+      } catch (e) {
+        // Fallback formatting
+        const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+        return date.getDate() + ' ' + months[date.getMonth()];
       }
-
-      // After cutoff or on Sunday, find next business day
-      const nextDay = new Date(now);
-      
-      // If it's Sunday, start from Monday
-      if (this.isSunday(now)) {
-        nextDay.setDate(nextDay.getDate() + 1);
-      } else {
-        // Not Sunday but after cutoff, try tomorrow
-        nextDay.setDate(nextDay.getDate() + 1);
-        // If tomorrow is Sunday, skip to Monday
-        if (this.isSunday(nextDay)) {
-          nextDay.setDate(nextDay.getDate() + 1);
-        }
-      }
-      
-      return nextDay;
     },
 
     /**
      * Calculate estimated delivery date range
      */
     getDeliveryDateRange: function() {
-      const shippingStart = this.getShippingStartDate();
-      
-      const minDate = this.addBusinessDays(shippingStart, this.config.minBusinessDays);
-      const maxDate = this.addBusinessDays(shippingStart, this.config.maxBusinessDays);
+      const startDate = this.getStartDate();
+
+      const minDate = this.addBusinessDays(startDate, this.config.minBusinessDays);
+      const maxDate = this.addBusinessDays(startDate, this.config.maxBusinessDays);
 
       return {
         min: this.formatDate(minDate),
@@ -215,51 +165,33 @@
     },
 
     /**
-     * Pad number with leading zero
-     */
-    pad: function(num) {
-      return String(num).padStart(2, '0');
-    },
-
-    /**
-     * Update the display
+     * Update the display with calculated delivery dates
      */
     update: function() {
-      if (!this.container) return;
+      if (!this.container || !this.dateRangeEl) return;
 
-      const isBeforeCutoff = this.isBeforeCutoff();
-      const timeRemaining = this.getTimeUntilCutoff();
       const dateRange = this.getDeliveryDateRange();
-
-      // Update countdown section
-      if (this.cutoffMessageEl && this.countdownEl) {
-        if (isBeforeCutoff && timeRemaining) {
-          this.cutoffMessageEl.classList.remove('delivery-estimate--hidden');
-          this.countdownEl.textContent = 
-            `${this.pad(timeRemaining.hours)}:${this.pad(timeRemaining.minutes)}:${this.pad(timeRemaining.seconds)}`;
-        } else {
-          this.cutoffMessageEl.classList.add('delivery-estimate--hidden');
-        }
-      }
-
-      // Update date range
-      if (this.dateRangeEl) {
-        this.dateRangeEl.textContent = `${dateRange.min} - ${dateRange.max}`;
-      }
+      
+      // Update the text to show "Llega entre {min} y {max}"
+      this.dateRangeEl.textContent = 'Llega entre ' + dateRange.min + ' y ' + dateRange.max;
     },
 
     /**
-     * Clean up interval when needed (for SPA navigation or manual cleanup)
+     * Clean up (for SPA navigation)
      */
     destroy: function() {
-      this.stopCountdown();
       this.initialized = false;
+      this.container = null;
+      this.dateRangeEl = null;
+      this.config = null;
     }
   };
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => DeliveryEstimate.init());
+    document.addEventListener('DOMContentLoaded', function() {
+      DeliveryEstimate.init();
+    });
   } else {
     DeliveryEstimate.init();
   }

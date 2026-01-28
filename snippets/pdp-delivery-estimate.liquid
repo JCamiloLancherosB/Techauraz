@@ -1,40 +1,33 @@
 {% comment %}
   Product Detail Page - Delivery Estimate Module
   
-  Shows:
-  1. "Buy in the next HH:MM for your order to ship today" (if before cut-off)
-  2. "Estimated delivery: between [date] and [date]" 
+  Shows dynamic delivery date range: "Llega entre {minDate} y {maxDate}"
   
   Rules:
-  - Cut-off: 2:00 PM Colombia time
-  - Excludes Sundays
-  - 2-5 business days delivery for Colombia
-  - Uses "Estimado" / "aprox." for honest messaging
+  - Cut-off: 2:00 PM Colombia time (America/Bogota)
+  - If order placed before 2pm → start counting from today
+  - If order placed after 2pm → start counting from next calendar day
+  - Business days = Mon-Fri (excludes Sat/Sun)
+  - Delivery window: 2-5 business days
+  - Locale: es-CO with short month format (e.g. "30 ene")
   
   Usage:
   {% render 'pdp-delivery-estimate' %}
 {% endcomment %}
 
-<div class="pdp-delivery-estimate" aria-live="polite" aria-atomic="true">
-  {%- comment -%} Cut-off countdown message {%- endcomment -%}
-  <div class="delivery-estimate__cutoff-message delivery-estimate__row">
-    <span class="delivery-estimate__icon delivery-estimate__icon--clock" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-    <span class="delivery-estimate__text">
-      <span class="visually-hidden">Tiempo restante para envío hoy:</span>
-      Compra en las próximas 
-      <strong class="delivery-estimate__countdown-time" role="timer" aria-label="Tiempo restante">--:--:--</strong> 
-      para que tu pedido salga <strong>hoy</strong>
-    </span>
-  </div>
-
-  {%- comment -%} Estimated delivery date range {%- endcomment -%}
-  <div class="delivery-estimate__delivery-row delivery-estimate__row">
-    <span class="delivery-estimate__icon delivery-estimate__icon--truck" aria-hidden="true">
+<div 
+  class="ta-delivery-estimate"
+  data-min-days="2"
+  data-max-days="5"
+  data-cutoff-hour="14"
+  data-timezone="America/Bogota"
+  data-locale="es-CO"
+  aria-live="polite" 
+  aria-atomic="true"
+>
+  {%- comment -%} Delivery date range - main message {%- endcomment -%}
+  <div class="ta-delivery-estimate__row">
+    <span class="ta-delivery-estimate__icon" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 6h12v8H3V6z" stroke="currentColor" stroke-width="2"/>
         <path d="M15 9h3l3 3v2h-6V9z" stroke="currentColor" stroke-width="2"/>
@@ -45,23 +38,13 @@
         <path d="M20 14h1" stroke="currentColor" stroke-width="2"/>
       </svg>
     </span>
-    <span class="delivery-estimate__text">
-      Entrega estimada: entre 
-      <strong class="delivery-estimate__date-range">--</strong>
-      <span class="delivery-estimate__aprox">(aprox.)</span>
-    </span>
-  </div>
-
-  {%- comment -%} Free shipping indicator {%- endcomment -%}
-  <div class="delivery-estimate__free-shipping delivery-estimate__row">
-    <span class="delivery-estimate__icon delivery-estimate__icon--check" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-        <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-    <span class="delivery-estimate__text">
-      <strong>Envío gratis</strong> a todo Colombia
+    <span class="ta-delivery-estimate__text">
+      {%- comment -%} Fallback message when JS is disabled {%- endcomment -%}
+      <noscript>{{ 'products.product.delivery_estimate.fallback' | t | default: 'Entrega 2–5 días hábiles' }}</noscript>
+      {%- comment -%} Dynamic message populated by JS {%- endcomment -%}
+      <span class="ta-delivery-estimate__message js-only">
+        <strong class="ta-delivery-estimate__date-range">{{ 'products.product.delivery_estimate.fallback' | t | default: 'Entrega 2–5 días hábiles' }}</strong>
+      </span>
     </span>
   </div>
 </div>
