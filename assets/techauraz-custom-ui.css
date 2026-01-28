@@ -56,10 +56,10 @@
 
 /* =============================================================================
    ANNOUNCEMENT TICKER STYLES
-   Rotating announcement messages with fade effect
+   Continuous marquee scrolling left with seamless loop
    ============================================================================= */
 
-/* Fixed height to prevent CLS (Cumulative Layout Shift) */
+/* Viewport container - hides overflow */
 .announcement-ticker {
   position: relative;
   width: 100%;
@@ -71,71 +71,94 @@
   overflow: hidden;
 }
 
-.announcement-ticker__wrapper {
+.announcement-ticker__viewport {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+
+/* Track that scrolls - animation set by JS */
+.announcement-ticker__track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Marquee animation when initialized */
+.announcement-ticker[data-ta-ticker-initialized="true"] .announcement-ticker__track {
+  animation: ta-marquee-scroll var(--ta-ticker-duration, 20s) linear infinite;
+}
+
+/* Pause animation during resize/setup */
+.announcement-ticker--resetting .announcement-ticker__track {
+  animation: none !important;
+}
+
+/* Pause on hover */
+.announcement-ticker:hover .announcement-ticker__track,
+.announcement-ticker:focus-within .announcement-ticker__track {
+  animation-play-state: paused;
+}
+
+/* Keyframes for left scroll */
+@keyframes ta-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(var(--ta-ticker-scroll-distance, -50%)));
+  }
 }
 
 /* Individual ticker item */
 .announcement-ticker__item {
-  position: absolute;
-  inset: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s ease-in-out;
-  will-change: opacity, transform;
-}
-
-.announcement-ticker__item--active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+  flex-shrink: 0;
+  padding: 0 var(--ta-space-xl, 2rem);
 }
 
 /* Ticker message styling */
 .announcement-ticker__message {
   margin: 0;
-  padding: 0 var(--ta-space-md, 1.2rem);
-  text-align: center;
+  padding: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  display: inline;
 }
 
-/* Link inside ticker - full clickable area */
+/* Link inside ticker - clickable */
 .announcement-ticker__item .announcement-bar__link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Paused state - when hovering on desktop */
-.announcement-ticker--paused .announcement-ticker__item--active {
-  /* Keep current message visible, subtle visual indication */
-  cursor: default;
+.announcement-ticker__item .announcement-bar__link:hover {
+  text-decoration: underline;
 }
 
-/* Accessibility: prefers-reduced-motion */
+/* Accessibility: prefers-reduced-motion - show static content */
 @media (prefers-reduced-motion: reduce) {
-  .announcement-ticker__item {
-    /* No fade animation, instant switch */
-    transition: none;
-    transform: none !important;
+  .announcement-ticker[data-ta-ticker-initialized="true"] .announcement-ticker__track {
+    animation: none;
   }
   
-  .announcement-ticker__item--active {
-    transform: none;
+  /* Show items as static centered content */
+  .announcement-ticker__viewport {
+    overflow: hidden;
+  }
+  
+  .announcement-ticker__track {
+    justify-content: center;
+  }
+  
+  /* Hide cloned items in reduced motion */
+  .announcement-ticker__item[data-ta-cloned="true"] {
+    display: none;
   }
 }
 
@@ -146,11 +169,12 @@
     height: 3.6rem;
   }
   
+  .announcement-ticker__item {
+    padding: 0 var(--ta-space-lg, 1.5rem);
+  }
+  
   .announcement-ticker__message {
     font-size: var(--ta-font-size-xs, 1.2rem);
-    padding: 0 var(--ta-space-sm, 0.8rem);
-    white-space: normal;
-    line-height: 1.3;
   }
 }
 

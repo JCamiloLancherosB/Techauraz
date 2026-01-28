@@ -8,151 +8,215 @@
  */
 
 /* =============================================================================
-   ANNOUNCEMENT TICKER - Rotating messages with fade animation
+   ANNOUNCEMENT MARQUEE - Continuous scrolling ticker
    ============================================================================= */
 (function() {
   'use strict';
 
+  // Configuration constants
+  var BASE_PPS = 40;           // Base pixels-per-second
+  var PPS_INCREMENT = 10;      // Added per speed level
+  var MIN_TRACK_MULTIPLIER = 2; // Track must be at least 2x viewport width
+  var RESIZE_DEBOUNCE_MS = 200; // Debounce delay for resize handler
+
   /**
-   * AnnouncementTicker class
-   * Manages rotating announcement messages with accessibility support
+   * Calculate pixels-per-second from speed level.
+   * Speed level 1-10, where pps = BASE_PPS + (speedLevel * PPS_INCREMENT)
+   * e.g., speed=5 => 90pps
+   * @param {HTMLElement} root - The ticker element
+   * @returns {number} Pixels per second
    */
-  class AnnouncementTicker {
-    constructor(container) {
-      this.container = container;
-      this.items = Array.from(container.querySelectorAll('.announcement-ticker__item'));
-      this.currentIndex = 0;
-      this.isPaused = false;
-      this.intervalId = null;
-      
-      // Get speed from data attribute (in seconds), default to 5 seconds
-      const speedAttr = container.getAttribute('data-ticker-speed');
-      this.speed = (speedAttr ? parseInt(speedAttr, 10) : 5) * 1000;
-      
-      // Ensure speed is within reasonable bounds (3-8 seconds)
-      this.speed = Math.max(3000, Math.min(8000, this.speed));
-      
-      // Check for reduced motion preference
-      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      
-      this.init();
+  function getPixelsPerSecond(root) {
+    // Check for CSS variable override first
+    var computedStyle = getComputedStyle(root);
+    var cssOverride = computedStyle.getPropertyValue('--ta-ticker-pps').trim();
+    if (cssOverride && !isNaN(parseFloat(cssOverride))) {
+      return parseFloat(cssOverride);
     }
     
-    init() {
-      if (this.items.length <= 1) {
-        // No rotation needed for single item
+    // Calculate from data-ticker-speed attribute
+    var speedLevel = parseInt(root.getAttribute('data-ticker-speed') || '5', 10);
+    var clampedSpeed = Math.max(1, Math.min(10, speedLevel));
+    return BASE_PPS + (clampedSpeed * PPS_INCREMENT);
+  }
+
+  /**
+   * Initialize announcement marquee with continuous left-scrolling animation.
+   * @param {HTMLElement} root - The .announcement-ticker element
+   */
+  function initAnnouncementMarquee(root) {
+    // Skip if already initialized
+    if (root.getAttribute('data-ta-ticker-initialized') === 'true') {
+      return;
+    }
+
+    var viewport = root.querySelector('.announcement-ticker__viewport');
+    var track = root.querySelector('.announcement-ticker__track');
+    
+    if (!viewport || !track) {
+      return;
+    }
+
+    // Check for reduced motion preference
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    // Store cleanup handlers for proper teardown
+    var resizeTimeout = null;
+    var abortController = typeof AbortController !== 'undefined' ? new AbortController() : null;
+
+    /**
+     * Remove all cloned elements from the track
+     */
+    function removeClones() {
+      var clones = track.querySelectorAll('[data-ta-cloned="true"]');
+      clones.forEach(function(clone) { clone.remove(); });
+    }
+
+    /**
+     * Measure and set up the marquee
+     */
+    function setupMarquee() {
+      // Remove any existing clones first (for resize handling)
+      removeClones();
+      
+      // Reset animation temporarily by adding a class
+      root.classList.add('announcement-ticker--resetting');
+      
+      // Get original items (not clones)
+      var originalItems = Array.from(track.querySelectorAll('.announcement-ticker__item:not([data-ta-cloned="true"])'));
+      
+      if (originalItems.length === 0) {
         return;
       }
+
+      // Measure original track width
+      var originalWidth = track.scrollWidth;
+      var viewportWidth = viewport.offsetWidth;
+
+      // If reduced motion is preferred, just mark as initialized and return
+      if (prefersReducedMotion.matches) {
+        root.setAttribute('data-ta-ticker-initialized', 'true');
+        root.classList.remove('announcement-ticker--resetting');
+        return;
+      }
+
+      // Clone items until track is at least MIN_TRACK_MULTIPLIER x viewport width for seamless loop
+      var minWidth = viewportWidth * MIN_TRACK_MULTIPLIER;
       
-      this.bindEvents();
-      this.startRotation();
+      while (track.scrollWidth < minWidth) {
+        originalItems.forEach(function(item) {
+          var clone = item.cloneNode(true);
+          clone.setAttribute('data-ta-cloned', 'true');
+          clone.setAttribute('aria-hidden', 'true');
+          // Remove any links' tabindex to prevent keyboard navigation to clones
+          var links = clone.querySelectorAll('a');
+          links.forEach(function(link) { link.setAttribute('tabindex', '-1'); });
+          track.appendChild(clone);
+        });
+      }
+
+      // Calculate animation duration based on scroll distance and speed
+      var pps = getPixelsPerSecond(root);
+      var scrollDistance = originalWidth;
+      var duration = scrollDistance / pps;
+
+      // Set CSS custom properties for the animation
+      root.style.setProperty('--ta-ticker-scroll-distance', '-' + scrollDistance + 'px');
+      root.style.setProperty('--ta-ticker-duration', duration + 's');
+
+      // Re-enable animation
+      root.classList.remove('announcement-ticker--resetting');
       
-      // Listen for reduced motion preference changes
-      this.prefersReducedMotion.addEventListener('change', () => {
-        // Restart with new preference
-        this.stopRotation();
-        this.startRotation();
-      });
+      // Mark as initialized
+      root.setAttribute('data-ta-ticker-initialized', 'true');
     }
-    
-    bindEvents() {
-      // Store bound references for cleanup
-      this.boundPause = () => this.pause();
-      this.boundResume = () => this.resume();
-      
-      // Pause on hover (desktop only)
-      this.container.addEventListener('mouseenter', this.boundPause);
-      this.container.addEventListener('mouseleave', this.boundResume);
-      
-      // Pause on focus for keyboard users
-      this.container.addEventListener('focusin', this.boundPause);
-      this.container.addEventListener('focusout', this.boundResume);
-    }
-    
-    startRotation() {
-      if (this.items.length <= 1) return;
-      
-      this.intervalId = setInterval(() => {
-        if (!this.isPaused) {
-          this.showNext();
+
+    /**
+     * Throttled resize handler
+     */
+    function handleResize() {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(function() {
+        // Only rebuild if element is still in DOM
+        if (document.contains(root)) {
+          setupMarquee();
         }
-      }, this.speed);
+      }, RESIZE_DEBOUNCE_MS);
     }
-    
-    stopRotation() {
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-        this.intervalId = null;
+
+    /**
+     * Handle reduced motion preference changes
+     */
+    function handleMotionChange() {
+      if (document.contains(root)) {
+        setupMarquee();
       }
     }
+
+    // Add event listeners with cleanup support
+    var listenerOptions = abortController ? { signal: abortController.signal } : undefined;
     
-    pause() {
-      this.isPaused = true;
-      this.container.classList.add('announcement-ticker--paused');
-    }
-    
-    resume() {
-      this.isPaused = false;
-      this.container.classList.remove('announcement-ticker--paused');
-    }
-    
-    showNext() {
-      const prevIndex = this.currentIndex;
-      this.currentIndex = (this.currentIndex + 1) % this.items.length;
-      this.transition(prevIndex, this.currentIndex);
-    }
-    
-    transition(fromIndex, toIndex) {
-      const fromItem = this.items[fromIndex];
-      const toItem = this.items[toIndex];
-      
-      if (!fromItem || !toItem) return;
-      
-      // Remove active state from current
-      fromItem.classList.remove('announcement-ticker__item--active');
-      fromItem.setAttribute('aria-hidden', 'true');
-      
-      // Add active state to next
-      toItem.classList.add('announcement-ticker__item--active');
-      toItem.removeAttribute('aria-hidden');
-    }
-    
-    destroy() {
-      this.stopRotation();
-      this.container.removeEventListener('mouseenter', this.boundPause);
-      this.container.removeEventListener('mouseleave', this.boundResume);
-      this.container.removeEventListener('focusin', this.boundPause);
-      this.container.removeEventListener('focusout', this.boundResume);
-    }
+    prefersReducedMotion.addEventListener('change', handleMotionChange, listenerOptions);
+    window.addEventListener('resize', handleResize, listenerOptions);
+
+    // Store cleanup function on element for potential teardown
+    root._taMarqueeCleanup = function() {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      if (abortController) {
+        abortController.abort();
+      } else {
+        // Fallback for browsers without AbortController
+        prefersReducedMotion.removeEventListener('change', handleMotionChange);
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+
+    // Initial setup
+    setupMarquee();
   }
-  
-  // Store ticker instances for cleanup
-  const tickerInstances = new WeakMap();
-  
-  // Initialize ticker on DOM ready
-  function initTickers() {
-    const tickers = document.querySelectorAll('.announcement-ticker');
-    tickers.forEach(ticker => {
-      // Destroy existing instance if present
-      if (tickerInstances.has(ticker)) {
-        tickerInstances.get(ticker).destroy();
-      }
-      // Create new instance
-      const instance = new AnnouncementTicker(ticker);
-      tickerInstances.set(ticker, instance);
-      ticker.setAttribute('data-ticker-initialized', 'true');
+
+  /**
+   * Initialize all announcement marquees on the page
+   */
+  function initAllMarquees() {
+    var tickers = document.querySelectorAll('.announcement-ticker');
+    tickers.forEach(function(ticker) {
+      initAnnouncementMarquee(ticker);
     });
   }
-  
+
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTickers);
+    document.addEventListener('DOMContentLoaded', initAllMarquees);
   } else {
-    initTickers();
+    initAllMarquees();
   }
-  
+
   // Re-init on Shopify section render (for theme editor)
-  document.addEventListener('shopify:section:load', initTickers);
+  document.addEventListener('shopify:section:load', function(event) {
+    var ticker = event.target.querySelector('.announcement-ticker');
+    if (ticker) {
+      // Reset initialization flag to allow re-init
+      ticker.removeAttribute('data-ta-ticker-initialized');
+      initAnnouncementMarquee(ticker);
+    }
+  });
+
+  // Cleanup on Shopify section unload (for theme editor)
+  document.addEventListener('shopify:section:unload', function(event) {
+    var ticker = event.target.querySelector('.announcement-ticker');
+    if (ticker && typeof ticker._taMarqueeCleanup === 'function') {
+      ticker._taMarqueeCleanup();
+    }
+  });
+
+  // Expose for external use if needed
+  window.TechaurazUI = window.TechaurazUI || {};
+  window.TechaurazUI.initAnnouncementMarquee = initAnnouncementMarquee;
 })();
 
 /* =============================================================================
