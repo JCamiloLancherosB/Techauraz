@@ -30,13 +30,12 @@ A comprehensive manual testing checklist for verifying responsive behavior and h
 - [ ] Test at each target breakpoint width
 
 ### Quick Overflow Check Method
-```
+
 1. Set viewport to target width (e.g., 360px)
 2. Check if horizontal scrollbar appears
 3. Use DevTools to highlight elements extending beyond viewport:
    - Elements panel → Right-click → "Scroll into view"
-   - Or add temporary CSS: * { outline: 1px solid red; }
-```
+   - Or add temporary CSS: `* { outline: 1px solid red; }`
 
 ---
 

@@ -353,20 +353,40 @@ slider-component,
 .product-card-wrapper,
 .collection-product-card {
   position: relative;
+  /* CSS Containment for layout performance - fallback gracefully */
   contain: layout;
+  overflow: hidden; /* Fallback for browsers without contain support */
 }
 
 /* 
  * Image overflow prevention - all breakpoints
- * Ensures images respect container boundaries
+ * Scoped to main content areas to avoid inline icon issues
  */
-img,
-picture,
-video,
-svg {
+.card img,
+.card picture,
+.card video,
+.product__media-wrapper img,
+.product__media-wrapper picture,
+.product__media-wrapper video,
+.banner img,
+.banner picture,
+.banner video,
+.hero img,
+.hero picture,
+.slideshow img,
+.slideshow picture {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* SVG images (not inline icons) */
+.card svg.image,
+.product__media-wrapper svg,
+.banner svg:not(.icon),
+img[src$=".svg"] {
+  max-width: 100%;
+  height: auto;
 }
 
 /* 
@@ -537,15 +557,13 @@ svg {
   
   /* 
    * PDP thumbnail list horizontal scroll
-   * Allow scroll but contain within viewport
+   * Simplified approach - just ensure it stays within container
    */
   .thumbnail-list.slider {
-    padding-left: var(--page-gutter, 1.5rem);
-    padding-right: var(--page-gutter, 1.5rem);
-    margin-left: calc(-1 * var(--page-gutter, 1.5rem));
-    margin-right: calc(-1 * var(--page-gutter, 1.5rem));
-    width: calc(100% + 2 * var(--page-gutter, 1.5rem));
-    max-width: 100vw;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -648,10 +666,16 @@ svg {
   /* 
    * Ultra-wide containment
    * Prevents content from stretching too wide
+   * Fallbacks for older browsers included
    */
   .page-width {
+    /* Fallback for browsers without min() support */
+    max-width: var(--page-width, 120rem);
+    /* Modern browsers with min() support */
     max-width: min(var(--page-width, 120rem), calc(100vw - 10rem));
-    margin-inline: auto;
+    /* Fallbacks for margin-inline */
+    margin-left: auto;
+    margin-right: auto;
   }
   
   /* Full-bleed sections remain full width */
@@ -684,13 +708,18 @@ svg {
   max-width: 100vw;
   left: 0;
   right: 0;
-  margin-inline: auto;
+  /* Fallbacks for margin-inline */
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* WhatsApp floating button - specific selectors only */
 .whatsapp-float,
-.whatsapp-button-float,
-[class*="whatsapp"][class*="float"] {
+.whatsapp-button-float {
   /* Ensure WhatsApp button stays within viewport */
+  /* Fallback for browsers without max()/env() support */
+  right: 1rem;
+  /* Modern browsers with safe area support */
   right: max(1rem, env(safe-area-inset-right, 0px));
   max-width: calc(100vw - 2rem);
 }
