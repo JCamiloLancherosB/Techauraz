@@ -172,7 +172,8 @@
         "category_5"
       ],
       "settings": {
-        "heading": "Categorías Destacadas"
+        "heading": "Categorías Destacadas",
+        "subtitle": "Explora nuestra selección de tecnología premium"
       }
     },
     "featured_collection_9GzLFt": {
@@ -232,52 +233,32 @@
         "padding_bottom": 0
       }
     },
-    "trust_badges_home": {
-      "type": "trust-badges",
-      "blocks": {
-        "trust_secure": {
-          "type": "badge",
-          "settings": {
-            "icon_type": "emoji",
-            "emoji": "💵",
-            "text": "Contraentrega"
-          }
-        },
-        "trust_delivery": {
-          "type": "badge",
-          "settings": {
-            "icon_type": "emoji",
-            "emoji": "🚚",
-            "text": "Envío 2-5 días"
-          }
-        },
-        "trust_guarantee": {
-          "type": "badge",
-          "settings": {
-            "icon_type": "emoji",
-            "emoji": "✅",
-            "text": "Garantía 30 días"
-          }
-        },
-        "trust_support": {
-          "type": "badge",
-          "settings": {
-            "icon_type": "emoji",
-            "emoji": "💬",
-            "text": "Soporte por WhatsApp"
-          }
-        }
-      },
-      "block_order": [
-        "trust_secure",
-        "trust_delivery",
-        "trust_guarantee",
-        "trust_support"
-      ],
+    "featured_collection_new_arrivals": {
+      "type": "featured-collection",
       "settings": {
-        "heading": "Comprar con confianza",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "title": "<strong>Nuevos Productos</strong>",
+        "heading_size": "h2",
+        "description": "Descubre las últimas novedades en tecnología",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "productos-inteligentes-electronicos",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "testimonials_home": {
@@ -323,8 +304,8 @@
         "show_view_all": false,
         "view_all_link": "",
         "view_all_text": "Ver más reseñas",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "newsletter_conversion_home": {
@@ -344,7 +325,7 @@
     "category_navigation",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
-    "trust_badges_home",
+    "featured_collection_new_arrivals",
     "testimonials_home",
     "newsletter_conversion_home"
   ]
