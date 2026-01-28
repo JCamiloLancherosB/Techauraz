@@ -8,7 +8,14 @@
     required: document.documentElement.getAttribute('data-form-required-error') || 'This field is required',
     email: document.documentElement.getAttribute('data-form-email-error') || 'Please enter a valid email',
     serverError: document.documentElement.getAttribute('data-form-server-error') || 'Something went wrong. Please try again.',
-    newsletterSuccess: document.documentElement.getAttribute('data-newsletter-success') || 'Thanks for subscribing!'
+    newsletterSuccess: document.documentElement.getAttribute('data-newsletter-success') || 'Thanks for subscribing!',
+    loading: document.documentElement.getAttribute('data-newsletter-loading') || 'Loading...'
+  };
+  
+  // SVG icons as constants (used for consistent icon rendering)
+  const ICONS = {
+    error: '<svg aria-hidden="true" focusable="false" class="icon icon-error" viewBox="0 0 13 13" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;flex-shrink:0;"><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/><path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></svg>',
+    success: '<svg aria-hidden="true" focusable="false" class="icon icon-success" viewBox="0 0 13 13" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;flex-shrink:0;"><path d="M6.5 12.35C9.73087 12.35 12.35 9.73086 12.35 6.5C12.35 3.26913 9.73087 0.65 6.5 0.65C3.26913 0.65 0.65 3.26913 0.65 6.5C0.65 9.73086 3.26913 12.35 6.5 12.35Z" fill="#428445" stroke="white" stroke-width="0.7"/><path d="M5.53271 8.66357L9.25213 4.68197" stroke="white"/><path d="M4.10645 6.7688L6.13766 8.62553" stroke="white"/></svg>'
   };
 
   // Email validation
@@ -273,8 +280,8 @@
             this.showSuccessMessage();
             this.emailInput.value = '';
             
-            // Track newsletter signup event
-            this.trackSignup(email);
+            // Track newsletter signup event (without PII)
+            this.trackSignup();
           }
         } else {
           this.showErrorMessage(errorMessages.serverError);
@@ -293,12 +300,45 @@
       this.form.classList.toggle('newsletter-form--loading', isLoading);
       
       if (isLoading) {
-        this.submitButton.innerHTML = '<span class="newsletter-loading-spinner" aria-hidden="true"></span><span class="visually-hidden">Loading...</span>';
+        // Create loading spinner with localized loading text
+        this.submitButton.innerHTML = '<span class="newsletter-loading-spinner" aria-hidden="true"></span><span class="visually-hidden">' + this.escapeHtml(errorMessages.loading) + '</span>';
         this.submitButton.setAttribute('aria-busy', 'true');
       } else {
         this.submitButton.innerHTML = this.originalButtonContent;
         this.submitButton.removeAttribute('aria-busy');
       }
+    }
+    
+    /**
+     * Escape HTML special characters to prevent XSS
+     * @param {string} text - Text to escape
+     * @returns {string} Escaped text
+     */
+    escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    /**
+     * Create message element safely without XSS risk
+     * @param {HTMLElement} container - Container element
+     * @param {string} iconHtml - Trusted icon HTML
+     * @param {string} message - Message text to display (escaped)
+     */
+    setMessageContent(container, iconHtml, message) {
+      // Clear existing content
+      container.innerHTML = '';
+      
+      // Add icon (trusted SVG)
+      const iconWrapper = document.createElement('span');
+      iconWrapper.innerHTML = iconHtml;
+      container.appendChild(iconWrapper.firstChild);
+      
+      // Add message text safely using textContent
+      const messageSpan = document.createElement('span');
+      messageSpan.textContent = message;
+      container.appendChild(messageSpan);
     }
     
     showFieldError(message) {
@@ -307,20 +347,20 @@
       this.emailInput.setAttribute('aria-describedby', this.formId + '-error');
       
       this.errorMessage.id = this.formId + '-error';
-      this.errorMessage.innerHTML = '<svg aria-hidden="true" focusable="false" class="icon icon-error" viewBox="0 0 13 13" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;"><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/><path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></svg>' + message;
+      this.setMessageContent(this.errorMessage, ICONS.error, message);
       this.errorMessage.style.display = 'flex';
       this.errorMessage.classList.add('is-visible');
     }
     
     showErrorMessage(message) {
-      this.errorMessage.innerHTML = '<svg aria-hidden="true" focusable="false" class="icon icon-error" viewBox="0 0 13 13" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;"><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/><path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></svg>' + message;
+      this.setMessageContent(this.errorMessage, ICONS.error, message);
       this.errorMessage.style.display = 'flex';
       this.errorMessage.classList.add('is-visible');
     }
     
     showSuccessMessage() {
       const successText = this.form.getAttribute('data-success-message') || errorMessages.newsletterSuccess;
-      this.successMessage.innerHTML = '<svg aria-hidden="true" focusable="false" class="icon icon-success" viewBox="0 0 13 13" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;"><path d="M6.5 12.35C9.73087 12.35 12.35 9.73086 12.35 6.5C12.35 3.26913 9.73087 0.65 6.5 0.65C3.26913 0.65 0.65 3.26913 0.65 6.5C0.65 9.73086 3.26913 12.35 6.5 12.35Z" fill="#428445" stroke="white" stroke-width="0.7"/><path d="M5.53271 8.66357L9.25213 4.68197" stroke="white"/><path d="M4.10645 6.7688L6.13766 8.62553" stroke="white"/></svg>' + successText;
+      this.setMessageContent(this.successMessage, ICONS.success, successText);
       this.successMessage.style.display = 'flex';
       this.successMessage.classList.add('is-visible');
       
@@ -336,17 +376,17 @@
       this.emailInput.removeAttribute('aria-describedby');
     }
     
-    trackSignup(email) {
-      // Dispatch custom event for analytics
+    trackSignup() {
+      // Dispatch custom event for analytics (without PII)
       window.dispatchEvent(new CustomEvent('newsletterSignup', {
-        detail: { email: email, formId: this.formId }
+        detail: { formId: this.formId }
       }));
       
       // Google Analytics tracking (if available)
       if (typeof gtag !== 'undefined') {
         gtag('event', 'newsletter_signup', {
           'event_category': 'Newsletter',
-          'event_label': 'Footer Signup'
+          'event_label': this.formId
         });
       }
     }
@@ -354,7 +394,7 @@
   
   // Initialize newsletter forms
   function initNewsletterForms() {
-    const newsletterForms = document.querySelectorAll('.newsletter-form, .ta-conv-newsletter, .footer__newsletter form');
+    const newsletterForms = document.querySelectorAll('.newsletter-form, .ta-conv-newsletter');
     newsletterForms.forEach(form => {
       // Skip if already initialized
       if (form.hasAttribute('data-newsletter-initialized')) {
