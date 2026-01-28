@@ -53,8 +53,11 @@ main[role="main"] {
   isolation: isolate;
 }
 
-/* Ensure CSS custom properties are always defined at :root level */
-/* This prevents any shadow DOM or adopted stylesheet from overriding them */
+/*
+ * CSS custom properties are defined at :root level below.
+ * This ensures our tokens take precedence over any injected styles
+ * because :root has equal specificity and our styles load later in cascade.
+ */
 
 /* =============================================================================
    1. BRAND COLORS - Premium Tech Palette

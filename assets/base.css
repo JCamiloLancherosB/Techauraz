@@ -655,11 +655,19 @@ select:focus {
   z-index: var(--ta-z-modal, 410) !important;
 }
 
-/* Cart drawer and menu drawer */
-.cart-drawer,
-.drawer,
+/* Cart drawer - uses drawer layer */
+.cart-drawer {
+  z-index: var(--ta-z-cart-drawer, 210) !important;
+}
+
+/* Menu drawer - uses drawer layer with higher z-index */
 .menu-drawer,
 menu-drawer {
+  z-index: var(--ta-z-menu-drawer, 230) !important;
+}
+
+/* Generic drawer - falls back to cart drawer level */
+.drawer:not(.cart-drawer):not(.menu-drawer) {
   z-index: var(--ta-z-cart-drawer, 210) !important;
 }
 

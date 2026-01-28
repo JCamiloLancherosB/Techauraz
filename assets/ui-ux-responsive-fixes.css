@@ -3956,66 +3956,80 @@ main#MainContent > .shopify-section:first-child .tech-hero,
  * IMPORTANT: All z-index values are now defined as CSS custom properties in
  * techauraz-tokens.css for consistency and easy maintenance.
  * 
- * Order from lowest to highest (as specified in requirements):
- * Announcement < Header < Cart Notification < Modals (search/cart drawer) < Cookie banner < WhatsApp
- * 
- * Layer 7 (Highest): WhatsApp FAB (--ta-z-whatsapp-fab: 500)
- *   - Always accessible for customer support
- *   - Above all other elements
- * 
- * Layer 6: Cookie/GDPR Banner (--ta-z-cookie-banner: 450)
- *   - GDPR compliance requires visibility
- *   - Above modals, below WhatsApp
- * 
- * Layer 5: Modals, Drawers, Overlays (--ta-z-modal: 410, --ta-z-cart-drawer: 210)
- *   - Cart drawer: 210
- *   - Search modal: 410
- *   - Menu drawer: 230
- *   - Overlay backgrounds: 200-220
- * 
- * Layer 4: Cart Notification (--ta-z-notification: 510)
- *   - Fixed overlay positioned for visibility
- *   - Above modals for immediate feedback
- * 
- * Layer 3: Sticky Header Group (--ta-z-header: 101, --ta-z-announcement-bar: 100)
- *   - Announcement bar/topbar (shipping, benefits): 100
- *   - Main navigation header: 101
- *   - Fixed/sticky position
- *   - Must stay below modals/drawers
- * 
- * Layer 2: Sticky Elements (z-index: 90-99)
- *   - Sticky benefits bar (if separate from announcement bar): 98
+ * Order from lowest to highest z-index values:
  * 
  * Layer 1 (Lowest): Regular Content (z-index: 0-50)
- *   - Slideshow controls: 20
- *   - Cards: 1-10
+ *   - --ta-z-base: 0
+ *   - --ta-z-content: 1
+ *   - --ta-z-elevated: 10
+ *   - --ta-z-slideshow-controls: 20
+ *   - --ta-z-card-badge: 30
  *   - Regular sections: auto or 0
+ * 
+ * Layer 2: Sticky Header Group (z-index: 100-199)
+ *   - --ta-z-announcement-bar: 100 (announcement/topbar)
+ *   - --ta-z-header: 101 (main navigation header)
+ *   - --ta-z-sticky-header: 102
+ *   - Fixed/sticky position elements
+ * 
+ * Layer 3: Drawers (z-index: 200-299)
+ *   - --ta-z-cart-drawer-overlay: 200
+ *   - --ta-z-cart-drawer: 210
+ *   - --ta-z-menu-drawer-overlay: 220
+ *   - --ta-z-menu-drawer: 230
+ *   - --ta-z-drawer-close: 250
+ * 
+ * Layer 4: Dropdowns/Menus (z-index: 300-399)
+ *   - --ta-z-mega-menu: 300
+ *   - --ta-z-dropdown: 310
+ *   - --ta-z-popover: 320
+ *   - --ta-z-tooltip: 350
+ * 
+ * Layer 5: Modals (z-index: 400-499)
+ *   - --ta-z-modal-overlay: 400
+ *   - --ta-z-modal: 410
+ *   - --ta-z-cookie-banner: 450
+ *   - --ta-z-lightbox: 460
+ * 
+ * Layer 6 (Highest): Toast/FAB (z-index: 500+)
+ *   - --ta-z-toast: 500
+ *   - --ta-z-whatsapp-fab: 500 (always accessible for support)
+ *   - --ta-z-notification: 510 (cart notification, visible feedback)
  */
 
-/* Enforce header z-index to stay below modals but above content
- * NOTE: Only apply z-index enforcement to navigation header elements
- * Content section headers (like "Featured Products") use normal stacking context
- */
+/* Enforce header z-index to stay below drawers/modals but above content */
 .header-wrapper,
 #shopify-section-header.section-header,
 .shopify-section-header-sticky {
-  z-index: var(--ta-z-header, 101) !important; /* Below modals but above content */
+  z-index: var(--ta-z-header, 101) !important;
 }
 
 /* Cart notification - fixed overlay for immediate feedback */
 cart-notification {
-  z-index: var(--ta-z-notification, 510) !important; /* Above modals for visibility */
+  z-index: var(--ta-z-notification, 510) !important;
 }
 
-/* Ensure modals and drawers are above header */
-.drawer,
-.cart-drawer,
-.menu-drawer,
+/* Cart drawer - uses drawer layer */
+.cart-drawer {
+  z-index: var(--ta-z-cart-drawer, 210) !important;
+}
+
+/* Menu drawer - uses drawer layer */
+.menu-drawer {
+  z-index: var(--ta-z-menu-drawer, 230) !important;
+}
+
+/* Generic drawer - falls back to cart drawer level */
+.drawer:not(.cart-drawer):not(.menu-drawer) {
+  z-index: var(--ta-z-cart-drawer, 210) !important;
+}
+
+/* Modals and dialogs - above drawers */
 modal-dialog,
 details-modal,
 .modal-overlay,
-[role="dialog"]:not(.cart-notification) {
-  z-index: var(--ta-z-modal, 410) !important; /* Above header, below cookie banner */
+[role="dialog"]:not(.cart-notification):not(.cart-drawer):not(.menu-drawer) {
+  z-index: var(--ta-z-modal, 410) !important;
 }
 
 /* Cookie banner - should be above modals but below WhatsApp */
@@ -4023,7 +4037,7 @@ details-modal,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: var(--ta-z-cookie-banner, 450) !important; /* Above modals, below WhatsApp */
+  z-index: var(--ta-z-cookie-banner, 450) !important;
 }
 
 /* Floating WhatsApp button - highest z-index for always-visible support button */
