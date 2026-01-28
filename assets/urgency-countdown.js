@@ -2,6 +2,7 @@
  * Urgency Elements - Countdown Timer
  * Moved from inline script in sections/urgency-elements.liquid
  * Initializes countdown timer using data-end-date attribute.
+ * This script is loaded with defer, so DOM is ready when it executes.
  */
 (function() {
   'use strict';
@@ -13,12 +14,19 @@
     var endDate = new Date(countdownEl.dataset.endDate);
     if (!endDate || isNaN(endDate.getTime())) return;
     
+    var intervalId = null;
+    
     function updateCountdown() {
       var now = new Date();
       var distance = endDate - now;
       
       if (distance < 0) {
         countdownEl.innerHTML = '<span class="urgency-value">¡Oferta terminada!</span>';
+        // Clear interval to prevent memory leak
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
         return;
       }
       
@@ -36,12 +44,9 @@
     }
     
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    intervalId = setInterval(updateCountdown, 1000);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCountdown);
-  } else {
-    initCountdown();
-  }
+  // Script is loaded with defer, so DOM is already parsed
+  initCountdown();
 })();
