@@ -1,17 +1,31 @@
 {% comment %}
+  DEPRECATED - Use 'card-product' snippet instead
+  
+  This snippet is deprecated as part of the Dawn template normalization.
+  All product card rendering should use the canonical Dawn snippet:
+  
+  {% render 'card-product', card_product: product %}
+  
+  The 'card-product' snippet (snippets/card-product.liquid) is the single 
+  source of truth for product card rendering across the theme.
+  
+  Migration Notes:
+  - The 'card-product' snippet has different parameters than this snippet.
+  - 'show_badges': card-product has built-in badge logic (OFERTA, Nuevo, Agotado)
+  - 'cta_text': card-product uses localized "Ver todos los detalles" and quick-add buttons
+  - For equivalent functionality, use card-product's built-in features instead.
+  
+  This file is kept for reference but should not be used in new development.
+  
+  ---
+  Previous documentation (for reference):
+  
   Conversion-Optimized Product Card
   
   Accepts:
   - product: {Object} Product object
   - show_badges: {Boolean} Show badges (default: true)
   - cta_text: {String} CTA text (default: "Ver producto")
-  
-  Usage:
-  {% render 'product-card-conversion', 
-    product: product,
-    show_badges: true,
-    cta_text: 'Ver producto'
-  %}
 {% endcomment %}
 
 {%- liquid
