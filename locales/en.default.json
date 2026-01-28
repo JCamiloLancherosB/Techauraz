@@ -340,6 +340,9 @@
       "view_all": "View all",
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
+    "related_products": {
+      "subheading": "Products selected especially for you"
+    },
     "collection_list": {
       "view_all": "View all"
     },

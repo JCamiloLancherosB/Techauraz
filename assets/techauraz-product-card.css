@@ -773,3 +773,32 @@
 .related-products__heading {
   color: inherit;
 }
+
+/* Dark Theme Card Variant (for related products section) */
+.tech-related-products .card-wrapper.product-card-wrapper {
+  background: var(--ta-bg, #ffffff);
+}
+
+/* On dark backgrounds (any color scheme with dark background), ensure card content is visible */
+[class*="color-scheme-"] .tech-related-products .card-wrapper.product-card-wrapper {
+  /* Cards always maintain light background for readability regardless of section color scheme */
+  background: var(--ta-bg, #ffffff);
+}
+
+/* Card quick add overlay styling for related products */
+.tech-related-products .card__quick-add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--ta-space-md, 1.2rem);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tech-related-products .card-wrapper.product-card-wrapper:hover .card__quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}

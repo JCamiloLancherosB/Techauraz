@@ -17,20 +17,25 @@
 <div class="color-{{ section.settings.color_scheme }} gradient no-js-hidden">
   <div class="related-products-section-{{ section.id }} section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <product-recommendations
-      class="related-products"
+      class="related-products page-width"
       data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}"
     >
       {% if recommendations.performed and recommendations.products_count > 0 %}
-        <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
-          ✨ {{ section.settings.heading }} ✨
-        </h2>
+        <div class="related-products__header">
+          <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
+            <span class="heading-icon">✨</span>
+            {{ section.settings.heading }}
+            <span class="heading-icon">✨</span>
+          </h2>
+          <p class="related-products__subheading">{{ 'sections.related_products.subheading' | t }}</p>
+        </div>
 
         <ul
           class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down tech-related-products"
           role="list"
         >
           {% for recommendation in recommendations.products %}
-            <li class="grid__item">
+            <li class="grid__item" style="--animation-delay: {{ forloop.index | times: 100 }}ms">
               {% render 'card-product',
                 card_product: recommendation,
                 media_aspect_ratio: section.settings.image_ratio,
