@@ -520,9 +520,10 @@ class HeaderDrawer extends MenuDrawer {
   }
 
   closeMenuDrawer(event, elementToFocus) {
-    if (!elementToFocus) return;
+    // Allow closing even if elementToFocus is not provided
+    // This fixes an issue where onFocusOut calls closeMenuDrawer without arguments
     super.closeMenuDrawer(event, elementToFocus);
-    this.header.classList.remove('menu-open');
+    if (this.header) this.header.classList.remove('menu-open');
     window.removeEventListener('resize', this.onResize);
   }
 
