@@ -103,27 +103,11 @@
             {%- render 'loading-spinner' -%}
           </button>
           
-          {%- comment -%} MICROCOPY: Trust indicators below CTAs {%- endcomment -%}
-          <div class="product-form__microcopy" role="group" aria-label="Beneficios de envío y pago">
-            <span class="product-form__microcopy-item">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <path d="M2 4h9v6H2V4z" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M11 6h2l2 2v2h-4V6z" stroke="currentColor" stroke-width="1.2"/>
-                <circle cx="4.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                <circle cx="12.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-              </svg>
-              Envío 2–5 días
-            </span>
-            <span class="product-form__microcopy-separator" aria-hidden="true">•</span>
-            <span class="product-form__microcopy-item">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <rect x="2" y="4" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M2 7h12" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M5 10h3" stroke="currentColor" stroke-width="1.2"/>
-              </svg>
-              Pago contra entrega disponible
-            </span>
-          </div>
+          {%- comment -%} 
+            MICROCOPY REMOVED: Duplicate shipping/payment trust indicators.
+            These messages are now handled by the pdp-delivery-estimate snippet
+            to show a single, dynamic delivery date range message.
+          {%- endcomment -%}
         </div>
       {%- endform -%}
     </product-form>

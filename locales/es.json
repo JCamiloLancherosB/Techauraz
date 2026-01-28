@@ -185,7 +185,11 @@
       "free_shipping": "Envío gratis disponible",
       "free_shipping_short": "Envío gratis",
       "cash_on_delivery": "Pago contraentrega disponible",
-      "cash_on_delivery_short": "Contraentrega"
+      "cash_on_delivery_short": "Contraentrega",
+      "delivery_estimate": {
+        "arrives_between": "Llega entre {{ min }} y {{ max }}",
+        "fallback": "Entrega 2–5 días hábiles"
+      }
     },
     "modal": {
       "label": "Galería media"

@@ -86,19 +86,16 @@ document.addEventListener('DOMContentLoaded', function () {
     priceElement.parentNode.insertBefore(trustDiv, priceElement.nextSibling);
   }
 
-  // 2. Agregar indicador de entrega y pago (info honesta, sin countdown falso)
+  // 2. Agregar indicador de entrega y pago - DESHABILITADO
+  // NOTA: Esta función ha sido deshabilitada porque duplicaba información
+  // que ahora se muestra dinámicamente en el snippet pdp-delivery-estimate.liquid
+  // con fechas de entrega calculadas correctamente.
   function addUrgencyIndicator() {
-    // Scope query to current product section
-    const trustElement = productSection ? productSection.querySelector('.trust-indicators') : null;
-    const existingUrgency = productSection ? productSection.querySelector('.urgency-indicator') : null;
-    if (!trustElement || existingUrgency) return;
-    
-    const urgencyDiv = document.createElement('div');
-    urgencyDiv.className = 'urgency-indicator';
-    // Mensaje honesto de entrega y pago contra entrega
-    urgencyDiv.innerHTML = '🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible';
-    
-    trustElement.parentNode.insertBefore(urgencyDiv, trustElement.nextSibling);
+    // Función deshabilitada intencionalmente.
+    // La información de envío y pago ahora se muestra a través de:
+    // 1. pdp-delivery-estimate.liquid - para fechas de entrega dinámicas
+    // 2. pdp-micro-trust.liquid - para indicadores de confianza
+    return;
   }
 
   // 3. Contador de urgencia dinámico - DESHABILITADO
