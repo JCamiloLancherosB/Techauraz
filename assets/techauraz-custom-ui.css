@@ -57,6 +57,7 @@
 /* =============================================================================
    ANNOUNCEMENT TICKER STYLES
    Continuous marquee scrolling left with seamless loop
+   Enhanced with decorative separators, fade edges, and premium typography
    ============================================================================= */
 
 /* Viewport container - hides overflow */
@@ -69,6 +70,28 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+/* Fade gradient edges for smooth visual transition */
+.announcement-ticker::before,
+.announcement-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.announcement-ticker::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background, rgb(var(--color-scheme-background, 255 255 255))), transparent);
+}
+
+.announcement-ticker::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background, rgb(var(--color-scheme-background, 255 255 255))), transparent);
 }
 
 .announcement-ticker__viewport {
@@ -85,6 +108,8 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
+  will-change: transform;
+  gap: 0;
 }
 
 /* Marquee animation when initialized */
@@ -97,7 +122,7 @@
   animation: none !important;
 }
 
-/* Pause on hover */
+/* Pause on hover with visual feedback */
 .announcement-ticker:hover .announcement-ticker__track,
 .announcement-ticker:focus-within .announcement-ticker__track {
   animation-play-state: paused;
@@ -118,15 +143,30 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  padding: 0 var(--ta-space-xl, 2rem);
+  padding: 0 8px;
 }
 
-/* Ticker message styling */
+/* Decorative separator between messages */
+.announcement-ticker__separator {
+  color: var(--color-accent, var(--ta-secondary-light, gold));
+  margin: 0 16px;
+  font-size: 0.75em;
+  opacity: 0.8;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Ticker message styling - enhanced typography */
 .announcement-ticker__message {
   margin: 0;
   padding: 0;
   white-space: nowrap;
   display: inline;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
 }
 
 /* Link inside ticker - clickable */
@@ -139,6 +179,11 @@
 
 .announcement-ticker__item .announcement-bar__link:hover {
   text-decoration: underline;
+}
+
+/* Enhanced hover state for message text */
+.announcement-ticker__item .announcement-bar__link:hover .announcement-ticker__message {
+  color: var(--color-accent, var(--ta-secondary-light, gold));
 }
 
 /* Accessibility: prefers-reduced-motion - show static content */
@@ -160,6 +205,12 @@
   .announcement-ticker__item[data-ta-cloned="true"] {
     display: none;
   }
+  
+  /* Hide fade edges in reduced motion for cleaner static display */
+  .announcement-ticker::before,
+  .announcement-ticker::after {
+    display: none;
+  }
 }
 
 /* Mobile adjustments */
@@ -169,12 +220,24 @@
     height: 3.6rem;
   }
   
+  /* Smaller fade edges on mobile */
+  .announcement-ticker::before,
+  .announcement-ticker::after {
+    width: 30px;
+  }
+  
   .announcement-ticker__item {
-    padding: 0 var(--ta-space-lg, 1.5rem);
+    padding: 0 4px;
+  }
+  
+  .announcement-ticker__separator {
+    margin: 0 10px;
+    font-size: 0.65em;
   }
   
   .announcement-ticker__message {
     font-size: var(--ta-font-size-xs, 1.2rem);
+    letter-spacing: 0.3px;
   }
 }
 
