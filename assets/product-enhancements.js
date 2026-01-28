@@ -370,16 +370,27 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 8. Smooth scroll to description
+  // Enhanced with header offset handling and reduced motion preference
   function initSmoothScrollToDescription() {
     const detailsLink = document.querySelector('[data-scroll-to-description]');
     if (!detailsLink) return;
 
     detailsLink.addEventListener('click', function(e) {
       e.preventDefault();
-      const description = document.querySelector('#product-description');
-      if (description) {
-        description.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const target = document.getElementById('product-description');
+      if (!target) return;
+      
+      const headerOffset = 80; // Adjust for fixed headers
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      // Check user's motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
     });
   }
 
