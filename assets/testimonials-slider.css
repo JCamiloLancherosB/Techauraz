@@ -2,7 +2,10 @@
  * =============================================================================
  * TESTIMONIALS SLIDER COMPONENT
  * =============================================================================
- * Refined testimonials/reviews slider section for Home page
+ * Styles for the testimonials/reviews slider section
+ * Used by: sections/testimonials.liquid
+ * 
+ * Features:
  * - Consistent card heights with equal spacing
  * - Better visual hierarchy  
  * - Improved mobile/desktop responsive behavior
@@ -108,10 +111,11 @@
   max-width: 100%;
   position: relative;
   padding-left: 24px;
-  /* Ensure text doesn't overflow */
+  /* Text truncation with fallback */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
 }
 
@@ -176,21 +180,6 @@
   display: flex;
   align-items: center;
   gap: 4px;
-}
-
-/* Verified badge indicator */
-.testimonial-card__author-type::before {
-  content: '✓';
-  font-size: 10px;
-  background: #10b981;
-  color: white;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 /* Slider navigation controls */
@@ -301,6 +290,7 @@
     font-size: 14px;
     padding-left: 20px;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
 
   .testimonial-card__text::before {

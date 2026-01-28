@@ -236,9 +236,9 @@
     "featured_collection_new_arrivals": {
       "type": "featured-collection",
       "settings": {
-        "title": "<strong>Nuevos Productos</strong>",
+        "title": "<strong>Electrónica Inteligente</strong>",
         "heading_size": "h2",
-        "description": "Descubre las últimas novedades en tecnología",
+        "description": "Descubre lo último en tecnología smart",
         "show_description": true,
         "description_style": "body",
         "collection": "productos-inteligentes-electronicos",
