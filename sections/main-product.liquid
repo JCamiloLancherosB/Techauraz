@@ -699,32 +699,10 @@
             📖 {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}
           </a>
-          
-          <script>
-            // Smooth scroll to product description
-            (function() {
-              const scrollLink = document.querySelector('[data-scroll-to-description]');
-              if (!scrollLink) return;
-              
-              scrollLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.getElementById('product-description');
-                if (!target) return;
-                
-                const headerOffset = 80; // Adjust for fixed headers
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                // Check user's motion preference
-                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: prefersReducedMotion ? 'auto' : 'smooth'
-                });
-              });
-            })();
-          </script>
+          {%- comment -%} 
+            Smooth scroll functionality moved to assets/product-enhancements.js 
+            Uses data-scroll-to-description attribute for initialization
+          {%- endcomment -%}
         </product-info>
       </div>
 
