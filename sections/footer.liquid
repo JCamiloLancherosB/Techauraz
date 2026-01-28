@@ -207,7 +207,20 @@
             </div>
           {%- endif -%}
 
-          {%- if section.settings.show_social and has_social_icons -%}
+          {%- comment -%}
+            Only show social icons here if there's no brand_information block that already shows them.
+            This prevents duplicate social blocks in the footer.
+          {%- endcomment -%}
+          {%- liquid
+            assign brand_block_shows_social = false
+            for block in section.blocks
+              if block.type == 'brand_information' and block.settings.show_social
+                assign brand_block_shows_social = true
+                break
+              endif
+            endfor
+          -%}
+          {%- if section.settings.show_social and has_social_icons and brand_block_shows_social == false -%}
             {%- render 'social-icons', class: 'footer__list-social' -%}
           {%- endif -%}
         </div>
