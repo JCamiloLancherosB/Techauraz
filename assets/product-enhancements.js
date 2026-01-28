@@ -67,23 +67,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // FUNCIONALIDADES PERSUASIVAS MEJORADAS
   // All queries scoped to current product section to prevent cross-product conflicts
   
-  // 1. Agregar elementos de confianza dinámicos (SOLO SI NO EXISTEN)
+  // 1. Trust indicators - DISABLED
+  // NOTE: This function has been disabled to prevent duplicate trust messaging.
+  // The canonical trust strip is now rendered via the trust_line block in main-product.liquid
+  // which provides a single, configurable set of 4 trust items (max).
+  // Do NOT re-enable this function.
   function addTrustIndicators() {
-    // Scope query to current product section
-    const priceElement = productSection ? productSection.querySelector('.product__price') : null;
-    const existingIndicators = productSection ? productSection.querySelector('.trust-indicators') : null;
-    if (!priceElement || existingIndicators) return;
-    
-    const trustDiv = document.createElement('div');
-    trustDiv.className = 'trust-indicators';
-    trustDiv.innerHTML = `
-      <div class="trust-indicator">🚚 Envío GRATIS</div>
-      <div class="trust-indicator">🔒 Pago Seguro</div>
-      <div class="trust-indicator">✅ Garantía 30 días</div>
-      <div class="trust-indicator">💯 Calidad Premium</div>
-    `;
-    
-    priceElement.parentNode.insertBefore(trustDiv, priceElement.nextSibling);
+    // Function intentionally disabled to avoid duplicate trust messaging.
+    // Trust indicators are now handled by:
+    // 1. trust_line block in main-product.liquid (canonical, max 4 items)
+    // 2. pdp-delivery-estimate.liquid for delivery dates
+    return;
   }
 
   // 2. Agregar indicador de entrega y pago - DESHABILITADO

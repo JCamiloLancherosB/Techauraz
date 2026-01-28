@@ -1,14 +1,17 @@
 {% comment %}
   Product Detail Page - Conversion Badges (ATF Section)
   
-  Shows trust badges near product price (Above The Fold)
-  Includes: Availability status, trust messages, and benefits bullets
+  Shows availability status near product price (Above The Fold)
+  
+  NOTE: Trust messages and benefits have been removed to avoid duplication.
+  Trust messaging is now handled by the CANONICAL trust_line block.
+  Delivery dates are handled by pdp-delivery-estimate.liquid
   
   Usage in templates/product.json (after price block):
   {% render 'pdp-conversion-badges' %}
 {% endcomment %}
 
-{%- comment -%} Availability Status {%- endcomment -%}
+{%- comment -%} Availability Status - the only unique element {%- endcomment -%}
 <div class="pdp-atf-availability">
   {%- if product.selected_or_first_available_variant.available -%}
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -24,26 +27,16 @@
   {%- endif -%}
 </div>
 
-{%- comment -%} Trust Messages {%- endcomment -%}
-<div class="pdp-atf-trust-messages">
-  <div class="pdp-atf-trust-message">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M2 6L9 2L16 6V12C16 12.5304 15.7893 13.0391 15.4142 13.4142C15.0391 13.7893 14.5304 14 14 14H4C3.46957 14 2.96086 13.7893 2.58579 13.4142C2.21071 13.0391 2 12.5304 2 12V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Contraentrega en todo Colombia</span>
-  </div>
+{%- comment -%}
+  REMOVED: Trust Messages & Benefits (duplicate content)
+  These items are now handled by:
+  - trust_line block in main-product.liquid (max 4 items, configurable)
+  - pdp-delivery-estimate.liquid (delivery dates)
   
-  <div class="pdp-atf-trust-message">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M9 1L11.5 6.5L17 7.5L13 11.5L14 17L9 14L4 17L5 11.5L1 7.5L6.5 6.5L9 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Garantía 1 mes</span>
-  </div>
-</div>
-
-{%- comment -%} 3 Bullets Benefits {%- endcomment -%}
-<div class="pdp-atf-benefits">
-  <div class="pdp-atf-benefit">✓ Envío nacional sin costo</div>
-  <div class="pdp-atf-benefit">✓ Paga al recibir (contraentrega)</div>
-  <div class="pdp-atf-benefit">✓ Soporte por WhatsApp 24/7</div>
-</div>
+  Previously contained:
+  - "Contraentrega en todo Colombia" (now in trust_line)
+  - "Garantía 1 mes" (now in trust_line as "Garantía 30 días")
+  - "Envío nacional sin costo" (now in trust_line as "Envío gratis")
+  - "Paga al recibir" (now in trust_line as "Contraentrega en Colombia")
+  - "Soporte por WhatsApp 24/7" (available via pdp-whatsapp-cta.liquid)
+{%- endcomment -%}

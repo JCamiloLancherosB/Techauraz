@@ -670,6 +670,11 @@
                 {% render 'icon-with-text', block: block %}
 
               {%- when 'trust_line' -%}
+                {%- comment -%} 
+                  CANONICAL TRUST STRIP - This is the ONE and ONLY trust strip on PDP.
+                  Max 4 items with subtle styling. Do NOT duplicate elsewhere.
+                  Configured via section settings in Customizer.
+                {%- endcomment -%}
                 <div class="tech-trust-line" {{ block.shopify_attributes }} role="list" aria-label="Beneficios de compra">
                   <div class="tech-trust-line__item" role="listitem">
                     <span class="tech-trust-line__icon" aria-hidden="true">🚚</span>
