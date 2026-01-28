@@ -5,18 +5,32 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_shipping": {
+        "announcement_categories": {
           "type": "announcement",
           "settings": {
-            "text": "🚚 Envío GRATIS a toda Colombia",
+            "text": "Explora categorías: Audífonos • Smartwatches • Memorias USB",
+            "link": "/collections/all"
+          }
+        },
+        "announcement_same_day": {
+          "type": "announcement",
+          "settings": {
+            "text": "Compra antes de las 2pm: procesamos tu pedido hoy",
             "link": ""
           }
         },
-        "announcement_payment": {
+        "announcement_whatsapp": {
           "type": "announcement",
           "settings": {
-            "text": "💳 Pago contra entrega disponible",
-            "link": ""
+            "text": "📲 Soporte por WhatsApp",
+            "link": "https://wa.me/573008602789"
+          }
+        },
+        "announcement_bestsellers": {
+          "type": "announcement",
+          "settings": {
+            "text": "Ver más vendidos",
+            "link": "/collections/all?sort_by=best-selling"
           }
         },
         "announcement_warranty": {
@@ -25,20 +39,14 @@
             "text": "🛡️ Garantía de 30 días",
             "link": ""
           }
-        },
-        "announcement_support": {
-          "type": "announcement",
-          "settings": {
-            "text": "📲 Soporte por WhatsApp",
-            "link": "https://wa.me/573008602789"
-          }
         }
       },
       "block_order": [
-        "announcement_shipping",
-        "announcement_payment",
-        "announcement_warranty",
-        "announcement_support"
+        "announcement_categories",
+        "announcement_same_day",
+        "announcement_whatsapp",
+        "announcement_bestsellers",
+        "announcement_warranty"
       ],
       "settings": {
         "sticky_promo": true,

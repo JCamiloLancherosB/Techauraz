@@ -304,25 +304,24 @@
     },
     {
       "type": "header",
-      "content": "Ticker rotativo"
+      "content": "Marquee continuo"
     },
     {
       "type": "checkbox",
       "id": "enable_ticker",
-      "label": "Activar ticker rotativo",
+      "label": "Activar marquee continuo",
       "default": true,
-      "info": "Muestra mensajes en rotación con efecto fade. Los mensajes se pausan al pasar el mouse (desktop)."
+      "info": "Muestra mensajes en un marquee que se desplaza continuamente hacia la izquierda. Se pausa al pasar el mouse."
     },
     {
       "type": "range",
       "id": "ticker_speed",
-      "min": 3,
-      "max": 8,
+      "min": 1,
+      "max": 10,
       "step": 1,
-      "unit": "s",
-      "label": "Velocidad de rotación (ticker)",
+      "label": "Velocidad del marquee",
       "default": 5,
-      "info": "Tiempo entre cada mensaje (3-8s)"
+      "info": "Velocidad en px/s: nivel 1=50px/s, 5=90px/s, 10=140px/s. A mayor valor, más rápido."
     },
     {
       "type": "header",
@@ -391,7 +390,39 @@
       "name": "t:sections.announcement-bar.presets.name",
       "blocks": [
         {
-          "type": "announcement"
+          "type": "announcement",
+          "settings": {
+            "text": "Explora categorías: Audífonos • Smartwatches • Memorias USB",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "Compra antes de las 2pm: procesamos tu pedido hoy",
+            "link": ""
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "📲 Soporte por WhatsApp",
+            "link": "https://wa.me/573008602789"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "Ver más vendidos",
+            "link": "/collections/all?sort_by=best-selling"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "🛡️ Garantía de 30 días",
+            "link": ""
+          }
         }
       ]
     }
