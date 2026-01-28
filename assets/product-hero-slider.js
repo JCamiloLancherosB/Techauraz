@@ -19,6 +19,7 @@ class ProductHeroSlider extends HTMLElement {
     this.prevButton = this.querySelector('.slider-prev');
     this.nextButton = this.querySelector('.slider-next');
     this.dots = Array.from(this.querySelectorAll('.slider-dot'));
+    this.thumbnails = Array.from(this.querySelectorAll('.product-thumbnail'));
     
     if (this.slides.length <= 1) {
       // Hide navigation if only one slide
@@ -50,6 +51,11 @@ class ProductHeroSlider extends HTMLElement {
     // Dots navigation
     this.dots.forEach((dot, index) => {
       dot.addEventListener('click', () => this.goToSlide(index));
+    });
+    
+    // Thumbnail navigation
+    this.thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => this.goToSlide(index));
     });
     
     // Keyboard navigation
@@ -103,6 +109,15 @@ class ProductHeroSlider extends HTMLElement {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
+      }
+    });
+    
+    // Update thumbnails
+    this.thumbnails.forEach((thumbnail, i) => {
+      if (i === index) {
+        thumbnail.classList.add('active');
+      } else {
+        thumbnail.classList.remove('active');
       }
     });
   }
