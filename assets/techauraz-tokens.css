@@ -305,6 +305,63 @@
   --ta-transition-normal: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --ta-transition-slow: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --ta-transition-colors: color, background-color, border-color 250ms ease;
+
+  /* =============================================================================
+     Z-INDEX HIERARCHY SYSTEM
+     Centralized z-index values to prevent stacking conflicts
+     =============================================================================
+     
+     LAYER STACK (from bottom to top):
+     Base content:     0-99      (page content, sections)
+     Overlays:        100-199    (announcement bars, headers, sticky elements)
+     Drawers:         200-299    (cart drawer, navigation drawer)
+     Dropdowns:       300-399    (mega menus, popovers)
+     Modals:          400-499    (cookie banner, lightboxes)
+     Toast/FAB:       500-599    (WhatsApp button, notifications)
+     Critical:        1000+      (loading overlays, emergency dialogs)
+     
+     ============================================================================= */
+     
+  /* Base content layer (0-99) */
+  --ta-z-base: 0;
+  --ta-z-content: 1;
+  --ta-z-elevated: 10;
+  --ta-z-slideshow-controls: 20;
+  --ta-z-card-badge: 30;
+  
+  /* Overlay/Sticky layer (100-199) */
+  --ta-z-announcement-bar: 100;
+  --ta-z-header: 101;
+  --ta-z-sticky-header: 102;
+  --ta-z-sticky-cart: 105;
+  
+  /* Drawer layer (200-299) */
+  --ta-z-cart-drawer-overlay: 200;
+  --ta-z-cart-drawer: 210;
+  --ta-z-menu-drawer-overlay: 220;
+  --ta-z-menu-drawer: 230;
+  --ta-z-drawer-close: 250;
+  
+  /* Dropdown layer (300-399) */
+  --ta-z-mega-menu: 300;
+  --ta-z-dropdown: 310;
+  --ta-z-popover: 320;
+  --ta-z-tooltip: 350;
+  
+  /* Modal layer (400-499) */
+  --ta-z-modal-overlay: 400;
+  --ta-z-modal: 410;
+  --ta-z-cookie-banner: 450;
+  --ta-z-lightbox: 460;
+  
+  /* Toast/FAB layer (500-599) */
+  --ta-z-toast: 500;
+  --ta-z-whatsapp-fab: 500;
+  --ta-z-notification: 510;
+  
+  /* Critical layer (1000+) */
+  --ta-z-loading: 1000;
+  --ta-z-skip-link: 9999;
 }
 
 /* =============================================================================

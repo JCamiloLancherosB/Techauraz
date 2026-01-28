@@ -576,11 +576,12 @@ select:focus {
   }
 }
 
-/* Floating elements z-index hierarchy - UPDATED */
+/* Floating elements z-index hierarchy - UPDATED 2026-01-28 */
+/* Uses centralized z-index tokens from techauraz-tokens.css */
 /* Announcement bar */
 .announcement-bar__container,
 .announcement-bar__container--sticky {
-  z-index: 101 !important;
+  z-index: var(--ta-z-announcement-bar, 100) !important;
 }
 
 /* Announcement bar styles - compact design */
@@ -625,29 +626,25 @@ select:focus {
 /* Header */
 .header-wrapper,
 .section-header {
-  z-index: 100 !important;
+  z-index: var(--ta-z-header, 101) !important;
 }
 
 /* 
- * Z-INDEX HIERARCHY (follows ui-ux-responsive-fixes.css documentation):
- * WhatsApp FAB: 500 (highest - always accessible)
- * Cookie Banner: 400 (above modals, below WhatsApp)
- * Modals/Drawers: 300 (above header, below cookie)
- * Cart Notification: 200 (above header)
- * Header: 100-101
+ * Z-INDEX HIERARCHY - Uses centralized tokens from techauraz-tokens.css
+ * See techauraz-tokens.css for the complete z-index hierarchy documentation
  */
 .whatsapp-float,
 .whatsapp-button-float,
 [class*="whatsapp"][class*="float"],
 [class*="floating-whatsapp"] {
-  z-index: 500 !important;
+  z-index: var(--ta-z-whatsapp-fab, 500) !important;
 }
 
 .cookie-banner,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: 400 !important;
+  z-index: var(--ta-z-cookie-banner, 450) !important;
 }
 
 /* Modals and overlays */
@@ -655,7 +652,7 @@ select:focus {
 .product-media-modal,
 .product-popup-modal,
 [role="dialog"] {
-  z-index: 300 !important;
+  z-index: var(--ta-z-modal, 410) !important;
 }
 
 /* Cart drawer and menu drawer */
@@ -663,7 +660,7 @@ select:focus {
 .drawer,
 .menu-drawer,
 menu-drawer {
-  z-index: 300 !important;
+  z-index: var(--ta-z-cart-drawer, 210) !important;
 }
 
 /* Mobile-specific z-index adjustments */

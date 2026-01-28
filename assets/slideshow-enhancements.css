@@ -264,7 +264,7 @@
 @media screen and (min-width: 750px) {
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     position: relative;
-    z-index: 102;
+    z-index: var(--ta-z-slideshow-controls, 20); /* Local stacking within slideshow */
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     border: 2px solid rgba(255, 255, 255, 0.4);
@@ -358,7 +358,7 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
+    z-index: var(--ta-z-slideshow-controls, 20); /* Local stacking within slideshow */
     display: flex;
     gap: 1rem;
     align-items: center;

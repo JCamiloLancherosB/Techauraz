@@ -3951,33 +3951,35 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 
 /* --- Z-INDEX HIERARCHY DOCUMENTATION --- */
 /*
- * Z-INDEX LAYERING SYSTEM (Updated 2026-01-27):
+ * Z-INDEX LAYERING SYSTEM (Updated 2026-01-28):
+ * 
+ * IMPORTANT: All z-index values are now defined as CSS custom properties in
+ * techauraz-tokens.css for consistency and easy maintenance.
  * 
  * Order from lowest to highest (as specified in requirements):
  * Announcement < Header < Cart Notification < Modals (search/cart drawer) < Cookie banner < WhatsApp
  * 
- * Layer 7 (Highest): WhatsApp FAB (z-index: 500)
+ * Layer 7 (Highest): WhatsApp FAB (--ta-z-whatsapp-fab: 500)
  *   - Always accessible for customer support
  *   - Above all other elements
  * 
- * Layer 6: Cookie/GDPR Banner (z-index: 400)
+ * Layer 6: Cookie/GDPR Banner (--ta-z-cookie-banner: 450)
  *   - GDPR compliance requires visibility
  *   - Above modals, below WhatsApp
  * 
- * Layer 5: Modals, Drawers, Overlays (z-index: 300)
- *   - Cart drawer: 300
- *   - Search modal: 300
- *   - Menu drawer: 300
- *   - Overlay backgrounds: 250
+ * Layer 5: Modals, Drawers, Overlays (--ta-z-modal: 410, --ta-z-cart-drawer: 210)
+ *   - Cart drawer: 210
+ *   - Search modal: 410
+ *   - Menu drawer: 230
+ *   - Overlay backgrounds: 200-220
  * 
- * Layer 4: Cart Notification (z-index: 200)
- *   - Fixed overlay positioned below header stack
- *   - Above header, below modals
- *   - Does not affect document flow (position: fixed)
+ * Layer 4: Cart Notification (--ta-z-notification: 510)
+ *   - Fixed overlay positioned for visibility
+ *   - Above modals for immediate feedback
  * 
- * Layer 3: Sticky Header Group (z-index: 100-101)
- *   - Announcement bar/topbar (shipping, benefits): 101 (topmost in header group)
- *   - Main navigation header: 100
+ * Layer 3: Sticky Header Group (--ta-z-header: 101, --ta-z-announcement-bar: 100)
+ *   - Announcement bar/topbar (shipping, benefits): 100
+ *   - Main navigation header: 101
  *   - Fixed/sticky position
  *   - Must stay below modals/drawers
  * 
@@ -3985,10 +3987,8 @@ main#MainContent > .shopify-section:first-child .tech-hero,
  *   - Sticky benefits bar (if separate from announcement bar): 98
  * 
  * Layer 1 (Lowest): Regular Content (z-index: 0-50)
- *   - Dropdowns: 50
- *   - Tooltips: 40
- *   - Product quick-view: 30
- *   - Cards: 1-3
+ *   - Slideshow controls: 20
+ *   - Cards: 1-10
  *   - Regular sections: auto or 0
  */
 
@@ -3999,12 +3999,12 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 .header-wrapper,
 #shopify-section-header.section-header,
 .shopify-section-header-sticky {
-  z-index: 100 !important; /* Below modals (300) but above content */
+  z-index: var(--ta-z-header, 101) !important; /* Below modals but above content */
 }
 
-/* Cart notification - fixed overlay above header, below modals */
+/* Cart notification - fixed overlay for immediate feedback */
 cart-notification {
-  z-index: 200 !important; /* Above header (100), below modals (300) */
+  z-index: var(--ta-z-notification, 510) !important; /* Above modals for visibility */
 }
 
 /* Ensure modals and drawers are above header */
@@ -4015,7 +4015,7 @@ modal-dialog,
 details-modal,
 .modal-overlay,
 [role="dialog"]:not(.cart-notification) {
-  z-index: 300 !important; /* Above header (100-101), below cookie banner (400) */
+  z-index: var(--ta-z-modal, 410) !important; /* Above header, below cookie banner */
 }
 
 /* Cookie banner - should be above modals but below WhatsApp */
@@ -4023,7 +4023,7 @@ details-modal,
 .cookies-banner,
 [class*="cookie"][class*="banner"],
 [class*="gdpr"] {
-  z-index: 400 !important; /* Above modals (300), below WhatsApp (500) */
+  z-index: var(--ta-z-cookie-banner, 450) !important; /* Above modals, below WhatsApp */
 }
 
 /* Floating WhatsApp button - highest z-index for always-visible support button */
@@ -4031,7 +4031,7 @@ details-modal,
 .floating-whatsapp,
 .wa-chat-box,
 [class*="whatsapp"][class*="float"] {
-  z-index: 500 !important; /* Highest - always accessible for customer support */
+  z-index: var(--ta-z-whatsapp-fab, 500) !important; /* Highest - always accessible */
 }
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */

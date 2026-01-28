@@ -233,10 +233,32 @@
     %}
 
 <!-- =============================================================================
-     UNIFIED CSS - SINGLE FILE APPROACH
-     All styles from 91 CSS files consolidated into base.css
-     Modern Tech Store Theme - Optimized for Performance
-     Date: 2026-01-20
+     UNIFIED CSS - TECHAURAZ THEME STYLESHEET LOADING ORDER
+     =============================================================================
+     
+     LOAD ORDER (Critical - do not change):
+     1. techauraz-tokens.css - CSS custom properties and design tokens (MUST BE FIRST)
+     2. base.css - Core Dawn theme styles + TechAura unified styles
+     3. ui-ux-responsive-fixes.css - Responsive design and layout fixes
+     4. home-modern-blocks.css - Home page section styles
+     5. testimonials-slider.css - Reviews section
+     6. techauraz-custom-ui.css - WhatsApp, Announcement Bar, Cookie Banner
+     7. slideshow-enhancements.css - Slider controls and CTAs
+     8. techauraz-product-card.css - Product card conversion styles
+     
+     Z-INDEX HIERARCHY (defined in techauraz-tokens.css):
+     - Base content: 0-99
+     - Announcement/Header: 100-199
+     - Drawers: 200-299
+     - Dropdowns/Menus: 300-399
+     - Modals/Cookie Banner: 400-499
+     - WhatsApp FAB/Toast: 500+
+     
+     NOTE: Shopify's adopted-style-sheet is injected via content_for_header.
+     This is normal Shopify behavior and should not interfere with our styles
+     as long as the loading order is maintained.
+     
+     Last updated: 2026-01-28
      ============================================================================= -->
 
 <!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
@@ -272,99 +294,90 @@
 
 <!-- 
   ============================================================================
-  CSS LOADING ORDER
+  CSS LOADING ORDER (CURRENT - Updated 2026-01-28)
   ============================================================================
   
   The following stylesheets are loaded in this order in the layout:
   
-  1. base.css (preload with fallback)
-     - Core Dawn theme styles (with 62.5% base font-size = 10px per 1rem)
-     - Body text base overridden to 1.6rem (16px) for better readability
+  1. techauraz-tokens.css (MUST BE FIRST)
+     - Design tokens (colors, spacing, typography, z-index hierarchy)
+     - CSS custom properties that all other files depend on
+     - Z-index centralized system to prevent stacking conflicts
      
-  2. animations.css (conditional - only if animations enabled in settings)
-     - Animation utilities and scroll reveal animations
+  2. base.css
+     - Core Dawn theme styles (62.5% base font-size = 10px per 1rem)
+     - Unified TechAura design system
+     - Body text base: 1.6rem (16px) for readability
      
-  3. cross-sell.css (conditional - product pages only)
-     - Cross-sell component styles for product pages
+  3. ui-ux-responsive-fixes.css
+     - Responsive design fixes
+     - Layout normalization
+     - Overflow prevention
      
-  4. techauraz-unified.css (preload with fallback) ✨
-     - Consolidated and optimized TechAura theme styles including:
-       • Normalized typography (fixes zoom effect)
-       • Compact, aligned header for desktop and mobile
-       • Professional tech store color palette (blue/cyan)
-       • Proper slideshow/hero controls positioning
-       • Normalized card sizing and spacing
-       • Persuasive visual elements
-       • Resolved CSS conflicts from previous files
-       • Mobile drawer functionality (focus trap, scroll lock)
-       • Performance optimizations
+  4. home-modern-blocks.css
+     - Testimonials section
+     - Newsletter section
+     - Footer improvements
      
-     This replaces the previous three files:
-     - techauraz-master.css (deprecated)
-     - techauraz-ui-enhancements.css (deprecated)
-     - techauraz-polish-2024.css (deprecated)
-  
-  5. forms-techauraz.css (preload with fallback)
-     - Enhanced form styling and validation states
-  
-  6. responsive-audit-fixes.css ✨
-     - Comprehensive responsive design fixes:
-       • Z-index hierarchy (header, modals, drawers, WhatsApp, cookie banner)
-       • Typography and legibility improvements
-       • Smooth animations with cubic-bezier timing
-       • prefers-reduced-motion support
-       • Touch targets (minimum 44x44px on mobile)
-       • Safe area insets for iPhone X+
-       • Overflow prevention and layout fixes
-       • Utility classes for common patterns
-  
-  7. card-clickable-fix.css
-     - Full card area clickable for better mobile UX
-  
-  8. product-page-consolidated.css
-     - Banner, buttons, description, footer improvements
-  
-  9. visual-system-unified-2024.css
-     - Rating visibility, dark theme palette, badge system
-  
-  10. responsive-mobile-unified.css ✨ (2024-01-15 - Consolidated)
-      - CONSOLIDATED mobile fixes (replaces 3 previous files):
-        • Replaces: storefront-visual-fixes-2024.css ❌ REMOVED 2026-01-20
-        • Replaces: mobile-view-fixes-2024.css ❌ REMOVED 2026-01-20
-        • Replaces: mobile-visual-fixes-jan-2024.css ❌ REMOVED 2026-01-20
-      - Complete mobile fixes including:
-        • Hero/slider - single slide display (no double images)
-        • Product grid - strict 2-column layout with proper spacing
-        • WhatsApp FAB - proper positioning with cookie bar awareness
-        • Text clipping prevention for headings and descriptions
-        • Button contrast improvements (COMPRAR AHORA, AGREGAR AL CARRITO)
-        • Product card badge visibility (Envío rápido, En stock)
-        • Section spacing and alignment
-        • Touch target optimization (44px minimum)
-        • iOS safe area support
-        • Reduced motion accessibility support
-  
-  11. storefront-polish-refinements-2024.css
-      - Final polish for sales-ready experience
-  
-  12. pdp-scroll-trigger-fixes.css
-      - Product page scroll trigger fixes
-  
-  13. Component-specific CSS files loaded per section as needed
-      - component-*.css files loaded dynamically by sections
+  5. testimonials-slider.css
+     - Reviews section slider styling
+     
+  6. techauraz-custom-ui.css
+     - WhatsApp floating button
+     - Announcement bar
+     - Cookie banner
+     - Sticky CTA bar
+     
+  7. slideshow-enhancements.css
+     - Slideshow controls
+     - Hero CTA buttons
+     - Image visibility fixes
+     
+  8. techauraz-product-card.css
+     - Product card styles
+     - Conversion-optimized card design
+     - Badge positioning
   
   ============================================================================
-  REMOVED FILES (2026-01-20 Cleanup):
+  Z-INDEX HIERARCHY (defined in techauraz-tokens.css)
   ============================================================================
-  ❌ button-visibility-enhancements.css - Duplicate of global-button-styles.css
-  ❌ product-page-visual-fixes-2024.css - Not referenced, consolidated
-  ❌ product-conversion.css - Not referenced, consolidated
-  ❌ mobile-view-fixes-2024.css - Consolidated into responsive-mobile-unified.css
-  ❌ mobile-visual-fixes-jan-2024.css - Consolidated into responsive-mobile-unified.css
-  ❌ storefront-visual-fixes-2024.css - Consolidated into responsive-mobile-unified.css
   
-  Total reduction: ~55KB CSS removed
-  See STYLE_NOTES.md for complete cleanup documentation
+  Layer 1: Base Content (0-99)
+    - Regular sections, cards, content
+    - Slideshow controls: 20
+    
+  Layer 2: Sticky Elements (100-199)
+    - Announcement bar: 100
+    - Header: 101
+    
+  Layer 3: Drawers (200-299)
+    - Cart drawer: 210
+    - Menu drawer: 230
+    
+  Layer 4: Dropdowns (300-399)
+    - Mega menu: 300
+    - Popovers: 320
+    
+  Layer 5: Modals (400-499)
+    - Modal dialogs: 410
+    - Cookie banner: 450
+    
+  Layer 6: Toast/FAB (500+)
+    - WhatsApp button: 500
+    - Notifications: 510
+  
+  ============================================================================
+  NOTE ON SHOPIFY'S ADOPTED-STYLE-SHEET
+  ============================================================================
+  
+  The #adopted-style-sheet seen in browser DevTools is injected by Shopify 
+  via {{ content_for_header }}. This is normal Shopify behavior for:
+  - Theme editor styles
+  - App styles
+  - Shopify's internal components
+  
+  Our styles load AFTER content_for_header, ensuring our custom styles 
+  take precedence through proper CSS cascade order.
   
   ============================================================================
 -->
