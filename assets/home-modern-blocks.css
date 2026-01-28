@@ -325,7 +325,7 @@
 }
 
 /* ==============================================
-   FOOTER ENHANCEMENTS - Refined Layout 2026
+   FOOTER ENHANCEMENTS - Modern Tech Layout
    - Clear 3-column structure: Help, Secure Purchase, Social+Brand
    - Tech-focused styling with improved contrast
    - Balanced spacing on desktop and mobile
@@ -413,7 +413,7 @@
 .footer-block__details-content a:hover,
 .footer-block .list-menu__item:hover {
   color: #38bdf8 !important;
-  padding-left: 4px;
+  transform: translateX(4px);
 }
 
 /* Menu links in footer - cleaner list style */
@@ -484,7 +484,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   margin: 0;
 }
 
@@ -567,9 +567,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 1.25rem;
-  width: 100%;
-  justify-content: center;
-  padding-top: 1rem;
 }
 
 .copyright__content {
@@ -753,10 +750,13 @@
   }
 
   .footer__copyright {
+    width: 100%;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.625rem;
     text-align: center;
+    padding-top: 1rem;
   }
 
   .policies {
