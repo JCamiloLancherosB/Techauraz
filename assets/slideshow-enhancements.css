@@ -16,14 +16,17 @@
 .template-index .tech-hero {
   position: relative;
   overflow: hidden;
-  /* Prevent header overlap */
+  /* Creates new stacking context to ensure z-index within hero doesn't affect header */
   isolation: isolate;
 }
 
 /* Container for proper aspect ratio handling */
 .template-index .tech-hero-slideshow {
   width: 100%;
-  /* Mobile: Use aspect-ratio for proper proportions */
+  /* 
+   * Mobile: Use aspect-ratio for proper proportions
+   * Fallback: min-height provides consistent height for browsers without aspect-ratio support
+   */
   aspect-ratio: 16 / 9;
   min-height: 280px;
   max-height: 400px;
@@ -51,13 +54,16 @@
   height: 100%;
 }
 
-/* Overlay alignment - centered across all breakpoints */
+/* 
+ * Overlay alignment - centered across all breakpoints
+ * This flexbox centering applies to .tech-hero__overlay (scoped to homepage)
+ * The .slideshow__text-wrapper styles below handle general banner content
+ */
 .template-index .tech-hero__overlay {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  /* Centering content */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,6 +242,12 @@
    OVERLAY ALIGNMENT - Consistent text/button centering across breakpoints
    ============================================================================= */
 
+/* =============================================================================
+   OVERLAY ALIGNMENT - Consistent text/button centering across breakpoints
+   Note: These selectors target general slideshow/banner content (not .tech-hero specific)
+   Parent containers have explicit heights set via .slideshow__slide and .banner__media
+   ============================================================================= */
+
 /* Overlay styling - text content positioning for better centering */
 /* This ensures text content stays above the overlay - z-index layering */
 .slideshow__text-wrapper,
@@ -248,6 +260,8 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  /* Contain content within boundaries - prevents overlap with adjacent sections */
+  overflow: hidden;
 }
 
 /* Mobile-specific overlay alignment */
@@ -255,8 +269,6 @@
   .slideshow__text-wrapper,
   .banner__content {
     padding: 0.75rem;
-    /* Ensure content doesn't get clipped */
-    overflow: visible;
   }
 }
 
@@ -521,8 +533,7 @@
    This is the authoritative styling - other files should not override these styles.
    ============================================================================= */
 
-/* CTA Container - using both class selectors ensures this applies regardless of CSS load order */
-.template-index slideshow-component .slideshow-ctas,
+/* CTA Container - targets the combined class selector for specificity */
 .template-index slideshow-component .banner__buttons.slideshow-ctas {
   display: flex;
   flex-wrap: wrap;
