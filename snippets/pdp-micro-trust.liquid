@@ -1,52 +1,27 @@
 {% comment %}
-  Product Detail Page - Micro-trust Icons
+  DEPRECATED: Product Detail Page - Micro-trust Icons
   
-  Displays compact trust indicators below CTAs
-  Shows key benefits: envío gratis, pago seguro, garantía, calidad
+  This snippet has been deprecated in favor of the canonical trust_line block.
+  Do NOT use this snippet. It remains for backward compatibility only.
   
-  Usage in templates/product.json (after buy_buttons block):
-  {% render 'pdp-micro-trust' %}
+  The trust_line block in main-product.liquid is now the CANONICAL source
+  for trust messaging on PDP. It shows max 4 items with subtle styling.
+  
+  Migration: Replace {% render 'pdp-micro-trust' %} with the trust_line block
+  configured in the Shopify Customizer.
+  
+  This file will render nothing to prevent duplicate trust messaging.
 {% endcomment %}
 
-{%- comment -%} Micro-trust Icons Row (below CTAs) {%- endcomment -%}
-<div class="pdp-atf-micro-trust">
-  {%- comment -%} Envío Gratis {%- endcomment -%}
-  <span class="pdp-atf-micro-trust__item">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M1 3h8v7H1V3z" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M9 5h2l2 2v3h-4V5z" stroke="currentColor" stroke-width="1.2"/>
-      <circle cx="3.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-      <circle cx="10.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-    </svg>
-    Envío Gratis
-  </span>
-  <span class="pdp-atf-micro-trust__separator">•</span>
+{%- comment -%}
+  DISABLED: The content below has been intentionally removed.
+  Trust indicators are now handled by trust_line block in main-product.liquid.
   
-  {%- comment -%} Pago Seguro {%- endcomment -%}
-  <span class="pdp-atf-micro-trust__item">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M7 1L2 3v4c0 3.5 2.5 5.5 5 6.5 2.5-1 5-3 5-6.5V3L7 1z" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M5 7l1.5 1.5L9.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Pago Seguro
-  </span>
-  <span class="pdp-atf-micro-trust__separator">•</span>
+  Previous content showed:
+  - Envío Gratis
+  - Pago Seguro
+  - Garantía 30 días
+  - Calidad Premium
   
-  {%- comment -%} Garantía {%- endcomment -%}
-  <span class="pdp-atf-micro-trust__item">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M7 1L8.5 5L12.5 5.5L9.5 8.5L10.5 12.5L7 10L3.5 12.5L4.5 8.5L1.5 5.5L5.5 5L7 1Z" stroke="currentColor" stroke-width="1.2"/>
-    </svg>
-    Garantía 30 días
-  </span>
-  <span class="pdp-atf-micro-trust__separator">•</span>
-  
-  {%- comment -%} Calidad {%- endcomment -%}
-  <span class="pdp-atf-micro-trust__item">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M4.5 7l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Calidad Premium
-  </span>
-</div>
+  This created duplication with trust_line block.
+{%- endcomment -%}

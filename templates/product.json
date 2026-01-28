@@ -59,10 +59,13 @@
                         "custom_liquid": "{% render 'pdp-delivery-estimate' %}"
                     }
                 },
-                "pdp_micro_trust": {
-                    "type": "custom_liquid",
+                "trust_line": {
+                    "type": "trust_line",
                     "settings": {
-                        "custom_liquid": "{% render 'pdp-micro-trust' %}"
+                        "text_shipping": "Envío gratis",
+                        "text_1": "Contraentrega en Colombia",
+                        "text_2": "Garantía 30 días",
+                        "text_return": "Devolución fácil"
                     }
                 },
                 "pdp_whatsapp_cta": {
@@ -85,7 +88,7 @@
             "block_order": [
                 "title",
                 "price",
-                "pdp_micro_trust",
+                "trust_line",
                 "variant_picker",
                 "buy_buttons",
                 "pdp_delivery_estimate",

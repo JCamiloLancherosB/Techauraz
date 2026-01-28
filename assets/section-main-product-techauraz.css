@@ -693,7 +693,11 @@
   vertical-align: middle;
 }
 
-/* --- Trust Chips Row (envío gratis/pago seguro/garantía/calidad) --- */
+/* --- DEPRECATED: Trust Chips Row --- 
+   These styles are DEPRECATED and will be removed in a future version.
+   Use .tech-trust-line instead (canonical trust strip).
+   The JS that generated these elements (addTrustIndicators) has been disabled.
+*/
 .trust-indicators {
   display: flex;
   flex-wrap: wrap;
@@ -704,7 +708,7 @@
   padding: var(--ta-space-sm, 0.8rem) 0;
 }
 
-/* Trust indicators now use unified styles from techauraz-tokens.css (.ta-chip, .ta-trust-chip) */
+/* DEPRECATED: Trust indicator chip - use .tech-trust-line__item instead */
 .trust-indicator {
   display: inline-flex;
   align-items: center;
@@ -726,7 +730,11 @@
   transform: translateY(-1px);
 }
 
-/* --- Urgency Bar "Oferta Termina..." Contrast Enhancement --- */
+/* --- DEPRECATED: Urgency Bar --- 
+   These styles are DEPRECATED. The urgency-indicator feature has been disabled
+   in product-enhancements.js because fake countdown timers damage customer trust.
+   Use pdp-delivery-estimate for real delivery information instead.
+*/
 .urgency-indicator {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
   color: #451a03;
@@ -813,8 +821,10 @@
 }
 
 /* =============================================================================
-   11. MICROCOPY BELOW CTAS
-   Shows trust indicators: "Envío 2-5 días" + "Pago contra entrega disponible"
+   11. DEPRECATED: MICROCOPY BELOW CTAS
+   These styles are kept for backward compatibility but microcopy was removed
+   from buy-buttons.liquid. Trust messaging is now in trust_line block.
+   Delivery info is now in pdp-delivery-estimate.liquid.
    ============================================================================= */
 
 .product-form__microcopy {
