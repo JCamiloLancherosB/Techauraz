@@ -7,7 +7,7 @@
 
 ### 1. templates/product.usb.json
 - **Reason**: Custom product template with no external references. The canonical `templates/product.json` is present and serves as the standard product template.
-- **Verification Command**: `rg "product\.usb" --type-not json` 
+- **Verification Command**: `rg "product\.usb"` (searched entire repository)
 - **Result**: No matches found
 
 ### 2. templates/product.usb-personalizadas.json
@@ -26,7 +26,7 @@
 - **Result**: Only references found were:
   - `CONVERSION_OPTIMIZATION_SUMMARY.md` (documentation only)
   - `snippets/card-product.liquid` (deprecation note)
-- **Note**: The `card-product.liquid` snippet already contains a note that `product-card-conversion` should NOT be used.
+- **Note**: The `card-product.liquid` snippet already contained a note that `product-card-conversion` is deprecated and has now been removed.
 
 ## Files NOT Deleted (Still Referenced)
 
