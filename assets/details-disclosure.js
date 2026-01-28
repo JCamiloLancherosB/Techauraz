@@ -38,6 +38,12 @@ class HeaderMenu extends DetailsDisclosure {
     this.header = document.querySelector('.header-wrapper');
     this.isDesktop = window.matchMedia('(min-width: 990px)').matches;
     
+    // Setup keyboard handlers (Escape key to close)
+    this.setupKeyboardHandlers();
+    
+    // Setup outside click handler
+    this.setupOutsideClickHandler();
+    
     // Desktop: Open on hover/focus for better UX
     if (this.isDesktop) {
       this.setupDesktopHover();
@@ -52,6 +58,32 @@ class HeaderMenu extends DetailsDisclosure {
         this.removeDesktopHover();
       }
     });
+  }
+  
+  setupKeyboardHandlers() {
+    // Handle Escape key to close menu
+    this.handleKeyDown = (event) => {
+      if (event.key === 'Escape' && this.mainDetailsToggle.hasAttribute('open')) {
+        event.preventDefault();
+        this.close();
+        // Return focus to the summary element
+        const summary = this.mainDetailsToggle.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    };
+    
+    this.addEventListener('keydown', this.handleKeyDown);
+  }
+  
+  setupOutsideClickHandler() {
+    // Handle clicks outside the menu to close it
+    this.handleOutsideClick = (event) => {
+      if (this.mainDetailsToggle.hasAttribute('open') && !this.contains(event.target)) {
+        this.close();
+      }
+    };
+    
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   setupDesktopHover() {
@@ -92,6 +124,17 @@ class HeaderMenu extends DetailsDisclosure {
     }
     clearTimeout(this.openDelay);
     clearTimeout(this.closeDelay);
+  }
+  
+  disconnectedCallback() {
+    // Cleanup event listeners
+    if (this.handleKeyDown) {
+      this.removeEventListener('keydown', this.handleKeyDown);
+    }
+    if (this.handleOutsideClick) {
+      document.removeEventListener('click', this.handleOutsideClick);
+    }
+    this.removeDesktopHover();
   }
 
   open() {
