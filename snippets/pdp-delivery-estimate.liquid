@@ -39,12 +39,11 @@
       </svg>
     </span>
     <span class="ta-delivery-estimate__text">
-      {%- comment -%} Fallback message when JS is disabled {%- endcomment -%}
-      <noscript>{{ 'products.product.delivery_estimate.fallback' | t | default: 'Entrega 2–5 días hábiles' }}</noscript>
-      {%- comment -%} Dynamic message populated by JS {%- endcomment -%}
-      <span class="ta-delivery-estimate__message js-only">
-        <strong class="ta-delivery-estimate__date-range">{{ 'products.product.delivery_estimate.fallback' | t | default: 'Entrega 2–5 días hábiles' }}</strong>
-      </span>
+      {%- comment -%} 
+        Fallback message shown when JS is disabled or hasn't loaded yet.
+        JS will replace this text with dynamic dates once loaded.
+      {%- endcomment -%}
+      <strong class="ta-delivery-estimate__date-range">{{ 'products.product.delivery_estimate.fallback' | t | default: 'Entrega 2–5 días hábiles' }}</strong>
     </span>
   </div>
 </div>

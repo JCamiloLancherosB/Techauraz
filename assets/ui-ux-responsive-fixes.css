@@ -4865,21 +4865,6 @@ section.newsletter {
   color: rgb(var(--color-foreground));
 }
 
-/* Message container for JS-populated content */
-.ta-delivery-estimate__message {
-  display: inline;
-}
-
-/* Hide JS-only content when JS is disabled (noscript handles fallback) */
-.ta-delivery-estimate noscript + .js-only {
-  display: none;
-}
-
-/* When JS runs, it updates the content, so show it normally */
-.ta-delivery-estimate .js-only {
-  display: inline;
-}
-
 /* Mobile responsive adjustments */
 @media screen and (max-width: 749px) {
   .ta-delivery-estimate {
@@ -4910,15 +4895,8 @@ section.newsletter {
   }
 }
 
-/* Dark mode / warm theme support for ta-delivery-estimate */
-.pdp--warm .ta-delivery-estimate {
-  background-color: rgba(255, 248, 241, 0.95);
-  border-color: rgba(210, 180, 140, 0.2);
-}
-
-.pdp--warm .ta-delivery-estimate__icon {
-  background-color: rgba(210, 180, 140, 0.15);
-}
+/* Note: pdp--warm dark mode support for ta-delivery-estimate is combined above 
+   with the pdp-delivery-estimate rules on lines 4800-4808 */
 
 
 /* =============================================================================
