@@ -4,8 +4,7 @@
   class="sticky-cta-bar{% if show_secondary_cta %} sticky-cta-bar--dual{% endif %}" 
   data-sticky-cta
   data-buy-button-text="{{ section.settings.buy_button_text | default: 'Comprar ahora' }}"
-  data-add-button-text="{{ section.settings.add_button_text | default: 'Añadir al carrito' }}"
-  data-show-secondary-cta="{{ show_secondary_cta }}"
+  data-add-button-text="{{ section.settings.add_button_text | default: 'Añadir' }}"
   role="region"
   aria-label="Botones de compra rápida"
   aria-hidden="true"
@@ -98,7 +97,7 @@
 
 {%- comment -%}
   JavaScript moved to assets/sticky-cta.js for better caching and maintainability.
-  Uses data-sticky-cta attribute for initialization and data-buy-button-text for configuration.
+  Uses data-sticky-cta attribute for initialization and data-buy-button-text / data-add-button-text for configuration.
 {%- endcomment -%}
 <script src="{{ 'sticky-cta.js' | asset_url }}" defer="defer"></script>
 
