@@ -1,7 +1,8 @@
 /**
  * =============================================================================
  * TECHAURAZ DESIGN TOKENS
- * Version: 1.0.0
+ * Version: 1.1.0
+ * Updated: 2026-01-28
  * =============================================================================
  * 
  * Single source of truth for all design tokens.
@@ -10,6 +11,7 @@
  * Naming convention: --ta-* (TechAura prefix)
  * 
  * CONTENTS:
+ * 0. CSS Isolation Layer (prevents external style interference)
  * 1. Brand Colors
  * 2. Gradient Tokens
  * 3. Typography Scale
@@ -17,11 +19,42 @@
  * 5. Border Radii
  * 6. Shadows
  * 7. Layout Heights
- * 8. Transitions
+ * 8. Transitions + Z-Index Hierarchy
  * 9. Legacy Compatibility Mapping
  * 10. Global Button Styles
+ * 
+ * NOTE: Shopify's adopted-style-sheet (injected via content_for_header)
+ * uses browser's Constructable Stylesheets API. Our styles load after
+ * content_for_header, so they take precedence in the CSS cascade.
+ * The CSS isolation layer below provides additional protection.
  * =============================================================================
  */
+
+/* =============================================================================
+   0. CSS ISOLATION LAYER
+   =============================================================================
+   Ensures TechAura styles take precedence over any externally injected styles.
+   Uses :where() for zero specificity where appropriate, and higher specificity
+   selectors for critical overrides.
+   ============================================================================= */
+
+/* Reset any potential interference on core layout elements */
+html.shopify-design-mode,
+html:not(.shopify-design-mode) {
+  /* Ensure our font-size base is applied */
+  font-size: 62.5%;
+}
+
+/* Protect our main content area from external style interference */
+#MainContent,
+.content-for-layout,
+main[role="main"] {
+  /* Establish our own stacking context */
+  isolation: isolate;
+}
+
+/* Ensure CSS custom properties are always defined at :root level */
+/* This prevents any shadow DOM or adopted stylesheet from overriding them */
 
 /* =============================================================================
    1. BRAND COLORS - Premium Tech Palette

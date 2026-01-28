@@ -512,7 +512,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 450; /* Above content (100), below WhatsApp (500) */
+  z-index: var(--ta-z-cookie-banner, 450); /* Above content, below WhatsApp - uses token from techauraz-tokens.css */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
