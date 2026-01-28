@@ -91,7 +91,7 @@
           data-slide="{{ forloop.index }}"
           aria-label="Ver imagen {{ forloop.index }}"
         >
-          {{ media | image_url: width: 80 | image_tag: class: 'product-thumbnail__image', loading: 'lazy', alt: media.alt }}
+          {{ media | image_url: width: 80 | image_tag: class: 'product-thumbnail__image', loading: 'lazy', alt: media.alt | default: product.title | append: ' - Imagen ' | append: forloop.index }}
         </button>
       {% endfor %}
     </div>
