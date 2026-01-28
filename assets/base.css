@@ -244,6 +244,21 @@ body {
   min-height: 100vh;
 }
 
+/* === MENU DRAWER BODY OVERFLOW CONTROL === 
+   Used by JavaScript (global.js) to prevent body scroll when menu drawer is open.
+   Classes are added/removed dynamically based on data-breakpoint attribute:
+   - "mobile" breakpoint → overflow-hidden-mobile (e.g., facets filter drawer)
+   - "tablet" breakpoint → overflow-hidden-tablet (e.g., header drawer on mobile/tablet)
+   - "desktop" breakpoint → overflow-hidden-desktop (e.g., full-width drawer mode)
+   
+   These classes intentionally work at all screen sizes since the JavaScript
+   manages when to add/remove them based on the component's breakpoint setting. */
+body.overflow-hidden-mobile,
+body.overflow-hidden-tablet,
+body.overflow-hidden-desktop {
+  overflow: hidden;
+}
+
 /* === ESSENTIAL UTILITIES === */
 .visually-hidden {
   position: absolute !important;
@@ -1067,6 +1082,44 @@ header-drawer {
   grid-area: drawer;
   justify-self: start;
   margin-left: -1.2rem;
+}
+
+/* Mobile header adjustments for proper proportions */
+@media screen and (max-width: 749px) {
+  .header {
+    height: 64px;
+    min-height: 64px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  header-drawer {
+    margin-left: -0.8rem;
+  }
+
+  .header__heading {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+/* Tablet breakpoint adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .header {
+    height: 68px;
+    min-height: 68px;
+    padding: 0 20px;
+  }
 }
 
 .header__heading-link {
@@ -10240,7 +10293,9 @@ button.icon-button:focus-visible {
 }
 
 .js menu-drawer>details>summary::before,
-.js menu-drawer>details[open]:not(.menu-opening)>summary::before {
+.js menu-drawer>details[open]:not(.menu-opening)>summary::before,
+.js header-drawer>details>summary::before,
+.js header-drawer>details[open]:not(.menu-opening)>summary::before {
   content: '';
   position: absolute;
   cursor: default;
@@ -10257,7 +10312,8 @@ button.icon-button:focus-visible {
   transition: opacity 0s, visibility 0s;
 }
 
-menu-drawer>details[open]>summary::before {
+menu-drawer>details[open]>summary::before,
+header-drawer>details[open]>summary::before {
   visibility: visible;
   opacity: 1;
   transition: opacity var(--duration-medium) ease, visibility var(--duration-medium) ease;
@@ -10283,6 +10339,23 @@ menu-drawer>details[open]>summary::before {
 .js .menu-drawer {
   height: calc(100vh - 100%);
   height: calc(var(--viewport-height, 100vh) - (var(--header-bottom-position, 100%)));
+}
+
+/* Mobile: Full viewport drawer for better UX on smaller screens */
+@media screen and (max-width: 749px) {
+  .menu-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 1000;
+  }
+
+  .js .menu-drawer {
+    height: 100vh;
+    height: 100dvh;
+  }
 }
 
 .js details[open]>.menu-drawer,
