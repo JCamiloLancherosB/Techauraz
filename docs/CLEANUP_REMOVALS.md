@@ -12,7 +12,7 @@ This document records all files removed as part of the audit-driven safe cleanup
 
 ### 1.1 Smooth Scroll Script (main-product.liquid)
 
-**Location**: `sections/main-product.liquid` (lines 703-727)
+**Location**: `sections/main-product.liquid` (inline script near "Ver todos los detalles" link)
 **Destination**: `assets/product-enhancements.js` (function `initSmoothScrollToDescription`)
 
 **Description**: Moved the smooth scroll functionality for "Ver todos los detalles" link from inline script to the external product-enhancements.js file. The script handles:
@@ -24,7 +24,7 @@ This document records all files removed as part of the audit-driven safe cleanup
 ```bash
 # Confirm script exists in external file
 grep -n "initSmoothScrollToDescription" assets/product-enhancements.js
-# Output: Line 373 - function initSmoothScrollToDescription()
+# Output: Shows function definition
 
 # Confirm inline script removed
 grep -c "<script>" sections/main-product.liquid | grep -v asset_url

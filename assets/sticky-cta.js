@@ -15,8 +15,16 @@ class StickyCTABar {
     this.element = element;
     this.buyButton = element.querySelector('[data-sticky-buy]');
     this.priceContainer = element.querySelector('[data-sticky-price]');
+    
+    // Bind handlers for proper cleanup
     this.handleVariantChange = this.handleVariantChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleBuyClick = this.handleBuyClick.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handlePageHide = this.handlePageHide.bind(this);
+    
+    // Resize timeout for debouncing
+    this.resizeTimeout = null;
     
     // Find primary CTA elements - multiple fallback selectors
     this.submitButton = this.findPrimaryButton();
@@ -58,31 +66,37 @@ class StickyCTABar {
     
     // Handle buy button click - triggers Buy Now by default
     if (this.buyButton) {
-      this.buyButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.handleBuyClick();
-      });
+      this.buyButton.addEventListener('click', this.handleBuyClick);
     }
 
     document.addEventListener('variant:change', this.handleVariantChange);
     
-    // Handle resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (window.innerWidth >= 750) {
-          this.hideStickyBar();
-        } else {
-          this.handleScroll();
-        }
-      }, 150);
-    });
+    // Handle resize with debounce
+    window.addEventListener('resize', this.handleResize);
     
-    window.addEventListener('pagehide', () => this.destroy());
+    // Cleanup on page hide
+    window.addEventListener('pagehide', this.handlePageHide);
   }
   
-  handleBuyClick() {
+  handleResize() {
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      if (window.innerWidth >= 750) {
+        this.hideStickyBar();
+      } else {
+        this.handleScroll();
+      }
+    }, 150);
+  }
+  
+  handlePageHide() {
+    this.destroy();
+  }
+  
+  handleBuyClick(e) {
+    e.preventDefault();
     const action = this.buyButton.dataset.action || 'buy-now';
     let targetButton;
     
@@ -111,8 +125,26 @@ class StickyCTABar {
   }
 
   destroy() {
+    // Clear pending resize timeout
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = null;
+    }
+    
+    // Remove all event listeners
     document.removeEventListener('variant:change', this.handleVariantChange);
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('pagehide', this.handlePageHide);
+    
+    if (this.buyButton) {
+      this.buyButton.removeEventListener('click', this.handleBuyClick);
+    }
+    
+    // Remove instance reference from element
+    if (this.element._stickyCTAInstance === this) {
+      delete this.element._stickyCTAInstance;
+    }
   }
 
   handleVariantChange(event) {
@@ -248,11 +280,30 @@ class StickyCTABar {
   }
 }
 
+/**
+ * Initialize StickyCTABar and store reference on element for cleanup
+ * @param {HTMLElement} element - The sticky CTA bar element
+ * @returns {StickyCTABar|null} The instance or null if not created
+ */
+function initStickyCTABar(element) {
+  if (!element) return null;
+  
+  // Destroy existing instance if present
+  if (element._stickyCTAInstance) {
+    element._stickyCTAInstance.destroy();
+  }
+  
+  // Create new instance and store reference
+  const instance = new StickyCTABar(element);
+  element._stickyCTAInstance = instance;
+  return instance;
+}
+
 // Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   const stickyBar = document.querySelector('[data-sticky-cta]');
   if (stickyBar && window.innerWidth < 750) {
-    new StickyCTABar(stickyBar);
+    initStickyCTABar(stickyBar);
   }
 });
 
@@ -260,6 +311,14 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('shopify:section:load', (event) => {
   const stickyBar = event.target.querySelector('[data-sticky-cta]');
   if (stickyBar && window.innerWidth < 750) {
-    new StickyCTABar(stickyBar);
+    initStickyCTABar(stickyBar);
+  }
+});
+
+// Clean up on Shopify section unload (theme editor)
+document.addEventListener('shopify:section:unload', (event) => {
+  const stickyBar = event.target.querySelector('[data-sticky-cta]');
+  if (stickyBar && stickyBar._stickyCTAInstance) {
+    stickyBar._stickyCTAInstance.destroy();
   }
 });
