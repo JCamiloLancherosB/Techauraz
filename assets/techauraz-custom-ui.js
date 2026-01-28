@@ -229,7 +229,17 @@
         // Remove hidden class if present (from previous session)
         banner.classList.remove('is-hidden');
         banner.classList.add('is-visible');
+        
+        // Update WhatsApp position
         updateWhatsAppPosition();
+        
+        // Set focus after transition completes for accessibility
+        banner.addEventListener('transitionend', function onTransitionEnd(e) {
+          if (e.propertyName === 'transform') {
+            banner.removeEventListener('transitionend', onTransitionEnd);
+            banner.focus({ preventScroll: true });
+          }
+        });
       }, BANNER_DELAY_MS);
     }
   }
@@ -238,6 +248,8 @@
   function hideBanner() {
     banner.classList.remove('is-visible');
     banner.classList.add('is-hidden');
+    
+    // Update WhatsApp position
     updateWhatsAppPosition();
   }
   
