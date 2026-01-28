@@ -60,7 +60,11 @@
   "newsletter": {
     "label": "Correo electrónico",
     "success": "Gracias por suscribirte",
-    "button_label": "Suscribir"
+    "button_label": "Suscribir",
+    "error_required": "Por favor ingresa tu correo electrónico",
+    "error_invalid": "Por favor ingresa un correo electrónico válido",
+    "error_server": "Algo salió mal. Por favor intenta de nuevo.",
+    "loading": "Suscribiendo..."
   },
   "forms": {
     "validation": {

@@ -950,6 +950,51 @@ select:focus {
   }
 }
 
+/* Conversion newsletter field wrapper */
+.ta-conv-newsletter__field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-md, 1.2rem);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Conversion newsletter loading state */
+.ta-conv-newsletter.newsletter-form--loading .ta-conv-newsletter__submit {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.ta-conv-newsletter.newsletter-form--loading .ta-conv-newsletter__submit-text {
+  visibility: hidden;
+}
+
+.ta-conv-newsletter.newsletter-form--loading .ta-conv-newsletter__submit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  margin-left: -9px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: newsletterSpin 0.8s linear infinite;
+}
+
+.ta-conv-newsletter__submit {
+  position: relative;
+}
+
+/* Conversion newsletter disclaimer styling */
+.ta-conv-newsletter__disclaimer {
+  font-size: var(--ta-font-size-xs, 0.75rem);
+  color: var(--ta-text-muted, #64748b);
+  margin-top: var(--ta-space-sm, 0.5rem);
+}
+
 /* =============================================================================
    6. GLOBAL CTA CONSISTENCY
    ============================================================================= */
