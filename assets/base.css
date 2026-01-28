@@ -245,18 +245,16 @@ body {
 }
 
 /* === MENU DRAWER BODY OVERFLOW CONTROL === 
-   Used by JavaScript (global.js) to prevent body scroll when menu drawer is open
-   Classes are added/removed dynamically based on data-breakpoint attribute */
-body.overflow-hidden-mobile {
-  overflow: hidden;
-}
-
-@media screen and (max-width: 989px) {
-  body.overflow-hidden-tablet {
-    overflow: hidden;
-  }
-}
-
+   Used by JavaScript (global.js) to prevent body scroll when menu drawer is open.
+   Classes are added/removed dynamically based on data-breakpoint attribute:
+   - "mobile" breakpoint → overflow-hidden-mobile (e.g., facets filter drawer)
+   - "tablet" breakpoint → overflow-hidden-tablet (e.g., header drawer on mobile/tablet)
+   - "desktop" breakpoint → overflow-hidden-desktop (e.g., full-width drawer mode)
+   
+   These classes intentionally work at all screen sizes since the JavaScript
+   manages when to add/remove them based on the component's breakpoint setting. */
+body.overflow-hidden-mobile,
+body.overflow-hidden-tablet,
 body.overflow-hidden-desktop {
   overflow: hidden;
 }

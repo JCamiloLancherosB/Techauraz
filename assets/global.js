@@ -450,7 +450,7 @@ class MenuDrawer extends HTMLElement {
   onFocusOut() {
     setTimeout(() => {
       if (this.mainDetailsToggle.hasAttribute('open') && !this.mainDetailsToggle.contains(document.activeElement))
-        this.closeMenuDrawer();
+        this.closeMenuDrawer(new Event('focusout'));
     });
   }
 
