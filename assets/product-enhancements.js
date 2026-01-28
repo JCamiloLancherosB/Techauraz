@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     priceElement.parentNode.insertBefore(trustDiv, priceElement.nextSibling);
   }
 
-  // 2. Agregar indicador de urgencia (SOLO SI NO EXISTE)
+  // 2. Agregar indicador de entrega y pago (info honesta, sin countdown falso)
   function addUrgencyIndicator() {
     // Scope query to current product section
     const trustElement = productSection ? productSection.querySelector('.trust-indicators') : null;
@@ -95,45 +95,20 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const urgencyDiv = document.createElement('div');
     urgencyDiv.className = 'urgency-indicator';
-    urgencyDiv.innerHTML = '⚡ Pagas contra entrega si prefieres ¡Oferta por tiempo limitado!';
+    // Mensaje honesto de entrega y pago contra entrega
+    urgencyDiv.innerHTML = '🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible';
     
     trustElement.parentNode.insertBefore(urgencyDiv, trustElement.nextSibling);
   }
 
-  // 3. Contador de urgencia dinámico (keyed by product ID to prevent conflicts)
+  // 3. Contador de urgencia dinámico - DESHABILITADO
+  // NOTA: Esta función ha sido deshabilitada porque mostraba un countdown
+  // falso que dañaba la confianza del cliente.
+  // Para información de entrega real, use el snippet pdp-delivery-estimate.liquid
   function initUrgencyTimer() {
-    // Scope query to current product section
-    const urgencyEl = productSection ? productSection.querySelector('.urgency-indicator') : null;
-    if (!urgencyEl || !productId) return;
-    
-    // Use product-specific storage key to prevent conflicts
-    const storageKey = `product-urgency-timer-${productId}`;
-    let timeLeft = localStorage.getItem(storageKey);
-    if (!timeLeft) {
-      timeLeft = 3600; // 1 hora
-      localStorage.setItem(storageKey, timeLeft.toString());
-    } else {
-      timeLeft = parseInt(timeLeft);
-    }
-
-    function updateTimer() {
-      if (timeLeft <= 0) {
-        urgencyEl.innerHTML = '⚡ ¡ÚLTIMA OPORTUNIDAD! Stock muy limitado ⚡';
-        urgencyEl.classList.add('urgency-pulse');
-        return;
-      }
-
-      const hours = Math.floor(timeLeft / 3600);
-      const minutes = Math.floor((timeLeft % 3600) / 60);
-      const seconds = timeLeft % 60;
-      
-      urgencyEl.innerHTML = `⚡ ¡Oferta termina en: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}! ⚡`;
-      timeLeft--;
-      localStorage.setItem(storageKey, timeLeft.toString());
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    // Función deshabilitada intencionalmente.
+    // Los countdowns falsos de "oferta termina" han sido eliminados.
+    return;
   }
 
   // 4. Tracking de comportamiento del usuario
@@ -411,50 +386,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 9. Countdown Timer (keyed by product ID)
+  // 9. Countdown Timer - DESHABILITADO
+  // NOTA: Esta función ha sido deshabilitada porque mostraba un countdown
+  // falso de 6 horas que se reinicia perpetuamente, lo cual daña la confianza.
+  // Para información de entrega real, use el snippet pdp-delivery-estimate.liquid
+  // que muestra un cut-off honesto basado en la hora real.
   function initCountdownTimer() {
-    const countdownTimer = document.querySelector('[data-countdown-timer]');
-    if (!countdownTimer || !productId) return;
-
-    const hoursEl = countdownTimer.querySelector('[data-countdown-hours]');
-    const minutesEl = countdownTimer.querySelector('[data-countdown-minutes]');
-    const secondsEl = countdownTimer.querySelector('[data-countdown-seconds]');
-
-    if (!hoursEl || !minutesEl || !secondsEl) return;
-
-    const storageKey = `product-countdown-${productId}`;
-    let endTime = localStorage.getItem(storageKey);
-    
-    if (!endTime) {
-      // Set countdown to 6 hours from now
-      endTime = new Date().getTime() + (6 * 60 * 60 * 1000);
-      localStorage.setItem(storageKey, endTime.toString());
-    } else {
-      endTime = parseInt(endTime);
-    }
-    
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = endTime - now;
-
-      if (distance < 0) {
-        // Reset to 6 hours when countdown ends
-        endTime = new Date().getTime() + (6 * 60 * 60 * 1000);
-        localStorage.setItem(storageKey, endTime.toString());
-        return;
-      }
-
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      hoursEl.textContent = String(hours).padStart(2, '0');
-      minutesEl.textContent = String(minutes).padStart(2, '0');
-      secondsEl.textContent = String(seconds).padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // Función deshabilitada intencionalmente.
+    // Los countdowns falsos han sido eliminados.
+    // Si necesita un countdown real, use la sección countdown-timer.liquid
+    // con una fecha de fin real configurada por el administrador.
+    return;
   }
 
   // 10. Hero Slider Controls and Dots Navigation

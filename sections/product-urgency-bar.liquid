@@ -1,11 +1,11 @@
 <div class="urgency-bar section-{{ section.id }}-padding" data-urgency-bar>
   <div class="urgency-bar__container page-width">
     <div class="urgency-bar__content">
-      <span class="urgency-bar__icon">🔥</span>
+      <span class="urgency-bar__icon">✅</span>
       <span class="urgency-bar__text">
-        {{ section.settings.urgency_text | default: "¡ÚLTIMAS UNIDADES! | POCO STOCK" }}
+        {{ section.settings.urgency_text | default: "🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible" }}
       </span>
-      <span class="urgency-bar__icon">🔥</span>
+      <span class="urgency-bar__icon">✅</span>
     </div>
   </div>
 </div>
@@ -30,8 +30,8 @@
       "type": "text",
       "id": "urgency_text",
       "label": "Texto de urgencia",
-      "default": "¡ÚLTIMAS 23 UNIDADES! | POCO STOCK",
-      "info": "Mensaje que aparece en la barra de urgencia"
+      "default": "🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible",
+      "info": "⚠️ Use información real y verificable. Evite números de stock falsos"
     },
     {
       "type": "range",
