@@ -81,6 +81,20 @@
                 data-slide="{{ forloop.index }}"></button>
       {% endfor %}
     </div>
+    
+    {%- comment -%} Thumbnail navigation for better UX {%- endcomment -%}
+    <div class="product-thumbnails">
+      {% for media in product.media %}
+        <button 
+          class="product-thumbnail{% if forloop.first %} active{% endif %}" 
+          data-thumbnail-index="{{ forloop.index }}"
+          data-slide="{{ forloop.index }}"
+          aria-label="Ver imagen {{ forloop.index }}"
+        >
+          {{ media | image_url: width: 80 | image_tag: class: 'product-thumbnail__image', loading: 'lazy', alt: media.alt | default: product.title | append: ' - Imagen ' | append: forloop.index }}
+        </button>
+      {% endfor %}
+    </div>
   {%- endif -%}
 </product-hero-slider>
 
