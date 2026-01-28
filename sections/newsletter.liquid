@@ -1,3 +1,4 @@
+<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
 <div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">
   <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
     {%- for block in section.blocks -%}
@@ -26,7 +27,7 @@
           </div>
         {%- when 'email_form' -%}
           <div {{ block.shopify_attributes }}>
-            {% form 'customer', class: 'newsletter-form' %}
+            {% form 'customer', class: 'newsletter-form', id: 'NewsletterSection', data-success-message: 'newsletter.success' | t %}
               <input type="hidden" name="contact[tags]" value="newsletter">
               <div
                 class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -69,7 +70,7 @@
                   </button>
                 </div>
                 {%- if form.errors -%}
-                  <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+                  <small class="newsletter-form__message newsletter-form__message--error form__message is-visible" id="Newsletter-error--{{ section.id }}" role="alert">
                     {%- render 'icon-error' -%}
                     {{- form.errors.translated_fields.email | capitalize }}
                     {{ form.errors.messages.email -}}
@@ -78,10 +79,11 @@
               </div>
               {%- if form.posted_successfully? -%}
                 <h3
-                  class="newsletter-form__message newsletter-form__message--success form__message"
+                  class="newsletter-form__message newsletter-form__message--success form__message is-visible"
                   id="Newsletter-success--{{ section.id }}"
                   tabindex="-1"
                   autofocus
+                  role="status"
                 >
                   {% render 'icon-success' -%}
                   {{- 'newsletter.success' | t }}

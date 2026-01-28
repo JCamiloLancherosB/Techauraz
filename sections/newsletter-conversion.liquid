@@ -2,15 +2,19 @@
   Conversion-Optimized Newsletter Form
   
   Simplified newsletter signup with single input and clear CTA.
+  Features: AJAX submission, loading state, success/error feedback
   
   Usage:
   {% render 'newsletter-conversion' %}
 {% endcomment %}
 
+<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
+
 {%- liquid
   assign heading = section.settings.heading | default: 'Únete a nuestra comunidad'
   assign subheading = section.settings.subheading | default: 'Recibe ofertas exclusivas y novedades de productos tech'
   assign button_text = section.settings.button_text | default: 'Suscribirme'
+  assign success_message = section.settings.success_message | default: '¡Gracias por suscribirte! Revisa tu correo para confirmar.'
 -%}
 
 <div class="ta-conv-newsletter-section page-width section-{{ section.id }}-padding">
@@ -23,40 +27,53 @@
       <p>{{ subheading }}</p>
     {%- endif -%}
     
-    {%- form 'customer', class: 'ta-conv-newsletter', id: 'ContactFooter' -%}
+    {%- form 'customer', class: 'ta-conv-newsletter newsletter-form', id: 'NewsletterConversion', data-success-message: success_message -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       
       {%- if form.posted_successfully? -%}
-        <div>
-          ✓ ¡Gracias por suscribirte! Revisa tu correo para confirmar.
+        <div class="newsletter-form__message newsletter-form__message--success is-visible" role="status" tabindex="-1">
+          {% render 'icon-success' %}
+          {{ success_message }}
         </div>
       {%- endif -%}
       
       {%- if form.errors -%}
-        <div>
+        <div class="newsletter-form__message newsletter-form__message--error is-visible" role="alert" id="NewsletterConversion-error">
+          {% render 'icon-error' %}
           {{ form.errors | default_errors }}
         </div>
       {%- endif -%}
       
-      <input 
-        type="email" 
-        name="contact[email]" 
-        class="ta-conv-newsletter__input"
-        placeholder="tu@email.com"
-        aria-label="Correo electrónico"
-        autocomplete="email"
-        required>
-      
-      <button 
-        type="submit" 
-        class="ta-conv-newsletter__submit"
-        name="commit">
-        {{ button_text }}
-      </button>
+      <div class="ta-conv-newsletter__field-wrapper">
+        <input 
+          id="NewsletterFormInput--{{ section.id }}"
+          type="email" 
+          name="contact[email]" 
+          class="ta-conv-newsletter__input field__input"
+          placeholder="{{ 'newsletter.label' | t | default: 'tu@email.com' }}"
+          aria-label="{{ 'newsletter.label' | t | default: 'Correo electrónico' }}"
+          aria-required="true"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="NewsletterConversion-error"
+          {% endif %}
+          required>
+        
+        <button 
+          type="submit" 
+          class="ta-conv-newsletter__submit"
+          name="commit"
+          aria-label="{{ button_text }}">
+          <span class="ta-conv-newsletter__submit-text">{{ button_text }}</span>
+        </button>
+      </div>
     {%- endform -%}
     
-    <p>
-      No spam. Cancela cuando quieras.
+    <p class="ta-conv-newsletter__disclaimer">
+      {{ section.settings.disclaimer | default: 'No spam. Cancela cuando quieras.' }}
     </p>
   </div>
 </div>
@@ -104,6 +121,18 @@
       "id": "button_text",
       "label": "Texto del botón",
       "default": "Suscribirme"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Mensaje de éxito",
+      "default": "¡Gracias por suscribirte! Revisa tu correo para confirmar."
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Texto de descargo",
+      "default": "No spam. Cancela cuando quieras."
     }
   ],
   "presets": [

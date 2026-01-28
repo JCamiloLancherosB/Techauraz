@@ -195,6 +195,136 @@
 }
 
 /* ==============================================
+   NEWSLETTER FORM UX STATES
+   Loading, Success, and Error States
+   ============================================== */
+
+/* Newsletter form message container - shared styles */
+.newsletter-form__message--success,
+.newsletter-form__message--error {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm, 0.5rem);
+  padding: var(--ta-space-md, 1rem) var(--ta-space-lg, 1.5rem);
+  margin-top: var(--ta-space-md, 1rem);
+  border-radius: var(--ta-radius-card, 8px);
+  font-size: var(--ta-font-size-sm, 0.875rem);
+  font-weight: var(--ta-font-medium, 500);
+  animation: fadeInSlide 0.3s ease-out;
+}
+
+.newsletter-form__message--success.is-visible,
+.newsletter-form__message--error.is-visible {
+  display: flex;
+}
+
+/* Success message styling */
+.newsletter-form__message--success {
+  color: var(--ta-text-inverse, #fff) !important;
+  background: rgba(66, 132, 69, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Error message styling */
+.newsletter-form__message--error {
+  color: var(--ta-text-inverse, #fff) !important;
+  background: rgba(235, 0, 27, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Footer-specific message styling (dark background) */
+.footer__newsletter .newsletter-form__message--success,
+.footer__newsletter .newsletter-form__message--error,
+.footer .newsletter-form__message--success,
+.footer .newsletter-form__message--error {
+  background: rgba(66, 132, 69, 0.95);
+}
+
+.footer__newsletter .newsletter-form__message--error,
+.footer .newsletter-form__message--error {
+  background: rgba(235, 0, 27, 0.95);
+}
+
+/* Loading state styling */
+.newsletter-form--loading {
+  pointer-events: none;
+}
+
+.newsletter-form--loading .newsletter-form__button,
+.newsletter-form--loading .ta-conv-newsletter__submit,
+.newsletter-form--loading button[type="submit"] {
+  position: relative;
+  cursor: wait;
+  opacity: 0.8;
+}
+
+/* Newsletter loading spinner */
+.newsletter-loading-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: newsletterSpin 0.8s linear infinite;
+}
+
+@keyframes newsletterSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Error state for email input */
+.newsletter-form .field__input--error,
+.ta-conv-newsletter .field__input--error,
+.ta-conv-newsletter__input.field__input--error {
+  border-color: var(--ta-error, #eb001b) !important;
+  box-shadow: 0 0 0 2px rgba(235, 0, 27, 0.2);
+}
+
+/* Success state for email input */
+.newsletter-form .field__input--success,
+.ta-conv-newsletter .field__input--success {
+  border-color: var(--ta-success, #428445) !important;
+  box-shadow: 0 0 0 2px rgba(66, 132, 69, 0.2);
+}
+
+/* Visually hidden utility class */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Mobile responsive for newsletter messages */
+@media screen and (max-width: 749px) {
+  .newsletter-form__message--success,
+  .newsletter-form__message--error {
+    padding: var(--ta-space-sm, 0.75rem) var(--ta-space-md, 1rem);
+    font-size: var(--ta-font-size-xs, 0.8rem);
+  }
+}
+
+/* ==============================================
    FOOTER ENHANCEMENTS - Improved Design 2026
    - Cleaner layout with better hierarchy
    - Improved column structure (Ayuda, Confianza, Social)
