@@ -1,0 +1,22 @@
+/* Urgency Elements Section - Stock indicator states
+   Moved from inline styles in sections/urgency-elements.liquid
+   Load via stylesheet_tag in section for scoped loading.
+*/
+
+.urgency-stock--low {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-color: #fbbf24;
+  color: #92400e;
+}
+
+.urgency-stock--available {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.urgency-stock--out {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #ef4444;
+  color: #991b1b;
+}

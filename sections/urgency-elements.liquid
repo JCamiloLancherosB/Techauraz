@@ -6,6 +6,8 @@
   Los contadores de "personas viendo" han sido eliminados porque son datos ficticios.
 {% endcomment %}
 
+{{ 'section-urgency-elements.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign inventory_qty = current_variant.inventory_quantity
@@ -114,67 +116,7 @@
   {% endif %}
 </div>
 
-<script>
-// Countdown timer - Solo si hay una fecha real configurada
-function initCountdown() {
-  const countdownEl = document.querySelector('.countdown-timer');
-  if (!countdownEl) return;
-  
-  const endDate = new Date(countdownEl.dataset.endDate);
-  if (!endDate || isNaN(endDate.getTime())) return;
-  
-  function updateCountdown() {
-    const now = new Date();
-    const distance = endDate - now;
-    
-    if (distance < 0) {
-      countdownEl.innerHTML = '<span class="urgency-value">¡Oferta terminada!</span>';
-      return;
-    }
-    
-    const hours = Math.floor(distance / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    const hoursEl = countdownEl.querySelector('[data-hours]');
-    const minutesEl = countdownEl.querySelector('[data-minutes]');
-    const secondsEl = countdownEl.querySelector('[data-seconds]');
-    
-    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
-  }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCountdown);
-} else {
-  initCountdown();
-}
-</script>
-
-<style>
-  .urgency-stock--low {
-    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-    border-color: #fbbf24;
-    color: #92400e;
-  }
-  
-  .urgency-stock--available {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    border-color: #22c55e;
-    color: #166534;
-  }
-  
-  .urgency-stock--out {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    border-color: #ef4444;
-    color: #991b1b;
-  }
-</style>
+<script src="{{ 'urgency-countdown.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
