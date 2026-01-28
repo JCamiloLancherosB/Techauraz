@@ -9,6 +9,12 @@
   The 'card-product' snippet (snippets/card-product.liquid) is the single 
   source of truth for product card rendering across the theme.
   
+  Migration Notes:
+  - The 'card-product' snippet has different parameters than this snippet.
+  - 'show_badges': card-product has built-in badge logic (OFERTA, Nuevo, Agotado)
+  - 'cta_text': card-product uses localized "Ver todos los detalles" and quick-add buttons
+  - For equivalent functionality, use card-product's built-in features instead.
+  
   This file is kept for reference but should not be used in new development.
   
   ---
