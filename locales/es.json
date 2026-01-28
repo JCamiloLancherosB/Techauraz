@@ -344,6 +344,9 @@
       "view_all": "Ver todo",
       "view_all_label": "Ver todos los productos de la colección {{ collection_name }}"
     },
+    "related_products": {
+      "subheading": "Productos seleccionados especialmente para ti"
+    },
     "collection_list": {
       "view_all": "Ver todo"
     },

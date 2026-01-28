@@ -410,3 +410,85 @@
     transform: none;
   }
 }
+
+/* ============================================================
+   RELATED PRODUCTS SECTION ENHANCEMENTS
+   ============================================================ */
+
+.related-products {
+  padding: var(--ta-space-3xl, 6rem) 0;
+}
+
+.related-products__header {
+  text-align: center;
+  margin-bottom: var(--ta-space-2xl, 4rem);
+}
+
+.related-products__heading {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  margin-bottom: var(--ta-space-sm, 0.8rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  flex-wrap: wrap;
+}
+
+.heading-icon {
+  display: inline-block;
+  animation: sparkle 1.5s ease-in-out 3; /* Play only 3 times instead of infinitely */
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.related-products__subheading {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  opacity: 0.8;
+  margin: 0;
+  color: var(--ta-text-muted, #64748b);
+}
+
+.tech-related-products {
+  gap: var(--ta-space-xl, 2.4rem);
+}
+
+/* Staggered fade-in animation for grid items */
+.tech-related-products .grid__item {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
+  opacity: 0;
+}
+
+/* Fallback: ensure items are visible if CSS animations don't work */
+.no-js .tech-related-products .grid__item,
+.tech-related-products .grid__item:not([style*="--animation-delay"]) {
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion: disable animations for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .heading-icon {
+    animation: none;
+  }
+  
+  .tech-related-products .grid__item {
+    animation: none;
+    opacity: 1;
+  }
+}
