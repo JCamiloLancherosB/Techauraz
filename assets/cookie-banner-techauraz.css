@@ -3,7 +3,7 @@
  * TECHAURAZ COOKIE BANNER
  * =============================================================================
  * Non-intrusive cookie consent banner with minimal design
- * Z-INDEX HIERARCHY: Header(100) < Cart(200) < Modals(300) < Cookie(400) < WhatsApp(500)
+ * Z-INDEX: Uses centralized tokens from techauraz-tokens.css
  */
 
 .cookie-banner {
@@ -11,7 +11,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 400; /* Above modals (300), below WhatsApp (500) */
+  z-index: var(--ta-z-cookie-banner, 450); /* Uses centralized z-index from techauraz-tokens.css */
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
   backdrop-filter: blur(10px);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
