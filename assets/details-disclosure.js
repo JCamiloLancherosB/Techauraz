@@ -36,7 +36,14 @@ class HeaderMenu extends DetailsDisclosure {
   constructor() {
     super();
     this.header = document.querySelector('.header-wrapper');
-    this.isDesktop = window.matchMedia('(min-width: 990px)').matches;
+    this.mediaQuery = window.matchMedia('(min-width: 990px)');
+    this.isDesktop = this.mediaQuery.matches;
+    
+    // Setup keyboard handlers (Escape key to close)
+    this.setupKeyboardHandlers();
+    
+    // Setup outside click handler (deferred to avoid race condition with toggle)
+    this.setupOutsideClickHandler();
     
     // Desktop: Open on hover/focus for better UX
     if (this.isDesktop) {
@@ -44,14 +51,48 @@ class HeaderMenu extends DetailsDisclosure {
     }
     
     // Listen for viewport changes
-    window.matchMedia('(min-width: 990px)').addEventListener('change', (e) => {
+    this.handleMediaChange = (e) => {
       this.isDesktop = e.matches;
       if (this.isDesktop) {
         this.setupDesktopHover();
       } else {
         this.removeDesktopHover();
       }
-    });
+    };
+    this.mediaQuery.addEventListener('change', this.handleMediaChange);
+  }
+  
+  setupKeyboardHandlers() {
+    // Handle Escape key to close menu - attached to document for reliable event capturing
+    this.handleKeyDown = (event) => {
+      if (event.key === 'Escape' && this.mainDetailsToggle.hasAttribute('open')) {
+        event.preventDefault();
+        this.close();
+        // Return focus to the summary element
+        const summary = this.mainDetailsToggle.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    };
+    
+    // Use document-level listener to catch events from all child elements
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+  
+  setupOutsideClickHandler() {
+    // Handle clicks outside the menu to close it
+    // Use setTimeout to defer setup, avoiding race condition with toggle clicks
+    this.handleOutsideClick = (event) => {
+      // Skip if menu is not open or click is inside
+      if (!this.mainDetailsToggle.hasAttribute('open')) return;
+      if (this.contains(event.target)) return;
+      
+      this.close();
+    };
+    
+    // Defer the listener setup to avoid immediate trigger on toggle click
+    setTimeout(() => {
+      document.addEventListener('click', this.handleOutsideClick);
+    }, 0);
   }
 
   setupDesktopHover() {
@@ -92,6 +133,20 @@ class HeaderMenu extends DetailsDisclosure {
     }
     clearTimeout(this.openDelay);
     clearTimeout(this.closeDelay);
+  }
+  
+  disconnectedCallback() {
+    // Cleanup all event listeners to prevent memory leaks
+    if (this.handleKeyDown) {
+      document.removeEventListener('keydown', this.handleKeyDown);
+    }
+    if (this.handleOutsideClick) {
+      document.removeEventListener('click', this.handleOutsideClick);
+    }
+    if (this.handleMediaChange) {
+      this.mediaQuery.removeEventListener('change', this.handleMediaChange);
+    }
+    this.removeDesktopHover();
   }
 
   open() {
