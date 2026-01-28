@@ -6,6 +6,7 @@
  * - Shows when primary CTA scrolls out of viewport
  * - Coordinates with WhatsApp and cookie banner
  * - Handles Buy Now vs Add to Cart action intentionally
+ * - Supports dual CTAs (Buy Now + Add to Cart)
  * - Updates on variant changes
  * - Mobile-only activation (< 750px viewport)
  */
@@ -14,12 +15,14 @@ class StickyCTABar {
   constructor(element) {
     this.element = element;
     this.buyButton = element.querySelector('[data-sticky-buy]');
+    this.addButton = element.querySelector('[data-sticky-add]');
     this.priceContainer = element.querySelector('[data-sticky-price]');
     
     // Bind handlers for proper cleanup
     this.handleVariantChange = this.handleVariantChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleBuyClick = this.handleBuyClick.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handlePageHide = this.handlePageHide.bind(this);
     
@@ -68,6 +71,11 @@ class StickyCTABar {
     if (this.buyButton) {
       this.buyButton.addEventListener('click', this.handleBuyClick);
     }
+    
+    // Handle add to cart button click
+    if (this.addButton) {
+      this.addButton.addEventListener('click', this.handleAddClick);
+    }
 
     document.addEventListener('variant:change', this.handleVariantChange);
     
@@ -108,6 +116,16 @@ class StickyCTABar {
       targetButton = this.submitButton;
     }
     
+    this.triggerButtonClick(targetButton);
+  }
+  
+  handleAddClick(e) {
+    e.preventDefault();
+    // Add to cart always uses the submit button
+    this.triggerButtonClick(this.submitButton);
+  }
+  
+  triggerButtonClick(targetButton) {
     if (targetButton && typeof targetButton.click === 'function') {
       // Scroll to product form for user context
       const productForm = document.querySelector('product-form, .product-form');
@@ -141,6 +159,10 @@ class StickyCTABar {
       this.buyButton.removeEventListener('click', this.handleBuyClick);
     }
     
+    if (this.addButton) {
+      this.addButton.removeEventListener('click', this.handleAddClick);
+    }
+    
     // Remove instance reference from element
     if (this.element._stickyCTAInstance === this) {
       delete this.element._stickyCTAInstance;
@@ -157,10 +179,8 @@ class StickyCTABar {
       this.updatePriceDisplay(variant.price, variant.compare_at_price);
     }
     
-    // Update button state
-    if (this.buyButton) {
-      this.updateButtonState(variant.available);
-    }
+    // Update button states
+    this.updateButtonState(variant.available);
   }
   
   updatePriceDisplay(price, compareAtPrice) {
@@ -187,20 +207,42 @@ class StickyCTABar {
   }
   
   updateButtonState(isAvailable) {
-    const textSpan = this.buyButton.querySelector('.sticky-cta-bar__text');
-    // Get button text from data attribute if available, otherwise use default
+    // Get button texts from data attributes
     const buyButtonText = this.element.dataset.buyButtonText || 'Comprar ahora';
+    const addButtonText = this.element.dataset.addButtonText || 'Añadir';
     
-    if (isAvailable) {
-      this.buyButton.disabled = false;
-      this.buyButton.removeAttribute('aria-disabled');
-      if (textSpan) textSpan.textContent = buyButtonText;
-      this.buyButton.setAttribute('aria-label', 'Comprar ahora');
-    } else {
-      this.buyButton.disabled = true;
-      this.buyButton.setAttribute('aria-disabled', 'true');
-      if (textSpan) textSpan.textContent = 'Agotado';
-      this.buyButton.setAttribute('aria-label', 'Producto agotado');
+    // Update buy button
+    if (this.buyButton) {
+      const buyTextSpan = this.buyButton.querySelector('.sticky-cta-bar__text');
+      
+      if (isAvailable) {
+        this.buyButton.disabled = false;
+        this.buyButton.removeAttribute('aria-disabled');
+        if (buyTextSpan) buyTextSpan.textContent = buyButtonText;
+        this.buyButton.setAttribute('aria-label', 'Comprar ahora');
+      } else {
+        this.buyButton.disabled = true;
+        this.buyButton.setAttribute('aria-disabled', 'true');
+        if (buyTextSpan) buyTextSpan.textContent = 'Agotado';
+        this.buyButton.setAttribute('aria-label', 'Producto agotado');
+      }
+    }
+    
+    // Update add button
+    if (this.addButton) {
+      const addTextSpan = this.addButton.querySelector('.sticky-cta-bar__text');
+      
+      if (isAvailable) {
+        this.addButton.disabled = false;
+        this.addButton.removeAttribute('aria-disabled');
+        if (addTextSpan) addTextSpan.textContent = addButtonText;
+        this.addButton.setAttribute('aria-label', 'Añadir al carrito');
+      } else {
+        this.addButton.disabled = true;
+        this.addButton.setAttribute('aria-disabled', 'true');
+        if (addTextSpan) addTextSpan.textContent = 'Agotado';
+        this.addButton.setAttribute('aria-label', 'Producto agotado');
+      }
     }
   }
 
