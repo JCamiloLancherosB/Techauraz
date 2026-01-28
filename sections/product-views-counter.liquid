@@ -4,6 +4,8 @@
   No hay números aleatorios/falsos.
 {%- endcomment -%}
 
+{{ 'section-product-views-counter.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign inventory_qty = current_variant.inventory_quantity
@@ -26,6 +28,13 @@
 -%}
 
 {%- if show_stock_indicator or show_review_indicator -%}
+{%- comment -%} Dynamic padding based on section settings - must remain inline {%- endcomment -%}
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
 <div class="product-social-proof section-{{ section.id }}-padding">
   <div class="product-social-proof__container page-width">
     
@@ -63,63 +72,6 @@
   </div>
 </div>
 {%- endif -%}
-
-<style>
-  .product-social-proof {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
-  
-  .product-social-proof__container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  
-  .product-social-proof__item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-  }
-  
-  .product-social-proof__item--stock {
-    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-    border: 1px solid #fbbf24;
-    color: #92400e;
-  }
-  
-  .product-social-proof__item--reviews {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    border: 1px solid #22c55e;
-    color: #166534;
-  }
-  
-  .product-social-proof__badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  
-  .product-social-proof__badge--warning {
-    color: #d97706;
-  }
-  
-  .product-social-proof__badge--success {
-    color: #16a34a;
-  }
-  
-  .product-social-proof__text {
-    line-height: 1.4;
-  }
-  
-  .product-social-proof__text strong {
-    font-weight: 700;
-  }
-</style>
 
 {% schema %}
 {
