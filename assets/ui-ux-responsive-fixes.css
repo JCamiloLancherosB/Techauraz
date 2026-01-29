@@ -3411,7 +3411,6 @@ body.template-index .newsletter {
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-topbar-h: 44px; /* Desktop */
     --tech-header-h: 80px; /* Desktop */
   }
 }
