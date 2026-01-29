@@ -292,9 +292,13 @@
 <link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-product-card.css' | asset_url }}"></noscript>
 
-<!-- Global Design Tokens and Visual Polish - Premium tech aesthetic - 2026-01-28 -->
+<!-- Global Design Tokens and Visual Polish - Premium tech aesthetic - 2026-01-29 -->
 <link rel="preload" href="{{ 'techauraz-design-tokens.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-design-tokens.css' | asset_url }}"></noscript>
+
+<!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
+<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 
 <!-- 
   ============================================================================
@@ -344,15 +348,24 @@
      
   9. techauraz-design-tokens.css
      - Global CSS custom properties (--tech-* prefix)
-     - Section styling utilities
-     - Heading decorations with gradient underline
-     - Animated link underlines
-     - Glow buttons with hover/focus states
-     - Card hover effects
-     - Loading states with spinner
-     - Scroll animations
-     - Badge variants (sale, new, popular)
+     - Comprehensive design token system
+     - Brand colors, gradients, shadows
+     - Typography, spacing, border radius
+     - Z-index scale, transitions
+     - Component-specific tokens
+     - Dark mode overrides
+     - Responsive adjustments
      - Reduced motion accessibility support
+  
+  10. techauraz-utilities.css
+      - Container utilities (.tech-container)
+      - Section utilities (.tech-section)
+      - Text utilities (.tech-heading, .tech-subheading)
+      - Button utilities (.tech-button)
+      - Card utilities (.tech-card)
+      - Badge utilities (.tech-badge)
+      - Animation utilities (.tech-animate-*)
+      - Visibility utilities (.tech-sr-only, .tech-hide-*)
   
   ============================================================================
   Z-INDEX HIERARCHY (defined in techauraz-tokens.css)
