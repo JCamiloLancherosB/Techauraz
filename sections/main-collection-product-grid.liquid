@@ -9,6 +9,10 @@
 {% if section.settings.image_shape == 'blob' %}
   {%- endif -%}
 
+{%- comment -%}
+  Note: quick-view-modal.css and quick-view.js are loaded globally in theme.liquid
+{%- endcomment -%}
+
 {%- if section.settings.enable_quick_add -%}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -168,6 +172,8 @@
     {% render 'mask-arch' %}
   {%- endif -%}
 </div>
+
+{%- comment -%} Quick View Modal is rendered globally in theme.liquid {%- endcomment -%}
 
 {% schema %}
 {

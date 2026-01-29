@@ -11,7 +11,8 @@
 
 {%- comment -%}
   Note: techauraz-custom-ui.css is loaded globally in theme.liquid
-  No need to load it again here to avoid duplicate CSS loads
+  Note: quick-view-modal.css and quick-view.js are loaded globally in theme.liquid
+  No need to load them again here to avoid duplicate CSS/JS loads
 {%- endcomment -%}
 
 {%- if section.settings.enable_quick_add -%}
@@ -154,6 +155,8 @@
     {%- endif -%}
   </div>
 </div>
+
+{%- comment -%} Quick View Modal is rendered globally in theme.liquid {%- endcomment -%}
 
 {% schema %}
 {

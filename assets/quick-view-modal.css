@@ -1,0 +1,822 @@
+/**
+ * =============================================================================
+ * QUICK VIEW MODAL STYLES - TechAura Colombia
+ * Version: 1.0.0
+ * =============================================================================
+ * 
+ * Styles for the product quick view modal overlay.
+ * Uses TechAura design tokens for consistent branding.
+ * 
+ * Features:
+ * - Centered modal with backdrop blur
+ * - Smooth fade-in/scale animation
+ * - Responsive: full-screen on mobile, 80% max on desktop
+ * - Matches existing button styles (blue "AGREGAR AL CARRITO")
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. MODAL CONTAINER & BACKDROP
+   ============================================================================= */
+
+.quick-view-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--ta-z-modal, 410);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ta-space-md, 1.2rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.quick-view-modal[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick-view-modal__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* =============================================================================
+   2. MODAL CONTENT CONTAINER
+   ============================================================================= */
+
+.quick-view-modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: var(--ta-bg, #ffffff);
+  border-radius: var(--ta-radius-lg, 16px);
+  box-shadow: var(--ta-shadow-xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25));
+  overflow: hidden;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+.quick-view-modal[aria-hidden="false"] .quick-view-modal__container {
+  transform: scale(1) translateY(0);
+}
+
+/* =============================================================================
+   3. CLOSE BUTTON
+   ============================================================================= */
+
+.quick-view-modal__close {
+  position: absolute;
+  top: var(--ta-space-md, 1.2rem);
+  right: var(--ta-space-md, 1.2rem);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ta-bg-secondary, #f8fafc);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.quick-view-modal__close:hover {
+  background: var(--ta-bg, #ffffff);
+  border-color: var(--ta-border-hover, #3b82f6);
+  transform: scale(1.1);
+}
+
+.quick-view-modal__close:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.quick-view-modal__close svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ta-text-muted, #64748b);
+  transition: color 0.2s ease;
+}
+
+.quick-view-modal__close:hover svg {
+  color: var(--ta-text, #0f172a);
+}
+
+/* =============================================================================
+   4. LOADING SKELETON
+   ============================================================================= */
+
+.quick-view-modal__loading {
+  display: none;
+  padding: var(--ta-space-xl, 2.4rem);
+}
+
+.quick-view-modal.is-loading .quick-view-modal__loading {
+  display: block;
+}
+
+.quick-view-modal.is-loading .quick-view-modal__content {
+  display: none;
+}
+
+.quick-view-modal__skeleton {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ta-space-xl, 2.4rem);
+}
+
+.quick-view-modal__skeleton-image {
+  aspect-ratio: 1;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ta-radius-md, 8px);
+}
+
+.quick-view-modal__skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-md, 1.2rem);
+  padding: var(--ta-space-md, 1.2rem) 0;
+}
+
+.quick-view-modal__skeleton-title {
+  height: 32px;
+  width: 80%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+.quick-view-modal__skeleton-price {
+  height: 28px;
+  width: 40%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+.quick-view-modal__skeleton-description {
+  height: 80px;
+  width: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+.quick-view-modal__skeleton-button {
+  height: 52px;
+  width: 100%;
+  margin-top: auto;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ta-radius-button, 8px);
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =============================================================================
+   5. MODAL CONTENT LAYOUT
+   ============================================================================= */
+
+.quick-view-modal__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* =============================================================================
+   6. GALLERY SECTION
+   ============================================================================= */
+
+.quick-view-modal__gallery {
+  padding: var(--ta-space-xl, 2.4rem);
+  background: var(--ta-bg-secondary, #f8fafc);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-md, 1.2rem);
+}
+
+.quick-view-modal__main-image {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--ta-bg, #ffffff);
+  border-radius: var(--ta-radius-md, 8px);
+  overflow: hidden;
+}
+
+.quick-view-modal__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.quick-view-modal__main-image:hover .quick-view-modal__image {
+  transform: scale(1.05);
+}
+
+.quick-view-modal__thumbnails {
+  display: flex;
+  gap: var(--ta-space-sm, 0.8rem);
+  overflow-x: auto;
+  padding-bottom: var(--ta-space-xs, 0.4rem);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ta-border-light, #e2e8f0) transparent;
+}
+
+.quick-view-modal__thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.quick-view-modal__thumbnails::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.quick-view-modal__thumbnails::-webkit-scrollbar-thumb {
+  background: var(--ta-border-light, #e2e8f0);
+  border-radius: 3px;
+}
+
+.quick-view-modal__thumbnail {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border: 2px solid transparent;
+  border-radius: var(--ta-radius-sm, 4px);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  background: var(--ta-bg, #ffffff);
+}
+
+.quick-view-modal__thumbnail:hover {
+  border-color: var(--ta-border-hover, #3b82f6);
+  transform: scale(1.05);
+}
+
+.quick-view-modal__thumbnail.is-active {
+  border-color: var(--ta-primary, #2563eb);
+}
+
+.quick-view-modal__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   7. PRODUCT INFO SECTION
+   ============================================================================= */
+
+.quick-view-modal__info {
+  padding: var(--ta-space-xl, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-lg, 1.6rem);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.quick-view-modal__title {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text, #0f172a);
+  line-height: var(--ta-leading-snug, 1.375);
+  margin: 0;
+}
+
+/* =============================================================================
+   8. PRICE STYLING
+   ============================================================================= */
+
+.quick-view-modal__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.quick-view-modal__price-current {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+  letter-spacing: var(--ta-tracking-tight, -0.025em);
+}
+
+.quick-view-modal__price-compare {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: var(--ta-text-muted, #64748b);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.quick-view-modal__price-compare:empty {
+  display: none;
+}
+
+/* Sale price - red for emphasis */
+.quick-view-modal.has-sale-price .quick-view-modal__price-current {
+  color: var(--ta-error, #ef4444);
+}
+
+/* =============================================================================
+   9. DESCRIPTION
+   ============================================================================= */
+
+.quick-view-modal__description {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  line-height: var(--ta-leading-relaxed, 1.625);
+  color: var(--ta-text-muted, #64748b);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   10. VARIANT SELECTOR
+   ============================================================================= */
+
+.quick-view-modal__variants {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-md, 1.2rem);
+}
+
+.quick-view-modal__variant-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.quick-view-modal__variant-label {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-text, #0f172a);
+}
+
+.quick-view-modal__variant-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.quick-view-modal__variant-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 40px;
+  padding: 0 var(--ta-space-md, 1.2rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: var(--ta-text, #0f172a);
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-sm, 4px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-view-modal__variant-option:hover:not(.is-disabled) {
+  border-color: var(--ta-primary, #2563eb);
+  background: var(--ta-bg-secondary, #f8fafc);
+}
+
+.quick-view-modal__variant-option.is-selected {
+  border-color: var(--ta-primary, #2563eb);
+  background: var(--ta-primary, #2563eb);
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.quick-view-modal__variant-option.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.quick-view-modal__variant-option:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   11. QUANTITY SELECTOR
+   ============================================================================= */
+
+.quick-view-modal__quantity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.quick-view-modal__quantity-label {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-text, #0f172a);
+}
+
+.quick-view-modal__quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-sm, 4px);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.quick-view-modal__quantity-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--ta-bg-secondary, #f8fafc);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.quick-view-modal__quantity-btn:hover {
+  background: var(--ta-bg-tertiary, #f1f5f9);
+}
+
+.quick-view-modal__quantity-btn:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: -3px;
+}
+
+.quick-view-modal__quantity-btn svg {
+  color: var(--ta-text, #0f172a);
+}
+
+.quick-view-modal__quantity-input {
+  width: 60px;
+  height: 44px;
+  text-align: center;
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-semibold, 600);
+  color: var(--ta-text, #0f172a);
+  border: none;
+  border-left: 1px solid var(--ta-border-light, #e2e8f0);
+  border-right: 1px solid var(--ta-border-light, #e2e8f0);
+  background: var(--ta-bg, #ffffff);
+  -moz-appearance: textfield;
+}
+
+.quick-view-modal__quantity-input::-webkit-outer-spin-button,
+.quick-view-modal__quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quick-view-modal__quantity-input:focus {
+  outline: none;
+  background: var(--ta-bg-secondary, #f8fafc);
+}
+
+/* =============================================================================
+   12. ADD TO CART BUTTON
+   ============================================================================= */
+
+.quick-view-modal__add-to-cart {
+  width: 100%;
+  min-height: var(--ta-touch-comfortable, 52px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-xl, 2.4rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  border: none;
+  border-radius: var(--ta-radius-button, 8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
+  color: var(--ta-primary-contrast, #ffffff);
+  box-shadow: var(--ta-shadow-button, 0 4px 12px rgba(37, 99, 235, 0.3));
+}
+
+.quick-view-modal__add-to-cart:hover:not(:disabled) {
+  background: var(--ta-gradient-primary-hover, linear-gradient(135deg, #60a5fa, #3b82f6));
+  box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+  transform: translateY(-2px);
+}
+
+.quick-view-modal__add-to-cart:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--ta-shadow-button-active, 0 2px 8px rgba(37, 99, 235, 0.3));
+}
+
+.quick-view-modal__add-to-cart:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.quick-view-modal__add-to-cart:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Loading state */
+.quick-view-modal__add-to-cart.is-loading .quick-view-modal__add-to-cart-text {
+  display: none;
+}
+
+.quick-view-modal__add-to-cart.is-loading .quick-view-modal__add-to-cart-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+/* Success state */
+.quick-view-modal__add-to-cart.is-success {
+  background: var(--ta-success, #10b981);
+}
+
+.quick-view-modal__add-to-cart.is-success .quick-view-modal__add-to-cart-text {
+  display: none;
+}
+
+.quick-view-modal__add-to-cart.is-success .quick-view-modal__add-to-cart-success {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+/* Sold out state */
+.quick-view-modal__add-to-cart.is-sold-out .quick-view-modal__add-to-cart-text {
+  display: none;
+}
+
+.quick-view-modal__add-to-cart.is-sold-out .quick-view-modal__add-to-cart-sold-out {
+  display: inline;
+}
+
+/* Error state */
+.quick-view-modal__add-to-cart.is-error {
+  background: var(--ta-error, #ef4444);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.quick-view-modal__spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* =============================================================================
+   13. VIEW DETAILS LINK
+   ============================================================================= */
+
+.quick-view-modal__details-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: var(--ta-primary, #2563eb);
+  text-decoration: none;
+  transition: color 0.2s ease, gap 0.2s ease;
+  margin-top: auto;
+}
+
+.quick-view-modal__details-link:hover {
+  color: var(--ta-primary-hover, #1e40af);
+  gap: var(--ta-space-sm, 0.8rem);
+  text-decoration: underline;
+}
+
+.quick-view-modal__details-link:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   14. RESPONSIVE - MOBILE (Full Screen)
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  .quick-view-modal {
+    padding: 0;
+  }
+
+  .quick-view-modal__container {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .quick-view-modal__content {
+    grid-template-columns: 1fr;
+    max-height: 100vh;
+  }
+
+  .quick-view-modal__skeleton {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-view-modal__gallery {
+    padding: var(--ta-space-lg, 1.6rem);
+    padding-top: calc(var(--ta-space-lg, 1.6rem) + 50px); /* Account for close button */
+  }
+
+  .quick-view-modal__main-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .quick-view-modal__info {
+    padding: var(--ta-space-lg, 1.6rem);
+    padding-bottom: calc(var(--ta-space-lg, 1.6rem) + env(safe-area-inset-bottom, 0));
+    max-height: none;
+  }
+
+  .quick-view-modal__title {
+    font-size: var(--ta-font-size-xl, 2rem);
+  }
+
+  .quick-view-modal__price-current {
+    font-size: var(--ta-font-size-xl, 2rem);
+  }
+
+  .quick-view-modal__thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .quick-view-modal__close {
+    top: var(--ta-space-sm, 0.8rem);
+    right: var(--ta-space-sm, 0.8rem);
+  }
+}
+
+/* =============================================================================
+   15. RESPONSIVE - TABLET
+   ============================================================================= */
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .quick-view-modal__container {
+    max-width: 90%;
+  }
+
+  .quick-view-modal__title {
+    font-size: var(--ta-font-size-xl, 2rem);
+  }
+}
+
+/* =============================================================================
+   16. RESPONSIVE - DESKTOP
+   ============================================================================= */
+
+@media screen and (min-width: 990px) {
+  .quick-view-modal__container {
+    max-width: min(1000px, 80%);
+  }
+}
+
+/* =============================================================================
+   17. BODY SCROLL LOCK
+   ============================================================================= */
+
+body.quick-view-modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: var(--scroll-position, 0);
+}
+
+/* =============================================================================
+   18. ACCESSIBILITY - REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-view-modal,
+  .quick-view-modal__container,
+  .quick-view-modal__close,
+  .quick-view-modal__image,
+  .quick-view-modal__thumbnail,
+  .quick-view-modal__add-to-cart,
+  .quick-view-modal__details-link {
+    transition: none;
+  }
+
+  .quick-view-modal[aria-hidden="false"] .quick-view-modal__container {
+    transform: none;
+  }
+
+  .quick-view-modal__skeleton-image,
+  .quick-view-modal__skeleton-title,
+  .quick-view-modal__skeleton-price,
+  .quick-view-modal__skeleton-description,
+  .quick-view-modal__skeleton-button {
+    animation: none;
+    background: #e0e0e0;
+  }
+}
+
+/* =============================================================================
+   19. QUICK VIEW TRIGGER BUTTON ON CARD
+   ============================================================================= */
+
+.quick-view-trigger {
+  position: absolute;
+  bottom: var(--ta-space-md, 1.2rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  padding: var(--ta-space-sm, 0.8rem) var(--ta-space-lg, 1.6rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  color: var(--ta-text, #0f172a);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-button, 8px);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  z-index: 4;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.quick-view-trigger:hover {
+  background: var(--ta-primary, #2563eb);
+  color: var(--ta-text-inverse, #ffffff);
+  border-color: var(--ta-primary, #2563eb);
+}
+
+.quick-view-trigger:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Show on card hover */
+.card-wrapper.product-card-wrapper:hover .quick-view-trigger,
+.card-wrapper.product-card-wrapper:focus-within .quick-view-trigger {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Mobile: always show the button but smaller */
+@media screen and (max-width: 749px) {
+  .quick-view-trigger {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+    font-size: 1rem;
+  }
+}
+
+/* =============================================================================
+   20. HIDDEN UTILITY CLASS
+   ============================================================================= */
+
+.quick-view-modal .hidden {
+  display: none !important;
+}
