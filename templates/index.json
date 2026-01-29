@@ -365,6 +365,74 @@
         "padding_top": 52,
         "padding_bottom": 52
       }
+    },
+    "testimonials_carousel_home": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_carousel_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.",
+            "customer_name": "Carlos M.",
+            "customer_title": "Cliente verificado"
+          }
+        },
+        "testimonial_carousel_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.",
+            "customer_name": "Ana R.",
+            "customer_title": "Comprador frecuente"
+          }
+        },
+        "testimonial_carousel_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 4,
+            "review_text": "Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.",
+            "customer_name": "Empresas Tech",
+            "customer_title": "Cliente corporativo"
+          }
+        },
+        "testimonial_carousel_4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "El smartwatch es increíble por el precio. Todas las funciones funcionan perfectamente y la batería dura varios días. Muy satisfecho con mi compra.",
+            "customer_name": "Pedro L.",
+            "customer_title": "Cliente verificado"
+          }
+        },
+        "testimonial_carousel_5": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "Servicio al cliente excepcional. Tuve una duda y me respondieron inmediatamente. El producto llegó en perfecto estado y antes de lo esperado.",
+            "customer_name": "Laura S.",
+            "customer_title": "Comprador frecuente"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_carousel_1",
+        "testimonial_carousel_2",
+        "testimonial_carousel_3",
+        "testimonial_carousel_4",
+        "testimonial_carousel_5"
+      ],
+      "settings": {
+        "title": "Lo que dicen nuestros clientes",
+        "subtitle": "Reseñas verificadas de clientes satisfechos",
+        "heading_size": "h1",
+        "visible_testimonials": 3,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "background_color": "#f8fafc",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
@@ -373,6 +441,7 @@
     "category_navigation",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
+    "testimonials_carousel_home",
     "modern_feature_cards_home",
     "testimonials_home",
     "newsletter_home"
