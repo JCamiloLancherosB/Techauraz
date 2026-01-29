@@ -55,10 +55,12 @@ class StickyAddToCartBar {
   }
   
   init() {
+    // Listen for resize first (always needed)
+    window.addEventListener('resize', this.handleResize);
+    
     // Only activate on mobile
     if (!this.isMobile()) {
       this.element.style.display = 'none';
-      window.addEventListener('resize', this.handleResize);
       return;
     }
     
@@ -76,9 +78,6 @@ class StickyAddToCartBar {
     
     // Sync initial quantity
     this.syncQuantityFromMain();
-    
-    // Listen for resize
-    window.addEventListener('resize', this.handleResize);
   }
   
   isMobile() {
@@ -122,10 +121,15 @@ class StickyAddToCartBar {
       return;
     }
     
+    // Disconnect existing observer if any
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    
     const options = {
       root: null, // viewport
       rootMargin: '0px',
-      threshold: 0 // Trigger when any part is visible/hidden
+      threshold: 0.5 // Trigger when 50% of button is visible
     };
     
     this.observer = new IntersectionObserver(this.handleIntersection, options);
@@ -232,19 +236,26 @@ class StickyAddToCartBar {
       setTimeout(() => {
         this.mainAddToCartButton.click();
         
-        // Show success state briefly
-        setTimeout(() => {
+        // Listen for cart update to show success (theme typically dispatches this)
+        const onCartUpdate = () => {
           this.addButton.classList.remove('sticky-add-to-cart__button--loading');
           this.addButton.classList.add('sticky-add-to-cart__button--success');
-          
-          // Haptic feedback (if supported)
           this.triggerHapticFeedback();
           
-          // Remove success state after animation
           setTimeout(() => {
             this.addButton.classList.remove('sticky-add-to-cart__button--success');
           }, 1500);
-        }, 500);
+          
+          document.removeEventListener('cart:updated', onCartUpdate);
+        };
+        
+        document.addEventListener('cart:updated', onCartUpdate);
+        
+        // Fallback timeout if no cart:updated event fires
+        setTimeout(() => {
+          document.removeEventListener('cart:updated', onCartUpdate);
+          this.addButton.classList.remove('sticky-add-to-cart__button--loading');
+        }, 3000);
       }, 50);
     } else {
       // Fallback: submit via AJAX if no main button found
@@ -267,8 +278,13 @@ class StickyAddToCartBar {
       body: JSON.stringify(formData)
     })
     .then(response => {
+      // Check content type before parsing
+      const contentType = response.headers.get('content-type');
       if (!response.ok) {
-        throw new Error('Add to cart failed');
+        throw new Error('Add to cart failed: ' + response.status);
+      }
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Invalid response type');
       }
       return response.json();
     })
@@ -280,9 +296,6 @@ class StickyAddToCartBar {
       // Dispatch cart update event
       document.dispatchEvent(new CustomEvent('cart:updated'));
       
-      // Update cart drawer or counter if exists
-      this.updateCartUI();
-      
       setTimeout(() => {
         this.addButton.classList.remove('sticky-add-to-cart__button--success');
       }, 1500);
@@ -290,22 +303,13 @@ class StickyAddToCartBar {
     .catch(error => {
       console.error('Add to cart error:', error);
       this.addButton.classList.remove('sticky-add-to-cart__button--loading');
-      // Could show error state here
+      
+      // Show brief error indication
+      this.addButton.style.backgroundColor = '#ef4444';
+      setTimeout(() => {
+        this.addButton.style.backgroundColor = '';
+      }, 1500);
     });
-  }
-  
-  updateCartUI() {
-    // Try to update cart count bubble
-    const cartCountBubble = document.querySelector('.cart-count-bubble, [data-cart-count]');
-    if (cartCountBubble) {
-      fetch('/cart.js')
-        .then(res => res.json())
-        .then(cart => {
-          const count = cart.item_count;
-          cartCountBubble.textContent = count;
-          cartCountBubble.style.display = count > 0 ? 'flex' : 'none';
-        });
-    }
   }
   
   triggerHapticFeedback() {
@@ -429,8 +433,28 @@ class StickyAddToCartBar {
     
     const img = this.thumbnail.querySelector('img');
     if (img && featuredImage.src) {
-      // Create URL with appropriate size
-      const newSrc = featuredImage.src.replace(/\.(jpg|jpeg|png|gif|webp)/i, '_120x120.$1');
+      // Use the original URL - Shopify CDN handles sizing via srcset
+      // Only modify URL if it's a valid Shopify CDN URL
+      let newSrc = featuredImage.src;
+      
+      try {
+        const url = new URL(newSrc, window.location.origin);
+        
+        // Only process Shopify CDN URLs with proper hostname validation
+        const isShopifyCDN = url.hostname === 'cdn.shopify.com' ||
+                             url.hostname.endsWith('.myshopify.com');
+        
+        if (isShopifyCDN) {
+          // Remove existing width parameter if present and add new one
+          url.searchParams.delete('width');
+          url.searchParams.set('width', '120');
+          newSrc = url.toString();
+        }
+      } catch (e) {
+        // If URL parsing fails, use original src as-is
+        console.warn('Could not parse image URL:', e);
+      }
+      
       img.src = newSrc;
       img.alt = featuredImage.alt || '';
     }
