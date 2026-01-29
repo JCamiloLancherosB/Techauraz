@@ -4592,6 +4592,14 @@ body.template-index .tech-hero-slideshow .slideshow__controls .slider-button {
   color: #1f2937;
 }
 
+#previousB {
+  transform: rotate(-90deg);
+}
+
+#previousN {
+  transform: rotate(90deg);
+}
+
 body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:hover {
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
