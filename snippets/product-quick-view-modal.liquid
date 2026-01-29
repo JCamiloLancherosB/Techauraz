@@ -1,0 +1,197 @@
+{% comment %}
+  Product Quick View Modal - TechAura Colombia
+  
+  A modal overlay for quick product previews without leaving the current page.
+  
+  Features:
+  - Product image gallery with thumbnail navigation
+  - Product title, price (COP format), and description
+  - Variant selector (if applicable)
+  - Quantity selector
+  - Add to Cart button with loading state
+  - View Full Details link
+  - Close button and click-outside-to-close
+  - Keyboard accessibility (ESC to close, tab trapping)
+  
+  Usage:
+  Include once at the bottom of sections that display product cards:
+  {% render 'product-quick-view-modal' %}
+{% endcomment %}
+
+<div 
+  id="product-quick-view-modal" 
+  class="quick-view-modal" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-labelledby="quick-view-title"
+  aria-hidden="true"
+  tabindex="-1"
+>
+  {%- comment -%} Modal Backdrop - Click to close {%- endcomment -%}
+  <div class="quick-view-modal__backdrop" data-quick-view-close></div>
+  
+  {%- comment -%} Modal Content Container {%- endcomment -%}
+  <div class="quick-view-modal__container">
+    {%- comment -%} Close Button {%- endcomment -%}
+    <button 
+      type="button" 
+      class="quick-view-modal__close" 
+      aria-label="{{ 'accessibility.close' | t | default: 'Cerrar' }}"
+      data-quick-view-close
+    >
+      <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    {%- comment -%} Loading Skeleton {%- endcomment -%}
+    <div class="quick-view-modal__loading" aria-live="polite">
+      <div class="quick-view-modal__skeleton">
+        <div class="quick-view-modal__skeleton-image"></div>
+        <div class="quick-view-modal__skeleton-content">
+          <div class="quick-view-modal__skeleton-title"></div>
+          <div class="quick-view-modal__skeleton-price"></div>
+          <div class="quick-view-modal__skeleton-description"></div>
+          <div class="quick-view-modal__skeleton-button"></div>
+        </div>
+      </div>
+      <span class="visually-hidden">{{ 'products.product.loading' | t | default: 'Cargando producto...' }}</span>
+    </div>
+    
+    {%- comment -%} Product Content (populated via JavaScript) {%- endcomment -%}
+    <div class="quick-view-modal__content" aria-busy="false">
+      {%- comment -%} Product Gallery Section {%- endcomment -%}
+      <div class="quick-view-modal__gallery">
+        <div class="quick-view-modal__main-image">
+          <img 
+            id="quick-view-main-image" 
+            src="" 
+            alt="" 
+            class="quick-view-modal__image"
+            loading="eager"
+          >
+        </div>
+        <div class="quick-view-modal__thumbnails" role="list" aria-label="{{ 'products.product.media.gallery' | t | default: 'Galería de imágenes' }}">
+          {%- comment -%} Thumbnails populated via JavaScript {%- endcomment -%}
+        </div>
+      </div>
+      
+      {%- comment -%} Product Info Section {%- endcomment -%}
+      <div class="quick-view-modal__info">
+        {%- comment -%} Product Title {%- endcomment -%}
+        <h2 id="quick-view-title" class="quick-view-modal__title"></h2>
+        
+        {%- comment -%} Product Price {%- endcomment -%}
+        <div class="quick-view-modal__price">
+          <span class="quick-view-modal__price-current" id="quick-view-price"></span>
+          <span class="quick-view-modal__price-compare" id="quick-view-compare-price"></span>
+        </div>
+        
+        {%- comment -%} Product Description {%- endcomment -%}
+        <div class="quick-view-modal__description" id="quick-view-description"></div>
+        
+        {%- comment -%} Variant Selector (if applicable) {%- endcomment -%}
+        <div class="quick-view-modal__variants" id="quick-view-variants" style="display: none;">
+          {%- comment -%} Variant options populated via JavaScript {%- endcomment -%}
+        </div>
+        
+        {%- comment -%} Quantity Selector {%- endcomment -%}
+        <div class="quick-view-modal__quantity">
+          <label for="quick-view-quantity" class="quick-view-modal__quantity-label">
+            {{ 'products.product.quantity.label' | t | default: 'Cantidad' }}
+          </label>
+          <div class="quick-view-modal__quantity-controls">
+            <button 
+              type="button" 
+              class="quick-view-modal__quantity-btn" 
+              data-action="decrease"
+              aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Disminuir cantidad' }}"
+            >
+              <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <input 
+              type="number" 
+              id="quick-view-quantity" 
+              name="quantity" 
+              value="1" 
+              min="1" 
+              class="quick-view-modal__quantity-input"
+              aria-label="{{ 'products.product.quantity.label' | t | default: 'Cantidad' }}"
+            >
+            <button 
+              type="button" 
+              class="quick-view-modal__quantity-btn" 
+              data-action="increase"
+              aria-label="{{ 'products.product.quantity.increase' | t | default: 'Aumentar cantidad' }}"
+            >
+              <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        {%- comment -%} Add to Cart Button {%- endcomment -%}
+        <button 
+          type="button" 
+          id="quick-view-add-to-cart" 
+          class="quick-view-modal__add-to-cart button button--primary"
+          aria-live="polite"
+        >
+          <span class="quick-view-modal__add-to-cart-text">
+            {{ 'products.product.add_to_cart' | t | default: 'AGREGAR AL CARRITO' }}
+          </span>
+          <span class="quick-view-modal__add-to-cart-loading hidden">
+            <svg class="quick-view-modal__spinner" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.416" stroke-dashoffset="10">
+                <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+            {{ 'products.product.adding' | t | default: 'Agregando...' }}
+          </span>
+          <span class="quick-view-modal__add-to-cart-success hidden">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {{ 'products.product.added' | t | default: '¡Agregado!' }}
+          </span>
+          <span class="quick-view-modal__add-to-cart-sold-out hidden">
+            {{ 'products.product.sold_out' | t | default: 'Agotado' }}
+          </span>
+        </button>
+        
+        {%- comment -%} View Full Details Link {%- endcomment -%}
+        <a 
+          href="#" 
+          id="quick-view-details-link" 
+          class="quick-view-modal__details-link"
+        >
+          {{ 'products.product.view_full_details' | t | default: 'Ver todos los detalles' }}
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Store localized strings for JavaScript {%- endcomment -%}
+<script type="application/json" id="quick-view-strings">
+{
+  "addToCart": {{ 'products.product.add_to_cart' | t | default: 'AGREGAR AL CARRITO' | json }},
+  "adding": {{ 'products.product.adding' | t | default: 'Agregando...' | json }},
+  "added": {{ 'products.product.added' | t | default: '¡Agregado!' | json }},
+  "soldOut": {{ 'products.product.sold_out' | t | default: 'Agotado' | json }},
+  "unavailable": {{ 'products.product.unavailable' | t | default: 'No disponible' | json }},
+  "selectOption": {{ 'products.product.choose_option' | t | default: 'Seleccionar' | json }},
+  "loading": {{ 'products.product.loading' | t | default: 'Cargando producto...' | json }},
+  "close": {{ 'accessibility.close' | t | default: 'Cerrar' | json }},
+  "error": {{ 'sections.cart.cart_error' | t | default: 'Error al agregar al carrito' | json }}
+}
+</script>
