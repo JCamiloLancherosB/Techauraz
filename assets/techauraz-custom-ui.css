@@ -934,6 +934,49 @@ select:focus {
    5. NEWSLETTER - Consistent alignment and accessibility
    ============================================================================= */
 
+/* Newsletter conversion section - full-width gradient background */
+.ta-conv-newsletter-section {
+  background: var(--tech-gradient-newsletter, linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1a1f36 100%));
+  padding: var(--ta-space-3xl, 4.8rem) var(--ta-space-lg, 1.6rem);
+}
+
+/* Newsletter inner wrapper - centered content */
+.ta-conv-newsletter__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ta-conv-newsletter__inner h2 {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-text-inverse, #ffffff);
+  margin-bottom: var(--ta-space-md, 1.2rem);
+  line-height: var(--ta-leading-tight, 1.2);
+}
+
+.ta-conv-newsletter__inner p {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: var(--ta-space-xl, 2.4rem);
+  line-height: var(--ta-leading-normal, 1.5);
+}
+
+/* Mobile responsive newsletter section */
+@media screen and (max-width: 749px) {
+  .ta-conv-newsletter-section {
+    padding: var(--ta-space-2xl, 3.2rem) var(--ta-space-md, 1.2rem);
+  }
+  
+  .ta-conv-newsletter__inner h2 {
+    font-size: var(--ta-font-size-h4, 2rem);
+  }
+  
+  .ta-conv-newsletter__inner p {
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+}
+
 /* Newsletter form container */
 .ta-conv-newsletter {
   display: flex;
@@ -1052,9 +1095,10 @@ select:focus {
 
 /* Conversion newsletter disclaimer styling */
 .ta-conv-newsletter__disclaimer {
-  font-size: var(--ta-font-size-xs, 0.75rem);
-  color: var(--ta-text-muted, #64748b);
-  margin-top: var(--ta-space-sm, 0.5rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: var(--ta-space-lg, 1.6rem);
+  text-align: center;
 }
 
 /* =============================================================================
