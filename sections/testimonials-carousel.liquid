@@ -1,0 +1,356 @@
+{{ 'testimonials.css' | asset_url | stylesheet_tag }}
+
+<section 
+  class="testimonials-carousel section-{{ section.id }}-padding"
+  data-section-id="{{ section.id }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  aria-label="Testimonios de clientes"
+  style="{% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}"
+>
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="testimonials-carousel__header">
+        <h2 class="testimonials-carousel__title {{ section.settings.heading_size }}">
+          {{ section.settings.title }}
+        </h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="testimonials-carousel__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="testimonials-carousel__container" role="region" aria-roledescription="carrusel" aria-label="Reseñas de clientes">
+      {%- comment -%} Navigation Arrows {%- endcomment -%}
+      {%- if section.blocks.size > 1 -%}
+        <button 
+          type="button" 
+          class="testimonials-carousel__nav testimonials-carousel__nav--prev"
+          aria-label="Ver testimonio anterior"
+          aria-controls="testimonials-track-{{ section.id }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- comment -%} Testimonials Track {%- endcomment -%}
+      <div class="testimonials-carousel__track-wrapper">
+        <div 
+          class="testimonials-carousel__track" 
+          id="testimonials-track-{{ section.id }}"
+          data-visible-count="{{ section.settings.visible_testimonials }}"
+          role="list"
+        >
+          {%- for block in section.blocks -%}
+            <article 
+              class="testimonials-carousel__card"
+              role="listitem"
+              {{ block.shopify_attributes }}
+              aria-label="Testimonio de {{ block.settings.customer_name | default: 'Cliente' }}"
+              tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+            >
+              <div class="testimonials-carousel__card-inner">
+                {%- comment -%} Star Rating with SVG {%- endcomment -%}
+                {%- if block.settings.rating > 0 -%}
+                  <div class="testimonials-carousel__rating" aria-label="Calificación: {{ block.settings.rating }} de 5 estrellas">
+                    {%- for i in (1..5) -%}
+                      {%- if i <= block.settings.rating -%}
+                        <svg class="testimonials-carousel__star testimonials-carousel__star--filled" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {%- else -%}
+                        <svg class="testimonials-carousel__star testimonials-carousel__star--empty" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                {%- comment -%} Review Text {%- endcomment -%}
+                {%- if block.settings.review_text != blank -%}
+                  <blockquote class="testimonials-carousel__text">
+                    <p>{{ block.settings.review_text }}</p>
+                  </blockquote>
+                {%- endif -%}
+
+                {%- comment -%} Customer Info {%- endcomment -%}
+                <div class="testimonials-carousel__customer">
+                  {%- if block.settings.customer_image != blank -%}
+                    <div class="testimonials-carousel__avatar">
+                      <img
+                        src="{{ block.settings.customer_image | image_url: width: 80, height: 80, crop: 'center' }}"
+                        alt="{{ block.settings.customer_name | escape }}"
+                        width="48"
+                        height="48"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    </div>
+                  {%- else -%}
+                    <div class="testimonials-carousel__avatar testimonials-carousel__avatar--placeholder">
+                      <span aria-hidden="true">{{ block.settings.customer_name | default: 'C' | slice: 0, 1 | upcase }}</span>
+                    </div>
+                  {%- endif -%}
+                  
+                  <div class="testimonials-carousel__customer-info">
+                    {%- if block.settings.customer_name != blank -%}
+                      <cite class="testimonials-carousel__customer-name">{{ block.settings.customer_name }}</cite>
+                    {%- endif -%}
+                    {%- if block.settings.customer_title != blank -%}
+                      <span class="testimonials-carousel__customer-title">{{ block.settings.customer_title }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <button 
+          type="button" 
+          class="testimonials-carousel__nav testimonials-carousel__nav--next"
+          aria-label="Ver siguiente testimonio"
+          aria-controls="testimonials-track-{{ section.id }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Dot Indicators {%- endcomment -%}
+    {%- if section.blocks.size > 1 -%}
+      <div class="testimonials-carousel__dots" role="tablist" aria-label="Indicadores de testimonio">
+        {%- for block in section.blocks -%}
+          <button 
+            type="button"
+            class="testimonials-carousel__dot{% if forloop.first %} testimonials-carousel__dot--active{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="Ir al testimonio {{ forloop.index }}"
+            data-index="{{ forloop.index0 }}"
+          >
+            <span class="visually-hidden">Testimonio {{ forloop.index }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'testimonials.js' | asset_url }}" defer></script>
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonios Carrusel",
+  "tag": "section",
+  "class": "section testimonials-carousel-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Lo que dicen nuestros clientes",
+      "label": "Título de la sección"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo (opcional)",
+      "default": "Reseñas verificadas de clientes satisfechos"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Pequeño" },
+        { "value": "h1", "label": "Mediano" },
+        { "value": "h0", "label": "Grande" }
+      ],
+      "default": "h1",
+      "label": "Tamaño del título"
+    },
+    {
+      "type": "range",
+      "id": "visible_testimonials",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "Testimonios visibles (escritorio)",
+      "info": "En móvil siempre se muestra 1 testimonio a la vez"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "default": true,
+      "label": "Reproducción automática",
+      "info": "Rotar testimonios automáticamente"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s",
+      "label": "Velocidad de autoplay",
+      "info": "Tiempo entre cada testimonio"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#f8fafc"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Calificación (estrellas)"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Texto de la reseña",
+          "default": "Excelente producto y servicio. Superó todas mis expectativas. Lo recomiendo totalmente."
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Nombre del cliente",
+          "default": "María García"
+        },
+        {
+          "type": "text",
+          "id": "customer_title",
+          "label": "Título del cliente (opcional)",
+          "default": "Cliente verificado",
+          "info": "Ej: Cliente verificado, Comprador frecuente"
+        },
+        {
+          "type": "image_picker",
+          "id": "customer_image",
+          "label": "Foto del cliente (opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonios Carrusel",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.",
+            "customer_name": "Carlos M.",
+            "customer_title": "Cliente verificado"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.",
+            "customer_name": "Ana R.",
+            "customer_title": "Comprador frecuente"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 4,
+            "review_text": "Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.",
+            "customer_name": "Empresas Tech",
+            "customer_title": "Cliente corporativo"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "El smartwatch es increíble por el precio. Todas las funciones funcionan perfectamente y la batería dura varios días. Muy satisfecho con mi compra.",
+            "customer_name": "Pedro L.",
+            "customer_title": "Cliente verificado"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "Servicio al cliente excepcional. Tuve una duda y me respondieron inmediatamente. El producto llegó en perfecto estado y antes de lo esperado.",
+            "customer_name": "Laura S.",
+            "customer_title": "Comprador frecuente"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

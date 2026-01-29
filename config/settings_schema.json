@@ -1465,5 +1465,60 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Testimonios Carrusel",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configuración de Testimonios"
+      },
+      {
+        "type": "paragraph",
+        "content": "Configura las opciones globales del carrusel de testimonios de clientes."
+      },
+      {
+        "type": "text",
+        "id": "testimonials_default_title",
+        "label": "Título predeterminado",
+        "default": "Lo que dicen nuestros clientes",
+        "info": "Este título se usará por defecto en nuevas secciones de testimonios"
+      },
+      {
+        "type": "range",
+        "id": "testimonials_visible_count",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 3,
+        "label": "Testimonios visibles (escritorio)",
+        "info": "Número de testimonios visibles a la vez en escritorio"
+      },
+      {
+        "type": "checkbox",
+        "id": "testimonials_autoplay",
+        "label": "Reproducción automática",
+        "default": true,
+        "info": "Rotar testimonios automáticamente"
+      },
+      {
+        "type": "range",
+        "id": "testimonials_autoplay_speed",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "default": 5,
+        "unit": "s",
+        "label": "Velocidad de autoplay",
+        "info": "Tiempo en segundos entre cada testimonio"
+      },
+      {
+        "type": "color",
+        "id": "testimonials_background_color",
+        "label": "Color de fondo",
+        "default": "#f8fafc",
+        "info": "Color de fondo predeterminado para la sección de testimonios"
+      }
+    ]
   }
 ]
