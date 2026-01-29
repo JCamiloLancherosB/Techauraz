@@ -1,8 +1,15 @@
 /**
- * =============================================================================
- * TECHAURAZ HEADER NAVIGATION ENHANCEMENTS
- * =============================================================================
- * Enhanced mega-menu and mobile drawer UX
+ * TECHAURAZ HEADER STYLES
+ * =======================
+ * Requires: techauraz-design-tokens.css
+ * 
+ * Structure:
+ * - .header-wrapper (sticky container)
+ * - .header (main header element)
+ *   - .header__icon--menu (hamburger)
+ *   - .header__heading (logo)
+ *   - .header__inline-menu (desktop nav)
+ *   - .header__icons (right side icons)
  * 
  * Features:
  * - Desktop: Mega-menu opens on hover and keyboard focus
@@ -11,7 +18,7 @@
  * - No z-index conflicts with announcement bar
  * 
  * Note: Focus trap for menus is handled by the global.js HeaderDrawer component.
- * This file provides CSS styling enhancements only.
+ * This file provides CSS styling enhancements.
  * 
  * Browser support: Modern browsers (Chrome, Firefox, Safari, Edge).
  * Uses 100dvh with 100vh fallback for mobile viewport height.
@@ -26,6 +33,328 @@
   --tech-ink: var(--color-foreground-rgb, 11, 18, 32);
   --tech-primary: var(--color-button, #2563eb);
   --tech-muted: #64748b;
+}
+
+/* ============================================
+   HEADER WRAPPER (Sticky Container)
+   ============================================ */
+
+.header-wrapper {
+  position: relative;
+  background: var(--tech-bg-card, #ffffff);
+  z-index: var(--tech-z-sticky, 200);
+}
+
+/* Show border only when modifier class is present */
+.header-wrapper--border-bottom {
+  border-bottom: 1px solid var(--tech-color-gray-200, #e2e8f0);
+}
+
+/* Sticky States */
+.shopify-section-header-sticky .header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: var(--tech-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.08));
+  transition: transform var(--tech-transition-normal, 250ms ease);
+}
+
+.shopify-section-header-hidden .header-wrapper {
+  transform: translateY(-100%);
+}
+
+/* ============================================
+   MAIN HEADER
+   ============================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--tech-header-height, 70px);
+  padding: 0 var(--tech-space-4, 16px);
+  gap: var(--tech-space-4, 16px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 990px) {
+  .header {
+    padding: 0 var(--tech-space-8, 32px);
+    gap: var(--tech-space-6, 24px);
+  }
+}
+
+/* ============================================
+   HAMBURGER MENU ICON
+   ============================================ */
+
+.header__icon--menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--tech-text-primary, #0f172a);
+  transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
+  border-radius: var(--tech-radius-md, 8px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header__icon--menu:hover,
+.header__icon--menu:focus {
+  background: var(--tech-color-gray-100, #f1f5f9);
+  color: var(--tech-color-primary, #2563eb);
+}
+
+.header__icon--menu:focus-visible {
+  outline: 2px solid var(--tech-color-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.header__icon--menu svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Hide hamburger on desktop when inline menu is shown */
+@media screen and (min-width: 990px) {
+  .header:not(.drawer-menu) .header__icon--menu {
+    display: none;
+  }
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.header__heading {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.header__heading-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header__heading-logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.header__heading-logo {
+  width: auto;
+  height: 40px;
+  max-height: 40px;
+  object-fit: contain;
+  transition: var(--tech-transition-transform, transform 250ms ease);
+}
+
+@media screen and (min-width: 750px) {
+  .header__heading-logo {
+    height: 48px;
+    max-height: 48px;
+  }
+}
+
+.header__heading-link:hover .header__heading-logo {
+  transform: scale(1.02);
+}
+
+/* Text fallback for logo */
+.header__heading-link .h2 {
+  font-size: var(--tech-text-xl, 1.25rem);
+  font-weight: var(--tech-font-bold, 700);
+  color: var(--tech-text-primary, #0f172a);
+  margin: 0;
+}
+
+/* ============================================
+   HEADER ICONS (Right Side)
+   ============================================ */
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--tech-space-1, 4px);
+  flex-shrink: 0;
+}
+
+.header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--tech-text-primary, #0f172a);
+  background: transparent;
+  border: none;
+  border-radius: var(--tech-radius-md, 8px);
+  cursor: pointer;
+  transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
+  text-decoration: none;
+  position: relative;
+}
+
+.header__icon:hover,
+.header__icon:focus {
+  background: var(--tech-color-gray-100, #f1f5f9);
+  color: var(--tech-color-primary, #2563eb);
+}
+
+.header__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Cart Count Bubble */
+.cart-count-bubble {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tech-color-primary, #2563eb);
+  color: var(--tech-text-inverted, #ffffff);
+  font-size: 10px;
+  font-weight: var(--tech-font-bold, 700);
+  border-radius: var(--tech-radius-full, 9999px);
+  line-height: 1;
+}
+
+/* Hide bubble when cart is empty
+   - :empty handles cases where the bubble has no content
+   - [data-count="0"] handles cases where the element exists but count is zero
+   The header.liquid already conditionally renders the bubble only when cart != empty,
+   but this CSS provides additional safety for dynamic updates via JavaScript */
+.cart-count-bubble:empty,
+.cart-count-bubble[data-count="0"] {
+  display: none;
+}
+
+/* ============================================
+   DESKTOP NAVIGATION
+   ============================================ */
+
+.header__inline-menu {
+  display: none;
+  flex: 1;
+  justify-content: center;
+}
+
+@media screen and (min-width: 990px) {
+  .header__inline-menu {
+    display: flex;
+  }
+}
+
+.header__menu-list {
+  display: flex;
+  align-items: center;
+  gap: var(--tech-space-1, 4px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__menu-item {
+  position: relative;
+}
+
+.header__menu-link {
+  display: flex;
+  align-items: center;
+  padding: var(--tech-space-2, 8px) var(--tech-space-3, 12px);
+  font-size: var(--tech-text-sm, 0.875rem);
+  font-weight: var(--tech-font-medium, 500);
+  color: var(--tech-text-primary, #0f172a);
+  text-decoration: none;
+  border-radius: var(--tech-radius-md, 8px);
+  transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
+  white-space: nowrap;
+}
+
+.header__menu-link:hover,
+.header__menu-link:focus,
+.header__menu-link[aria-current="page"] {
+  color: var(--tech-color-primary, #2563eb);
+  background: var(--tech-color-primary-bg, rgba(37, 99, 235, 0.1));
+}
+
+.header__menu-link[aria-current="page"] {
+  font-weight: var(--tech-font-semibold, 600);
+}
+
+/* Active state underline */
+.header__menu-link[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: var(--tech-space-3, 12px);
+  right: var(--tech-space-3, 12px);
+  height: 2px;
+  background: var(--tech-color-primary, #2563eb);
+  border-radius: var(--tech-radius-full, 9999px);
+}
+
+/* ============================================
+   MOBILE MENU DRAWER ENHANCEMENTS
+   ============================================ */
+
+.menu-drawer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--tech-z-drawer, 400);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.menu-drawer-container[open],
+.menu-drawer-container.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.menu-drawer__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--tech-bg-overlay, rgba(15, 23, 42, 0.8));
+  opacity: 0;
+  transition: opacity var(--tech-transition-normal, 250ms ease);
+}
+
+.menu-drawer-container[open] .menu-drawer__overlay,
+.menu-drawer-container.is-open .menu-drawer__overlay {
+  opacity: 1;
+}
+
+/* Prevent body scroll when drawer is open
+   These classes are added by HeaderDrawer based on data-breakpoint attribute */
+body.menu-drawer-open,
+body.overflow-hidden-tablet,
+body.overflow-hidden-mobile,
+body.overflow-hidden-desktop {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 /* =============================================================================
