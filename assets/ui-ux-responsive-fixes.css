@@ -3928,10 +3928,9 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 /* --- BENEFITS BAR / SHIPPING BANNER POSITIONING --- */
 /* Ensure benefits bar and shipping banner are not hidden by sticky header */
 
-/* Benefits bar positioning */
+/* Section positioning (benefits bar visual styles below) */
 .section-benefits-bar,
-.free-shipping-banner,
-.benefits-bar {
+.free-shipping-banner {
   position: relative;
   top: 0;
   /* Remove any negative margins that might hide content */
@@ -3952,9 +3951,15 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 /* =============================================================================
    BENEFITS BAR STYLES
    Visual styling for the benefits/value proposition bar on home page
+   Includes positioning, visual design, and responsive layout
    ============================================================================= */
 
 .benefits-bar {
+  /* Positioning (inherited from section positioning above) */
+  position: relative;
+  top: 0;
+  margin-top: 0;
+  /* Visual styling */
   background: var(--ta-bg-secondary, #f8fafc);
   padding: var(--ta-space-lg, 1.6rem) 0;
   border-bottom: 1px solid var(--ta-border-light, #f1f5f9);
@@ -3975,7 +3980,7 @@ main#MainContent > .shopify-section:first-child .tech-hero,
   background: var(--ta-bg, #ffffff);
   border-radius: var(--ta-radius-card, 12px);
   box-shadow: var(--ta-shadow-sm, 0 1px 3px 0 rgba(0, 0, 0, 0.1));
-  transition: var(--ta-transition-normal, all 250ms ease);
+  transition: transform 250ms ease, box-shadow 250ms ease;
 }
 
 .benefit-item:hover {

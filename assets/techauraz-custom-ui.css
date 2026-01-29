@@ -957,7 +957,7 @@ select:focus {
 
 .ta-conv-newsletter__inner p {
   font-size: var(--ta-font-size-md, 1.6rem);
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   margin-bottom: var(--ta-space-xl, 2.4rem);
   line-height: var(--ta-leading-normal, 1.5);
 }
@@ -1096,7 +1096,7 @@ select:focus {
 /* Conversion newsletter disclaimer styling */
 .ta-conv-newsletter__disclaimer {
   font-size: var(--ta-font-size-xs, 1.2rem);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.82);
   margin-top: var(--ta-space-lg, 1.6rem);
   text-align: center;
 }
