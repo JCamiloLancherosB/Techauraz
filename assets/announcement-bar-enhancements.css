@@ -99,7 +99,7 @@
   margin: 0 var(--tech-space-4);
   color: var(--tech-color-accent);
   font-size: var(--tech-text-sm);
-  animation: separator-pulse 2s ease-in-out infinite;
+  animation: separator-pulse 4s ease-in-out infinite;
 }
 
 @keyframes separator-pulse {
