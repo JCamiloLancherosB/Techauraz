@@ -111,11 +111,6 @@
   will-change: transform;
 }
 
-/* Marquee animation when initialized */
-.announcement-ticker[data-ta-ticker-initialized="true"] .announcement-ticker__track {
-  animation: ta-marquee-scroll var(--ta-ticker-duration, 20s) linear infinite;
-}
-
 /* Pause animation during resize/setup */
 .announcement-ticker--resetting .announcement-ticker__track {
   animation: none !important;
