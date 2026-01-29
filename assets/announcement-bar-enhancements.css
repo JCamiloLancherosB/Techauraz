@@ -1,0 +1,199 @@
+/**
+ * ANNOUNCEMENT BAR ENHANCEMENTS
+ * =============================
+ * Requires: techauraz-design-tokens.css
+ * 
+ * Enhanced marquee/ticker styling with persuasive elements
+ */
+
+/* ============================================
+   ANNOUNCEMENT BAR CONTAINER
+   ============================================ */
+
+.announcement-bar-section {
+  background: var(--tech-gradient-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.utility-bar {
+  padding: var(--tech-space-2) 0;
+  min-height: var(--tech-announcement-height);
+}
+
+/* ============================================
+   TICKER/MARQUEE STYLES
+   ============================================ */
+
+.announcement-ticker {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Fade edges for seamless appearance */
+.announcement-ticker::before,
+.announcement-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.announcement-ticker::before {
+  left: 0;
+  background: linear-gradient(to right, var(--tech-color-secondary) 0%, transparent 100%);
+}
+
+.announcement-ticker::after {
+  right: 0;
+  background: linear-gradient(to left, var(--tech-color-secondary) 0%, transparent 100%);
+}
+
+.announcement-ticker__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.announcement-ticker__track {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  animation: marquee-scroll var(--ticker-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.announcement-ticker:hover .announcement-ticker__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================
+   TICKER ITEMS
+   ============================================ */
+
+.announcement-ticker__item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 var(--tech-space-2);
+}
+
+/* Decorative Separator */
+.announcement-ticker__separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 var(--tech-space-4);
+  color: var(--tech-color-accent);
+  font-size: var(--tech-text-sm);
+  animation: separator-pulse 2s ease-in-out infinite;
+}
+
+@keyframes separator-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Message Styling */
+.announcement-ticker__message {
+  font-family: var(--tech-font-body);
+  font-size: var(--tech-text-sm);
+  font-weight: var(--tech-font-medium);
+  color: var(--tech-text-inverted);
+  letter-spacing: var(--tech-tracking-wide);
+  transition: var(--tech-transition-colors);
+}
+
+.announcement-bar__link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.announcement-bar__link:hover .announcement-ticker__message {
+  color: var(--tech-color-accent);
+}
+
+/* Emoji/Icon in message */
+.announcement-ticker__message .emoji,
+.announcement-ticker__message span[role="img"] {
+  margin-right: var(--tech-space-2);
+  font-size: var(--tech-text-base);
+}
+
+/* Highlight key words */
+.announcement-ticker__message strong,
+.announcement-ticker__message b {
+  color: var(--tech-color-accent);
+  font-weight: var(--tech-font-bold);
+}
+
+/* ============================================
+   NON-TICKER (SINGLE MESSAGE) STYLES
+   ============================================ */
+
+.announcement-bar:not(.announcement-ticker) {
+  text-align: center;
+}
+
+.announcement-bar:not(.announcement-ticker) .announcement-bar__message {
+  font-size: var(--tech-text-sm);
+  font-weight: var(--tech-font-medium);
+  color: var(--tech-text-inverted);
+  letter-spacing: var(--tech-tracking-wide);
+}
+
+/* ============================================
+   SLIDER NAVIGATION (for rotating messages)
+   ============================================ */
+
+.announcement-bar-slider .slider-button {
+  background: transparent;
+  border: none;
+  color: var(--tech-color-gray-400);
+  padding: var(--tech-space-2);
+  cursor: pointer;
+  transition: var(--tech-transition-colors);
+}
+
+.announcement-bar-slider .slider-button:hover {
+  color: var(--tech-text-inverted);
+}
+
+.announcement-bar-slider .slider-button svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ============================================
+   MOBILE ADJUSTMENTS
+   ============================================ */
+
+@media screen and (max-width: 749px) {
+  .announcement-ticker::before,
+  .announcement-ticker::after {
+    width: 40px;
+  }
+  
+  .announcement-ticker__separator {
+    margin: 0 var(--tech-space-3);
+  }
+  
+  .announcement-ticker__message {
+    font-size: var(--tech-text-xs);
+  }
+}
