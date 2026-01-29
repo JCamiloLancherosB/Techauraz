@@ -4505,11 +4505,6 @@ body.template-index .tech-hero-slideshow {
   margin-bottom: 0;
 }
 
-/* Fixed heights for slides - prevents jumping between slides */
-body.template-index .tech-hero-slideshow .slideshow__slide {
-  height: 520px;
-}
-
 /* Mobile: reduce height for better mobile experience */
 @media screen and (max-width: 749px) {
   body.template-index .tech-hero-slideshow .slideshow__slide {
