@@ -152,9 +152,10 @@
         role="region"
         aria-label="{{ 'sections.header.announcement' | t }}"
         data-ticker-speed="{{ ticker_speed }}"
+        data-section-id="{{ section.id }}"
       >
         <div class="announcement-ticker__viewport">
-          <div class="announcement-ticker__track">
+          <div class="announcement-ticker__track" id="AnnouncementTicker-{{ section.id }}">
             {%- for block in section.blocks -%}
               <span
                 class="announcement-ticker__item"
@@ -168,10 +169,10 @@
                       href="{{ block.settings.link }}"
                       class="announcement-bar__link link link--text focus-inset"
                     >
-                      <span class="announcement-bar__message announcement-ticker__message h5">{{ block.settings.text | escape }}</span>
+                      <span class="announcement-bar__message announcement-ticker__message">{{ block.settings.text | escape }}</span>
                     </a>
                   {%- else -%}
-                    <span class="announcement-bar__message announcement-ticker__message h5">{{ block.settings.text | escape }}</span>
+                    <span class="announcement-bar__message announcement-ticker__message">{{ block.settings.text | escape }}</span>
                   {%- endif -%}
                 {%- endif -%}
               </span>
@@ -179,6 +180,35 @@
           </div>
         </div>
       </div>
+      <script>
+        (function() {
+          document.addEventListener('DOMContentLoaded', function initAnnouncementTicker() {
+            var ticker = document.getElementById('AnnouncementTicker-{{ section.id }}');
+            if (!ticker) return;
+            
+            // Clone content for seamless infinite scroll using cloneNode
+            var items = ticker.querySelectorAll('.announcement-ticker__item');
+            items.forEach(function(item) {
+              var clone = item.cloneNode(true);
+              // Remove shopify_attributes from clone to avoid duplicate IDs
+              clone.removeAttribute('data-shopify-editor-block');
+              ticker.appendChild(clone);
+            });
+            
+            // Calculate animation duration based on content width
+            var contentWidth = ticker.scrollWidth / 2;
+            var speedLevel = {{ ticker_speed | default: 5 }};
+            // Speed mapping: level 1 = 40px/s, level 10 = 120px/s
+            var speed = 40 + (speedLevel - 1) * 9;
+            var duration = contentWidth / speed;
+            
+            // Ensure duration is within reasonable bounds (5s - 120s)
+            duration = Math.max(5, Math.min(120, duration));
+            
+            ticker.style.setProperty('--ticker-duration', duration + 's');
+          });
+        })();
+      </script>
     {%- endif -%}
     <div class="localization-wrapper">
       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -393,36 +423,36 @@
         {
           "type": "announcement",
           "settings": {
-            "text": "Explora categorías: Audífonos • Smartwatches • Memorias USB",
-            "link": "/collections/all"
-          }
-        },
-        {
-          "type": "announcement",
-          "settings": {
-            "text": "Compra antes de las 2pm: procesamos tu pedido hoy",
+            "text": "🚀 Envío GRATIS a toda Colombia - Sin mínimo de compra",
             "link": ""
           }
         },
         {
           "type": "announcement",
           "settings": {
-            "text": "📲 Soporte por WhatsApp",
+            "text": "💳 Pago Contraentrega - Paga solo cuando recibas",
+            "link": ""
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "⚡ Procesamos HOY pedidos antes de las 2pm",
+            "link": ""
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "🛡️ Garantía 30 días - Compra sin riesgos",
+            "link": ""
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "📱 Soporte WhatsApp - Respuesta inmediata",
             "link": "https://wa.me/573008602789"
-          }
-        },
-        {
-          "type": "announcement",
-          "settings": {
-            "text": "Ver más vendidos",
-            "link": "/collections/all?sort_by=best-selling"
-          }
-        },
-        {
-          "type": "announcement",
-          "settings": {
-            "text": "🛡️ Garantía de 30 días",
-            "link": ""
           }
         }
       ]
