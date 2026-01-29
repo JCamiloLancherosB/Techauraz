@@ -1693,7 +1693,7 @@ header-drawer {
   left: 0;
   width: 40px;
   height: 2px;
-  background: var(--color-accent, #3b82f6);
+  background: var(--color-accent, #14b8a6);
 }
 
 @media screen and (min-width: 990px) {
@@ -1888,8 +1888,7 @@ header-drawer {
   }
 }
 
-.footer-block__details-content .list-menu__item--link,
-.copyright__content a {
+.footer-block__details-content .list-menu__item--link {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2065,11 +2064,6 @@ header-drawer {
   color: white;
 }
 
-.policies li::before {
-  content: '';
-  padding: 0;
-}
-
 .policies li a {
   padding: 0.6rem 0;
   display: block;
@@ -2109,39 +2103,8 @@ header-drawer {
 .localization-selector:hover,
 .localization-selector:focus {
   border-color: rgba(255, 255, 255, 0.4);
-  outline: none;
-}
-
-/* Footer Blocks Wrapper Enhancement */
-.footer__blocks-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-/* Footer Info Items (with icons) */
-.footer__info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.footer__info-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--color-accent, #3b82f6);
-  flex-shrink: 0;
-}
-
-.footer__info-text {
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-.footer__info-text strong {
-  color: white;
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
 }
 
 /* check for flexbox gap in older Safari versions */
@@ -2219,15 +2182,13 @@ header-drawer {
 }
 
 /* Social media links styling */
-.footer .list-social,
-.footer__social {
+.footer .list-social {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
 
-.footer .list-social__link,
-.footer__social-link {
+.footer .list-social__link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2242,9 +2203,8 @@ header-drawer {
   padding: 0;
 }
 
-.footer .list-social__link:hover,
-.footer__social-link:hover {
-  background: var(--color-accent, #3b82f6);
+.footer .list-social__link:hover {
+  background: var(--color-accent, #14b8a6);
   color: white;
   transform: translateY(-3px);
 }
