@@ -68,51 +68,50 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "benefits_bar_home": {
-      "type": "benefits-bar",
+    "benefits_conversion_home": {
+      "type": "benefits-conversion",
       "blocks": {
-        "benefit_1": {
+        "benefit_shipping": {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "🚚",
-            "title": "Envío rápido",
-            "description": "Recibe tus pedidos en 2-5 días hábiles en toda Colombia."
+            "icon": "🚚",
+            "title": "Recibe gratis en tu casa",
+            "description": "Sin costos ocultos. Envío incluido a toda Colombia en compras de cualquier monto."
           }
         },
-        "benefit_2": {
+        "benefit_payment": {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "💳",
-            "title": "Pago contraentrega",
-            "description": "Paga cuando recibes tu producto y comprueba la calidad."
+            "icon": "💳",
+            "title": "Paga cuando recibes",
+            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
           }
         },
-        "benefit_3": {
+        "benefit_guarantee": {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "✅",
-            "title": "Garantía 30 días",
-            "description": "Compra con tranquilidad gracias a nuestra garantía extendida."
+            "icon": "✨",
+            "title": "Garantía de 30 días",
+            "description": "Si no quedas 100% satisfecho, devuélvelo sin preguntas ni complicaciones."
           }
         },
-        "benefit_4": {
+        "benefit_delivery": {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "💬",
-            "title": "Soporte inmediato",
-            "description": "Atención por WhatsApp para resolver tus dudas al instante."
+            "icon": "⚡",
+            "title": "Entrega en 2-5 días",
+            "description": "Procesamos tu pedido el mismo día. Recíbelo rápido donde estés en Colombia."
           }
         }
       },
       "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4"
+        "benefit_shipping",
+        "benefit_payment",
+        "benefit_guarantee",
+        "benefit_delivery"
       ],
       "settings": {
-        "full_width": false,
-        "scroll_on_mobile": true
+        "heading": ""
       }
     },
     "category_navigation": {
@@ -172,8 +171,7 @@
         "category_5"
       ],
       "settings": {
-        "heading": "Categorías Destacadas",
-        "subtitle": "Explora nuestra selección de tecnología premium"
+        "heading": "Explora por Categoría"
       }
     },
     "featured_collection_9GzLFt": {
@@ -182,13 +180,13 @@
       "settings": {
         "title": "<strong>Productos Destacados</strong>",
         "heading_size": "h2",
-        "description": "Lo mejor en tecnología seleccionado para ti",
-        "show_description": true,
+        "description": "",
+        "show_description": false,
         "description_style": "body",
-        "collection": "diademas-gamer-techaura",
+        "collection": "conectividad-hubs-y-adaptadores-techaura",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "full_width": false,
+        "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
@@ -201,8 +199,8 @@
         "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     },
     "featured_collection_bestsellers": {
@@ -210,13 +208,13 @@
       "settings": {
         "title": "<strong>Más Vendidos</strong>",
         "heading_size": "h2",
-        "description": "Los favoritos de nuestros clientes",
-        "show_description": true,
+        "description": "",
+        "show_description": false,
         "description_style": "body",
         "collection": "carga-energia-techaura",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "full_width": false,
+        "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
@@ -229,36 +227,63 @@
         "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     },
-    "featured_collection_new_arrivals": {
-      "type": "featured-collection",
+    "modern_feature_cards_home": {
+      "type": "modern-feature-cards",
+      "blocks": {
+        "feature_card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "🚀",
+            "title": "Envío Ultra Rápido",
+            "description": "Recibe tus productos en 2-5 días hábiles en toda Colombia. Procesamos tu pedido el mismo día para que lo recibas lo antes posible.",
+            "cta_text": "Ver envíos",
+            "cta_link": "shopify://collections/all"
+          }
+        },
+        "feature_card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "💎",
+            "title": "Calidad Premium Garantizada",
+            "description": "Productos seleccionados con los más altos estándares de calidad internacional. Cada artículo pasa rigurosos controles antes de llegar a ti.",
+            "cta_text": "Ver productos",
+            "cta_link": "shopify://collections/all"
+          }
+        },
+        "feature_card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "🔒",
+            "title": "Compra 100% Segura",
+            "description": "Pago seguro y protegido con tecnología de encriptación. Opción de pago contra entrega disponible en todo el país.",
+            "cta_text": "Más información",
+            "cta_link": "shopify://pages/contacto-techaura"
+          }
+        },
+        "feature_card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "⚡",
+            "title": "Soporte Inmediato",
+            "description": "Equipo de atención al cliente disponible para resolver todas tus dudas y ayudarte en cada paso de tu compra.",
+            "cta_text": "Contáctanos",
+            "cta_link": "shopify://pages/contacto-techaura"
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_1",
+        "feature_card_2",
+        "feature_card_3",
+        "feature_card_4"
+      ],
       "settings": {
-        "title": "<strong>Electrónica Inteligente</strong>",
-        "heading_size": "h2",
-        "description": "Descubre lo último en tecnología smart",
-        "show_description": true,
-        "description_style": "body",
-        "collection": "productos-inteligentes-electronicos",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "¿Por Qué Comprar con TechAura?",
+        "subheading": "Descubre las ventajas que hacen de TechAura tu mejor opción para productos tecnológicos premium"
       }
     },
     "testimonials_home": {
@@ -304,29 +329,52 @@
         "show_view_all": false,
         "view_all_link": "",
         "view_all_text": "Ver más reseñas",
-        "padding_top": 60,
-        "padding_bottom": 60
+        "padding_top": 44,
+        "padding_bottom": 44
       }
     },
-    "newsletter_conversion_home": {
-      "type": "newsletter-conversion",
+    "newsletter_home": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "heading": "Suscríbete a nuestro newsletter",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_block": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Recibe ofertas exclusivas, novedades y consejos tecnológicos directamente en tu correo.</p>"
+          }
+        },
+        "email_form_block": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_block",
+        "paragraph_block",
+        "email_form_block"
+      ],
       "settings": {
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "heading": "Ofertas Exclusivas para Ti",
-        "subheading": "Recibe descuentos especiales y novedades tech en tu correo",
-        "button_text": "Suscribirme"
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "slideshow_iqMhTA",
-    "benefits_bar_home",
+    "benefits_conversion_home",
     "category_navigation",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
-    "featured_collection_new_arrivals",
+    "modern_feature_cards_home",
     "testimonials_home",
-    "newsletter_conversion_home"
+    "newsletter_home"
   ]
 }
