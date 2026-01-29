@@ -978,16 +978,6 @@ details summary:focus-visible,
 }
 
 @media screen and (min-width: 750px) {
-  .slideshow,
-  .banner,
-  .hero,
-  [class*="slideshow"],
-  [class*="banner--"],
-  .shopify-section--slideshow,
-  .shopify-section--image-banner {
-    min-height: 400px;
-  }
-}
 
 /* Slideshow slides - fixed dimensions */
 .slideshow__slide,
