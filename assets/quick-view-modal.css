@@ -585,6 +585,12 @@
   display: inline;
 }
 
+/* Error state */
+.quick-view-modal__add-to-cart.is-error {
+  background: var(--ta-error, #ef4444);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
 .quick-view-modal__spinner {
   animation: spin 1s linear infinite;
 }
@@ -701,7 +707,6 @@
 
 @media screen and (min-width: 990px) {
   .quick-view-modal__container {
-    max-width: 80%;
     max-width: min(1000px, 80%);
   }
 }
@@ -715,10 +720,6 @@ body.quick-view-modal-open {
   position: fixed;
   width: 100%;
   height: 100%;
-}
-
-/* Preserve scroll position */
-body.quick-view-modal-open {
   top: var(--scroll-position, 0);
 }
 

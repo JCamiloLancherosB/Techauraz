@@ -304,6 +304,10 @@
 <link rel="preload" href="{{ 'announcement-bar-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'announcement-bar-enhancements.css' | asset_url }}"></noscript>
 
+<!-- Quick View Modal - Product preview modal styles - 2026-01-29 -->
+<link rel="preload" href="{{ 'quick-view-modal.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'quick-view-modal.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER (CURRENT - Updated 2026-01-28)
@@ -590,6 +594,9 @@
     {%- comment -%} Cookie Banner - GDPR Compliance {%- endcomment -%}
     {% render 'cookie-banner' %}
 
+    {%- comment -%} Quick View Modal - Rendered once globally {%- endcomment -%}
+    {% render 'product-quick-view-modal' %}
+
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
       <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
@@ -652,6 +659,7 @@
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%} WhatsApp Floating Button {%- endcomment -%}
     {% render 'whatsapp-float' %}

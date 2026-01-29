@@ -170,9 +170,14 @@
     // Set up focus trap
     setupFocusTrap();
 
-    // Focus on modal container
+    // Focus on close button for better accessibility
     setTimeout(() => {
-      elements.container.focus();
+      const closeBtn = elements.container.querySelector('.quick-view-modal__close');
+      if (closeBtn) {
+        closeBtn.focus();
+      } else {
+        elements.container.focus();
+      }
     }, 100);
   }
 
@@ -340,30 +345,42 @@
   }
 
   /**
+   * Get Shopify image URL with size transformation
+   */
+  function getSizedImageUrl(url, size) {
+    if (!url) return '';
+    // Remove existing size suffix if present, then add new one
+    const baseUrl = url.replace(/(_\d+x\d+)?(\.[^.]+)(\?.*)?$/, '$2$3');
+    return baseUrl.replace(/(\.[^.]+)(\?.*)?$/, `_${size}$1$2`);
+  }
+
+  /**
    * Render product images
    */
   function renderImages(product) {
     if (!product.images || product.images.length === 0) {
-      elements.mainImage.src = '//cdn.shopify.com/s/files/1/0533/2089/files/placeholder-image.png?v=1530129081';
+      // Use a data URI placeholder to avoid network request
+      elements.mainImage.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNDAwIDQwMCI+PHJlY3QgZmlsbD0iI2Y4ZmFmYyIgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk0YTNiOCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiPlNpbiBpbWFnZW48L3RleHQ+PC9zdmc+';
       elements.mainImage.alt = product.title;
       return;
     }
 
     // Main image
-    const mainImageSrc = product.images[0].replace(/\.([^\.]+)$/, '_800x800.$1');
+    const mainImageSrc = getSizedImageUrl(product.images[0], '800x800');
     elements.mainImage.src = mainImageSrc;
     elements.mainImage.alt = product.title;
 
     // Thumbnails
     if (product.images.length > 1) {
       elements.thumbnailsContainer.innerHTML = product.images.map((image, index) => {
-        const thumbSrc = image.replace(/\.([^\.]+)$/, '_100x100.$1');
+        const thumbSrc = getSizedImageUrl(image, '100x100');
+        const fullSrc = getSizedImageUrl(image, '800x800');
         return `
           <button 
             type="button"
             class="quick-view-modal__thumbnail${index === 0 ? ' is-active' : ''}"
             data-image-index="${index}"
-            data-image-src="${image.replace(/\.([^\.]+)$/, '_800x800.$1')}"
+            data-image-src="${fullSrc}"
             aria-label="Ver imagen ${index + 1}"
           >
             <img src="${thumbSrc}" alt="Miniatura ${index + 1}" loading="lazy">
@@ -379,10 +396,9 @@
   function renderVariants(product) {
     if (!product.options || product.options.length === 0) return;
 
-    // Check if there's only one option with value "Default Title" (no real variants)
-    if (product.options.length === 1 && product.options[0] === 'Title') {
-      const allDefault = product.variants.every(v => v.title === 'Default Title');
-      if (allDefault) return;
+    // Check if product has only default variant (no real options)
+    if (product.variants.length === 1 && product.variants[0].title === 'Default Title') {
+      return;
     }
 
     let html = '';
@@ -593,9 +609,13 @@
         btn.disabled = false;
         closeModal();
         
-        // Open cart drawer if it exists
+        // Open cart drawer if it exists and has open method
         if (cartDrawer && typeof cartDrawer.open === 'function') {
-          cartDrawer.open();
+          try {
+            cartDrawer.open();
+          } catch (e) {
+            console.warn('Quick View: Could not open cart drawer', e);
+          }
         }
       }, 1500);
 
@@ -604,8 +624,17 @@
       btn.classList.remove('is-loading');
       btn.disabled = false;
       
-      // Show error briefly
-      alert(strings.error);
+      // Show error state on button briefly instead of alert
+      btn.classList.add('is-error');
+      const originalText = btn.querySelector('.quick-view-modal__add-to-cart-text');
+      if (originalText) {
+        const errorText = originalText.textContent;
+        originalText.textContent = strings.error;
+        setTimeout(() => {
+          btn.classList.remove('is-error');
+          originalText.textContent = errorText;
+        }, 3000);
+      }
     }
   }
 
