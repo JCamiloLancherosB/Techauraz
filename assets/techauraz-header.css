@@ -641,7 +641,7 @@ body.overflow-hidden-desktop {
      PROMO BAR
      ========================================================================== */
   .menu-drawer__promo {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
     color: #ffffff;
     text-align: center;
     padding: 1rem 1.5rem;

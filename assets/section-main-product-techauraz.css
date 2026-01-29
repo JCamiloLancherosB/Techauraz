@@ -1391,9 +1391,9 @@
 
 .product-form .shopify-payment-button__button,
 .product-form__buttons .shopify-payment-button__button {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
   border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);
+  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.4);
 }
 
 /* Add to Cart secondary style */
