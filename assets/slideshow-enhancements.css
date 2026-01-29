@@ -90,7 +90,7 @@
 @media screen and (min-width: 990px) {
   .template-index .tech-hero__media,
   .template-index .tech-hero .slideshow__slide {
-    min-height: 400px;
+    min-height: 502px;
     max-height: 560px;
   }
 }
