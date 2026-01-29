@@ -4593,11 +4593,11 @@ body.template-index .tech-hero-slideshow .slideshow__controls .slider-button {
 }
 
 #previousB {
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 
 #previousN {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:hover {
