@@ -17,7 +17,6 @@
 }
 
 .utility-bar {
-  padding: var(--tech-space-2) 0;
   min-height: var(--tech-announcement-height);
 }
 
