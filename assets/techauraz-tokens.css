@@ -973,7 +973,7 @@ details summary:focus-visible,
 .shopify-section--slideshow,
 .shopify-section--image-banner {
   /* Reserve minimum height to prevent CLS */
-  min-height: 300px;
+  min-height: 222px;
   contain: layout;
 }
 
