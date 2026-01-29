@@ -4502,7 +4502,7 @@ details-modal,
 /* Wrapper for home page slideshow */
 body.template-index .tech-hero-slideshow {
   position: relative;
-  margin-bottom: 0;
+  margin-bottom: -115px;
 }
 
 /* Mobile: reduce height for better mobile experience */
