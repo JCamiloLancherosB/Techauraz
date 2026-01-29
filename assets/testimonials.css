@@ -444,26 +444,19 @@
   .testimonials-carousel__track-wrapper {
     width: 100%;
     padding: 0 16px;
+    overflow: hidden;
   }
 
   .testimonials-carousel__track {
     gap: 16px;
-    scroll-snap-type: x mandatory;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     padding: 8px 4px;
-  }
-
-  .testimonials-carousel__track::-webkit-scrollbar {
-    display: none;
+    /* JavaScript handles scrolling via transform, no CSS scroll needed */
   }
 
   /* Show 1 card on mobile - stacked vertically */
   .testimonials-carousel__card {
     flex: 0 0 calc(100% - 8px);
     min-width: calc(100% - 8px);
-    scroll-snap-align: center;
   }
 
   .testimonials-carousel__track[data-visible-count="1"] .testimonials-carousel__card,
@@ -575,4 +568,21 @@
     flex: 0 0 100%;
     page-break-inside: avoid;
   }
+}
+
+/* =============================================================================
+   UTILITY CLASSES
+   ============================================================================= */
+
+/* Visually hidden utility class for screen readers */
+.testimonials-carousel .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

@@ -15,6 +15,9 @@
 (function() {
   'use strict';
 
+  // Constants
+  const TRANSITION_DURATION = 500; // ms - matches CSS transition
+
   class TestimonialsCarousel {
     constructor(element) {
       this.section = element;
@@ -35,6 +38,7 @@
       this.autoplayTimer = null;
       this.isPaused = false;
       this.isAnimating = false;
+      this.isDestroyed = false;
       
       // Touch handling
       this.touchStartX = 0;
@@ -42,8 +46,17 @@
       this.touchThreshold = 50;
       this.isDragging = false;
       
+      // Resize handling
+      this.resizeTimeout = null;
+      
       // Get visible count from data attribute
       this.visibleCount = parseInt(this.track?.dataset.visibleCount, 10) || 3;
+      
+      // Bound event handlers for cleanup
+      this.boundHandleMouseMove = (e) => this.handleMouseMove(e);
+      this.boundHandleMouseUp = (e) => this.handleMouseUp(e);
+      this.boundHandleVisibilityChange = () => this.handleVisibilityChange();
+      this.boundHandleResize = () => this.handleResize();
       
       // Initialize
       this.init();
@@ -86,22 +99,16 @@
       this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
       this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e));
 
-      // Mouse drag support
+      // Mouse drag support (using bound methods for cleanup)
       this.track.addEventListener('mousedown', (e) => this.handleMouseDown(e));
-      document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-      document.addEventListener('mouseup', (e) => this.handleMouseUp(e));
+      document.addEventListener('mousemove', this.boundHandleMouseMove);
+      document.addEventListener('mouseup', this.boundHandleMouseUp);
 
       // Keyboard navigation
       this.section.addEventListener('keydown', (e) => this.handleKeydown(e));
 
       // Pause autoplay when tab is hidden (for accessibility/performance)
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          this.pauseAutoplay();
-        } else {
-          this.resumeAutoplay();
-        }
-      });
+      document.addEventListener('visibilitychange', this.boundHandleVisibilityChange);
 
       // Handle focus for accessibility
       this.cards.forEach((card, index) => {
@@ -111,12 +118,27 @@
         });
       });
 
-      // Handle window resize
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => this.updateCarousel(), 100);
-      });
+      // Handle window resize with debouncing
+      window.addEventListener('resize', this.boundHandleResize);
+    }
+
+    handleVisibilityChange() {
+      if (document.hidden) {
+        this.pauseAutoplay();
+      } else {
+        this.resumeAutoplay();
+      }
+    }
+
+    handleResize() {
+      if (this.resizeTimeout) {
+        clearTimeout(this.resizeTimeout);
+      }
+      this.resizeTimeout = setTimeout(() => {
+        if (!this.isDestroyed) {
+          this.updateCarousel();
+        }
+      }, 100);
     }
 
     // Navigation methods
@@ -173,7 +195,7 @@
     }
 
     updateCarousel() {
-      if (!this.track) return;
+      if (!this.track || this.isDestroyed) return;
 
       this.isAnimating = true;
 
@@ -193,17 +215,19 @@
       // Update accessibility
       this.updateAccessibility();
 
-      // Reset animating flag after transition
+      // Reset animating flag after transition (using constant for consistency with CSS)
       setTimeout(() => {
-        this.isAnimating = false;
-      }, 500);
+        if (!this.isDestroyed) {
+          this.isAnimating = false;
+        }
+      }, TRANSITION_DURATION);
     }
 
     updateDots() {
       this.dots.forEach((dot, index) => {
         const isActive = index === this.currentIndex;
         dot.classList.toggle('testimonials-carousel__dot--active', isActive);
-        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
     }
 
@@ -220,12 +244,16 @@
     }
 
     updateAccessibility() {
-      // Update tabindex for keyboard navigation
+      // Update focus management for keyboard navigation
+      // Note: We use aria-current instead of aria-hidden to allow screen reader users
+      // to navigate through all testimonials
+      const effectiveVisibleCount = this.getEffectiveVisibleCount();
       this.cards.forEach((card, index) => {
-        const effectiveVisibleCount = this.getEffectiveVisibleCount();
-        const isVisible = index >= this.currentIndex && index < this.currentIndex + effectiveVisibleCount;
-        card.setAttribute('tabindex', isVisible ? '0' : '-1');
-        card.setAttribute('aria-hidden', !isVisible);
+        const isCurrentlyVisible = index >= this.currentIndex && index < this.currentIndex + effectiveVisibleCount;
+        // Set tabindex to make visible cards focusable
+        card.setAttribute('tabindex', isCurrentlyVisible ? '0' : '-1');
+        // Use aria-current to indicate active slides without hiding content
+        card.setAttribute('aria-current', isCurrentlyVisible ? 'true' : 'false');
       });
 
       // Announce slide change to screen readers
@@ -375,7 +403,20 @@
 
     // Cleanup
     destroy() {
+      this.isDestroyed = true;
       this.stopAutoplay();
+      
+      // Clear resize timeout
+      if (this.resizeTimeout) {
+        clearTimeout(this.resizeTimeout);
+        this.resizeTimeout = null;
+      }
+      
+      // Remove document-level event listeners
+      document.removeEventListener('mousemove', this.boundHandleMouseMove);
+      document.removeEventListener('mouseup', this.boundHandleMouseUp);
+      document.removeEventListener('visibilitychange', this.boundHandleVisibilityChange);
+      window.removeEventListener('resize', this.boundHandleResize);
     }
   }
 
@@ -384,7 +425,7 @@
     const carousels = document.querySelectorAll('.testimonials-carousel');
     carousels.forEach((carousel) => {
       if (!carousel.dataset.initialized) {
-        new TestimonialsCarousel(carousel);
+        carousel.carouselInstance = new TestimonialsCarousel(carousel);
         carousel.dataset.initialized = 'true';
       }
     });
@@ -401,7 +442,7 @@
   document.addEventListener('shopify:section:load', (e) => {
     const section = e.target.querySelector('.testimonials-carousel');
     if (section && !section.dataset.initialized) {
-      new TestimonialsCarousel(section);
+      section.carouselInstance = new TestimonialsCarousel(section);
       section.dataset.initialized = 'true';
     }
   });
