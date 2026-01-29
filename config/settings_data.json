@@ -216,22 +216,30 @@
           "color_scheme": "",
           "image_ratio": "adapt",
           "image_shape": "default",
-          "show_secondary_image": false,
+          "show_secondary_image": true,
           "show_vendor": false,
           "show_rating": false,
+          "enable_quick_add": true,
           "columns_mobile": "2",
           "padding_top": 36,
           "padding_bottom": 36
+        }
+      },
+      "sticky-mobile-cta": {
+        "type": "sticky-mobile-cta",
+        "settings": {
+          "enable_sticky_cta": true,
+          "show_benefits": true,
+          "benefit_1_text": "Envío Gratis",
+          "benefit_2_text": "Pago Contraentrega",
+          "buy_button_text": "Comprar ahora",
+          "whatsapp_phone": "+573008602789",
+          "whatsapp_button_text": "WhatsApp"
         }
       }
     },
     "content_for_index": [],
     "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      },
       "2567389343055140935": {
         "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
         "disabled": false,
