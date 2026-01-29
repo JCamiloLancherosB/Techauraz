@@ -1,0 +1,247 @@
+/**
+ * TECHAURAZ UTILITY CLASSES
+ * =========================
+ * Helper classes that use design tokens for common patterns.
+ * Use these instead of writing one-off styles.
+ */
+
+/* ============================================
+   CONTAINER UTILITIES
+   ============================================ */
+
+.tech-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--tech-space-4);
+  padding-right: var(--tech-space-4);
+}
+
+.tech-container--narrow {
+  max-width: 800px;
+}
+
+.tech-container--wide {
+  max-width: 1400px;
+}
+
+/* ============================================
+   SECTION UTILITIES
+   ============================================ */
+
+.tech-section {
+  padding-top: var(--tech-section-gap);
+  padding-bottom: var(--tech-section-gap);
+}
+
+.tech-section--sm {
+  padding-top: var(--tech-space-10);
+  padding-bottom: var(--tech-space-10);
+}
+
+.tech-section--lg {
+  padding-top: var(--tech-space-24);
+  padding-bottom: var(--tech-space-24);
+}
+
+/* ============================================
+   TEXT UTILITIES
+   ============================================ */
+
+.tech-heading {
+  font-family: var(--tech-font-display);
+  font-weight: var(--tech-font-bold);
+  line-height: var(--tech-leading-tight);
+  color: var(--tech-text-primary);
+}
+
+.tech-heading--decorated {
+  position: relative;
+  display: inline-block;
+}
+
+.tech-heading--decorated::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--tech-gradient-primary);
+  border-radius: var(--tech-radius-full);
+}
+
+.tech-subheading {
+  font-size: var(--tech-text-lg);
+  color: var(--tech-text-secondary);
+  line-height: var(--tech-leading-relaxed);
+}
+
+/* ============================================
+   BUTTON UTILITIES
+   ============================================ */
+
+.tech-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tech-space-2);
+  height: var(--tech-button-height);
+  padding: 0 var(--tech-button-padding-x);
+  font-family: var(--tech-font-body);
+  font-size: var(--tech-text-sm);
+  font-weight: var(--tech-font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tech-tracking-wide);
+  border-radius: var(--tech-radius-button);
+  border: none;
+  cursor: pointer;
+  transition: var(--tech-transition-all);
+  text-decoration: none;
+}
+
+.tech-button--primary {
+  background: var(--tech-gradient-primary);
+  color: var(--tech-text-inverted);
+  box-shadow: var(--tech-shadow-primary);
+}
+
+.tech-button--primary:hover {
+  background: var(--tech-gradient-primary-hover);
+  box-shadow: var(--tech-shadow-primary-hover);
+  transform: translateY(-2px);
+}
+
+.tech-button--secondary {
+  background: transparent;
+  color: var(--tech-text-primary);
+  border: 2px solid var(--tech-color-gray-300);
+}
+
+.tech-button--secondary:hover {
+  border-color: var(--tech-color-primary);
+  color: var(--tech-color-primary);
+}
+
+.tech-button--success {
+  background: var(--tech-gradient-success);
+  color: var(--tech-text-inverted);
+  box-shadow: var(--tech-shadow-success);
+}
+
+/* ============================================
+   CARD UTILITIES
+   ============================================ */
+
+.tech-card {
+  background: var(--tech-bg-card);
+  border-radius: var(--tech-radius-card);
+  box-shadow: var(--tech-shadow-md);
+  overflow: hidden;
+  transition: var(--tech-transition-all);
+}
+
+.tech-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tech-shadow-lg);
+}
+
+.tech-card--dark {
+  background: var(--tech-bg-card-dark);
+  color: var(--tech-text-inverted);
+}
+
+/* ============================================
+   BADGE UTILITIES
+   ============================================ */
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tech-space-1);
+  padding: var(--tech-space-1) var(--tech-space-2);
+  font-size: var(--tech-text-xs);
+  font-weight: var(--tech-font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tech-tracking-wide);
+  border-radius: var(--tech-radius-badge);
+}
+
+.tech-badge--sale {
+  background: var(--tech-gradient-sale);
+  color: var(--tech-text-inverted);
+}
+
+.tech-badge--new {
+  background: var(--tech-gradient-success);
+  color: var(--tech-text-inverted);
+}
+
+.tech-badge--popular {
+  background: var(--tech-color-accent);
+  color: var(--tech-color-secondary);
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+.tech-animate-fade-in {
+  animation: tech-fade-in var(--tech-transition-slow) ease forwards;
+}
+
+.tech-animate-slide-up {
+  animation: tech-slide-up var(--tech-transition-slow) ease forwards;
+}
+
+.tech-animate-pulse {
+  animation: tech-pulse 2s ease-in-out infinite;
+}
+
+@keyframes tech-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tech-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tech-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ============================================
+   VISIBILITY UTILITIES
+   ============================================ */
+
+.tech-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .tech-hide-mobile { display: none !important; }
+}
+
+@media screen and (min-width: 750px) {
+  .tech-hide-desktop { display: none !important; }
+}

@@ -1,71 +1,132 @@
 /**
- * =============================================================================
- * TECHAURAZ DESIGN TOKENS - GLOBAL PAGE DECORATIONS & VISUAL POLISH
+ * TECHAURAZ DESIGN TOKENS
+ * ======================
+ * This file contains all CSS custom properties (variables) for the Techauraz theme.
+ * ALL other CSS files should reference these variables for consistency.
+ * 
+ * IMPORTANT: This file must be loaded BEFORE all other custom CSS files.
+ * 
  * Version: 1.0.0
- * Created: 2026-01-28
- * =============================================================================
- * 
- * CSS Custom Properties System for premium, cohesive tech-focused aesthetic.
- * This file provides design tokens and utility classes for consistent styling.
- * 
- * CONTENTS:
- * 1. CSS Custom Properties (:root variables)
- * 2. Section Styling Utilities
- * 3. Container Utilities
- * 4. Heading Decorations
- * 5. Animated Underline Links
- * 6. Glow Buttons
- * 7. Card Hover Effects
- * 8. Loading States
- * 9. Scroll Animations
- * 10. Badge Variants
- * 11. Accessibility (Reduced Motion)
- * 
- * =============================================================================
+ * Last Updated: 2026-01-29
  */
 
-/* =============================================================================
-   1. CSS CUSTOM PROPERTIES SYSTEM
-   ============================================================================= */
 :root {
-  /* ----------------------------------------
-     Brand Colors
-     ---------------------------------------- */
-  --tech-primary: #2563eb;
-  --tech-primary-dark: #1d4ed8;
-  --tech-primary-light: #60a5fa;
-  --tech-secondary: #0f172a;
-  --tech-accent: #fbbf24;
-  --tech-success: #22c55e;
-  --tech-error: #ef4444;
+  /* ============================================
+     BRAND COLORS
+     ============================================ */
   
-  /* ----------------------------------------
-     Gradients
-     ---------------------------------------- */
+  /* Primary Blue - Main brand color (buttons, links, accents) */
+  --tech-color-primary: #2563eb;
+  --tech-color-primary-hover: #1d4ed8;
+  --tech-color-primary-active: #1e40af;
+  --tech-color-primary-light: #60a5fa;
+  --tech-color-primary-lighter: #93c5fd;
+  --tech-color-primary-bg: rgba(37, 99, 235, 0.1);
+  
+  /* Secondary - Dark navy (backgrounds, footer, cards) */
+  --tech-color-secondary: #0f172a;
+  --tech-color-secondary-light: #1e293b;
+  --tech-color-secondary-lighter: #334155;
+  
+  /* Accent Gold - For highlights and special elements */
+  --tech-color-accent: #f59e0b;
+  --tech-color-accent-light: #fbbf24;
+  --tech-color-accent-dark: #d97706;
+  
+  /* Success/Sale/Error States */
+  --tech-color-success: #22c55e;
+  --tech-color-success-bg: rgba(34, 197, 94, 0.1);
+  --tech-color-sale: #ef4444;
+  --tech-color-sale-bg: rgba(239, 68, 68, 0.1);
+  --tech-color-warning: #f59e0b;
+  --tech-color-warning-bg: rgba(245, 158, 11, 0.1);
+  --tech-color-error: #dc2626;
+  --tech-color-error-bg: rgba(220, 38, 38, 0.1);
+  
+  /* Neutral Grays */
+  --tech-color-gray-50: #f8fafc;
+  --tech-color-gray-100: #f1f5f9;
+  --tech-color-gray-200: #e2e8f0;
+  --tech-color-gray-300: #cbd5e1;
+  --tech-color-gray-400: #94a3b8;
+  --tech-color-gray-500: #64748b;
+  --tech-color-gray-600: #475569;
+  --tech-color-gray-700: #334155;
+  --tech-color-gray-800: #1e293b;
+  --tech-color-gray-900: #0f172a;
+  
+  /* Background Colors */
+  --tech-bg-page: #f0f4f8;
+  --tech-bg-card: #ffffff;
+  --tech-bg-card-dark: #1e293b;
+  --tech-bg-overlay: rgba(15, 23, 42, 0.8);
+  
+  /* Text Colors */
+  --tech-text-primary: #0f172a;
+  --tech-text-secondary: #475569;
+  --tech-text-muted: #64748b;
+  --tech-text-inverted: #ffffff;
+  --tech-text-link: var(--tech-color-primary);
+  --tech-text-link-hover: var(--tech-color-primary-hover);
+
+  /* ============================================
+     GRADIENTS
+     ============================================ */
+  
   --tech-gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --tech-gradient-primary-hover: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  --tech-gradient-success: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --tech-gradient-sale: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   --tech-gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  --tech-gradient-subtle: linear-gradient(180deg, transparent 0%, rgba(37, 99, 235, 0.03) 100%);
+  --tech-gradient-newsletter: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%); /* Green gradient for newsletter/subscription sections */
+  --tech-gradient-hero-overlay: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.7) 100%);
+  --tech-gradient-card-hover: linear-gradient(180deg, transparent 0%, rgba(37, 99, 235, 0.05) 100%);
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
   
-  /* ----------------------------------------
-     Shadows
-     ---------------------------------------- */
-  --tech-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --tech-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --tech-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
-  --tech-shadow-glow: 0 0 20px rgba(37, 99, 235, 0.3);
+  --tech-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --tech-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --tech-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --tech-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --tech-shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.16);
+  --tech-shadow-2xl: 0 20px 50px rgba(0, 0, 0, 0.2);
   
-  /* ----------------------------------------
-     Border Radius
-     ---------------------------------------- */
+  /* Colored Shadows (for buttons) */
+  --tech-shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.35);
+  --tech-shadow-primary-hover: 0 6px 20px rgba(37, 99, 235, 0.45);
+  --tech-shadow-success: 0 4px 14px rgba(34, 197, 94, 0.35);
+  --tech-shadow-sale: 0 4px 14px rgba(239, 68, 68, 0.35);
+  
+  /* Glow Effects */
+  --tech-glow-primary: 0 0 20px rgba(37, 99, 235, 0.4);
+  --tech-glow-accent: 0 0 20px rgba(251, 191, 36, 0.4);
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================ */
+  
+  --tech-radius-xs: 2px;
   --tech-radius-sm: 4px;
   --tech-radius-md: 8px;
   --tech-radius-lg: 12px;
-  --tech-radius-xl: 20px;
+  --tech-radius-xl: 16px;
+  --tech-radius-2xl: 24px;
   --tech-radius-full: 9999px;
   
-  /* ----------------------------------------
-     Spacing Scale
-     ---------------------------------------- */
+  /* Component-specific radius */
+  --tech-radius-button: 8px;
+  --tech-radius-card: 12px;
+  --tech-radius-input: 8px;
+  --tech-radius-badge: 4px;
+  --tech-radius-pill: 9999px;
+
+  /* ============================================
+     SPACING SCALE (based on 4px grid)
+     ============================================ */
+  
+  --tech-space-0: 0;
   --tech-space-1: 4px;
   --tech-space-2: 8px;
   --tech-space-3: 12px;
@@ -76,218 +137,153 @@
   --tech-space-10: 40px;
   --tech-space-12: 48px;
   --tech-space-16: 64px;
+  --tech-space-20: 80px;
+  --tech-space-24: 96px;
   
-  /* ----------------------------------------
-     Typography
-     ---------------------------------------- */
-  --tech-font-display: 'Inter', system-ui, sans-serif;
-  --tech-font-body: 'Inter', system-ui, sans-serif;
+  /* Section Spacing */
+  --tech-section-gap: 60px;
+  --tech-section-gap-mobile: 40px;
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
   
-  /* ----------------------------------------
-     Transitions
-     ---------------------------------------- */
+  /* Font Families */
+  --tech-font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tech-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tech-font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, monospace;
+  
+  /* Font Sizes */
+  --tech-text-xs: 0.75rem;    /* 12px */
+  --tech-text-sm: 0.875rem;   /* 14px */
+  --tech-text-base: 1rem;     /* 16px */
+  --tech-text-lg: 1.125rem;   /* 18px */
+  --tech-text-xl: 1.25rem;    /* 20px */
+  --tech-text-2xl: 1.5rem;    /* 24px */
+  --tech-text-3xl: 1.875rem;  /* 30px */
+  --tech-text-4xl: 2.25rem;   /* 36px */
+  --tech-text-5xl: 3rem;      /* 48px */
+  
+  /* Font Weights */
+  --tech-font-normal: 400;
+  --tech-font-medium: 500;
+  --tech-font-semibold: 600;
+  --tech-font-bold: 700;
+  
+  /* Line Heights */
+  --tech-leading-tight: 1.25;
+  --tech-leading-snug: 1.375;
+  --tech-leading-normal: 1.5;
+  --tech-leading-relaxed: 1.625;
+  --tech-leading-loose: 2;
+  
+  /* Letter Spacing */
+  --tech-tracking-tight: -0.025em;
+  --tech-tracking-normal: 0;
+  --tech-tracking-wide: 0.025em;
+  --tech-tracking-wider: 0.05em;
+  --tech-tracking-widest: 0.1em;
+
+  /* ============================================
+     TRANSITIONS & ANIMATIONS
+     ============================================ */
+  
   --tech-transition-fast: 150ms ease;
   --tech-transition-normal: 250ms ease;
   --tech-transition-slow: 350ms ease;
+  --tech-transition-slower: 500ms ease;
+  
+  /* Specific Transitions */
+  --tech-transition-colors: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  --tech-transition-transform: transform 250ms ease;
+  --tech-transition-shadow: box-shadow 250ms ease;
+  --tech-transition-all: all 250ms ease;
+
+  /* ============================================
+     Z-INDEX SCALE
+     ============================================ */
+  
+  --tech-z-dropdown: 100;
+  --tech-z-sticky: 200;
+  --tech-z-fixed: 300;
+  --tech-z-drawer: 400;
+  --tech-z-modal: 500;
+  --tech-z-popover: 600;
+  --tech-z-tooltip: 700;
+  --tech-z-toast: 800;
+  --tech-z-max: 9999;
+
+  /* ============================================
+     COMPONENT-SPECIFIC TOKENS
+     ============================================ */
+  
+  /* Header */
+  --tech-header-height: 70px;
+  --tech-header-height-mobile: 60px;
+  --tech-announcement-height: 40px;
+  
+  /* Cards */
+  --tech-card-padding: var(--tech-space-4);
+  --tech-card-gap: var(--tech-space-6);
+  
+  /* Buttons */
+  --tech-button-height: 48px;
+  --tech-button-height-sm: 36px;
+  --tech-button-height-lg: 56px;
+  --tech-button-padding-x: var(--tech-space-6);
+  
+  /* Inputs */
+  --tech-input-height: 48px;
+  --tech-input-padding-x: var(--tech-space-4);
+  
+  /* Product Cards */
+  --tech-product-card-image-ratio: 1;
+  --tech-product-card-gap: var(--tech-space-3);
 }
 
-/* =============================================================================
-   2. SECTION STYLING UTILITIES
-   ============================================================================= */
-.section-tech {
-  padding: var(--tech-space-16) 0;
+/* ============================================
+   DARK MODE OVERRIDES (for dark sections)
+   ============================================ */
+
+.color-scheme-dark,
+[data-color-scheme="dark"] {
+  --tech-text-primary: #f8fafc;
+  --tech-text-secondary: #cbd5e1;
+  --tech-text-muted: #94a3b8;
+  --tech-bg-card: #1e293b;
 }
 
-.section-tech--alt {
-  background: var(--tech-gradient-subtle);
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media screen and (max-width: 749px) {
+  :root {
+    --tech-section-gap: var(--tech-section-gap-mobile);
+    --tech-header-height: var(--tech-header-height-mobile);
+    --tech-text-4xl: 2rem;
+    --tech-text-5xl: 2.5rem;
+  }
 }
 
-/* =============================================================================
-   3. CONTAINER UTILITY
-   ============================================================================= */
-.container-tech {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--tech-space-4);
-}
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
 
-/* =============================================================================
-   4. HEADINGS WITH DECORATIONS
-   ============================================================================= */
-.heading-tech {
-  position: relative;
-  display: inline-block;
-}
-
-.heading-tech::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: var(--tech-gradient-primary);
-  border-radius: var(--tech-radius-full);
-}
-
-/* =============================================================================
-   5. ANIMATED UNDERLINE LINKS
-   ============================================================================= */
-.link-tech {
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-}
-
-.link-tech::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--tech-primary);
-  transition: width var(--tech-transition-normal);
-}
-
-.link-tech:hover::after {
-  width: 100%;
-}
-
-/* =============================================================================
-   6. GLOW BUTTON
-   ============================================================================= */
-.button-tech {
-  background: var(--tech-gradient-primary);
-  color: white;
-  border: none;
-  padding: var(--tech-space-3) var(--tech-space-6);
-  border-radius: var(--tech-radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--tech-transition-normal);
-  box-shadow: var(--tech-shadow-md);
-}
-
-.button-tech:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--tech-shadow-lg), var(--tech-shadow-glow);
-}
-
-.button-tech:focus,
-.button-tech:focus-visible {
-  outline: 2px solid var(--tech-primary-light);
-  outline-offset: 2px;
-  box-shadow: var(--tech-shadow-lg), var(--tech-shadow-glow);
-}
-
-/* =============================================================================
-   7. CARDS WITH HOVER EFFECT
-   ============================================================================= */
-.card-tech {
-  background: white;
-  border-radius: var(--tech-radius-lg);
-  box-shadow: var(--tech-shadow-md);
-  transition: all var(--tech-transition-normal);
-  overflow: hidden;
-}
-
-.card-tech:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--tech-shadow-lg);
-}
-
-/* =============================================================================
-   8. LOADING STATES
-   ============================================================================= */
-.loading-tech {
-  position: relative;
-  pointer-events: none;
-}
-
-.loading-tech::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border: 2px solid transparent;
-  border-top-color: var(--tech-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* =============================================================================
-   9. SCROLL ANIMATIONS
-   ============================================================================= */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity var(--tech-transition-slow), transform var(--tech-transition-slow);
-}
-
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =============================================================================
-   10. BADGE VARIANTS
-   ============================================================================= */
-.badge-tech {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--tech-space-1);
-  padding: var(--tech-space-1) var(--tech-space-2);
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: var(--tech-radius-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.badge-tech--sale {
-  background: var(--tech-error);
-  color: white;
-}
-
-.badge-tech--new {
-  background: var(--tech-success);
-  color: white;
-}
-
-.badge-tech--popular {
-  background: var(--tech-accent);
-  color: var(--tech-secondary);
-}
-
-/* =============================================================================
-   11. ACCESSIBILITY - REDUCED MOTION PREFERENCES
-   ============================================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .animate-on-scroll {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  :root {
+    --tech-transition-fast: 0ms;
+    --tech-transition-normal: 0ms;
+    --tech-transition-slow: 0ms;
+    --tech-transition-slower: 0ms;
   }
   
-  .button-tech:hover,
-  .card-tech:hover {
-    transform: none;
-  }
-  
-  .link-tech::after {
-    transition: none;
-  }
-  
-  .loading-tech::after {
-    animation: none;
+  /* Disable all animations for users who prefer reduced motion */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
