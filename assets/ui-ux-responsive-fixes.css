@@ -3145,24 +3145,6 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
   }
 }
 
-/* =============================================================================
-   HOME PAGE LAYOUT NORMALIZATION
-   Purpose: Consistent vertical spacing and horizontal alignment across all sections
-   Scope: Only affects homepage (body.template-index)
-   
-   OBJECTIVES:
-   - Desktop: 56px vertical padding per section
-   - Mobile: 32px vertical padding per section  
-   - All H2 headings aligned to same column (page-width)
-   - No large gaps between sections
-   - Consistent padding-inline (gutters)
-   ============================================================================= */
-
-/* Desktop: 56px baseline for consistent vertical rhythm across ALL sections */
-body.template-index .shopify-section {
-  padding-block: 56px !important;
-}
-
 /* Hero (slideshow) - reduce bottom padding to tighten gap to next section */
 body.template-index .shopify-section:first-child {
   padding-top: 0 !important;
