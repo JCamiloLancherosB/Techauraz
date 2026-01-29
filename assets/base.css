@@ -12937,18 +12937,6 @@ textarea:focus-visible,
   color: white;
 }
 
-/* =============================================================================
-   5. ENHANCED VISUAL HIERARCHY
-   Improve readability and visual flow
-   ============================================================================= */
-
-/* Section containers */
-.section-wrapper,
-[class*="section-"] {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
 /* Improve heading hierarchy */
 .section h2,
 .section .h2,
