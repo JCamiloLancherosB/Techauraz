@@ -292,6 +292,10 @@
 <link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-product-card.css' | asset_url }}"></noscript>
 
+<!-- Global Design Tokens and Visual Polish - Premium tech aesthetic - 2026-01-28 -->
+<link rel="preload" href="{{ 'techauraz-design-tokens.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-design-tokens.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER (CURRENT - Updated 2026-01-28)
@@ -337,6 +341,18 @@
      - Product card styles
      - Conversion-optimized card design
      - Badge positioning
+     
+  9. techauraz-design-tokens.css
+     - Global CSS custom properties (--tech-* prefix)
+     - Section styling utilities
+     - Heading decorations with gradient underline
+     - Animated link underlines
+     - Glow buttons with hover/focus states
+     - Card hover effects
+     - Loading states with spinner
+     - Scroll animations
+     - Badge variants (sale, new, popular)
+     - Reduced motion accessibility support
   
   ============================================================================
   Z-INDEX HIERARCHY (defined in techauraz-tokens.css)
@@ -610,6 +626,7 @@
     <script src="{{ 'mobile-fixes-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%} WhatsApp Floating Button {%- endcomment -%}
     {% render 'whatsapp-float' %}
