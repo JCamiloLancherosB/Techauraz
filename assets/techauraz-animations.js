@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, {
     threshold: 0.1,  // Trigger when 10% of element is visible
-    rootMargin: '0px 0px -50px 0px'  // Trigger slightly before element enters viewport
+    rootMargin: '0px 0px -50px 0px'  // Trigger after element enters viewport by 50px (smooth reveal)
   });
   
   // Observe all animated elements
