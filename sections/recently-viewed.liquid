@@ -57,11 +57,8 @@
     <div data-recently-viewed-content>
       {%- comment -%}
         Content is rendered client-side by JavaScript.
-        Show loading state initially for better UX.
+        Empty placeholder shown initially - JS will render content quickly.
       {%- endcomment -%}
-      <div class="recently-viewed__loading">
-        <div class="recently-viewed__loading-spinner"></div>
-      </div>
     </div>
   </div>
 </recently-viewed-section>
@@ -71,10 +68,11 @@
 {%- comment -%}
   Pass product data to JavaScript for tracking on product pages.
   This ensures the current product is added to recently viewed.
+  Uses a namespaced variable to avoid conflicts with other scripts.
 {%- endcomment -%}
 {%- if product -%}
   <script>
-    window.productData = {
+    window.RecentlyViewedProductData = {
       handle: {{ product.handle | json }},
       title: {{ product.title | json }},
       featured_image: {{ product.featured_image | image_url: width: 800 | json }},

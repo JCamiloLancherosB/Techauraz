@@ -8,13 +8,12 @@
  * - Clears products older than 30 days
  * - Syncs across browser tabs using storage event
  * - Handles localStorage quota exceeded errors
- * - Detects incognito/private mode
  */
 
 (function() {
   'use strict';
 
-  const STORAGE_KEY = 'techauraz_recently_viewed';
+  const STORAGE_KEY = 'shopify_recently_viewed';
   const MAX_PRODUCTS = 20;
   const EXPIRY_DAYS = 30;
   const EXPIRY_MS = EXPIRY_DAYS * 24 * 60 * 60 * 1000;
@@ -31,23 +30,6 @@
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  /**
-   * Check if running in incognito/private mode
-   * In many browsers, localStorage works but has limited quota in private mode
-   * @returns {boolean}
-   */
-  function isPrivateMode() {
-    try {
-      // Try to use localStorage with larger data to detect limited quota
-      const testKey = '__private_test__';
-      localStorage.setItem(testKey, new Array(100).join('test'));
-      localStorage.removeItem(testKey);
-      return false;
-    } catch (e) {
-      return true;
     }
   }
 
@@ -88,7 +70,7 @@
    * @param {Array} products
    */
   function saveRecentlyViewed(products) {
-    if (!isLocalStorageAvailable() || isPrivateMode()) return;
+    if (!isLocalStorageAvailable()) return;
     
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
@@ -99,10 +81,8 @@
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(reducedProducts));
         } catch (retryError) {
-          console.warn('Unable to save recently viewed products:', retryError);
+          // Silently fail - this can happen in private mode or when storage is full
         }
-      } else {
-        console.warn('Error saving recently viewed products:', e);
       }
     }
   }
@@ -150,8 +130,8 @@
     // Only track on product pages
     if (!window.location.pathname.includes('/products/')) return;
     
-    // Get product data from the page
-    const productData = window.productData || window.ShopifyAnalytics?.meta?.product;
+    // Get product data from the page (check namespaced variable first, then fallback)
+    const productData = window.RecentlyViewedProductData || window.ShopifyAnalytics?.meta?.product;
     
     if (productData) {
       addProduct({
@@ -210,7 +190,6 @@
       this.autoHide = this.dataset.autoHide === 'true';
       
       this.render();
-      this.setupScrollSync();
       
       // Listen for updates from other tabs
       window.addEventListener('storage', (e) => {
@@ -291,7 +270,7 @@
       return `
         <div class="recently-viewed__carousel-wrapper" data-recently-viewed-wrapper>
           <button type="button" class="recently-viewed__nav recently-viewed__nav--prev" data-recently-viewed-prev aria-label="Anterior">
-            <svg viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M7 9L1 5L7 1"/>
               <path d="M13 5H1"/>
             </svg>
@@ -300,7 +279,7 @@
             ${items}
           </ul>
           <button type="button" class="recently-viewed__nav recently-viewed__nav--next" data-recently-viewed-next aria-label="Siguiente">
-            <svg viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M7 1L13 5L7 9"/>
               <path d="M1 5H13"/>
             </svg>
@@ -313,19 +292,36 @@
       const hasComparePrice = product.compareAtPrice && product.compareAtPrice > product.price;
       const priceClass = hasComparePrice ? 'recently-viewed__product-price--sale' : '';
       
-      // Format price (assuming cents, divide by 100)
+      /**
+       * Format price for display.
+       * Shopify stores prices in the smallest currency unit (cents for COP).
+       * Values >= 100 are treated as cents and divided by 100.
+       * This uses the shop's currency settings when available.
+       */
       const formatPrice = (price) => {
         if (!price) return '';
         const numPrice = typeof price === 'number' ? price : parseFloat(price);
-        if (isNaN(numPrice)) return price;
-        // Check if price is in cents (common in Shopify)
-        const displayPrice = numPrice > 1000 ? numPrice / 100 : numPrice;
-        return new Intl.NumberFormat('es-CO', {
-          style: 'currency',
-          currency: 'COP',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(displayPrice);
+        if (isNaN(numPrice)) return String(price);
+        
+        // Shopify prices are typically in cents (multiply by 100)
+        // Check if the value looks like it's already in cents (>= 100)
+        const displayPrice = numPrice >= 100 ? numPrice / 100 : numPrice;
+        
+        // Use Shopify's currency settings if available, fallback to COP
+        const currency = window.Shopify?.currency?.active || 'COP';
+        const locale = document.documentElement.lang || 'es-CO';
+        
+        try {
+          return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(displayPrice);
+        } catch (e) {
+          // Fallback for unsupported locales/currencies
+          return `$${displayPrice.toLocaleString()}`;
+        }
       };
       
       const priceHtml = product.price ? `
@@ -339,12 +335,10 @@
           alt="${this.escapeHtml(product.title)}"
           class="recently-viewed__product-image"
           loading="lazy"
-          width="400"
-          height="400"
         >
       ` : `
-        <div class="recently-viewed__product-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <div class="recently-viewed__product-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="2"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <path d="M21 15l-5-5L5 21"/>
@@ -370,18 +364,24 @@
     }
 
     getOptimizedImageUrl(url, width) {
-      if (!url) return '';
-      // Handle Shopify CDN URLs
-      if (url.includes('cdn.shopify.com')) {
-        return url.replace(/(_\d+x\d+)?(\.[a-z]+)(\?.*)?$/i, `_${width}x$2`);
+      if (!url || typeof url !== 'string') return '';
+      // Handle Shopify CDN URLs - check for proper format before replacing
+      if (url.includes('cdn.shopify.com') && /\.(jpg|jpeg|png|gif|webp)/i.test(url)) {
+        return url.replace(/(_\d+x\d*)?(\.(jpg|jpeg|png|gif|webp))(\?.*)?$/i, `_${width}x$2$4`);
       }
       return url;
     }
 
+    /**
+     * Escape HTML to prevent XSS vulnerabilities.
+     * Uses DOM textContent/innerHTML for safe escaping.
+     * @param {*} str - Value to escape (will be converted to string)
+     * @returns {string} HTML-safe string
+     */
     escapeHtml(str) {
-      if (!str) return '';
+      if (str === null || str === undefined) return '';
       const div = document.createElement('div');
-      div.textContent = str;
+      div.textContent = String(str);
       return div.innerHTML;
     }
 
@@ -430,15 +430,6 @@
       // Update fade effect classes
       this.wrapper.classList.toggle('has-scroll-left', canScrollLeft);
       this.wrapper.classList.toggle('has-scroll-right', canScrollRight);
-    }
-
-    setupScrollSync() {
-      // Listen for storage changes from other tabs
-      window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) {
-          this.render();
-        }
-      });
     }
   }
 
