@@ -197,10 +197,41 @@
       "delivery_estimate": {
         "arrives_between": "Llega entre {{ min }} y {{ max }}",
         "fallback": "Entrega 2–5 días hábiles"
-      }
+      },
+      "in_stock": "En stock"
     },
     "modal": {
       "label": "Galería media"
+    },
+    "comparison": {
+      "compare": "Comparar",
+      "compare_products": "Comparar productos",
+      "specification": "Especificación",
+      "price": "Precio",
+      "availability": "Disponibilidad",
+      "vendor": "Marca",
+      "type": "Tipo",
+      "description": "Descripción",
+      "ports": "Puertos",
+      "capacity": "Capacidad",
+      "connectivity": "Conectividad",
+      "battery": "Batería",
+      "dimensions": "Dimensiones",
+      "weight": "Peso",
+      "warranty": "Garantía",
+      "save": "Ahorras",
+      "remove": "Quitar",
+      "clear_all": "Limpiar todo",
+      "share_comparison": "Compartir comparación:",
+      "copy_link": "Copiar enlace",
+      "empty_title": "No hay productos para comparar",
+      "empty_text": "Agrega productos a la comparación desde las tarjetas de producto usando el botón \"Comparar\".",
+      "browse_products": "Explorar productos",
+      "product_added": "Producto agregado a comparación",
+      "product_removed": "Producto eliminado de comparación",
+      "max_reached": "Máximo 4 productos para comparar",
+      "products_selected": "{count} producto(s) seleccionado(s)",
+      "link_copied": "Enlace copiado al portapapeles"
     },
     "facets": {
       "apply": "Aplicar",

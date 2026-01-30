@@ -1,0 +1,51 @@
+{% comment %}
+  Compare Button Snippet
+  Renders a toggle button for adding/removing products from comparison
+  
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - show_counter: {Boolean} Show counter badge (optional, default: false)
+  - class: {String} Additional CSS classes (optional)
+  
+  Usage:
+  {% render 'compare-button', product: product, show_counter: true %}
+{% endcomment %}
+
+{%- if product and product != empty -%}
+  {%- liquid
+    assign button_class = 'compare-button'
+    if class != blank
+      assign button_class = button_class | append: ' ' | append: class
+    endif
+  -%}
+  
+  <button
+    type="button"
+    class="{{ button_class }}"
+    data-compare-button
+    data-product-id="{{ product.id }}"
+    data-product-handle="{{ product.handle }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-url="{{ product.url }}"
+    data-product-image="{{ product.featured_media | image_url: width: 200 }}"
+    data-product-price="{{ product.price | money }}"
+    {%- if product.compare_at_price > product.price -%}
+      data-product-compare-price="{{ product.compare_at_price | money }}"
+    {%- endif -%}
+    data-product-available="{{ product.available }}"
+    aria-pressed="false"
+    aria-label="{{ 'products.comparison.compare' | t | default: 'Comparar' }}: {{ product.title | escape }}"
+  >
+    <span class="compare-button__icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+    </span>
+    <span class="compare-button__text">{{ 'products.comparison.compare' | t | default: 'Comparar' }}</span>
+    {%- if show_counter -%}
+      <span class="compare-button__badge" data-compare-counter style="display: none;">0</span>
+    {%- endif -%}
+  </button>
+{%- endif -%}
