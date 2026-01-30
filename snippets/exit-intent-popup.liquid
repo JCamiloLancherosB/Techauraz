@@ -1,0 +1,236 @@
+{% comment %}
+  Exit Intent Popup - TechAura Colombia
+  
+  A conversion-optimized popup that appears when visitors show intent to leave.
+  Designed for the Colombian market with Spanish content and GDPR compliance.
+  
+  Features:
+  - Desktop: Mouse exit detection (cursor leaving viewport)
+  - Mobile: Scroll-up detection or back button intent
+  - Session/localStorage to respect user dismissal
+  - Email validation and marketing consent
+  - Integration with Shopify newsletter
+  - Countdown timer for urgency (optional)
+  
+  Settings:
+  - Enable/disable popup
+  - Discount code to display
+  - Customizable headline and body text
+  - Time delay before popup can trigger
+  - Pages to exclude (checkout, cart)
+  
+  Usage:
+  {% render 'exit-intent-popup' %}
+{% endcomment %}
+
+{%- comment -%} Check if popup is enabled in theme settings {%- endcomment -%}
+{%- if settings.exit_intent_popup_enabled -%}
+  {%- comment -%} Check if current page should be excluded {%- endcomment -%}
+  {%- assign current_template = template.name -%}
+  {%- assign should_show = true -%}
+  
+  {%- comment -%} Exclude checkout pages (mainly for Shopify Plus stores) {%- endcomment -%}
+  {%- if current_template == 'checkout' -%}
+    {%- assign should_show = false -%}
+  {%- endif -%}
+  
+  {%- comment -%} Exclude cart page if setting is enabled {%- endcomment -%}
+  {%- if settings.exit_intent_exclude_cart and current_template == 'cart' -%}
+    {%- assign should_show = false -%}
+  {%- endif -%}
+  
+  {%- if should_show -%}
+    {%- comment -%} Lazy load CSS for performance - using media print approach {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'exit-intent-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ 'exit-intent-popup.css' | asset_url }}"></noscript>
+    
+    <div 
+      id="exit-intent-popup" 
+      class="exit-intent-popup" 
+      role="dialog" 
+      aria-modal="true" 
+      aria-labelledby="exit-intent-title"
+      aria-describedby="exit-intent-description"
+      aria-hidden="true"
+      tabindex="-1"
+      data-delay="{{ settings.exit_intent_delay | default: 10 }}"
+      data-discount-code="{{ settings.exit_intent_discount_code | default: 'BIENVENIDO10' }}"
+    >
+      {%- comment -%} Modal Backdrop {%- endcomment -%}
+      <div class="exit-intent-popup__backdrop" data-exit-intent-close></div>
+      
+      {%- comment -%} Modal Container {%- endcomment -%}
+      <div class="exit-intent-popup__container">
+        {%- comment -%} Close Button {%- endcomment -%}
+        <button 
+          type="button" 
+          class="exit-intent-popup__close" 
+          aria-label="{{ 'accessibility.close' | t | default: 'Cerrar' }}"
+          data-exit-intent-close
+        >
+          <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        
+        {%- comment -%} Popup Content {%- endcomment -%}
+        <div class="exit-intent-popup__content">
+          {%- comment -%} Gift Icon / Illustration {%- endcomment -%}
+          <div class="exit-intent-popup__icon">
+            <svg aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 12 20 22 4 22 4 12"></polyline>
+              <rect x="2" y="7" width="20" height="5"></rect>
+              <line x1="12" y1="22" x2="12" y2="7"></line>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+          </div>
+          
+          {%- comment -%} Headline {%- endcomment -%}
+          <h2 id="exit-intent-title" class="exit-intent-popup__title">
+            {{ settings.exit_intent_headline | default: '¡Espera! 🎁 Tenemos algo para ti' }}
+          </h2>
+          
+          {%- comment -%} Offer Description {%- endcomment -%}
+          <p id="exit-intent-description" class="exit-intent-popup__description">
+            {{ settings.exit_intent_body_text | default: 'Obtén 10% de descuento en tu primera compra' }}
+          </p>
+          
+          {%- comment -%} Discount Code Display {%- endcomment -%}
+          <div class="exit-intent-popup__discount-code" id="exit-intent-discount-display">
+            <span class="exit-intent-popup__discount-label">Tu código:</span>
+            <span class="exit-intent-popup__discount-value">{{ settings.exit_intent_discount_code | default: 'BIENVENIDO10' }}</span>
+            <button type="button" class="exit-intent-popup__copy-btn" data-copy-discount aria-label="Copiar código de descuento">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          
+          {%- comment -%} Countdown Timer (optional) {%- endcomment -%}
+          {%- if settings.exit_intent_show_countdown -%}
+            <div class="exit-intent-popup__countdown" aria-live="polite">
+              <span class="exit-intent-popup__countdown-label">Oferta válida por:</span>
+              <div class="exit-intent-popup__countdown-timer" id="exit-intent-countdown">
+                <span class="exit-intent-popup__countdown-value" data-minutes>15</span>
+                <span class="exit-intent-popup__countdown-separator">:</span>
+                <span class="exit-intent-popup__countdown-value" data-seconds>00</span>
+              </div>
+            </div>
+          {%- endif -%}
+          
+          {%- comment -%} Email Signup Form {%- endcomment -%}
+          <form class="exit-intent-popup__form" id="exit-intent-form" method="post" action="{{ routes.root_url }}contact#contact_form" accept-charset="UTF-8">
+            <input type="hidden" name="form_type" value="customer">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="contact[tags]" value="newsletter,exit-intent,discount">
+            
+            <div class="exit-intent-popup__form-group">
+              <label for="exit-intent-email" class="visually-hidden">{{ 'newsletter.label' | t | default: 'Correo electrónico' }}</label>
+              <input 
+                type="email" 
+                id="exit-intent-email" 
+                name="contact[email]" 
+                class="exit-intent-popup__input" 
+                placeholder="{{ settings.exit_intent_email_placeholder | default: 'Tu correo electrónico' }}"
+                autocomplete="email"
+                required
+                aria-describedby="exit-intent-email-error"
+              >
+              <span id="exit-intent-email-error" class="exit-intent-popup__error" role="alert" aria-live="polite"></span>
+            </div>
+            
+            {%- comment -%} GDPR Consent Checkbox {%- endcomment -%}
+            <div class="exit-intent-popup__consent">
+              <label class="exit-intent-popup__checkbox-label">
+                <input 
+                  type="checkbox" 
+                  name="contact[accepts_marketing]" 
+                  value="true"
+                  class="exit-intent-popup__checkbox"
+                  required
+                  id="exit-intent-consent"
+                >
+                <span class="exit-intent-popup__checkbox-custom"></span>
+                <span class="exit-intent-popup__consent-text">
+                  {{ settings.exit_intent_consent_text | default: 'Acepto recibir ofertas y novedades por email. Puedo cancelar en cualquier momento.' }}
+                </span>
+              </label>
+            </div>
+            
+            {%- comment -%} Submit Button {%- endcomment -%}
+            <button type="submit" class="exit-intent-popup__submit" id="exit-intent-submit">
+              <span class="exit-intent-popup__submit-text">
+                {{ settings.exit_intent_cta_text | default: 'OBTENER MI DESCUENTO' }}
+              </span>
+              <span class="exit-intent-popup__submit-loading hidden">
+                <svg class="exit-intent-popup__spinner" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.416" stroke-dashoffset="10">
+                    <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+                Enviando...
+              </span>
+            </button>
+          </form>
+          
+          {%- comment -%} Dismiss Link {%- endcomment -%}
+          <button type="button" class="exit-intent-popup__dismiss" data-exit-intent-close data-track-dismiss>
+            {{ settings.exit_intent_dismiss_text | default: 'No, gracias. Prefiero pagar precio completo' }}
+          </button>
+        </div>
+        
+        {%- comment -%} Success State {%- endcomment -%}
+        <div class="exit-intent-popup__success hidden" id="exit-intent-success">
+          <div class="exit-intent-popup__success-icon">
+            <svg aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h3 class="exit-intent-popup__success-title">¡Gracias! 🎉</h3>
+          <p class="exit-intent-popup__success-message">
+            Te hemos enviado el código de descuento a tu correo.
+          </p>
+          <div class="exit-intent-popup__discount-code exit-intent-popup__discount-code--success">
+            <span class="exit-intent-popup__discount-label">Tu código:</span>
+            <span class="exit-intent-popup__discount-value">{{ settings.exit_intent_discount_code | default: 'BIENVENIDO10' }}</span>
+            <button type="button" class="exit-intent-popup__copy-btn" data-copy-discount aria-label="Copiar código de descuento">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          <a href="{{ routes.all_products_collection_url }}" class="exit-intent-popup__shop-btn">
+            COMPRAR AHORA
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    {%- comment -%} JavaScript configuration {%- endcomment -%}
+    <script type="application/json" id="exit-intent-config">
+    {
+      "enabled": true,
+      "delay": {{ settings.exit_intent_delay | default: 10 }},
+      "discountCode": {{ settings.exit_intent_discount_code | default: 'BIENVENIDO10' | json }},
+      "showCountdown": {{ settings.exit_intent_show_countdown | default: false }},
+      "countdownMinutes": {{ settings.exit_intent_countdown_minutes | default: 15 }},
+      "cartItemCount": {{ cart.item_count | default: 0 }},
+      "strings": {
+        "emailRequired": "Por favor ingresa tu correo electrónico",
+        "emailInvalid": "Por favor ingresa un correo electrónico válido",
+        "consentRequired": "Debes aceptar recibir comunicaciones",
+        "submitError": "Hubo un error. Por favor intenta de nuevo.",
+        "copied": "¡Código copiado!"
+      }
+    }
+    </script>
+    
+    {%- comment -%} Lazy load JavaScript for performance {%- endcomment -%}
+    <script src="{{ 'exit-intent-popup.js' | asset_url }}" defer></script>
+  {%- endif -%}
+{%- endif -%}
