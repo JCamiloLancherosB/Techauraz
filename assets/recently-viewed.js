@@ -365,10 +365,26 @@
 
     getOptimizedImageUrl(url, width) {
       if (!url || typeof url !== 'string') return '';
-      // Handle Shopify CDN URLs - check for proper format before replacing
-      if (url.includes('cdn.shopify.com') && /\.(jpg|jpeg|png|gif|webp)/i.test(url)) {
-        return url.replace(/(_\d+x\d*)?(\.(jpg|jpeg|png|gif|webp))(\?.*)?$/i, `_${width}x$2$4`);
+      
+      // Validate and handle Shopify CDN URLs only
+      // Use URL parsing to properly validate the hostname
+      try {
+        const parsedUrl = new URL(url);
+        const hostname = parsedUrl.hostname;
+        
+        // Only process if it's a legitimate Shopify CDN hostname
+        // Must end with .cdn.shopify.com (subdomain) or be exactly cdn.shopify.com
+        const isShopifyCdn = hostname === 'cdn.shopify.com' || 
+                            hostname.endsWith('.cdn.shopify.com') ||
+                            hostname.endsWith('.myshopify.com');
+        
+        if (isShopifyCdn && /\.(jpg|jpeg|png|gif|webp)/i.test(url)) {
+          return url.replace(/(_\d+x\d*)?(\.(jpg|jpeg|png|gif|webp))(\?.*)?$/i, `_${width}x$2$4`);
+        }
+      } catch (e) {
+        // Invalid URL - return as-is
       }
+      
       return url;
     }
 
