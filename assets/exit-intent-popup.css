@@ -1,0 +1,782 @@
+/**
+ * =============================================================================
+ * EXIT INTENT POPUP STYLES - TechAura Colombia
+ * Version: 1.0.0
+ * =============================================================================
+ * 
+ * Conversion-optimized popup for capturing leaving visitors.
+ * Uses TechAura design tokens for consistent branding.
+ * 
+ * Features:
+ * - Centered modal with dark overlay
+ * - Animated entrance (scale + fade)
+ * - Mobile: Bottom sheet style
+ * - Success state after email submission
+ * - GDPR compliant design
+ * =============================================================================
+ */
+
+/* =============================================================================
+   1. MODAL CONTAINER & BACKDROP
+   ============================================================================= */
+
+.exit-intent-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--ta-z-modal, 450);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ta-space-lg, 1.6rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.exit-intent-popup[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.exit-intent-popup__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+/* =============================================================================
+   2. MODAL CONTENT CONTAINER
+   ============================================================================= */
+
+.exit-intent-popup__container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  background: var(--ta-bg, #ffffff);
+  border-radius: var(--ta-radius-xl, 20px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  overflow-y: auto;
+  transform: scale(0.9) translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+.exit-intent-popup[aria-hidden="false"] .exit-intent-popup__container {
+  transform: scale(1) translateY(0);
+}
+
+/* =============================================================================
+   3. CLOSE BUTTON
+   ============================================================================= */
+
+.exit-intent-popup__close {
+  position: absolute;
+  top: var(--ta-space-md, 1.2rem);
+  right: var(--ta-space-md, 1.2rem);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ta-bg-secondary, #f8fafc);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.exit-intent-popup__close:hover {
+  background: var(--ta-bg, #ffffff);
+  border-color: var(--ta-border-hover, #3b82f6);
+  transform: scale(1.1);
+}
+
+.exit-intent-popup__close:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.exit-intent-popup__close svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ta-text-muted, #64748b);
+  transition: color 0.2s ease;
+}
+
+.exit-intent-popup__close:hover svg {
+  color: var(--ta-text, #0f172a);
+}
+
+/* =============================================================================
+   4. POPUP CONTENT
+   ============================================================================= */
+
+.exit-intent-popup__content {
+  padding: var(--ta-space-2xl, 3.2rem) var(--ta-space-xl, 2.4rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ta-space-md, 1.2rem);
+}
+
+/* =============================================================================
+   5. ICON / ILLUSTRATION
+   ============================================================================= */
+
+.exit-intent-popup__icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--ta-primary, #2563eb), var(--ta-primary-dark, #1e40af));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--ta-space-sm, 0.8rem);
+  animation: exit-intent-bounce 0.6s ease-out 0.3s both;
+}
+
+.exit-intent-popup__icon svg {
+  width: 48px;
+  height: 48px;
+  color: #ffffff;
+}
+
+@keyframes exit-intent-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* =============================================================================
+   6. TITLE & DESCRIPTION
+   ============================================================================= */
+
+.exit-intent-popup__title {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-text, #0f172a);
+  line-height: var(--ta-leading-tight, 1.25);
+  margin: 0;
+  animation: exit-intent-fade-up 0.5s ease-out 0.4s both;
+}
+
+.exit-intent-popup__description {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: var(--ta-text-muted, #64748b);
+  line-height: var(--ta-leading-relaxed, 1.625);
+  margin: 0;
+  animation: exit-intent-fade-up 0.5s ease-out 0.5s both;
+}
+
+@keyframes exit-intent-fade-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* =============================================================================
+   7. DISCOUNT CODE DISPLAY
+   ============================================================================= */
+
+.exit-intent-popup__discount-code {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px dashed #f59e0b;
+  border-radius: var(--ta-radius-md, 8px);
+  margin: var(--ta-space-sm, 0.8rem) 0;
+  animation: exit-intent-fade-up 0.5s ease-out 0.6s both;
+}
+
+.exit-intent-popup__discount-code--success {
+  animation: none;
+  margin-top: var(--ta-space-lg, 1.6rem);
+}
+
+.exit-intent-popup__discount-label {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: #92400e;
+}
+
+.exit-intent-popup__discount-value {
+  font-size: var(--ta-font-size-lg, 1.8rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: #b45309;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  font-family: monospace;
+}
+
+.exit-intent-popup__copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: var(--ta-radius-sm, 4px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-left: auto;
+}
+
+.exit-intent-popup__copy-btn:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+}
+
+.exit-intent-popup__copy-btn:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.exit-intent-popup__copy-btn svg {
+  color: #92400e;
+}
+
+.exit-intent-popup__copy-btn.copied {
+  background: #10b981;
+}
+
+.exit-intent-popup__copy-btn.copied svg {
+  color: #ffffff;
+}
+
+/* =============================================================================
+   8. COUNTDOWN TIMER
+   ============================================================================= */
+
+.exit-intent-popup__countdown {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  padding: var(--ta-space-sm, 0.8rem) var(--ta-space-md, 1.2rem);
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-radius: var(--ta-radius-md, 8px);
+  animation: exit-intent-fade-up 0.5s ease-out 0.7s both;
+}
+
+.exit-intent-popup__countdown-label {
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  font-weight: var(--ta-font-medium, 500);
+  color: #991b1b;
+}
+
+.exit-intent-popup__countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.exit-intent-popup__countdown-value {
+  font-size: var(--ta-font-size-lg, 1.8rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: #dc2626;
+  font-family: monospace;
+  min-width: 28px;
+  text-align: center;
+}
+
+.exit-intent-popup__countdown-separator {
+  font-size: var(--ta-font-size-lg, 1.8rem);
+  font-weight: var(--ta-font-bold, 700);
+  color: #dc2626;
+  animation: exit-intent-blink 1s infinite;
+}
+
+@keyframes exit-intent-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* =============================================================================
+   9. EMAIL FORM
+   ============================================================================= */
+
+.exit-intent-popup__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ta-space-md, 1.2rem);
+  animation: exit-intent-fade-up 0.5s ease-out 0.7s both;
+}
+
+.exit-intent-popup__form-group {
+  position: relative;
+  width: 100%;
+}
+
+.exit-intent-popup__input {
+  width: 100%;
+  height: var(--ta-touch-comfortable, 52px);
+  padding: 0 var(--ta-space-lg, 1.6rem);
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: var(--ta-text, #0f172a);
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-button, 8px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exit-intent-popup__input::placeholder {
+  color: var(--ta-text-muted, #64748b);
+}
+
+.exit-intent-popup__input:focus {
+  outline: none;
+  border-color: var(--ta-primary, #2563eb);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.exit-intent-popup__input:invalid:not(:placeholder-shown) {
+  border-color: var(--ta-error, #ef4444);
+}
+
+.exit-intent-popup__input.has-error {
+  border-color: var(--ta-error, #ef4444);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.exit-intent-popup__error {
+  display: none;
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-error, #ef4444);
+  text-align: left;
+  margin-top: var(--ta-space-xs, 0.4rem);
+}
+
+.exit-intent-popup__error.visible {
+  display: block;
+}
+
+/* =============================================================================
+   10. GDPR CONSENT CHECKBOX
+   ============================================================================= */
+
+.exit-intent-popup__consent {
+  width: 100%;
+  text-align: left;
+}
+
+.exit-intent-popup__checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ta-space-sm, 0.8rem);
+  cursor: pointer;
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
+  line-height: var(--ta-leading-relaxed, 1.625);
+}
+
+.exit-intent-popup__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.exit-intent-popup__checkbox-custom {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-sm, 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 2px;
+}
+
+.exit-intent-popup__checkbox:checked + .exit-intent-popup__checkbox-custom {
+  background: var(--ta-primary, #2563eb);
+  border-color: var(--ta-primary, #2563eb);
+}
+
+.exit-intent-popup__checkbox:checked + .exit-intent-popup__checkbox-custom::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-top: -2px;
+}
+
+.exit-intent-popup__checkbox:focus-visible + .exit-intent-popup__checkbox-custom {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.exit-intent-popup__consent-text {
+  flex: 1;
+}
+
+/* =============================================================================
+   11. SUBMIT BUTTON
+   ============================================================================= */
+
+.exit-intent-popup__submit {
+  width: 100%;
+  min-height: var(--ta-touch-comfortable, 52px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-xl, 2.4rem);
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  border: none;
+  border-radius: var(--ta-radius-button, 8px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ta-space-sm, 0.8rem);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.exit-intent-popup__submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
+}
+
+.exit-intent-popup__submit:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+}
+
+.exit-intent-popup__submit:focus-visible {
+  outline: 3px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.exit-intent-popup__submit:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Loading state */
+.exit-intent-popup__submit.is-loading .exit-intent-popup__submit-text {
+  display: none;
+}
+
+.exit-intent-popup__submit.is-loading .exit-intent-popup__submit-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--ta-space-sm, 0.8rem);
+}
+
+.exit-intent-popup__spinner {
+  animation: exit-intent-spin 1s linear infinite;
+}
+
+@keyframes exit-intent-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* =============================================================================
+   12. DISMISS LINK
+   ============================================================================= */
+
+.exit-intent-popup__dismiss {
+  background: none;
+  border: none;
+  font-size: var(--ta-font-size-sm, 1.4rem);
+  color: var(--ta-text-muted, #64748b);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: var(--ta-space-sm, 0.8rem);
+  transition: color 0.2s ease;
+  animation: exit-intent-fade-up 0.5s ease-out 0.8s both;
+}
+
+.exit-intent-popup__dismiss:hover {
+  color: var(--ta-text, #0f172a);
+}
+
+.exit-intent-popup__dismiss:focus-visible {
+  outline: 2px solid var(--ta-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   13. SUCCESS STATE
+   ============================================================================= */
+
+.exit-intent-popup__success {
+  padding: var(--ta-space-2xl, 3.2rem) var(--ta-space-xl, 2.4rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ta-space-md, 1.2rem);
+}
+
+.exit-intent-popup__success.hidden {
+  display: none;
+}
+
+.exit-intent-popup__success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: exit-intent-success-pop 0.5s ease-out;
+}
+
+.exit-intent-popup__success-icon svg {
+  width: 48px;
+  height: 48px;
+  color: #ffffff;
+}
+
+@keyframes exit-intent-success-pop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.exit-intent-popup__success-title {
+  font-size: var(--ta-font-size-h3, 2.4rem);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-text, #0f172a);
+  margin: 0;
+}
+
+.exit-intent-popup__success-message {
+  font-size: var(--ta-font-size-md, 1.6rem);
+  color: var(--ta-text-muted, #64748b);
+  margin: 0;
+}
+
+.exit-intent-popup__shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--ta-touch-comfortable, 52px);
+  padding: var(--ta-space-md, 1.2rem) var(--ta-space-xl, 2.4rem);
+  font-size: var(--ta-font-size-md, 1.6rem);
+  font-weight: var(--ta-font-bold, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--ta-radius-button, 8px);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+  margin-top: var(--ta-space-md, 1.2rem);
+}
+
+.exit-intent-popup__shop-btn:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  transform: translateY(-2px);
+}
+
+/* =============================================================================
+   14. MOBILE STYLES - BOTTOM SHEET
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  .exit-intent-popup {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .exit-intent-popup__container {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: var(--ta-radius-xl, 20px) var(--ta-radius-xl, 20px) 0 0;
+    transform: translateY(100%);
+  }
+
+  .exit-intent-popup[aria-hidden="false"] .exit-intent-popup__container {
+    transform: translateY(0);
+  }
+
+  .exit-intent-popup__content {
+    padding: var(--ta-space-xl, 2.4rem) var(--ta-space-lg, 1.6rem);
+    padding-bottom: calc(var(--ta-space-xl, 2.4rem) + env(safe-area-inset-bottom, 0));
+  }
+
+  .exit-intent-popup__success {
+    padding: var(--ta-space-xl, 2.4rem) var(--ta-space-lg, 1.6rem);
+    padding-bottom: calc(var(--ta-space-xl, 2.4rem) + env(safe-area-inset-bottom, 0));
+  }
+
+  .exit-intent-popup__icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .exit-intent-popup__icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .exit-intent-popup__title {
+    font-size: var(--ta-font-size-xl, 2rem);
+  }
+
+  .exit-intent-popup__description {
+    font-size: var(--ta-font-size-sm, 1.4rem);
+  }
+
+  .exit-intent-popup__close {
+    top: var(--ta-space-sm, 0.8rem);
+    right: var(--ta-space-sm, 0.8rem);
+  }
+
+  /* Bottom sheet handle indicator */
+  .exit-intent-popup__container::before {
+    content: '';
+    position: absolute;
+    top: var(--ta-space-sm, 0.8rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--ta-border-light, #e2e8f0);
+    border-radius: 2px;
+  }
+}
+
+/* =============================================================================
+   15. TABLET ADJUSTMENTS
+   ============================================================================= */
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .exit-intent-popup__container {
+    max-width: 440px;
+  }
+}
+
+/* =============================================================================
+   16. BODY SCROLL LOCK
+   ============================================================================= */
+
+body.exit-intent-popup-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* =============================================================================
+   17. ACCESSIBILITY - REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .exit-intent-popup,
+  .exit-intent-popup__container,
+  .exit-intent-popup__close,
+  .exit-intent-popup__submit,
+  .exit-intent-popup__dismiss,
+  .exit-intent-popup__copy-btn,
+  .exit-intent-popup__icon,
+  .exit-intent-popup__title,
+  .exit-intent-popup__description,
+  .exit-intent-popup__discount-code,
+  .exit-intent-popup__countdown,
+  .exit-intent-popup__form,
+  .exit-intent-popup__success-icon {
+    transition: none;
+    animation: none;
+  }
+
+  .exit-intent-popup[aria-hidden="false"] .exit-intent-popup__container {
+    transform: none;
+  }
+
+  .exit-intent-popup__countdown-separator {
+    animation: none;
+  }
+}
+
+/* =============================================================================
+   18. PRINT STYLES
+   ============================================================================= */
+
+@media print {
+  .exit-intent-popup {
+    display: none !important;
+  }
+}
+
+/* =============================================================================
+   19. HIDDEN UTILITY CLASS
+   ============================================================================= */
+
+.exit-intent-popup .hidden {
+  display: none !important;
+}
+
+/* =============================================================================
+   20. HIGH CONTRAST MODE SUPPORT
+   ============================================================================= */
+
+@media (prefers-contrast: high) {
+  .exit-intent-popup__container {
+    border: 2px solid var(--ta-text, #0f172a);
+  }
+
+  .exit-intent-popup__input {
+    border-width: 3px;
+  }
+
+  .exit-intent-popup__checkbox-custom {
+    border-width: 3px;
+  }
+}
