@@ -1414,6 +1414,85 @@
     ]
   },
   {
+    "name": "Trust Badges",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configuraci\u00f3n de sellos de confianza"
+      },
+      {
+        "type": "paragraph",
+        "content": "Configura los sellos de confianza que aparecen en las p\u00e1ginas de producto y carrito."
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_shipping",
+        "label": "Mostrar sello de env\u00edo gratis",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_shipping_text",
+        "label": "Texto del sello de env\u00edo",
+        "default": "Env\u00edo gratis a toda Colombia"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_payment",
+        "label": "Mostrar sello de pago contraentrega",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_payment_text",
+        "label": "Texto del sello de pago",
+        "default": "Pago contraentrega disponible"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_secure",
+        "label": "Mostrar sello de compra segura",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_secure_text",
+        "label": "Texto del sello de seguridad",
+        "default": "Compra 100% segura"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_guarantee",
+        "label": "Mostrar sello de garant\u00eda",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_guarantee_text",
+        "label": "Texto del sello de garant\u00eda",
+        "default": "Garant\u00eda de 30 d\u00edas"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_delivery",
+        "label": "Mostrar sello de entrega r\u00e1pida",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_delivery_text",
+        "label": "Texto del sello de entrega",
+        "default": "Entrega en 2-5 d\u00edas h\u00e1biles"
+      },
+      {
+        "type": "color",
+        "id": "trust_badge_icon_color",
+        "label": "Color de iconos",
+        "default": "#6B46C1"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.cart.name",
     "settings": [
       {

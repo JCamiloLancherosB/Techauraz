@@ -1,0 +1,113 @@
+{% comment %}
+  Trust Badges Snippet
+  
+  Displays configurable trust badges throughout checkout flow and product pages.
+  Reduces purchase anxiety and increases conversions.
+  
+  Usage:
+  {% render 'trust-badges' %}
+  {% render 'trust-badges', layout: 'compact' %}
+  {% render 'trust-badges', show_heading: false %}
+  
+  Parameters:
+  - layout: 'default' | 'compact' | 'minimal' (optional, default: 'default')
+  - show_heading: boolean (optional, default: true)
+  - context: 'product' | 'cart' | 'checkout' (optional, for styling variations)
+{% endcomment %}
+
+{%- liquid
+  assign layout_class = layout | default: 'default'
+  assign show_heading_flag = show_heading | default: true
+  assign context_class = context | default: ''
+  
+  assign show_shipping = settings.trust_badge_shipping | default: true
+  assign show_payment = settings.trust_badge_payment | default: true
+  assign show_secure = settings.trust_badge_secure | default: true
+  assign show_guarantee = settings.trust_badge_guarantee | default: true
+  assign show_delivery = settings.trust_badge_delivery | default: true
+  
+  assign text_shipping = settings.trust_badge_shipping_text | default: 'Envío gratis a toda Colombia'
+  assign text_payment = settings.trust_badge_payment_text | default: 'Pago contraentrega disponible'
+  assign text_secure = settings.trust_badge_secure_text | default: 'Compra 100% segura'
+  assign text_guarantee = settings.trust_badge_guarantee_text | default: 'Garantía de 30 días'
+  assign text_delivery = settings.trust_badge_delivery_text | default: 'Entrega en 2-5 días hábiles'
+  
+  assign icon_color = settings.trust_badge_icon_color | default: '#6B46C1'
+  
+  assign visible_badges = 0
+  if show_shipping
+    assign visible_badges = visible_badges | plus: 1
+  endif
+  if show_payment
+    assign visible_badges = visible_badges | plus: 1
+  endif
+  if show_secure
+    assign visible_badges = visible_badges | plus: 1
+  endif
+  if show_guarantee
+    assign visible_badges = visible_badges | plus: 1
+  endif
+  if show_delivery
+    assign visible_badges = visible_badges | plus: 1
+  endif
+-%}
+
+{%- if visible_badges > 0 -%}
+  {{ 'trust-badges.css' | asset_url | stylesheet_tag }}
+  
+  <div 
+    class="trust-badges-inline trust-badges-inline--{{ layout_class }}{% if context_class != '' %} trust-badges-inline--{{ context_class }}{% endif %}"
+    style="--trust-badge-icon-color: {{ icon_color }};"
+  >
+    {%- if show_heading_flag and layout_class != 'compact' and layout_class != 'minimal' -%}
+      <p class="trust-badges-inline__heading">{{ 'sections.trust_badges.heading' | t | default: 'Compra con confianza' }}</p>
+    {%- endif -%}
+    
+    <div class="trust-badges-inline__grid">
+      {%- if show_shipping -%}
+        <div class="trust-badges-inline__item">
+          <span class="trust-badges-inline__icon">
+            {%- render 'icon-trust-shipping' -%}
+          </span>
+          <span class="trust-badges-inline__text">{{ text_shipping }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if show_payment -%}
+        <div class="trust-badges-inline__item">
+          <span class="trust-badges-inline__icon">
+            {%- render 'icon-trust-payment' -%}
+          </span>
+          <span class="trust-badges-inline__text">{{ text_payment }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if show_secure -%}
+        <div class="trust-badges-inline__item">
+          <span class="trust-badges-inline__icon">
+            {%- render 'icon-trust-secure' -%}
+          </span>
+          <span class="trust-badges-inline__text">{{ text_secure }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if show_guarantee -%}
+        <div class="trust-badges-inline__item">
+          <span class="trust-badges-inline__icon">
+            {%- render 'icon-trust-guarantee' -%}
+          </span>
+          <span class="trust-badges-inline__text">{{ text_guarantee }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if show_delivery -%}
+        <div class="trust-badges-inline__item">
+          <span class="trust-badges-inline__icon">
+            {%- render 'icon-trust-delivery' -%}
+          </span>
+          <span class="trust-badges-inline__text">{{ text_delivery }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
