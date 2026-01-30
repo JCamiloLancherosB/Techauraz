@@ -85,14 +85,14 @@
               {%- comment -%} Recent Searches Section - Rendered via JavaScript {%- endcomment -%}
               <div class="predictive-search__recent-searches" data-recent-searches style="display: none;">
                 <div class="predictive-search__recent-searches-header">
-                  <h2 class="predictive-search__recent-searches-title">
-                    {{- 'templates.search.predictive.recent_searches' | t | default: 'Búsquedas recientes' -}}
-                  </h2>
+                  <div class="predictive-search__recent-searches-title" role="heading" aria-level="2">
+                    {{- 'templates.search.predictive.recent_searches' | t -}}
+                  </div>
                   <button type="button" class="predictive-search__recent-clear-btn" data-clear-recent-searches>
-                    {{- 'templates.search.predictive.clear_recent' | t | default: 'Borrar todo' -}}
+                    {{- 'templates.search.predictive.clear_recent' | t -}}
                   </button>
                 </div>
-                <div class="predictive-search__recent-list" data-recent-searches-list></div>
+                <div class="predictive-search__recent-list" data-recent-searches-list aria-label="{{ 'templates.search.predictive.recent_searches' | t }}"></div>
               </div>
               
               {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}

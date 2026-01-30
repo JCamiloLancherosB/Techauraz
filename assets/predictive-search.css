@@ -160,11 +160,20 @@ predictive-search[open] .predictive-search--header {
 }
 
 .predictive-search__recent-remove {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
   opacity: 0.5;
   margin-left: 0.4rem;
+  padding: 0.6rem;
+  /* Expand touch target with negative margin */
+  margin: -0.6rem -0.6rem -0.6rem 0.2rem;
   transition: opacity 0.2s ease, color 0.2s ease;
+  /* Ensure minimum touch target size of 44px */
+  min-width: 4.4rem;
+  min-height: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .predictive-search__recent-item:hover .predictive-search__recent-remove {

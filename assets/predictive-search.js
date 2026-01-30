@@ -3,18 +3,22 @@ class PredictiveSearch extends SearchForm {
     super();
     this.cachedResults = {};
     this.predictiveSearchResults = this.querySelector('[data-predictive-search]');
-    this.allPredictiveSearchInstances = document.querySelectorAll('predictive-search');
     this.isOpen = false;
     this.abortController = new AbortController();
     this.searchTerm = '';
     
     // Recent searches configuration
-    this.recentSearchesKey = 'techauraz_recent_searches';
+    this.recentSearchesKey = 'shopify_predictive_search_recent';
     this.maxRecentSearches = 5;
     this.recentSearchesContainer = null;
 
     this.setupEventListeners();
     this.initRecentSearches();
+  }
+
+  // Lazy getter for all instances to ensure DOM is ready
+  get allPredictiveSearchInstances() {
+    return document.querySelectorAll('predictive-search');
   }
 
   setupEventListeners() {
@@ -108,36 +112,46 @@ class PredictiveSearch extends SearchForm {
     container.style.display = 'block';
     listElement.innerHTML = searches.map(term => `
       <button type="button" class="predictive-search__recent-item" data-recent-search-term="${this.escapeHtml(term)}">
-        <svg class="predictive-search__recent-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="predictive-search__recent-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
         <span>${this.escapeHtml(term)}</span>
-        <svg class="predictive-search__recent-remove" data-remove-recent="${this.escapeHtml(term)}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="predictive-search__recent-remove" data-remove-recent="${this.escapeHtml(term)}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     `).join('');
 
-    // Add click handlers
-    listElement.querySelectorAll('[data-recent-search-term]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        // Check if clicking remove button
-        if (e.target.closest('[data-remove-recent]')) {
-          e.stopPropagation();
-          const termToRemove = e.target.closest('[data-remove-recent]').dataset.removeRecent;
-          this.removeRecentSearch(termToRemove);
-          return;
-        }
-        const term = btn.dataset.recentSearchTerm;
+    // Use event delegation on the list element to avoid memory leaks
+    // Remove any existing handler first
+    if (this._recentSearchHandler) {
+      listElement.removeEventListener('click', this._recentSearchHandler);
+    }
+    
+    this._recentSearchHandler = (e) => {
+      const removeBtn = e.target.closest('[data-remove-recent]');
+      const itemBtn = e.target.closest('[data-recent-search-term]');
+      
+      if (removeBtn) {
+        e.stopPropagation();
+        const termToRemove = removeBtn.dataset.removeRecent;
+        this.removeRecentSearch(termToRemove);
+        return;
+      }
+      
+      if (itemBtn) {
+        const term = itemBtn.dataset.recentSearchTerm;
         this.input.value = term;
         this.searchTerm = term;
         this.onChange();
-      });
-    });
+      }
+    };
+    
+    listElement.addEventListener('click', this._recentSearchHandler);
 
-    // Clear all button handler
+    // Clear all button handler - use onclick to replace any existing handler
     const clearBtn = container.querySelector('[data-clear-recent-searches]');
     if (clearBtn) {
       clearBtn.onclick = () => this.clearRecentSearches();
@@ -276,19 +290,22 @@ class PredictiveSearch extends SearchForm {
 
   onKeyup(event) {
     if (!this.getQuery().length) this.close(true);
-    event.preventDefault();
 
     switch (event.code) {
       case 'ArrowUp':
+        event.preventDefault();
         this.switchOption('up');
         break;
       case 'ArrowDown':
+        event.preventDefault();
         this.switchOption('down');
         break;
       case 'Enter':
+        event.preventDefault();
         this.selectOption();
         break;
       case 'Escape':
+        event.preventDefault();
         this.close();
         this.input.blur();
         break;
@@ -309,8 +326,11 @@ class PredictiveSearch extends SearchForm {
   updateSearchForTerm(previousTerm, newTerm) {
     const searchForTextElement = this.querySelector('[data-predictive-search-search-for-text]');
     const currentButtonText = searchForTextElement?.innerText;
-    if (currentButtonText) {
-      if (currentButtonText.match(new RegExp(previousTerm, 'g')).length > 1) {
+    if (currentButtonText && previousTerm) {
+      // Escape special regex characters in the previous term
+      const escapedPreviousTerm = previousTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const matches = currentButtonText.match(new RegExp(escapedPreviousTerm, 'g'));
+      if (matches && matches.length > 1) {
         // The new term matches part of the button text and not just the search term, do not replace to avoid mistakes
         return;
       }
@@ -395,7 +415,7 @@ class PredictiveSearch extends SearchForm {
   }
 
   getSearchResults(searchTerm) {
-    const queryKey = searchTerm.replace(' ', '-').toLowerCase();
+    const queryKey = searchTerm.replace(/\s+/g, '-').toLowerCase();
     this.setLiveRegionLoadingState();
     
     // Cancel any pending requests
@@ -420,9 +440,16 @@ class PredictiveSearch extends SearchForm {
         return response.text();
       })
       .then((text) => {
-        const resultsMarkup = new DOMParser()
+        const resultElement = new DOMParser()
           .parseFromString(text, 'text/html')
-          .querySelector('#shopify-section-predictive-search').innerHTML;
+          .querySelector('#shopify-section-predictive-search');
+        
+        if (!resultElement) {
+          this.close();
+          return;
+        }
+        
+        const resultsMarkup = resultElement.innerHTML;
         // Save bandwidth keeping the cache in all instances synced
         this.allPredictiveSearchInstances.forEach((predictiveSearchInstance) => {
           predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
@@ -430,8 +457,8 @@ class PredictiveSearch extends SearchForm {
         this.renderSearchResults(resultsMarkup);
       })
       .catch((error) => {
-        if (error?.code === 20) {
-          // Code 20 means the call was aborted
+        // Check for AbortError (request was cancelled)
+        if (error?.name === 'AbortError') {
           return;
         }
         this.close();
