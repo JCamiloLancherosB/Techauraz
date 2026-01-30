@@ -1,0 +1,280 @@
+{% comment %}
+  Animated Benefits Section
+  
+  Features:
+  - Lottie animations for benefit icons
+  - Staggered entrance animations on scroll
+  - Counter animation for numbers
+  - Hover micro-interactions
+  - Reduced motion support with static fallbacks
+  
+  Created: 2026-01-30
+{% endcomment %}
+
+{{ 'animated-benefits.css' | asset_url | stylesheet_tag }}
+
+<section 
+  class="animated-benefits color-{{ section.settings.color_scheme }}"
+  data-section-id="{{ section.id }}"
+  style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;"
+  {% if section.settings.title != blank %}aria-label="{{ section.settings.title | strip_html }}"{% else %}aria-label="Sección de beneficios"{% endif %}
+>
+  <div class="page-width animated-benefits__container">
+    {%- if section.settings.title != blank -%}
+      <div class="animated-benefits__header">
+        <h2 class="animated-benefits__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="animated-benefits__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="animated-benefits__grid">
+      {%- for block in section.blocks -%}
+        <div 
+          class="animated-benefits__card benefit-card"
+          data-benefit-index="{{ forloop.index0 }}"
+          data-animation-delay="{{ forloop.index0 | times: 150 }}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="benefit-card__icon-wrapper">
+            <div class="benefit-card__icon-inner">
+            {%- case block.settings.icon_type -%}
+              {%- when 'shipping' -%}
+                <div 
+                  class="benefit-card__lottie" 
+                  data-lottie-src="{{ 'lottie-shipping.json' | asset_url }}"
+                  data-lottie-name="shipping"
+                  aria-hidden="true"
+                ></div>
+                <div class="benefit-card__static-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="20" width="24" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M28 28H36C38.2091 28 40 29.7909 40 32V34C40 35.1046 39.1046 36 38 36H4" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="36" r="4" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="34" cy="36" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M28 28V20H32L40 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+
+              {%- when 'payment' -%}
+                <div 
+                  class="benefit-card__lottie" 
+                  data-lottie-src="{{ 'lottie-payment.json' | asset_url }}"
+                  data-lottie-name="payment"
+                  aria-hidden="true"
+                ></div>
+                <div class="benefit-card__static-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="12" width="36" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <line x1="6" y1="20" x2="42" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <rect x="10" y="26" width="12" height="4" rx="1" fill="currentColor"/>
+                    <circle cx="36" cy="28" r="4" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+
+              {%- when 'guarantee' -%}
+                <div 
+                  class="benefit-card__lottie" 
+                  data-lottie-src="{{ 'lottie-guarantee.json' | asset_url }}"
+                  data-lottie-name="guarantee"
+                  aria-hidden="true"
+                ></div>
+                <div class="benefit-card__static-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 4L8 10V22C8 32.4 14.64 41.96 24 44C33.36 41.96 40 32.4 40 22V10L24 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 24L22 30L34 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+              {%- when 'delivery' -%}
+                <div 
+                  class="benefit-card__lottie" 
+                  data-lottie-src="{{ 'lottie-delivery.json' | asset_url }}"
+                  data-lottie-name="delivery"
+                  aria-hidden="true"
+                ></div>
+                <div class="benefit-card__static-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                    <path d="M24 12V24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 24H10M38 24H42M24 6V10M24 38V42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+
+              {%- else -%}
+                <div class="benefit-card__static-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+                    <path d="M16 24L22 30L34 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+            {%- endcase -%}
+            </div>
+          </div>
+
+          <div class="benefit-card__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="benefit-card__title">
+                {%- if block.settings.counter_number != blank -%}
+                  <span 
+                    class="benefit-card__counter" 
+                    data-counter-target="{{ block.settings.counter_number }}"
+                    data-counter-suffix="{{ block.settings.counter_suffix }}"
+                  >{{ block.settings.counter_number }}{{ block.settings.counter_suffix }}</span>
+                {%- else -%}
+                  {{ block.settings.title }}
+                {%- endif -%}
+              </h3>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <p class="benefit-card__description">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+
+          <div class="benefit-card__hover-bg" aria-hidden="true"></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'animated-benefits.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Beneficios Animados",
+  "tag": "section",
+  "class": "section-animated-benefits",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿Por qué comprar con nosotros?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Tu satisfacción es nuestra prioridad"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Tipo de icono",
+          "options": [
+            { "value": "shipping", "label": "Envío (Camión)" },
+            { "value": "payment", "label": "Pago (Tarjeta)" },
+            { "value": "guarantee", "label": "Garantía (Escudo)" },
+            { "value": "delivery", "label": "Entrega rápida (Reloj)" },
+            { "value": "custom", "label": "Personalizado (Check)" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Envío Gratis"
+        },
+        {
+          "type": "text",
+          "id": "counter_number",
+          "label": "Número para contador (opcional)",
+          "info": "Si se proporciona, se mostrará una animación de contador. Ej: 30"
+        },
+        {
+          "type": "text",
+          "id": "counter_suffix",
+          "label": "Sufijo del contador",
+          "info": "Texto después del número. Ej: ' días', '%', '+'"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "En compras mayores a $150.000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beneficios Animados",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "shipping",
+            "title": "Envío Gratis",
+            "description": "En compras mayores a $150.000 COP a todo Colombia"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "payment",
+            "title": "Paga al Recibir",
+            "description": "Pago contra entrega en tu puerta sin complicaciones"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "guarantee",
+            "title": "",
+            "counter_number": "30",
+            "counter_suffix": " días",
+            "description": "De garantía sin complicaciones ni preguntas"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "delivery",
+            "title": "Entrega Express",
+            "description": "En Bogotá recibe tu pedido en 24-48 horas"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
