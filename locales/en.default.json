@@ -259,7 +259,15 @@
       "title": "Search results",
       "search_for": "Search for “{{ terms }}”",
       "suggestions": "Suggestions",
-      "pages": "Pages"
+      "pages": "Pages",
+      "predictive": {
+        "placeholder": "Search products...",
+        "recent_searches": "Recent searches",
+        "clear_recent": "Clear all",
+        "no_results_title": "No results found",
+        "no_results_message": "No results for \"{{ terms }}\". Try different search terms.",
+        "view_all_results": "View all results for \"{{ terms }}\""
+      }
     },
     "cart": {
       "cart": "Cart"

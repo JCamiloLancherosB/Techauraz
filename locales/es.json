@@ -270,6 +270,14 @@
         "one": "{{ count }} sugerencia",
         "other": "{{ count }} sugerencias",
         "many": "{{ count }} sugerencias"
+      },
+      "predictive": {
+        "placeholder": "Buscar productos...",
+        "recent_searches": "Búsquedas recientes",
+        "clear_recent": "Borrar todo",
+        "no_results_title": "No se encontraron resultados",
+        "no_results_message": "No hay resultados para \"{{ terms }}\". Intenta con otros términos.",
+        "view_all_results": "Ver todos los resultados para \"{{ terms }}\""
       }
     },
     "cart": {
