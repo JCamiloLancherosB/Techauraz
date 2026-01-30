@@ -187,10 +187,41 @@
       "xr_button": "View in your space",
       "xr_button_label": "View in your space, loads item in augmented reality window",
       "include_taxes": "Tax included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "in_stock": "In stock"
     },
     "modal": {
       "label": "Media gallery"
+    },
+    "comparison": {
+      "compare": "Compare",
+      "compare_products": "Compare products",
+      "specification": "Specification",
+      "price": "Price",
+      "availability": "Availability",
+      "vendor": "Vendor",
+      "type": "Type",
+      "description": "Description",
+      "ports": "Ports",
+      "capacity": "Capacity",
+      "connectivity": "Connectivity",
+      "battery": "Battery",
+      "dimensions": "Dimensions",
+      "weight": "Weight",
+      "warranty": "Warranty",
+      "save": "You save",
+      "remove": "Remove",
+      "clear_all": "Clear all",
+      "share_comparison": "Share comparison:",
+      "copy_link": "Copy link",
+      "empty_title": "No products to compare",
+      "empty_text": "Add products to comparison from the product cards using the \"Compare\" button.",
+      "browse_products": "Browse products",
+      "product_added": "Product added to comparison",
+      "product_removed": "Product removed from comparison",
+      "max_reached": "Maximum 4 products to compare",
+      "products_selected": "{count} product(s) selected",
+      "link_copied": "Link copied to clipboard"
     },
     "facets": {
       "filter_and_operator_subtitle": "Match all",

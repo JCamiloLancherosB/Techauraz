@@ -308,6 +308,10 @@
 <link rel="preload" href="{{ 'quick-view-modal.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'quick-view-modal.css' | asset_url }}"></noscript>
 
+<!-- Product Comparison - Side-by-side product comparison feature - 2026-01-30 -->
+<link rel="preload" href="{{ 'product-comparison.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'product-comparison.css' | asset_url }}"></noscript>
+
 <!-- 
   ============================================================================
   CSS LOADING ORDER (CURRENT - Updated 2026-01-28)
@@ -660,6 +664,7 @@
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-comparison.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%} WhatsApp Floating Button {%- endcomment -%}
     {% render 'whatsapp-float' %}

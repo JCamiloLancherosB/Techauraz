@@ -202,6 +202,11 @@
             >
               {{ 'products.product.quick_view' | t | default: 'Vista Rápida' }}
             </button>
+            
+            {%- comment -%} Compare Button - Adds product to comparison {%- endcomment -%}
+            <div class="card__compare-wrapper no-js-hidden">
+              {% render 'compare-button', product: card_product %}
+            </div>
           </div>
         {%- endif -%}
         
