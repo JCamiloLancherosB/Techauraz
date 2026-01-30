@@ -1,13 +1,13 @@
 {% comment %}
-  Trust Badges Snippet
+  Trust Badges Inline Snippet
   
   Displays configurable trust badges throughout checkout flow and product pages.
   Reduces purchase anxiety and increases conversions.
   
   Usage:
-  {% render 'trust-badges' %}
-  {% render 'trust-badges', layout: 'compact' %}
-  {% render 'trust-badges', show_heading: false %}
+  {% render 'trust-badges-inline' %}
+  {% render 'trust-badges-inline', layout: 'compact' %}
+  {% render 'trust-badges-inline', show_heading: false %}
   
   Parameters:
   - layout: 'default' | 'compact' | 'minimal' (optional, default: 'default')
@@ -20,11 +20,39 @@
   assign show_heading_flag = show_heading | default: true
   assign context_class = context | default: ''
   
-  assign show_shipping = settings.trust_badge_shipping | default: true
-  assign show_payment = settings.trust_badge_payment | default: true
-  assign show_secure = settings.trust_badge_secure | default: true
-  assign show_guarantee = settings.trust_badge_guarantee | default: true
-  assign show_delivery = settings.trust_badge_delivery | default: true
+  comment
+    Use setting values directly - checkbox settings will be true/false
+    Default to true only for nil values (settings not yet saved)
+  endcomment
+  if settings.trust_badge_shipping == nil
+    assign show_shipping = true
+  else
+    assign show_shipping = settings.trust_badge_shipping
+  endif
+  
+  if settings.trust_badge_payment == nil
+    assign show_payment = true
+  else
+    assign show_payment = settings.trust_badge_payment
+  endif
+  
+  if settings.trust_badge_secure == nil
+    assign show_secure = true
+  else
+    assign show_secure = settings.trust_badge_secure
+  endif
+  
+  if settings.trust_badge_guarantee == nil
+    assign show_guarantee = true
+  else
+    assign show_guarantee = settings.trust_badge_guarantee
+  endif
+  
+  if settings.trust_badge_delivery == nil
+    assign show_delivery = true
+  else
+    assign show_delivery = settings.trust_badge_delivery
+  endif
   
   assign text_shipping = settings.trust_badge_shipping_text | default: 'Envío gratis a toda Colombia'
   assign text_payment = settings.trust_badge_payment_text | default: 'Pago contraentrega disponible'

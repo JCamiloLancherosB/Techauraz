@@ -1418,23 +1418,23 @@
     "settings": [
       {
         "type": "header",
-        "content": "Configuraci\u00f3n de sellos de confianza"
+        "content": "Configuración de sellos de confianza"
       },
       {
         "type": "paragraph",
-        "content": "Configura los sellos de confianza que aparecen en las p\u00e1ginas de producto y carrito."
+        "content": "Configura los sellos de confianza que aparecen en las páginas de producto y carrito."
       },
       {
         "type": "checkbox",
         "id": "trust_badge_shipping",
-        "label": "Mostrar sello de env\u00edo gratis",
+        "label": "Mostrar sello de envío gratis",
         "default": true
       },
       {
         "type": "text",
         "id": "trust_badge_shipping_text",
-        "label": "Texto del sello de env\u00edo",
-        "default": "Env\u00edo gratis a toda Colombia"
+        "label": "Texto del sello de envío",
+        "default": "Envío gratis a toda Colombia"
       },
       {
         "type": "checkbox",
@@ -1463,26 +1463,26 @@
       {
         "type": "checkbox",
         "id": "trust_badge_guarantee",
-        "label": "Mostrar sello de garant\u00eda",
+        "label": "Mostrar sello de garantía",
         "default": true
       },
       {
         "type": "text",
         "id": "trust_badge_guarantee_text",
-        "label": "Texto del sello de garant\u00eda",
-        "default": "Garant\u00eda de 30 d\u00edas"
+        "label": "Texto del sello de garantía",
+        "default": "Garantía de 30 días"
       },
       {
         "type": "checkbox",
         "id": "trust_badge_delivery",
-        "label": "Mostrar sello de entrega r\u00e1pida",
+        "label": "Mostrar sello de entrega rápida",
         "default": true
       },
       {
         "type": "text",
         "id": "trust_badge_delivery_text",
         "label": "Texto del sello de entrega",
-        "default": "Entrega en 2-5 d\u00edas h\u00e1biles"
+        "default": "Entrega en 2-5 días hábiles"
       },
       {
         "type": "color",

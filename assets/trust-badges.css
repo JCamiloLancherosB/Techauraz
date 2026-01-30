@@ -6,12 +6,12 @@
  */
 
 /* ============================================
-   CSS Custom Properties (Configurable via settings)
+   CSS Custom Properties (Configurable via inline style)
    ============================================ */
 .trust-badges-inline {
   --trust-badge-bg: rgba(107, 70, 193, 0.05);
   --trust-badge-text-color: #1a1a1a;
-  --trust-badge-icon-color: #6B46C1;
+  /* --trust-badge-icon-color is set via inline style from theme settings */
   --trust-badge-border-radius: 8px;
   --trust-badge-gap: 1rem;
   --trust-badge-padding: 1rem;
@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--trust-badge-icon-color);
+  color: var(--trust-badge-icon-color, #6B46C1);
 }
 
 .trust-badges-inline__icon .icon {
