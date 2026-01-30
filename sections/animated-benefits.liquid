@@ -16,12 +16,13 @@
 <section 
   class="animated-benefits color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
-  aria-label="{{ section.settings.title | default: 'Beneficios' }}"
+  style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;"
+  {% if section.settings.title != blank %}aria-label="{{ section.settings.title | strip_html }}"{% else %}aria-label="Sección de beneficios"{% endif %}
 >
   <div class="page-width animated-benefits__container">
     {%- if section.settings.title != blank -%}
       <div class="animated-benefits__header">
-        <h2 class="animated-benefits__title h1">{{ section.settings.title }}</h2>
+        <h2 class="animated-benefits__title">{{ section.settings.title }}</h2>
         {%- if section.settings.subtitle != blank -%}
           <p class="animated-benefits__subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
@@ -37,6 +38,7 @@
           {{ block.shopify_attributes }}
         >
           <div class="benefit-card__icon-wrapper">
+            <div class="benefit-card__icon-inner">
             {%- case block.settings.icon_type -%}
               {%- when 'shipping' -%}
                 <div 
@@ -108,6 +110,7 @@
                   </svg>
                 </div>
             {%- endcase -%}
+            </div>
           </div>
 
           <div class="benefit-card__content">
@@ -118,7 +121,7 @@
                     class="benefit-card__counter" 
                     data-counter-target="{{ block.settings.counter_number }}"
                     data-counter-suffix="{{ block.settings.counter_suffix }}"
-                  >0{{ block.settings.counter_suffix }}</span>
+                  >{{ block.settings.counter_number }}{{ block.settings.counter_suffix }}</span>
                 {%- else -%}
                   {{ block.settings.title }}
                 {%- endif -%}
@@ -149,7 +152,7 @@
   },
   "settings": [
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "title",
       "label": "Título",
       "default": "¿Por qué comprar con nosotros?"

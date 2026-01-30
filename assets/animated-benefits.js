@@ -21,7 +21,9 @@
 
   // Configuration
   const CONFIG = {
+    // SRI hash for lottie-web 5.12.2 minified from cdnjs
     lottieLibUrl: 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js',
+    lottieLibIntegrity: 'sha512-jEnuDt6jfAi0GPdnQ5L04TV1wGCnZZaH2AVn2mSwMJkE2q4o4GTbM1pSjE7fRUCXe4ujTx5lnX1C3Cw2e8Uolw==',
     observerThreshold: 0.15,
     observerRootMargin: '0px 0px -50px 0px',
     counterDuration: 2000, // ms
@@ -53,6 +55,8 @@
       const script = document.createElement('script');
       script.src = CONFIG.lottieLibUrl;
       script.async = true;
+      script.integrity = CONFIG.lottieLibIntegrity;
+      script.crossOrigin = 'anonymous';
 
       script.onload = () => {
         lottieLoaded = true;
@@ -101,7 +105,11 @@
       lottieAnimations.set(container, animation);
 
       return animation;
-    } catch {
+    } catch (error) {
+      // Log error for debugging in development
+      if (typeof console !== 'undefined' && console.warn) {
+        console.warn('Animated Benefits: Failed to load Lottie animation', error);
+      }
       container.classList.add('lottie-failed');
       return null;
     }
@@ -120,16 +128,24 @@
    * Animate a counter from 0 to target value
    */
   function animateCounter(element) {
+    const target = parseInt(element.dataset.counterTarget, 10);
+    const suffix = element.dataset.counterSuffix || '';
+    
+    // Validate that target is a valid number
+    if (isNaN(target)) {
+      // Show the original text content or a fallback
+      if (typeof console !== 'undefined' && console.warn) {
+        console.warn('Animated Benefits: Invalid counter target', element.dataset.counterTarget);
+      }
+      return;
+    }
+
     if (prefersReducedMotion) {
       // Just set the final value immediately
-      const target = parseInt(element.dataset.counterTarget, 10);
-      const suffix = element.dataset.counterSuffix || '';
       element.textContent = target + suffix;
       return;
     }
 
-    const target = parseInt(element.dataset.counterTarget, 10);
-    const suffix = element.dataset.counterSuffix || '';
     const duration = CONFIG.counterDuration;
     const easing = easings[CONFIG.counterEasing] || easings.easeOutExpo;
 
@@ -222,19 +238,22 @@
     );
 
     // Initialize Lottie animations and observe cards
-    cards.forEach(async (card, index) => {
+    // Start observing immediately, Lottie will load in background
+    cards.forEach((card, index) => {
       // Set staggered animation delay
       const delay = index * 150;
       card.style.setProperty('--animation-delay', `${delay}ms`);
 
-      // Initialize Lottie for this card
+      // Start observing immediately for entrance animations
+      observer.observe(card);
+
+      // Initialize Lottie for this card (non-blocking)
       const lottieContainer = card.querySelector('.benefit-card__lottie');
       if (lottieContainer) {
-        await initLottieAnimation(lottieContainer);
+        initLottieAnimation(lottieContainer).catch(() => {
+          // Error already handled in initLottieAnimation
+        });
       }
-
-      // Start observing
-      observer.observe(card);
     });
   }
 
