@@ -36,10 +36,25 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "section_title": "👁️ Vistos Recientemente",
+        "heading_size": "h2",
+        "products_to_show": 8,
+        "show_view_all_link": false,
+        "empty_state_text": "No has visto productos recientemente",
+        "auto_hide_when_empty": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "banner",
-    "product-grid"
+    "product-grid",
+    "recently-viewed"
   ]
 }
