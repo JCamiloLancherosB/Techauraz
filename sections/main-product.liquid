@@ -504,6 +504,8 @@
                     show_pickup_availability: true
                   -%}
                 </div>
+                {%- comment -%} Trust Badges below Add to Cart {%- endcomment -%}
+                {%- render 'trust-badges-inline', layout: 'compact', show_heading: false, context: 'product' -%}
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}

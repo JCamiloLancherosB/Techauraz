@@ -31,6 +31,11 @@
       {%- endif -%}
     </div>
 
+    {%- comment -%} Trust Badges - visible when cart has items {%- endcomment -%}
+    {%- if cart != empty -%}
+      {%- render 'trust-badges-inline', layout: 'compact', show_heading: false, context: 'cart' -%}
+    {%- endif -%}
+
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">

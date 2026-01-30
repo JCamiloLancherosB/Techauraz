@@ -1414,6 +1414,85 @@
     ]
   },
   {
+    "name": "Trust Badges",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configuración de sellos de confianza"
+      },
+      {
+        "type": "paragraph",
+        "content": "Configura los sellos de confianza que aparecen en las páginas de producto y carrito."
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_shipping",
+        "label": "Mostrar sello de envío gratis",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_shipping_text",
+        "label": "Texto del sello de envío",
+        "default": "Envío gratis a toda Colombia"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_payment",
+        "label": "Mostrar sello de pago contraentrega",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_payment_text",
+        "label": "Texto del sello de pago",
+        "default": "Pago contraentrega disponible"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_secure",
+        "label": "Mostrar sello de compra segura",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_secure_text",
+        "label": "Texto del sello de seguridad",
+        "default": "Compra 100% segura"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_guarantee",
+        "label": "Mostrar sello de garantía",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_guarantee_text",
+        "label": "Texto del sello de garantía",
+        "default": "Garantía de 30 días"
+      },
+      {
+        "type": "checkbox",
+        "id": "trust_badge_delivery",
+        "label": "Mostrar sello de entrega rápida",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_delivery_text",
+        "label": "Texto del sello de entrega",
+        "default": "Entrega en 2-5 días hábiles"
+      },
+      {
+        "type": "color",
+        "id": "trust_badge_icon_color",
+        "label": "Color de iconos",
+        "default": "#6B46C1"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.cart.name",
     "settings": [
       {
