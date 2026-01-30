@@ -3,12 +3,22 @@ class PredictiveSearch extends SearchForm {
     super();
     this.cachedResults = {};
     this.predictiveSearchResults = this.querySelector('[data-predictive-search]');
-    this.allPredictiveSearchInstances = document.querySelectorAll('predictive-search');
     this.isOpen = false;
     this.abortController = new AbortController();
     this.searchTerm = '';
+    
+    // Recent searches configuration
+    this.recentSearchesKey = 'shopify_predictive_search_recent';
+    this.maxRecentSearches = 5;
+    this.recentSearchesContainer = null;
 
     this.setupEventListeners();
+    this.initRecentSearches();
+  }
+
+  // Lazy getter for all instances to ensure DOM is ready
+  get allPredictiveSearchInstances() {
+    return document.querySelectorAll('predictive-search');
   }
 
   setupEventListeners() {
@@ -18,6 +28,187 @@ class PredictiveSearch extends SearchForm {
     this.addEventListener('focusout', this.onFocusOut.bind(this));
     this.addEventListener('keyup', this.onKeyup.bind(this));
     this.addEventListener('keydown', this.onKeydown.bind(this));
+  }
+
+  // ============================================================================
+  // RECENT SEARCHES FUNCTIONALITY
+  // ============================================================================
+  
+  initRecentSearches() {
+    this.recentSearchesContainer = this.querySelector('[data-recent-searches]');
+  }
+
+  getRecentSearches() {
+    try {
+      const searches = localStorage.getItem(this.recentSearchesKey);
+      return searches ? JSON.parse(searches) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  saveRecentSearch(term) {
+    if (!term || term.length < 2) return;
+    
+    try {
+      let searches = this.getRecentSearches();
+      // Remove if already exists (will re-add at top)
+      searches = searches.filter(s => s.toLowerCase() !== term.toLowerCase());
+      // Add to beginning
+      searches.unshift(term);
+      // Keep only max items
+      searches = searches.slice(0, this.maxRecentSearches);
+      localStorage.setItem(this.recentSearchesKey, JSON.stringify(searches));
+      
+      // Sync across all instances
+      this.allPredictiveSearchInstances.forEach(instance => {
+        instance.renderRecentSearches();
+      });
+    } catch (e) {
+      // localStorage not available
+    }
+  }
+
+  removeRecentSearch(term) {
+    try {
+      let searches = this.getRecentSearches();
+      searches = searches.filter(s => s !== term);
+      localStorage.setItem(this.recentSearchesKey, JSON.stringify(searches));
+      
+      // Sync across all instances
+      this.allPredictiveSearchInstances.forEach(instance => {
+        instance.renderRecentSearches();
+      });
+    } catch (e) {
+      // localStorage not available
+    }
+  }
+
+  clearRecentSearches() {
+    try {
+      localStorage.removeItem(this.recentSearchesKey);
+      this.allPredictiveSearchInstances.forEach(instance => {
+        instance.renderRecentSearches();
+      });
+    } catch (e) {
+      // localStorage not available
+    }
+  }
+
+  renderRecentSearches() {
+    const container = this.recentSearchesContainer;
+    if (!container) return;
+
+    const searches = this.getRecentSearches();
+    const listElement = container.querySelector('[data-recent-searches-list]');
+    
+    if (!listElement) return;
+
+    if (searches.length === 0) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'block';
+    listElement.innerHTML = searches.map(term => `
+      <button type="button" class="predictive-search__recent-item" data-recent-search-term="${this.escapeHtml(term)}">
+        <svg class="predictive-search__recent-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>${this.escapeHtml(term)}</span>
+        <svg class="predictive-search__recent-remove" data-remove-recent="${this.escapeHtml(term)}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    `).join('');
+
+    // Use event delegation on the list element to avoid memory leaks
+    // Remove any existing handler first
+    if (this._recentSearchHandler) {
+      listElement.removeEventListener('click', this._recentSearchHandler);
+    }
+    
+    this._recentSearchHandler = (e) => {
+      const removeBtn = e.target.closest('[data-remove-recent]');
+      const itemBtn = e.target.closest('[data-recent-search-term]');
+      
+      if (removeBtn) {
+        e.stopPropagation();
+        const termToRemove = removeBtn.dataset.removeRecent;
+        this.removeRecentSearch(termToRemove);
+        return;
+      }
+      
+      if (itemBtn) {
+        const term = itemBtn.dataset.recentSearchTerm;
+        this.input.value = term;
+        this.searchTerm = term;
+        this.onChange();
+      }
+    };
+    
+    listElement.addEventListener('click', this._recentSearchHandler);
+
+    // Clear all button handler - use onclick to replace any existing handler
+    const clearBtn = container.querySelector('[data-clear-recent-searches]');
+    if (clearBtn) {
+      clearBtn.onclick = () => this.clearRecentSearches();
+    }
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ============================================================================
+  // ANALYTICS TRACKING
+  // ============================================================================
+  
+  trackSearchEvent(searchTerm, resultsCount = 0) {
+    // Track via dataLayer for Google Analytics / GTM
+    if (typeof window.dataLayer !== 'undefined') {
+      window.dataLayer.push({
+        event: 'search',
+        search_term: searchTerm,
+        search_results_count: resultsCount
+      });
+    }
+
+    // Track via Shopify's analytics if available
+    if (typeof window.ShopifyAnalytics !== 'undefined' && window.ShopifyAnalytics.lib) {
+      try {
+        window.ShopifyAnalytics.lib.track('Search', {
+          query: searchTerm,
+          resultsCount: resultsCount
+        });
+      } catch (e) {
+        // Shopify analytics not available
+      }
+    }
+
+    // Custom event for other tracking integrations
+    document.dispatchEvent(new CustomEvent('predictive-search:query', {
+      detail: { term: searchTerm, resultsCount: resultsCount }
+    }));
+  }
+
+  trackSearchSelection(searchTerm, selectedItem, itemType) {
+    if (typeof window.dataLayer !== 'undefined') {
+      window.dataLayer.push({
+        event: 'search_result_click',
+        search_term: searchTerm,
+        selected_item: selectedItem,
+        item_type: itemType
+      });
+    }
+
+    document.dispatchEvent(new CustomEvent('predictive-search:select', {
+      detail: { term: searchTerm, item: selectedItem, type: itemType }
+    }));
   }
 
   getQuery() {
@@ -47,7 +238,15 @@ class PredictiveSearch extends SearchForm {
   }
 
   onFormSubmit(event) {
-    if (!this.getQuery().length || this.querySelector('[aria-selected="true"] a')) event.preventDefault();
+    const query = this.getQuery();
+    if (!query.length || this.querySelector('[aria-selected="true"] a')) {
+      event.preventDefault();
+      return;
+    }
+    
+    // Save to recent searches and track before submitting
+    this.saveRecentSearch(query);
+    this.trackSearchEvent(query);
   }
 
   onFormReset(event) {
@@ -63,7 +262,15 @@ class PredictiveSearch extends SearchForm {
   onFocus() {
     const currentSearchTerm = this.getQuery();
 
-    if (!currentSearchTerm.length) return;
+    // Show recent searches when input is empty
+    if (!currentSearchTerm.length) {
+      this.renderRecentSearches();
+      const hasRecentSearches = this.getRecentSearches().length > 0;
+      if (hasRecentSearches && this.recentSearchesContainer) {
+        this.open();
+      }
+      return;
+    }
 
     if (this.searchTerm !== currentSearchTerm) {
       // Search term was changed from other search input, treat it as a user change
@@ -83,17 +290,24 @@ class PredictiveSearch extends SearchForm {
 
   onKeyup(event) {
     if (!this.getQuery().length) this.close(true);
-    event.preventDefault();
 
     switch (event.code) {
       case 'ArrowUp':
+        event.preventDefault();
         this.switchOption('up');
         break;
       case 'ArrowDown':
+        event.preventDefault();
         this.switchOption('down');
         break;
       case 'Enter':
+        event.preventDefault();
         this.selectOption();
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.close();
+        this.input.blur();
         break;
     }
   }
@@ -103,13 +317,20 @@ class PredictiveSearch extends SearchForm {
     if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
       event.preventDefault();
     }
+    // Prevent form submission on Escape
+    if (event.code === 'Escape') {
+      event.preventDefault();
+    }
   }
 
   updateSearchForTerm(previousTerm, newTerm) {
     const searchForTextElement = this.querySelector('[data-predictive-search-search-for-text]');
     const currentButtonText = searchForTextElement?.innerText;
-    if (currentButtonText) {
-      if (currentButtonText.match(new RegExp(previousTerm, 'g')).length > 1) {
+    if (currentButtonText && previousTerm) {
+      // Escape special regex characters in the previous term
+      const escapedPreviousTerm = previousTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const matches = currentButtonText.match(new RegExp(escapedPreviousTerm, 'g'));
+      if (matches && matches.length > 1) {
         // The new term matches part of the button text and not just the search term, do not replace to avoid mistakes
         return;
       }
@@ -164,12 +385,42 @@ class PredictiveSearch extends SearchForm {
   selectOption() {
     const selectedOption = this.querySelector('[aria-selected="true"] a, button[aria-selected="true"]');
 
-    if (selectedOption) selectedOption.click();
+    if (selectedOption) {
+      // Track the selection
+      const searchTerm = this.getQuery();
+      const selectedItem = selectedOption.href || selectedOption.textContent;
+      const itemType = this.getSelectedItemType(selectedOption);
+      
+      // Save search term to recent searches
+      if (searchTerm) {
+        this.saveRecentSearch(searchTerm);
+      }
+      
+      this.trackSearchSelection(searchTerm, selectedItem, itemType);
+      selectedOption.click();
+    }
+  }
+
+  getSelectedItemType(element) {
+    const parentLi = element.closest('li');
+    if (!parentLi) return 'search-all';
+    
+    const id = parentLi.id || '';
+    if (id.includes('product')) return 'product';
+    if (id.includes('collection')) return 'collection';
+    if (id.includes('query')) return 'suggestion';
+    if (id.includes('page')) return 'page';
+    if (id.includes('article')) return 'article';
+    return 'other';
   }
 
   getSearchResults(searchTerm) {
-    const queryKey = searchTerm.replace(' ', '-').toLowerCase();
+    const queryKey = searchTerm.replace(/\s+/g, '-').toLowerCase();
     this.setLiveRegionLoadingState();
+    
+    // Cancel any pending requests
+    this.abortController.abort();
+    this.abortController = new AbortController();
 
     if (this.cachedResults[queryKey]) {
       this.renderSearchResults(this.cachedResults[queryKey]);
@@ -189,9 +440,16 @@ class PredictiveSearch extends SearchForm {
         return response.text();
       })
       .then((text) => {
-        const resultsMarkup = new DOMParser()
+        const resultElement = new DOMParser()
           .parseFromString(text, 'text/html')
-          .querySelector('#shopify-section-predictive-search').innerHTML;
+          .querySelector('#shopify-section-predictive-search');
+        
+        if (!resultElement) {
+          this.close();
+          return;
+        }
+        
+        const resultsMarkup = resultElement.innerHTML;
         // Save bandwidth keeping the cache in all instances synced
         this.allPredictiveSearchInstances.forEach((predictiveSearchInstance) => {
           predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
@@ -199,8 +457,8 @@ class PredictiveSearch extends SearchForm {
         this.renderSearchResults(resultsMarkup);
       })
       .catch((error) => {
-        if (error?.code === 20) {
-          // Code 20 means the call was aborted
+        // Check for AbortError (request was cancelled)
+        if (error?.name === 'AbortError') {
           return;
         }
         this.close();

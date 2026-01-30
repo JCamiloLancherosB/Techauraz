@@ -5,13 +5,31 @@
     | plus: predictive_search.resources.pages.size
     | plus: predictive_search.resources.articles.size
   %}
+  {% assign total_results = predictive_search.resources.products.size | plus: first_column_results_size %}
+  
   <div id="predictive-search-results" role="listbox">
-    {%- if first_column_results_size > 0 or predictive_search.resources.products.size > 0 -%}
-      <div
-        id="predictive-search-results-groups-wrapper"
-        class="predictive-search__results-groups-wrapper{% unless predictive_search.resources.products.size > 0 %} predictive-search__results-groups-wrapper--no-products{% endunless %}{% unless predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 %} predictive-search__results-groups-wrapper--no-suggestions{% endunless %}"
-      >
-    {%- endif -%}
+    {%- if total_results == 0 -%}
+      {%- comment -%} No results found {%- endcomment -%}
+      <div class="predictive-search__no-results">
+        <svg class="predictive-search__no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+          <path d="M8 8l6 6M14 8l-6 6" stroke-linecap="round"></path>
+        </svg>
+        <p class="predictive-search__no-results-title">
+          {{- 'templates.search.predictive.no_results_title' | t -}}
+        </p>
+        <p class="predictive-search__no-results-text">
+          {{- 'templates.search.predictive.no_results_message' | t: terms: predictive_search.terms -}}
+        </p>
+      </div>
+    {%- else -%}
+      {%- if first_column_results_size > 0 or predictive_search.resources.products.size > 0 -%}
+        <div
+          id="predictive-search-results-groups-wrapper"
+          class="predictive-search__results-groups-wrapper{% unless predictive_search.resources.products.size > 0 %} predictive-search__results-groups-wrapper--no-products{% endunless %}{% unless predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 %} predictive-search__results-groups-wrapper--no-suggestions{% endunless %}"
+        >
+      {%- endif -%}
     {%- if first_column_results_size > 0 -%}
       <div class="predictive-search__result-group">
     {%- endif -%}
@@ -234,11 +252,11 @@
         {% render 'icon-arrow' %}
       </button>
     </div>
+    {%- endif -%} {%- comment -%} End of total_results > 0 check {%- endcomment -%}
   </div>
 
   <span class="hidden" data-predictive-search-live-region-count-value>
     {% liquid
-      assign total_results = predictive_search.resources.products.size | plus: first_column_results_size
       if total_results == 0
         echo 'templates.search.no_results' | t: terms: predictive_search.terms
       else

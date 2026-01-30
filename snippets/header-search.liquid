@@ -48,7 +48,7 @@
               type="search"
               name="q"
               value="{{ search.terms | escape }}"
-              placeholder="{{ 'general.search.search' | t }}"
+              placeholder="{{ 'templates.search.predictive.placeholder' | t | default: 'general.search.search' | t }}"
               {%- if settings.predictive_search_enabled -%}
                 role="combobox"
                 aria-expanded="false"
@@ -82,6 +82,19 @@
 
           {%- if settings.predictive_search_enabled -%}
             <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              {%- comment -%} Recent Searches Section - Rendered via JavaScript {%- endcomment -%}
+              <div class="predictive-search__recent-searches" data-recent-searches style="display: none;">
+                <div class="predictive-search__recent-searches-header">
+                  <div class="predictive-search__recent-searches-title" role="heading" aria-level="2">
+                    {{- 'templates.search.predictive.recent_searches' | t -}}
+                  </div>
+                  <button type="button" class="predictive-search__recent-clear-btn" data-clear-recent-searches>
+                    {{- 'templates.search.predictive.clear_recent' | t -}}
+                  </button>
+                </div>
+                <div class="predictive-search__recent-list" data-recent-searches-list aria-label="{{ 'templates.search.predictive.recent_searches' | t }}"></div>
+              </div>
+              
               {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
             </div>
 
