@@ -1493,6 +1493,49 @@
     ]
   },
   {
+    "name": "Productos vistos recientemente",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "recently_viewed_enabled",
+        "label": "Habilitar sección de productos vistos recientemente",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "recently_viewed_products_count",
+        "min": 4,
+        "max": 10,
+        "step": 1,
+        "default": 8,
+        "label": "Número de productos a mostrar"
+      },
+      {
+        "type": "text",
+        "id": "recently_viewed_title",
+        "label": "Título de la sección",
+        "default": "👁️ Vistos Recientemente"
+      },
+      {
+        "type": "checkbox",
+        "id": "recently_viewed_auto_hide",
+        "label": "Ocultar automáticamente cuando está vacío",
+        "default": true,
+        "info": "Oculta la sección si el usuario no ha visto ningún producto"
+      },
+      {
+        "type": "range",
+        "id": "recently_viewed_max_stored",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "default": 20,
+        "label": "Máximo de productos almacenados",
+        "info": "Número máximo de productos guardados en el historial del navegador"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.cart.name",
     "settings": [
       {
