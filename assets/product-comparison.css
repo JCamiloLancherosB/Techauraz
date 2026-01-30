@@ -296,9 +296,6 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 /* Sticky Header Row */
@@ -306,6 +303,10 @@
   position: sticky;
   top: 0;
   z-index: 20;
+}
+
+.comparison-table thead th {
+  background: var(--tech-color-background, #f8f9fa);
 }
 
 /* Alternating Row Colors */
@@ -388,6 +389,11 @@
   font-size: 0.875rem;
   color: var(--tech-color-text-secondary, #999999);
   text-decoration: line-through;
+}
+
+.comparison-table__savings {
+  color: var(--tech-color-success, #10b981);
+  font-weight: 500;
 }
 
 .comparison-table__product-actions {

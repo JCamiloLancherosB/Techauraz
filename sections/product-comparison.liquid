@@ -65,9 +65,9 @@
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th>{{ 'products.comparison.specification' | t | default: 'Especificación' }}</th>
+                  <th scope="col">{{ 'products.comparison.specification' | t | default: 'Especificación' }}</th>
                   {%- for product in comparison_products -%}
-                    <th class="comparison-table__product-col">
+                    <th scope="col" class="comparison-table__product-col">
                       <div class="comparison-table__product-header">
                         <div class="comparison-table__product-image">
                           {%- if product.featured_media -%}
@@ -93,7 +93,9 @@
                         </div>
                         <div class="comparison-table__product-actions">
                           {%- if product.available -%}
-                            <form method="post" action="/cart/add">
+                            <form method="post" action="{{ routes.cart_add_url }}">
+                              <input type="hidden" name="form_type" value="product">
+                              <input type="hidden" name="utf8" value="✓">
                               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                               <button type="submit" class="comparison-table__add-btn">
                                 {{ 'products.product.add_to_cart' | t | default: 'Agregar al carrito' }}
@@ -116,13 +118,13 @@
               <tbody>
                 {%- comment -%} Price Row {%- endcomment -%}
                 <tr>
-                  <td>{{ 'products.comparison.price' | t | default: 'Precio' }}</td>
+                  <th scope="row">{{ 'products.comparison.price' | t | default: 'Precio' }}</th>
                   {%- for product in comparison_products -%}
                     <td>
                       <span class="comparison-table__spec-value">
                         {{ product.price | money }}
                         {%- if product.compare_at_price > product.price -%}
-                          <br><small style="color: var(--tech-color-success, #10b981);">
+                          <br><small class="comparison-table__savings">
                             {{ 'products.comparison.save' | t | default: 'Ahorras' }}: 
                             {{ product.compare_at_price | minus: product.price | money }}
                           </small>
@@ -134,7 +136,7 @@
 
                 {%- comment -%} Availability Row {%- endcomment -%}
                 <tr>
-                  <td>{{ 'products.comparison.availability' | t | default: 'Disponibilidad' }}</td>
+                  <th scope="row">{{ 'products.comparison.availability' | t | default: 'Disponibilidad' }}</th>
                   {%- for product in comparison_products -%}
                     <td>
                       {%- if product.available -%}
@@ -152,7 +154,7 @@
 
                 {%- comment -%} Vendor Row {%- endcomment -%}
                 <tr>
-                  <td>{{ 'products.comparison.vendor' | t | default: 'Marca' }}</td>
+                  <th scope="row">{{ 'products.comparison.vendor' | t | default: 'Marca' }}</th>
                   {%- for product in comparison_products -%}
                     <td>
                       <span class="comparison-table__spec-value">
@@ -164,7 +166,7 @@
 
                 {%- comment -%} Type Row {%- endcomment -%}
                 <tr>
-                  <td>{{ 'products.comparison.type' | t | default: 'Tipo' }}</td>
+                  <th scope="row">{{ 'products.comparison.type' | t | default: 'Tipo' }}</th>
                   {%- for product in comparison_products -%}
                     <td>
                       <span class="comparison-table__spec-value">
@@ -189,7 +191,7 @@
                 {%- endfor -%}
                 {%- if has_ports -%}
                   <tr>
-                    <td>{{ 'products.comparison.ports' | t | default: 'Puertos' }}</td>
+                    <th scope="row">{{ 'products.comparison.ports' | t | default: 'Puertos' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.ports %} comparison-table__spec-value--na{% endunless %}">
@@ -210,7 +212,7 @@
                 {%- endfor -%}
                 {%- if has_capacity -%}
                   <tr>
-                    <td>{{ 'products.comparison.capacity' | t | default: 'Capacidad' }}</td>
+                    <th scope="row">{{ 'products.comparison.capacity' | t | default: 'Capacidad' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.capacity %} comparison-table__spec-value--na{% endunless %}">
@@ -231,7 +233,7 @@
                 {%- endfor -%}
                 {%- if has_connectivity -%}
                   <tr>
-                    <td>{{ 'products.comparison.connectivity' | t | default: 'Conectividad' }}</td>
+                    <th scope="row">{{ 'products.comparison.connectivity' | t | default: 'Conectividad' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.connectivity %} comparison-table__spec-value--na{% endunless %}">
@@ -252,7 +254,7 @@
                 {%- endfor -%}
                 {%- if has_battery -%}
                   <tr>
-                    <td>{{ 'products.comparison.battery' | t | default: 'Batería' }}</td>
+                    <th scope="row">{{ 'products.comparison.battery' | t | default: 'Batería' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.battery %} comparison-table__spec-value--na{% endunless %}">
@@ -273,7 +275,7 @@
                 {%- endfor -%}
                 {%- if has_dimensions -%}
                   <tr>
-                    <td>{{ 'products.comparison.dimensions' | t | default: 'Dimensiones' }}</td>
+                    <th scope="row">{{ 'products.comparison.dimensions' | t | default: 'Dimensiones' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.dimensions %} comparison-table__spec-value--na{% endunless %}">
@@ -294,7 +296,7 @@
                 {%- endfor -%}
                 {%- if has_weight -%}
                   <tr>
-                    <td>{{ 'products.comparison.weight' | t | default: 'Peso' }}</td>
+                    <th scope="row">{{ 'products.comparison.weight' | t | default: 'Peso' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.weight %} comparison-table__spec-value--na{% endunless %}">
@@ -315,7 +317,7 @@
                 {%- endfor -%}
                 {%- if has_warranty -%}
                   <tr>
-                    <td>{{ 'products.comparison.warranty' | t | default: 'Garantía' }}</td>
+                    <th scope="row">{{ 'products.comparison.warranty' | t | default: 'Garantía' }}</th>
                     {%- for product in comparison_products -%}
                       <td>
                         <span class="comparison-table__spec-value{% unless product.metafields.specs.warranty %} comparison-table__spec-value--na{% endunless %}">
@@ -328,7 +330,7 @@
 
                 {%- comment -%} Description Row {%- endcomment -%}
                 <tr>
-                  <td>{{ 'products.comparison.description' | t | default: 'Descripción' }}</td>
+                  <th scope="row">{{ 'products.comparison.description' | t | default: 'Descripción' }}</th>
                   {%- for product in comparison_products -%}
                     <td>
                       <span class="comparison-table__spec-value">
@@ -355,7 +357,28 @@
 
         {%- else -%}
           {%- comment -%} No valid products found from URL {%- endcomment -%}
-          {% render 'comparison-empty-state' %}
+          <div class="comparison__empty" data-comparison-empty>
+            <div class="comparison__empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h2 class="comparison__empty-title">
+              {{ 'products.comparison.empty_title' | t | default: 'No hay productos para comparar' }}
+            </h2>
+            <p class="comparison__empty-text">
+              {{ 'products.comparison.empty_text' | t | default: 'Agrega productos a la comparación desde las tarjetas de producto usando el botón "Comparar".' }}
+            </p>
+            <a href="{{ routes.collections_url }}" class="comparison__empty-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              {{ 'products.comparison.browse_products' | t | default: 'Explorar productos' }}
+            </a>
+          </div>
         {%- endif -%}
         
       {%- else -%}
