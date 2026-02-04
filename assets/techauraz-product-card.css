@@ -327,7 +327,7 @@
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
-  transform: scale(1.02);
+  transform: translateY(-2px);
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:active {
@@ -371,7 +371,7 @@
 .card .button--primary:hover,
 .card-wrapper .button--primary:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: scale(1.02);
+  transform: translateY(-2px);
 }
 
 /* =============================================================================

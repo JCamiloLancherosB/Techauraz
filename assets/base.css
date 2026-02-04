@@ -3502,7 +3502,7 @@ header-drawer {
 
 .quick-add__submit:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
-  transform: scale(1.02) !important;
+  transform: translateY(-2px) !important;
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
   color: #ffffff !important;
 }
@@ -7161,7 +7161,7 @@ body.menu-drawer-open {
 
 .quick-add__submit:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: scale(1.02);
+  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
