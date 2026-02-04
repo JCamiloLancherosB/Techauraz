@@ -8364,6 +8364,7 @@ body.menu-drawer-open {
   outline: none;
   border-color: #3b82f6;
   background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
 }
 
 .newsletter-submit {
@@ -8453,7 +8454,7 @@ body.menu-drawer-open {
   outline: none;
   border-color: #3b82f6;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
 }
 
 .ta-conv-newsletter-section .ta-conv-newsletter__submit {
