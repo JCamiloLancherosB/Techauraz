@@ -110,8 +110,8 @@
   z-index: 1;
   border-radius: var(--ta-radius-xl);
   padding: var(--ta-space-2xl) var(--ta-space-xl) !important;
-  background: var(--ta-gradient-cta);
-  box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%) !important;
+  box-shadow: 0 20px 60px rgba(30, 58, 95, 0.4);
 }
 
 .newsletter__wrapper::before {
@@ -145,8 +145,9 @@
 }
 
 .newsletter-form .field {
-  background: var(--ta-bg);
-  border-radius: var(--ta-radius-pill);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
   overflow: hidden;
   box-shadow: var(--ta-shadow-lg);
   display: flex;
@@ -154,11 +155,17 @@
 }
 
 .newsletter-form .field__input {
+  background: transparent !important;
   border: none;
-  border-radius: var(--ta-radius-pill);
+  border-radius: 8px 0 0 8px !important;
   padding: var(--ta-space-lg) var(--ta-space-xl);
   font-size: var(--ta-font-size-md);
   flex: 1;
+  color: #ffffff !important;
+}
+
+.newsletter-form .field__input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .newsletter-form .field__input:focus {
@@ -167,21 +174,23 @@
 }
 
 .newsletter-form__button {
-  background: var(--ta-gradient-cta);
+  background: #3b82f6 !important;
   border: none;
-  border-radius: var(--ta-radius-full);
+  border-radius: 0 8px 8px 0 !important;
   width: var(--ta-touch-comfortable);
   height: var(--ta-touch-comfortable);
-  margin-right: var(--ta-space-xs);
+  margin-right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--ta-transition-normal);
   flex-shrink: 0;
+  color: white !important;
 }
 
 .newsletter-form__button:hover {
-  transform: scale(1.1) rotate(5deg);
+  background: #2563eb !important;
+  transform: translateY(-2px);
   box-shadow: var(--ta-shadow-md);
 }
 
@@ -387,7 +396,7 @@
   left: 0;
   width: 28px;
   height: 2px;
-  background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+  background: #3b82f6;
   border-radius: 2px;
 }
 
@@ -422,7 +431,7 @@
 
 .footer-block__details-content a:hover,
 .footer-block .list-menu__item:hover {
-  color: #38bdf8 !important;
+  color: #3b82f6 !important;
   transform: translateX(4px);
 }
 
@@ -444,14 +453,16 @@
 
 /* Newsletter in footer (when enabled) */
 .footer__newsletter .field {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
 }
 
 .footer__newsletter .field__input {
-  background: transparent;
+  background: transparent !important;
   color: var(--ta-text-inverse);
   border: none;
   padding: 0.75rem 1.25rem;
@@ -459,21 +470,25 @@
 }
 
 .footer__newsletter .field__input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .footer__newsletter .newsletter-form__button {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  background: #3b82f6 !important;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 4px;
-  transition: transform 0.2s ease;
+  border-radius: 0 8px 8px 0 !important;
+  width: 48px;
+  height: 48px;
+  margin-right: 0;
+  transition: transform 0.2s ease, background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer__newsletter .newsletter-form__button:hover {
-  transform: scale(1.05);
+  background: #2563eb !important;
+  transform: translateY(-2px);
 }
 
 /* Social icons - refined styling for brand column */
@@ -500,10 +515,10 @@
 
 .footer__list-social a:hover,
 .footer__list-social .list-social__link:hover {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  background: #3b82f6 !important;
   border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .footer__list-social svg {
@@ -590,7 +605,7 @@
 }
 
 .copyright__content a:hover {
-  color: #38bdf8 !important;
+  color: #3b82f6 !important;
 }
 
 /* Policies list */
