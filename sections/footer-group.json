@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -33,7 +42,7 @@
       ],
       "custom_css": [],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
         "newsletter_enable": false,
         "newsletter_heading": "Suscríbete a nuestro email",
         "enable_follow_on_shop": false,
