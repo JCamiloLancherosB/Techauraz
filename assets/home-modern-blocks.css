@@ -406,10 +406,6 @@
   border-bottom: none !important;
 }
 
-.footer-block__heading::after {
-  display: none;
-}
-
 /* Footer text blocks - Help & Secure Purchase columns */
 .footer-block__details-content {
   font-size: 0.9375rem !important;

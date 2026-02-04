@@ -23,10 +23,6 @@
   font-size: 2rem !important;
   font-weight: 700 !important;
   color: #1e3a5f !important;
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
-  background-clip: unset;
 }
 
 .testimonials-slider-wrapper {
