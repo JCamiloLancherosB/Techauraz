@@ -1437,3 +1437,239 @@
 .product__view-details--enhanced:hover svg {
   transform: translateX(4px);
 }
+
+/* =============================================================================
+   21. ENHANCED PRICE STYLING FOR PRODUCT DETAIL PAGE
+   Improved visual hierarchy for sale prices and badges
+   ============================================================================= */
+
+/* Price container on sale - improved layout */
+.price--on-sale {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Regular/compare price styling (strikethrough) */
+.price-item--regular.price-item--last,
+.price--on-sale .price-item--regular {
+  color: #64748b;
+  text-decoration: line-through;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* Sale price styling - more prominent */
+.price-item--sale {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #059669;
+}
+
+/* =============================================================================
+   22. ENHANCED OFFER BADGE
+   Animated, premium badge style with pulse effect
+   ============================================================================= */
+
+.badge.price__badge-sale {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  animation: pulse-badge-enhanced 2s infinite;
+}
+
+@keyframes pulse-badge-enhanced {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* =============================================================================
+   23. ENHANCED BUY BUTTONS
+   Premium button styles with improved visual hierarchy
+   ============================================================================= */
+
+/* Primary button - COMPRAR AHORA */
+.product-form__submit[name="buy"],
+.tech-cta-primary .shopify-payment-button__button {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  color: white !important;
+  padding: 18px 48px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+}
+
+.product-form__submit[name="buy"]:hover,
+.tech-cta-primary .shopify-payment-button__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.45);
+}
+
+/* Secondary button - AGREGAR AL CARRITO */
+.product-form__submit:not([name="buy"]),
+.tech-cta-secondary {
+  background: transparent;
+  color: #3b82f6;
+  padding: 18px 48px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid #3b82f6;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.product-form__submit:not([name="buy"]):hover,
+.tech-cta-secondary:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* =============================================================================
+   24. ENHANCED TRUST BADGES BAR
+   Elegant, organized trust icons container
+   ============================================================================= */
+
+.product-trust-badges,
+.trust-badges-pdp,
+.trust-badges-inline--product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin: 16px 0;
+}
+
+.trust-badge-item,
+.trust-badges-inline__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #475569;
+  font-weight: 500;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trust-badge-item:hover,
+.trust-badges-inline__item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.trust-badge-item svg,
+.trust-badge-item .icon,
+.trust-badges-inline__icon .icon,
+.trust-badges-inline__icon svg {
+  width: 18px;
+  height: 18px;
+  color: #10b981;
+}
+
+/* =============================================================================
+   25. ENHANCED DESCRIPTION SECTION
+   Clear visual hierarchy with decorative elements
+   ============================================================================= */
+
+.product__description-wrapper,
+.product__description--enhanced {
+  border-left: 4px solid #3b82f6;
+  padding-left: 24px;
+  margin: 32px 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(59, 130, 246, 0.05) 100%);
+  padding: 24px;
+  border-radius: 0 12px 12px 0;
+}
+
+.product__description h2,
+.product-description__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.product__description ul,
+.product-description__content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product__description li,
+.product-description__content li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.product__description li::before,
+.product-description__content li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* Mobile responsiveness for enhanced styles */
+@media screen and (max-width: 749px) {
+  .price--on-sale {
+    gap: 8px;
+  }
+  
+  .price-item--sale {
+    font-size: 1.75rem;
+  }
+  
+  .badge.price__badge-sale {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .product-form__submit[name="buy"],
+  .tech-cta-primary .shopify-payment-button__button,
+  .product-form__submit:not([name="buy"]),
+  .tech-cta-secondary {
+    padding: 16px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .product-trust-badges,
+  .trust-badges-pdp,
+  .trust-badges-inline--product {
+    padding: 12px;
+    gap: 6px;
+  }
+  
+  .trust-badge-item,
+  .trust-badges-inline__item {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .product__description-wrapper,
+  .product__description--enhanced {
+    padding: 16px;
+    margin: 24px 0;
+  }
+}
