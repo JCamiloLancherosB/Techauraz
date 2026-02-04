@@ -1497,9 +1497,11 @@
 
 /* Primary button - COMPRAR AHORA */
 .product-form__submit[name="buy"],
-.tech-cta-primary .shopify-payment-button__button {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  color: white !important;
+.tech-cta-primary .shopify-payment-button__button,
+.product-form .shopify-payment-button__button,
+.product-form__buttons .shopify-payment-button__button {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
   padding: 18px 48px;
   border-radius: 12px;
   font-size: 1rem;
@@ -1592,10 +1594,9 @@
 .product__description-wrapper,
 .product__description--enhanced {
   border-left: 4px solid #3b82f6;
-  padding-left: 24px;
   margin: 32px 0;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(59, 130, 246, 0.05) 100%);
-  padding: 24px;
+  padding: 24px 24px 24px 28px;
   border-radius: 0 12px 12px 0;
 }
 
@@ -1624,10 +1625,16 @@
 
 .product__description li::before,
 .product-description__content li::before {
-  content: "✓";
+  content: "";
   position: absolute;
   left: 0;
-  color: #10b981;
+  top: 4px;
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid #10b981;
+  border-bottom: 2px solid #10b981;
+  transform: rotate(-45deg);
+}
   font-weight: 700;
 }
 
