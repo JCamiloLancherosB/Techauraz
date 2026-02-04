@@ -292,7 +292,7 @@
 @media screen and (min-width: 750px) {
   .slideshow__text-wrapper .banner__box,
   .banner__content .banner__box {
-    padding: 48px 56px;
+    padding: 3rem 3.5rem;
   }
 }
 
@@ -311,7 +311,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   /* Fallback for browsers without background-clip support */
   color: #fbbf24;
 }
@@ -377,7 +377,7 @@
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    /* 48px for cleaner proportions */
+    /* 48px exceeds WCAG 2.1 minimum touch target (44px) */
     width: 48px;
     height: 48px;
     min-width: 48px;
@@ -575,14 +575,14 @@
 /* Individual CTA Button */
 .template-index slideshow-component .slideshow-cta {
   min-height: 48px; /* Exceeds 44px requirement for better touch targets */
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 0.025em;
   line-height: 1.5;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
