@@ -1,16 +1,99 @@
-<div class="product-faq section-{{ section.id }}-padding">
+{%- comment -%}
+  Product FAQ Section - TechAura
+  
+  Features:
+  - Accordion-style FAQ with expand/collapse functionality
+  - Support for product-specific FAQs via metafields
+  - Default store-wide FAQs as fallback
+  - Smooth height animation on expand/collapse
+  - Only one item open at a time (optional setting)
+  - FAQ Schema structured data for SEO
+  - Keyboard accessibility with ARIA attributes
+{%- endcomment -%}
+
+{{ 'faq-accordion.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign use_metafield_faqs = false
+  
+  if section.settings.use_product_metafields and product != blank
+    if product.metafields.custom.faq_items != blank
+      assign use_metafield_faqs = true
+      assign metafield_faqs = product.metafields.custom.faq_items.value
+    endif
+  endif
+  
+  assign has_block_faqs = section.blocks.size > 0
+  assign show_default_faqs = false
+  
+  unless has_block_faqs or use_metafield_faqs
+    assign show_default_faqs = true
+  endunless
+  
+  assign faq_schema_items = ''
+-%}
+
+<div class="product-faq section-{{ section.id }}-padding" id="product-faq-{{ section.id }}">
   <div class="product-faq__container page-width">
-    {% if section.settings.heading != blank %}
+    {%- if section.settings.heading != blank -%}
       <h2 class="product-faq__heading">{{ section.settings.heading }}</h2>
-    {% endif %}
+    {%- endif -%}
 
-    {% if section.settings.description != blank %}
+    {%- if section.settings.description != blank -%}
       <p class="product-faq__description">{{ section.settings.description }}</p>
-    {% endif %}
+    {%- endif -%}
 
-    {% if section.blocks.size > 0 %}
-      <div class="product-faq__accordion">
-        {% for block in section.blocks %}
+    <div 
+      class="product-faq__accordion" 
+      data-single-open="{{ section.settings.single_open }}"
+      role="region"
+      aria-label="{{ section.settings.heading | default: 'Preguntas Frecuentes' }}"
+    >
+      {%- if use_metafield_faqs -%}
+        {%- comment -%} Product-specific FAQs from metafields {%- endcomment -%}
+        {%- for faq in metafield_faqs -%}
+          {%- capture faq_schema_item -%}
+            {
+              "@type": "Question",
+              "name": {{ faq.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ faq.answer | strip_html | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endcapture -%}
+          {%- assign faq_schema_items = faq_schema_items | append: faq_schema_item -%}
+          
+          <details class="product-faq__item">
+            <summary class="product-faq__question">
+              <span class="product-faq__question-text">{{ faq.question }}</span>
+              <span class="product-faq__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="product-faq__answer">
+              {{ faq.answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+        
+      {%- elsif has_block_faqs -%}
+        {%- comment -%} FAQs from section blocks {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- capture faq_schema_item -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endcapture -%}
+          {%- assign faq_schema_items = faq_schema_items | append: faq_schema_item -%}
+          
           <details class="product-faq__item" {{ block.shopify_attributes }}>
             <summary class="product-faq__question">
               <span class="product-faq__question-text">{{ block.settings.question }}</span>
@@ -24,63 +107,100 @@
               {{ block.settings.answer }}
             </div>
           </details>
-        {% endfor %}
-      </div>
-    {% else %}
-      {%- comment -%} Preguntas frecuentes por defecto {%- endcomment -%}
-      <div class="product-faq__accordion">
-        <details class="product-faq__item">
-          <summary class="product-faq__question">
-            <span class="product-faq__question-text">¿Cuál es el tiempo de envío?</span>
-            <span class="product-faq__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </summary>
-          <div class="product-faq__answer">
-            <p>Los envíos a las principales ciudades de Colombia toman de 2 a 5 días hábiles. Para zonas rurales puede tomar hasta 7 días hábiles.</p>
-          </div>
-        </details>
-
-        <details class="product-faq__item">
-          <summary class="product-faq__question">
-            <span class="product-faq__question-text">¿Ofrecen garantía?</span>
-            <span class="product-faq__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </summary>
-          <div class="product-faq__answer">
-            <p>Sí, todos nuestros productos tienen garantía de 30 días. Si no estás satisfecho, puedes devolver el producto sin problemas.</p>
-          </div>
-        </details>
-
-        <details class="product-faq__item">
-          <summary class="product-faq__question">
-            <span class="product-faq__question-text">¿Cuáles son los métodos de pago?</span>
-            <span class="product-faq__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </summary>
-          <div class="product-faq__answer">
-            <p>Aceptamos tarjetas de crédito y débito, PSE, transferencias bancarias y pago contra entrega en ciudades principales.</p>
-          </div>
-        </details>
-      </div>
-    {% endif %}
+        {%- endfor -%}
+        
+      {%- else -%}
+        {%- comment -%} Default TechAura FAQs {%- endcomment -%}
+        {%- assign default_faqs = "shipping,payment,warranty,returns,authenticity" | split: "," -%}
+        
+        {%- for faq_type in default_faqs -%}
+          {%- case faq_type -%}
+            {%- when 'shipping' -%}
+              {%- assign question = "¿Cuánto tarda el envío?" -%}
+              {%- assign answer = "<p>Enviamos en <strong>2-5 días hábiles</strong> a toda Colombia. El envío es <strong>completamente GRATIS</strong> y recibirás un número de seguimiento para rastrear tu pedido en tiempo real. Para zonas rurales, el tiempo puede extenderse hasta 7 días hábiles.</p>" -%}
+            {%- when 'payment' -%}
+              {%- assign question = "¿Puedo pagar contra entrega?" -%}
+              {%- assign answer = "<p>¡Sí! Aceptamos <strong>pago contraentrega</strong> en toda Colombia sin costo adicional. Pagas en efectivo o con tarjeta directamente al mensajero cuando recibas tu producto. También aceptamos tarjetas de crédito/débito, PSE y transferencias bancarias.</p>" -%}
+            {%- when 'warranty' -%}
+              {%- assign question = "¿Qué garantía tienen los productos?" -%}
+              {%- assign answer = "<p>Todos nuestros productos tienen <strong>30 días de garantía</strong> contra defectos de fabricación. Si algo no funciona correctamente, te lo reemplazamos o devolvemos tu dinero al 100%, sin complicaciones ni preguntas.</p>" -%}
+            {%- when 'returns' -%}
+              {%- assign question = "¿Cómo hago una devolución?" -%}
+              {%- assign answer = "<p>Contáctanos por <strong>WhatsApp</strong> y te guiaremos en el proceso. Tienes 30 días desde la recepción para solicitar una devolución. El reembolso se procesa en 3-5 días hábiles una vez recibamos el producto.</p>" -%}
+            {%- when 'authenticity' -%}
+              {%- assign question = "¿Los productos son originales?" -%}
+              {%- assign answer = "<p>Trabajamos con <strong>proveedores verificados</strong> y distribuidores autorizados para garantizar la calidad de todos nuestros productos. Cada artículo pasa por un control de calidad antes del envío. Tu satisfacción está 100% garantizada.</p>" -%}
+          {%- endcase -%}
+          
+          {%- capture faq_schema_item -%}
+            {
+              "@type": "Question",
+              "name": {{ question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ answer | strip_html | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endcapture -%}
+          {%- assign faq_schema_items = faq_schema_items | append: faq_schema_item -%}
+          
+          <details class="product-faq__item">
+            <summary class="product-faq__question">
+              <span class="product-faq__question-text">{{ question }}</span>
+              <span class="product-faq__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="product-faq__answer">
+              {{ answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
   </div>
 </div>
+
+{%- comment -%} FAQ Schema Structured Data for SEO {%- endcomment -%}
+{%- if faq_schema_items != blank -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{{ faq_schema_items }}]
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Section-specific padding styles {%- endcomment -%}
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+</style>
+
+<script src="{{ 'faq-accordion.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
   "name": "Preguntas Frecuentes",
   "tag": "section",
-  "class": "section",
+  "class": "section product-faq-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -88,10 +208,32 @@
       "default": "Preguntas Frecuentes"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "description",
       "label": "Descripción",
-      "default": "Encuentra respuestas a las preguntas más comunes sobre nuestros productos"
+      "default": "Encuentra respuestas a las preguntas más comunes sobre envíos, pagos y garantías"
+    },
+    {
+      "type": "header",
+      "content": "Configuración"
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Solo un elemento abierto a la vez",
+      "info": "Al abrir una pregunta, las demás se cerrarán automáticamente",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "use_product_metafields",
+      "label": "Usar FAQs del producto",
+      "info": "Prioriza las preguntas frecuentes configuradas en el metafield 'custom.faq_items' del producto",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
     },
     {
       "type": "range",
@@ -101,7 +243,7 @@
       "step": 4,
       "unit": "px",
       "label": "Espaciado superior",
-      "default": 36
+      "default": 40
     },
     {
       "type": "range",
@@ -111,13 +253,14 @@
       "step": 4,
       "unit": "px",
       "label": "Espaciado inferior",
-      "default": 36
+      "default": 40
     }
   ],
   "blocks": [
     {
       "type": "faq_item",
-      "name": "Pregunta",
+      "name": "Pregunta FAQ",
+      "limit": 10,
       "settings": [
         {
           "type": "text",
@@ -129,7 +272,7 @@
           "type": "richtext",
           "id": "answer",
           "label": "Respuesta",
-          "default": "<p>Aquí va la respuesta detallada a la pregunta.</p>"
+          "default": "<p>Aquí va la respuesta detallada a la pregunta. Puedes incluir <strong>texto en negrita</strong>, enlaces y listas.</p>"
         }
       ]
     }
@@ -141,22 +284,36 @@
         {
           "type": "faq_item",
           "settings": {
-            "question": "¿Cuál es el tiempo de envío?",
-            "answer": "<p>Los envíos a las principales ciudades de Colombia toman de 2 a 5 días hábiles. Para zonas rurales puede tomar hasta 7 días hábiles.</p>"
+            "question": "¿Cuánto tarda el envío?",
+            "answer": "<p>Enviamos en <strong>2-5 días hábiles</strong> a toda Colombia. El envío es <strong>completamente GRATIS</strong> y recibirás un número de seguimiento para rastrear tu pedido en tiempo real.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
-            "question": "¿Ofrecen garantía?",
-            "answer": "<p>Sí, todos nuestros productos tienen garantía de 30 días. Si no estás satisfecho, puedes devolver el producto sin problemas.</p>"
+            "question": "¿Puedo pagar contra entrega?",
+            "answer": "<p>¡Sí! Aceptamos <strong>pago contraentrega</strong> en toda Colombia sin costo adicional. Pagas en efectivo o con tarjeta directamente al mensajero cuando recibas tu producto.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
-            "question": "¿Cuáles son los métodos de pago?",
-            "answer": "<p>Aceptamos tarjetas de crédito y débito, PSE, transferencias bancarias y pago contra entrega en ciudades principales.</p>"
+            "question": "¿Qué garantía tienen los productos?",
+            "answer": "<p>Todos nuestros productos tienen <strong>30 días de garantía</strong> contra defectos de fabricación. Si algo no funciona correctamente, te lo reemplazamos o devolvemos tu dinero.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo hago una devolución?",
+            "answer": "<p>Contáctanos por <strong>WhatsApp</strong> al +57 300 860 2789 y te guiaremos en el proceso. Tienes 30 días desde la recepción para solicitar una devolución.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Los productos son originales?",
+            "answer": "<p>Trabajamos con <strong>proveedores verificados</strong> y distribuidores autorizados para garantizar la calidad de todos nuestros productos.</p>"
           }
         }
       ]

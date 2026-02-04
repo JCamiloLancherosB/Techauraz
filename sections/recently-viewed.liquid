@@ -1,0 +1,192 @@
+{%- comment -%}
+  Recently Viewed Products Section
+  
+  Displays a horizontal scrollable carousel of products the user has recently viewed.
+  Uses localStorage to track viewed products client-side.
+  
+  Features:
+  - Horizontal scrollable carousel with scroll-snap
+  - Navigation arrows for desktop
+  - Fade edges effect on scroll
+  - Empty state message
+  - Auto-hide when empty (optional)
+  - Excludes current product when on product page
+  
+  Settings:
+  - section_title: Section heading text
+  - products_to_show: Number of products to display (1-10)
+  - show_view_all_link: Show "Ver historial completo" link
+  - view_all_link_url: Custom URL for view all link
+  - auto_hide_when_empty: Hide section when no products viewed
+  - color_scheme: Color scheme for the section
+  - padding_top/padding_bottom: Section padding
+{%- endcomment -%}
+
+{{ 'recently-viewed.css' | asset_url | stylesheet_tag }}
+
+<recently-viewed-section 
+  class="recently-viewed-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-max-display="{{ section.settings.products_to_show }}"
+  data-auto-hide="{{ section.settings.auto_hide_when_empty }}"
+  data-empty-text="{{ section.settings.empty_state_text | escape }}"
+  {% if product %}data-current-product="{{ product.handle }}"{% endif %}
+  {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+  style="
+    --recently-viewed-padding-top: {{ section.settings.padding_top }}px;
+    --recently-viewed-padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="page-width recently-viewed__container">
+    {%- if section.settings.section_title != blank or section.settings.show_view_all_link -%}
+      <div class="recently-viewed__header">
+        {%- if section.settings.section_title != blank -%}
+          <h2 class="recently-viewed__title {{ section.settings.heading_size }}">
+            {{ section.settings.section_title }}
+          </h2>
+        {%- endif -%}
+        
+        {%- if section.settings.show_view_all_link -%}
+          <a href="{{ section.settings.view_all_link_url | default: '/collections/all' }}" class="recently-viewed__link">
+            {{ section.settings.view_all_link_text | default: 'Ver historial completo' }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    
+    <div data-recently-viewed-content>
+      {%- comment -%}
+        Content is rendered client-side by JavaScript.
+        Empty placeholder shown initially - JS will render content quickly.
+      {%- endcomment -%}
+    </div>
+  </div>
+</recently-viewed-section>
+
+<script src="{{ 'recently-viewed.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  Pass product data to JavaScript for tracking on product pages.
+  This ensures the current product is added to recently viewed.
+  Uses a namespaced variable to avoid conflicts with other scripts.
+{%- endcomment -%}
+{%- if product -%}
+  <script>
+    window.RecentlyViewedProductData = {
+      handle: {{ product.handle | json }},
+      title: {{ product.title | json }},
+      featured_image: {{ product.featured_image | image_url: width: 800 | json }},
+      price: {{ product.price | json }},
+      compare_at_price: {{ product.compare_at_price | json }},
+      url: {{ product.url | json }}
+    };
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Productos vistos recientemente",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "default": "👁️ Vistos Recientemente",
+      "label": "Título de la sección"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h3", "label": "Pequeño" },
+        { "value": "h2", "label": "Mediano" },
+        { "value": "h1", "label": "Grande" }
+      ],
+      "default": "h2",
+      "label": "Tamaño del título"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "default": 8,
+      "label": "Productos a mostrar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all_link",
+      "default": false,
+      "label": "Mostrar enlace 'Ver historial completo'"
+    },
+    {
+      "type": "text",
+      "id": "view_all_link_text",
+      "default": "Ver historial completo",
+      "label": "Texto del enlace"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link_url",
+      "label": "URL del enlace (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "empty_state_text",
+      "default": "No has visto productos recientemente",
+      "label": "Texto cuando está vacío"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_hide_when_empty",
+      "default": true,
+      "label": "Ocultar sección automáticamente cuando está vacía"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de colores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado de la sección"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Productos vistos recientemente",
+      "settings": {
+        "section_title": "👁️ Vistos Recientemente",
+        "products_to_show": 8,
+        "auto_hide_when_empty": true
+      }
+    }
+  ]
+}
+{% endschema %}
