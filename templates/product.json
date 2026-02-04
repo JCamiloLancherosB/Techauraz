@@ -394,6 +394,20 @@
                 "padding_top": 40,
                 "padding_bottom": 40
             }
+        },
+        "recently-viewed": {
+            "type": "recently-viewed",
+            "settings": {
+                "section_title": "👁️ Vistos Recientemente",
+                "heading_size": "h2",
+                "products_to_show": 8,
+                "show_view_all_link": false,
+                "empty_state_text": "No has visto productos recientemente",
+                "auto_hide_when_empty": true,
+                "color_scheme": "scheme-1",
+                "padding_top": 40,
+                "padding_bottom": 40
+            }
         }
     },
     "order": [
@@ -406,6 +420,7 @@
         "product_faq",
         "171500672571a9dd42",
         "1759259835d66ec7b3",
+        "recently-viewed",
         "related-products",
         "sticky_mobile_cta",
         "purchase_notification"
