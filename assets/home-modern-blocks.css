@@ -103,6 +103,7 @@
 .newsletter {
   position: relative;
   overflow: hidden;
+  text-align: center !important;
 }
 
 .newsletter__wrapper {
@@ -112,6 +113,7 @@
   padding: var(--ta-space-2xl) var(--ta-space-xl) !important;
   background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%) !important;
   box-shadow: 0 20px 60px rgba(30, 58, 95, 0.4);
+  text-align: center !important;
 }
 
 .newsletter__wrapper::before {
@@ -137,6 +139,18 @@
   color: rgba(255, 255, 255, 0.95) !important;
   font-size: var(--ta-font-size-md);
   margin-top: var(--ta-space-md);
+  text-align: center !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.newsletter .rte,
+.newsletter .rte p {
+  text-align: center !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .newsletter-form__field-wrapper {
@@ -380,35 +394,28 @@
 /* Footer block headings - tech brand style */
 .footer-block__heading {
   color: var(--ta-text-inverse, #fff) !important;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 1.25rem;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 20px !important;
   position: relative;
-  padding-bottom: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.footer-block__heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 28px;
-  height: 2px;
-  background: #3b82f6;
-  border-radius: 2px;
+  padding-top: 12px !important;
+  padding-bottom: 0;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  border-top: 3px solid #3b82f6 !important;
+  border-bottom: none !important;
 }
 
 /* Footer text blocks - Help & Secure Purchase columns */
 .footer-block__details-content {
-  font-size: 0.875rem;
-  line-height: 1.75;
+  font-size: 0.9375rem !important;
+  line-height: 1.7 !important;
 }
 
 .footer-block__details-content p {
   margin-bottom: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #cbd5e1 !important;
+  font-size: 0.9375rem !important;
 }
 
 .footer-block__details-content p:last-child {
@@ -420,13 +427,20 @@
   font-weight: 600;
 }
 
+.footer-block__details-content li {
+  margin-bottom: 12px !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.7 !important;
+  color: #cbd5e1 !important;
+}
+
 .footer-block__details-content a,
 .footer-block .list-menu__item {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: #cbd5e1 !important;
   transition: color 0.2s ease, padding-left 0.2s ease;
   display: inline-block;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.9375rem !important;
 }
 
 .footer-block__details-content a:hover,
@@ -532,6 +546,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1.5rem;
   margin-top: 2rem;
+  font-size: 0.8125rem !important;
+}
+
+.footer__content-bottom a {
+  font-size: 0.8125rem !important;
+  color: #94a3b8 !important;
 }
 
 .footer__content-bottom-wrapper {
@@ -548,10 +568,20 @@
   flex-wrap: wrap;
   gap: 1.25rem;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .footer__localization .localization-form {
   margin: 0;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.footer .disclosure__button {
+  font-size: 0.9375rem !important;
+  padding: 12px 24px !important;
 }
 
 .footer__localization h2 {
@@ -586,8 +616,8 @@
 
 /* Copyright section - refined typography */
 .footer__copyright {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8125rem !important;
+  color: #94a3b8 !important;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -595,11 +625,13 @@
 }
 
 .copyright__content {
-  color: rgba(255, 255, 255, 0.55) !important;
+  color: #94a3b8 !important;
+  font-size: 0.8125rem !important;
 }
 
 .copyright__content a {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: #94a3b8 !important;
+  font-size: 0.8125rem !important;
   transition: color 0.2s ease;
   text-decoration: none;
 }
