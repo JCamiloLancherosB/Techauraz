@@ -1493,45 +1493,110 @@
     ]
   },
   {
-    "name": "Productos vistos recientemente",
+    "name": "Exit Intent Popup",
     "settings": [
       {
-        "type": "checkbox",
-        "id": "recently_viewed_enabled",
-        "label": "Habilitar sección de productos vistos recientemente",
-        "default": true
+        "type": "header",
+        "content": "Configuración del popup de intención de salida"
       },
       {
-        "type": "range",
-        "id": "recently_viewed_products_count",
-        "min": 4,
-        "max": 10,
-        "step": 1,
-        "default": 8,
-        "label": "Número de productos a mostrar"
+        "type": "paragraph",
+        "content": "Configura el popup que aparece cuando los visitantes muestran intención de abandonar el sitio. Diseñado para capturar clientes potenciales con una oferta de descuento."
+      },
+      {
+        "type": "checkbox",
+        "id": "exit_intent_popup_enabled",
+        "label": "Activar popup de intención de salida",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Contenido del popup"
       },
       {
         "type": "text",
-        "id": "recently_viewed_title",
-        "label": "Título de la sección",
-        "default": "👁️ Vistos Recientemente"
+        "id": "exit_intent_headline",
+        "label": "Título principal",
+        "default": "¡Espera! 🎁 Tenemos algo para ti"
       },
       {
-        "type": "checkbox",
-        "id": "recently_viewed_auto_hide",
-        "label": "Ocultar automáticamente cuando está vacío",
-        "default": true,
-        "info": "Oculta la sección si el usuario no ha visto ningún producto"
+        "type": "text",
+        "id": "exit_intent_body_text",
+        "label": "Texto de la oferta",
+        "default": "Obtén 10% de descuento en tu primera compra"
+      },
+      {
+        "type": "text",
+        "id": "exit_intent_discount_code",
+        "label": "Código de descuento",
+        "default": "BIENVENIDO10",
+        "info": "Este código debe existir en Shopify > Descuentos"
+      },
+      {
+        "type": "text",
+        "id": "exit_intent_email_placeholder",
+        "label": "Placeholder del campo de email",
+        "default": "Tu correo electrónico"
+      },
+      {
+        "type": "text",
+        "id": "exit_intent_cta_text",
+        "label": "Texto del botón CTA",
+        "default": "OBTENER MI DESCUENTO"
+      },
+      {
+        "type": "text",
+        "id": "exit_intent_dismiss_text",
+        "label": "Texto del enlace de rechazo",
+        "default": "No, gracias. Prefiero pagar precio completo"
+      },
+      {
+        "type": "textarea",
+        "id": "exit_intent_consent_text",
+        "label": "Texto del consentimiento GDPR",
+        "default": "Acepto recibir ofertas y novedades por email. Puedo cancelar en cualquier momento."
+      },
+      {
+        "type": "header",
+        "content": "Comportamiento"
       },
       {
         "type": "range",
-        "id": "recently_viewed_max_stored",
-        "min": 10,
+        "id": "exit_intent_delay",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "unit": "s",
+        "label": "Tiempo en el sitio antes de activar (segundos)",
+        "default": 10,
+        "info": "El popup solo se mostrará después de que el visitante haya pasado este tiempo en el sitio"
+      },
+      {
+        "type": "checkbox",
+        "id": "exit_intent_exclude_cart",
+        "label": "No mostrar en página del carrito",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Urgencia (Opcional)"
+      },
+      {
+        "type": "checkbox",
+        "id": "exit_intent_show_countdown",
+        "label": "Mostrar temporizador de cuenta regresiva",
+        "default": false,
+        "info": "Muestra un contador para crear urgencia"
+      },
+      {
+        "type": "range",
+        "id": "exit_intent_countdown_minutes",
+        "min": 5,
         "max": 30,
         "step": 5,
-        "default": 20,
-        "label": "Máximo de productos almacenados",
-        "info": "Número máximo de productos guardados en el historial del navegador"
+        "unit": "min",
+        "label": "Duración del temporizador",
+        "default": 15
       }
     ]
   },
