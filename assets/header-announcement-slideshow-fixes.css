@@ -246,7 +246,7 @@ body.scrolled-past-header .announcement-bar-section {
 }
 
 .slideshow .button--secondary:hover,
-.banner__box .button__secondary:hover {
+.banner__box .button--secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: #ffffff;
   transform: translateY(-1px);
