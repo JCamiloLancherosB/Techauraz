@@ -276,16 +276,14 @@
 .slideshow__text-wrapper .banner__box,
 .banner__content .banner__box {
   pointer-events: auto;
-  /* Premium glass morphism effect - subtle, not a "patch" */
-  background: rgba(15, 23, 42, 0.65);
+  /* Enhanced glassmorphism effect - premium depth and elegance */
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
+  border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem 2.5rem;
   max-width: min(90%, 600px);
   /* Ensure consistent centering of content within box */
   text-align: center;
@@ -294,8 +292,40 @@
 @media screen and (min-width: 750px) {
   .slideshow__text-wrapper .banner__box,
   .banner__content .banner__box {
-    padding: 2rem 2.5rem;
+    padding: 48px 56px;
   }
+}
+
+/* =============================================================================
+   SLIDESHOW HEADING - Premium golden gradient typography
+   ============================================================================= */
+
+/* Hero heading with golden gradient for premium impact */
+.slideshow__text-wrapper .banner__heading,
+.banner__content .banner__heading,
+.template-index slideshow-component .banner__heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  /* Fallback for browsers without background-clip support */
+  color: #fbbf24;
+}
+
+/* Slideshow text/subheading styling */
+.slideshow__text-wrapper .banner__text,
+.banner__content .banner__text,
+.template-index slideshow-component .banner__text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Ensure overlay is positioned correctly with subtle gradient - not a "patch" look */
@@ -341,50 +371,46 @@
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     position: relative;
     z-index: var(--ta-z-slideshow-controls, 20); /* Local stacking within slideshow */
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    /* Enhanced glassmorphism effect for navigation buttons */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    /* 52px exceeds WCAG 2.1 minimum (44px) while maintaining visual balance */
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    min-height: 52px;
+    /* 48px for cleaner proportions */
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1f2937;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
     pointer-events: auto;
   }
 
   .template-index slideshow-component .slideshow__controls--top .slider-button:hover {
-    background: rgba(37, 99, 235, 0.95);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.2);
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
   }
 
   .template-index slideshow-component .slideshow__controls--top .slider-button:focus {
-    outline: 3px solid rgba(37, 99, 235, 0.6);
+    outline: 3px solid rgba(255, 255, 255, 0.5);
     outline-offset: 3px;
-    background: rgba(37, 99, 235, 0.95);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.6);
   }
 
   .template-index slideshow-component .slideshow__controls--top .slider-button:focus-visible {
-    outline: 3px solid rgba(37, 99, 235, 0.8);
+    outline: 3px solid rgba(255, 255, 255, 0.7);
     outline-offset: 3px;
-    background: rgba(37, 99, 235, 0.95);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      0 0 0 4px rgba(37, 99, 235, 0.3),
-      0 6px 20px rgba(37, 99, 235, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* Ensure SVG icons in slider buttons are white */
+  .template-index slideshow-component .slideshow__controls--top .slider-button svg {
+    color: white;
+    fill: currentColor;
   }
 }
 
@@ -549,13 +575,14 @@
 /* Individual CTA Button */
 .template-index slideshow-component .slideshow-cta {
   min-height: 48px; /* Exceeds 44px requirement for better touch targets */
-  padding: 14px 32px;
+  padding: 16px 32px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
   line-height: 1.5;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
@@ -565,44 +592,41 @@
   pointer-events: auto; /* Ensure clickability */
 }
 
-/* Primary CTA */
+/* Primary CTA - "VER CATÁLOGO" enhanced blue button */
 .template-index slideshow-component .slideshow-cta.button--primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: #3b82f6;
   color: #ffffff;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  border: none;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4);
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  background: #2563eb;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.5);
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:focus {
-  outline: 3px solid rgba(37, 99, 235, 0.5);
+  outline: 3px solid rgba(59, 130, 246, 0.5);
   outline-offset: 3px;
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.7);
+  outline: 3px solid rgba(59, 130, 246, 0.7);
   outline-offset: 3px;
 }
 
-/* Secondary CTA */
+/* Secondary CTA - "CONTACTAR" transparent with border */
 .template-index slideshow-component .slideshow-cta.button--secondary {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  background: transparent;
   color: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .template-index slideshow-component .slideshow-cta.button--secondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .template-index slideshow-component .slideshow-cta.button--secondary:focus {
