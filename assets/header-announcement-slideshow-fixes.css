@@ -1,0 +1,301 @@
+/**
+ * HEADER, ANNOUNCEMENT BAR & SLIDESHOW UI/UX FIXES
+ * =================================================
+ * Purpose: Fix visual inconsistencies and improve UX
+ * 
+ * PROBLEMS ADDRESSED:
+ * 1. Announcement Bar - Disappears on scroll leaving empty space
+ * 2. Header Icons - Inconsistent styles and sizes
+ * 3. Slideshow Navigation - Inconsistent button styles
+ * 4. Header Logo & Navigation - Improve active state visibility
+ * 5. Slideshow Content - Better title contrast
+ * 
+ * Dependencies: Requires techauraz-header.css and slideshow-enhancements.css
+ */
+
+/* =============================================================================
+   PROBLEM 1: ANNOUNCEMENT BAR - SMOOTH HIDE WITHOUT EMPTY SPACE
+   ============================================================================= */
+
+/* Base announcement bar section - ensure smooth transitions */
+.announcement-bar-section {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When scrolled, hide announcement bar smoothly without leaving space */
+body.scrolled-past-header .announcement-bar-section {
+  /* Move the bar up and out of view */
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Alternative: Keep announcement bar fixed to top (optional behavior) */
+/* Uncomment below if you prefer the bar to stay visible when scrolling */
+/*
+.announcement-bar-section.announcement-bar--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+*/
+
+/* =============================================================================
+   PROBLEM 2: HEADER ICONS - CONSISTENT VISUAL STYLE
+   ============================================================================= */
+
+/* Ensure all header icons have consistent circular hover area */
+.header__icon,
+.header__icon--search,
+.header__icon--account,
+.header__icon--cart {
+  border-radius: 50%;
+}
+
+/* Enhanced hover effect for icons */
+.header__icon:hover,
+.header__icon:focus-visible {
+  background: rgba(59, 130, 246, 0.1);
+  transform: scale(1.05);
+}
+
+/* Hide close icon from search button (if it appears as Q×) */
+.header__icon--search .icon-close {
+  display: none;
+}
+
+/* =============================================================================
+   PROBLEM 3: SLIDESHOW NAVIGATION - UNIFIED BUTTON STYLE
+   ============================================================================= */
+
+/* Ensure navigation buttons have consistent styling across all slides */
+.template-index .slideshow__controls--top .slider-button {
+  /* Consistent size */
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  
+  /* Unified glassmorphism effect */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(30, 58, 95, 0.2);
+  border-radius: 50%;
+  
+  /* Shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover state */
+.template-index .slideshow__controls--top .slider-button:hover {
+  background: #ffffff;
+  border-color: #3b82f6;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+}
+
+/* Icon color within buttons */
+.template-index .slideshow__controls--top .slider-button svg,
+.template-index .slideshow__controls--top .slider-button .icon {
+  width: 20px;
+  height: 20px;
+  color: #1e3a5f;
+}
+
+/* Position buttons consistently */
+.template-index .slideshow__controls--top {
+  padding: 0 1.5rem;
+}
+
+/* =============================================================================
+   SLIDESHOW PAGINATION DOTS - IMPROVED VISIBILITY
+   ============================================================================= */
+
+/* Enhanced dot styling for better visibility */
+.template-index slideshow-component .slider-counter__link--dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(226, 232, 240, 0.5);
+  border: 2px solid rgba(226, 232, 240, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active dot with blue accent */
+.template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+/* Hover state for dots */
+.template-index slideshow-component .slider-counter__link--dots:hover .dot {
+  background: rgba(59, 130, 246, 0.7);
+  border-color: rgba(59, 130, 246, 0.9);
+  transform: scale(1.15);
+}
+
+/* =============================================================================
+   PROBLEM 4: HEADER LOGO & NAVIGATION
+   ============================================================================= */
+
+/* Logo container - subtle improvements */
+.header__heading-logo-wrapper {
+  padding: 8px;
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.header__heading-link:hover .header__heading-logo-wrapper {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* Active navigation link - enhanced visibility */
+.header__menu-link[aria-current="page"] {
+  color: #3b82f6;
+  font-weight: 600;
+  position: relative;
+}
+
+/* Active link underline indicator */
+.header__menu-link[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+/* Improved menu spacing */
+.header__inline-menu .header__menu-list {
+  gap: 8px;
+}
+
+/* =============================================================================
+   PROBLEM 5: SLIDESHOW CONTENT BOX - BETTER READABILITY
+   ============================================================================= */
+
+/* Override golden gradient title with white for better readability */
+.template-index slideshow-component .banner__heading,
+.slideshow__text-wrapper .banner__heading {
+  /* Override the existing golden gradient with solid white */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced subtitle readability */
+.slideshow__text-wrapper .banner__text,
+.template-index slideshow-component .banner__text {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* Enhanced glassmorphism for content box */
+.slideshow__text-wrapper .banner__box,
+.template-index .tech-hero__overlay .banner__box {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Primary CTA button styling */
+.slideshow .button--primary,
+.banner__box .button--primary {
+  background: #3b82f6;
+  border: none;
+  padding: 14px 32px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.slideshow .button--primary:hover,
+.banner__box .button--primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Secondary CTA button styling */
+.slideshow .button--secondary,
+.banner__box .button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  padding: 12px 30px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.slideshow .button--secondary:hover,
+.banner__box .button__secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* =============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+/* Mobile: Adjust content box padding and button sizes */
+@media screen and (max-width: 749px) {
+  /* Smaller content box padding on mobile */
+  .slideshow__text-wrapper .banner__box,
+  .template-index .tech-hero__overlay .banner__box {
+    padding: 24px 20px;
+  }
+  
+  /* Smaller navigation buttons on mobile */
+  .template-index .slideshow__controls--top .slider-button {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .template-index .slideshow__controls--top .slider-button svg,
+  .template-index .slideshow__controls--top .slider-button .icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Adjust button padding on mobile */
+  .slideshow .button--primary,
+  .banner__box .button--primary {
+    padding: 12px 24px;
+    font-size: 0.9375rem;
+  }
+  
+  .slideshow .button--secondary,
+  .banner__box .button--secondary {
+    padding: 10px 22px;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Tablet: Medium adjustments */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .slideshow__text-wrapper .banner__box,
+  .template-index .tech-hero__overlay .banner__box {
+    padding: 32px 36px;
+  }
+}
