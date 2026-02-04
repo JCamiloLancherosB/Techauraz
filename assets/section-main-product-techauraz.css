@@ -1635,8 +1635,6 @@
   border-bottom: 2px solid #10b981;
   transform: rotate(-45deg);
 }
-  font-weight: 700;
-}
 
 /* Mobile responsiveness for enhanced styles */
 @media screen and (max-width: 749px) {
