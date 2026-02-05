@@ -2399,16 +2399,10 @@ header-drawer {
 }
 
 /* Newsletter to footer smooth transition */
-.newsletter + .footer,
 .section + .footer,
-section.newsletter + footer.footer {
-  margin-top: 0;
-  border-top: none;
-}
-
-/* Ensure seamless transition from any newsletter section */
 [class*="newsletter"] + .footer {
   margin-top: 0;
+  border-top: none;
 }
 
 /* ========== From section-image-banner.css ========== */
