@@ -615,53 +615,59 @@ select:focus {
 
 /* Override faint text colors for better contrast */
 .ta-conv-benefit {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  justify-content: space-between;
   background: var(--ta-surface, #ffffff);
-  border: 1px solid var(--ta-border, #e2e8f0);
-  border-radius: var(--ta-radius-card, 12px);
-  padding: var(--ta-space-xl, 2.4rem) var(--ta-space-lg, 1.6rem);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 16px;
+  padding: 24px;
   text-align: center;
   transition: var(--ta-transition-normal);
   box-shadow: var(--ta-shadow-sm);
 }
 
 .ta-conv-benefit:hover {
-  border-color: var(--ta-primary, #2563eb);
+  border-color: rgba(99, 102, 241, 0.4);
   box-shadow: var(--ta-shadow-card-hover);
   transform: translateY(-4px);
 }
 
-/* Icon consistency - fixed size, better alignment */
-.ta-conv-benefit__icon {
-  font-size: 4rem;
+/* Icon consistency - fixed size, centered alignment */
+.ta-conv-benefit__icon,
+.ta-conv-benefit-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
   line-height: 1;
-  margin-bottom: var(--ta-space-md, 1.2rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 6.4rem;
-  height: 6.4rem;
-  margin-left: auto;
-  margin-right: auto;
-  background: var(--ta-gradient-bg-section, linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(34, 211, 238, 0.08)));
-  border-radius: var(--ta-radius-lg, 12px);
 }
 
 /* Title - strong contrast, readable */
-.ta-conv-benefit__title {
-  font-size: var(--ta-font-size-lg, 1.8rem);
-  font-weight: var(--ta-font-bold, 700);
+.ta-conv-benefit__title,
+.ta-conv-benefit-title {
+  font-size: 18px;
+  font-weight: 600;
   color: var(--ta-text, #0f172a);
-  margin: 0 0 var(--ta-space-sm, 0.8rem) 0;
-  line-height: var(--ta-leading-tight, 1.2);
+  margin: 0 0 12px 0;
+  line-height: 1.3;
 }
 
-/* Description - good contrast, not faint */
-.ta-conv-benefit__description {
-  font-size: var(--ta-font-size-sm, 1.4rem);
+/* Description - good contrast, flex-grow for alignment */
+.ta-conv-benefit__description,
+.ta-conv-benefit-desc {
+  font-size: 14px;
   font-weight: var(--ta-font-normal, 400);
-  color: var(--ta-text-secondary, #1e293b);
-  line-height: var(--ta-leading-relaxed, 1.625);
+  color: var(--ta-text-secondary, #475569);
+  line-height: 1.6;
   margin: 0;
+  flex-grow: 1;
+}
+
+/* Button styles within benefit cards */
+.ta-conv-benefit .button {
+  margin-top: auto;
+  width: 100%;
 }
 
 /* Benefits grid - consistent sizing */
@@ -687,13 +693,14 @@ select:focus {
   }
 
   .ta-conv-benefit {
-    padding: var(--ta-space-lg, 1.6rem);
+    padding: 20px;
+    min-height: 240px;
   }
 
-  .ta-conv-benefit__icon {
-    font-size: 3.2rem;
-    width: 5.6rem;
-    height: 5.6rem;
+  .ta-conv-benefit__icon,
+  .ta-conv-benefit-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
   }
 
   .ta-conv-section-heading {
