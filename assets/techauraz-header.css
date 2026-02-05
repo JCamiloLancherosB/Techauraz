@@ -142,6 +142,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  margin-right: 32px;
 }
 
 .header__heading-logo-wrapper {
@@ -197,17 +198,16 @@
   color: var(--tech-text-primary, #0f172a);
   background: transparent;
   border: none;
-  border-radius: var(--tech-radius-md, 8px);
+  border-radius: 8px;
   cursor: pointer;
-  transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
+  transition: background-color 0.2s;
   text-decoration: none;
   position: relative;
 }
 
 .header__icon:hover,
 .header__icon:focus {
-  background: var(--tech-color-gray-100, #f1f5f9);
-  color: var(--tech-color-primary, #2563eb);
+  background-color: rgba(99, 102, 241, 0.1);
 }
 
 .header__icon svg {
@@ -276,9 +276,9 @@
 .header__menu-link {
   display: flex;
   align-items: center;
-  padding: var(--tech-space-2, 8px) var(--tech-space-3, 12px);
-  font-size: var(--tech-text-sm, 0.875rem);
-  font-weight: var(--tech-font-medium, 500);
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
   color: var(--tech-text-primary, #0f172a);
   text-decoration: none;
   border-radius: var(--tech-radius-md, 8px);
