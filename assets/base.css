@@ -234,7 +234,7 @@ html {
 
 body {
   font-family: var(--font-body-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  font-size: 1.6rem;
+  font-size: max(14px, 1.4rem);
   line-height: 1.6;
   color: var(--color-text-secondary);
   background: linear-gradient(180deg, var(--color-bg-gradient-start) 0%, var(--color-bg-primary) 40%, var(--color-bg-gradient-end) 100%);
@@ -1676,7 +1676,7 @@ header-drawer {
 }
 
 .footer-block__heading {
-  font-size: 0.9rem;
+  font-size: max(14px, 1.4rem);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1698,7 +1698,7 @@ header-drawer {
 
 @media screen and (min-width: 990px) {
   .footer-block__heading {
-    font-size: 1rem;
+    font-size: max(14px, 1.4rem);
   }
 }
 
@@ -1867,6 +1867,7 @@ header-drawer {
 
 .footer-block__details-content {
   margin-bottom: 4rem;
+  font-size: max(14px, 1.4rem);
 }
 
 @media screen and (min-width: 750px) {
@@ -1895,7 +1896,7 @@ header-drawer {
   color: #94a3b8;
   text-decoration: none;
   padding: 6px 0;
-  font-size: 0.9rem;
+  font-size: max(14px, 1.4rem);
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -13952,4 +13953,23 @@ select:focus {
 
 /* =============================================================================
    END OF PRODUCT GRID LAYOUT IMPROVEMENTS
+   ============================================================================= */
+
+/* =============================================================================
+   FONT SIZE CONSISTENCY IMPROVEMENTS
+   ============================================================================= */
+
+/* Badges de conversión - texto más legible */
+.pdp-badges__text,
+.ta-conv-benefit-desc {
+  font-size: max(13px, 1.3rem);
+}
+
+/* Títulos de sección - tamaño consistente */
+.section__title {
+  font-size: clamp(22px, 4vw, 32px);
+}
+
+/* =============================================================================
+   END OF FONT SIZE CONSISTENCY IMPROVEMENTS
    ============================================================================= */
