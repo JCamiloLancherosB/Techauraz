@@ -394,28 +394,30 @@
 /* Footer block headings - tech brand style */
 .footer-block__heading {
   color: var(--ta-text-inverse, #fff) !important;
-  font-weight: 700 !important;
-  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
   margin-bottom: 20px !important;
   position: relative;
-  padding-top: 12px !important;
+  padding-left: 12px !important;
+  padding-top: 0 !important;
   padding-bottom: 0;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  border-top: 3px solid #3b82f6 !important;
+  border-left: 3px solid var(--color-primary, #2563eb) !important;
+  border-top: none !important;
   border-bottom: none !important;
 }
 
 /* Footer text blocks - Help & Secure Purchase columns */
 .footer-block__details-content {
-  font-size: 0.9375rem !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
 }
 
 .footer-block__details-content p {
   margin-bottom: 0.75rem;
-  color: #cbd5e1 !important;
-  font-size: 0.9375rem !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 14px !important;
 }
 
 .footer-block__details-content p:last-child {
@@ -429,18 +431,18 @@
 
 .footer-block__details-content li {
   margin-bottom: 12px !important;
-  font-size: 0.9375rem !important;
-  line-height: 1.7 !important;
-  color: #cbd5e1 !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .footer-block__details-content a,
 .footer-block .list-menu__item {
-  color: #cbd5e1 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
   transition: color 0.2s ease, padding-left 0.2s ease;
   display: inline-block;
   text-decoration: none;
-  font-size: 0.9375rem !important;
+  font-size: 14px !important;
 }
 
 .footer-block__details-content a:hover,
@@ -753,8 +755,7 @@
   }
 
   .footer-block__heading::after {
-    width: 24px;
-    height: 2px;
+    display: none;
   }
 
   .newsletter__subheading {
@@ -778,13 +779,15 @@
   }
 
   .footer-block__heading {
-    font-size: 0.9rem;
+    font-size: 16px;
     margin-bottom: 1rem;
-    padding-bottom: 0.625rem;
+    padding-bottom: 0;
+    padding-left: 12px;
+    border-left: 3px solid var(--color-primary, #2563eb);
   }
 
   .footer-block__details-content {
-    font-size: 0.8125rem;
+    font-size: 14px;
   }
 
   .footer__content-bottom {

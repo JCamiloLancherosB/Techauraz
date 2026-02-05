@@ -1497,11 +1497,11 @@ header-drawer {
 /* ========== From section-footer.css ========== */
 /* Footer Enhancement - Visual Improvements */
 .footer {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #e2e8f0;
   padding: 60px 0 24px;
   border-top: 1px solid rgba(251, 191, 36, 0.2);
-  margin-top: 3rem;
+  margin-top: 0;
 }
 
 .footer:not(.color-scheme-1) {
@@ -1676,29 +1676,24 @@ header-drawer {
 }
 
 .footer-block__heading {
-  font-size: max(14px, 1.4rem);
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.1em;
   color: white;
   margin-bottom: 20px;
   position: relative;
-  padding-bottom: 12px;
+  padding-left: 12px;
+  border-left: 3px solid var(--color-primary, #2563eb);
 }
 
 .footer-block__heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: var(--color-accent, #14b8a6);
+  display: none;
 }
 
 @media screen and (min-width: 990px) {
   .footer-block__heading {
-    font-size: max(14px, 1.4rem);
+    font-size: 16px;
   }
 }
 
@@ -1867,7 +1862,13 @@ header-drawer {
 
 .footer-block__details-content {
   margin-bottom: 4rem;
-  font-size: max(14px, 1.4rem);
+  font-size: 14px;
+}
+
+.footer-block__details-content li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 @media screen and (min-width: 750px) {
@@ -1893,10 +1894,11 @@ header-drawer {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   padding: 6px 0;
-  font-size: max(14px, 1.4rem);
+  font-size: 14px;
+  line-height: 1.8;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -2090,22 +2092,23 @@ header-drawer {
 
 /* Country/Language Selector Enhancement */
 .localization-selector {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-  padding: 8px 32px 8px 12px;
-  color: white;
-  font-size: 0.85rem;
+  padding: 10px 36px 10px 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
   appearance: none;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .localization-selector:hover,
 .localization-selector:focus {
-  border-color: rgba(255, 255, 255, 0.4);
-  outline: 2px solid rgba(255, 255, 255, 0.3);
-  outline-offset: 2px;
+  background: rgba(30, 41, 59, 1);
+  border-color: var(--color-primary, #2563eb);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 /* check for flexbox gap in older Safari versions */
@@ -2212,8 +2215,8 @@ header-drawer {
 
 .footer .list-social__link svg,
 .footer .list-social__link .icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Payment icons */
@@ -2393,6 +2396,19 @@ header-drawer {
   .social-links {
     justify-content: center;
   }
+}
+
+/* Newsletter to footer smooth transition */
+.newsletter + .footer,
+.section + .footer,
+section.newsletter + footer.footer {
+  margin-top: 0;
+  border-top: none;
+}
+
+/* Ensure seamless transition from any newsletter section */
+[class*="newsletter"] + .footer {
+  margin-top: 0;
 }
 
 /* ========== From section-image-banner.css ========== */
@@ -13692,6 +13708,11 @@ select:focus {
   border-radius: 50%;
   background: rgba(59, 130, 246, 0.1);
   transition: all 0.3s ease;
+}
+
+.footer__list-social .link svg {
+  width: 24px;
+  height: 24px;
 }
 
 .footer__list-social .link:hover {
