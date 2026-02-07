@@ -250,6 +250,7 @@ class CrossSell {
   async updateCartCount() {
     try {
       const response = await fetch(`${window.routes.cart_url}?section_id=cart-icon-bubble`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const sectionHtml = await response.text();
       const parsed = new DOMParser().parseFromString(sectionHtml, 'text/html');
       const sourceEl = parsed.querySelector('.shopify-section');
@@ -260,8 +261,10 @@ class CrossSell {
       }
 
       // Publish cart update event to refresh cart drawer contents
+      // publish and PUB_SUB_EVENTS are globals defined in the Dawn theme (pubsub.js/constants.js)
       if (typeof publish === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
         const cartResponse = await fetch('/cart.js');
+        if (!cartResponse.ok) throw new Error(`HTTP ${cartResponse.status}`);
         const cartData = await cartResponse.json();
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cross-sell', cartData: cartData });
       }
