@@ -13,6 +13,7 @@
   const MOBILE_BREAKPOINT = 749; // px
   const MIN_BOTTOM_PADDING = 100; // px
   const STICKY_CTA_HEIGHT = 110; // px - approximate height of sticky CTA with benefits
+  const KEYBOARD_DETECTION_THRESHOLD = 100; // px - viewport shrinks more than this likely means keyboard is open
   
   // Wait for DOM to be ready
   if (document.readyState === 'loading') {
@@ -229,7 +230,7 @@
       // Adjust fixed bottom elements when keyboard is open (viewport shrinks)
       var heightDiff = window.innerHeight - viewportHeight;
       var stickyCTA = document.querySelector('.sticky-cta-bar');
-      if (stickyCTA && heightDiff > 100) {
+      if (stickyCTA && heightDiff > KEYBOARD_DETECTION_THRESHOLD) {
         // Keyboard is likely open, hide sticky CTA to avoid overlap
         stickyCTA.style.transform = 'translateY(100%)';
       } else if (stickyCTA) {

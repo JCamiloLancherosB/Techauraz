@@ -489,7 +489,7 @@
   .testimonials-carousel__dot {
     width: 10px;
     height: 10px;
-    /* Expand touch target to 44px minimum via padding */
+    /* Expand touch target to 44px minimum: (44 - 10) / 2 = 17px padding per side */
     padding: 17px;
     margin: -17px 0;
     background-clip: content-box;
