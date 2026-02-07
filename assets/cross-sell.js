@@ -245,26 +245,26 @@ class CrossSell {
   }
 
   /**
-   * Actualiza el contador del carrito
+   * Actualiza el contador del carrito y el drawer
    */
   async updateCartCount() {
     try {
-      const response = await fetch('/cart.js');
-      const cart = await response.json();
-      const cartCount = document.querySelector('.cart-count, #cart-icon-bubble');
-      
-      if (cartCount) {
-        cartCount.textContent = cart.item_count;
-        
-        // Animar el badge del carrito
-        cartCount.classList.add('animate-pulse');
-        setTimeout(() => {
-          cartCount.classList.remove('animate-pulse');
-        }, 600);
+      const response = await fetch(`${window.routes.cart_url}?section_id=cart-icon-bubble`);
+      const sectionHtml = await response.text();
+      const parsed = new DOMParser().parseFromString(sectionHtml, 'text/html');
+      const sourceEl = parsed.querySelector('.shopify-section');
+      const targetEl = document.getElementById('cart-icon-bubble');
+
+      if (targetEl && sourceEl) {
+        targetEl.innerHTML = sourceEl.innerHTML;
       }
 
-      // Disparar evento para actualizar drawer si está abierto
-      document.dispatchEvent(new CustomEvent('cart:updated'));
+      // Publish cart update event to refresh cart drawer contents
+      if (typeof publish === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+        const cartResponse = await fetch('/cart.js');
+        const cartData = await cartResponse.json();
+        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cross-sell', cartData: cartData });
+      }
     } catch (error) {
       console.error('Error updating cart count:', error);
     }
@@ -319,7 +319,7 @@ class CrossSell {
    */
   formatPrice(price) {
     // Price is already in cents in Shopify, divide by 100
-    return (price / 100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return (price / 100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
 }
 
