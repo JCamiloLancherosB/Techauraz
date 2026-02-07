@@ -693,71 +693,6 @@
   vertical-align: middle;
 }
 
-/* --- DEPRECATED: Trust Chips Row --- 
-   These styles are DEPRECATED and will be removed in a future version.
-   Use .tech-trust-line instead (canonical trust strip).
-   The JS that generated these elements (addTrustIndicators) has been disabled.
-*/
-.trust-indicators {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--ta-space-sm, 0.6rem);
-  margin: var(--ta-space-md, 1rem) 0;
-  padding: var(--ta-space-sm, 0.8rem) 0;
-}
-
-/* DEPRECATED: Trust indicator chip - use .tech-trust-line__item instead */
-.trust-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--ta-space-xs, 0.4rem);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
-  color: var(--ta-success, #10b981);
-  padding: var(--ta-space-xs, 0.5rem) var(--ta-space-sm, 0.9rem);
-  border-radius: var(--ta-radius-pill, 20px);
-  font-size: var(--ta-font-size-xs, 1.25rem);
-  font-weight: var(--ta-font-semibold, 600);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  white-space: nowrap;
-  transition: var(--ta-transition-fast);
-}
-
-.trust-indicator:hover {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
-  border-color: rgba(16, 185, 129, 0.4);
-  transform: translateY(-1px);
-}
-
-/* --- DEPRECATED: Urgency Bar --- 
-   These styles are DEPRECATED. The urgency-indicator feature has been disabled
-   in product-enhancements.js because fake countdown timers damage customer trust.
-   Use pdp-delivery-estimate for real delivery information instead.
-*/
-.urgency-indicator {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #451a03;
-  padding: var(--ta-space-sm, 0.9rem) var(--ta-space-md, 1.2rem);
-  border-radius: var(--ta-radius-md, 8px);
-  font-weight: var(--ta-font-bold, 700);
-  font-size: var(--ta-font-size-sm, 1.4rem);
-  text-align: center;
-  margin: var(--ta-space-md, 1rem) 0;
-  box-shadow: 0 3px 12px rgba(251, 191, 36, 0.35);
-  line-height: var(--ta-leading-normal, 1.4);
-  border: 1px solid rgba(234, 179, 8, 0.3);
-}
-
-.urgency-indicator.urgency-pulse {
-  animation: urgency-pulse-effect 1.5s ease-in-out infinite;
-}
-
-@keyframes urgency-pulse-effect {
-  0%, 100% { box-shadow: 0 3px 12px rgba(251, 191, 36, 0.35); }
-  50% { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.55); }
-}
-
 /* =============================================================================
    10. MOBILE RESPONSIVE FIXES FOR PDP UPPER BLOCK
    ============================================================================= */
@@ -775,25 +710,6 @@
     margin-left: var(--ta-space-xs, 0.3rem);
   }
 
-  /* Trust chips stack nicely on mobile */
-  .trust-indicators {
-    gap: 0.5rem;
-    margin: var(--ta-space-sm, 0.6rem) 0;
-    padding: var(--ta-space-xs, 0.4rem) 0;
-  }
-
-  .trust-indicator {
-    font-size: 1.1rem;
-    padding: 0.4rem 0.7rem;
-  }
-
-  /* Urgency bar mobile */
-  .urgency-indicator {
-    font-size: 1.3rem;
-    padding: 0.75rem 1rem;
-    margin: var(--ta-space-sm, 0.6rem) 0;
-  }
-
   /* CTA buttons mobile */
   .tech-pdp-purchase .product-form__cta-primary .shopify-payment-button__button,
   .tech-pdp-purchase .tech-cta-primary .shopify-payment-button__button {
@@ -805,73 +721,6 @@
   .tech-pdp-purchase .product-form__submit.tech-cta-secondary {
     min-height: 44px;
     font-size: 1.3rem;
-  }
-}
-
-/* Very small screens (e.g., 360px) - Trust indicators */
-@media screen and (max-width: 380px) {
-  .trust-indicators {
-    justify-content: center;
-  }
-
-  .trust-indicator {
-    font-size: 1rem;
-    padding: 0.35rem 0.6rem;
-  }
-}
-
-/* =============================================================================
-   11. DEPRECATED: MICROCOPY BELOW CTAS
-   These styles are kept for backward compatibility but microcopy was removed
-   from buy-buttons.liquid. Trust messaging is now in trust_line block.
-   Delivery info is now in pdp-delivery-estimate.liquid.
-   ============================================================================= */
-
-.product-form__microcopy {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: var(--ta-space-xs, 0.4rem) var(--ta-space-md, 1rem);
-  padding: var(--ta-space-md, 1rem) 0;
-  margin-top: var(--ta-space-xs, 0.4rem);
-  border-top: 1px solid var(--ta-border-light, #f1f5f9);
-}
-
-.product-form__microcopy-item {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--ta-space-xs, 0.4rem);
-  font-size: var(--ta-font-size-xs, 1.2rem);
-  color: var(--ta-text-secondary, #475569);
-  font-weight: var(--ta-font-medium, 500);
-  line-height: var(--ta-leading-normal, 1.5);
-}
-
-.product-form__microcopy-item svg {
-  color: var(--ta-success, #10b981);
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
-
-.product-form__microcopy-separator {
-  color: var(--ta-border, #e2e8f0);
-  font-size: 0.6rem;
-}
-
-@media screen and (max-width: 749px) {
-  .product-form__microcopy {
-    gap: var(--ta-space-xs, 0.3rem) var(--ta-space-sm, 0.6rem);
-    padding: var(--ta-space-sm, 0.6rem) 0;
-  }
-
-  .product-form__microcopy-item {
-    font-size: 1.1rem;
-  }
-
-  .product-form__microcopy-separator {
-    display: none;
   }
 }
 
@@ -1164,14 +1013,6 @@
    Improved visual hierarchy and sale badge with animation
    ============================================================================= */
 
-.product__price {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin: 16px 0;
-}
-
 .price--large .price-item--sale {
   font-size: 2rem;
   font-weight: 700;
@@ -1314,47 +1155,6 @@
 
 .product-description-content ol li {
   margin-bottom: 8px;
-}
-
-/* =============================================================================
-   19. ENHANCED TRUST LINE VISUAL DECORATIONS
-   Premium trust badges with hover effects and gradient background
-   ============================================================================= */
-
-.tech-trust-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  padding: 20px;
-  background: linear-gradient(180deg, transparent 0%, rgba(37, 99, 235, 0.05) 100%);
-  border-radius: 12px;
-  margin: 24px 0;
-}
-
-.tech-trust-line__item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
-}
-
-.tech-trust-line__item:hover {
-  transform: translateY(-2px);
-}
-
-.tech-trust-line__icon {
-  font-size: 1.25rem;
-}
-
-.tech-trust-line__text {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-foreground, #1e293b);
 }
 
 /* =============================================================================
