@@ -5,7 +5,7 @@
   assign og_description = page_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
-    assign og_type = 'og:product'
+    assign og_type = 'product'
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'
@@ -31,8 +31,6 @@
 {%- if request.page_type == 'product' -%}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code | default: 'COP' }}">
-  <meta property="product:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
-  <meta property="product:price:currency" content="{{ cart.currency.iso_code | default: 'COP' }}">
   <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
   <meta property="product:condition" content="new">
 {%- endif -%}
