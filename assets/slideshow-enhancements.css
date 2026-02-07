@@ -786,3 +786,21 @@
     transform: none;
   }
 }
+
+/* Autoplay pause/play button */
+.slideshow__autoplay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  color: inherit;
+}
+
+.slideshow__autoplay .icon--play { display: none; }
+.slideshow__autoplay .icon--pause { display: inline-block; }
+
+.slideshow__autoplay--paused .icon--play { display: inline-block; }
+.slideshow__autoplay--paused .icon--pause { display: none; }
