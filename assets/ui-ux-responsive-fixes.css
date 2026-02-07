@@ -1361,6 +1361,14 @@ a:hover {
     min-width: 44px;
   }
 
+  /* Eliminate 300ms tap delay on mobile interactive elements */
+  .quick-add__submit,
+  .banner__buttons .button,
+  .sticky-cta-bar__button,
+  .menu-drawer__menu-item > a {
+    touch-action: manipulation;
+  }
+
   /* Larger tap targets */
   .header__icon,
   .footer__social-icon {
@@ -1681,6 +1689,7 @@ textarea:focus-visible {
   .banner__buttons .button {
     width: 100%;
     max-width: 100%;
+    min-height: 44px;
   }
 
   /* Mobile: controls below slideshow with proper spacing */
@@ -1695,8 +1704,8 @@ textarea:focus-visible {
   }
 
   .slideshow__controls--top .slider-button {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     margin: 0 0.5rem;
   }
 
@@ -4226,6 +4235,15 @@ details-modal,
   .menu-drawer__navigation a,
   .menu-drawer__menu-item {
     color: var(--tech-ink, #0B1220) !important;
+  }
+
+  /* Ensure 44px touch targets for mobile drawer navigation links */
+  .menu-drawer__menu-item > a,
+  .menu-drawer__menu-item > span,
+  .menu-drawer .list-menu__item--link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
   
   .menu-drawer .list-menu__item--link:hover,

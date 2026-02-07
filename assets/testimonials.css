@@ -398,10 +398,10 @@
 }
 
 /* =============================================================================
-   RESPONSIVE - Mobile (max-width: 768px)
+   RESPONSIVE - Mobile (max-width: 749px) - aligned with Dawn breakpoint
    ============================================================================= */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 749px) {
   .testimonials-carousel__header {
     margin-bottom: 32px;
     padding: 0 16px;
@@ -472,8 +472,8 @@
 
   .testimonials-carousel__text p {
     font-size: 14px;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
   }
 
   .testimonials-carousel__avatar {
@@ -489,6 +489,10 @@
   .testimonials-carousel__dot {
     width: 10px;
     height: 10px;
+    /* Expand touch target to 44px minimum via padding */
+    padding: 17px;
+    margin: -17px 0;
+    background-clip: content-box;
   }
 }
 

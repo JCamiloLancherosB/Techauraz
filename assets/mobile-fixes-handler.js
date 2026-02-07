@@ -26,6 +26,7 @@
     handleWhatsAppFABPosition();
     handleProductGridSpacing();
     handleStickyCTACollisions();
+    handleIOSViewport();
   }
   
   /**
@@ -211,6 +212,37 @@
     });
   }
   
+  /**
+   * Handle iOS viewport changes (keyboard, safe areas, notch)
+   * Uses visualViewport API to dynamically adjust fixed elements
+   */
+  function handleIOSViewport() {
+    if (!window.visualViewport) return;
+
+    function updateViewport() {
+      if (window.innerWidth > MOBILE_BREAKPOINT) return;
+
+      // Set CSS custom property for actual viewport height (accounts for iOS keyboard/chrome)
+      var viewportHeight = window.visualViewport.height;
+      document.documentElement.style.setProperty('--viewport-height', viewportHeight + 'px');
+
+      // Adjust fixed bottom elements when keyboard is open (viewport shrinks)
+      var heightDiff = window.innerHeight - viewportHeight;
+      var stickyCTA = document.querySelector('.sticky-cta-bar');
+      if (stickyCTA && heightDiff > 100) {
+        // Keyboard is likely open, hide sticky CTA to avoid overlap
+        stickyCTA.style.transform = 'translateY(100%)';
+      } else if (stickyCTA) {
+        // Clear inline style so CSS classes control visibility
+        stickyCTA.style.transform = '';
+      }
+    }
+
+    window.visualViewport.addEventListener('resize', updateViewport);
+    window.visualViewport.addEventListener('scroll', updateViewport);
+    updateViewport();
+  }
+
   /**
    * Ensure product grid has proper spacing on mobile
    */
