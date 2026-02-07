@@ -198,7 +198,8 @@
         "arrives_between": "Llega entre {{ min }} y {{ max }}",
         "fallback": "Entrega 2–5 días hábiles"
       },
-      "in_stock": "En stock"
+      "in_stock": "En stock",
+      "available": "Disponible"
     },
     "modal": {
       "label": "Galería media"
@@ -443,6 +444,20 @@
       "remove_all": "Eliminar todo",
       "cancel": "Cancelar",
       "remove_all_single_item_confirmation": "¿Quitar 1 artículo de tu carrito?"
+    },
+    "trust_badges": {
+      "heading": "Compra con confianza",
+      "shipping": "Envío gratis a toda Colombia",
+      "payment": "Pago contraentrega disponible",
+      "secure": "Compra 100% segura",
+      "guarantee": "Garantía de 30 días",
+      "delivery": "Entrega en 2-5 días hábiles"
+    },
+    "animated_benefits": {
+      "aria_label": "Sección de beneficios"
+    },
+    "category_navigation": {
+      "products_count": "{{ count }} productos"
     }
   },
   "localization": {
