@@ -355,6 +355,32 @@
   outline-offset: 2px;
 }
 
+.testimonials-carousel__autoplay-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  color: #475569;
+}
+
+.testimonials-carousel__autoplay-toggle:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.testimonials-carousel__autoplay-toggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
 /* =============================================================================
    RESPONSIVE - Tablet (max-width: 1024px)
    ============================================================================= */
@@ -398,10 +424,10 @@
 }
 
 /* =============================================================================
-   RESPONSIVE - Mobile (max-width: 768px)
+   RESPONSIVE - Mobile (max-width: 749px) - aligned with Dawn breakpoint
    ============================================================================= */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 749px) {
   .testimonials-carousel__header {
     margin-bottom: 32px;
     padding: 0 16px;
@@ -472,8 +498,8 @@
 
   .testimonials-carousel__text p {
     font-size: 14px;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
   }
 
   .testimonials-carousel__avatar {
@@ -489,6 +515,10 @@
   .testimonials-carousel__dot {
     width: 10px;
     height: 10px;
+    /* Expand touch target to 44px minimum: (44 - 10) / 2 = 17px padding per side */
+    padding: 17px;
+    margin: -17px 0;
+    background-clip: content-box;
   }
 }
 

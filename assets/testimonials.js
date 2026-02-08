@@ -31,12 +31,14 @@
       this.prevBtn = element.querySelector('.testimonials-carousel__nav--prev');
       this.nextBtn = element.querySelector('.testimonials-carousel__nav--next');
       this.dots = Array.from(element.querySelectorAll('.testimonials-carousel__dot'));
+      this.autoplayToggle = element.querySelector('.testimonials-carousel__autoplay-toggle');
       
       // State
       this.currentIndex = 0;
       this.totalSlides = this.cards.length;
       this.autoplayTimer = null;
       this.isPaused = false;
+      this.userPaused = false;
       this.isAnimating = false;
       this.isDestroyed = false;
       
@@ -89,6 +91,11 @@
       this.dots.forEach((dot, index) => {
         dot.addEventListener('click', () => this.goToSlide(index));
       });
+
+      // Autoplay toggle button
+      if (this.autoplayToggle) {
+        this.autoplayToggle.addEventListener('click', () => this.toggleAutoplay());
+      }
 
       // Pause on hover
       this.section.addEventListener('mouseenter', () => this.pauseAutoplay());
@@ -299,11 +306,46 @@
     }
 
     resumeAutoplay() {
-      this.isPaused = false;
+      if (!this.userPaused) {
+        this.isPaused = false;
+      }
+    }
+
+    toggleAutoplay() {
+      if (this.userPaused) {
+        // Resume
+        this.userPaused = false;
+        this.isPaused = false;
+        this.startAutoplay();
+        this.updateAutoplayToggle(true);
+      } else {
+        // Pause
+        this.userPaused = true;
+        this.isPaused = true;
+        this.stopAutoplay();
+        this.updateAutoplayToggle(false);
+      }
+    }
+
+    updateAutoplayToggle(isPlaying) {
+      if (!this.autoplayToggle) return;
+      var pauseIcon = this.autoplayToggle.querySelector('.testimonials-carousel__pause-icon');
+      var playIcon = this.autoplayToggle.querySelector('.testimonials-carousel__play-icon');
+      if (isPlaying) {
+        this.autoplayToggle.setAttribute('aria-label', 'Pausar rotación automática');
+        this.autoplayToggle.dataset.playing = 'true';
+        if (pauseIcon) pauseIcon.style.display = '';
+        if (playIcon) playIcon.style.display = 'none';
+      } else {
+        this.autoplayToggle.setAttribute('aria-label', 'Reanudar rotación automática');
+        this.autoplayToggle.dataset.playing = 'false';
+        if (pauseIcon) pauseIcon.style.display = 'none';
+        if (playIcon) playIcon.style.display = '';
+      }
     }
 
     resetAutoplay() {
-      if (this.autoplay) {
+      if (this.autoplay && !this.userPaused) {
         this.startAutoplay();
       }
     }
