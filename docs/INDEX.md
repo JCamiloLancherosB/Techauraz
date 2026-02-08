@@ -2,14 +2,34 @@
 
 This directory contains all technical documentation for the Techauraz Shopify theme.
 
-## Directory Structure
+---
+
+## Core Documentation
+
+| Document | Description |
+|----------|-------------|
+| [CHANGELOG.md](./CHANGELOG.md) | Chronological record of all major changes, fixes, and implementations |
+| [CSS_ARCHITECTURE.md](./CSS_ARCHITECTURE.md) | CSS consolidation history, design system, animation deduplication, CSS/Liquid sync audit |
+| [DEPLOYMENT.md](./DEPLOYMENT.md) | Deployment procedures, testing checklists, rollback plans, browser compatibility |
+| [README_FIXES.md](./README_FIXES.md) | Fix documentation and notes |
+| [REQUIREMENTS_CHECKLIST.md](./REQUIREMENTS_CHECKLIST.md) | Project requirements tracking |
+| [FINAL_CLEANUP_SUMMARY.md](./FINAL_CLEANUP_SUMMARY.md) | Final cleanup summary |
+
+---
+
+## Additional Documentation
+
+### `/improvements`
+- [IMPROVEMENTS.md](./improvements/IMPROVEMENTS.md) — Improvement tracking and CSS/visual/UX changes
 
 ### `/implementation`
-Implementation guides and fix documentation:
-- Implementation summaries and details
-- Product page fixes
-- Theme fixes from 2024
-- UI/UX implementation guides
+Remaining implementation guides and fix documentation (product page fixes, theme fixes, UI/UX guides).
+
+### `/deployment`
+- [DEPLOYMENT_SUMMARY.md](./deployment/DEPLOYMENT_SUMMARY.md) — Fix summaries for hero carousel, cookie notice, header overflow, product card typography, product details button
+
+### `/summaries`
+Additional project summaries and audit reports.
 
 ### `/performance`
 Performance optimization documentation:
@@ -19,26 +39,12 @@ Performance optimization documentation:
 - Core Web Vitals improvements
 
 ### `/testing`
-Testing guides and procedures:
-- Testing guides for UX and performance
-- QA procedures
+Testing guides and procedures for UX and performance.
 
-### `/deployment`
-Deployment procedures and checklists:
-- Deployment summaries
-- Deployment checklists
+### `/visual-references`
+Visual reference materials.
 
-### `/summaries`
-Project summaries and change logs:
-- Various implementation summaries
-- Change summaries
-- Audit summaries
-
-### `/improvements`
-Improvement documentation:
-- CSS changes reference
-- Visual changes documentation
-- UX/CRO improvements
+---
 
 ## Quick Links
 
@@ -46,9 +52,9 @@ Improvement documentation:
 - README with Fixes: [README_FIXES.md](./README_FIXES.md)
 - README Performance: [README_PERFORMANCE.md](./README_PERFORMANCE.md)
 - QA Checklist (Visual): [QA_CHECKLIST.md](./QA_CHECKLIST.md)
-- QA Checklist (Manual): [qa-checklist.md](./qa-checklist.md) - Comprehensive UI/accessibility testing
+- QA Checklist (Manual): [qa-checklist.md](./qa-checklist.md) — Comprehensive UI/accessibility testing
 
-## Documentation Updates
+---
 
-Last organized: December 2024
-Purpose: Clean up root directory and organize 30+ documentation files into logical structure
+Last organized: January 2026  
+Purpose: Consolidated 11 implementation/summary/testing/deployment docs into 3 core files (CHANGELOG, CSS_ARCHITECTURE, DEPLOYMENT)
