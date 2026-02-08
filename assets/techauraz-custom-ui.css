@@ -388,6 +388,16 @@
   }
 }
 
+/* Hide WhatsApp float when drawers or modals are open to prevent overlapping content */
+body:has(cart-drawer .drawer.active) .whatsapp-float,
+body:has(cart-drawer .drawer[open]) .whatsapp-float,
+body:has(.menu-drawer[open]) .whatsapp-float,
+body:has(.modal[open]) .whatsapp-float {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
 /* =============================================================================
    GLOBAL ELEMENT CONSISTENCY - Apply tokens across common elements
    ============================================================================= */
