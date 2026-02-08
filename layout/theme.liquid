@@ -664,19 +664,16 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'custom-scripts.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-enhancements.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'mobile-fixes-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-comparison.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%} WhatsApp Floating Button {%- endcomment -%}
     {% render 'whatsapp-float' %}
 
-<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
+<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer="defer"></script>
 
 {%- comment -%} DEBUG UI MODE - JS loaded conditionally via ?debug_ui=1 URL parameter {%- endcomment -%}
 {%- if request.design_mode == false -%}
