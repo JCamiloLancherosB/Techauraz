@@ -254,9 +254,9 @@ Todos los objetivos cumplidos. Solo requiere que el usuario agregue el bloque `t
 ---
 
 **Documentación relacionada:**
-- [PDP_ATF_CONFIGURATION.md](./PDP_ATF_CONFIGURATION.md) - Guía de configuración
-- [PDP_ATF_IMPLEMENTATION_SUMMARY.md](./PDP_ATF_IMPLEMENTATION_SUMMARY.md) - Detalles técnicos
-- [PDP_ATF_VISUAL_REFERENCE.md](./PDP_ATF_VISUAL_REFERENCE.md) - Referencias visuales
+- [PDP_ATF_CONFIGURATION.md](../implementation/PDP_ATF_CONFIGURATION.md) - Guía de configuración
+- [PDP_ATF_IMPLEMENTATION_SUMMARY.md](../implementation/PDP_ATF_IMPLEMENTATION_SUMMARY.md) - Detalles técnicos
+- [PDP_ATF_VISUAL_REFERENCE.md](../visual-references/PDP_ATF_VISUAL_REFERENCE.md) - Referencias visuales
 
 **Fecha de completación:** 2026-01-23
 **Branch:** `copilot/refactor-above-the-fold-pdp`
