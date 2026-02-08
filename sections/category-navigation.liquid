@@ -23,10 +23,8 @@
                 <h3 class="category-name">{{ block.settings.title }}</h3>
               {%- endif -%}
               
-              {%- if block.settings.collection != blank -%}
-                <p class="category-count">{{ block.settings.collection.products_count }} productos</p>
-              {%- elsif block.settings.product_count != blank -%}
-                <p class="category-count">{{ block.settings.product_count }} productos</p>
+              {%- if block.settings.product_count != blank -%}
+                <p class="category-count">{{ 'sections.category_navigation.products_count' | t: count: block.settings.product_count }}</p>
               {%- endif -%}
             </a>
         {%- endcase -%}
