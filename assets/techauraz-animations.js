@@ -1,73 +1,62 @@
 /**
  * =============================================================================
- * TECHAURAZ SCROLL ANIMATIONS
- * Version: 1.0.0
- * Created: 2026-01-28
+ * TECHAURAZ ANIMATIONS & ENHANCEMENTS
+ * Version: 2.0.0
  * =============================================================================
- * 
- * Scroll animation observer for elements with .animate-on-scroll class.
- * Uses IntersectionObserver for performant scroll-based animations.
- * 
- * Features:
- * - Fade-in and slide-up animation on scroll
- * - Respects prefers-reduced-motion accessibility setting
- * - Single observation (animates once, stays visible)
- * - Configurable threshold and root margin
- * 
- * Usage:
- * Add class="animate-on-scroll" to any element you want to animate on scroll.
- * The element will fade in and slide up when it enters the viewport.
- * 
+ *
+ * Consolidated module for Techauraz-specific UI enhancements.
+ *
+ * Contents:
+ * 1. Image lazy-loading handler — adds `.loaded` class to lazy images
+ * 2. Metafield theme style handler — applies PDP warm theme via metafield
+ *
+ * Note: Scroll-trigger animations are handled by Dawn core (animations.js).
+ *       Animated-benefits animations are handled by animated-benefits.js.
+ *
  * =============================================================================
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+/**
+ * Adds a `loaded` class to every lazy-loaded image once it finishes loading.
+ * Images that are already complete when the script runs are handled
+ * synchronously; others get a one-time `load` event listener.
+ *
+ * @returns {void}
+ */
+(function initImageLazyLoadHandler() {
   'use strict';
-  
-  // Respect reduced motion preferences for accessibility
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Make all animated elements visible immediately without animation
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    animatedElements.forEach(function(el) {
-      el.classList.add('is-visible');
-    });
-    return;
-  }
-  
-  // Select all elements with the animate-on-scroll class
-  const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  
-  // Exit early if no animated elements exist
-  if (animatedElements.length === 0) {
-    return;
-  }
-  
-  // Check if IntersectionObserver is supported
-  if (!window.IntersectionObserver) {
-    // Fallback: make all elements visible immediately
-    animatedElements.forEach(function(el) {
-      el.classList.add('is-visible');
-    });
-    return;
-  }
-  
-  // Create IntersectionObserver with optimized settings
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        // Add visible class to trigger animation
-        entry.target.classList.add('is-visible');
-        // Stop observing once animated (animation only happens once)
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,  // Trigger when 10% of element is visible
-    rootMargin: '0px 0px -50px 0px'  // Trigger after element enters viewport by 50px (smooth reveal)
+
+  const images = document.querySelectorAll('img[loading="lazy"]');
+
+  images.forEach(function (img) {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', function () {
+        this.classList.add('loaded');
+      });
+    }
   });
-  
-  // Observe all animated elements
-  animatedElements.forEach(function(el) {
-    observer.observe(el);
-  });
-});
+})();
+
+/**
+ * Applies a warm CRO theme class to the PDP container when the product
+ * metafield `theme_style` is set to `warm_cro`.
+ *
+ * Expects a `.product` element with a `data-theme-style` attribute set in
+ * Liquid (e.g. `data-theme-style="{{ product.metafields.custom.theme_style }}"`).
+ *
+ * @returns {void}
+ */
+(function initMetafieldThemeStyle() {
+  'use strict';
+
+  var productContainer = document.querySelector('.product');
+  if (!productContainer) return;
+
+  var themeStyle = productContainer.dataset.themeStyle;
+
+  if (themeStyle === 'warm_cro') {
+    productContainer.classList.add('pdp--warm');
+  }
+})();
