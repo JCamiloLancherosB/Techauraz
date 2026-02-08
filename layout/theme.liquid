@@ -248,7 +248,7 @@
      2. base.css - Core Dawn theme styles + TechAura unified styles
      3. ui-ux-responsive-fixes.css - Responsive design and layout fixes
      4. home-modern-blocks.css - Home page section styles
-     5. testimonials-slider.css - Reviews section
+     5. testimonials.css - Reviews & carousel sections (consolidated)
      6. techauraz-custom-ui.css - WhatsApp, Announcement Bar, Cookie Banner
      7. slideshow-enhancements.css - Slider controls and CTAs
      8. techauraz-product-card.css - Product card conversion styles
@@ -283,9 +283,9 @@
 <link rel="preload" href="{{ 'home-modern-blocks.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'home-modern-blocks.css' | asset_url }}"></noscript>
 
-<!-- Testimonials Slider - Reviews section styling - 2026-01-21 -->
-<link rel="preload" href="{{ 'testimonials-slider.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'testimonials-slider.css' | asset_url }}"></noscript>
+<!-- Testimonials - Reviews & carousel section styling (consolidated) -->
+<link rel="preload" href="{{ 'testimonials.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}"></noscript>
 
 <!-- Custom UI Components - WhatsApp, Announcement Bar, Cookie Banner - 2026-01-21 -->
 <link rel="preload" href="{{ 'techauraz-custom-ui.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -347,7 +347,7 @@
      - Newsletter section
      - Footer improvements
      
-  5. testimonials-slider.css
+  5. testimonials.css
      - Reviews section slider styling
      
   6. techauraz-custom-ui.css
@@ -643,7 +643,7 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'techauraz-enhancements.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>

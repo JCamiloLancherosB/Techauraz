@@ -22,7 +22,7 @@ The theme uses a layered CSS architecture with clear responsibilities for each l
 ┌─────────────────────────────────────────────────────────────────┐
 │  LAYER 3: Component & Section Base Styles                       │
 │  - home-modern-blocks.css (testimonials, newsletter, footer)   │
-│  - testimonials-slider.css (reviews section)                   │
+│  - testimonials.css (reviews & carousel sections)              │
 │  - ui-ux-responsive-fixes.css (responsive utilities)           │
 └─────────────────────────────────────────────────────────────────┘
                               ▲
@@ -68,7 +68,7 @@ The CSS files are loaded in this exact order in `layout/theme.liquid`:
 ### 4. Component Styles
 ```liquid
 <link rel="preload" href="{{ 'home-modern-blocks.css' | asset_url }}" as="style" ...>
-<link rel="preload" href="{{ 'testimonials-slider.css' | asset_url }}" as="style" ...>
+<link rel="preload" href="{{ 'testimonials.css' | asset_url }}" as="style" ...>
 ```
 - **Purpose**: Shared component styles
 - **Contains**: Common UI patterns used across sections
@@ -138,7 +138,7 @@ These files are loaded once in `theme.liquid`:
 - `base.css`
 - `ui-ux-responsive-fixes.css`
 - `home-modern-blocks.css`
-- `testimonials-slider.css`
+- `testimonials.css`
 - `techauraz-custom-ui.css`
 - `slideshow-enhancements.css`
 
@@ -174,7 +174,7 @@ These files should be loaded by their respective sections:
 | `base.css` | 2 | theme.liquid | Core styles |
 | `ui-ux-responsive-fixes.css` | 3 | theme.liquid | Responsive utils |
 | `home-modern-blocks.css` | 3 | theme.liquid | Component styles |
-| `testimonials-slider.css` | 3 | theme.liquid | Reviews styles |
+| `testimonials.css` | 3 | theme.liquid | Reviews & carousel styles |
 | `techauraz-custom-ui.css` | 4 | theme.liquid | Custom UI |
 | `slideshow-enhancements.css` | 4 | theme.liquid | Slideshow |
 | `section-*.css` | 5 | Per section | Section-specific |

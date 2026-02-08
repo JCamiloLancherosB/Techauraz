@@ -75,7 +75,7 @@
 
 /* Force 1:1 aspect ratio */
 .card-wrapper.product-card-wrapper .card__media .media {
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 1 / 1;
   width: 100%;
   height: auto;
   border-radius: var(--ta-radius-md, 8px);
