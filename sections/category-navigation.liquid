@@ -24,7 +24,7 @@
               {%- endif -%}
               
               {%- if block.settings.product_count != blank -%}
-                <p class="category-count">{{ block.settings.product_count }} productos</p>
+                <p class="category-count">{{ 'sections.category_navigation.products_count' | t: count: block.settings.product_count }}</p>
               {%- endif -%}
             </a>
         {%- endcase -%}
@@ -73,8 +73,14 @@
         {
           "type": "text",
           "id": "product_count",
-          "label": "Cantidad de Productos",
-          "default": "25"
+          "label": "Cantidad de Productos (manual)",
+          "info": "Se usa solo si no se selecciona una colección"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección",
+          "info": "Selecciona una colección para mostrar el conteo real de productos automáticamente"
         },
         {
           "type": "url",

@@ -17,7 +17,7 @@
   class="animated-benefits color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
   style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;"
-  {% if section.settings.title != blank %}aria-label="{{ section.settings.title | strip_html }}"{% else %}aria-label="Sección de beneficios"{% endif %}
+  {% if section.settings.title != blank %}aria-label="{{ section.settings.title | strip_html }}"{% else %}aria-label="{{ 'sections.animated_benefits.aria_label' | t }}"{% endif %}
 >
   <div class="page-width animated-benefits__container">
     {%- if section.settings.title != blank -%}

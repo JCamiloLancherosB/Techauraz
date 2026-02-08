@@ -18,12 +18,12 @@
       <circle cx="7" cy="7" r="7" fill="#10b981"/>
       <path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span class="pdp-atf-availability__text pdp-atf-availability__text--available">Disponible</span>
+    <span class="pdp-atf-availability__text pdp-atf-availability__text--available">{{ 'products.product.available' | t }}</span>
   {%- else -%}
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="7" cy="7" r="7" fill="#ef4444"/>
     </svg>
-    <span class="pdp-atf-availability__text pdp-atf-availability__text--unavailable">Agotado</span>
+    <span class="pdp-atf-availability__text pdp-atf-availability__text--unavailable">{{ 'products.product.sold_out' | t }}</span>
   {%- endif -%}
 </div>
 

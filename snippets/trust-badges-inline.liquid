@@ -54,11 +54,17 @@
     assign show_delivery = settings.trust_badge_delivery
   endif
   
-  assign text_shipping = settings.trust_badge_shipping_text | default: 'Envío gratis a toda Colombia'
-  assign text_payment = settings.trust_badge_payment_text | default: 'Pago contraentrega disponible'
-  assign text_secure = settings.trust_badge_secure_text | default: 'Compra 100% segura'
-  assign text_guarantee = settings.trust_badge_guarantee_text | default: 'Garantía de 30 días'
-  assign text_delivery = settings.trust_badge_delivery_text | default: 'Entrega en 2-5 días hábiles'
+  assign text_shipping_default = 'sections.trust_badges.shipping' | t
+  assign text_payment_default = 'sections.trust_badges.payment' | t
+  assign text_secure_default = 'sections.trust_badges.secure' | t
+  assign text_guarantee_default = 'sections.trust_badges.guarantee' | t
+  assign text_delivery_default = 'sections.trust_badges.delivery' | t
+
+  assign text_shipping = settings.trust_badge_shipping_text | default: text_shipping_default
+  assign text_payment = settings.trust_badge_payment_text | default: text_payment_default
+  assign text_secure = settings.trust_badge_secure_text | default: text_secure_default
+  assign text_guarantee = settings.trust_badge_guarantee_text | default: text_guarantee_default
+  assign text_delivery = settings.trust_badge_delivery_text | default: text_delivery_default
   
   assign icon_color = settings.trust_badge_icon_color | default: '#6B46C1'
   
@@ -88,7 +94,7 @@
     style="--trust-badge-icon-color: {{ icon_color }};"
   >
     {%- if show_heading_flag and layout_class != 'compact' and layout_class != 'minimal' -%}
-      <p class="trust-badges-inline__heading">{{ 'sections.trust_badges.heading' | t | default: 'Compra con confianza' }}</p>
+      <p class="trust-badges-inline__heading">{{ 'sections.trust_badges.heading' | t }}</p>
     {%- endif -%}
     
     <div class="trust-badges-inline__grid">

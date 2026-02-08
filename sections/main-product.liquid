@@ -691,24 +691,7 @@
                   Max 4 items with subtle styling. Do NOT duplicate elsewhere.
                   Configured via section settings in Customizer.
                 {%- endcomment -%}
-                <div class="tech-trust-line" {{ block.shopify_attributes }} role="list" aria-label="Beneficios de compra">
-                  <div class="tech-trust-line__item" role="listitem">
-                    <span class="tech-trust-line__icon" aria-hidden="true">🚚</span>
-                    <span class="tech-trust-line__text">{{ block.settings.text_shipping | default: "Envío gratis" }}</span>
-                  </div>
-                  <div class="tech-trust-line__item" role="listitem">
-                    <span class="tech-trust-line__icon" aria-hidden="true">💵</span>
-                    <span class="tech-trust-line__text">{{ block.settings.text_1 | default: "Contraentrega en Colombia" }}</span>
-                  </div>
-                  <div class="tech-trust-line__item" role="listitem">
-                    <span class="tech-trust-line__icon" aria-hidden="true">✅</span>
-                    <span class="tech-trust-line__text">{{ block.settings.text_2 | default: "Garantía 30 días" }}</span>
-                  </div>
-                  <div class="tech-trust-line__item" role="listitem">
-                    <span class="tech-trust-line__icon" aria-hidden="true">↩️</span>
-                    <span class="tech-trust-line__text">{{ block.settings.text_return | default: "Devolución fácil" }}</span>
-                  </div>
-                </div>
+                {%- render 'trust-line', block: block -%}
 
             {%- endcase -%}
           {%- endfor -%}

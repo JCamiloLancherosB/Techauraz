@@ -237,7 +237,7 @@
      =============================================================================
      
      LOAD ORDER (Critical - do not change):
-     1. techauraz-tokens.css - CSS custom properties and design tokens (MUST BE FIRST)
+     1. techauraz-tokens.css - CSS custom properties, design tokens + legacy --tech-* compat (MUST BE FIRST)
      2. base.css - Core Dawn theme styles + TechAura unified styles
      3. ui-ux-responsive-fixes.css - Responsive design and layout fixes
      4. home-modern-blocks.css - Home page section styles
@@ -258,7 +258,7 @@
      This is normal Shopify behavior and should not interfere with our styles
      as long as the loading order is maintained.
      
-     Last updated: 2026-01-28
+     Last updated: 2026-02-07
      ============================================================================= -->
 
 <!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
@@ -292,10 +292,6 @@
 <link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-product-card.css' | asset_url }}"></noscript>
 
-<!-- Global Design Tokens and Visual Polish - Premium tech aesthetic - 2026-01-29 -->
-<link rel="preload" href="{{ 'techauraz-design-tokens.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-design-tokens.css' | asset_url }}"></noscript>
-
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
 <link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
@@ -318,7 +314,7 @@
 
 <!-- 
   ============================================================================
-  CSS LOADING ORDER (CURRENT - Updated 2026-01-28)
+  CSS LOADING ORDER (CURRENT - Updated 2026-02-07)
   ============================================================================
   
   The following stylesheets are loaded in this order in the layout:
@@ -327,6 +323,7 @@
      - Design tokens (colors, spacing, typography, z-index hierarchy)
      - CSS custom properties that all other files depend on
      - Z-index centralized system to prevent stacking conflicts
+     - Legacy --tech-* compatibility mappings (consolidated from techauraz-design-tokens.css)
      
   2. base.css
      - Core Dawn theme styles (62.5% base font-size = 10px per 1rem)
@@ -361,29 +358,18 @@
      - Product card styles
      - Conversion-optimized card design
      - Badge positioning
-     
-  9. techauraz-design-tokens.css
-     - Global CSS custom properties (--tech-* prefix)
-     - Comprehensive design token system
-     - Brand colors, gradients, shadows
-     - Typography, spacing, border radius
-     - Z-index scale, transitions
-     - Component-specific tokens
-     - Dark mode overrides
-     - Responsive adjustments
-     - Reduced motion accessibility support
+
+  9. techauraz-utilities.css
+     - Container utilities (.tech-container)
+     - Section utilities (.tech-section)
+     - Text utilities (.tech-heading, .tech-subheading)
+     - Button utilities (.tech-button)
+     - Card utilities (.tech-card)
+     - Badge utilities (.tech-badge)
+     - Animation utilities (.tech-animate-*)
+     - Visibility utilities (.tech-sr-only, .tech-hide-*)
   
-  10. techauraz-utilities.css
-      - Container utilities (.tech-container)
-      - Section utilities (.tech-section)
-      - Text utilities (.tech-heading, .tech-subheading)
-      - Button utilities (.tech-button)
-      - Card utilities (.tech-card)
-      - Badge utilities (.tech-badge)
-      - Animation utilities (.tech-animate-*)
-      - Visibility utilities (.tech-sr-only, .tech-hide-*)
-  
-  11. announcement-bar-enhancements.css
+  10. announcement-bar-enhancements.css
       - Announcement bar container styling
       - Ticker/marquee enhanced styles
       - Fade edges for seamless appearance
@@ -565,20 +551,6 @@
 })();
 </script>
 
-{%- comment -%} DEBUG UI MODE - Activated via ?debug_ui=1 URL parameter {%- endcomment -%}
-{%- if request.design_mode == false -%}
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get('debug_ui') === '1') {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '{{ "debug-ui.css" | asset_url }}';
-        document.head.appendChild(link);
-      }
-    })();
-  </script>
-{%- endif -%}
 </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %}">
@@ -664,32 +636,15 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'custom-scripts.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-enhancements.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'mobile-fixes-handler.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-comparison.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%} WhatsApp Floating Button {%- endcomment -%}
     {% render 'whatsapp-float' %}
 
-<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
+<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer="defer"></script>
 
-{%- comment -%} DEBUG UI MODE - JS loaded conditionally via ?debug_ui=1 URL parameter {%- endcomment -%}
-{%- if request.design_mode == false -%}
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get('debug_ui') === '1') {
-        var script = document.createElement('script');
-        script.src = '{{ "debug-ui.js" | asset_url }}';
-        script.defer = true;
-        document.body.appendChild(script);
-      }
-    })();
-  </script>
-{%- endif -%}
 </body> </html>

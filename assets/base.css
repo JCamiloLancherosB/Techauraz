@@ -12248,6 +12248,41 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   }
 }
 
+/* Cart Drawer Shipping Bar */
+.cart-drawer__shipping-bar {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.shipping-bar__message {
+  margin-bottom: 0.8rem;
+}
+
+.shipping-bar__text {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.shipping-bar__text--success {
+  color: #10b981;
+}
+
+.shipping-bar__progress {
+  height: 6px;
+  background: rgba(var(--color-foreground), 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.shipping-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  max-width: 100%;
+}
+
 /* COD Benefits Section */
 .cod-benefits {
   margin-top: 2rem;

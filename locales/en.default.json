@@ -188,7 +188,12 @@
       "xr_button_label": "View in your space, loads item in augmented reality window",
       "include_taxes": "Tax included.",
       "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
-      "in_stock": "In stock"
+      "in_stock": "In stock",
+      "delivery_estimate": {
+        "arrives_between": "Arrives between {{ min }} and {{ max }}",
+        "fallback": "Delivery 2–5 business days"
+      },
+      "available": "Available"
     },
     "modal": {
       "label": "Media gallery"
@@ -432,6 +437,20 @@
       "remove_all_items_confirmation": "Remove all {{ quantity }} items from your cart?",
       "remove_all": "Remove all",
       "cancel": "Cancel"
+    },
+    "trust_badges": {
+      "heading": "Shop with confidence",
+      "shipping": "Free shipping throughout Colombia",
+      "payment": "Cash on delivery available",
+      "secure": "100% secure purchase",
+      "guarantee": "30-day guarantee",
+      "delivery": "Delivery in 2-5 business days"
+    },
+    "animated_benefits": {
+      "aria_label": "Benefits section"
+    },
+    "category_navigation": {
+      "products_count": "{{ count }} products"
     }
   },
   "localization": {
