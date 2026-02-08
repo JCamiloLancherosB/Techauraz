@@ -1328,15 +1328,15 @@ h2.title {
 
 /* Section heading variants for different color schemes */
 .ta-section-heading--inverse,
-[class*="color-scheme-d58c693b"] .ta-section-heading,
-[class*="color-scheme-d58c693b"] .section-heading,
-[class*="color-scheme-d58c693b"] .title-wrapper .title,
-[class*="color-scheme-d58c693b"] h2.title {
+[class*="color-scheme-"] .ta-section-heading,
+[class*="color-scheme-"] .section-heading,
+[class*="color-scheme-"] .title-wrapper .title,
+[class*="color-scheme-"] h2.title {
   color: var(--ta-text-inverse, #ffffff);
 }
 
 .ta-section-subtitle--inverse,
-[class*="color-scheme-d58c693b"] .ta-section-subtitle {
+[class*="color-scheme-"] .ta-section-subtitle {
   color: rgba(255, 255, 255, 0.85);
 }
 
