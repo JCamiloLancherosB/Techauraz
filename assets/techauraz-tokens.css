@@ -453,7 +453,7 @@ main[role="main"] {
   --shadow-card-hover: var(--ta-shadow-card-hover);
   --shadow-button: var(--ta-shadow-button);
 
-  /* Legacy --tech-* mappings (from techauraz-custom-ui.css) */
+  /* Legacy --tech-* mappings (consolidated from techauraz-design-tokens.css) */
   --tech-bg: var(--ta-bg);
   --tech-surface: var(--ta-bg-secondary);
   --tech-ink: var(--ta-text);
@@ -464,6 +464,84 @@ main[role="main"] {
   --tech-border: var(--ta-border);
   --tech-border-light: var(--ta-border-light);
 
+  /* --tech-* color tokens */
+  --tech-color-primary: #2563eb;
+  --tech-color-primary-hover: #1d4ed8;
+  --tech-color-primary-bg: rgba(37, 99, 235, 0.1);
+  --tech-color-secondary: #0f172a;
+  --tech-color-accent: #f59e0b;
+  --tech-color-success: #22c55e;
+  --tech-color-error: #dc2626;
+  --tech-color-gray-100: #f1f5f9;
+  --tech-color-gray-200: #e2e8f0;
+  --tech-color-gray-300: #cbd5e1;
+  --tech-color-gray-400: #94a3b8;
+  --tech-color-background: #f5f5f5;
+  --tech-color-background-alt: #fafafa;
+  --tech-color-background-hover: #f0f4ff;
+  --tech-color-border: #e5e5e5;
+  --tech-color-border-light: #f0f0f0;
+  --tech-color-surface: #ffffff;
+  --tech-color-text: #333333;
+  --tech-color-text-secondary: #666666;
+
+  /* --tech-* background and text tokens */
+  --tech-bg-card: #ffffff;
+  --tech-bg-card-dark: #1e293b;
+  --tech-bg-overlay: rgba(15, 23, 42, 0.8);
+  --tech-text-primary: #0f172a;
+  --tech-text-secondary: #475569;
+  --tech-text-inverted: #ffffff;
+  --tech-text-xs: 0.75rem;
+  --tech-text-sm: 0.875rem;
+  --tech-text-base: 1rem;
+  --tech-text-lg: 1.125rem;
+  --tech-text-xl: 1.25rem;
+
+  /* --tech-* typography tokens */
+  --tech-font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tech-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tech-font-medium: 500;
+  --tech-font-semibold: 600;
+  --tech-font-bold: 700;
+  --tech-leading-tight: 1.25;
+  --tech-leading-relaxed: 1.625;
+  --tech-tracking-wide: 0.025em;
+
+  /* --tech-* gradient tokens */
+  --tech-gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --tech-gradient-primary-hover: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  --tech-gradient-success: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --tech-gradient-sale: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --tech-gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  --tech-gradient-newsletter: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1a1f36 100%);
+
+  /* --tech-* shadow tokens */
+  --tech-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --tech-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --tech-shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.35);
+  --tech-shadow-primary-hover: 0 6px 20px rgba(37, 99, 235, 0.45);
+  --tech-shadow-success: 0 4px 14px rgba(34, 197, 94, 0.35);
+
+  /* --tech-* radius tokens */
+  --tech-radius-md: 8px;
+  --tech-radius-badge: 4px;
+  --tech-radius-button: 8px;
+  --tech-radius-card: 12px;
+  --tech-radius-full: 9999px;
+
+  /* --tech-* spacing tokens (numeric scale) */
+  --tech-space-1: 4px;
+  --tech-space-2: 8px;
+  --tech-space-3: 12px;
+  --tech-space-4: 16px;
+  --tech-space-6: 24px;
+  --tech-space-8: 32px;
+  --tech-space-10: 40px;
+  --tech-space-24: 96px;
+  --tech-section-gap: 60px;
+
+  /* --tech-* named spacing (Dawn compat) */
   --tech-space-2xs: var(--ta-space-xs);
   --tech-space-xs: var(--ta-space-sm);
   --tech-space-sm: var(--ta-space-md);
@@ -472,6 +550,21 @@ main[role="main"] {
   --tech-space-xl: var(--ta-space-2xl);
   --tech-space-2xl: var(--ta-space-3xl);
 
+  /* --tech-* transition tokens */
+  --tech-transition-normal: 250ms ease;
+  --tech-transition-slow: 350ms ease;
+  --tech-transition-colors: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  --tech-transition-transform: transform 250ms ease;
+  --tech-transition-all: all 250ms ease;
+
+  /* --tech-* layout tokens */
+  --tech-header-height: 70px;
+  --tech-announcement-height: 40px;
+  --tech-button-height: 48px;
+  --tech-z-sticky: 200;
+  --tech-z-drawer: 400;
+
+  /* --tech-* button tokens */
   --tech-button-radius: var(--ta-radius-button);
   --tech-button-shadow: var(--ta-shadow-button);
   --tech-button-shadow-hover: var(--ta-shadow-button-hover);
