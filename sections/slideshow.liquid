@@ -39,6 +39,16 @@
       </button>
       <button
         type="button"
+        class="slideshow__autoplay slider-button no-js-hidden"
+        aria-label="{{ 'sections.slideshow.pause_slideshow' | t | default: 'Pausar presentación' }}"
+        aria-controls="Slider-{{ section.id }}"
+        data-autoplay-button
+      >
+        <svg class="icon icon--pause" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><rect x="2" y="1" width="3" height="10" fill="currentColor"/><rect x="7" y="1" width="3" height="10" fill="currentColor"/></svg>
+        <svg class="icon icon--play" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false" hidden><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+      </button>
+      <button
+        type="button"
         class="slider-button slider-button--next"
         name="next"
         aria-label="{{ 'sections.slideshow.next_slideshow' | t }}"

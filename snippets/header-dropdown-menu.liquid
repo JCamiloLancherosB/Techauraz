@@ -56,6 +56,7 @@
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                           class="header__menu-item link link--text list-menu__item focus-inset caption-large header__menu-item--category"
                           aria-expanded="false"
+                          aria-controls="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
                         >
                           <span class="header__menu-item-title">{{ childlink.title | escape }}</span>
                           {% render 'icon-caret' %}

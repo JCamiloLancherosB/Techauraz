@@ -13,7 +13,7 @@
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
-    <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+    <div id="CartDrawer-Overlay" class="cart-drawer__overlay" role="presentation"></div>
     <div
       class="drawer__inner gradient color-{{ settings.cart_color_scheme }}"
       role="dialog"
@@ -92,8 +92,8 @@
             {%- endif -%}
           </div>
           
-          <div class="shipping-bar__progress">
-            <div class="shipping-bar__fill" style="width: {{ progress }}%;"></div>
+          <div class="shipping-bar__progress" role="progressbar" aria-valuenow="{{ progress | round }}" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso hacia envío gratis">
+            <div class="shipping-bar__fill"></div>
           </div>
         </div>
       {%- endif -%}
@@ -553,7 +553,7 @@
         <!-- COD Message for TechAura -->
         <div class="cart__cod-message">
           <div class="cart__cod-message-header">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="1" y="3" width="15" height="13"></rect>
               <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
