@@ -641,154 +641,128 @@
    - PDP "También te puede gustar" (related products)
    - Any featured collection with a dark color scheme
    
-   The dark scheme used is: scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71
-   Background: #202b3d (dark blue-gray)
+   Uses generic [class*="color-scheme-"] selector to work with ANY Shopify
+   color scheme, avoiding hardcoded IDs that break when merchants modify themes.
    ============================================================================= */
 
 /* 
- * Target cards inside dark color scheme sections
- * Shopify generates class like: color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71
- * We use [class*="color-scheme-d58c693b"] to match partial class names
+ * Target cards inside any color scheme section
+ * Shopify generates classes like: color-scheme-<uuid>
+ * We use [class*="color-scheme-"] to match any color scheme
  */
 
-/* Dark scheme card container - ensure white background for card content */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper {
+/* Color scheme card container - ensure white background for card content */
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper {
   background: var(--ta-bg, #ffffff);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Hover state on dark backgrounds */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper:hover,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper:hover {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper:hover {
   border-color: var(--ta-primary-light, #3b82f6);
   box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4);
 }
 
 /* Card inner area - ensure proper background */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__inner,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__inner {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .card__inner {
   background: var(--ta-bg-secondary, #f8fafc);
 }
 
 /* Card content area background */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__content,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__content {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .card__content {
   background: var(--ta-bg, #ffffff);
 }
 
 /* Title text - ensure dark readable text on white card background */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link,
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__heading a,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__heading a {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .card__heading .full-unstyled-link,
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .card__heading a {
   color: var(--ta-text, #0f172a) !important;
 }
 
 /* Title hover state */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link {
   color: var(--ta-primary, #2563eb) !important;
 }
 
 /* Price styling - keep it prominent and readable */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price-item--regular,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price-item--regular {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price-item--regular {
   color: var(--ta-success, #10b981) !important;
 }
 
 /* Sale price - strikethrough for original price */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
   color: var(--ta-text-muted, #64748b) !important;
 }
 
 /* Sale price - red for emphasis on discounted price */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
   color: var(--ta-error, #ef4444) !important;
 }
 
 /* Description text */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .card__description,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .card__description {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .card__description {
   color: var(--ta-text-muted, #64748b) !important;
 }
 
 /* Vendor text */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .caption-with-letter-spacing,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .caption-with-letter-spacing {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .caption-with-letter-spacing {
   color: var(--ta-text-muted, #64748b) !important;
 }
 
 /* Quick add button - ensure visibility and contrast */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
   background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb)) !important;
   color: var(--ta-primary-contrast, #ffffff) !important;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
   background: var(--ta-gradient-primary-hover, linear-gradient(135deg, #60a5fa, #3b82f6)) !important;
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
 }
 
 /* Focus state for accessibility */
-[class*="color-scheme-d58c693b"] .card-wrapper.product-card-wrapper .quick-add__submit:focus-visible,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .card-wrapper.product-card-wrapper .quick-add__submit:focus-visible {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .quick-add__submit:focus-visible {
   outline: 3px solid var(--ta-primary-lighter, #60a5fa);
   outline-offset: 2px;
 }
 
 /* Section title styling for dark schemes */
-[class*="color-scheme-d58c693b"] .title,
-[class*="color-scheme-d58c693b"] h2.title,
-[class*="color-scheme-d58c693b"] .inline-richtext,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .title,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 h2.title,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .inline-richtext {
+[class*="color-scheme-"] .title,
+[class*="color-scheme-"] h2.title,
+[class*="color-scheme-"] .inline-richtext {
   color: var(--ta-text-inverse, #ffffff);
 }
 
 /* Section description on dark background */
-[class*="color-scheme-d58c693b"] .collection__description,
-[class*="color-scheme-d58c693b"] .rte,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__description,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .rte {
+[class*="color-scheme-"] .collection__description,
+[class*="color-scheme-"] .rte {
   color: rgba(255, 255, 255, 0.85);
 }
 
 /* View all button on dark background */
-[class*="color-scheme-d58c693b"] .collection__view-all .button,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__view-all .button {
+[class*="color-scheme-"] .collection__view-all .button {
   background: var(--ta-primary, #2563eb);
   color: var(--ta-text-inverse, #ffffff);
   border: none;
 }
 
-[class*="color-scheme-d58c693b"] .collection__view-all .button:hover,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .collection__view-all .button:hover {
+[class*="color-scheme-"] .collection__view-all .button:hover {
   background: var(--ta-primary-hover, #1e40af);
 }
 
 /* Slider controls on dark backgrounds */
-[class*="color-scheme-d58c693b"] .slider-button,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-button {
+[class*="color-scheme-"] .slider-button {
   background: rgba(255, 255, 255, 0.9);
   color: var(--ta-text, #0f172a);
 }
 
-[class*="color-scheme-d58c693b"] .slider-button:hover,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-button:hover {
+[class*="color-scheme-"] .slider-button:hover {
   background: var(--ta-bg, #ffffff);
 }
 
-[class*="color-scheme-d58c693b"] .slider-counter,
-.color-scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71 .slider-counter {
+[class*="color-scheme-"] .slider-counter {
   color: rgba(255, 255, 255, 0.85);
 }
 
