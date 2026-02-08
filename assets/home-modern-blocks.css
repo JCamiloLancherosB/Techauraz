@@ -110,7 +110,7 @@
   position: relative;
   z-index: 1;
   border-radius: var(--ta-radius-xl);
-  padding: var(--ta-space-2xl) var(--ta-space-xl);
+  padding: var(--ta-space-2xl) var(--ta-space-xl) !important; /* Competes with !important in ui-ux-responsive-fixes.css */
   background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
   box-shadow: 0 20px 60px rgba(30, 58, 95, 0.4);
   text-align: center;
