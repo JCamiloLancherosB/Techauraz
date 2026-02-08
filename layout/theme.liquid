@@ -30,6 +30,13 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    <!-- Hreflang tags for multilingual SEO -->
+    {%- assign hreflang_path = canonical_url | remove: request.origin | remove_first: request.locale.root_url -%}
+    {%- for language in localization.available_languages -%}
+      <link rel="alternate" hreflang="{{ language.iso_code }}" href="{{ request.origin }}{{ language.root_url }}{{ hreflang_path }}">
+    {%- endfor -%}
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+
     <!-- SEO Meta Description - Uses page-specific description or falls back to default -->
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">

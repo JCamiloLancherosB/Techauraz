@@ -12,7 +12,7 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Inicio",
+      "name": {{ 'general.breadcrumbs.home' | t | default: 'Inicio' | json }},
       "item": {{ shop.url | json }}
     }
     {% if template contains 'product' and product %}
