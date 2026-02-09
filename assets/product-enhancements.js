@@ -66,41 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // FUNCIONALIDADES PERSUASIVAS MEJORADAS
   // All queries scoped to current product section to prevent cross-product conflicts
-  
-  // 1. Trust indicators - DISABLED
-  // NOTE: This function has been disabled to prevent duplicate trust messaging.
-  // The canonical trust strip is now rendered via the trust_line block in main-product.liquid
-  // which provides a single, configurable set of 4 trust items (max).
-  // Do NOT re-enable this function.
-  function addTrustIndicators() {
-    // Function intentionally disabled to avoid duplicate trust messaging.
-    // Trust indicators are now handled by:
-    // 1. trust_line block in main-product.liquid (canonical, max 4 items)
-    // 2. pdp-delivery-estimate.liquid for delivery dates
-    return;
-  }
-
-  // 2. Agregar indicador de entrega y pago - DESHABILITADO
-  // NOTA: Esta función ha sido deshabilitada porque duplicaba información
-  // que ahora se muestra dinámicamente en el snippet pdp-delivery-estimate.liquid
-  // con fechas de entrega calculadas correctamente.
-  function addUrgencyIndicator() {
-    // Función deshabilitada intencionalmente.
-    // La información de envío y pago ahora se muestra a través de:
-    // 1. pdp-delivery-estimate.liquid - para fechas de entrega dinámicas
-    // 2. pdp-micro-trust.liquid - para indicadores de confianza
-    return;
-  }
-
-  // 3. Contador de urgencia dinámico - DESHABILITADO
-  // NOTA: Esta función ha sido deshabilitada porque mostraba un countdown
-  // falso que dañaba la confianza del cliente.
-  // Para información de entrega real, use el snippet pdp-delivery-estimate.liquid
-  function initUrgencyTimer() {
-    // Función deshabilitada intencionalmente.
-    // Los countdowns falsos de "oferta termina" han sido eliminados.
-    return;
-  }
 
   // 4. Tracking de comportamiento del usuario
   function initUserBehaviorTracking() {
@@ -310,26 +275,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 8000);
   }
 
-  // 6. Social proof dinámico
-  // DESHABILITADO: Esta función mostraba mensajes ficticios/aleatorios
-  // que dañan la confianza del cliente.
-  // 
-  // Para mostrar social proof real, use la sección "Social Proof Real"
-  // (product-views-counter.liquid) que muestra:
-  // - Stock bajo basado en inventario real de Shopify
-  // - Contador de reseñas basado en reseñas reales de Shopify
-  function initSocialProof() {
-    // Función deshabilitada intencionalmente.
-    // Los mensajes ficticios de compras recientes han sido eliminados
-    // para mejorar la percepción de confianza del cliente.
-    //
-    // Si necesita social proof real, considere:
-    // 1. Integrar con la API de pedidos de Shopify
-    // 2. Usar un servicio de analytics verificado
-    // 3. Mostrar reseñas reales de clientes
-    return;
-  }
-
   // 7. Optimización de imágenes lazy loading
   function initImageOptimization() {
     const images = document.querySelectorAll('img[loading="lazy"], .product__media img');
@@ -386,19 +331,6 @@ document.addEventListener('DOMContentLoaded', function () {
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
     });
-  }
-
-  // 9. Countdown Timer - DESHABILITADO
-  // NOTA: Esta función ha sido deshabilitada porque mostraba un countdown
-  // falso de 6 horas que se reinicia perpetuamente, lo cual daña la confianza.
-  // Para información de entrega real, use el snippet pdp-delivery-estimate.liquid
-  // que muestra un cut-off honesto basado en la hora real.
-  function initCountdownTimer() {
-    // Función deshabilitada intencionalmente.
-    // Los countdowns falsos han sido eliminados.
-    // Si necesita un countdown real, use la sección countdown-timer.liquid
-    // con una fecha de fin real configurada por el administrador.
-    return;
   }
 
   // 10. Hero Slider Controls and Dots Navigation
@@ -504,30 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   try {
-    addTrustIndicators();
-  } catch (e) {
-    console.warn('Trust indicators init failed:', e);
-  }
-
-  try {
-    addUrgencyIndicator();
-  } catch (e) {
-    console.warn('Urgency indicator init failed:', e);
-  }
-
-  try {
-    initUrgencyTimer();
-  } catch (e) {
-    console.warn('Urgency timer init failed:', e);
-  }
-
-  try {
-    initCountdownTimer();
-  } catch (e) {
-    console.warn('Countdown timer init failed:', e);
-  }
-
-  try {
     initHeroSlider();
   } catch (e) {
     console.warn('Hero slider init failed:', e);
@@ -537,12 +445,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initUserBehaviorTracking();
   } catch (e) {
     console.warn('User behavior tracking init failed:', e);
-  }
-
-  try {
-    initSocialProof();
-  } catch (e) {
-    console.warn('Social proof init failed:', e);
   }
 
   try {
