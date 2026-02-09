@@ -1,1 +1,63 @@
-<script type="application/ld+json"> { "@context":"https://schema.org", "@type":"Organization", "name":"TechAura", "url":"{{ shop.url }}", "logo":"{{ settings.logo | image_url: width: 300 }}", "sameAs":[ "https://www.facebook.com/profile.php?id=61560597029674", "https://www.instagram.com/techauraz/" ] } </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "alternateName": "Techauraz",
+  "url": {{ shop.url | json }},
+  "description": "Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tech con envío gratis",
+  {% if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+  {% endif %}
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "CO",
+    "addressRegion": "Colombia"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+57-300-860-2789",
+    "contactType": "customer service",
+    "areaServed": "CO",
+    "availableLanguage": ["Spanish"]
+  },
+  "sameAs": [
+    {%- liquid
+      assign social_links = ""
+      if settings.social_twitter_link != blank
+        assign social_links = social_links | append: settings.social_twitter_link | append: ","
+      endif
+      if settings.social_facebook_link != blank
+        assign social_links = social_links | append: settings.social_facebook_link | append: ","
+      endif
+      if settings.social_pinterest_link != blank
+        assign social_links = social_links | append: settings.social_pinterest_link | append: ","
+      endif
+      if settings.social_instagram_link != blank
+        assign social_links = social_links | append: settings.social_instagram_link | append: ","
+      endif
+      if settings.social_tiktok_link != blank
+        assign social_links = social_links | append: settings.social_tiktok_link | append: ","
+      endif
+      if settings.social_tumblr_link != blank
+        assign social_links = social_links | append: settings.social_tumblr_link | append: ","
+      endif
+      if settings.social_snapchat_link != blank
+        assign social_links = social_links | append: settings.social_snapchat_link | append: ","
+      endif
+      if settings.social_youtube_link != blank
+        assign social_links = social_links | append: settings.social_youtube_link | append: ","
+      endif
+      if settings.social_vimeo_link != blank
+        assign social_links = social_links | append: settings.social_vimeo_link | append: ","
+      endif
+      assign social_links = social_links | split: ","
+    -%}
+    {%- for link in social_links -%}
+      {%- if link != blank -%}
+        {{ link | json }}{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
