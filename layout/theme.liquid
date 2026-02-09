@@ -74,36 +74,10 @@
     <meta name="twitter:description" content="Productos tecnológicos y gadgets con envío a todo Colombia">
     <meta name="twitter:site" content="@techauraz">
     
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "TechAura",
-      "alternateName": "Techauraz",
-      "url": "{{ shop.url }}",
-      {% comment %} "logo": "{{ 'logo.png' | asset_url }}", {% endcomment %}
-      "description": "Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tech con envío gratis",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "CO",
-        "addressRegion": "Colombia"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+57-300-860-2789",
-        "contactType": "customer service",
-        "areaServed": "CO",
-        "availableLanguage": ["Spanish"]
-      },
-      "sameAs": [
-        "{{ settings.social_facebook_link }}",
-        "{{ settings.social_instagram_link }}",
-        "{{ settings.social_twitter_link }}"
-      ]
-    }
-    </script>
+    <!-- Structured Data: Organization (canonical source) -->
+    {% render 'structured-data-base' %}
 
+    <!-- Structured Data: WebSite with SearchAction (canonical source) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -121,60 +95,7 @@
     }
     </script>
 
-    {%- if template.name == 'product' and product -%}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": {{ product.title | json }},
-      "description": {{ product.description | strip_html | truncate: 250 | json }},
-      "image": {{ product.featured_image | image_url: width: 1200 | json }},
-      "url": "{{ shop.url }}{{ product.url }}",
-      "brand": {
-        "@type": "Brand",
-        "name": "TechAura"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "{{ shop.url }}{{ product.url }}",
-        "priceCurrency": "COP",
-        "price": "{{ product.selected_or_first_available_variant.price | divided_by: 100.0 }}",
-        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-        "seller": {
-          "@type": "Organization",
-          "name": "TechAura"
-        },
-        "priceValidUntil": "{{ 'now' | date: '%s' | plus: 2592000 | date: '%Y-%m-%d' }}",
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "COP"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "CO"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "businessDays": {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-            },
-            "cutoffTime": "23:59:59",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 5,
-              "unitCode": "DAY"
-            }
-          }
-        }
-      }
-    }
-    </script>
-    {%- endif -%}
+    <!-- Product structured data is rendered via snippets/schema-product.liquid in sections/main-product.liquid -->
 
     <!-- Favicon -->
     {%- if settings.favicon != blank -%}
