@@ -588,10 +588,7 @@
   endif
 -%}
 
-{% comment %}
-  Product structured data removed — canonical source is snippets/schema-product.liquid
-  (rendered in sections/main-product.liquid)
-{% endcomment %}
+{% render 'schema-product', product: product %}
 
 {% if product.media.size > 0 %}
   <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
