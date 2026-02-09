@@ -370,6 +370,15 @@
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
       },
       "empty_subtitle": "Discover our products and add them to your cart",
+      "empty_text_cod": "Your cart is waiting for the best gadgets 🎯",
+      "empty_subtitle_cod": "Discover amazing tech with cash on delivery",
+      "continue_shopping_cta": "🔥 See featured products",
+      "shipping_remaining": "🚚 <strong>You're {{ remaining }} away from FREE shipping!</strong>",
+      "shipping_free": "✅ <strong>You have FREE shipping!</strong>",
+      "cod_top_title": "🏠 PAY AT HOME",
+      "cod_top_pay_on_delivery": "✓ Pay on delivery",
+      "cod_top_no_bank_data": "✓ No bank details needed",
+      "cod_top_delivery_time": "✓ Delivery in 2-4 days",
       "trust_badges": {
         "free_shipping": "Free Shipping $150,000+",
         "secure_payment": "Secure Payment",
