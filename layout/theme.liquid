@@ -366,18 +366,6 @@
 
     <!-- Google Webmaster Tools Site Verification -->
     <meta name="google-site-verification" content="fj7UYrB5GV0ojQhLbYR8XqrgfSDiY8Bcqz-npt1MvQo" />
-    {% comment %} Soporte WebP automático {% endcomment %}
-   <script defer="defer">
-     document.addEventListener('DOMContentLoaded', function() {
-       if(window.HTMLCanvasElement) {
-         var img = new Image();
-         img.onload = img.onerror = function() {
-           document.documentElement.className += (img.height == 1) ? ' webp' : ' no-webp';
-         };
-         img.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==';
-       }
-     });
-   </script>
    <!-- GOOGLE TAG MANAGER - OPTIMIZED -->
 <script>
 (function(w,d,s,l,i){
