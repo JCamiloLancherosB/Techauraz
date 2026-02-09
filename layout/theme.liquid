@@ -150,14 +150,23 @@
      =============================================================================
      
      LOAD ORDER (Critical - do not change):
+     
+     GLOBAL (loaded on all pages):
      1. techauraz-tokens.css - CSS custom properties, design tokens + legacy --tech-* compat (MUST BE FIRST)
      2. base.css - Core Dawn theme styles + TechAura unified styles
      3. ui-ux-responsive-fixes.css - Responsive design and layout fixes
-     4. home-modern-blocks.css - Home page section styles
-     5. testimonials.css - Reviews & carousel sections (consolidated)
-     6. techauraz-custom-ui.css - WhatsApp, Announcement Bar, Cookie Banner
-     7. slideshow-enhancements.css - Slider controls and CTAs
-     8. techauraz-product-card.css - Product card conversion styles
+     4. home-modern-blocks.css - Newsletter + Footer styles (contains global footer styles)
+     5. techauraz-custom-ui.css - WhatsApp, Announcement Bar, Cookie Banner
+     6. techauraz-product-card.css - Product card conversion styles
+     7. techauraz-utilities.css - Utility classes using design tokens
+     8. announcement-bar-enhancements.css - Marquee styling with persuasive elements
+     9. header-announcement-slideshow-fixes.css - Header & Announcement Bar UI/UX fixes
+     
+     CONDITIONAL (loaded only on specific pages):
+     A. testimonials.css - Reviews & carousel sections (HOME ONLY: template.name == 'index')
+     B. slideshow-enhancements.css - Slider controls and CTAs (HOME ONLY: template.name == 'index')
+     C. quick-view-modal.css - Product preview modal (HOME, COLLECTION, SEARCH pages)
+     D. product-comparison.css - Side-by-side comparison (PDP & comparison pages)
      
      Z-INDEX HIERARCHY (defined in techauraz-tokens.css):
      - Base content: 0-99
@@ -171,7 +180,7 @@
      This is normal Shopify behavior and should not interfere with our styles
      as long as the loading order is maintained.
      
-     Last updated: 2026-02-07
+     Last updated: 2026-02-09
      ============================================================================= -->
 
 <!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
@@ -185,21 +194,25 @@
 <link rel="preload" href="{{ 'ui-ux-responsive-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'ui-ux-responsive-fixes.css' | asset_url }}"></noscript>
 
-<!-- Home Modern Blocks - Testimonials + Newsletter + Footer - 2026-01-21 -->
+<!-- Home Modern Blocks - Newsletter + Footer styles - 2026-01-21 (GLOBAL: contains footer styles) -->
 <link rel="preload" href="{{ 'home-modern-blocks.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'home-modern-blocks.css' | asset_url }}"></noscript>
 
-<!-- Testimonials - Reviews & carousel section styling (consolidated) -->
-<link rel="preload" href="{{ 'testimonials.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' -%}
+  <!-- Testimonials - Reviews & carousel section styling (HOME ONLY) -->
+  <link rel="preload" href="{{ 'testimonials.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- Custom UI Components - WhatsApp, Announcement Bar, Cookie Banner - 2026-01-21 -->
 <link rel="preload" href="{{ 'techauraz-custom-ui.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}"></noscript>
 
-<!-- Slideshow Enhancements - Controls & CTAs - 2026-01-22 -->
-<link rel="preload" href="{{ 'slideshow-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'slideshow-enhancements.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' -%}
+  <!-- Slideshow Enhancements - Controls & CTAs (HOME ONLY) -->
+  <link rel="preload" href="{{ 'slideshow-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'slideshow-enhancements.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- Unified Product Card Styles - Premium card spec for conversion - 2026-01-27 -->
 <link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -217,20 +230,24 @@
 <link rel="preload" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
 
-<!-- Quick View Modal - Product preview modal styles - 2026-01-29 -->
-<link rel="preload" href="{{ 'quick-view-modal.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'quick-view-modal.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
+  <!-- Quick View Modal - Product preview modal styles (PAGES WITH PRODUCT CARDS ONLY) -->
+  <link rel="preload" href="{{ 'quick-view-modal.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'quick-view-modal.css' | asset_url }}"></noscript>
+{%- endif -%}
 
-<!-- Product Comparison - Side-by-side product comparison feature - 2026-01-30 -->
-<link rel="preload" href="{{ 'product-comparison.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'product-comparison.css' | asset_url }}"></noscript>
+{%- if template.name == 'product' or template.suffix == 'comparison' -%}
+  <!-- Product Comparison - Side-by-side product comparison feature (PDP & COMPARISON PAGES ONLY) -->
+  <link rel="preload" href="{{ 'product-comparison.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'product-comparison.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- 
   ============================================================================
-  CSS LOADING ORDER (CURRENT - Updated 2026-02-07)
+  CSS LOADING ORDER (CURRENT - Updated 2026-02-09)
   ============================================================================
   
-  The following stylesheets are loaded in this order in the layout:
+  GLOBAL STYLESHEETS (loaded on all pages):
   
   1. techauraz-tokens.css (MUST BE FIRST)
      - Design tokens (colors, spacing, typography, z-index hierarchy)
@@ -248,31 +265,22 @@
      - Layout normalization
      - Overflow prevention
      
-  4. home-modern-blocks.css
-     - Testimonials section
-     - Newsletter section
-     - Footer improvements
+  4. home-modern-blocks.css (GLOBAL - contains footer styles)
+     - Newsletter section styles
+     - Footer improvements (used on all pages)
      
-  5. testimonials.css
-     - Reviews section slider styling
-     
-  6. techauraz-custom-ui.css
+  5. techauraz-custom-ui.css
      - WhatsApp floating button
      - Announcement bar
      - Cookie banner
      - Sticky CTA bar
      
-  7. slideshow-enhancements.css
-     - Slideshow controls
-     - Hero CTA buttons
-     - Image visibility fixes
-     
-  8. techauraz-product-card.css
+  6. techauraz-product-card.css
      - Product card styles
      - Conversion-optimized card design
      - Badge positioning
 
-  9. techauraz-utilities.css
+  7. techauraz-utilities.css
      - Container utilities (.tech-container)
      - Section utilities (.tech-section)
      - Text utilities (.tech-heading, .tech-subheading)
@@ -282,13 +290,36 @@
      - Animation utilities (.tech-animate-*)
      - Visibility utilities (.tech-sr-only, .tech-hide-*)
   
-  10. announcement-bar-enhancements.css
-      - Announcement bar container styling
-      - Ticker/marquee enhanced styles
-      - Fade edges for seamless appearance
-      - Animated separators
-      - Message styling with accent highlights
-      - Mobile responsive adjustments
+  8. announcement-bar-enhancements.css
+     - Announcement bar container styling
+     - Ticker/marquee enhanced styles
+     - Fade edges for seamless appearance
+     - Animated separators
+     - Message styling with accent highlights
+     - Mobile responsive adjustments
+  
+  9. header-announcement-slideshow-fixes.css
+     - Header & Announcement Bar UI/UX fixes
+  
+  CONDITIONAL STYLESHEETS (loaded only on specific pages):
+  
+  A. testimonials.css (HOME ONLY: template.name == 'index')
+     - Reviews section slider styling
+     - Testimonials carousel component
+  
+  B. slideshow-enhancements.css (HOME ONLY: template.name == 'index')
+     - Slideshow controls
+     - Hero CTA buttons
+     - Image visibility fixes
+     - Fully scoped to .template-index
+  
+  C. quick-view-modal.css (HOME, COLLECTION, SEARCH pages)
+     - Product preview modal styles
+     - Only needed on pages with product cards
+  
+  D. product-comparison.css (PDP & COMPARISON pages)
+     - Side-by-side product comparison feature
+     - Also loaded by sections/product-comparison.liquid itself
   
   ============================================================================
   Z-INDEX HIERARCHY (defined in techauraz-tokens.css)
