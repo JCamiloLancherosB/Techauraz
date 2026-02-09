@@ -5,9 +5,8 @@
 
 {%- comment -%}
   Load shared CSS assets once at section level (not per card)
-  These styles support rating, volume pricing, and visual system for product cards
+  These styles support volume pricing and visual system for product cards (rating styles are in base.css)
 {%- endcomment -%}
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
 {{ 'visual-system-unified-2024.css' | asset_url | stylesheet_tag }}
 
