@@ -1,60 +1,51 @@
 # Techauraz Documentation Index
 
-This directory contains all technical documentation for the Techauraz Shopify theme.
+This directory contains the active technical documentation for the Techauraz Shopify theme.
 
 ---
 
-## Core Documentation
+## Active Documentation
 
 | Document | Description |
 |----------|-------------|
 | [CHANGELOG.md](./CHANGELOG.md) | Chronological record of all major changes, fixes, and implementations |
 | [CSS_ARCHITECTURE.md](./CSS_ARCHITECTURE.md) | CSS consolidation history, design system, animation deduplication, CSS/Liquid sync audit |
+| [css-loading-order.md](./css-loading-order.md) | Active reference for CSS loading order in theme.liquid |
 | [DEPLOYMENT.md](./DEPLOYMENT.md) | Deployment procedures, testing checklists, rollback plans, browser compatibility |
-| [README_FIXES.md](./README_FIXES.md) | Fix documentation and notes |
-| [REQUIREMENTS_CHECKLIST.md](./REQUIREMENTS_CHECKLIST.md) | Project requirements tracking |
-| [FINAL_CLEANUP_SUMMARY.md](./FINAL_CLEANUP_SUMMARY.md) | Final cleanup summary |
+| [QA_CHECKLIST.md](./QA_CHECKLIST.md) | Visual QA checklist |
+| [qa-checklist.md](./qa-checklist.md) | Comprehensive UI/accessibility testing checklist |
+| [qa-conversion-checklist.md](./qa-conversion-checklist.md) | Conversion-focused QA checklist |
+
+### `/performance`
+
+| Document | Description |
+|----------|-------------|
+| [PERF.md](./performance/PERF.md) | Consolidated performance reference |
+| [CACHE_OPTIMIZATION.md](./performance/CACHE_OPTIMIZATION.md) | Cache optimization strategies |
+| [PERFORMANCE_TESTING.md](./performance/PERFORMANCE_TESTING.md) | Performance testing guide |
 
 ---
 
-## Additional Documentation
+## Archived Documentation
 
-### `/improvements`
-- [IMPROVEMENTS.md](./improvements/IMPROVEMENTS.md) — Improvement tracking and CSS/visual/UX changes
+Historical documentation from previous PRs, refactoring cycles, and implementation summaries has been moved to [`docs/archive/`](./archive/). These files are preserved for reference but are no longer actively maintained.
 
-### `/implementation`
-Remaining implementation guides and fix documentation (product page fixes, theme fixes, UI/UX guides).
-
-### `/deployment`
-- [DEPLOYMENT_SUMMARY.md](./deployment/DEPLOYMENT_SUMMARY.md) — Fix summaries for hero carousel, cookie notice, header overflow, product card typography, product details button
-
-### `/summaries`
-Additional project summaries and audit reports.
-
-### `/performance`
-Performance optimization documentation:
-- Performance testing guides
-- Cache optimization
-- Performance summaries
-- Core Web Vitals improvements
-
-### `/testing`
-Testing guides and procedures for UX and performance.
-
-### `/visual-references`
-Visual reference materials.
+Archived subdirectories:
+- `archive/implementation/` — Past implementation summaries and guides
+- `archive/summaries/` — PR and task completion summaries
+- `archive/performance/` — Superseded performance docs
+- `archive/visual-references/` — Visual before/after comparisons
+- `archive/testing/` — Historical testing guides
+- `archive/deployment/` — Past deployment summaries
+- `archive/improvements/` — Previous improvement tracking
 
 ---
 
 ## Quick Links
 
 - Main README: [/README.md](../README.md)
-- README with Fixes: [README_FIXES.md](./README_FIXES.md)
-- README Performance: [README_PERFORMANCE.md](./README_PERFORMANCE.md)
-- QA Checklist (Visual): [QA_CHECKLIST.md](./QA_CHECKLIST.md)
-- QA Checklist (Manual): [qa-checklist.md](./qa-checklist.md) — Comprehensive UI/accessibility testing
 
 ---
 
-Last organized: January 2026  
-Purpose: Consolidated 11 implementation/summary/testing/deployment docs into 3 core files (CHANGELOG, CSS_ARCHITECTURE, DEPLOYMENT)
+Last organized: February 2026  
+Purpose: Reduced docs root to active-only files; archived 100+ historical docs into docs/archive/
