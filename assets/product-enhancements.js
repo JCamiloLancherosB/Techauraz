@@ -30,40 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.productEnhancementsInitialized.add(productId);
   }
 
-  // Verificación de compatibilidad IE
-  function isIE() {
-    const ua = window.navigator.userAgent;
-    const msie = ua.indexOf('MSIE ');
-    const trident = ua.indexOf('Trident/');
-    return msie > 0 || trident > 0;
-  }
-
-  // Solo ejecutar para IE si es necesario
-  if (isIE()) {
-    const sectionId = productSection ? productSection.getAttribute('data-section') : null;
-    if (sectionId) {
-      const hiddenInput = document.querySelector(`#product-form-${sectionId} input[name="id"]`);
-      const variantPicker = document.querySelector(`variant-selects[data-section="${sectionId}"]`);
-      
-      if (hiddenInput && variantPicker) {
-        const noScriptInputWrapper = document.createElement('div');
-        const noScriptContent = document.querySelector(`.product-form__noscript-wrapper-${sectionId}`);
-        
-        if (noScriptContent) {
-          noScriptInputWrapper.innerHTML = noScriptContent.textContent;
-          variantPicker.outerHTML = noScriptInputWrapper.outerHTML;
-        }
-
-        const variantsSelect = document.querySelector(`#Variants-${sectionId}`);
-        if (variantsSelect) {
-          variantsSelect.addEventListener('change', function (event) {
-            hiddenInput.value = event.currentTarget.value;
-          });
-        }
-      }
-    }
-  }
-
   // FUNCIONALIDADES PERSUASIVAS MEJORADAS
   // All queries scoped to current product section to prevent cross-product conflicts
   
