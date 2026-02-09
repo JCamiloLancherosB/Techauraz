@@ -28,8 +28,8 @@
               <div class="cart__empty-icon cart__empty-icon--drawer">
                 {% render 'icon-cart-empty' %}
               </div>
-              <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
-              <p class="cart__empty-subtitle">{{ 'sections.cart.empty_subtitle' | t }}</p>
+              <h2 class="cart__empty-text">Tu carrito está esperando los mejores gadgets 🎯</h2>
+              <p class="cart__empty-subtitle">Descubre tecnología increíble con pago contra entrega</p>
               <button
                 class="drawer__close"
                 type="button"
@@ -38,8 +38,8 @@
               >
                 {% render 'icon-close' %}
               </button>
-              <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping">
-                {{ 'general.continue_shopping' | t }}
+              <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping cart__continue-shopping--cta">
+                🔥 Ver productos destacados
               </a>
 
               {%- if shop.customer_accounts_enabled and customer == null -%}
@@ -69,10 +69,10 @@
         </button>
       </div>
       
-      {%- comment -%} Free Shipping Progress Bar {%- endcomment -%}
+      {%- comment -%} Free Shipping Progress Bar - threshold in cents (COP $150.000 = 15000000 centavos) {%- endcomment -%}
+      {%- assign free_shipping_threshold = 15000000 -%}
       {%- if cart != empty -%}
         <div class="cart-drawer__shipping-bar">
-          {%- assign free_shipping_threshold = 150000 -%}
           {%- assign cart_total = cart.total_price -%}
           {%- assign remaining = free_shipping_threshold | minus: cart_total -%}
           {%- assign progress = cart_total | times: 100.0 | divided_by: free_shipping_threshold -%}
@@ -83,21 +83,41 @@
           <div class="shipping-bar__message">
             {%- if remaining > 0 -%}
               <p class="shipping-bar__text">
-                🚚 <strong>¡Solo te faltan {{ remaining | money }} para envío gratis!</strong>
+                🚚 <strong>¡Te faltan {{ remaining | money }} para envío GRATIS!</strong>
               </p>
             {%- else -%}
               <p class="shipping-bar__text shipping-bar__text--success">
-                ✓ <strong>¡Felicidades! Tienes envío gratis</strong>
+                ✅ <strong>¡Tienes envío GRATIS!</strong>
               </p>
             {%- endif -%}
           </div>
           
           <div class="shipping-bar__progress" role="progressbar" aria-valuenow="{{ progress | round }}" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso hacia envío gratis">
-            <div class="shipping-bar__fill"></div>
+            <div class="shipping-bar__fill" style="width: {{ progress | round }}%;"></div>
           </div>
         </div>
       {%- endif -%}
-      
+
+      {%- comment -%} COD Benefits - Visible immediately below header/shipping bar {%- endcomment -%}
+      {%- if cart != empty -%}
+        <div class="cart-drawer__cod-top">
+          <div class="cod-top__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <strong>🏠 PAGA EN CASA</strong>
+          </div>
+          <ul class="cod-top__list">
+            <li>✓ Paga al recibir tu pedido</li>
+            <li>✓ Sin datos bancarios</li>
+            <li>✓ Entrega en 2-4 días</li>
+          </ul>
+        </div>
+      {%- endif -%}
+
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"
@@ -531,41 +551,6 @@
             {%- endif -%}
           </small>
           
-          {%- comment -%} COD Benefits Section {%- endcomment -%}
-          <div class="cod-benefits">
-            <div class="cod-benefits__title">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-              </svg>
-              PAGA EN CASA - Contraentrega
-            </div>
-            <ul class="cod-benefits__list">
-              <li class="cod-benefits__item">Envío gratis en compras superiores a $150.000</li>
-              <li class="cod-benefits__item">Paga cuando recibes tu pedido</li>
-              <li class="cod-benefits__item">Entrega en 2-4 días hábiles</li>
-              <li class="cod-benefits__item">Atención al cliente 24/7</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- CTAs -->
-        
-        <!-- COD Message for TechAura -->
-        <div class="cart__cod-message">
-          <div class="cart__cod-message-header">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <rect x="1" y="3" width="15" height="13"></rect>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-              <circle cx="5.5" cy="18.5" r="2.5"></circle>
-              <circle cx="18.5" cy="18.5" r="2.5"></circle>
-            </svg>
-            <strong>PAGA EN CASA</strong>
-          </div>
-          <p class="cart__cod-message-body">
-            ✓ Paga al recibir tu pedido<br>
-            ✓ Envío gratis en compras mayores a $150.000<br>
-            ✓ Contraentrega disponible
-          </p>
         </div>
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
