@@ -1420,3 +1420,24 @@
   color: #94a3b8;
   line-height: 1.6;
 }
+
+/* ============================================================================
+   RESPONSIVE OVERRIDES FOR TA-CONV CLASSES
+   ============================================================================
+   Additional responsive and consistency rules for ta-conv classes moved from base.css
+   ============================================================================ */
+
+/* Mobile benefits grid - moved from base.css line 9638 */
+@media screen and (max-width: 749px) {
+  .ta-conv-benefits {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+}
+
+/* Font size consistency - moved from base.css line 12935 */
+.pdp-badges__text,
+.ta-conv-benefit-desc {
+  font-size: max(13px, 1.3rem);
+}

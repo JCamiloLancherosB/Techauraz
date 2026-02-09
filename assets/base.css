@@ -9635,13 +9635,6 @@ button.icon-button:focus-visible {
     width: 100%;
   }
 
-  /* Mobile benefits grid */
-  .ta-conv-benefits {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0;
-  }
-
   /* Mobile card grid */
   .product-grid {
     gap: 1.25rem;
@@ -12931,12 +12924,6 @@ select:focus {
 /* =============================================================================
    FONT SIZE CONSISTENCY IMPROVEMENTS
    ============================================================================= */
-
-/* Badges de conversión - texto más legible */
-.pdp-badges__text,
-.ta-conv-benefit-desc {
-  font-size: max(13px, 1.3rem);
-}
 
 /* Títulos de sección - tamaño consistente */
 .section__title {
