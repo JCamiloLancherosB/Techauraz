@@ -261,9 +261,9 @@
    
    BLOCKS MOVED:
    1. .tech-pdp-gallery (line 4918) - Product gallery zoom cursor
-   2. .ta-conv-* blocks (lines 7696-8640) - Conversion optimization suite
+   2. .ta-conv-* blocks (lines 7695-8640) - Conversion optimization suite
    3. .shipping-bar__* (lines 12243-12283) - Cart drawer shipping progress
-   4. .cod-* and .cart-drawer__cod-* (lines 12286-12439) - COD payment benefits
+   4. .cod-* and .cart-drawer__cod-* (lines 12285-12439) - COD payment benefits
    
    Total: ~1,156 lines moved
    
@@ -281,7 +281,7 @@
    TECHAURAZ CONVERSION OPTIMIZATION 2024
    ============================================================================
    Version: 1.0.0
-   Moved from: assets/base.css (lines 7696-8640)
+   Moved from: assets/base.css (lines 7695-8640)
    
    DEPENDENCIES:
    - base.css (base styles, utilities, focus-visible, grid, reset)
