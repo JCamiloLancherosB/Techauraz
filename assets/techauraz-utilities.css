@@ -265,7 +265,7 @@
    3. .shipping-bar__* (lines 12243-12283) - Cart drawer shipping progress
    4. .cod-* and .cart-drawer__cod-* (lines 12286-12439) - COD payment benefits
    
-   Total: ~1,142 lines moved
+   Total: ~1,156 lines moved
    
    ============================================================================ */
 
@@ -277,34 +277,27 @@
   cursor: zoom-in;
 }
 
-/* ========== From techauraz-conversion-2024.css ========== */
-/**
- * =============================================================================
- * TECHAURAZ CONVERSION OPTIMIZATION 2024
- * =============================================================================
- * Version: 1.0.0
- * Date: 2024-12-22
- * 
- * DEPENDENCIAS:
- * - base.css (estilos base, utilidades, focus-visible, grid)
- * - animations.css (keyframes y clases de animación)
- * 
- * NOTA: Estilos base heredados, no duplicar aquí.
- * 
- * Conversion-focused enhancements for higher conversions with:
- * - Persuasive visual design
- * - Clear product storytelling
- * - Frictionless CTAs
- * - Consistent styling
- * - No style conflicts
- * 
- * Namespace: .ta-conv-* to prevent conflicts
- * 
- * DEPENDENCIAS:
- * - base.css (estilos base, utilidades, focus-visible, grid, reset)
- * - animations.css (keyframes y clases de animación)
- * =============================================================================
- */
+/* ============================================================================
+   TECHAURAZ CONVERSION OPTIMIZATION 2024
+   ============================================================================
+   Version: 1.0.0
+   Originally from: techauraz-conversion-2024.css
+   
+   DEPENDENCIES:
+   - base.css (base styles, utilities, focus-visible, grid, reset)
+   - animations.css (keyframes and animation classes)
+   
+   NOTE: Base styles are inherited, do not duplicate here.
+   
+   Conversion-focused enhancements for higher conversions with:
+   - Persuasive visual design
+   - Clear product storytelling
+   - Frictionless CTAs
+   - Consistent styling
+   - No style conflicts
+   
+   Namespace: .ta-conv-* to prevent conflicts
+   ============================================================================ */
 
 /* =============================================================================
    CONVERSION VARIABLES - Using Unified Color System
