@@ -4,13 +4,14 @@
 <!-- PRECONNECT and DNS Prefetch - Critical for performance -->
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.shopify.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://connect.facebook.net">
 
 <!-- Preload critical JavaScript -->
+{%- if request.design_mode -%}
 <link rel="modulepreload" href="{{ 'theme-editor.js' | asset_url }}">
+{%- endif -%}
 
 <!-- Note: Image preloading should be done in sections, not in layout -->
 {%- comment -%}
@@ -101,13 +102,6 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
     
-    <!-- Preload critical resources -->
-    <link rel="preload" as="script" href="{{ 'global.js' | asset_url }}">
-    
-    <!-- DNS prefetch para external domains -->
-<link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
-<link rel="dns-prefetch" href="https://cdn.shopify.com">
-
     <!-- Meta Tags de Shopify -->
     {% render 'meta-tags' %}
 
