@@ -6,6 +6,7 @@
 {%- endcomment -%}
 
 {%- if section.settings.show_section -%}
+{{ 'product-reviews-summary.css' | asset_url | stylesheet_tag }}
 
 {%- assign rating_value = product.metafields.reviews.rating.value -%}
 {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
@@ -16,13 +17,14 @@
     <div class="product-reviews-summary__stars" role="img" aria-label="{{ rating_value }} de 5 estrellas">
       {%- assign rating_int = rating_value | floor -%}
       {%- assign rating_decimal = rating_value | modulo: 1 -%}
+      {%- assign half_star_pos = rating_int | plus: 1 -%}
       {%- for i in (1..5) -%}
         {%- if i <= rating_int -%}
           <svg class="product-reviews-summary__star product-reviews-summary__star--full" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        {%- elsif i == rating_int | plus: 1 and rating_decimal > 0 -%}
-          <svg class="product-reviews-summary__star product-reviews-summary__star--half" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="half-{{ section.id }}"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="#d1d5db"/></linearGradient></defs><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#half-{{ section.id }})"/></svg>
+        {%- elsif i == half_star_pos and rating_decimal > 0 -%}
+          <svg class="product-reviews-summary__star product-reviews-summary__star--half" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="half-{{ section.id }}"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="var(--ta-border, #e2e8f0)"/></linearGradient></defs><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#half-{{ section.id }})"/></svg>
         {%- else -%}
-          <svg class="product-reviews-summary__star product-reviews-summary__star--empty" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#d1d5db" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="product-reviews-summary__star product-reviews-summary__star--empty" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         {%- endif -%}
       {%- endfor -%}
     </div>
@@ -40,43 +42,6 @@
     <span class="product-reviews-summary__text">{{ section.settings.placeholder_text }}</span>
   {%- endif -%}
 </div>
-
-<style>
-  .product-reviews-summary {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    max-height: 48px;
-    padding: 0.6rem 0;
-  }
-
-  .product-reviews-summary__stars {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    color: var(--ta-warning, #f59e0b);
-  }
-
-  .product-reviews-summary__stars--placeholder {
-    color: var(--ta-warning-light, #fbbf24);
-  }
-
-  .product-reviews-summary__star {
-    flex-shrink: 0;
-  }
-
-  .product-reviews-summary__text {
-    font-size: 1.3rem;
-    line-height: 1.4;
-    color: var(--ta-text-muted, #64748b);
-  }
-
-  @media screen and (min-width: 750px) {
-    .product-reviews-summary__text {
-      font-size: 1.4rem;
-    }
-  }
-</style>
 
 {%- endif -%}
 
