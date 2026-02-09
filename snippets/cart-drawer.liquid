@@ -28,8 +28,8 @@
               <div class="cart__empty-icon cart__empty-icon--drawer">
                 {% render 'icon-cart-empty' %}
               </div>
-              <h2 class="cart__empty-text">Tu carrito está esperando los mejores gadgets 🎯</h2>
-              <p class="cart__empty-subtitle">Descubre tecnología increíble con pago contra entrega</p>
+              <h2 class="cart__empty-text">{{ 'sections.cart.empty_text_cod' | t }}</h2>
+              <p class="cart__empty-subtitle">{{ 'sections.cart.empty_subtitle_cod' | t }}</p>
               <button
                 class="drawer__close"
                 type="button"
@@ -39,7 +39,7 @@
                 {% render 'icon-close' %}
               </button>
               <a href="{{ routes.all_products_collection_url }}" class="button cart__continue-shopping cart__continue-shopping--cta">
-                🔥 Ver productos destacados
+                {{ 'sections.cart.continue_shopping_cta' | t }}
               </a>
 
               {%- if shop.customer_accounts_enabled and customer == null -%}
@@ -82,12 +82,13 @@
           
           <div class="shipping-bar__message">
             {%- if remaining > 0 -%}
+              {%- assign remaining_formatted = remaining | money -%}
               <p class="shipping-bar__text">
-                🚚 <strong>¡Te faltan {{ remaining | money }} para envío GRATIS!</strong>
+                {{ 'sections.cart.shipping_remaining' | t: remaining: remaining_formatted }}
               </p>
             {%- else -%}
               <p class="shipping-bar__text shipping-bar__text--success">
-                ✅ <strong>¡Tienes envío GRATIS!</strong>
+                {{ 'sections.cart.shipping_free' | t }}
               </p>
             {%- endif -%}
           </div>
@@ -108,12 +109,12 @@
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
               <circle cx="18.5" cy="18.5" r="2.5"></circle>
             </svg>
-            <strong>🏠 PAGA EN CASA</strong>
+            <strong>{{ 'sections.cart.cod_top_title' | t }}</strong>
           </div>
           <ul class="cod-top__list">
-            <li>✓ Paga al recibir tu pedido</li>
-            <li>✓ Sin datos bancarios</li>
-            <li>✓ Entrega en 2-4 días</li>
+            <li>{{ 'sections.cart.cod_top_pay_on_delivery' | t }}</li>
+            <li>{{ 'sections.cart.cod_top_no_bank_data' | t }}</li>
+            <li>{{ 'sections.cart.cod_top_delivery_time' | t }}</li>
           </ul>
         </div>
       {%- endif -%}
