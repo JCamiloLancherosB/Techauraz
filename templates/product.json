@@ -413,6 +413,24 @@
                 "padding_bottom": 40
             }
         },
+        "product_reviews_summary": {
+            "type": "product-reviews-summary",
+            "settings": {
+                "show_section": true,
+                "placeholder_text": "Calificación garantizada"
+            }
+        },
+        "product_trust_strip": {
+            "type": "product-trust-strip",
+            "settings": {
+                "show_section": true,
+                "text_guarantee": "Garantía 30 días",
+                "text_shipping": "Envío gratis +$150.000",
+                "text_cod": "Paga al recibir",
+                "text_stock_available": "Stock disponible",
+                "text_stock_unavailable": "Agotado"
+            }
+        },
         "recently-viewed": {
             "type": "recently-viewed",
             "settings": {
@@ -430,6 +448,8 @@
     },
     "order": [
         "main",
+        "product_reviews_summary",
+        "product_trust_strip",
         "product_benefits",
         "product_includes",
         "product_usage_warranty",
