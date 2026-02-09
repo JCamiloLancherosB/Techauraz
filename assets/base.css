@@ -7678,14 +7678,6 @@ body.menu-drawer-open {
   z-index: 20 !important;
 }
 
-/* Override social proof popup with tech theme colors */
-.social-proof-popup {
-  background: linear-gradient(135deg, var(--ta-primary), var(--ta-accent)) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: var(--ta-shadow-md) !important;
-}
-
 /* Override viewer count with tech theme */
 .viewer-count {
   background: linear-gradient(135deg, var(--ta-primary), var(--ta-primary-dark)) !important;
