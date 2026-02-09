@@ -186,14 +186,12 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <!-- Título y Meta Description Dinámicos -->
-    {%- assign path_parts = request.path | split: '/' -%}
-    {%- assign base_path = path_parts | last -%}
-    {%- unless request.page_type == 'list-collections' or request.page_type == 'collection' and base_path == 'all' -%}
     <title>
-        TechAura - Tecnología y Gadgets en Colombia | Envío Nacional
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
-    {%- endunless -%}
     
     <!-- Preload critical resources -->
     <link rel="preload" as="script" href="{{ 'global.js' | asset_url }}">
