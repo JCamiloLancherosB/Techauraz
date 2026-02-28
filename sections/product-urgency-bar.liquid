@@ -1,11 +1,11 @@
 <div class="urgency-bar section-{{ section.id }}-padding" data-urgency-bar>
   <div class="urgency-bar__container page-width">
     <div class="urgency-bar__content">
-      <span class="urgency-bar__icon">✅</span>
+      <span class="urgency-bar__icon">{% render 'icon-system', icon: 'check-circle', size: 16, color: 'var(--ta-accent, #00D4AA)' %}</span>
       <span class="urgency-bar__text">
-        {{ section.settings.urgency_text | default: "🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible" }}
+        {{ section.settings.urgency_text | default: "Envío 2–5 días hábiles | Pago contra entrega disponible" }}
       </span>
-      <span class="urgency-bar__icon">✅</span>
+      <span class="urgency-bar__icon">{% render 'icon-system', icon: 'check-circle', size: 16, color: 'var(--ta-accent, #00D4AA)' %}</span>
     </div>
   </div>
 </div>
@@ -30,7 +30,7 @@
       "type": "text",
       "id": "urgency_text",
       "label": "Texto de urgencia",
-      "default": "🚚 Envío 2–5 días hábiles | 💳 Pago contra entrega disponible",
+      "default": "Envío 2–5 días hábiles | Pago contra entrega disponible",
       "info": "⚠️ Use información real y verificable. Evite números de stock falsos"
     },
     {

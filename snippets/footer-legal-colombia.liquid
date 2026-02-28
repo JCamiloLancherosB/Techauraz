@@ -1,0 +1,175 @@
+{%- comment -%}
+  TechAura Footer Legal Compliance — Colombia
+  ============================================
+  Required legal information for Colombian e-commerce:
+  - Company identification (NIT or Razón Social)
+  - Ley 1581 de 2012 (Data Protection)
+  - Ley 1480 de 2011 (Consumer Rights / Derecho de Retracto)
+  - Contact information
+  - Payment methods trust badges
+  
+  Usage: {% render 'footer-legal-colombia' %}
+  Place after the main footer content, before closing </footer>
+{%- endcomment -%}
+
+<div class="footer-legal-colombia">
+  <div class="page-width footer-legal-colombia__inner">
+    
+    {%- comment -%} Trust Badges Row {%- endcomment -%}
+    <div class="footer-legal-colombia__trust">
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'guarantee', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
+        <span>Garantía 30 Días</span>
+      </div>
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'shipping', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
+        <span>Envío Gratis 🇨🇴</span>
+      </div>
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'lock', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
+        <span>Pago Seguro SSL</span>
+      </div>
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'payment', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
+        <span>Pago Contraentrega</span>
+      </div>
+    </div>
+
+    {%- comment -%} Payment Methods {%- endcomment -%}
+    <div class="footer-legal-colombia__payments">
+      <p class="footer-legal-colombia__payments-label">Métodos de pago aceptados:</p>
+      <div class="footer-legal-colombia__payments-list">
+        <span class="footer-legal-colombia__payment-method">💳 Tarjetas Crédito/Débito</span>
+        <span class="footer-legal-colombia__payment-method">🏦 PSE</span>
+        <span class="footer-legal-colombia__payment-method">📱 Nequi</span>
+        <span class="footer-legal-colombia__payment-method">🏪 Efectivo Contraentrega</span>
+        <span class="footer-legal-colombia__payment-method">🔄 Transferencia Bancaria</span>
+      </div>
+    </div>
+
+    {%- comment -%} Legal Compliance {%- endcomment -%}
+    <div class="footer-legal-colombia__legal">
+      <p class="footer-legal-colombia__legal-text">
+        TechAura — Tienda de Tecnología en Colombia
+        <br>
+        <small>
+          Este sitio cumple con la <strong>Ley 1480 de 2011</strong> (Estatuto del Consumidor) y la <strong>Ley 1581 de 2012</strong> (Protección de Datos Personales).
+          Derecho de retracto: 5 días hábiles desde la entrega del producto (Art. 47, Ley 1480/2011).
+        </small>
+      </p>
+      <p class="footer-legal-colombia__legal-text">
+        <small>
+          Al realizar una compra en TechAura, aceptas nuestra 
+          <a href="{{ pages['politica-de-privacidad'].url | default: '/policies/privacy-policy' }}">Política de Privacidad</a> y 
+          <a href="{{ pages['terminos-y-condiciones'].url | default: '/policies/terms-of-service' }}">Términos y Condiciones</a>.
+          Para solicitudes de datos personales (ARCO): contacto@techauraz.com
+        </small>
+      </p>
+      <p class="footer-legal-colombia__legal-text">
+        <small>WhatsApp: <a href="https://wa.me/573008602789">+57 300 860 2789</a> · Atención Lun-Sáb 8am-6pm COT</small>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .footer-legal-colombia {
+    background: var(--ta-bg-tertiary, #f1f5f9);
+    border-top: 1px solid var(--ta-border, #e2e8f0);
+    padding: 2.4rem 0 1.6rem;
+  }
+
+  .footer-legal-colombia__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-legal-colombia__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+
+  .footer-legal-colombia__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ta-text, #0f172a);
+    background: var(--ta-bg, #fff);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--ta-radius-pill, 999px);
+    box-shadow: var(--ta-shadow-xs, 0 1px 2px rgba(0,0,0,0.05));
+    border: 1px solid var(--ta-border, #e2e8f0);
+  }
+
+  .footer-legal-colombia__payments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .footer-legal-colombia__payments-label {
+    font-size: 1.2rem;
+    color: var(--ta-text-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .footer-legal-colombia__payments-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-legal-colombia__payment-method {
+    font-size: 1.2rem;
+    color: var(--ta-text-secondary, #1e293b);
+    background: var(--ta-bg, #fff);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--ta-radius-sm, 4px);
+    border: 1px solid var(--ta-border-light, #f1f5f9);
+  }
+
+  .footer-legal-colombia__legal {
+    max-width: 700px;
+  }
+
+  .footer-legal-colombia__legal-text {
+    font-size: 1.1rem;
+    color: var(--ta-text-muted, #64748b);
+    line-height: 1.5;
+    margin: 0 0 0.6rem;
+  }
+
+  .footer-legal-colombia__legal-text a {
+    color: var(--ta-text-link, #2563EB);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer-legal-colombia__legal-text a:hover {
+    color: var(--ta-primary, #1E3A5F);
+  }
+
+  @media screen and (max-width: 749px) {
+    .footer-legal-colombia__trust {
+      gap: 0.8rem;
+    }
+
+    .footer-legal-colombia__badge {
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>

@@ -8,7 +8,12 @@
       <ul class="product-benefits__list">
         {% for block in section.blocks %}
           <li class="product-benefits__item" {{ block.shopify_attributes }}>
-            <span class="product-benefits__icon" aria-hidden="true">{{ block.settings.emoji }}</span>
+            {%- assign emoji_val = block.settings.emoji -%}
+            {%- if emoji_val == 'fire' or emoji_val == 'shipping' or emoji_val == 'sparkles' or emoji_val == 'guarantee' or emoji_val == 'lightning' or emoji_val == 'lock' or emoji_val == 'star' or emoji_val == 'check-circle' or emoji_val == 'award' or emoji_val == 'diamond' or emoji_val == 'rocket' or emoji_val == 'package' -%}
+              <span class="product-benefits__icon" aria-hidden="true">{% render 'icon-system', icon: emoji_val, size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
+            {%- else -%}
+              <span class="product-benefits__icon" aria-hidden="true">{{ emoji_val }}</span>
+            {%- endif -%}
             <div class="product-benefits__content">
               <h3 class="product-benefits__title">{{ block.settings.title }}</h3>
               <p class="product-benefits__description">{{ block.settings.description }}</p>
@@ -20,21 +25,21 @@
       {%- comment -%} Beneficios por defecto si no hay bloques configurados {%- endcomment -%}
       <ul class="product-benefits__list">
         <li class="product-benefits__item">
-          <span class="product-benefits__icon" aria-hidden="true">🔥</span>
+          <span class="product-benefits__icon" aria-hidden="true">{% render 'icon-system', icon: 'fire', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <div class="product-benefits__content">
             <h3 class="product-benefits__title">Alta Calidad</h3>
             <p class="product-benefits__description">Productos premium con la mejor calidad del mercado</p>
           </div>
         </li>
         <li class="product-benefits__item">
-          <span class="product-benefits__icon" aria-hidden="true">🚚</span>
+          <span class="product-benefits__icon" aria-hidden="true">{% render 'icon-system', icon: 'shipping', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <div class="product-benefits__content">
             <h3 class="product-benefits__title">Envío Gratis</h3>
             <p class="product-benefits__description">Entrega rápida a todo Colombia sin costo adicional</p>
           </div>
         </li>
         <li class="product-benefits__item">
-          <span class="product-benefits__icon" aria-hidden="true">✨</span>
+          <span class="product-benefits__icon" aria-hidden="true">{% render 'icon-system', icon: 'sparkles', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <div class="product-benefits__content">
             <h3 class="product-benefits__title">Garantía Total</h3>
             <p class="product-benefits__description">15 días de garantía en todos nuestros productos</p>
@@ -87,8 +92,8 @@
           "type": "text",
           "id": "emoji",
           "label": "Emoji",
-          "default": "🔥",
-          "info": "Usa cualquier emoji como ícono"
+          "default": "fire",
+          "info": "Usa un nombre de icono SVG (fire, shipping, sparkles, guarantee, lightning, lock, star, award, diamond, rocket, package) o cualquier emoji"
         },
         {
           "type": "text",
@@ -112,7 +117,7 @@
         {
           "type": "benefit",
           "settings": {
-            "emoji": "🔥",
+            "emoji": "fire",
             "title": "Alta Calidad Premium",
             "description": "Productos fabricados con los mejores materiales del mercado"
           }
@@ -120,7 +125,7 @@
         {
           "type": "benefit",
           "settings": {
-            "emoji": "🚚",
+            "emoji": "shipping",
             "title": "Envío Gratis",
             "description": "Entrega rápida a toda Colombia sin costo adicional"
           }
@@ -128,7 +133,7 @@
         {
           "type": "benefit",
           "settings": {
-            "emoji": "✨",
+            "emoji": "sparkles",
             "title": "Garantía 15 Días",
             "description": "Devolución sin preguntas si no quedas satisfecho"
           }

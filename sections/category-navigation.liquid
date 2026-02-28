@@ -16,7 +16,14 @@
           {%- when 'category' -%}
             <a href="{{ block.settings.link }}" class="category-card" {{ block.shopify_attributes }}>
               {%- if block.settings.icon != blank -%}
-                <div class="category-icon" aria-hidden="true">{{ block.settings.icon }}</div>
+                <div class="category-icon" aria-hidden="true">
+                  {%- assign cat_icon = block.settings.icon -%}
+                  {%- if cat_icon == 'headphones' or cat_icon == 'watch' or cat_icon == 'usb' or cat_icon == 'smartphone' or cat_icon == 'lightbulb' or cat_icon == 'shipping' or cat_icon == 'payment' or cat_icon == 'guarantee' or cat_icon == 'lightning' or cat_icon == 'sparkles' or cat_icon == 'rocket' or cat_icon == 'diamond' or cat_icon == 'lock' or cat_icon == 'fire' or cat_icon == 'package' -%}
+                    {% render 'icon-system', icon: cat_icon, size: 28, color: 'var(--ta-accent, #00D4AA)' %}
+                  {%- else -%}
+                    {{ cat_icon }}
+                  {%- endif -%}
+                </div>
               {%- endif -%}
               
               {%- if block.settings.title != blank -%}

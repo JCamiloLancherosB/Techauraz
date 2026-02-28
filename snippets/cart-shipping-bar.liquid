@@ -1,0 +1,122 @@
+{%- comment -%}
+  Cart Drawer Free Shipping Progress Bar
+  =======================================
+  Shows a visual progress bar toward free shipping threshold.
+  Displays dynamically based on cart total.
+  
+  Usage: {% render 'cart-shipping-bar' %}
+  Place inside the cart drawer after the cart items list.
+{%- endcomment -%}
+
+{%- liquid
+  assign free_shipping_threshold = 0
+  assign cart_total = cart.total_price
+  assign remaining = free_shipping_threshold | minus: cart_total
+  assign progress_percent = 100
+  
+  if free_shipping_threshold > 0
+    if cart_total < free_shipping_threshold
+      assign progress_percent = cart_total | times: 100 | divided_by: free_shipping_threshold
+    endif
+  endif
+-%}
+
+<div class="cart-shipping-bar" data-shipping-bar>
+  {%- if free_shipping_threshold > 0 and cart_total < free_shipping_threshold -%}
+    <div class="cart-shipping-bar__message">
+      {% render 'icon-system', icon: 'shipping', size: 18, color: 'var(--ta-accent, #00D4AA)' %}
+      <span>¡Añade <strong>{{ remaining | money }}</strong> más para <strong>envío GRATIS</strong>!</span>
+    </div>
+  {%- else -%}
+    <div class="cart-shipping-bar__message cart-shipping-bar__message--success">
+      {% render 'icon-system', icon: 'check-circle', size: 18, color: 'var(--ta-success, #10b981)' %}
+      <span><strong>¡Felicitaciones!</strong> Tu envío es <strong>GRATIS</strong> 🎉</span>
+    </div>
+  {%- endif -%}
+
+  <div class="cart-shipping-bar__track">
+    <div class="cart-shipping-bar__progress" style="width: {{ progress_percent }}%"></div>
+  </div>
+</div>
+
+{%- comment -%} Cart Trust Badges {%- endcomment -%}
+<div class="cart-trust-badges">
+  <div class="cart-trust-badges__item">
+    {% render 'icon-system', icon: 'lock', size: 16, color: 'var(--ta-text-muted)' %}
+    <span>Pago Seguro</span>
+  </div>
+  <div class="cart-trust-badges__item">
+    {% render 'icon-system', icon: 'guarantee', size: 16, color: 'var(--ta-text-muted)' %}
+    <span>Garantía 30 días</span>
+  </div>
+  <div class="cart-trust-badges__item">
+    {% render 'icon-system', icon: 'refresh-ccw', size: 16, color: 'var(--ta-text-muted)' %}
+    <span>Devolución fácil</span>
+  </div>
+</div>
+
+<style>
+  .cart-shipping-bar {
+    padding: 1.2rem 1.6rem;
+    background: var(--ta-bg-secondary, #f8fafc);
+    border-radius: var(--ta-radius-md, 8px);
+    margin: 1.2rem 0;
+  }
+
+  .cart-shipping-bar__message {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.3rem;
+    color: var(--ta-text, #0f172a);
+    margin-bottom: 0.8rem;
+  }
+
+  .cart-shipping-bar__message--success {
+    color: var(--ta-success, #10b981);
+  }
+
+  .cart-shipping-bar__track {
+    width: 100%;
+    height: 6px;
+    background: var(--ta-border, #e2e8f0);
+    border-radius: var(--ta-radius-pill, 999px);
+    overflow: hidden;
+  }
+
+  .cart-shipping-bar__progress {
+    height: 100%;
+    background: var(--ta-cta-gradient, linear-gradient(135deg, #00D4AA 0%, #00B894 100%));
+    border-radius: var(--ta-radius-pill, 999px);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 4%;
+  }
+
+  .cart-trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--ta-border-light, #f1f5f9);
+    margin-top: 1rem;
+  }
+
+  .cart-trust-badges__item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.1rem;
+    color: var(--ta-text-muted, #64748b);
+  }
+
+  @media screen and (max-width: 749px) {
+    .cart-trust-badges {
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .cart-trust-badges__item {
+      font-size: 1rem;
+    }
+  }
+</style>

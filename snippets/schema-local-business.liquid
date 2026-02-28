@@ -1,0 +1,108 @@
+{% comment %}
+  LocalBusiness Structured Data (JSON-LD)
+  Complements Organization schema with local business details for Google Maps/Local SEO
+  Usage: {% render 'schema-local-business' %}
+{% endcomment %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": {{ shop.name | json }},
+  "alternateName": "TechAura Colombia",
+  "url": {{ shop.url | json }},
+  "description": "Tienda líder en Colombia de tecnología premium: audífonos gamer, smartwatches, memorias USB personalizadas y accesorios tech. Envío gratis a toda Colombia con pago contra entrega.",
+  {% if settings.logo %}
+  "logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+  "image": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+  {% endif %}
+  "telephone": "+57-300-860-2789",
+  "email": "soporte@techauraz.com",
+  "priceRange": "$$ - $$$",
+  "currenciesAccepted": "COP",
+  "paymentAccepted": "Efectivo, Tarjeta de Crédito, Tarjeta de Débito, PSE, Efecty, Nequi, Daviplata, Contraentrega",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "14:00"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "CO",
+    "addressRegion": "Colombia"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "4.570868",
+    "longitude": "-74.297333"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Colombia"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Productos TechAura",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Audífonos y Diademas Gamer",
+        "itemListElement": []
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Smart Watches y Electrónicos",
+        "itemListElement": []
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Memorias USB Personalizadas",
+        "itemListElement": []
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Accesorios Tecnológicos",
+        "itemListElement": []
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Iluminación LED",
+        "itemListElement": []
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "527",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "slogan": "Tecnología Premium con Envío GRATIS a Todo Colombia",
+  "foundingDate": "2024",
+  "knowsAbout": [
+    "Audífonos inalámbricos",
+    "Smartwatch",
+    "Memorias USB personalizadas",
+    "Accesorios tecnológicos",
+    "Gadgets electrónicos",
+    "Iluminación LED",
+    "Cargadores rápidos",
+    "Hubs USB"
+  ],
+  "makesOffer": {
+    "@type": "Offer",
+    "description": "Envío GRATIS a toda Colombia + Pago contra entrega + Garantía 30 días",
+    "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModeDirectDownload"
+  }
+}
+</script>

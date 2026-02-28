@@ -98,6 +98,12 @@
                     {%- if block.settings.customer_name != blank -%}
                       <cite class="testimonials-carousel__customer-name">{{ block.settings.customer_name }}</cite>
                     {%- endif -%}
+                    {%- if block.settings.customer_city != blank -%}
+                      <span class="testimonials-carousel__customer-city">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        {{ block.settings.customer_city }}
+                      </span>
+                    {%- endif -%}
                     {%- if block.settings.customer_title != blank -%}
                       <span class="testimonials-carousel__customer-title">{{ block.settings.customer_title }}</span>
                     {%- endif -%}
@@ -298,6 +304,13 @@
           "id": "customer_name",
           "label": "Nombre del cliente",
           "default": "María García"
+        },
+        {
+          "type": "text",
+          "id": "customer_city",
+          "label": "Ciudad del cliente",
+          "default": "Bogotá, Colombia",
+          "info": "Ej: Bogotá, Medellín, Cali"
         },
         {
           "type": "text",

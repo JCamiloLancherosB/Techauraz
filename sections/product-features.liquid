@@ -9,7 +9,12 @@
         {% for block in section.blocks %}
           <li class="product-features__item" {{ block.shopify_attributes }}>
             {% if block.settings.icon != blank %}
-              <span class="product-features__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            {%- assign icon_val = block.settings.icon -%}
+            {%- if icon_val == 'lightning' or icon_val == 'usb' or icon_val == 'smartphone' or icon_val == 'headphones' or icon_val == 'watch' or icon_val == 'fire' or icon_val == 'shipping' or icon_val == 'sparkles' or icon_val == 'guarantee' or icon_val == 'lock' or icon_val == 'star' or icon_val == 'diamond' or icon_val == 'rocket' or icon_val == 'package' or icon_val == 'eye' -%}
+              <span class="product-features__icon" aria-hidden="true">{% render 'icon-system', icon: icon_val, size: 20, color: 'var(--ta-accent, #00D4AA)' %}</span>
+            {%- else -%}
+              <span class="product-features__icon" aria-hidden="true">{{ icon_val }}</span>
+            {%- endif -%}
             {% endif %}
             <div class="product-features__content">
               {% if block.settings.label != blank %}
@@ -66,8 +71,8 @@
           "type": "text",
           "id": "icon",
           "label": "Icono (emoji)",
-          "default": "⚡",
-          "info": "Usa cualquier emoji"
+          "default": "lightning",
+          "info": "Usa un nombre de icono SVG (lightning, usb, smartphone, headphones, watch, fire, shipping, sparkles, lock, star, diamond, package) o cualquier emoji"
         },
         {
           "type": "text",
@@ -91,7 +96,7 @@
         {
           "type": "feature",
           "settings": {
-            "icon": "⚡",
+            "icon": "lightning",
             "label": "Procesador",
             "value": "Dual Core 1.2GHz"
           }
@@ -99,7 +104,7 @@
         {
           "type": "feature",
           "settings": {
-            "icon": "💾",
+            "icon": "usb",
             "label": "Memoria",
             "value": "32GB / 64GB"
           }

@@ -1,0 +1,208 @@
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS — TechAura WCAG 2.2
+   ============================================================================
+   Focus indicators, skip navigation, contrast, touch targets, and ARIA.
+   Loaded globally for all pages.
+   ============================================================================ */
+
+/* ----------------------------------------
+   Skip Navigation Link
+   ---------------------------------------- */
+.ta-skip-nav {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    z-index: 9999;
+    padding: 1rem 2rem;
+    background: var(--ta-primary, #1E3A5F);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-decoration: none;
+    border-bottom-right-radius: var(--ta-radius-md, 8px);
+    outline: none;
+}
+
+.ta-skip-nav:focus {
+    top: 0;
+}
+
+/* ----------------------------------------
+   Focus Visible — Custom focus indicator
+   ----------------------------------------
+   Using :focus-visible for keyboard-only focus.
+   This avoids showing focus rings on mouse clicks.
+   ---------------------------------------- */
+:focus-visible {
+    outline: 3px solid var(--ta-accent, #00D4AA);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* Reset default focus for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Specific button focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--ta-accent, #00D4AA);
+    outline-offset: 3px;
+}
+
+/* ----------------------------------------
+   Touch Target Minimum Size (48x48px)
+   WCAG 2.2 Level AA — Success Criterion 2.5.8
+   ---------------------------------------- */
+button,
+a.button,
+.product-form__submit,
+.shopify-payment-button__button,
+input[type="submit"],
+.quantity__button,
+.drawer__close {
+    min-height: var(--ta-touch-comfortable, 48px);
+    min-width: var(--ta-touch-comfortable, 48px);
+}
+
+.quantity__button {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* ----------------------------------------
+   Color Contrast Fixes
+   ---------------------------------------- */
+
+/* Ensure muted text meets 4.5:1 contrast ratio on white */
+.product-option,
+.caption-with-letter-spacing,
+.tax-note {
+    color: var(--ta-text-secondary, #334155);
+}
+
+/* Ensure links are distinguishable without color alone */
+.rte a,
+.footer-legal-colombia__legal-text a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ----------------------------------------
+   Cart Drawer Trust Strip Styles
+   ---------------------------------------- */
+.cart-drawer__trust-strip {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 0.8rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--ta-border-light, #f1f5f9);
+}
+
+.cart-drawer__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 1.1rem;
+    color: var(--ta-text-muted, #64748b);
+    font-weight: 500;
+}
+
+@media screen and (max-width: 749px) {
+    .cart-drawer__trust-strip {
+        gap: 0.6rem;
+    }
+
+    .cart-drawer__trust-item {
+        font-size: 1rem;
+    }
+}
+
+/* ----------------------------------------
+   Cart Checkout Button — CTA Gradient
+   ---------------------------------------- */
+.cart__checkout-button.cart__checkout-button--cod {
+    background: var(--ta-cta-gradient, linear-gradient(135deg, #00D4AA 0%, #00B894 100%));
+    color: var(--ta-cta-contrast, #0F172A);
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: none;
+    box-shadow: 0 4px 14px rgba(0, 212, 170, 0.3);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart__checkout-button.cart__checkout-button--cod:hover {
+    box-shadow: 0 6px 20px rgba(0, 212, 170, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ----------------------------------------
+   Screen Reader Only — Enhanced
+   ---------------------------------------- */
+.sr-only,
+.screen-reader-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ----------------------------------------
+   Prefers Reduced Motion - Global
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ----------------------------------------
+   Prefers Contrast - High Contrast Mode
+   ---------------------------------------- */
+@media (prefers-contrast: more) {
+    :root {
+        --ta-border: #000;
+        --ta-text-muted: #1e293b;
+    }
+}
+
+/* ----------------------------------------
+   Print Styles — Basic
+   ---------------------------------------- */
+@media print {
+
+    .header,
+    .footer,
+    .announcement-bar,
+    .whatsapp-fab,
+    .cookie-banner,
+    .sticky-mobile-cta,
+    .purchase-notification {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+    }
+}

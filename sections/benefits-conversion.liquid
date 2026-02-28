@@ -30,7 +30,14 @@
       {%- case block.type -%}
         {%- when 'benefit' -%}
           <div class="ta-conv-benefit" {{ block.shopify_attributes }}>
-            <div class="ta-conv-benefit__icon">{{ block.settings.icon | default: '✨' }}</div>
+            <div class="ta-conv-benefit__icon">
+              {%- assign icon_val = block.settings.icon | default: 'sparkles' -%}
+              {%- if icon_val == 'shipping' or icon_val == 'payment' or icon_val == 'guarantee' or icon_val == 'lightning' or icon_val == 'sparkles' or icon_val == 'rocket' or icon_val == 'diamond' or icon_val == 'lock' or icon_val == 'fire' or icon_val == 'package' -%}
+                {% render 'icon-system', icon: icon_val, size: 32, color: 'var(--ta-accent, #00D4AA)' %}
+              {%- else -%}
+                {{ icon_val }}
+              {%- endif -%}
+            </div>
             <h3 class="ta-conv-benefit__title">{{ block.settings.title }}</h3>
             <p class="ta-conv-benefit__description">{{ block.settings.description }}</p>
           </div>
@@ -65,8 +72,8 @@
           "type": "text",
           "id": "icon",
           "label": "Icono (emoji)",
-          "default": "✨",
-          "info": "Usa emojis como 🚚, 💳, ✨, ⚡, etc."
+          "default": "sparkles",
+          "info": "Usa un nombre de icono SVG (shipping, payment, guarantee, lightning, sparkles, lock, fire, check-circle, award, diamond) o cualquier emoji"
         },
         {
           "type": "text",
@@ -90,7 +97,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon": "🚚",
+            "icon": "shipping",
             "title": "Recibe gratis en tu casa",
             "description": "Sin costos ocultos ni sorpresas. El precio que ves es el que pagas, envío incluido a toda Colombia."
           }
@@ -98,7 +105,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon": "💳",
+            "icon": "payment",
             "title": "Paga cuando recibes",
             "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
           }
@@ -106,7 +113,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon": "✨",
+            "icon": "sparkles",
             "title": "30 días de garantía",
             "description": "Si no quedas satisfecho, devuélvelo sin preguntas. Tu satisfacción es nuestra prioridad."
           }
@@ -114,7 +121,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon": "⚡",
+            "icon": "lightning",
             "title": "Entrega en 2-5 días",
             "description": "Procesamos y enviamos tu pedido el mismo día. Recíbelo rápidamente donde estés."
           }

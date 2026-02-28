@@ -1,0 +1,32 @@
+{%- comment -%}
+  FAQPage Structured Data Schema
+  ==============================
+  Generates JSON-LD FAQPage schema for product FAQ sections.
+  This helps Google display FAQ rich results in search.
+  
+  Usage: {% render 'schema-faq', faq_items: section.blocks %}
+  Each block must have settings: question, answer
+{%- endcomment -%}
+
+{%- if faq_items.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for item in faq_items -%}
+      {%- if item.settings.question != blank and item.settings.answer != blank -%}
+        {
+          "@type": "Question",
+          "name": {{ item.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.settings.answer | strip_html | json }}
+          }
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}

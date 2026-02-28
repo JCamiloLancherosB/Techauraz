@@ -13,7 +13,12 @@
               {% if block.settings.icon_svg != blank %}
                 {{ block.settings.icon_svg }}
               {% elsif block.settings.icon_emoji != blank %}
-                <span class="benefit-emoji">{{ block.settings.icon_emoji }}</span>
+              {%- assign bar_icon = block.settings.icon_emoji -%}
+              {%- if bar_icon == 'shipping' or bar_icon == 'lock' or bar_icon == 'check-circle' or bar_icon == 'fire' or bar_icon == 'sparkles' or bar_icon == 'star' or bar_icon == 'guarantee' or bar_icon == 'payment' or bar_icon == 'package' or bar_icon == 'lightning' or bar_icon == 'headphones' -%}
+                <span class="benefit-emoji">{% render 'icon-system', icon: bar_icon, size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
+              {%- else -%}
+                <span class="benefit-emoji">{{ bar_icon }}</span>
+              {%- endif -%}
               {% else %}
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                   <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2"/>
@@ -63,8 +68,8 @@
           "type": "text",
           "id": "icon_emoji",
           "label": "Icono (Emoji)",
-          "default": "✓",
-          "info": "Usa un emoji como icono"
+          "default": "check-circle",
+          "info": "Usa un nombre de icono SVG (shipping, lock, check-circle, fire, sparkles, star, guarantee, payment, package, lightning, headphones) o cualquier emoji"
         },
         {
           "type": "html",
@@ -94,7 +99,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "🚚",
+            "icon_emoji": "shipping",
             "title": "Envío Gratis",
             "description": "En compras superiores a $150.000"
           }
@@ -102,7 +107,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "✓",
+            "icon_emoji": "check-circle",
             "title": "Garantía 15 Días",
             "description": "Devoluciones sin preguntas"
           }
@@ -110,7 +115,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "🔒",
+            "icon_emoji": "lock",
             "title": "Pago Seguro",
             "description": "Tus datos están protegidos"
           }
@@ -118,7 +123,7 @@
         {
           "type": "benefit",
           "settings": {
-            "icon_emoji": "💬",
+            "icon_emoji": "headphones",
             "title": "Soporte 24/7",
             "description": "Estamos aquí para ayudarte"
           }

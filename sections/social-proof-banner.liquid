@@ -1,0 +1,278 @@
+{% comment %}
+  Social Proof Banner
+  Dynamic stats with animated counters showing trust signals
+  Usage: Add as a section in your template
+{% endcomment %}
+
+{{ 'social-proof-banner.css' | asset_url | stylesheet_tag }}
+
+<section 
+  class="social-proof-banner section-{{ section.id }}-padding"
+  aria-label="Estadísticas de satisfacción"
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="social-proof-banner__header">
+        <h2 class="social-proof-banner__title {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="social-proof-banner__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="social-proof-banner__grid">
+      {%- for block in section.blocks -%}
+        <div class="social-proof-banner__stat" {{ block.shopify_attributes }}>
+          <div class="social-proof-banner__stat-inner">
+            {%- if block.settings.icon != blank -%}
+              <div class="social-proof-banner__icon" aria-hidden="true">
+                {% render 'icon-system', icon: block.settings.icon, size: 32, color: 'var(--ta-accent, #00D4AA)' %}
+              </div>
+            {%- endif -%}
+            <div class="social-proof-banner__value" 
+              data-count-target="{{ block.settings.stat_value }}"
+              data-count-prefix="{{ block.settings.stat_prefix }}"
+              data-count-suffix="{{ block.settings.stat_suffix }}"
+              aria-live="polite"
+            >
+              <span class="social-proof-banner__number">
+                {{ block.settings.stat_prefix }}{{ block.settings.stat_value }}{{ block.settings.stat_suffix }}
+              </span>
+            </div>
+            {%- if block.settings.stat_label != blank -%}
+              <p class="social-proof-banner__label">{{ block.settings.stat_label }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_trust_text -%}
+      <div class="social-proof-banner__trust-text">
+        <span class="social-proof-banner__trust-icon" aria-hidden="true">
+          {% render 'icon-system', icon: 'check-circle', size: 16, color: 'var(--ta-accent, #00D4AA)' %}
+        </span>
+        <span>{{ section.settings.trust_text | default: 'Datos verificados — actualizado en tiempo real' }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  // Animated counter on scroll into view
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    const counters = document.querySelectorAll('.social-proof-banner__number');
+    if (!counters.length) return;
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        
+        const el = entry.target;
+        if (el.dataset.animated) return;
+        el.dataset.animated = 'true';
+        
+        const parent = el.closest('[data-count-target]');
+        if (!parent) return;
+        
+        const target = parseFloat(parent.dataset.countTarget);
+        const prefix = parent.dataset.countPrefix || '';
+        const suffix = parent.dataset.countSuffix || '';
+        const isDecimal = String(target).includes('.');
+        const duration = 2000;
+        const startTime = performance.now();
+        
+        function animate(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = target * eased;
+          
+          el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString('es-CO')) + suffix;
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        }
+        
+        requestAnimationFrame(animate);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+    
+    counters.forEach(function(counter) { observer.observe(counter); });
+  });
+</script>
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Social Proof Banner",
+  "tag": "section",
+  "class": "section social-proof-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Miles de colombianos ya confían en TechAura"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Números que hablan por sí solos"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Pequeño" },
+        { "value": "h1", "label": "Mediano" },
+        { "value": "h0", "label": "Grande" }
+      ],
+      "default": "h1",
+      "label": "Tamaño del título"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_text",
+      "default": true,
+      "label": "Mostrar texto de confianza"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Texto de confianza",
+      "default": "Datos verificados — actualizado en tiempo real"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Estadística",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icono SVG",
+          "default": "star",
+          "info": "Nombre del icono: star, shipping, lock, check-circle, fire, award, headphones, etc."
+        },
+        {
+          "type": "text",
+          "id": "stat_prefix",
+          "label": "Prefijo",
+          "default": "+",
+          "info": "Texto antes del número (ej: +, $)"
+        },
+        {
+          "type": "text",
+          "id": "stat_value",
+          "label": "Valor numérico",
+          "default": "5200"
+        },
+        {
+          "type": "text",
+          "id": "stat_suffix",
+          "label": "Sufijo",
+          "default": "",
+          "info": "Texto después del número (ej: %, /5)"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Etiqueta",
+          "default": "Clientes Satisfechos"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof Banner",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "icon": "award",
+            "stat_prefix": "+",
+            "stat_value": "5200",
+            "stat_suffix": "",
+            "stat_label": "Clientes Satisfechos"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "icon": "star",
+            "stat_prefix": "",
+            "stat_value": "4.9",
+            "stat_suffix": "/5",
+            "stat_label": "Calificación Promedio"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "icon": "check-circle",
+            "stat_prefix": "",
+            "stat_value": "98",
+            "stat_suffix": "%",
+            "stat_label": "Tasa de Satisfacción"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "icon": "shipping",
+            "stat_prefix": "",
+            "stat_value": "3",
+            "stat_suffix": " días",
+            "stat_label": "Entrega Promedio"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

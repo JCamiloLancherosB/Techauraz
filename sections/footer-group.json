@@ -18,14 +18,14 @@
           "type": "text",
           "settings": {
             "heading": "Ayuda",
-            "subtext": "<p><strong>📦 Envíos:</strong> 2-5 días hábiles a toda Colombia</p><p><strong>🔄 Devoluciones:</strong> 30 días de garantía</p><p><strong>📞 Contacto:</strong> <a href=\"https://wa.me/573008602789\">WhatsApp +57 300 860 2789</a></p>"
+            "subtext": "<p><strong>Envíos:</strong> 2-5 días hábiles a toda Colombia</p><p><strong>Devoluciones:</strong> 30 días de garantía</p><p><strong>Contacto:</strong> <a href=\"https://wa.me/573008602789\">WhatsApp +57 300 860 2789</a></p>"
           }
         },
         "block_confianza": {
           "type": "text",
           "settings": {
             "heading": "Compra Segura",
-            "subtext": "<p>✅ <strong>Pago contraentrega</strong> - Paga al recibir</p><p>🛡️ <strong>Garantía 30 días</strong> - Compra tranquilo</p><p>🚚 <strong>Envío gratis</strong> - A toda Colombia</p>"
+            "subtext": "<p><strong>Pago contraentrega</strong> - Paga al recibir</p><p><strong>Garantía 30 días</strong> - Compra tranquilo</p><p><strong>Envío gratis</strong> - A toda Colombia</p>"
           }
         },
         "block_brand": {

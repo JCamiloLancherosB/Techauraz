@@ -41,7 +41,12 @@
               <div class="modern-feature-card" {{ block.shopify_attributes }}>
                 {%- if block.settings.icon != blank -%}
                   <div class="modern-feature-card__icon" aria-hidden="true">
-                    {{ block.settings.icon }}
+                    {%- assign fc_icon = block.settings.icon -%}
+                    {%- if fc_icon == 'shipping' or fc_icon == 'payment' or fc_icon == 'guarantee' or fc_icon == 'lightning' or fc_icon == 'sparkles' or fc_icon == 'rocket' or fc_icon == 'diamond' or fc_icon == 'lock' or fc_icon == 'fire' or fc_icon == 'package' or fc_icon == 'headset' or fc_icon == 'check-circle' or fc_icon == 'award' or fc_icon == 'truck-fast' or fc_icon == 'headphones' or fc_icon == 'watch' or fc_icon == 'usb' or fc_icon == 'smartphone' or fc_icon == 'lightbulb' -%}
+                      {% render 'icon-system', icon: fc_icon, size: 32, color: 'var(--ta-accent, #00D4AA)' %}
+                    {%- else -%}
+                      {{ fc_icon }}
+                    {%- endif -%}
                   </div>
                 {%- endif -%}
                 
@@ -128,8 +133,8 @@
           "type": "text",
           "id": "icon",
           "label": "Icono (emoji)",
-          "default": "✨",
-          "info": "Usa emojis como 🚚, 💳, ✨, ⚡, 🔒, etc."
+          "default": "sparkles",
+          "info": "Usa un nombre de icono SVG (shipping, payment, guarantee, lightning, sparkles, rocket, diamond, lock, fire, package, check-circle, award) o cualquier emoji"
         },
         {
           "type": "text",
@@ -173,7 +178,7 @@
         {
           "type": "card",
           "settings": {
-            "icon": "🚚",
+            "icon": "shipping",
             "title": "Recibe gratis en tu casa",
             "description": "Envío sin costo a toda Colombia. El precio que ves es el que pagas.",
             "cta_text": "Ver envíos",
@@ -183,7 +188,7 @@
         {
           "type": "card",
           "settings": {
-            "icon": "💳",
+            "icon": "payment",
             "title": "Paga cuando recibes",
             "description": "Pago contra entrega disponible. Inspecciona antes de pagar.",
             "cta_text": "",
@@ -193,7 +198,7 @@
         {
           "type": "card",
           "settings": {
-            "icon": "✅",
+            "icon": "check-circle",
             "title": "30 días de garantía",
             "description": "Si no quedas satisfecho, devuélvelo sin preguntas.",
             "cta_text": "",
@@ -203,7 +208,7 @@
         {
           "type": "card",
           "settings": {
-            "icon": "⚡",
+            "icon": "lightning",
             "title": "Entrega en 2-5 días",
             "description": "Procesamos tu pedido el mismo día. Recíbelo rápido.",
             "cta_text": "Más vendidos",

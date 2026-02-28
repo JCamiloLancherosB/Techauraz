@@ -1,0 +1,54 @@
+{% comment %}
+  Article/BlogPosting Structured Data (JSON-LD)
+  Renders Article schema for blog posts to appear in Google News and rich results
+  Usage: {% render 'schema-article', article: article %}
+{% endcomment %}
+
+{% if article %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ article.url | prepend: request.origin | json }}
+  },
+  "headline": {{ article.title | truncate: 110 | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncate: 300 | json }},
+  {% if article.image %}
+  "image": {
+    "@type": "ImageObject",
+    "url": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+    "width": 1200,
+    "height": 630
+  },
+  {% endif %}
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "dateModified": "{{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }},
+    "url": {{ shop.url | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }}
+    {% if settings.logo %}
+    ,"logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},
+      "width": 600,
+      "height": 60
+    }
+    {% endif %}
+  },
+  "articleSection": {{ blog.title | default: 'Blog' | json }},
+  "inLanguage": "es-CO",
+  "wordCount": {{ article.content | strip_html | split: ' ' | size | json }}
+  {% if article.tags.size > 0 %}
+  ,"keywords": {{ article.tags | join: ', ' | json }}
+  {% endif %}
+}
+</script>
+{% endif %}

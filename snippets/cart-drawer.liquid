@@ -555,6 +555,22 @@
         </div>
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
+          {%- comment -%} Trust Badges — reduce checkout anxiety {%- endcomment -%}
+          <div class="cart-drawer__trust-strip">
+            <span class="cart-drawer__trust-item">
+              {% render 'icon-system', icon: 'lock', size: 14, color: 'var(--ta-accent, #00D4AA)' %}
+              Pago Seguro
+            </span>
+            <span class="cart-drawer__trust-item">
+              {% render 'icon-system', icon: 'guarantee', size: 14, color: 'var(--ta-accent, #00D4AA)' %}
+              Garantía 30 días
+            </span>
+            <span class="cart-drawer__trust-item">
+              {% render 'icon-system', icon: 'refresh-ccw', size: 14, color: 'var(--ta-accent, #00D4AA)' %}
+              Devolución fácil
+            </span>
+          </div>
+
           <noscript>
             <button type="submit" class="cart__update-button button button--secondary" form="CartDrawer-Form">
               {{ 'sections.cart.update' | t }}
@@ -571,7 +587,7 @@
               disabled
             {% endif %}
           >
-            🏠 {{ 'sections.cart.checkout' | t }} - Paga en Casa
+            {{ 'sections.cart.checkout' | t }} — Paga al Recibir
           </button>
         </div>
       </div>

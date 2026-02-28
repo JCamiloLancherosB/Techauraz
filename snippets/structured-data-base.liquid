@@ -9,6 +9,24 @@
   {% if settings.logo %}
     "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
   {% endif %}
+  "foundingDate": "2024",
+  "slogan": "Tecnología Premium con Envío GRATIS a Todo Colombia",
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "minValue": 2,
+    "maxValue": 10
+  },
+  "knowsAbout": [
+    "Audífonos inalámbricos",
+    "Smartwatch",
+    "Memorias USB personalizadas",
+    "Accesorios tecnológicos",
+    "Gadgets electrónicos",
+    "Iluminación LED",
+    "Cargadores rápidos",
+    "Hubs USB",
+    "Tecnología Colombia"
+  ],
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "CO",
@@ -61,3 +79,6 @@
   ]
 }
 </script>
+
+{%- comment -%} LocalBusiness schema for Google Local SEO {%- endcomment -%}
+{% render 'schema-local-business' %}

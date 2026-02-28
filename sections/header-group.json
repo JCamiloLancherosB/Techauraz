@@ -31,7 +31,7 @@
         "announcement_whatsapp": {
           "type": "announcement",
           "settings": {
-            "text": "📲 Soporte por WhatsApp",
+            "text": "Soporte por WhatsApp",
             "link": "https://wa.me/573008602789"
           }
         },
@@ -45,7 +45,7 @@
         "announcement_warranty": {
           "type": "announcement",
           "settings": {
-            "text": "🛡️ Garantía de 30 días",
+            "text": "Garantía de 30 días",
             "link": ""
           }
         }
@@ -88,7 +88,7 @@
         "enable_language_selector": false,
         "mobile_logo_position": "left",
         "show_mobile_promo": true,
-        "mobile_promo_text": "🚚 Envío Gratis + Pago Contra Entrega",
+        "mobile_promo_text": "Envío Gratis + Pago Contra Entrega",
         "margin_bottom": 0,
         "padding_top": 12,
         "padding_bottom": 12

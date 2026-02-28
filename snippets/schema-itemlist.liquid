@@ -1,0 +1,32 @@
+{%- comment -%}
+  ItemList Structured Data Schema
+  ===============================
+  Generates JSON-LD ItemList schema for collection pages.
+  Helps Google display carousel rich results for product lists.
+  
+  Usage: {% render 'schema-itemlist', collection: collection %}
+{%- endcomment -%}
+
+{%- if collection and collection.products.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | strip_html | truncate: 200 | json }},
+  "url": "{{ shop.url }}{{ collection.url }}",
+  "numberOfItems": {{ collection.products_count }},
+  "itemListElement": [
+    {%- for product in collection.products limit: 30 -%}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "url": "{{ shop.url }}{{ product.url }}",
+        "name": {{ product.title | json }},
+        "image": "https:{{ product.featured_image | image_url: width: 600 }}"
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}

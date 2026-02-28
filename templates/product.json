@@ -88,16 +88,16 @@
             "block_order": [
                 "title",
                 "price",
+                "judge_me_reviews_preview_badge_nJBx3F",
                 "trust_line",
                 "variant_picker",
+                "quantity_selector",
                 "buy_buttons",
                 "pdp_delivery_estimate",
-                "quantity_selector",
                 "pdp_conversion_badges",
                 "pdp_key_specs",
                 "description",
                 "pdp_whatsapp_cta",
-                "judge_me_reviews_preview_badge_nJBx3F",
                 "share",
                 "vendor"
             ],
@@ -117,14 +117,13 @@
                 "padding_bottom": 24
             }
         },
-
         "product_benefits": {
             "type": "product-benefits",
             "blocks": {
                 "benefit_1": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "🔥",
+                        "emoji": "fire",
                         "title": "Calidad Premium Garantizada",
                         "description": "Si no supera tus expectativas, te devolvemos el 100% de tu dinero sin preguntas"
                     }
@@ -132,7 +131,7 @@
                 "benefit_2": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "🚚",
+                        "emoji": "shipping",
                         "title": "Envío Gratis Express",
                         "description": "Recíbelo en 2-5 días hábiles sin costo adicional, directo a tu puerta"
                     }
@@ -140,7 +139,7 @@
                 "benefit_3": {
                     "type": "benefit",
                     "settings": {
-                        "emoji": "✨",
+                        "emoji": "sparkles",
                         "title": "Garantía de Satisfacción 30 Días",
                         "description": "Pruébalo sin riesgo. No te convence? Devolución gratis y reembolso completo"
                     }
@@ -152,19 +151,18 @@
                 "benefit_3"
             ],
             "settings": {
-                "heading": "🛡️ Compra con Total Confianza y Seguridad",
+                "heading": "Compra con Total Confianza y Seguridad",
                 "padding_top": 40,
                 "padding_bottom": 40
             }
         },
-
         "product_features": {
             "type": "product-features",
             "blocks": {
                 "feature_1": {
                     "type": "feature",
                     "settings": {
-                        "icon": "⚡",
+                        "icon": "lightning",
                         "label": "Procesador",
                         "value": "Último modelo disponible"
                     }
@@ -172,7 +170,7 @@
                 "feature_2": {
                     "type": "feature",
                     "settings": {
-                        "icon": "💾",
+                        "icon": "usb",
                         "label": "Almacenamiento",
                         "value": "Alta capacidad"
                     }
@@ -228,7 +226,6 @@
                 "padding_bottom": 36
             }
         },
-
         "product_usage_warranty": {
             "type": "product-usage-warranty",
             "blocks": {
@@ -261,9 +258,9 @@
             ],
             "settings": {
                 "show_usage_section": true,
-                "usage_heading": "🔧 Cómo se usa",
+                "usage_heading": "Cómo se Usa",
                 "show_warranty_section": true,
-                "warranty_heading": "🛡️ Garantía y Soporte",
+                "warranty_heading": "Garantía y Soporte",
                 "warranty_period_label": "Garantía de 1 mes",
                 "warranty_description": "Todos nuestros productos incluyen garantía de 1 mes contra defectos de fabricación. Si algo falla, te lo reemplazamos sin costo.",
                 "whatsapp_label": "Soporte por WhatsApp",
@@ -275,17 +272,15 @@
                 "padding_bottom": 40
             }
         },
-
         "shipping-returns": {
             "type": "shipping-returns",
             "settings": {
-                "heading": "📦 Envío y Pago",
+                "heading": "Envío y Pago",
                 "show_timeline": true,
                 "padding_top": 40,
                 "padding_bottom": 40
             }
         },
-
         "product_faq": {
             "type": "product-faq",
             "blocks": {
@@ -325,30 +320,27 @@
                 "faq_4"
             ],
             "settings": {
-                "heading": "❓ Preguntas Frecuentes - Resolvemos tus Dudas",
+                "heading": "Preguntas Frecuentes",
                 "padding_top": 40,
                 "padding_bottom": 40
             }
         },
-
         "product_testimonials": {
             "type": "product-testimonials",
             "settings": {
-                "heading": "⭐ Lo que Dicen Nuestros Clientes",
+                "heading": "Lo que Dicen Nuestros Clientes",
                 "padding_top": 40,
                 "padding_bottom": 40
             }
         },
-
         "shipping_timeline": {
             "type": "shipping-timeline",
             "settings": {
-                "heading": "📦 Proceso de Envío",
+                "heading": "Proceso de Envío",
                 "padding_top": 36,
                 "padding_bottom": 36
             }
         },
-
         "sticky_mobile_cta": {
             "type": "sticky-mobile-cta",
             "settings": {
@@ -358,7 +350,7 @@
                 "benefit_2_text": "Pago Contraentrega",
                 "buy_button_text": "Agregar",
                 "whatsapp_phone": "+573008602789",
-                "whatsapp_button_text": "💬 WhatsApp"
+                "whatsapp_button_text": "WhatsApp"
             }
         },
         "purchase_notification": {
@@ -398,7 +390,7 @@
             "type": "related-products",
             "custom_css": [],
             "settings": {
-                "heading": "✨ Productos que también te Encantarán",
+                "heading": "Productos que también te Encantarán",
                 "heading_size": "h2",
                 "products_to_show": 8,
                 "columns_desktop": 4,
@@ -425,20 +417,40 @@
             "settings": {
                 "show_section": true,
                 "text_guarantee": "Garantía 30 días",
-                "text_shipping": "Envío gratis +$150.000",
+                "text_shipping": "Envío GRATIS",
                 "text_cod": "Paga al recibir",
-                "text_stock_available": "Stock disponible",
-                "text_stock_unavailable": "Agotado"
+                "text_stock_available": "En stock — envío hoy",
+                "text_stock_unavailable": "Agotado temporalmente"
+            }
+        },
+        "countdown_timer_pdp": {
+            "type": "countdown-timer",
+            "settings": {
+                "enable_section": true,
+                "heading": "¡OFERTA POR TIEMPO LIMITADO!",
+                "subheading": "Aprovecha este descuento antes de que termine",
+                "days_to_add": 2,
+                "hours_to_add": 12,
+                "button_label": "",
+                "padding_top": 24,
+                "padding_bottom": 24
+            }
+        },
+        "cross_sell_pdp": {
+            "type": "cross-sell",
+            "settings": {
+                "title": "Completa tu Compra",
+                "subtitle": "Estos productos combinan perfectamente con tu elección"
             }
         },
         "recently-viewed": {
             "type": "recently-viewed",
             "settings": {
-                "section_title": "👁️ Vistos Recientemente",
+                "section_title": "Vistos Recientemente",
                 "heading_size": "h2",
                 "products_to_show": 8,
                 "show_view_all_link": false,
-                "empty_state_text": "No has visto productos recientemente",
+                "empty_state_text": "Aún no has explorado productos",
                 "auto_hide_when_empty": true,
                 "color_scheme": "scheme-1",
                 "padding_top": 40,
@@ -450,6 +462,7 @@
         "main",
         "product_reviews_summary",
         "product_trust_strip",
+        "countdown_timer_pdp",
         "product_benefits",
         "product_includes",
         "product_usage_warranty",
@@ -460,6 +473,7 @@
         "product_testimonials",
         "171500672571a9dd42",
         "1759259835d66ec7b3",
+        "cross_sell_pdp",
         "recently-viewed",
         "related-products",
         "sticky_mobile_cta",

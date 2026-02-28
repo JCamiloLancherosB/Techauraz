@@ -9,7 +9,12 @@
         {% for block in section.blocks %}
           <div class="trust-badges__item" {{ block.shopify_attributes }}>
             {% if block.settings.icon_type == 'emoji' %}
-              <span class="trust-badges__icon" aria-hidden="true">{{ block.settings.emoji }}</span>
+              {%- assign badge_icon = block.settings.emoji -%}
+              {%- if badge_icon == 'lock' or badge_icon == 'payment' or badge_icon == 'shipping' or badge_icon == 'check-circle' or badge_icon == 'guarantee' or badge_icon == 'star' or badge_icon == 'fire' or badge_icon == 'sparkles' or badge_icon == 'diamond' or badge_icon == 'award' or badge_icon == 'package' or badge_icon == 'lightning' -%}
+                <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: badge_icon, size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
+              {%- else -%}
+                <span class="trust-badges__icon" aria-hidden="true">{{ badge_icon }}</span>
+              {%- endif -%}
             {% elsif block.settings.icon_type == 'svg' and block.settings.custom_svg != blank %}
               <div class="trust-badges__icon">{{ block.settings.custom_svg }}</div>
             {% elsif block.settings.icon_type == 'image' and block.settings.image != blank %}
@@ -23,32 +28,32 @@
       {% else %}
         {%- comment -%} Badges de confianza por defecto {%- endcomment -%}
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">🔒</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'lock', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">Pago Seguro</span>
         </div>
         
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">💳</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'payment', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">Todos los Medios de Pago</span>
         </div>
 
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">🚚</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'shipping', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">Envío Gratis</span>
         </div>
 
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">✅</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'check-circle', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">Garantía 30 Días</span>
         </div>
 
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">💵</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'payment', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">Pago Contra Entrega</span>
         </div>
 
         <div class="trust-badges__item">
-          <span class="trust-badges__icon" aria-hidden="true">⭐</span>
+          <span class="trust-badges__icon" aria-hidden="true">{% render 'icon-system', icon: 'star', size: 24, color: 'var(--ta-accent, #00D4AA)' %}</span>
           <span class="trust-badges__text">+1000 Clientes Satisfechos</span>
         </div>
       {% endif %}
@@ -118,8 +123,8 @@
           "type": "text",
           "id": "emoji",
           "label": "Emoji",
-          "default": "🔒",
-          "info": "Solo se usa si el tipo de ícono es 'Emoji'"
+          "default": "lock",
+          "info": "Usa un nombre de icono SVG (lock, payment, shipping, check-circle, guarantee, star, fire, sparkles, diamond, award, package, lightning) o cualquier emoji"
         },
         {
           "type": "image_picker",
@@ -150,7 +155,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "🔒",
+            "emoji": "lock",
             "text": "Pago Seguro SSL"
           }
         },
@@ -158,7 +163,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "💳",
+            "emoji": "payment",
             "text": "PSE, Tarjetas, Efectivo"
           }
         },
@@ -166,7 +171,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "🚚",
+            "emoji": "shipping",
             "text": "Envío Gratis"
           }
         },
@@ -174,7 +179,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "✅",
+            "emoji": "check-circle",
             "text": "Garantía 30 Días"
           }
         },
@@ -182,7 +187,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "💵",
+            "emoji": "payment",
             "text": "Contraentrega Disponible"
           }
         },
@@ -190,7 +195,7 @@
           "type": "badge",
           "settings": {
             "icon_type": "emoji",
-            "emoji": "⭐",
+            "emoji": "star",
             "text": "+1000 Clientes"
           }
         }

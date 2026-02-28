@@ -1,8 +1,8 @@
 /**
  * =============================================================================
  * TECHAURAZ DESIGN TOKENS
- * Version: 1.1.0
- * Updated: 2026-01-28
+ * Version: 2.0.0
+ * Updated: 2026-02-28
  * =============================================================================
  * 
  * Single source of truth for all design tokens.
@@ -66,26 +66,37 @@ main[role="main"] {
   /* ----------------------------------------
      Primary Brand Colors - Deep Blue System
      ---------------------------------------- */
-  --ta-primary: #2563eb;
-  --ta-primary-hover: #1e40af;
-  --ta-primary-active: #1e3a8a;
-  --ta-primary-light: #3b82f6;
-  --ta-primary-lighter: #60a5fa;
+  --ta-primary: #1E3A5F;
+  --ta-primary-hover: #162D4A;
+  --ta-primary-active: #0F2035;
+  --ta-primary-light: #2563EB;
+  --ta-primary-lighter: #3B82F6;
   --ta-primary-contrast: #ffffff;
 
   /* ----------------------------------------
-     Secondary Colors - Cyan/Teal Accents
+     Secondary Colors - Blue Accents
      ---------------------------------------- */
-  --ta-secondary: #06b6d4;
-  --ta-secondary-hover: #0891b2;
-  --ta-secondary-light: #22d3ee;
+  --ta-secondary: #2563EB;
+  --ta-secondary-hover: #1D4ED8;
+  --ta-secondary-light: #3B82F6;
 
   /* ----------------------------------------
-     Accent Colors - Teal for highlights
+     Accent Colors - Teal-Green CTA  
+     (High-contrast persuasion color for buy buttons)
      ---------------------------------------- */
-  --ta-accent: #14b8a6;
-  --ta-accent-hover: #0d9488;
-  --ta-accent-light: #2dd4bf;
+  --ta-accent: #00D4AA;
+  --ta-accent-hover: #00B894;
+  --ta-accent-light: #34EDCA;
+  --ta-accent-dark: #009B7D;
+
+  /* ----------------------------------------
+     CTA Color (dedicated conversion color)
+     ---------------------------------------- */
+  --ta-cta: #00D4AA;
+  --ta-cta-hover: #00B894;
+  --ta-cta-active: #009B7D;
+  --ta-cta-contrast: #0F172A;
+  --ta-cta-gradient: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
 
   /* ----------------------------------------
      Background Colors
@@ -104,15 +115,15 @@ main[role="main"] {
   --ta-text-secondary: #1e293b;
   --ta-text-muted: #64748b;
   --ta-text-inverse: #ffffff;
-  --ta-text-link: #3b82f6;
+  --ta-text-link: #2563EB;
 
   /* ----------------------------------------
      Border Colors
      ---------------------------------------- */
   --ta-border: #e2e8f0;
   --ta-border-light: #f1f5f9;
-  --ta-border-hover: #3b82f6;
-  --ta-border-focus: #3b82f6;
+  --ta-border-hover: #2563EB;
+  --ta-border-focus: #2563EB;
 
   /* ----------------------------------------
      State Colors
@@ -124,6 +135,13 @@ main[role="main"] {
   --ta-error: #ef4444;
   --ta-error-light: #f87171;
   --ta-info: #3b82f6;
+
+  /* ----------------------------------------
+     Sale/Offer Colors
+     ---------------------------------------- */
+  --ta-sale: #EF4444;
+  --ta-sale-bg: #FEF2F2;
+  --ta-sale-gradient: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
 }
 
 /* =============================================================================
@@ -131,27 +149,28 @@ main[role="main"] {
    ============================================================================= */
 :root {
   /* Primary gradients */
-  --ta-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  --ta-gradient-primary-hover: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-  --ta-gradient-primary-dark: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  --ta-gradient-primary: linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%);
+  --ta-gradient-primary-hover: linear-gradient(135deg, #2563EB 0%, #1E3A5F 100%);
+  --ta-gradient-primary-dark: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%);
 
   /* Secondary gradients */
-  --ta-gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-  --ta-gradient-accent: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  --ta-gradient-secondary: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  --ta-gradient-accent: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
 
   /* Premium background gradients */
-  --ta-gradient-bg-subtle: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%, #dbeafe 100%);
-  --ta-gradient-bg-section: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%);
-  --ta-gradient-bg-hero: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%);
+  --ta-gradient-bg-subtle: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f1f5f9 100%);
+  --ta-gradient-bg-section: linear-gradient(135deg, rgba(30, 58, 95, 0.05) 0%, rgba(0, 212, 170, 0.05) 100%);
+  --ta-gradient-bg-hero: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.7) 100%);
 
   /* Action gradients */
   --ta-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
   --ta-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  --ta-gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%);
+  --ta-gradient-cta: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
 
   /* Tech glow effect */
-  --ta-glow-primary: rgba(59, 130, 246, 0.3);
-  --ta-glow-secondary: rgba(6, 182, 212, 0.3);
+  --ta-glow-primary: rgba(30, 58, 95, 0.3);
+  --ta-glow-secondary: rgba(0, 212, 170, 0.3);
+  --ta-glow-cta: rgba(0, 212, 170, 0.4);
 }
 
 /* =============================================================================
@@ -172,24 +191,34 @@ main[role="main"] {
   /* ----------------------------------------
      Base Font Size (body text = 16px)
      ---------------------------------------- */
-  --ta-font-size-base: 1.6rem; /* 16px at 62.5% root */
+  --ta-font-size-base: 1.6rem;
+  /* 16px at 62.5% root */
 
   /* ----------------------------------------
      Heading Scale (modular scale ~1.25)
      ---------------------------------------- */
-  --ta-font-size-h1: 4.8rem; /* 48px - Hero headlines */
-  --ta-font-size-h2: 3.6rem; /* 36px - Section titles */
-  --ta-font-size-h3: 2.4rem; /* 24px - Subsections */
-  --ta-font-size-h4: 2rem;   /* 20px - Card titles */
+  --ta-font-size-h1: 4.8rem;
+  /* 48px - Hero headlines */
+  --ta-font-size-h2: 3.6rem;
+  /* 36px - Section titles */
+  --ta-font-size-h3: 2.4rem;
+  /* 24px - Subsections */
+  --ta-font-size-h4: 2rem;
+  /* 20px - Card titles */
 
   /* ----------------------------------------
      Body Text Scale
      ---------------------------------------- */
-  --ta-font-size-xs: 1.2rem;   /* 12px - Small labels */
-  --ta-font-size-sm: 1.4rem;   /* 14px - Secondary text */
-  --ta-font-size-md: 1.6rem;   /* 16px - Body text */
-  --ta-font-size-lg: 1.8rem;   /* 18px - Large body */
-  --ta-font-size-xl: 2rem;     /* 20px - Lead text */
+  --ta-font-size-xs: 1.2rem;
+  /* 12px - Small labels */
+  --ta-font-size-sm: 1.4rem;
+  /* 14px - Secondary text */
+  --ta-font-size-md: 1.6rem;
+  /* 16px - Body text */
+  --ta-font-size-lg: 1.8rem;
+  /* 18px - Large body */
+  --ta-font-size-xl: 2rem;
+  /* 20px - Lead text */
 
   /* ----------------------------------------
      Line Heights
@@ -226,13 +255,20 @@ main[role="main"] {
    ============================================================================= */
 :root {
   --ta-space-0: 0;
-  --ta-space-xs: 0.4rem;   /* 4px */
-  --ta-space-sm: 0.8rem;   /* 8px */
-  --ta-space-md: 1.2rem;   /* 12px */
-  --ta-space-lg: 1.6rem;   /* 16px */
-  --ta-space-xl: 2.4rem;   /* 24px */
-  --ta-space-2xl: 3.2rem;  /* 32px */
-  --ta-space-3xl: 4.8rem;  /* 48px */
+  --ta-space-xs: 0.4rem;
+  /* 4px */
+  --ta-space-sm: 0.8rem;
+  /* 8px */
+  --ta-space-md: 1.2rem;
+  /* 12px */
+  --ta-space-lg: 1.6rem;
+  /* 16px */
+  --ta-space-xl: 2.4rem;
+  /* 24px */
+  --ta-space-2xl: 3.2rem;
+  /* 32px */
+  --ta-space-3xl: 4.8rem;
+  /* 48px */
 
   /* Additional granular spacing */
   --ta-space-1: 0.4rem;
@@ -300,10 +336,13 @@ main[role="main"] {
    ============================================================================= */
 :root {
   /* Header system heights */
-  --ta-height-topbar: 40px;       /* Announcement bar */
-  --ta-height-header: 80px;       /* Main header */
+  --ta-height-topbar: 40px;
+  /* Announcement bar */
+  --ta-height-header: 80px;
+  /* Main header */
   --ta-height-header-mobile: 64px;
-  --ta-height-stack: 120px;       /* Topbar + header combined */
+  --ta-height-stack: 120px;
+  /* Topbar + header combined */
   --ta-height-stack-mobile: 104px;
 
   /* Page layout */
@@ -357,44 +396,44 @@ main[role="main"] {
      Critical:        1000+      (loading overlays, emergency dialogs)
      
      ============================================================================= */
-     
+
   /* Base content layer (0-99) */
   --ta-z-base: 0;
   --ta-z-content: 1;
   --ta-z-elevated: 10;
   --ta-z-slideshow-controls: 20;
   --ta-z-card-badge: 30;
-  
+
   /* Overlay/Sticky layer (100-199) */
   --ta-z-announcement-bar: 100;
   --ta-z-header: 101;
   --ta-z-sticky-header: 102;
   --ta-z-sticky-cart: 105;
-  
+
   /* Drawer layer (200-299) */
   --ta-z-cart-drawer-overlay: 200;
   --ta-z-cart-drawer: 210;
   --ta-z-menu-drawer-overlay: 220;
   --ta-z-menu-drawer: 230;
   --ta-z-drawer-close: 250;
-  
+
   /* Dropdown layer (300-399) */
   --ta-z-mega-menu: 300;
   --ta-z-dropdown: 310;
   --ta-z-popover: 320;
   --ta-z-tooltip: 350;
-  
+
   /* Modal layer (400-499) */
   --ta-z-modal-overlay: 400;
   --ta-z-modal: 410;
   --ta-z-cookie-banner: 450;
   --ta-z-lightbox: 460;
-  
+
   /* Toast/FAB layer (500-599) */
   --ta-z-toast: 500;
   --ta-z-whatsapp-fab: 500;
   --ta-z-notification: 510;
-  
+
   /* Critical layer (1000+) */
   --ta-z-loading: 1000;
   --ta-z-skip-link: 9999;
@@ -769,7 +808,8 @@ main[role="main"] {
 /* =============================================================================
    HEADINGS - Apply token styles to all headings
    ============================================================================= */
-h1, .h1 {
+h1,
+.h1 {
   font-size: var(--ta-font-size-h1);
   font-weight: var(--ta-font-bold);
   line-height: var(--ta-leading-tight);
@@ -777,7 +817,8 @@ h1, .h1 {
   color: var(--ta-text);
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: var(--ta-font-size-h2);
   font-weight: var(--ta-font-bold);
   line-height: var(--ta-leading-tight);
@@ -785,14 +826,16 @@ h2, .h2 {
   color: var(--ta-text);
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: var(--ta-font-size-h3);
   font-weight: var(--ta-font-semibold);
   line-height: var(--ta-leading-snug);
   color: var(--ta-text);
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-size: var(--ta-font-size-h4);
   font-weight: var(--ta-font-semibold);
   line-height: var(--ta-leading-snug);
@@ -842,6 +885,7 @@ h4, .h4 {
    ACCESSIBILITY - Reduced motion support
    ============================================================================= */
 @media (prefers-reduced-motion: reduce) {
+
   .ta-btn,
   .button,
   .btn,
@@ -1051,6 +1095,7 @@ details summary:focus-visible,
 }
 
 @media screen and (min-width: 750px) {
+
   .header-wrapper,
   .shopify-section-header-sticky {
     min-height: var(--ta-header-height-desktop);
@@ -1072,317 +1117,321 @@ details summary:focus-visible,
 
 @media screen and (min-width: 750px) {
 
-/* Slideshow slides - fixed dimensions */
-.slideshow__slide,
-.banner__media {
-  min-height: inherit;
-  position: relative;
-}
+  /* Slideshow slides - fixed dimensions */
+  .slideshow__slide,
+  .banner__media {
+    min-height: inherit;
+    position: relative;
+  }
 
-/* Images with aspect ratio to prevent CLS */
-.slideshow__media img,
-.banner__media img,
-.hero__media img {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-@media screen and (max-width: 749px) {
+  /* Images with aspect ratio to prevent CLS */
   .slideshow__media img,
   .banner__media img,
   .hero__media img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
-}
 
-/* =============================================================================
+  @media screen and (max-width: 749px) {
+
+    .slideshow__media img,
+    .banner__media img,
+    .hero__media img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  /* =============================================================================
    13. DARK SECTION CONTRAST - CTA buttons and text visibility
    Ensures WCAG AA contrast (4.5:1) for text on dark backgrounds
    ============================================================================= */
 
-/* --- Dark section text colors --- */
-.color-inverse,
-.color-scheme--inverse,
-[data-color-scheme="inverse"],
-.banner--dark,
-.slideshow--dark,
-.section--dark,
-.gradient--dark {
-  --ta-text: #ffffff;
-  --ta-text-secondary: rgba(255, 255, 255, 0.9);
-  --ta-text-muted: rgba(255, 255, 255, 0.7);
-}
+  /* --- Dark section text colors --- */
+  .color-inverse,
+  .color-scheme--inverse,
+  [data-color-scheme="inverse"],
+  .banner--dark,
+  .slideshow--dark,
+  .section--dark,
+  .gradient--dark {
+    --ta-text: #ffffff;
+    --ta-text-secondary: rgba(255, 255, 255, 0.9);
+    --ta-text-muted: rgba(255, 255, 255, 0.7);
+  }
 
-/* Primary CTA on dark backgrounds - high contrast */
-.color-inverse .button--primary,
-.banner--dark .button--primary,
-.slideshow--dark .button--primary,
-[data-color-scheme="inverse"] .button--primary {
-  background: var(--ta-primary-contrast, #ffffff);
-  color: var(--ta-primary, #2563eb);
-  border: 2px solid transparent;
-}
+  /* Primary CTA on dark backgrounds - high contrast */
+  .color-inverse .button--primary,
+  .banner--dark .button--primary,
+  .slideshow--dark .button--primary,
+  [data-color-scheme="inverse"] .button--primary {
+    background: var(--ta-primary-contrast, #ffffff);
+    color: var(--ta-primary, #2563eb);
+    border: 2px solid transparent;
+  }
 
-.color-inverse .button--primary:hover,
-.banner--dark .button--primary:hover,
-.slideshow--dark .button--primary:hover,
-[data-color-scheme="inverse"] .button--primary:hover {
-  background: var(--ta-bg-secondary, #f8fafc);
-  color: var(--ta-primary-hover, #1e40af);
-  transform: translateY(-2px);
-}
+  .color-inverse .button--primary:hover,
+  .banner--dark .button--primary:hover,
+  .slideshow--dark .button--primary:hover,
+  [data-color-scheme="inverse"] .button--primary:hover {
+    background: var(--ta-bg-secondary, #f8fafc);
+    color: var(--ta-primary-hover, #1e40af);
+    transform: translateY(-2px);
+  }
 
-/* Secondary CTA on dark backgrounds */
-.color-inverse .button--secondary,
-.banner--dark .button--secondary,
-.slideshow--dark .button--secondary,
-[data-color-scheme="inverse"] .button--secondary {
-  background: transparent;
-  color: var(--ta-primary-contrast, #ffffff);
-  border: 2px solid var(--ta-primary-contrast, #ffffff);
-}
+  /* Secondary CTA on dark backgrounds */
+  .color-inverse .button--secondary,
+  .banner--dark .button--secondary,
+  .slideshow--dark .button--secondary,
+  [data-color-scheme="inverse"] .button--secondary {
+    background: transparent;
+    color: var(--ta-primary-contrast, #ffffff);
+    border: 2px solid var(--ta-primary-contrast, #ffffff);
+  }
 
-.color-inverse .button--secondary:hover,
-.banner--dark .button--secondary:hover,
-.slideshow--dark .button--secondary:hover,
-[data-color-scheme="inverse"] .button--secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--ta-primary-contrast, #ffffff);
-}
+  .color-inverse .button--secondary:hover,
+  .banner--dark .button--secondary:hover,
+  .slideshow--dark .button--secondary:hover,
+  [data-color-scheme="inverse"] .button--secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--ta-primary-contrast, #ffffff);
+  }
 
-/* Focus states on dark backgrounds - use contrasting yellow */
-.color-inverse :focus-visible,
-.banner--dark :focus-visible,
-.slideshow--dark :focus-visible,
-[data-color-scheme="inverse"] :focus-visible {
-  outline-color: var(--ta-warning-light, #fbbf24);
-}
+  /* Focus states on dark backgrounds - use contrasting yellow */
+  .color-inverse :focus-visible,
+  .banner--dark :focus-visible,
+  .slideshow--dark :focus-visible,
+  [data-color-scheme="inverse"] :focus-visible {
+    outline-color: var(--ta-warning-light, #fbbf24);
+  }
 
-/* Ensure hero/banner text meets contrast requirements */
-.banner__heading,
-.slideshow__heading,
-.banner__text,
-.slideshow__text,
-.hero__title,
-.hero__subtitle {
-  /* Text shadow for better readability on image backgrounds */
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
+  /* Ensure hero/banner text meets contrast requirements */
+  .banner__heading,
+  .slideshow__heading,
+  .banner__text,
+  .slideshow__text,
+  .hero__title,
+  .hero__subtitle {
+    /* Text shadow for better readability on image backgrounds */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
 
-/* Banner box (overlay content) - premium glass morphism, not a "patch" */
-.banner__box,
-.slideshow__text-wrapper {
-  /* Premium glass morphism effect */
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: var(--ta-space-lg, 1.6rem) var(--ta-space-xl, 2rem);
-  border-radius: var(--ta-radius-lg, 16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
+  /* Banner box (overlay content) - premium glass morphism, not a "patch" */
+  .banner__box,
+  .slideshow__text-wrapper {
+    /* Premium glass morphism effect */
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: var(--ta-space-lg, 1.6rem) var(--ta-space-xl, 2rem);
+    border-radius: var(--ta-radius-lg, 16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
 
-/* =============================================================================
+  /* =============================================================================
    14. UNIFIED CHIP/BADGE STYLES
    Trust indicators: envío gratis, pago seguro, garantía, etc.
    Consistent styling using design tokens
    ============================================================================= */
 
-/* Base chip styles - works for trust indicators, tags, labels */
-.ta-chip,
-.trust-indicator,
-.ta-trust-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--ta-space-xs, 0.4rem);
-  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
-  font-size: var(--ta-font-size-xs, 1.2rem);
-  font-weight: var(--ta-font-semibold, 600);
-  line-height: var(--ta-leading-tight, 1.2);
-  border-radius: var(--ta-radius-pill, 9999px);
-  white-space: nowrap;
-  transition: var(--ta-transition-fast);
-}
+  /* Base chip styles - works for trust indicators, tags, labels */
+  .ta-chip,
+  .trust-indicator,
+  .ta-trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ta-space-xs, 0.4rem);
+    padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+    font-size: var(--ta-font-size-xs, 1.2rem);
+    font-weight: var(--ta-font-semibold, 600);
+    line-height: var(--ta-leading-tight, 1.2);
+    border-radius: var(--ta-radius-pill, 9999px);
+    white-space: nowrap;
+    transition: var(--ta-transition-fast);
+  }
 
-/* Success chip - for positive indicators (envío gratis, garantía) */
-.ta-chip--success,
-.trust-indicator--success,
-.ta-trust-chip {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
-  color: var(--ta-success, #10b981);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-}
+  /* Success chip - for positive indicators (envío gratis, garantía) */
+  .ta-chip--success,
+  .trust-indicator--success,
+  .ta-trust-chip {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
+    color: var(--ta-success, #10b981);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
 
-.ta-chip--success:hover,
-.trust-indicator--success:hover,
-.ta-trust-chip:hover {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
-  border-color: rgba(16, 185, 129, 0.4);
-  transform: translateY(-1px);
-}
+  .ta-chip--success:hover,
+  .trust-indicator--success:hover,
+  .ta-trust-chip:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
+    border-color: rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+  }
 
-/* Primary chip - for brand-related indicators */
-.ta-chip--primary {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
-  color: var(--ta-primary, #2563eb);
-  border: 1px solid rgba(37, 99, 235, 0.25);
-}
+  /* Primary chip - for brand-related indicators */
+  .ta-chip--primary {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+    color: var(--ta-primary, #2563eb);
+    border: 1px solid rgba(37, 99, 235, 0.25);
+  }
 
-.ta-chip--primary:hover {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
-  border-color: rgba(37, 99, 235, 0.4);
-  transform: translateY(-1px);
-}
+  .ta-chip--primary:hover {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
+    border-color: rgba(37, 99, 235, 0.4);
+    transform: translateY(-1px);
+  }
 
-/* Warning chip - for urgency/attention indicators */
-.ta-chip--warning {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
-  color: #92400e;
-  border: 1px solid rgba(251, 191, 36, 0.3);
-}
+  /* Warning chip - for urgency/attention indicators */
+  .ta-chip--warning {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+    color: #92400e;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
 
-.ta-chip--warning:hover {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
-  border-color: rgba(251, 191, 36, 0.5);
-}
+  .ta-chip--warning:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
+    border-color: rgba(251, 191, 36, 0.5);
+  }
 
-/* Neutral chip - for general labels */
-.ta-chip--neutral {
-  background: var(--ta-bg-secondary, #f8fafc);
-  color: var(--ta-text-muted, #64748b);
-  border: 1px solid var(--ta-border, #e2e8f0);
-}
+  /* Neutral chip - for general labels */
+  .ta-chip--neutral {
+    background: var(--ta-bg-secondary, #f8fafc);
+    color: var(--ta-text-muted, #64748b);
+    border: 1px solid var(--ta-border, #e2e8f0);
+  }
 
-.ta-chip--neutral:hover {
-  background: var(--ta-bg-tertiary, #f1f5f9);
-  border-color: var(--ta-border-hover, #3b82f6);
-}
+  .ta-chip--neutral:hover {
+    background: var(--ta-bg-tertiary, #f1f5f9);
+    border-color: var(--ta-border-hover, #3b82f6);
+  }
 
-/* Chip with icon */
-.ta-chip__icon {
-  flex-shrink: 0;
-  width: 1em;
-  height: 1em;
-}
+  /* Chip with icon */
+  .ta-chip__icon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+  }
 
-/* =============================================================================
+  /* =============================================================================
    15. UNIFIED SECTION HEADING STYLES
    Consistent styling for "Productos destacados", "Más vendidos", etc.
    ============================================================================= */
 
-/* Base section heading - unified across all pages */
-.ta-section-heading,
-.section-heading,
-.title-wrapper .title,
-h2.title {
-  font-family: var(--ta-font-heading);
-  font-size: var(--ta-font-size-h2, 3.6rem);
-  font-weight: var(--ta-font-bold, 700);
-  line-height: var(--ta-leading-tight, 1.2);
-  letter-spacing: var(--ta-tracking-tight, -0.025em);
-  color: var(--ta-text, #0f172a);
-  text-align: center;
-  margin-bottom: var(--ta-space-xl, 2.4rem);
-}
-
-/* Section heading with subtitle support */
-.ta-section-header {
-  text-align: center;
-  margin-bottom: var(--ta-space-2xl, 3.2rem);
-}
-
-.ta-section-header .ta-section-heading {
-  margin-bottom: var(--ta-space-sm, 0.8rem);
-}
-
-.ta-section-subtitle {
-  font-size: var(--ta-font-size-md, 1.6rem);
-  color: var(--ta-text-muted, #64748b);
-  line-height: var(--ta-leading-relaxed, 1.625);
-  max-width: 60ch;
-  margin-inline: auto;
-}
-
-/* Mobile responsive typography for section headings */
-@media screen and (max-width: 749px) {
+  /* Base section heading - unified across all pages */
   .ta-section-heading,
   .section-heading,
   .title-wrapper .title,
   h2.title {
-    font-size: var(--ta-font-size-h2, 2.4rem);
-    margin-bottom: var(--ta-space-lg, 1.6rem);
-  }
-
-  .ta-section-header {
+    font-family: var(--ta-font-heading);
+    font-size: var(--ta-font-size-h2, 3.6rem);
+    font-weight: var(--ta-font-bold, 700);
+    line-height: var(--ta-leading-tight, 1.2);
+    letter-spacing: var(--ta-tracking-tight, -0.025em);
+    color: var(--ta-text, #0f172a);
+    text-align: center;
     margin-bottom: var(--ta-space-xl, 2.4rem);
   }
 
-  .ta-section-subtitle {
-    font-size: var(--ta-font-size-sm, 1.4rem);
+  /* Section heading with subtitle support */
+  .ta-section-header {
+    text-align: center;
+    margin-bottom: var(--ta-space-2xl, 3.2rem);
   }
-}
 
-/* Section heading variants for different color schemes */
-.ta-section-heading--inverse,
-[class*="color-scheme-"] .ta-section-heading,
-[class*="color-scheme-"] .section-heading,
-[class*="color-scheme-"] .title-wrapper .title,
-[class*="color-scheme-"] h2.title {
-  color: var(--ta-text-inverse, #ffffff);
-}
+  .ta-section-header .ta-section-heading {
+    margin-bottom: var(--ta-space-sm, 0.8rem);
+  }
 
-.ta-section-subtitle--inverse,
-[class*="color-scheme-"] .ta-section-subtitle {
-  color: rgba(255, 255, 255, 0.85);
-}
+  .ta-section-subtitle {
+    font-size: var(--ta-font-size-md, 1.6rem);
+    color: var(--ta-text-muted, #64748b);
+    line-height: var(--ta-leading-relaxed, 1.625);
+    max-width: 60ch;
+    margin-inline: auto;
+  }
 
-/* =============================================================================
+  /* Mobile responsive typography for section headings */
+  @media screen and (max-width: 749px) {
+
+    .ta-section-heading,
+    .section-heading,
+    .title-wrapper .title,
+    h2.title {
+      font-size: var(--ta-font-size-h2, 2.4rem);
+      margin-bottom: var(--ta-space-lg, 1.6rem);
+    }
+
+    .ta-section-header {
+      margin-bottom: var(--ta-space-xl, 2.4rem);
+    }
+
+    .ta-section-subtitle {
+      font-size: var(--ta-font-size-sm, 1.4rem);
+    }
+  }
+
+  /* Section heading variants for different color schemes */
+  .ta-section-heading--inverse,
+  [class*="color-scheme-"] .ta-section-heading,
+  [class*="color-scheme-"] .section-heading,
+  [class*="color-scheme-"] .title-wrapper .title,
+  [class*="color-scheme-"] h2.title {
+    color: var(--ta-text-inverse, #ffffff);
+  }
+
+  .ta-section-subtitle--inverse,
+  [class*="color-scheme-"] .ta-section-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* =============================================================================
    16. UNIFIED CARD BASE STYLES
    Ensures all card types use consistent tokens
    ============================================================================= */
 
-/* Card base - applies to product cards, benefit cards, feature cards */
-.ta-card {
-  background: var(--ta-bg, #ffffff);
-  border: 1px solid var(--ta-border-light, #f1f5f9);
-  border-radius: var(--ta-radius-card, 12px);
-  box-shadow: var(--ta-shadow-sm);
-  transition: var(--ta-transition-normal);
-  overflow: hidden;
-}
-
-.ta-card:hover {
-  border-color: var(--ta-border-hover, #3b82f6);
-  box-shadow: var(--ta-shadow-card-hover);
-  transform: translateY(-4px);
-}
-
-/* Card padding variants */
-.ta-card--padded {
-  padding: var(--ta-space-lg, 1.6rem);
-}
-
-.ta-card--padded-lg {
-  padding: var(--ta-space-xl, 2.4rem);
-}
-
-/* Accessibility: reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .ta-chip,
-  .trust-indicator,
-  .ta-trust-chip,
+  /* Card base - applies to product cards, benefit cards, feature cards */
   .ta-card {
-    transition: none;
+    background: var(--ta-bg, #ffffff);
+    border: 1px solid var(--ta-border-light, #f1f5f9);
+    border-radius: var(--ta-radius-card, 12px);
+    box-shadow: var(--ta-shadow-sm);
+    transition: var(--ta-transition-normal);
+    overflow: hidden;
   }
 
-  .ta-chip:hover,
-  .trust-indicator:hover,
-  .ta-trust-chip:hover,
   .ta-card:hover {
-    transform: none;
+    border-color: var(--ta-border-hover, #3b82f6);
+    box-shadow: var(--ta-shadow-card-hover);
+    transform: translateY(-4px);
+  }
+
+  /* Card padding variants */
+  .ta-card--padded {
+    padding: var(--ta-space-lg, 1.6rem);
+  }
+
+  .ta-card--padded-lg {
+    padding: var(--ta-space-xl, 2.4rem);
+  }
+
+  /* Accessibility: reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+
+    .ta-chip,
+    .trust-indicator,
+    .ta-trust-chip,
+    .ta-card {
+      transition: none;
+    }
+
+    .ta-chip:hover,
+    .trust-indicator:hover,
+    .ta-trust-chip:hover,
+    .ta-card:hover {
+      transform: none;
+    }
   }
 }

@@ -1,0 +1,62 @@
+{%- comment -%}
+  Optimized Image Snippet — TechAura
+  ===================================
+  Renders a responsive, lazy-loaded image with proper srcset,
+  sizes, fetchpriority support, and alt text.
+  
+  Usage:
+  {% render 'optimized-image', 
+    image: product.featured_image, 
+    alt: product.title, 
+    sizes: '(min-width: 1200px) 580px, (min-width: 750px) 50vw, 100vw',
+    priority: false,
+    aspect_ratio: '1/1',
+    class: 'product-image'
+  %}
+  
+  Parameters:
+  - image: {Image} Shopify image object
+  - alt: {String} Alt text for accessibility
+  - sizes: {String} Responsive sizes attribute
+  - priority: {Boolean} If true, uses fetchpriority="high" and eager loading (for hero/LCP)
+  - aspect_ratio: {String} CSS aspect-ratio (e.g. '1/1', '3/4', '16/9')
+  - class: {String} Additional CSS classes
+  - width: {Number} Maximum width to render (default: 1200)
+{%- endcomment -%}
+
+{%- liquid
+  assign img_alt = alt | default: image.alt | escape
+  assign img_sizes = sizes | default: '(min-width: 1200px) 580px, (min-width: 750px) 50vw, 100vw'
+  assign max_width = width | default: 1200
+  assign img_class = class | default: ''
+  assign is_priority = priority | default: false
+-%}
+
+{%- if image != blank -%}
+  <img 
+    srcset="
+      {{ image | image_url: width: 200 }} 200w,
+      {{ image | image_url: width: 400 }} 400w,
+      {{ image | image_url: width: 600 }} 600w,
+      {{ image | image_url: width: 800 }} 800w,
+      {{ image | image_url: width: 1000 }} 1000w,
+      {{ image | image_url: width: max_width }} {{ max_width }}w"
+    src="{{ image | image_url: width: 600 }}"
+    sizes="{{ img_sizes }}"
+    alt="{{ img_alt }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    class="{{ img_class }}"
+    {%- if is_priority -%}
+      fetchpriority="high"
+      loading="eager"
+      decoding="sync"
+    {%- else -%}
+      loading="lazy"
+      decoding="async"
+    {%- endif -%}
+    {%- if aspect_ratio -%}
+      style="aspect-ratio: {{ aspect_ratio }}; object-fit: cover;"
+    {%- endif -%}
+  >
+{%- endif -%}

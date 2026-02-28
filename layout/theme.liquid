@@ -28,7 +28,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#1E3A5F">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <!-- Hreflang tags for multilingual SEO -->
@@ -41,8 +41,18 @@
     <!-- SEO Meta Description - Uses page-specific description or falls back to default -->
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
+    {% elsif template.name == 'index' %}
+      <meta name="description" content="TechAura ✓ Tienda online #1 de tecnología en Colombia. Audífonos, smartwatches, memorias USB personalizadas y accesorios tech con envío GRATIS y pago contra entrega. Garantía 30 días.">
+    {% elsif template.name == 'collection' %}
+      <meta name="description" content="{{ collection.title }} en TechAura. {{ collection.products_count }} productos tecnológicos con envío gratis a toda Colombia. Pago contra entrega disponible.">
+    {% elsif template.name == 'product' %}
+      <meta name="description" content="{{ product.title | escape }} - Desde {{ product.price | money }}. Envío GRATIS + Garantía 30 días + Pago contra entrega en toda Colombia. Compra seguro en TechAura.">
+    {% elsif template contains 'article' %}
+      <meta name="description" content="{{ article.excerpt_or_content | strip_html | truncate: 155 | escape }}">
+    {% elsif template contains 'blog' %}
+      <meta name="description" content="Blog TechAura - Guías, reseñas y consejos sobre tecnología, gadgets, audífonos, smartwatches y más. Tips para sacar el máximo provecho a tus dispositivos.">
     {% else %}
-      <meta name="description" content="TechAura - Tienda líder en Colombia de productos tecnológicos: memorias USB personalizadas, gadgets electrónicos, smartwatches y accesorios tecnológicos con envío a todo el país">
+      <meta name="description" content="TechAura ✓ Tienda online de tecnología en Colombia. Audífonos, smartwatches, memorias USB y accesorios tech con envío GRATIS, pago contra entrega y garantía 30 días.">
     {% endif %}
     
     <!-- Localización Colombia -->
@@ -55,10 +65,8 @@
     <meta name="distribution" content="Colombia">
     
     <!-- SEO Esencial TechAura -->
-    <meta name="keywords" content="tecnología Colombia, memorias USB personalizadas, gadgets electrónicos, smartwatches, accesorios tecnológicos, tienda tech Colombia, productos electrónicos">
     <meta name="author" content="TechAura">
-    <meta name="robots" content="index, follow">
-    <meta name="revisit-after" content="7 days">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- Open Graph and Twitter Card tags are rendered dynamically via snippets/meta-tags.liquid -->
     
@@ -90,16 +98,38 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32, quality: 85, format: 'webp' }}">
     {%- endif -%}
 
+    {%- comment -%} Performance: DNS Prefetch & Preconnect for faster resource loading {%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
+
     <!-- Preconnect para fuentes -->
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if template.name == 'index' -%}
+        TechAura | Tienda #1 de Tecnología en Colombia | Envío Gratis
+      {%- elsif template.name == 'product' -%}
+        {{ product.title }} | Desde {{ product.price | money }} | Envío GRATIS | TechAura
+      {%- elsif template.name == 'collection' -%}
+        {{ collection.title }} | Compra Online con Envío Gratis | TechAura
+      {%- elsif template contains 'article' -%}
+        {{ article.title }} | Blog TechAura
+      {%- elsif template contains 'blog' -%}
+        {{ blog.title | default: 'Blog' }} | Guías y Consejos Tech | TechAura
+      {%- elsif template.name == '404' -%}
+        Página no encontrada | TechAura
+      {%- elsif template.name == 'search' -%}
+        Buscar: {{ search.terms | escape }} | TechAura
+      {%- else -%}
+        {{ page_title }}
+        {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+        {%- if current_page != 1 %} &ndash; Página {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
     </title>
     
     <!-- Meta Tags de Shopify -->
@@ -108,6 +138,15 @@
     {%- comment -%} SEO: Breadcrumbs Structured Data {%- endcomment -%}
     {% render 'schema-breadcrumbs' %}
 
+    {%- comment -%} SEO: Collection Page Structured Data {%- endcomment -%}
+    {%- if template.name == 'collection' and collection -%}
+      {% render 'schema-collection', collection: collection %}
+    {%- endif -%}
+
+    {%- comment -%} SEO: Article/Blog Structured Data {%- endcomment -%}
+    {%- if template contains 'article' and article -%}
+      {% render 'schema-article', article: article %}
+    {%- endif -%}
     <!-- Scripts Principales -->
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -208,9 +247,15 @@
   <noscript><link rel="stylesheet" href="{{ 'slideshow-enhancements.css' | asset_url }}"></noscript>
 {%- endif -%}
 
-<!-- Unified Product Card Styles - Premium card spec for conversion - 2026-01-27 -->
-<link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-product-card.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' or template.name == 'cart' -%}
+  <!-- Unified Product Card Styles - Premium card spec for conversion - 2026-01-27 -->
+  <link rel="preload" href="{{ 'techauraz-product-card.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'techauraz-product-card.css' | asset_url }}"></noscript>
+
+  <!-- Product Card Enhancements - Discount badges, hover effects, CTA buttons - 2026-02-28 -->
+  <link rel="preload" href="{{ 'techauraz-card-enhancements.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'techauraz-card-enhancements.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
 <link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -224,6 +269,11 @@
 <link rel="preload" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
 
+<!-- Accessibility - Focus indicators, touch targets, WCAG 2.2 AA - 2026-02-28 -->
+<link rel="preload" href="{{ 'techauraz-accessibility.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}"></noscript>
+
+
 {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
   <!-- Quick View Modal - Product preview modal styles (PAGES WITH PRODUCT CARDS ONLY) -->
   <link rel="preload" href="{{ 'quick-view-modal.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -234,6 +284,12 @@
   <!-- Product Comparison - Side-by-side product comparison feature (PDP & COMPARISON PAGES ONLY) -->
   <link rel="preload" href="{{ 'product-comparison.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ 'product-comparison.css' | asset_url }}"></noscript>
+{%- endif -%}
+
+{%- if template.name == 'product' -%}
+  <!-- PDP CRO - Buy button hierarchy, sale badges, trust indicators - 2026-02-28 -->
+  <link rel="preload" href="{{ 'techauraz-pdp-cro.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'techauraz-pdp-cro.css' | asset_url }}"></noscript>
 {%- endif -%}
 
 <!-- 

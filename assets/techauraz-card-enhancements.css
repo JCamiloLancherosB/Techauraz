@@ -1,0 +1,131 @@
+/* ============================================================================
+   PRODUCT CARD ENHANCEMENTS — TechAura 2.0
+   ============================================================================
+   Enhancements for product cards across the site:
+   - Consistent image aspect ratios
+   - Discount percentage badge
+   - Hover effects (scale, shadow, second image reveal)
+   - Price styling with crossed-out compare-at price
+   - Quick action buttons
+   ============================================================================ */
+
+/* ----------------------------------------
+   Discount Badge
+   ---------------------------------------- */
+.card__badge .badge--sale,
+.card .ta-discount-badge {
+    background: var(--ta-sale-gradient, linear-gradient(135deg, #EF4444 0%, #DC2626 100%));
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--ta-radius-md, 8px);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+/* ----------------------------------------
+   Card Container — Hover Effects
+   ---------------------------------------- */
+.card-wrapper:hover .card__inner,
+.card-wrapper:hover .card {
+    transform: translateY(-4px);
+    box-shadow: var(--ta-shadow-card-hover, 0 20px 30px -5px rgba(37, 99, 235, 0.2), 0 10px 15px -6px rgba(37, 99, 235, 0.15));
+}
+
+.card__inner,
+.card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----------------------------------------
+   Image Aspect Ratio — Consistent 1:1 in grids
+   ---------------------------------------- */
+.card__media .media {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.card__media .media img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-wrapper:hover .card__media .media img {
+    transform: scale(1.06);
+}
+
+/* ----------------------------------------
+   Price Styling Enhancements
+   ---------------------------------------- */
+.price--on-sale .price-item--regular {
+    color: var(--ta-text-muted, #64748b);
+    font-size: 0.9em;
+    text-decoration: line-through;
+    text-decoration-color: rgba(100, 116, 139, 0.6);
+}
+
+.price--on-sale .price-item--sale {
+    color: var(--ta-sale, #EF4444);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* ----------------------------------------
+   Card Title — Clean typography
+   ---------------------------------------- */
+.card__heading a {
+    color: var(--ta-text, #0f172a);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.card__heading a:hover {
+    color: var(--ta-secondary, #2563EB);
+}
+
+/* ----------------------------------------
+   Quick Add / View Button
+   ---------------------------------------- */
+.quick-add__submit {
+    background: var(--ta-cta-gradient, linear-gradient(135deg, #00D4AA 0%, #00B894 100%));
+    color: var(--ta-cta-contrast, #0F172A);
+    border: none;
+    font-weight: 700;
+    border-radius: var(--ta-radius-button, 8px);
+    min-height: var(--ta-touch-comfortable, 48px);
+    transition: var(--ta-transition-fast, all 150ms ease);
+    box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+}
+
+.quick-add__submit:hover {
+    box-shadow: 0 6px 16px rgba(0, 212, 170, 0.4);
+    transform: translateY(-1px);
+}
+
+/* ----------------------------------------
+   Accessibility: Reduced Motion
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .card__inner,
+    .card,
+    .card__media .media img,
+    .quick-add__submit {
+        transition: none;
+    }
+
+    .card-wrapper:hover .card__inner,
+    .card-wrapper:hover .card {
+        transform: none;
+    }
+
+    .card-wrapper:hover .card__media .media img {
+        transform: none;
+    }
+}
