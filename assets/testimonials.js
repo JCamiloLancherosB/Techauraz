@@ -12,7 +12,7 @@
  * - WCAG 2.1 AA accessibility compliant
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Constants
@@ -24,7 +24,7 @@
       this.sectionId = element.dataset.sectionId;
       this.autoplay = element.dataset.autoplay === 'true';
       this.autoplaySpeed = (parseInt(element.dataset.autoplaySpeed, 10) || 5) * 1000;
-      
+
       // DOM elements
       this.track = element.querySelector('.testimonials-carousel__track');
       this.cards = Array.from(element.querySelectorAll('.testimonials-carousel__card'));
@@ -32,7 +32,7 @@
       this.nextBtn = element.querySelector('.testimonials-carousel__nav--next');
       this.dots = Array.from(element.querySelectorAll('.testimonials-carousel__dot'));
       this.autoplayToggle = element.querySelector('.testimonials-carousel__autoplay-toggle');
-      
+
       // State
       this.currentIndex = 0;
       this.totalSlides = this.cards.length;
@@ -41,25 +41,25 @@
       this.userPaused = false;
       this.isAnimating = false;
       this.isDestroyed = false;
-      
+
       // Touch handling
       this.touchStartX = 0;
       this.touchEndX = 0;
       this.touchThreshold = 50;
       this.isDragging = false;
-      
+
       // Resize handling
       this.resizeTimeout = null;
-      
+
       // Get visible count from data attribute
       this.visibleCount = parseInt(this.track?.dataset.visibleCount, 10) || 3;
-      
+
       // Bound event handlers for cleanup
       this.boundHandleMouseMove = (e) => this.handleMouseMove(e);
       this.boundHandleMouseUp = (e) => this.handleMouseUp(e);
       this.boundHandleVisibilityChange = () => this.handleVisibilityChange();
       this.boundHandleResize = () => this.handleResize();
-      
+
       // Initialize
       this.init();
     }
@@ -69,7 +69,7 @@
 
       this.bindEvents();
       this.updateCarousel();
-      
+
       if (this.autoplay && this.totalSlides > 1) {
         this.startAutoplay();
       }
@@ -143,6 +143,7 @@
       }
       this.resizeTimeout = setTimeout(() => {
         if (!this.isDestroyed) {
+          this._dimensionsDirty = true;
           this.updateCarousel();
         }
       }, 100);
@@ -151,7 +152,7 @@
     // Navigation methods
     next() {
       if (this.isAnimating) return;
-      
+
       const maxIndex = this.getMaxIndex();
       if (this.currentIndex < maxIndex) {
         this.currentIndex++;
@@ -164,7 +165,7 @@
 
     prev() {
       if (this.isAnimating) return;
-      
+
       const maxIndex = this.getMaxIndex();
       if (this.currentIndex > 0) {
         this.currentIndex--;
@@ -177,7 +178,7 @@
 
     goToSlide(index) {
       if (this.isAnimating || index === this.currentIndex) return;
-      
+
       const maxIndex = this.getMaxIndex();
       this.currentIndex = Math.max(0, Math.min(index, maxIndex));
       this.updateCarousel();
@@ -206,19 +207,22 @@
 
       this.isAnimating = true;
 
-      // Calculate the translation amount
-      const cardWidth = this.cards[0]?.offsetWidth || 0;
-      const gap = parseInt(getComputedStyle(this.track).gap, 10) || 24;
-      const translateX = -this.currentIndex * (cardWidth + gap);
+      // Use cached dimensions to avoid forced reflow
+      if (!this._cachedCardWidth || this._dimensionsDirty) {
+        this._cachedCardWidth = this.cards[0]?.offsetWidth || 0;
+        this._cachedGap = parseInt(getComputedStyle(this.track).gap, 10) || 24;
+        this._dimensionsDirty = false;
+      }
 
+      const translateX = -this.currentIndex * (this._cachedCardWidth + this._cachedGap);
       this.track.style.transform = `translateX(${translateX}px)`;
 
       // Update dots
       this.updateDots();
-      
+
       // Update navigation buttons
       this.updateNavButtons();
-      
+
       // Update accessibility
       this.updateAccessibility();
 
@@ -240,7 +244,7 @@
 
     updateNavButtons() {
       const maxIndex = this.getMaxIndex();
-      
+
       // Buttons are always enabled for infinite loop, but visually indicate boundaries
       if (this.prevBtn) {
         this.prevBtn.disabled = false;
@@ -277,7 +281,7 @@
         liveRegion.setAttribute('aria-atomic', 'true');
         this.section.appendChild(liveRegion);
       }
-      
+
       const effectiveVisibleCount = this.getEffectiveVisibleCount();
       liveRegion.textContent = `Mostrando testimonio ${this.currentIndex + 1} de ${this.totalSlides}`;
     }
@@ -285,7 +289,7 @@
     // Autoplay methods
     startAutoplay() {
       if (!this.autoplay || this.totalSlides <= 1) return;
-      
+
       this.stopAutoplay();
       this.autoplayTimer = setInterval(() => {
         if (!this.isPaused) {
@@ -360,7 +364,7 @@
     handleTouchMove(e) {
       if (!this.isDragging) return;
       this.touchEndX = e.touches[0].clientX;
-      
+
       // Prevent vertical scrolling when swiping horizontally
       const diff = Math.abs(this.touchStartX - this.touchEndX);
       if (diff > 10) {
@@ -370,7 +374,7 @@
 
     handleTouchEnd(e) {
       if (!this.isDragging) return;
-      
+
       this.isDragging = false;
       const diff = this.touchStartX - this.touchEndX;
 
@@ -389,7 +393,7 @@
     handleMouseDown(e) {
       // Only handle left mouse button
       if (e.button !== 0) return;
-      
+
       this.touchStartX = e.clientX;
       this.isDragging = true;
       this.track.style.cursor = 'grabbing';
@@ -404,10 +408,10 @@
 
     handleMouseUp(e) {
       if (!this.isDragging) return;
-      
+
       this.isDragging = false;
       this.track.style.cursor = '';
-      
+
       const diff = this.touchStartX - this.touchEndX;
 
       if (Math.abs(diff) > this.touchThreshold) {
@@ -447,13 +451,13 @@
     destroy() {
       this.isDestroyed = true;
       this.stopAutoplay();
-      
+
       // Clear resize timeout
       if (this.resizeTimeout) {
         clearTimeout(this.resizeTimeout);
         this.resizeTimeout = null;
       }
-      
+
       // Remove document-level event listeners
       document.removeEventListener('mousemove', this.boundHandleMouseMove);
       document.removeEventListener('mouseup', this.boundHandleMouseUp);

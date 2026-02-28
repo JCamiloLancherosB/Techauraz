@@ -1,9 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" data-form-required-error="{{ 'forms.validation.required' | t }}" data-form-email-error="{{ 'forms.validation.email' | t }}" data-form-server-error="{{ 'newsletter.error_server' | t }}" data-newsletter-success="{{ 'newsletter.success' | t }}" data-newsletter-loading="{{ 'newsletter.loading' | t }}">
 <head>
-<!-- PRECONNECT and DNS Prefetch - Critical for performance -->
+<!-- PRECONNECT and DNS Prefetch - Critical for performance (max 4) -->
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.shopify.com">
+<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://connect.facebook.net">
@@ -98,16 +99,10 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32, quality: 85, format: 'webp' }}">
     {%- endif -%}
 
-    {%- comment -%} Performance: DNS Prefetch & Preconnect for faster resource loading {%- endcomment -%}
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.shopify.com">
-    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
-
-    <!-- Preconnect para fuentes -->
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
+    {%- comment -%}
+      Performance: Preconnect hints consolidated at top of <head> (lines 4-9).
+      Avoid adding more than 4 preconnect hints total — see Lighthouse warning.
+    {%- endcomment -%}
 
     <title>
       {%- if template.name == 'index' -%}
@@ -258,7 +253,8 @@
 {%- endif -%}
 
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
-<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- Deferred: below-fold, non-critical -->
+<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 
 <!-- Announcement Bar Enhancements - Marquee styling with persuasive elements - 2026-01-29 -->
@@ -270,7 +266,8 @@
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
 
 <!-- Accessibility - Focus indicators, touch targets, WCAG 2.2 AA - 2026-02-28 -->
-<link rel="preload" href="{{ 'techauraz-accessibility.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- Deferred: non-render-blocking -->
+<link rel="preload" href="{{ 'techauraz-accessibility.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}"></noscript>
 
 
@@ -447,15 +444,13 @@
 
     <!-- Google Webmaster Tools Site Verification -->
     <meta name="google-site-verification" content="fj7UYrB5GV0ojQhLbYR8XqrgfSDiY8Bcqz-npt1MvQo" />
-   <!-- GOOGLE TAG MANAGER - OPTIMIZED -->
+<!-- GOOGLE TAG MANAGER - OPTIMIZED -->
 <script>
 (function(w,d,s,l,i){
-  // Performance optimization constants
-  var GTM_DELAY = 5000;           // Delay before auto-loading GTM (5s)
-  var GTM_IDLE_TIMEOUT = 7000;    // Timeout for idle callback (7s)
-  var GTM_INTERACTION_DELAY = 100; // Short delay after interaction to avoid blocking (100ms - GTM is lighter)
+  // Performance optimization: load GTM only after user engagement
+  var GTM_DELAY = 8000;           // Auto-load after 8s if no interaction
+  var GTM_INTERACTION_DELAY = 100; // Short delay after first interaction
   
-  // Load GTM only after user interaction or idle time
   function loadGTM() {
     if (w.gtmLoaded) return;
     w.gtmLoaded = true;
@@ -469,33 +464,22 @@
     f.parentNode.insertBefore(j,f);
   }
   
-  // Load after delay or on first scroll/click/touch
   var timer = setTimeout(loadGTM, GTM_DELAY);
   
-  ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
-    window.addEventListener(e, function() {
+  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
+    w.addEventListener(e, function() {
       clearTimeout(timer);
-      // Delay slightly to not block interaction
       setTimeout(loadGTM, GTM_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
-  
-  // Load on idle if supported
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(function() {
-      clearTimeout(timer);
-      loadGTM();
-    }, { timeout: GTM_IDLE_TIMEOUT });
-  }
 })(window,document,'script','dataLayer','GTM-PB6TD2ZD');
 </script>
 <!-- FACEBOOK PIXEL - OPTIMIZED -->
 <script>
 (function() {
-  // Performance optimization constants
-  var FB_DELAY = 6000;            // Delay before auto-loading FB Pixel (6s)
-  var FB_IDLE_TIMEOUT = 8000;     // Timeout for idle callback (8s)
-  var FB_INTERACTION_DELAY = 200; // Longer delay after interaction (200ms - FB Pixel is heavier than GTM)
+  // Performance optimization: load FB Pixel after GTM, on interaction only
+  var FB_DELAY = 10000;           // Auto-load after 10s if no interaction
+  var FB_INTERACTION_DELAY = 300; // Delay after interaction (FB is heavy)
   
   var fbLoaded = false;
   
@@ -513,23 +497,13 @@
     fbq('track', 'PageView');
   }
   
-  // Load only after interaction or idle - later than GTM
   var timer = setTimeout(loadFBPixel, FB_DELAY);
-  ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(e) {
+  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
     window.addEventListener(e, function() {
       clearTimeout(timer);
-      // Delay to reduce impact on interaction
       setTimeout(loadFBPixel, FB_INTERACTION_DELAY);
     }, { once: true, passive: true });
   });
-  
-  // Load on idle if supported
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(function() {
-      clearTimeout(timer);
-      loadFBPixel();
-    }, { timeout: FB_IDLE_TIMEOUT });
-  }
 })();
 </script>
 
