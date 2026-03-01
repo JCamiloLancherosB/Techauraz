@@ -1,35 +1,33 @@
-/* Category Navigation Section - Normalized for Home Layout 
-   Global normalization in ui-ux-responsive-fixes.css handles:
-   - Section padding: 56px desktop, 32px mobile (body.template-index .shopify-section)
-   - Wrapper: max-width 1200px, padding-inline 2rem desktop / 1rem mobile (body.template-index .category-nav-wrapper)
-   - Title: margin-bottom 2rem desktop / 1.5rem mobile + text-align center (body.template-index .category-nav-title)
-   - Grid gap: 2rem desktop, 1.5rem mobile (body.template-index .category-nav-grid)
+/* ============================================================================
+   Category Navigation - Bento Box Grid with Image Cards
    
-   This section only contains visual styling specific to category navigation.
-   Scoped to .category-nav-section to avoid global leakage.
-*/
+   Features:
+   - Image cards with dark gradient overlay for text readability
+   - Badge support (e.g. "Trending 🔥")  
+   - Asymmetric Bento Box layout (first card spans 2 cols on desktop)
+   - Fallback to icon/emoji when no image is set
+   
+   Global normalization in ui-ux-responsive-fixes.css handles:
+   - Section padding, wrapper max-width, title alignment, grid gap
+   ============================================================================ */
 
 .category-nav-section {
   background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.category-nav-section .category-nav-wrapper {
-  /* Handled by global normalization */
 }
 
 .category-nav-section .category-nav-title {
-  /* Alignment and spacing handled by global normalization */
   font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
   line-height: 1.2;
+  text-align: center;
+  margin-bottom: 0.75rem;
 }
 
 .category-nav-section .category-nav-subtitle {
   text-align: center;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--color-text-muted);
   margin-bottom: 2.5rem;
   max-width: 600px;
@@ -38,155 +36,223 @@
   line-height: 1.5;
 }
 
+/* ---- Grid Layout ---- */
 .category-nav-section .category-nav-grid {
-  /* gap handled by normalization in ui-ux-responsive-fixes.css */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 @media screen and (min-width: 750px) {
   .category-nav-section .category-nav-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
 }
 
 @media screen and (min-width: 990px) {
   .category-nav-section .category-nav-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Bento: first card spans 2 columns for visual hierarchy */
+  .category-nav-section .category-card--featured {
+    grid-column: span 2;
   }
 }
 
+/* ---- Card Base ---- */
 .category-nav-section .category-card {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2.5rem 1.5rem;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
+  align-items: flex-end;
   border-radius: 20px;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  min-height: 180px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  min-height: 200px;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   animation: categoryFadeInUp 0.5s ease-out both;
 }
 
-.category-nav-section .category-card::before {
-  content: '';
+/* ---- Image Layer ---- */
+.category-nav-section .category-card__image {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(37, 99, 235, 0.05) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
-.category-nav-section .category-card:hover::before,
-.category-nav-section .category-card:focus-visible::before {
-  opacity: 1;
+.category-nav-section .category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.category-nav-section .category-card:hover,
-.category-nav-section .category-card:focus-visible {
-  transform: translate3d(0, -8px, 0);
-  border-color: var(--color-primary);
-  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
+.category-nav-section .category-card:hover .category-card__image img {
+  transform: scale(1.08);
 }
 
-.category-nav-section .category-icon {
+/* Placeholder fallback when no image */
+.category-nav-section .category-card__image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.category-nav-section .category-card__emoji {
   font-size: 4rem;
-  margin-bottom: 1.2rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.15));
-  position: relative;
+}
+
+/* ---- Dark Gradient Overlay ---- */
+.category-nav-section .category-card__overlay {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      rgba(0, 0, 0, 0.75) 100%);
+  transition: background 0.35s ease;
 }
 
-.category-nav-section .category-card:hover .category-icon,
-.category-nav-section .category-card:focus-visible .category-icon {
-  transform: scale(1.15) translate3d(0, -4px, 0);
-  filter: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.2));
+.category-nav-section .category-card:hover .category-card__overlay {
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.35) 40%,
+      rgba(0, 0, 0, 0.8) 100%);
 }
 
-.category-nav-section .category-name {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-text-primary, #0f172a);
-  text-align: center;
+/* ---- Content Layer ---- */
+.category-nav-section .category-card__content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+/* ---- Badge ---- */
+.category-nav-section .category-card__badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #00D95F 0%, #00C853 100%);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
-  position: relative;
-  z-index: 1;
 }
 
-.category-nav-section .category-count {
-  font-size: 1.3rem;
-  color: var(--color-text-secondary, #334155);
+/* ---- Typography ---- */
+.category-nav-section .category-card__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.category-nav-section .category-card__subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem 0 0;
   font-weight: 500;
-  position: relative;
-  z-index: 1;
 }
 
-/* Mobile optimizations */
+/* ---- Hover / Focus ---- */
+.category-nav-section .category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.category-nav-section .category-card:focus-visible {
+  outline: 3px solid var(--ta-accent, #00D4AA);
+  outline-offset: 4px;
+  transform: translateY(-6px);
+}
+
+/* ---- Featured card (span 2 cols) — taller on desktop ---- */
+@media screen and (min-width: 990px) {
+  .category-nav-section .category-card--featured {
+    min-height: 260px;
+  }
+
+  .category-nav-section .category-card--featured .category-card__name {
+    font-size: 2rem;
+  }
+}
+
+/* ---- Mobile tweaks ---- */
 @media screen and (max-width: 749px) {
   .category-nav-section .category-card {
-    padding: 2rem 1rem;
-    min-height: 140px;
+    min-height: 160px;
   }
-  
-  .category-nav-section .category-icon {
-    font-size: 3.5rem;
+
+  .category-nav-section .category-card__content {
+    padding: 1rem;
   }
-  
-  .category-nav-section .category-name {
-    font-size: 1.4rem;
+
+  .category-nav-section .category-card__name {
+    font-size: 1.25rem;
+  }
+
+  .category-nav-section .category-card__badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
   }
 }
 
-/* Accessibility */
-.category-nav-section .category-card:focus-visible {
-  outline: 3px solid var(--color-primary);
-  outline-offset: 4px;
-}
-
-.category-nav-section .category-card:focus-visible .category-name {
-  color: var(--color-primary);
-}
-
-/* Animation for loading - scoped keyframes */
+/* ---- Staggered entry animation ---- */
 @keyframes categoryFadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.category-nav-section .category-card:nth-child(1) { animation-delay: 0.05s; }
-.category-nav-section .category-card:nth-child(2) { animation-delay: 0.1s; }
-.category-nav-section .category-card:nth-child(3) { animation-delay: 0.15s; }
-.category-nav-section .category-card:nth-child(4) { animation-delay: 0.2s; }
-.category-nav-section .category-card:nth-child(5) { animation-delay: 0.25s; }
-.category-nav-section .category-card:nth-child(6) { animation-delay: 0.3s; }
+.category-nav-section .category-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
 
-/* Respect user's motion preferences */
+.category-nav-section .category-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.category-nav-section .category-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.category-nav-section .category-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.category-nav-section .category-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .category-nav-section .category-card {
     animation: none;
   }
-  
+
   .category-nav-section .category-card:hover,
   .category-nav-section .category-card:focus-visible {
     transform: none;
   }
-  
-  .category-nav-section .category-card:hover .category-icon,
-  .category-nav-section .category-card:focus-visible .category-icon {
+
+  .category-nav-section .category-card:hover .category-card__image img {
     transform: none;
   }
 }

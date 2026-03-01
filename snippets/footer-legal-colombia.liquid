@@ -6,67 +6,70 @@
   - Ley 1581 de 2012 (Data Protection)
   - Ley 1480 de 2011 (Consumer Rights / Derecho de Retracto)
   - Contact information
-  - Payment methods trust badges
+  - Prominent "Pago 100% Seguro" visual trust box with Colombian payment methods
   
   Usage: {% render 'footer-legal-colombia' %}
-  Place after the main footer content, before closing </footer>
 {%- endcomment -%}
 
 <div class="footer-legal-colombia">
   <div class="page-width footer-legal-colombia__inner">
     
-    {%- comment -%} Trust Badges Row {%- endcomment -%}
-    <div class="footer-legal-colombia__trust">
-      <div class="footer-legal-colombia__badge">
-        {% render 'icon-system', icon: 'guarantee', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
-        <span>Garantía 30 Días</span>
+    {%- comment -%} Prominent Trust Box: Pago Seguro {%- endcomment -%}
+    <div class="footer-legal-colombia__secure-box">
+      <div class="footer-legal-colombia__secure-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-legal-colombia__secure-icon">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span class="footer-legal-colombia__secure-title">PAGO 100% SEGURO</span>
       </div>
-      <div class="footer-legal-colombia__badge">
-        {% render 'icon-system', icon: 'shipping', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
-        <span>Envío Gratis 🇨🇴</span>
-      </div>
-      <div class="footer-legal-colombia__badge">
-        {% render 'icon-system', icon: 'lock', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
-        <span>Pago Seguro SSL</span>
-      </div>
-      <div class="footer-legal-colombia__badge">
-        {% render 'icon-system', icon: 'payment', size: 20, color: 'var(--ta-accent, #00D4AA)' %}
-        <span>Pago Contraentrega</span>
+      <p class="footer-legal-colombia__secure-subtitle">Protegido con encriptación SSL de 256 bits</p>
+      
+      <div class="footer-legal-colombia__payment-logos">
+        <div class="footer-legal-colombia__logo footer-legal-colombia__logo--nequi">Nequi</div>
+        <div class="footer-legal-colombia__logo footer-legal-colombia__logo--pse">PSE</div>
+        <div class="footer-legal-colombia__logo footer-legal-colombia__logo--bancolombia">Bancolombia</div>
+        <div class="footer-legal-colombia__logo footer-legal-colombia__logo--mastercard">
+          <div class="mc-circle-1"></div>
+          <div class="mc-circle-2"></div>
+        </div>
+        <div class="footer-legal-colombia__logo footer-legal-colombia__logo--cod">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Contraentrega
+        </div>
       </div>
     </div>
 
-    {%- comment -%} Payment Methods {%- endcomment -%}
-    <div class="footer-legal-colombia__payments">
-      <p class="footer-legal-colombia__payments-label">Métodos de pago aceptados:</p>
-      <div class="footer-legal-colombia__payments-list">
-        <span class="footer-legal-colombia__payment-method">💳 Tarjetas Crédito/Débito</span>
-        <span class="footer-legal-colombia__payment-method">🏦 PSE</span>
-        <span class="footer-legal-colombia__payment-method">📱 Nequi</span>
-        <span class="footer-legal-colombia__payment-method">🏪 Efectivo Contraentrega</span>
-        <span class="footer-legal-colombia__payment-method">🔄 Transferencia Bancaria</span>
+    {%- comment -%} Trust Badges Row (Below secure box) {%- endcomment -%}
+    <div class="footer-legal-colombia__trust">
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'guarantee', size: 18, color: 'currentColor' %}
+        <span>Garantía 30 Días</span>
+      </div>
+      <div class="footer-legal-colombia__badge">
+        {% render 'icon-system', icon: 'shipping', size: 18, color: 'currentColor' %}
+        <span>Envío a todo Colombia</span>
       </div>
     </div>
 
     {%- comment -%} Legal Compliance {%- endcomment -%}
     <div class="footer-legal-colombia__legal">
       <p class="footer-legal-colombia__legal-text">
-        TechAura — Tienda de Tecnología en Colombia
+        <strong>TechAura</strong> — Tienda de Tecnología
         <br>
         <small>
           Este sitio cumple con la <strong>Ley 1480 de 2011</strong> (Estatuto del Consumidor) y la <strong>Ley 1581 de 2012</strong> (Protección de Datos Personales).
-          Derecho de retracto: 5 días hábiles desde la entrega del producto (Art. 47, Ley 1480/2011).
         </small>
       </p>
-      <p class="footer-legal-colombia__legal-text">
+      <p class="footer-legal-colombia__legal-text footer-legal-colombia__links">
         <small>
-          Al realizar una compra en TechAura, aceptas nuestra 
-          <a href="{{ pages['politica-de-privacidad'].url | default: '/policies/privacy-policy' }}">Política de Privacidad</a> y 
-          <a href="{{ pages['terminos-y-condiciones'].url | default: '/policies/terms-of-service' }}">Términos y Condiciones</a>.
-          Para solicitudes de datos personales (ARCO): contacto@techauraz.com
+          <a href="{{ pages['politica-de-privacidad'].url | default: '/policies/privacy-policy' }}">Política de Privacidad</a> • 
+          <a href="{{ pages['terminos-y-condiciones'].url | default: '/policies/terms-of-service' }}">Términos y Condiciones</a> • 
+          <a href="{{ pages['politica-de-reembolso'].url | default: '/policies/refund-policy' }}">Devoluciones</a>
         </small>
       </p>
       <p class="footer-legal-colombia__legal-text">
-        <small>WhatsApp: <a href="https://wa.me/573008602789">+57 300 860 2789</a> · Atención Lun-Sáb 8am-6pm COT</small>
+        <small>WhatsApp: <a href="https://wa.me/573008602789" target="_blank" rel="noopener noreferrer" class="footer-legal-colombia__whatsapp"><strong>+57 300 860 2789</strong></a> · Lunes a Sábado 8am - 6pm</small>
       </p>
     </div>
 
@@ -75,101 +78,203 @@
 
 <style>
   .footer-legal-colombia {
-    background: var(--ta-bg-tertiary, #f1f5f9);
-    border-top: 1px solid var(--ta-border, #e2e8f0);
-    padding: 2.4rem 0 1.6rem;
+    background: var(--ta-bg-primary, #ffffff);
+    padding: 3.2rem 0 2.4rem;
+    border-top: 1px solid #f1f5f9;
   }
 
   .footer-legal-colombia__inner {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 2rem;
     align-items: center;
     text-align: center;
   }
 
+  /* Secure Box */
+  .footer-legal-colombia__secure-box {
+    width: 100%;
+    max-width: 600px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .footer-legal-colombia__secure-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #475569;
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-legal-colombia__secure-icon {
+    color: #10b981; /* Green lock for trust */
+  }
+
+  .footer-legal-colombia__secure-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-legal-colombia__secure-subtitle {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0 0 1.25rem;
+  }
+
+  /* Payment Logos Grayscale */
+  .footer-legal-colombia__payment-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .footer-legal-colombia__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 1rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    filter: grayscale(100%);
+    opacity: 0.85;
+    transition: filter 0.2s, opacity 0.2s;
+  }
+
+  .footer-legal-colombia__logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* Specific fake logo styles for realism without images */
+  .footer-legal-colombia__logo--nequi {
+    font-family: monospace;
+    letter-spacing: -0.5px;
+    font-size: 1rem;
+    text-transform: lowercase;
+  }
+
+  .footer-legal-colombia__logo--pse {
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-legal-colombia__logo--bancolombia {
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+  }
+
+  .footer-legal-colombia__logo--mastercard {
+    position: relative;
+    width: 50px;
+    padding: 0;
+  }
+  
+  .footer-legal-colombia__logo--mastercard .mc-circle-1,
+  .footer-legal-colombia__logo--mastercard .mc-circle-2 {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .footer-legal-colombia__logo--mastercard .mc-circle-1 {
+    background-color: #eb001b; /* Red */
+    left: 10px;
+  }
+
+  .footer-legal-colombia__logo--mastercard .mc-circle-2 {
+    background-color: #f79e1b; /* Orange */
+    right: 10px;
+    opacity: 0.9;
+  }
+
+  .footer-legal-colombia__logo--cod {
+    gap: 0.35rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Trust Badges */
   .footer-legal-colombia__trust {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.6rem;
+    gap: 1.25rem;
   }
 
   .footer-legal-colombia__badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.3rem;
+    gap: 0.4rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: var(--ta-text, #0f172a);
-    background: var(--ta-bg, #fff);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--ta-radius-pill, 999px);
-    box-shadow: var(--ta-shadow-xs, 0 1px 2px rgba(0,0,0,0.05));
-    border: 1px solid var(--ta-border, #e2e8f0);
+    color: #475569;
   }
 
-  .footer-legal-colombia__payments {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .footer-legal-colombia__payments-label {
-    font-size: 1.2rem;
-    color: var(--ta-text-muted, #64748b);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .footer-legal-colombia__payments-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .footer-legal-colombia__payment-method {
-    font-size: 1.2rem;
-    color: var(--ta-text-secondary, #1e293b);
-    background: var(--ta-bg, #fff);
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--ta-radius-sm, 4px);
-    border: 1px solid var(--ta-border-light, #f1f5f9);
-  }
-
+  /* Legal Text */
   .footer-legal-colombia__legal {
-    max-width: 700px;
+    max-width: 600px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1.5rem;
   }
 
   .footer-legal-colombia__legal-text {
-    font-size: 1.1rem;
-    color: var(--ta-text-muted, #64748b);
-    line-height: 1.5;
-    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
   }
 
-  .footer-legal-colombia__legal-text a {
-    color: var(--ta-text-link, #2563EB);
+  .footer-legal-colombia__links a {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-legal-colombia__links a:hover {
+    color: #0f172a;
     text-decoration: underline;
-    text-underline-offset: 2px;
   }
 
-  .footer-legal-colombia__legal-text a:hover {
-    color: var(--ta-primary, #1E3A5F);
+  .footer-legal-colombia__whatsapp {
+    color: #10b981;
+    text-decoration: none;
+  }
+
+  .footer-legal-colombia__whatsapp:hover {
+    text-decoration: underline;
   }
 
   @media screen and (max-width: 749px) {
-    .footer-legal-colombia__trust {
-      gap: 0.8rem;
+    .footer-legal-colombia__secure-box {
+      padding: 1.25rem 1rem;
+    }
+    
+    .footer-legal-colombia__payment-logos {
+      gap: 0.5rem;
     }
 
-    .footer-legal-colombia__badge {
-      font-size: 1.1rem;
-      padding: 0.5rem 1rem;
+    .footer-legal-colombia__logo {
+      height: 32px;
+      padding: 0 0.75rem;
+      font-size: 0.75rem;
     }
   }
 </style>

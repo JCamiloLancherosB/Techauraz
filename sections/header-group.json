@@ -14,48 +14,48 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_categories": {
+        "announcement_flash": {
           "type": "announcement",
           "settings": {
-            "text": "Explora categorías: Audífonos • Smartwatches • Memorias USB",
+            "text": "MARZO TECH: Hasta -40% en audífonos y smartwatches",
             "link": "/collections/all"
           }
         },
-        "announcement_same_day": {
+        "announcement_cod": {
           "type": "announcement",
           "settings": {
-            "text": "Compra antes de las 2pm: procesamos tu pedido hoy",
+            "text": "PAGO CONTRAENTREGA: Recibe primero, paga después",
             "link": ""
           }
         },
-        "announcement_whatsapp": {
+        "announcement_shipping": {
           "type": "announcement",
           "settings": {
-            "text": "Soporte por WhatsApp",
-            "link": "https://wa.me/573008602789"
+            "text": "ENVÍO GRATIS a toda Colombia sin mínimo de compra",
+            "link": ""
           }
         },
-        "announcement_bestsellers": {
+        "announcement_guarantee": {
           "type": "announcement",
           "settings": {
-            "text": "Ver más vendidos",
-            "link": "/collections/all?sort_by=best-selling"
+            "text": "Garantía 30 días: No te gusta? Te devolvemos el 100%",
+            "link": ""
           }
         },
-        "announcement_warranty": {
+        "announcement_proof": {
           "type": "announcement",
           "settings": {
-            "text": "Garantía de 30 días",
+            "text": "+5.200 colombianos ya confían en TechAura",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement_categories",
-        "announcement_same_day",
-        "announcement_whatsapp",
-        "announcement_bestsellers",
-        "announcement_warranty"
+        "announcement_flash",
+        "announcement_cod",
+        "announcement_shipping",
+        "announcement_guarantee",
+        "announcement_proof"
       ],
       "settings": {
         "sticky_promo": true,

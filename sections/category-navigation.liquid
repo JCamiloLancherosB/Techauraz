@@ -14,25 +14,37 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'category' -%}
-            <a href="{{ block.settings.link }}" class="category-card" {{ block.shopify_attributes }}>
-              {%- if block.settings.icon != blank -%}
-                <div class="category-icon" aria-hidden="true">
-                  {%- assign cat_icon = block.settings.icon -%}
+            <a href="{{ block.settings.link }}" class="category-card{% if forloop.first %} category-card--featured{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.image -%}
+                <div class="category-card__image">
+                  {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 50vw, 20vw' }}
+                </div>
+              {%- else -%}
+                <div class="category-card__image category-card__image--placeholder">
+                  {%- assign cat_icon = block.settings.icon | default: 'sparkles' -%}
                   {%- if cat_icon == 'headphones' or cat_icon == 'watch' or cat_icon == 'usb' or cat_icon == 'smartphone' or cat_icon == 'lightbulb' or cat_icon == 'shipping' or cat_icon == 'payment' or cat_icon == 'guarantee' or cat_icon == 'lightning' or cat_icon == 'sparkles' or cat_icon == 'rocket' or cat_icon == 'diamond' or cat_icon == 'lock' or cat_icon == 'fire' or cat_icon == 'package' -%}
-                    {% render 'icon-system', icon: cat_icon, size: 28, color: 'var(--ta-accent, #00D4AA)' %}
+                    {% render 'icon-system', icon: cat_icon, size: 48, color: 'var(--ta-accent, #00D4AA)' %}
                   {%- else -%}
-                    {{ cat_icon }}
+                    <span class="category-card__emoji" aria-hidden="true">{{ cat_icon }}</span>
                   {%- endif -%}
                 </div>
               {%- endif -%}
-              
-              {%- if block.settings.title != blank -%}
-                <h3 class="category-name">{{ block.settings.title }}</h3>
-              {%- endif -%}
-              
-              {%- if block.settings.product_count != blank -%}
-                <p class="category-count">{{ 'sections.category_navigation.products_count' | t: count: block.settings.product_count }}</p>
-              {%- endif -%}
+
+              <div class="category-card__overlay"></div>
+
+              <div class="category-card__content">
+                {%- if block.settings.badge != blank -%}
+                  <span class="category-card__badge">{{ block.settings.badge }}</span>
+                {%- endif -%}
+                
+                {%- if block.settings.title != blank -%}
+                  <h3 class="category-card__name">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="category-card__subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+              </div>
             </a>
         {%- endcase -%}
       {%- endfor -%}
@@ -66,10 +78,17 @@
       "name": "Categoría",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen de categoría",
+          "info": "Usa una foto lifestyle del producto. Tamaño recomendado: 600x400px"
+        },
+        {
           "type": "text",
           "id": "icon",
-          "label": "Icono (emoji o símbolo)",
-          "default": "🎧"
+          "label": "Icono fallback (si no hay imagen)",
+          "default": "headphones",
+          "info": "Nombre de icono SVG (headphones, watch, usb, smartphone, lightbulb) o emoji"
         },
         {
           "type": "text",
@@ -79,15 +98,15 @@
         },
         {
           "type": "text",
-          "id": "product_count",
-          "label": "Cantidad de Productos (manual)",
-          "info": "Se usa solo si no se selecciona una colección"
+          "id": "subtitle",
+          "label": "Subtítulo (opcional)",
+          "info": "Ej: 'Desde $49.900'"
         },
         {
-          "type": "collection",
-          "id": "collection",
-          "label": "Colección",
-          "info": "Selecciona una colección para mostrar el conteo real de productos automáticamente"
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (opcional)",
+          "info": "Ej: 'Trending 🔥' o 'Nuevo'. Déjalo vacío para no mostrar badge."
         },
         {
           "type": "url",
@@ -104,41 +123,37 @@
         {
           "type": "category",
           "settings": {
-            "icon": "🎧",
+            "icon": "headphones",
             "title": "Audífonos",
-            "product_count": "25"
+            "badge": "Trending 🔥"
           }
         },
         {
           "type": "category",
           "settings": {
-            "icon": "⌚",
-            "title": "Smart Watches",
-            "product_count": "18"
+            "icon": "watch",
+            "title": "Smart Watches"
           }
         },
         {
           "type": "category",
           "settings": {
-            "icon": "💾",
-            "title": "Memorias USB",
-            "product_count": "30"
+            "icon": "usb",
+            "title": "Memorias USB"
           }
         },
         {
           "type": "category",
           "settings": {
-            "icon": "📱",
-            "title": "Accesorios",
-            "product_count": "40"
+            "icon": "smartphone",
+            "title": "Accesorios"
           }
         },
         {
           "type": "category",
           "settings": {
-            "icon": "💡",
-            "title": "Iluminación",
-            "product_count": "15"
+            "icon": "lightbulb",
+            "title": "Iluminación"
           }
         }
       ]

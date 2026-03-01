@@ -100,6 +100,10 @@
       <span class="price-item price-item--sale price-item--last">
         {{ money_price }}
       </span>
+      {%- if compare_at_price and compare_at_price > price -%}
+        {%- assign savings_pct = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price -%}
+        <span class="price__savings-pill">Ahorras {{ savings_pct }}%</span>
+      {%- endif -%}
     </div>
     <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>

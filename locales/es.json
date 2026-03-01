@@ -58,13 +58,13 @@
     }
   },
   "newsletter": {
-    "label": "Correo electrónico",
-    "success": "Gracias por suscribirte",
-    "button_label": "Suscribir",
+    "label": "Tu mejor correo...",
+    "success": "¡Revisa tu bandeja de entrada! Tu código está en camino.",
+    "button_label": "Quiero mi Descuento →",
     "error_required": "Por favor ingresa tu correo electrónico",
     "error_invalid": "Por favor ingresa un correo electrónico válido",
     "error_server": "Algo salió mal. Por favor intenta de nuevo.",
-    "loading": "Suscribiendo..."
+    "loading": "Verificando..."
   },
   "forms": {
     "validation": {
@@ -117,7 +117,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Agregar al carrito",
+      "add_to_cart": "Lo Quiero 🛒",
       "description": "Descripción",
       "on_sale": "Oferta",
       "quantity": {

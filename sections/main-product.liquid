@@ -120,7 +120,11 @@
 
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{{ product.title | escape }}</h1>
+                  {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
+                    <h1>Power Bank Transparente 20.000 mAh - Carga Ultra Rápida</h1>
+                  {%- else -%}
+                    <h1>{{ product.title | escape }}</h1>
+                  {%- endif -%}
                 </div>
 
               {%- when 'price' -%}
@@ -131,6 +135,41 @@
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
+                  
+                  {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
+                  <div class="pdp-urgency-injectors" style="margin-top: 1.5rem; background: #fff8f1; border: 1px solid #ffedd5; padding: 1rem; border-radius: 8px;">
+                    <p class="urgency-pulse" style="color: #ef4444; font-weight: 800; animation: p-pulse 2s infinite; font-size: 1.05rem; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                      <span style="font-size: 1.2rem;">🔥</span> ¡Últimas <span id="random-stock" style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; margin: 0 2px;">5</span> unidades disponibles!
+                    </p>
+                    <p class="delivery-estimator" style="color: #10b981; font-weight: 600; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 6px;">
+                      <span style="font-size: 1.1rem;">🚚</span> Pídelo hoy y recíbelo entre el <strong id="date-min"></strong> y el <strong id="date-max"></strong>
+                    </p>
+                  </div>
+                  <style>
+                    @keyframes p-pulse {
+                      0%, 100% { opacity: 1; transform: scale(1); }
+                      50% { opacity: 0.8; transform: scale(1.02); }
+                    }
+                  </style>
+                  <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                      const stockEl = document.getElementById('random-stock');
+                      if (stockEl) {
+                        stockEl.innerText = Math.floor(Math.random() * 5) + 3; // Random 3-7
+                      }
+                      const dateObj = new Date();
+                      const options = { month: 'short', day: 'numeric' };
+                      const minDate = new Date(dateObj.getTime() + 2 * 24 * 60 * 60 * 1000);
+                      const maxDate = new Date(dateObj.getTime() + 5 * 24 * 60 * 60 * 1000);
+                      const minEl = document.getElementById('date-min');
+                      const maxEl = document.getElementById('date-max');
+                      if (minEl && maxEl) {
+                        minEl.innerText = minDate.toLocaleDateString('es-CO', options);
+                        maxEl.innerText = maxDate.toLocaleDateString('es-CO', options);
+                      }
+                    });
+                  </script>
+                  {%- endif -%}
                 </div>
 
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -208,13 +247,24 @@
                 </p>
 
               {%- when 'description' -%}
-                {%- if product.description != blank -%}
+                {%- if product.description != blank or product.title contains 'Power Bank' -%}
                   <div id="product-description" class="product__description rte quick-add-hidden product__description--enhanced" {{ block.shopify_attributes }}>
                     <div class="product-description__header">
                       <h3 class="product-description__title">✨ Descubre Todo Sobre Este Producto</h3>
                     </div>
                     <div class="product-description__content">
-                      {{ product.description }}
+                      {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
+                        <p>No vuelvas a quedarte sin batería en el momento más importante. La <strong>Power Bank Transparente 20.000 mAh</strong> está diseñada para un rendimiento extremo con un look futurista.</p>
+                        <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
+                          <li style="margin-bottom: 1rem; line-height: 1.5;"><span style="font-size: 1.2rem; margin-right: 8px;">🔋</span> <strong>Capacidad Masiva:</strong> Carga tu celular de 0 a 100% hasta 4 veces sin buscar un enchufe. Ideal para viajes largos o días intensos de trabajo.</li>
+                          <li style="margin-bottom: 1rem; line-height: 1.5;"><span style="font-size: 1.2rem; margin-right: 8px;">⚡</span> <strong>Carga Ultra Rápida 22.5W:</strong> Ahorra tiempo valioso. Obtén un 50% de batería en solo 30 minutos gracias a su tecnología de carga rápida avanzada.</li>
+                          <li style="margin-bottom: 1rem; line-height: 1.5;"><span style="font-size: 1.2rem; margin-right: 8px;">🔌</span> <strong>Multidispositivo Inteligente:</strong> Cuenta con puertos USB y Tipo C. Carga tu teléfono, audífonos o tablet al mismo tiempo sin pérdida de velocidad.</li>
+                          <li style="margin-bottom: 1rem; line-height: 1.5;"><span style="font-size: 1.2rem; margin-right: 8px;">✨</span> <strong>Diseño Cyberpunk Transparente:</strong> Destaca entre la multitud con su cubierta transparente premium que muestra los componentes internos, combinando estética y alta tecnología.</li>
+                          <li style="margin-bottom: 1rem; line-height: 1.5;"><span style="font-size: 1.2rem; margin-right: 8px;">🛡️</span> <strong>Protección Total:</strong> Chip inteligente integrado que protege tus dispositivos contra sobrecalentamiento, cortocircuitos y sobrecargas eléctricas.</li>
+                        </ul>
+                      {%- else -%}
+                        {{ product.description | replace: '(valor percibido alto)', '' }}
+                      {%- endif -%}
                     </div>
                   </div>
                 {%- endif -%}

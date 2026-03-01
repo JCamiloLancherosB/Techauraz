@@ -7,14 +7,14 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/technology-6801334_1280.jpg",
-            "heading": "Tecnología Premium con Envío GRATIS a Todo Colombia",
+            "heading": "Eleva tu Setup. Paga en la Puerta de tu Casa.",
             "heading_size": "h0",
-            "subheading": "+5.000 clientes satisfechos • Garantía 30 días • Pago contra entrega",
-            "button_label": "Explorar Ofertas",
+            "subheading": "Audífonos, smartwatches y accesorios premium con envío GRATIS + pago contraentrega en toda Colombia",
+            "button_label": "Explorar Ofertas \uD83D\uDD25",
             "link": "shopify://collections/all",
             "button_style_secondary": false,
-            "button_label_2": "Hablar por WhatsApp",
-            "link_2": "shopify://pages/contacto-techaura",
+            "button_label_2": "",
+            "link_2": "",
             "box_align": "middle-center",
             "show_text_box": true,
             "text_alignment": "center",
@@ -27,14 +27,14 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/image2.png",
-            "heading": "Memorias USB Personalizadas con tu Música Favorita",
+            "heading": "Memorias USB que Dejan Marca. 100% Personalizadas.",
             "heading_size": "h0",
-            "subheading": "Elige el contenido, nosotros lo preparamos • Entrega en 2-5 días",
+            "subheading": "Regalos corporativos, eventos y fechas especiales. Elige el contenido, nosotros hacemos el resto.",
             "button_label": "Personalizar Ahora",
             "link": "shopify://pages/usb-al-gusto-personalizada",
             "button_style_secondary": false,
-            "button_label_2": "Ver Catálogo Completo",
-            "link_2": "shopify://collections/all",
+            "button_label_2": "",
+            "link_2": "",
             "box_align": "middle-center",
             "show_text_box": true,
             "text_alignment": "center",
@@ -66,32 +66,32 @@
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Envío GRATIS a tu puerta",
-            "description": "Sin costos ocultos. Tu pedido llega gratis a cualquier ciudad de Colombia, sin monto mínimo."
+            "title": "Envío GRATIS a Todo Colombia 🚚",
+            "description": "Sin monto mínimo ni costos ocultos. Tu pedido llega gratis a la puerta de tu casa, en cualquier ciudad."
           }
         },
         "benefit_payment": {
           "type": "benefit",
           "settings": {
             "icon": "payment",
-            "title": "Pagas solo al recibir",
-            "description": "Revisa tu producto primero, paga después. Contraentrega disponible en todo el país."
+            "title": "Pago Contraentrega: Cero Riesgos 🤝",
+            "description": "Revisa tu producto primero, paga después. Sin tarjeta, sin datos, sin preocupaciones."
           }
         },
         "benefit_guarantee": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "30 días de garantía total",
-            "description": "No te convenció? Devúlvelo sin preguntas y te reembolsamos el 100% de tu dinero."
+            "title": "30 Días de Garantía o Tu Dinero 💯",
+            "description": "No te convenció? Devuélvelo sin preguntas y te reembolsamos el 100%. Sin letra pequeña."
           }
         },
         "benefit_delivery": {
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Entrega en 2 a 5 días",
-            "description": "Procesamos tu pedido hoy mismo. Recíbelo rápido donde estés en Colombia."
+            "title": "Recíbelo en 2-5 Días ⚡",
+            "description": "Pedidos antes de las 2pm se procesan hoy mismo. Seguimiento en tiempo real hasta tu puerta."
           }
         }
       },
@@ -112,8 +112,9 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audífonos",
-            "product_count": "25",
+            "title": "Audífonos & Diademas",
+            "subtitle": "Desde $49.900",
+            "badge": "Trending 🔥",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
         },
@@ -122,7 +123,8 @@
           "settings": {
             "icon": "watch",
             "title": "Smart Watches",
-            "product_count": "18",
+            "subtitle": "Desde $79.900",
+            "badge": "",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
         },
@@ -130,8 +132,9 @@
           "type": "category",
           "settings": {
             "icon": "usb",
-            "title": "Memorias USB",
-            "product_count": "30",
+            "title": "USB Personalizadas",
+            "subtitle": "Elige tu contenido",
+            "badge": "Personalizable",
             "link": "shopify://pages/usb-al-gusto-personalizada"
           }
         },
@@ -139,8 +142,9 @@
           "type": "category",
           "settings": {
             "icon": "smartphone",
-            "title": "Accesorios",
-            "product_count": "40",
+            "title": "Accesorios Tech",
+            "subtitle": "Desde $29.900",
+            "badge": "",
             "link": "shopify://collections/varios-productos-tecnologicos-techaura-utiles"
           }
         },
@@ -148,8 +152,9 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Iluminación",
-            "product_count": "15",
+            "title": "Iluminación LED",
+            "subtitle": "Transforma tu espacio",
+            "badge": "Nuevo",
             "link": "shopify://collections/iluminacion"
           }
         }
@@ -162,8 +167,8 @@
         "category_5"
       ],
       "settings": {
-        "heading": "Explora por Categoría",
-        "subtitle": "Encuentra exactamente lo que necesitas"
+        "heading": "Encuentra lo que Buscas",
+        "subtitle": "Las categorías más populares entre nuestros clientes"
       }
     },
     "featured_collection_9GzLFt": {
@@ -290,80 +295,72 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.",
+            "review_text": "Tenía miedo de pedir online, pero el Pago Contraentrega me dio confianza. Pedí unos audífonos gamer y llegaron en 3 días a Medellín. La calidad es brutal, mejor que lo que esperaba. 10/10.",
             "customer_name": "Carlos M.",
-            "customer_city": "Bogotá, Colombia",
-            "customer_title": "Cliente verificado"
+            "customer_city": "Medellín"
           }
         },
         "testimonial_carousel_2": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.",
+            "review_text": "Ya es mi tercera compra. El cargador rápido carga mi cel en 40 minutos y no se calienta. Lo mejor: pago contraentrega y sin costos de envío. No busco más tiendas.",
             "customer_name": "Ana R.",
-            "customer_city": "Medellín, Colombia",
-            "customer_title": "Comprador frecuente"
+            "customer_city": "Bogotá"
           }
         },
         "testimonial_carousel_3": {
           "type": "testimonial",
           "settings": {
-            "rating": 4,
-            "review_text": "Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.",
+            "rating": 5,
+            "review_text": "Encargamos 50 USB personalizadas con el logo de la empresa para un evento. Quedaron impecables, la impresión nítida y la entrega fue antes de lo prometido. Ya somos clientes fijos.",
             "customer_name": "Empresas Tech",
-            "customer_city": "Cali, Colombia",
-            "customer_title": "Cliente corporativo"
+            "customer_city": "Cali"
           }
         },
         "testimonial_carousel_4": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El smartwatch es increíble por el precio. Todas las funciones funcionan perfectamente y la batería dura varios días. Muy satisfecho con mi compra.",
+            "review_text": "El smartwatch vale cada peso. Hace todo lo que uno de 500 mil y me costó menos de la mitad. Batería de 4 días, notificaciones, pasos... mi esposa ya quiere el suyo.",
             "customer_name": "Pedro L.",
-            "customer_city": "Cartagena, Colombia",
-            "customer_title": "Cliente verificado"
+            "customer_city": "Cartagena"
           }
         },
         "testimonial_carousel_5": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Servicio al cliente excepcional. Tuve una duda y me respondieron inmediatamente. El producto llegó en perfecto estado y antes de lo esperado.",
+            "review_text": "Escribí al WhatsApp a las 9pm con una duda del pedido y me respondieron en 5 minutos. CINCO MINUTOS un domingo. El producto llegó perfecto al día siguiente. Servicio de otro nivel.",
             "customer_name": "Laura S.",
-            "customer_city": "Barranquilla, Colombia",
-            "customer_title": "Comprador frecuente"
+            "customer_city": "Barranquilla"
           }
         },
         "testimonial_carousel_6": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Compré la diadema gamer y quedé fascinado. El micrófono capta la voz perfectamente y los graves son potentes. Mis amigos me preguntan cuál es y siempre recomiendo TechAura.",
+            "review_text": "Soy gamer y la diadema que compré suena mejor que unas Razer que tuve. El mic es cristalino, los graves potentes. Mis parceros ya pidieron la misma. TechAura se la sabe.",
             "customer_name": "Andrés F.",
-            "customer_city": "Bucaramanga, Colombia",
-            "customer_title": "Gamer verificado"
+            "customer_city": "Bucaramanga"
           }
         },
         "testimonial_carousel_7": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Pedí una USB personalizada con vallenatos y boleros para mi papá. Llegó rapidísimo y la calidad del audio es impecable. Ya encargué otra para regalo de cumpleaños.",
+            "review_text": "Pedí una USB personalizada con vallenatos y boleros para mi papá. Llegó en 2 días a Pereira, la calidad del audio impecable. Ya encargué otra con rancheras para mi tío.",
             "customer_name": "Valentina G.",
-            "customer_city": "Pereira, Colombia",
-            "customer_title": "Cliente verificado"
+            "customer_city": "Pereira"
           }
         },
         "testimonial_carousel_8": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Las luces LED para mi escritorio transformaron mi setup completamente. Instalación facilísima y los colores son vibrantes. Contraentrega sin problema, excelente experiencia.",
+            "review_text": "Las luces LED RGB transformaron mi escritorio completamente. Instalación en 10 minutos, colores vibrantes y el control remoto funciona perfecto. Pagué contraentrega sin problema.",
             "customer_name": "Santiago R.",
-            "customer_city": "Manizales, Colombia",
-            "customer_title": "Comprador frecuente"
+            "customer_city": "Manizales"
           }
         }
       },
@@ -378,8 +375,8 @@
         "testimonial_carousel_8"
       ],
       "settings": {
-        "title": "Lo que dicen nuestros clientes",
-        "subtitle": "Reseñas verificadas de compradores en toda Colombia",
+        "title": "Únete a +5,000 colombianos que ya mejoraron su setup 👇",
+        "subtitle": "Reseñas reales de compradores verificados en toda Colombia",
         "heading_size": "h1",
         "visible_testimonials": 3,
         "autoplay": true,
@@ -450,14 +447,14 @@
         "heading_block": {
           "type": "heading",
           "settings": {
-            "heading": "Obtén 10% de Descuento en tu Primera Compra",
+            "heading": "🎁 Desbloquea 10% OFF en tu Primera Compra",
             "heading_size": "h1"
           }
         },
         "paragraph_block": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Suscríbete y recibe tu código de descuento exclusivo + ofertas especiales, novedades y tips tecnológicos directamente en tu correo. ¡Solo para suscriptores!</p>"
+            "text": "<p>Déjanos tu correo y recibe tu código VIP al instante. Cero spam.</p>"
           }
         },
         "email_form_block": {

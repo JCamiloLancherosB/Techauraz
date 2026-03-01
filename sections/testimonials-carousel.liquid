@@ -1,170 +1,110 @@
+{{ 'testimonials.css' | asset_url | stylesheet_tag }}
 
 <section 
-  class="testimonials-carousel section-{{ section.id }}-padding"
+  class="testimonials-wall section-{{ section.id }}-padding"
   data-section-id="{{ section.id }}"
-  data-autoplay="{{ section.settings.autoplay }}"
-  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
   aria-label="Testimonios de clientes"
   style="{% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}"
 >
   <div class="page-width">
     {%- if section.settings.title != blank -%}
-      <div class="testimonials-carousel__header">
-        <h2 class="testimonials-carousel__title {{ section.settings.heading_size }}">
+      <div class="testimonials-wall__header">
+        <h2 class="testimonials-wall__title {{ section.settings.heading_size }}">
           {{ section.settings.title }}
         </h2>
         {%- if section.settings.subtitle != blank -%}
-          <p class="testimonials-carousel__subtitle">{{ section.settings.subtitle }}</p>
+          <p class="testimonials-wall__subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
 
-    <div class="testimonials-carousel__container" role="region" aria-roledescription="carousel" aria-label="Reseñas de clientes">
-      {%- comment -%} Navigation Arrows {%- endcomment -%}
-      {%- if section.blocks.size > 1 -%}
-        <button 
-          type="button" 
-          class="testimonials-carousel__nav testimonials-carousel__nav--prev"
-          aria-label="Ver testimonio anterior"
-          aria-controls="testimonials-track-{{ section.id }}"
+    <div class="testimonials-wall__grid" role="list">
+      {%- for block in section.blocks -%}
+        <article 
+          class="testimonials-wall__card"
+          role="listitem"
+          {{ block.shopify_attributes }}
+          aria-label="Testimonio de {{ block.settings.customer_name | default: 'Cliente' }}"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-      {%- endif -%}
-
-      {%- comment -%} Testimonials Track {%- endcomment -%}
-      <div class="testimonials-carousel__track-wrapper">
-        <div 
-          class="testimonials-carousel__track" 
-          id="testimonials-track-{{ section.id }}"
-          data-visible-count="{{ section.settings.visible_testimonials }}"
-          role="list"
-        >
-          {%- for block in section.blocks -%}
-            <article 
-              class="testimonials-carousel__card"
-              role="listitem"
-              {{ block.shopify_attributes }}
-              aria-label="Testimonio de {{ block.settings.customer_name | default: 'Cliente' }}"
-              tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-            >
-              <div class="testimonials-carousel__card-inner">
-                {%- comment -%} Star Rating with SVG {%- endcomment -%}
-                {%- if block.settings.rating > 0 -%}
-                  <div class="testimonials-carousel__rating" aria-label="Calificación: {{ block.settings.rating }} de 5 estrellas">
-                    {%- for i in (1..5) -%}
-                      {%- if i <= block.settings.rating -%}
-                        <svg class="testimonials-carousel__star testimonials-carousel__star--filled" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                      {%- else -%}
-                        <svg class="testimonials-carousel__star testimonials-carousel__star--empty" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                      {%- endif -%}
-                    {%- endfor -%}
-                  </div>
+          {%- comment -%} Star Rating {%- endcomment -%}
+          {%- if block.settings.rating > 0 -%}
+            <div class="testimonials-wall__rating" aria-label="Calificación: {{ block.settings.rating }} de 5 estrellas">
+              {%- for i in (1..5) -%}
+                {%- if i <= block.settings.rating -%}
+                  <svg class="testimonials-wall__star testimonials-wall__star--filled" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                {%- else -%}
+                  <svg class="testimonials-wall__star testimonials-wall__star--empty" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
                 {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
 
-                {%- comment -%} Review Text {%- endcomment -%}
-                {%- if block.settings.review_text != blank -%}
-                  <blockquote class="testimonials-carousel__text">
-                    <p>{{ block.settings.review_text }}</p>
-                  </blockquote>
-                {%- endif -%}
+          {%- comment -%} Review Text {%- endcomment -%}
+          {%- if block.settings.review_text != blank -%}
+            <blockquote class="testimonials-wall__text">
+              <p>{{ block.settings.review_text }}</p>
+            </blockquote>
+          {%- endif -%}
 
-                {%- comment -%} Customer Info {%- endcomment -%}
-                <div class="testimonials-carousel__customer">
-                  {%- if block.settings.customer_image != blank -%}
-                    <div class="testimonials-carousel__avatar">
-                      <img
-                        src="{{ block.settings.customer_image | image_url: width: 80, height: 80, crop: 'center' }}"
-                        alt="{% if block.settings.customer_name != blank %}{{ block.settings.customer_name | escape }}{% else %}Foto del cliente{% endif %}"
-                        width="48"
-                        height="48"
-                        loading="lazy"
-                        decoding="async"
-                      >
-                    </div>
-                  {%- else -%}
-                    <div class="testimonials-carousel__avatar testimonials-carousel__avatar--placeholder">
-                      <span aria-hidden="true">{{ block.settings.customer_name | default: 'C' | slice: 0, 1 | upcase }}</span>
-                    </div>
-                  {%- endif -%}
-                  
-                  <div class="testimonials-carousel__customer-info">
-                    {%- if block.settings.customer_name != blank -%}
-                      <cite class="testimonials-carousel__customer-name">{{ block.settings.customer_name }}</cite>
-                    {%- endif -%}
-                    {%- if block.settings.customer_city != blank -%}
-                      <span class="testimonials-carousel__customer-city">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        {{ block.settings.customer_city }}
-                      </span>
-                    {%- endif -%}
-                    {%- if block.settings.customer_title != blank -%}
-                      <span class="testimonials-carousel__customer-title">{{ block.settings.customer_title }}</span>
-                    {%- endif -%}
-                  </div>
-                </div>
+          {%- comment -%} Product Photo (optional UGC placeholder) {%- endcomment -%}
+          {%- if block.settings.product_image != blank -%}
+            <div class="testimonials-wall__product-image">
+              <img
+                src="{{ block.settings.product_image | image_url: width: 400 }}"
+                alt="Producto reseñado"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Customer Info + Verified Badge {%- endcomment -%}
+          <div class="testimonials-wall__customer">
+            {%- if block.settings.customer_image != blank -%}
+              <div class="testimonials-wall__avatar">
+                <img
+                  src="{{ block.settings.customer_image | image_url: width: 80, height: 80, crop: 'center' }}"
+                  alt="{{ block.settings.customer_name | escape }}"
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  decoding="async"
+                >
               </div>
-            </article>
-          {%- endfor -%}
-        </div>
-      </div>
+            {%- else -%}
+              <div class="testimonials-wall__avatar testimonials-wall__avatar--placeholder">
+                <span aria-hidden="true">{{ block.settings.customer_name | default: 'C' | slice: 0, 1 | upcase }}</span>
+              </div>
+            {%- endif -%}
+            
+            <div class="testimonials-wall__customer-info">
+              {%- if block.settings.customer_name != blank -%}
+                <cite class="testimonials-wall__name">{{ block.settings.customer_name }}</cite>
+              {%- endif -%}
+              {%- if block.settings.customer_city != blank -%}
+                <span class="testimonials-wall__city">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {{ block.settings.customer_city }}
+                </span>
+              {%- endif -%}
+            </div>
+          </div>
 
-      {%- if section.blocks.size > 1 -%}
-        <button 
-          type="button" 
-          class="testimonials-carousel__nav testimonials-carousel__nav--next"
-          aria-label="Ver siguiente testimonio"
-          aria-controls="testimonials-track-{{ section.id }}"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      {%- endif -%}
+          {%- comment -%} Verified Purchase Badge {%- endcomment -%}
+          <div class="testimonials-wall__verified">
+            <span class="testimonials-wall__verified-badge">✅ Compra Verificada</span>
+          </div>
+        </article>
+      {%- endfor -%}
     </div>
-
-    {%- comment -%} Dot Indicators {%- endcomment -%}
-    {%- if section.blocks.size > 1 -%}
-      <div class="testimonials-carousel__dots" role="group" aria-label="Navegación de testimonios">
-        {%- for block in section.blocks -%}
-          <button 
-            type="button"
-            class="testimonials-carousel__dot{% if forloop.first %} testimonials-carousel__dot--active{% endif %}"
-            aria-label="Ir al testimonio {{ forloop.index }} de {{ section.blocks.size }}"
-            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
-            data-index="{{ forloop.index0 }}"
-          >
-            <span class="visually-hidden">Testimonio {{ forloop.index }}</span>
-          </button>
-        {%- endfor -%}
-        {%- if section.settings.autoplay -%}
-          <button
-            type="button"
-            class="testimonials-carousel__autoplay-toggle"
-            aria-label="Pausar rotación automática"
-            data-playing="true"
-          >
-            <svg class="testimonials-carousel__pause-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-              <rect x="6" y="4" width="4" height="16"></rect>
-              <rect x="14" y="4" width="4" height="16"></rect>
-            </svg>
-            <svg class="testimonials-carousel__play-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" style="display:none;">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-          </button>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
   </div>
 </section>
-
-<script src="{{ 'testimonials.js' | asset_url }}" defer></script>
 
 <style>
   .section-{{ section.id }}-padding {
@@ -182,9 +122,9 @@
 
 {% schema %}
 {
-  "name": "Testimonios Carrusel",
+  "name": "Wall of Love",
   "tag": "section",
-  "class": "section testimonials-carousel-section",
+  "class": "section testimonials-wall-section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
@@ -192,14 +132,14 @@
     {
       "type": "text",
       "id": "title",
-      "default": "Lo que dicen nuestros clientes",
+      "default": "Únete a +5,000 colombianos que ya mejoraron su setup 👇",
       "label": "Título de la sección"
     },
     {
       "type": "text",
       "id": "subtitle",
       "label": "Subtítulo (opcional)",
-      "default": "Reseñas verificadas de clientes satisfechos"
+      "default": "Reseñas reales de compradores verificados en toda Colombia"
     },
     {
       "type": "select",
@@ -211,38 +151,6 @@
       ],
       "default": "h1",
       "label": "Tamaño del título"
-    },
-    {
-      "type": "range",
-      "id": "visible_testimonials",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 3,
-      "label": "Testimonios visibles (escritorio)",
-      "info": "En móvil siempre se muestra 1 testimonio a la vez"
-    },
-    {
-      "type": "header",
-      "content": "Autoplay"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "default": true,
-      "label": "Reproducción automática",
-      "info": "Rotar testimonios automáticamente"
-    },
-    {
-      "type": "range",
-      "id": "autoplay_speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "default": 5,
-      "unit": "s",
-      "label": "Velocidad de autoplay",
-      "info": "Tiempo entre cada testimonio"
     },
     {
       "type": "header",
@@ -309,71 +217,53 @@
           "type": "text",
           "id": "customer_city",
           "label": "Ciudad del cliente",
-          "default": "Bogotá, Colombia",
+          "default": "Bogotá",
           "info": "Ej: Bogotá, Medellín, Cali"
-        },
-        {
-          "type": "text",
-          "id": "customer_title",
-          "label": "Título del cliente (opcional)",
-          "default": "Cliente verificado",
-          "info": "Ej: Cliente verificado, Comprador frecuente"
         },
         {
           "type": "image_picker",
           "id": "customer_image",
-          "label": "Foto del cliente (opcional)"
+          "label": "Foto del cliente (opcional)",
+          "info": "Foto real o avatar. 80x80px recomendado."
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Foto del producto/unboxing (opcional)",
+          "info": "Imagen UGC del producto en mano del cliente. 400x300px recomendado."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Testimonios Carrusel",
+      "name": "Wall of Love",
       "blocks": [
         {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.",
+            "review_text": "Tenía miedo de pedir online, pero el Pago Contraentrega me dio confianza. Llegó en 3 días a Medellín y la calidad es brutal. 10/10.",
             "customer_name": "Carlos M.",
-            "customer_title": "Cliente verificado"
+            "customer_city": "Medellín"
           }
         },
         {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.",
+            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y los uso diariamente. Ya es mi segunda compra en TechAura.",
             "customer_name": "Ana R.",
-            "customer_title": "Comprador frecuente"
+            "customer_city": "Bogotá"
           }
         },
         {
           "type": "testimonial",
           "settings": {
-            "rating": 4,
-            "review_text": "Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.",
+            "rating": 5,
+            "review_text": "Pedí la USB personalizada para un regalo corporativo y quedó perfecta. Ya encargamos 50 más para la oficina.",
             "customer_name": "Empresas Tech",
-            "customer_title": "Cliente corporativo"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "El smartwatch es increíble por el precio. Todas las funciones funcionan perfectamente y la batería dura varios días. Muy satisfecho con mi compra.",
-            "customer_name": "Pedro L.",
-            "customer_title": "Cliente verificado"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "Servicio al cliente excepcional. Tuve una duda y me respondieron inmediatamente. El producto llegó en perfecto estado y antes de lo esperado.",
-            "customer_name": "Laura S.",
-            "customer_title": "Comprador frecuente"
+            "customer_city": "Cali"
           }
         }
       ]

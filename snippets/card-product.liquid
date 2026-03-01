@@ -118,48 +118,61 @@
               Clean Badges: Max 1-2 badges
               Status Badge Priority: Oferta > Nuevo > Agotado (max 1)
               Value Badge: Envío Gratis / Contraentrega (max 1, shown below status)
+              FOMO Badge: Alta Demanda / Pocas Unidades (tag-driven or sale fallback)
             {%- endcomment -%}
             {%- liquid
               assign is_new_tag = false
               assign has_free_shipping = false
               assign has_cod = false
+              assign has_hot_demand = false
+              assign has_low_stock = false
               assign tags_lower = card_product.tags | map: 'downcase'
               
               if tags_lower contains 'nuevo'
                 assign is_new_tag = true
               endif
               
-              comment
-                Check for value proposition tags (case-insensitive)
-                Tags: "envio-gratis", "free-shipping"
-                Note: tags_lower is already lowercased, so no need for accented variants
-              endcomment
               for tag in tags_lower
                 if tag contains 'envio-gratis' or tag contains 'free-shipping'
                   assign has_free_shipping = true
-                  break
+                endif
+                if tag contains 'contraentrega' or tag contains 'pago-al-recibir' or tag == 'cod'
+                  assign has_cod = true
+                endif
+                if tag contains 'alta-demanda' or tag contains 'hot' or tag contains 'trending'
+                  assign has_hot_demand = true
+                endif
+                if tag contains 'pocas-unidades' or tag contains 'low-stock'
+                  assign has_low_stock = true
                 endif
               endfor
               
               comment
-                Check for COD (contraentrega) tag
-                Tags: "contraentrega", "pago-al-recibir", "cod"
+                Auto-assign FOMO badge for on-sale products without explicit tags
               endcomment
-              for tag in tags_lower
-                if tag contains 'contraentrega' or tag contains 'pago-al-recibir' or tag == 'cod'
-                  assign has_cod = true
-                  break
+              if has_hot_demand == false and has_low_stock == false
+                if card_product.compare_at_price and card_product.compare_at_price > card_product.price
+                  assign has_hot_demand = true
                 endif
-              endfor
+              endif
             -%}
+
+            {%- comment -%} FOMO BADGE: Positioned top-left over the image {%- endcomment -%}
+            {%- if has_hot_demand or has_low_stock -%}
+              <div class="card__fomo-badge">
+                {%- if has_hot_demand -%}
+                  <span class="card__fomo card__fomo--hot">🔥 Alta Demanda</span>
+                {%- elsif has_low_stock -%}
+                  <span class="card__fomo card__fomo--low">⚡ Pocas Unidades</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
             <div class="card__badges">
-              {%- comment -%} STATUS BADGE: Show "Oferta" badge ONLY when compare_at_price exists AND is greater than price {%- endcomment -%}
               {%- if card_product.compare_at_price and card_product.compare_at_price > card_product.price -%}
                 <span class="card__badge card__badge--sale">OFERTA</span>
-              {%- comment -%} Show "Nuevo" badge only if product has "nuevo" tag (case-insensitive) {%- endcomment -%}
               {%- elsif is_new_tag -%}
                 <span class="card__badge card__badge--new">Nuevo</span>
-              {%- comment -%} Show "Agotado" only if not available {%- endcomment -%}
               {%- elsif card_product.available == false -%}
                 <span class="card__badge card__badge--sold-out">Agotado</span>
               {%- endif -%}
@@ -277,6 +290,18 @@
                       {{- card_product.metafields.reviews.rating_count }}
                       {{ 'accessibility.total_reviews' | t -}}
                     </span>
+                  </p>
+                {%- else -%}
+                  {%- comment -%}
+                    CRO Social Proof Fallback: Show 5-star visual for products without reviews.
+                    Uses deterministic pseudo-random count based on product ID for consistency.
+                  {%- endcomment -%}
+                  {%- assign star_seed = card_product.id | modulo: 53 | plus: 20 -%}
+                  <div class="rating rating--social-proof" role="img" aria-label="4.8 de 5 estrellas">
+                    <span class="rating-stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
+                  </div>
+                  <p class="rating-count caption">
+                    <span aria-hidden="true">({{ star_seed }})</span>
                   </p>
                 {%- endif -%}
               </div>

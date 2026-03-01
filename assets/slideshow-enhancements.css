@@ -81,6 +81,7 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .template-index .tech-hero__media,
   .template-index .tech-hero .slideshow__slide {
     min-height: 350px;
@@ -88,6 +89,7 @@
 }
 
 @media screen and (min-width: 990px) {
+
   .template-index .tech-hero__media,
   .template-index .tech-hero .slideshow__slide {
     min-height: 502px;
@@ -149,7 +151,8 @@
   height: 100% !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  min-height: 280px; /* Mobile - matches hero */
+  min-height: 280px;
+  /* Mobile - matches hero */
   object-fit: cover;
   display: block;
   opacity: 1;
@@ -157,16 +160,20 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .slideshow__media.placeholder .placeholder-svg,
   .banner__media.placeholder .placeholder-svg {
-    min-height: 350px; /* Tablet - matches hero */
+    min-height: 350px;
+    /* Tablet - matches hero */
   }
 }
 
 @media screen and (min-width: 990px) {
+
   .slideshow__media.placeholder .placeholder-svg,
   .banner__media.placeholder .placeholder-svg {
-    min-height: 400px; /* Desktop - matches hero */
+    min-height: 400px;
+    /* Desktop - matches hero */
     max-height: 560px;
   }
 }
@@ -175,15 +182,18 @@
 .slideshow__media,
 .banner__media {
   min-height: 280px;
-  max-height: 400px; /* Cap mobile height */
+  max-height: 400px;
+  /* Cap mobile height */
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: #f1f5f9; /* Light gray fallback background */
+  background: #f1f5f9;
+  /* Light gray fallback background */
 }
 
 /* Tablet: Set height */
 @media screen and (min-width: 750px) {
+
   .slideshow__media,
   .banner__media {
     min-height: 350px;
@@ -193,6 +203,7 @@
 
 /* Desktop: Set height with max to prevent excessive height */
 @media screen and (min-width: 990px) {
+
   .slideshow__media,
   .banner__media {
     min-height: 400px;
@@ -220,20 +231,24 @@
 
 /* Ensure slideshow slide containers maintain consistent height */
 .slideshow__slide {
-  min-height: 280px; /* Mobile */
-  max-height: 400px; /* Cap mobile height to prevent excessive growth */
+  min-height: 280px;
+  /* Mobile */
+  max-height: 400px;
+  /* Cap mobile height to prevent excessive growth */
 }
 
 @media screen and (min-width: 750px) {
   .slideshow__slide {
-    min-height: 350px; /* Tablet - matches hero ratio */
+    min-height: 350px;
+    /* Tablet - matches hero ratio */
     max-height: 500px;
   }
 }
 
 @media screen and (min-width: 990px) {
   .slideshow__slide {
-    min-height: 400px; /* Desktop - matches hero ratio */
+    min-height: 400px;
+    /* Desktop - matches hero ratio */
     max-height: 560px;
   }
 }
@@ -254,8 +269,10 @@
 .banner__content {
   position: absolute;
   inset: 0;
-  z-index: 3; /* Above overlay (z-index: 2) */
-  pointer-events: none; /* Allow clicks to pass through wrapper */
+  z-index: 3;
+  /* Above overlay (z-index: 2) */
+  pointer-events: none;
+  /* Allow clicks to pass through wrapper */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,6 +283,7 @@
 
 /* Mobile-specific overlay alignment */
 @media screen and (max-width: 749px) {
+
   .slideshow__text-wrapper,
   .banner__content {
     padding: 0.75rem;
@@ -290,6 +308,7 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .slideshow__text-wrapper .banner__box,
   .banner__content .banner__box {
     padding: 3rem 3.5rem;
@@ -338,15 +357,15 @@
   right: 0;
   bottom: 0;
   /* Gradient overlay: subtle at top, stronger at bottom for text readability */
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.25) 40%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.25) 40%,
+      rgba(0, 0, 0, 0.45) 100%);
   content: '';
-  z-index: 1; /* Above image (z-index: 0) */
-  pointer-events: none; /* Don't block clicks */
+  z-index: 1;
+  /* Above image (z-index: 0) */
+  pointer-events: none;
+  /* Don't block clicks */
 }
 
 /* Ensure the image stays at base z-index */
@@ -370,7 +389,8 @@
 @media screen and (min-width: 750px) {
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     position: relative;
-    z-index: var(--ta-z-slideshow-controls, 20); /* Local stacking within slideshow */
+    z-index: var(--ta-z-slideshow-controls, 20);
+    /* Local stacking within slideshow */
     /* Enhanced glassmorphism effect for navigation buttons */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
@@ -419,6 +439,7 @@
  * Arrows are hidden on mobile for better UX - users swipe to navigate slides
  */
 @media screen and (max-width: 749px) {
+
   /* Hide arrow buttons on mobile for auto-rotate mode - users swipe instead */
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     display: none;
@@ -460,7 +481,8 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: var(--ta-z-slideshow-controls, 20); /* Local stacking within slideshow */
+    z-index: var(--ta-z-slideshow-controls, 20);
+    /* Local stacking within slideshow */
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -568,13 +590,16 @@
   align-items: center;
   margin-top: 1.5rem;
   position: relative;
-  z-index: 10; /* Ensure CTAs are above overlay */
-  pointer-events: auto; /* Ensure clickability */
+  z-index: 10;
+  /* Ensure CTAs are above overlay */
+  pointer-events: auto;
+  /* Ensure clickability */
 }
 
 /* Individual CTA Button */
 .template-index slideshow-component .slideshow-cta {
-  min-height: 48px; /* Exceeds 44px requirement for better touch targets */
+  min-height: 48px;
+  /* Exceeds 44px requirement for better touch targets */
   padding: 1rem 2rem;
   cursor: pointer;
   font-weight: 600;
@@ -589,30 +614,48 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  pointer-events: auto; /* Ensure clickability */
+  pointer-events: auto;
+  /* Ensure clickability */
 }
 
-/* Primary CTA - "VER CATÁLOGO" enhanced blue button */
+/* Primary CTA - Neon Green conversion button with pulse (Isolation Effect) */
 .template-index slideshow-component .slideshow-cta.button--primary {
-  background: #3b82f6;
+  background: linear-gradient(135deg, #00D95F 0%, #00C853 100%);
   color: #ffffff;
   border: none;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 14px 0 rgba(0, 217, 95, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: cta-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 4px 14px 0 rgba(0, 217, 95, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 4px 30px 0 rgba(0, 217, 95, 0.7), 0 0 60px rgba(0, 217, 95, 0.2);
+  }
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:hover {
-  background: #2563eb;
+  background: linear-gradient(135deg, #00E676 0%, #00D95F 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.5);
+  box-shadow: 0 6px 24px 0 rgba(0, 217, 95, 0.6);
+  animation: none;
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:focus {
-  outline: 3px solid rgba(59, 130, 246, 0.5);
+  outline: 3px solid rgba(0, 217, 95, 0.5);
   outline-offset: 3px;
 }
 
 .template-index slideshow-component .slideshow-cta.button--primary:focus-visible {
-  outline: 3px solid rgba(59, 130, 246, 0.7);
+  outline: 3px solid rgba(0, 217, 95, 0.7);
   outline-offset: 3px;
 }
 
@@ -658,7 +701,8 @@
   .template-index slideshow-component .slideshow-cta {
     width: 100%;
     max-width: 100%;
-    min-height: 52px; /* Exceeds 44px requirement */
+    min-height: 52px;
+    /* Exceeds 44px requirement */
     padding: 16px 24px;
   }
 }
@@ -689,9 +733,11 @@
 /* Ensure slideshow has proper positioning context for absolute controls */
 /* Arrow positioning: lines 95-142, Dot positioning: lines 180-212 */
 .template-index slideshow-component .slideshow {
-  position: relative; /* Positioning context for arrows and dots */
+  position: relative;
+  /* Positioning context for arrows and dots */
   margin-bottom: 0;
-  padding-bottom: 4rem; /* Space for dots */
+  padding-bottom: 4rem;
+  /* Space for dots */
 }
 
 @media screen and (max-width: 749px) {
@@ -700,7 +746,7 @@
   }
 
   /* Add extra spacing after slideshow on mobile to prevent overlap */
-  .template-index slideshow-component + * {
+  .template-index slideshow-component+* {
     margin-top: 2rem;
   }
 }
@@ -729,6 +775,7 @@
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
+
   .template-index slideshow-component .slider-button,
   .template-index slideshow-component .slideshow-cta {
     border-width: 3px;
@@ -741,6 +788,7 @@
 
 /* Print styles - hide controls */
 @media print {
+
   .template-index slideshow-component .slideshow__controls,
   .template-index slideshow-component .slider-button {
     display: none !important;
@@ -753,6 +801,7 @@
    ============================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   /* Disable slideshow auto-rotation transitions */
   .template-index slideshow-component .slideshow,
   .template-index slideshow-component .slideshow__slide,
@@ -771,6 +820,7 @@
   .template-index slideshow-component .slider-button,
   .template-index slideshow-component .slideshow-cta {
     transition: none;
+    animation: none;
   }
 
   /* Disable hover transforms that cause motion */
@@ -799,8 +849,18 @@
   color: inherit;
 }
 
-.slideshow__autoplay .icon--play { display: none; }
-.slideshow__autoplay .icon--pause { display: inline-block; }
+.slideshow__autoplay .icon--play {
+  display: none;
+}
 
-.slideshow__autoplay--paused .icon--play { display: inline-block; }
-.slideshow__autoplay--paused .icon--pause { display: none; }
+.slideshow__autoplay .icon--pause {
+  display: inline-block;
+}
+
+.slideshow__autoplay--paused .icon--play {
+  display: inline-block;
+}
+
+.slideshow__autoplay--paused .icon--pause {
+  display: none;
+}
