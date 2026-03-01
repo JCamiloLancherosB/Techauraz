@@ -7,6 +7,43 @@
    ============================================================================= */
 
 /* =============================================================================
+   0. CRO H1 TITLE UTILITY CLASSES
+   Custom utility classes for product title (no Tailwind dependency)
+   ============================================================================= */
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.text-slate-900 {
+  color: #0f172a;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.leading-tight {
+  line-height: 1.25;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+@media screen and (min-width: 750px) {
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+/* =============================================================================
    1. LAYOUT WIDTH & WHITESPACE FIXES
    Remove excessive top whitespace, ensure proper page-width constraint
    ============================================================================= */
@@ -42,12 +79,12 @@
   .product.grid.grid--1-col.grid--2-col-tablet {
     gap: 2.5rem;
   }
-  
+
   /* Large media setting */
   .product--large.grid.grid--2-col-tablet {
     grid-template-columns: 60% 40%;
   }
-  
+
   /* Medium media setting */
   .product--medium.grid.grid--2-col-tablet {
     grid-template-columns: 55% 45%;
@@ -93,8 +130,15 @@
 }
 
 @keyframes pulse-badge {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
 }
 
 /* Price styling with improved contrast and readability */
@@ -277,11 +321,11 @@
     gap: var(--ta-space-sm, 0.5rem) var(--ta-space-md, 0.75rem);
     padding: var(--ta-space-sm, 0.5rem) 0;
   }
-  
+
   .pdp-atf-micro-trust__item {
     font-size: 1.1rem;
   }
-  
+
   .pdp-atf-micro-trust__separator {
     display: none;
   }
@@ -363,6 +407,7 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .tech-pdp-media,
   .product-hero-slider {
     position: sticky;
@@ -512,7 +557,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: var(--ta-z-cookie-banner, 450); /* Above content, below WhatsApp - uses token from techauraz-tokens.css */
+  z-index: var(--ta-z-cookie-banner, 450);
+  /* Above content, below WhatsApp - uses token from techauraz-tokens.css */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   padding: var(--ta-space-md, 1.2rem) var(--ta-space-lg, 1.6rem);
@@ -529,6 +575,7 @@
 
 /* Safe area offset for devices with notches/home indicators */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
+
   .sticky-cta-bar,
   .sticky-mobile-cta {
     padding-bottom: calc(var(--ta-space-md, 1.2rem) + env(safe-area-inset-bottom));
@@ -537,21 +584,23 @@
 
 /* Mobile spacing optimization - coordinate WhatsApp position when sticky bar is visible */
 @media screen and (max-width: 749px) {
+
   /* When sticky CTA is visible, move WhatsApp button up */
-  .sticky-cta-bar--visible ~ .whatsapp-float,
-  .sticky-mobile-cta--visible ~ .whatsapp-float,
+  .sticky-cta-bar--visible~.whatsapp-float,
+  .sticky-mobile-cta--visible~.whatsapp-float,
   body:has(.sticky-cta-bar--visible) .whatsapp-float,
   body:has(.sticky-mobile-cta--visible) .whatsapp-float {
     bottom: calc(80px + env(safe-area-inset-bottom, 0px) + var(--ta-space-xl, 2.4rem));
     transition: bottom var(--ta-duration-normal, 0.25s) var(--ta-ease-out, ease-out);
   }
-  
+
   /* When cookie banner is visible, adjust sticky CTA position */
   body:has(.cookie-banner.is-visible) .sticky-cta-bar,
   body:has(.cookie-banner.is-visible) .sticky-mobile-cta {
-    bottom: 80px; /* Cookie banner approximate height */
+    bottom: 80px;
+    /* Cookie banner approximate height */
   }
-  
+
   /* When both cookie banner and sticky CTA visible, move WhatsApp higher */
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
   body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-float {
@@ -597,35 +646,36 @@
 
 /* Mobile-first adjustments */
 @media screen and (max-width: 749px) {
+
   /* Reduce section padding on mobile */
   [class*="section-"][class*="-padding"] {
     padding-top: var(--ta-space-sm, 0.5rem);
     padding-bottom: var(--ta-space-lg, 1rem);
   }
-  
+
   /* Compact product title */
   .product__title h1 {
     font-size: var(--ta-font-size-h4, 2rem);
     line-height: var(--ta-leading-tight, 1.25);
     margin-bottom: var(--ta-space-sm, 0.5rem);
   }
-  
+
   /* Tighter price display */
   .price--large .price-item--regular {
     font-size: var(--ta-font-size-h4, 2rem);
   }
-  
+
   .price--large .price-item--sale {
     font-size: var(--ta-font-size-h3, 2.2rem);
   }
-  
+
   /* Compact CTAs - maintain touch targets */
   .tech-cta-primary .shopify-payment-button__button,
   .product-form__cta-primary .shopify-payment-button__button {
     min-height: var(--ta-touch-comfortable, 48px);
     font-size: var(--ta-font-size-sm, 1.4rem);
   }
-  
+
   .tech-cta-secondary,
   .product-form__submit.tech-cta-secondary {
     min-height: var(--ta-touch-min, 44px);
@@ -638,7 +688,7 @@
   .product__title h1 {
     font-size: var(--ta-font-size-h3, 2.4rem);
   }
-  
+
   .price--large .price-item--sale {
     font-size: var(--ta-font-size-h3, 2.4rem);
   }
@@ -697,6 +747,7 @@
    10. MOBILE RESPONSIVE FIXES FOR PDP UPPER BLOCK
    ============================================================================= */
 @media screen and (max-width: 749px) {
+
   /* Tighter price area on mobile */
   .product__price {
     gap: var(--ta-space-sm, 0.6rem);
@@ -827,17 +878,21 @@
 }
 
 @keyframes urgency-soft-pulse {
-  0%, 100% { 
+
+  0%,
+  100% {
     box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
     transform: scale(1);
   }
-  50% { 
+
+  50% {
     box-shadow: 0 3px 12px rgba(251, 191, 36, 0.25);
     transform: scale(1.005);
   }
 }
 
 @media screen and (max-width: 749px) {
+
   .urgency-indicator,
   .pdp-urgency-bar {
     font-size: 1.2rem;
@@ -890,13 +945,14 @@
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
+
   .urgency-indicator.urgency-pulse,
   .pdp-urgency-bar.urgency-pulse,
   .price__badge-sale,
   .badge.price__badge-sale {
     animation: none;
   }
-  
+
   .tech-cta-primary .shopify-payment-button__button:hover,
   .product-form__cta-primary .shopify-payment-button__button:hover,
   .tech-cta-secondary:hover,
@@ -911,11 +967,11 @@
   .tech-trust-line {
     border: 2px solid var(--ta-text, #0f172a);
   }
-  
+
   .tech-trust-line__item {
     border: 1px solid var(--ta-text, #0f172a);
   }
-  
+
   .urgency-indicator,
   .pdp-urgency-bar {
     border: 2px solid var(--ta-text, #0f172a);
@@ -926,6 +982,7 @@
    15. MOBILE CTA ADJUSTMENTS - Maintain Touch Targets
    ============================================================================= */
 @media screen and (max-width: 749px) {
+
   .tech-cta-primary .shopify-payment-button__button,
   .product-form__cta-primary .shopify-payment-button__button {
     min-height: 48px;
@@ -987,7 +1044,7 @@
   .product-thumbnails {
     gap: var(--ta-space-md, 0.75rem);
   }
-  
+
   .product-thumbnail {
     width: 70px;
     height: 70px;
@@ -1286,8 +1343,15 @@
 }
 
 @keyframes pulse-badge-enhanced {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* =============================================================================
@@ -1441,16 +1505,16 @@
   .price--on-sale {
     gap: 8px;
   }
-  
+
   .price-item--sale {
     font-size: 1.75rem;
   }
-  
+
   .badge.price__badge-sale {
     padding: 5px 10px;
     font-size: 0.7rem;
   }
-  
+
   .product-form__submit[name="buy"],
   .tech-cta-primary .shopify-payment-button__button,
   .product-form__submit:not([name="buy"]),
@@ -1458,20 +1522,20 @@
     padding: 16px 24px;
     font-size: 0.9rem;
   }
-  
+
   .product-trust-badges,
   .trust-badges-pdp,
   .trust-badges-inline--product {
     padding: 12px;
     gap: 6px;
   }
-  
+
   .trust-badge-item,
   .trust-badges-inline__item {
     padding: 6px 10px;
     font-size: 0.75rem;
   }
-  
+
   .product__description-wrapper,
   .product__description--enhanced {
     padding: 16px;

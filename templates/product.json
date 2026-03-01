@@ -74,6 +74,12 @@
                         "custom_liquid": "{% render 'pdp-whatsapp-cta', product: product %}"
                     }
                 },
+                "pdp_fomo_stock": {
+                    "type": "custom_liquid",
+                    "settings": {
+                        "custom_liquid": "{% render 'pdp-fomo-stock', product: product %}"
+                    }
+                },
                 "share": {
                     "type": "share",
                     "settings": {
@@ -88,6 +94,7 @@
             "block_order": [
                 "title",
                 "price",
+                "pdp_fomo_stock",
                 "judge_me_reviews_preview_badge_nJBx3F",
                 "trust_line",
                 "variant_picker",

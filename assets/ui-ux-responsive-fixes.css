@@ -85,18 +85,21 @@
  * Responsive: Mobile-first, scales up for tablet/desktop
  */
 .ta-section {
-  padding-block: var(--ta-space-2xl, 3.2rem); /* 32px mobile */
+  padding-block: var(--ta-space-2xl, 3.2rem);
+  /* 32px mobile */
 }
 
 @media screen and (min-width: 750px) {
   .ta-section {
-    padding-block: var(--ta-space-3xl, 4.8rem); /* 48px tablet */
+    padding-block: var(--ta-space-3xl, 4.8rem);
+    /* 48px tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   .ta-section {
-    padding-block: calc(var(--ta-space-3xl, 4.8rem) + var(--ta-space-lg, 1.6rem)); /* 64px desktop */
+    padding-block: calc(var(--ta-space-3xl, 4.8rem) + var(--ta-space-lg, 1.6rem));
+    /* 64px desktop */
   }
 }
 
@@ -123,13 +126,15 @@
  * Mobile: 32px (2rem) vertical spacing
  */
 .tech-section {
-  padding-block: 2rem; /* Mobile: 32px */
+  padding-block: 2rem;
+  /* Mobile: 32px */
   padding-inline: 1rem;
 }
 
 @media screen and (min-width: 750px) {
   .tech-section {
-    padding-block: 3.5rem; /* Desktop: 56px */
+    padding-block: 3.5rem;
+    /* Desktop: 56px */
     padding-inline: 2rem;
   }
 }
@@ -158,6 +163,7 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .page-width,
   .ta-section .page-width,
   .tech-section .page-width,
@@ -167,6 +173,7 @@
 }
 
 @media screen and (min-width: 990px) {
+
   .page-width,
   .ta-section .page-width,
   .tech-section .page-width,
@@ -176,6 +183,7 @@
 }
 
 @media screen and (min-width: 1280px) {
+
   .page-width,
   .ta-section .page-width,
   .tech-section .page-width,
@@ -196,6 +204,7 @@
 }
 
 @media screen and (min-width: 750px) {
+
   .ta-section h2,
   .ta-section .section-heading,
   .tech-section h2,
@@ -274,6 +283,7 @@ slider-component,
 
 /* Fallback for older browsers (Safari < 16, older Edge/Chrome) */
 @supports not (overflow-x: clip) {
+
   slider-component,
   .slider-component-desktop,
   .slider-mobile-gutter {
@@ -298,14 +308,17 @@ slider-component,
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .slider::-webkit-scrollbar,
 .slider--desktop::-webkit-scrollbar,
 .slider--tablet::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Opera */
+  display: none;
+  /* Chrome/Safari/Opera */
 }
 
 /* Featured collection slider - specific overflow handling */
@@ -334,7 +347,8 @@ slider-component,
 
 /* Home collections - prevent grid peek from causing overflow */
 .grid--peek {
-  padding-right: 1.5rem; /* Space for peek effect without overflow */
+  padding-right: 1.5rem;
+  /* Space for peek effect without overflow */
 }
 
 /* =============================================================================
@@ -355,7 +369,8 @@ slider-component,
   position: relative;
   /* CSS Containment for layout performance - fallback gracefully */
   contain: layout;
-  overflow: hidden; /* Fallback for browsers without contain support */
+  overflow: hidden;
+  /* Fallback for browsers without contain support */
 }
 
 /* 
@@ -476,6 +491,7 @@ img[src$=".svg"] {
    0.3.1 MOBILE OVERFLOW HARDENING (360px - 749px)
    ============================================================================= */
 @media screen and (max-width: 749px) {
+
   /* 
    * Contain absolute positioned quick-add buttons on mobile
    * These commonly overflow on small viewports
@@ -489,7 +505,7 @@ img[src$=".svg"] {
     max-width: 100%;
     box-sizing: border-box;
   }
-  
+
   /* 
    * Card badges containment on mobile
    * Prevents sale/new badges from extending outside card
@@ -503,7 +519,7 @@ img[src$=".svg"] {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   /* 
    * Hero text containment on narrow mobile (360px)
    * Long headlines can overflow
@@ -518,7 +534,7 @@ img[src$=".svg"] {
     word-wrap: break-word;
     hyphens: auto;
   }
-  
+
   /* 
    * CTA buttons full width on mobile
    * Prevents button text overflow
@@ -531,7 +547,7 @@ img[src$=".svg"] {
     max-width: 100%;
     box-sizing: border-box;
   }
-  
+
   /* 
    * Newsletter form field sizing
    * Input and button must fit container
@@ -540,13 +556,13 @@ img[src$=".svg"] {
     flex-direction: column;
     gap: 0.75rem;
   }
-  
+
   .newsletter-form__field-wrapper input,
   .newsletter-form__field-wrapper button {
     width: 100%;
     max-width: 100%;
   }
-  
+
   /* 
    * Related products single column on very small screens
    * Prevents card overflow at 360px
@@ -554,7 +570,7 @@ img[src$=".svg"] {
   .related-products .grid--2-col-tablet-down {
     grid-template-columns: 1fr;
   }
-  
+
   /* 
    * PDP thumbnail list horizontal scroll
    * Simplified approach - just ensure it stays within container
@@ -572,6 +588,7 @@ img[src$=".svg"] {
    Extra tight containment for smallest supported viewports
    ============================================================================= */
 @media screen and (max-width: 390px) {
+
   /* 
    * Extra containment for 360px devices
    * iPhones SE, older Android devices
@@ -580,7 +597,7 @@ img[src$=".svg"] {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   /* Product card titles - prevent long names from overflowing */
   .card__heading,
   .card__heading a,
@@ -592,14 +609,14 @@ img[src$=".svg"] {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   /* Price display sizing */
   .price__regular,
   .price__sale,
   .price-item {
     font-size: 1.3rem;
   }
-  
+
   /* Announcement bar text size */
   .announcement-bar__message {
     font-size: 1.1rem;
@@ -610,6 +627,7 @@ img[src$=".svg"] {
    0.3.3 TABLET OVERFLOW HARDENING (750px - 1023px)
    ============================================================================= */
 @media screen and (min-width: 750px) and (max-width: 1023px) {
+
   /* 
    * Tablet grid adjustments
    * Ensure 2-3 column grids don't overflow
@@ -619,7 +637,7 @@ img[src$=".svg"] {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
-  
+
   /* 
    * PDP layout containment on tablet
    * Two-column layout must fit viewport
@@ -628,7 +646,7 @@ img[src$=".svg"] {
   .product--large {
     gap: 2rem;
   }
-  
+
   .product__media-wrapper,
   .product__info-wrapper {
     max-width: 100%;
@@ -639,6 +657,7 @@ img[src$=".svg"] {
    0.3.4 DESKTOP OVERFLOW HARDENING (1024px+)
    ============================================================================= */
 @media screen and (min-width: 1024px) {
+
   /* 
    * Large screen carousel containment
    * Prevents multi-item sliders from overflowing
@@ -648,7 +667,7 @@ img[src$=".svg"] {
   .featured-collection .slider {
     max-width: 100%;
   }
-  
+
   /* 
    * Wide content section containment
    * Rich text and image-with-text sections
@@ -663,6 +682,7 @@ img[src$=".svg"] {
    0.3.5 ULTRA-WIDE OVERFLOW HARDENING (1440px+)
    ============================================================================= */
 @media screen and (min-width: 1440px) {
+
   /* 
    * Ultra-wide containment
    * Prevents content from stretching too wide
@@ -677,7 +697,7 @@ img[src$=".svg"] {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   /* Full-bleed sections remain full width */
   .section--full-width .page-width,
   .banner .page-width,
@@ -890,6 +910,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Extra Small Mobile (360px+) - Minimum supported width */
 @media screen and (min-width: 360px) and (max-width: 749px) {
+
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
@@ -923,6 +944,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Mobile responsiveness - general (up to 749px) */
 @media screen and (max-width: 749px) {
+
   /* Ensure images don't overflow */
   img {
     max-width: 100%;
@@ -932,6 +954,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Tablet responsiveness (768px+) - Target 768px specifically */
 @media screen and (min-width: 750px) and (max-width: 989px) {
+
   /* Adjust grid columns for tablet - 3 columns */
   .grid--2-col-tablet {
     grid-template-columns: repeat(2, 1fr);
@@ -961,6 +984,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Desktop responsiveness (990px-1279px) */
 @media screen and (min-width: 990px) and (max-width: 1279px) {
+
   /* Featured collection - 4 columns on smaller desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(4, 1fr);
@@ -970,6 +994,7 @@ slideshow-component .slider::-webkit-scrollbar {
 
 /* Large Desktop (1280px+) - Target 1280px specifically */
 @media screen and (min-width: 1280px) {
+
   /* Featured collection - full 5 columns on large desktop */
   .grid--5-col-desktop {
     grid-template-columns: repeat(5, 1fr);
@@ -1254,6 +1279,7 @@ slideshow-component .slider::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 749px) {
+
   .grid--2-col,
   .grid--3-col,
   .grid--4-col,
@@ -1263,6 +1289,7 @@ slideshow-component .slider::-webkit-scrollbar {
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
+
   .grid--3-col,
   .grid--4-col,
   .grid--5-col {
@@ -1354,6 +1381,7 @@ a:hover {
 
 /* Touch-friendly elements on mobile */
 @media screen and (max-width: 749px) {
+
   button,
   a,
   .clickable {
@@ -1365,7 +1393,7 @@ a:hover {
   .quick-add__submit,
   .banner__buttons .button,
   .sticky-cta-bar__button,
-  .menu-drawer__menu-item > a {
+  .menu-drawer__menu-item>a {
     touch-action: manipulation;
   }
 
@@ -1393,6 +1421,7 @@ textarea:focus-visible {
 
 /* Print styles */
 @media print {
+
   .header__icons,
   .footer__social,
   .slideshow__controls,
@@ -1407,6 +1436,7 @@ textarea:focus-visible {
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -1473,7 +1503,8 @@ textarea:focus-visible {
 
 @keyframes tech-ripple {
   to {
-    width: 300px;  /* Consider var(--ripple-size, 300px) for responsive sizing */
+    width: 300px;
+    /* Consider var(--ripple-size, 300px) for responsive sizing */
     height: 300px;
     opacity: 0;
   }
@@ -1492,9 +1523,9 @@ textarea:focus-visible {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg,
-    transparent 0%,
-    var(--color-primary, #2563eb) 50%,
-    transparent 100%);
+      transparent 0%,
+      var(--color-primary, #2563eb) 50%,
+      transparent 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1521,16 +1552,25 @@ textarea:focus-visible {
   width: 200%;
   height: 200%;
   background: radial-gradient(circle,
-    rgba(59, 130, 246, 0.1) 0%,
-    transparent 70%);
+      rgba(59, 130, 246, 0.1) 0%,
+      transparent 70%);
   animation: tech-newsletter-pulse 4s ease-in-out infinite;
   /* will-change for animation optimization - consider JS toggle on viewport intersection */
   will-change: transform, opacity;
 }
 
 @keyframes tech-newsletter-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 0.8; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 }
 
 /* Header tech enhancements - subtle gradient on scroll
@@ -1538,15 +1578,15 @@ textarea:focus-visible {
    on window scroll event (typically: window.scrollY > 0) */
 .header.scrolled {
   background: linear-gradient(180deg,
-    var(--color-bg-primary, #ffffff) 0%,
-    rgba(248, 250, 252, 0.98) 100%);
+      var(--color-bg-primary, #ffffff) 0%,
+      rgba(248, 250, 252, 0.98) 100%);
 }
 
 /* Footer tech styling - gradient background */
 .footer {
   background: linear-gradient(180deg,
-    var(--color-bg-tertiary, #f1f5f9) 0%,
-    var(--color-bg-secondary, #f8fafc) 100%);
+      var(--color-bg-tertiary, #f1f5f9) 0%,
+      var(--color-bg-secondary, #f8fafc) 100%);
   position: relative;
 }
 
@@ -1558,10 +1598,10 @@ textarea:focus-visible {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg,
-    transparent 0%,
-    var(--color-border, #e2e8f0) 20%,
-    var(--color-border, #e2e8f0) 80%,
-    transparent 100%);
+      transparent 0%,
+      var(--color-border, #e2e8f0) 20%,
+      var(--color-border, #e2e8f0) 80%,
+      transparent 100%);
 }
 
 /* Enhanced focus states for tech aesthetic */
@@ -1583,22 +1623,19 @@ textarea:focus-visible {
 .slideshow__slide::after {
   content: '';
   position: absolute;
-  inset: 0; /* Shorthand for top: 0; right: 0; bottom: 0; left: 0; */
+  inset: 0;
+  /* Shorthand for top: 0; right: 0; bottom: 0; left: 0; */
   /* Subtle vignette gradient - premium appearance */
-  background: 
-    radial-gradient(
-      ellipse at center,
+  background:
+    radial-gradient(ellipse at center,
       rgba(0, 0, 0, 0.1) 0%,
       rgba(0, 0, 0, 0.25) 60%,
-      rgba(0, 0, 0, 0.4) 100%
-    ),
-    linear-gradient(
-      180deg,
+      rgba(0, 0, 0, 0.4) 100%),
+    linear-gradient(180deg,
       rgba(15, 23, 42, 0.1) 0%,
       transparent 30%,
       transparent 60%,
-      rgba(15, 23, 42, 0.35) 100%
-    );
+      rgba(15, 23, 42, 0.35) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1846,15 +1883,18 @@ textarea:focus-visible {
 .ta-conv-benefits {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem; /* Mobile: 24px */
-  padding: 0; /* Padding handled by ta-conv-section-spacing */
+  gap: 1.5rem;
+  /* Mobile: 24px */
+  padding: 0;
+  /* Padding handled by ta-conv-section-spacing */
   max-width: var(--page-width, 1200px);
   margin: 0 auto;
 }
 
 @media screen and (min-width: 750px) {
   .ta-conv-benefits {
-    gap: 2rem; /* Desktop: 32px - Standardized */
+    gap: 2rem;
+    /* Desktop: 32px - Standardized */
   }
 }
 
@@ -1920,7 +1960,7 @@ textarea:focus-visible {
     padding: 20px;
     min-height: 240px;
   }
-  
+
   .ta-conv-benefit__icon,
   .ta-conv-benefit-icon {
     font-size: 40px;
@@ -1930,12 +1970,14 @@ textarea:focus-visible {
 
 /* Section spacing improvements - Updated to match tech-section standards */
 .ta-conv-section-spacing {
-  padding: 3.5rem 2rem; /* Desktop: 56px vertical, consistent gutters */
+  padding: 3.5rem 2rem;
+  /* Desktop: 56px vertical, consistent gutters */
 }
 
 @media screen and (max-width: 749px) {
   .ta-conv-section-spacing {
-    padding: 2rem 1rem; /* Mobile: 32px vertical */
+    padding: 2rem 1rem;
+    /* Mobile: 32px vertical */
   }
 }
 
@@ -1944,13 +1986,15 @@ textarea:focus-visible {
   font-size: 2rem;
   font-weight: 700;
   color: var(--tech-ink, #0B1220);
-  margin-bottom: 3rem; /* Desktop: 48px - consistent with tech-section */
+  margin-bottom: 3rem;
+  /* Desktop: 48px - consistent with tech-section */
 }
 
 @media screen and (max-width: 749px) {
   .ta-conv-section-heading {
     font-size: 1.5rem;
-    margin-bottom: 2rem; /* Mobile: 32px - consistent with tech-section */
+    margin-bottom: 2rem;
+    /* Mobile: 32px - consistent with tech-section */
   }
 }
 
@@ -1960,7 +2004,7 @@ textarea:focus-visible {
 
 /* Fix oversized icon-caret in filter dropdowns and facets - Compact UI */
 .facets__summary .icon-caret,
-.facets__summary-label + .icon-caret,
+.facets__summary-label+.icon-caret,
 .facets details summary .icon-caret,
 .select .icon-caret,
 details.facets__disclosure summary .icon-caret {
@@ -2739,6 +2783,7 @@ body.template-index #shopify-section-cta_midpage .rich-text__buttons {
 }
 
 @media screen and (min-width: 750px) {
+
   #shopify-section-featured_collection_9GzLFt,
   #shopify-section-featured_collection_gY3DF9,
   #shopify-section-featured_collection_wXX7kY,
@@ -2929,7 +2974,8 @@ section[id^="MainProduct-"] .tech-pdp-media product-model {
 /* PRIMARY CTA: COMPRAR AHORA (Dynamic Checkout / Shop Pay / PayPal Express) */
 .tech-cta-primary,
 .product-form__cta-primary {
-  order: -1; /* Ensure it appears first */
+  order: -1;
+  /* Ensure it appears first */
 }
 
 .tech-cta-primary .shopify-payment-button,
@@ -3201,17 +3247,20 @@ body.template-index .trust-badges__container,
 body.template-index .ta-conv-newsletter-section {
   max-width: var(--page-width, 1200px);
   margin-inline: auto;
-  padding-inline: 2rem; /* Desktop: consistent gutters */
+  padding-inline: 2rem;
+  /* Desktop: consistent gutters */
 }
 
 @media screen and (max-width: 749px) {
+
   body.template-index .page-width,
   body.template-index .category-nav-wrapper,
   body.template-index .ta-conv-section-spacing,
   body.template-index .modern-feature-cards__wrapper,
   body.template-index .trust-badges__container,
   body.template-index .ta-conv-newsletter-section {
-    padding-inline: 1rem; /* Mobile: consistent gutters */
+    padding-inline: 1rem;
+    /* Mobile: consistent gutters */
   }
 }
 
@@ -3225,11 +3274,13 @@ body.template-index .ta-conv-section-heading,
 body.template-index .modern-feature-cards__heading,
 body.template-index .testimonials-section__title,
 body.template-index .trust-badges__heading {
-  margin-bottom: 2rem; /* Desktop: 32px - consistent heading spacing */
+  margin-bottom: 2rem;
+  /* Desktop: 32px - consistent heading spacing */
   text-align: center;
 }
 
 @media screen and (max-width: 749px) {
+
   body.template-index h2,
   body.template-index .title,
   body.template-index .category-nav-title,
@@ -3237,7 +3288,8 @@ body.template-index .trust-badges__heading {
   body.template-index .modern-feature-cards__heading,
   body.template-index .testimonials-section__title,
   body.template-index .trust-badges__heading {
-    margin-bottom: 1.5rem; /* Mobile: 24px */
+    margin-bottom: 1.5rem;
+    /* Mobile: 24px */
   }
 }
 
@@ -3249,16 +3301,19 @@ body.template-index .category-nav-grid,
 body.template-index .ta-conv-benefits,
 body.template-index .modern-feature-cards__grid,
 body.template-index .trust-badges__grid {
-  gap: 2rem; /* Desktop: 32px */
+  gap: 2rem;
+  /* Desktop: 32px */
 }
 
 @media screen and (max-width: 749px) {
+
   body.template-index .product-grid,
   body.template-index .category-nav-grid,
   body.template-index .ta-conv-benefits,
   body.template-index .modern-feature-cards__grid,
   body.template-index .trust-badges__grid {
-    gap: 1.5rem; /* Mobile: 24px */
+    gap: 1.5rem;
+    /* Mobile: 24px */
   }
 }
 
@@ -3301,7 +3356,8 @@ body.template-index .newsletter {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.3;
-  min-height: calc(1.3em * 2); /* Reserve space for 2 lines */
+  min-height: calc(1.3em * 2);
+  /* Reserve space for 2 lines */
 }
 
 /* Price and button area: push to bottom */
@@ -3321,12 +3377,14 @@ body.template-index .newsletter {
 .tech-card .card__media img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Prevent cropping, show full product */
+  object-fit: contain;
+  /* Prevent cropping, show full product */
   object-position: center;
 }
 
 /* Mobile: Prevent horizontal overflow on grid */
 @media screen and (max-width: 749px) {
+
   /* Slightly reduce min-height for title on mobile */
   .tech-card .card__heading {
     min-height: calc(1.2em * 2);
@@ -3362,7 +3420,7 @@ body.template-index .newsletter {
     row-gap: 2rem;
     justify-content: center;
   }
-  
+
   /* Ensure grid container is centered */
   .template-product .related-products {
     max-width: var(--page-width, 1200px);
@@ -3388,14 +3446,14 @@ body.template-index .newsletter {
     row-gap: 1.2rem;
     justify-content: center;
   }
-  
+
   /* Prevent overflow on mobile */
   .template-product .related-products {
     padding-left: 1rem;
     padding-right: 1rem;
     overflow-x: hidden;
   }
-  
+
   /* Ensure cards fit properly in 2-column layout - 0.5rem = column-gap/2 */
   .template-product .tech-related-products .grid__item {
     max-width: calc(50% - 0.5rem);
@@ -3415,14 +3473,16 @@ body.template-index .newsletter {
 /* --- CSS VARIABLES FOR HEADER OFFSET --- */
 :root {
   /* Topbar (announcement bar) height - displays shipping, benefits, and contact info */
-  --tech-topbar-h: 36px; /* Mobile */
-  
+  --tech-topbar-h: 36px;
+  /* Mobile */
+
   /* Header (main navigation) height */
-  --tech-header-h: 72px; /* Mobile */
-  
+  --tech-header-h: 72px;
+  /* Mobile */
+
   /* Total stack height (topbar + header) */
   --tech-stack-h: calc(var(--tech-topbar-h) + var(--tech-header-h));
-  
+
   /* Legacy variables for backward compatibility */
   --tech-topbar-height: var(--tech-topbar-h);
   --tech-header-height: var(--tech-header-h);
@@ -3432,14 +3492,17 @@ body.template-index .newsletter {
 
 @media screen and (min-width: 750px) {
   :root {
-    --tech-topbar-h: 40px; /* Tablet */
-    --tech-header-h: 76px; /* Tablet */
+    --tech-topbar-h: 40px;
+    /* Tablet */
+    --tech-header-h: 76px;
+    /* Tablet */
   }
 }
 
 @media screen and (min-width: 990px) {
   :root {
-    --tech-header-h: 80px; /* Desktop */
+    --tech-header-h: 80px;
+    /* Desktop */
   }
 }
 
@@ -3460,8 +3523,8 @@ body {
 /* Override white text on white background - make menu readable */
 .header__menu-item,
 .list-menu__item--link,
-.list-menu__item > a,
-.header-menu > li > a,
+.list-menu__item>a,
+.header-menu>li>a,
 .header__inline-menu a {
   color: var(--tech-ink, #0B1220) !important;
   font-weight: 500;
@@ -3471,8 +3534,8 @@ body {
 /* Hover state - make it obvious with color change and underline */
 .header__menu-item:hover,
 .list-menu__item--link:hover,
-.list-menu__item > a:hover,
-.header-menu > li > a:hover,
+.list-menu__item>a:hover,
+.header-menu>li>a:hover,
 .header__inline-menu a:hover {
   color: var(--tech-primary, #2563eb) !important;
   text-decoration: underline;
@@ -3482,8 +3545,8 @@ body {
 /* Focus state for accessibility */
 .header__menu-item:focus-visible,
 .list-menu__item--link:focus-visible,
-.list-menu__item > a:focus-visible,
-.header-menu > li > a:focus-visible,
+.list-menu__item>a:focus-visible,
+.header-menu>li>a:focus-visible,
 .header__inline-menu a:focus-visible {
   color: var(--tech-primary-hover, #1e40af) !important;
   outline: 2px solid var(--tech-primary, #2563eb);
@@ -3495,7 +3558,7 @@ body {
 /* Active/current menu item */
 .header__active-menu-item,
 .list-menu__item--active,
-.header-menu > li.active > a {
+.header-menu>li.active>a {
   color: #2563eb !important;
   font-weight: 600;
 }
@@ -3565,11 +3628,11 @@ body {
 /* Menu text visibility - all sticky/scrolled states */
 .scrolled-past-header .header__menu-item,
 .scrolled-past-header .list-menu__item--link,
-.scrolled-past-header .list-menu__item > a,
+.scrolled-past-header .list-menu__item>a,
 .scrolled-past-header .header__inline-menu a,
 .shopify-section-header-sticky .header__menu-item,
 .shopify-section-header-sticky .list-menu__item--link,
-.shopify-section-header-sticky .list-menu__item > a,
+.shopify-section-header-sticky .list-menu__item>a,
 .header.scrolled .header__menu-item,
 .header.scrolled .list-menu__item--link,
 .header.scrolled .header__inline-menu a {
@@ -3637,6 +3700,7 @@ body {
 
 /* Desktop dropdown menus - smooth appearance */
 @media screen and (min-width: 990px) {
+
   /* Base submenu styling */
   .header__submenu,
   .mega-menu__content {
@@ -3651,28 +3715,28 @@ body {
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
-    transition: 
+    transition:
       opacity 0.2s ease,
       visibility 0.2s ease,
       transform 0.2s ease;
     z-index: 100;
     padding: 0.5rem 0;
   }
-  
+
   /* Open state - show dropdown */
-  details[open] > .header__submenu,
-  details[open] > .mega-menu__content {
+  details[open]>.header__submenu,
+  details[open]>.mega-menu__content {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
-  
+
   /* Prevent jitter - add invisible hover bridge */
   header-menu details {
     position: relative;
   }
-  
-  header-menu details > summary::after {
+
+  header-menu details>summary::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -3681,14 +3745,14 @@ body {
     height: 10px;
     background: transparent;
   }
-  
+
   /* Nested submenus (third level) */
   .header__submenu .header__submenu {
     top: 0;
     left: 100%;
     margin-left: 2px;
   }
-  
+
   /* Submenu items styling */
   .header__submenu .header__menu-item,
   .header__submenu .list-menu__item {
@@ -3698,13 +3762,13 @@ body {
     font-size: 1.4rem;
     transition: all 0.15s ease;
   }
-  
+
   .header__submenu .header__menu-item:hover,
   .header__submenu .list-menu__item:hover {
     background-color: rgba(37, 99, 235, 0.08);
     color: var(--tech-primary, #2563eb);
   }
-  
+
   /* Mega menu specific styling */
   .mega-menu__content {
     left: 50%;
@@ -3714,17 +3778,17 @@ body {
     max-width: 90vw;
     padding: 1.5rem;
   }
-  
-  details[open] > .mega-menu__content {
+
+  details[open]>.mega-menu__content {
     transform: translateX(-50%) translateY(0);
   }
-  
+
   .mega-menu__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
   }
-  
+
   .mega-menu__link--level-2 {
     font-weight: 600;
     font-size: 1.5rem;
@@ -3732,7 +3796,7 @@ body {
     margin-bottom: 0.5rem;
     display: block;
   }
-  
+
   .mega-menu__link {
     font-size: 1.4rem;
     color: var(--tech-muted, #64748b);
@@ -3740,7 +3804,7 @@ body {
     display: block;
     transition: color 0.15s ease;
   }
-  
+
   .mega-menu__link:hover {
     color: var(--tech-primary, #2563eb);
   }
@@ -3800,32 +3864,32 @@ html.tech-header-fixed body main#MainContent {
 
 /* Reset padding when header is in overlay mode (transparent over hero) */
 /* Using adjacent sibling selector for better specificity */
-.header-wrapper--overlay + .content-for-layout,
-.shopify-section-header-sticky.header-wrapper--overlay + .content-for-layout {
+.header-wrapper--overlay+.content-for-layout,
+.shopify-section-header-sticky.header-wrapper--overlay+.content-for-layout {
   padding-top: 0 !important;
 }
 
 /* Ensure first section in main has no extra top margin/padding that could create gaps */
-main > .shopify-section:first-child,
-main > section:first-child,
-main.content-for-layout > .shopify-section:first-child,
-main#MainContent > .shopify-section:first-child {
+main>.shopify-section:first-child,
+main>section:first-child,
+main.content-for-layout>.shopify-section:first-child,
+main#MainContent>.shopify-section:first-child {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
 /* Specifically target slideshow as it's often the first section on home page */
 /* Using specific selectors to avoid affecting slideshows in other contexts */
-main > .shopify-section:first-child .slideshow,
-main > section:first-child .slideshow,
-main > .shopify-section:first-child .slideshow-wrapper,
-main > .shopify-section:first-child .tech-hero,
-main#MainContent > .shopify-section:first-child .slideshow,
-main#MainContent > .shopify-section:first-child .slideshow-wrapper,
-main#MainContent > .shopify-section:first-child .tech-hero,
-.content-for-layout > .shopify-section:first-child .slideshow,
-.content-for-layout > .shopify-section:first-child .slideshow-wrapper,
-.content-for-layout > .shopify-section:first-child .tech-hero {
+main>.shopify-section:first-child .slideshow,
+main>section:first-child .slideshow,
+main>.shopify-section:first-child .slideshow-wrapper,
+main>.shopify-section:first-child .tech-hero,
+main#MainContent>.shopify-section:first-child .slideshow,
+main#MainContent>.shopify-section:first-child .slideshow-wrapper,
+main#MainContent>.shopify-section:first-child .tech-hero,
+.content-for-layout>.shopify-section:first-child .slideshow,
+.content-for-layout>.shopify-section:first-child .slideshow-wrapper,
+.content-for-layout>.shopify-section:first-child .tech-hero {
   margin-top: 0 !important;
 }
 
@@ -3844,7 +3908,8 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 .announcement-bar-section {
   position: sticky !important;
   top: 0 !important;
-  z-index: 101 !important; /* Above header (100) to stay visible when scrolling */
+  z-index: 101 !important;
+  /* Above header (100) to stay visible when scrolling */
   /* Ensure it has a solid background */
   width: 100%;
   /* Remove any margins that might cause gaps */
@@ -3863,9 +3928,11 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 
 /* When sticky_promo setting is enabled, make announcement-bar__container sticky within the section */
 .announcement-bar__container--sticky {
-  position: relative; /* Changed from sticky - parent section handles stickiness */
+  position: relative;
+  /* Changed from sticky - parent section handles stickiness */
   top: 0;
-  z-index: 1; /* Local stacking within parent */
+  z-index: 1;
+  /* Local stacking within parent */
   background-color: inherit;
   width: 100%;
 }
@@ -3916,7 +3983,8 @@ main#MainContent > .shopify-section:first-child .tech-hero,
 .header-wrapper {
   /* Position header below the announcement bar when both are sticky */
   top: var(--tech-topbar-h, 0) !important;
-  z-index: 100 !important; /* Below announcement bar (101), above content, below modals (200+) */
+  z-index: 100 !important;
+  /* Below announcement bar (101), above content, below modals (200+) */
   /* Ensure solid background - prevents transparency issues */
   background-color: rgb(var(--color-background, 255 255 255)) !important;
 }
@@ -4225,11 +4293,13 @@ details-modal,
 .floating-whatsapp,
 .wa-chat-box,
 [class*="whatsapp"][class*="float"] {
-  z-index: var(--ta-z-whatsapp-fab, 500) !important; /* Highest - always accessible */
+  z-index: var(--ta-z-whatsapp-fab, 500) !important;
+  /* Highest - always accessible */
 }
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
 @media screen and (max-width: 749px) {
+
   /* Menu items in mobile drawer should be readable with proper contrast */
   .menu-drawer .list-menu__item--link,
   .menu-drawer__navigation a,
@@ -4238,26 +4308,26 @@ details-modal,
   }
 
   /* Ensure 44px touch targets for mobile drawer navigation links */
-  .menu-drawer__menu-item > a,
-  .menu-drawer__menu-item > span,
+  .menu-drawer__menu-item>a,
+  .menu-drawer__menu-item>span,
   .menu-drawer .list-menu__item--link {
     min-height: 44px;
     display: flex;
     align-items: center;
   }
-  
+
   .menu-drawer .list-menu__item--link:hover,
   .menu-drawer__navigation a:hover,
   .menu-drawer__menu-item:hover {
     color: var(--tech-primary, #2563eb) !important;
   }
-  
+
   /* Active state for mobile drawer */
   .menu-drawer__menu-item--active {
     color: var(--tech-primary, #2563eb) !important;
     font-weight: 600;
   }
-  
+
   /* Mobile drawer close button */
   .menu-drawer__close-button {
     color: var(--tech-ink, #0B1220) !important;
@@ -4266,6 +4336,7 @@ details-modal,
 
 /* --- DESKTOP SPECIFIC ADJUSTMENTS --- */
 @media screen and (min-width: 990px) {
+
   /* Desktop menu hover effects - more subtle */
   .header__menu-item:hover,
   .list-menu__item--link:hover {
@@ -4400,11 +4471,13 @@ details-modal,
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 2.6em; /* 1.3 line-height * 2 lines */
+  max-height: 2.6em;
+  /* 1.3 line-height * 2 lines */
 }
 
 .tech-card-product .card__description {
-  display: none; /* Hide description to reduce card height */
+  display: none;
+  /* Hide description to reduce card height */
 }
 
 /* Push card__information (parent container) to grow and fill space */
@@ -4458,7 +4531,8 @@ details-modal,
 }
 
 .tech-card-product .card__inner {
-  aspect-ratio: 1 / 1; /* Square product images */
+  aspect-ratio: 1 / 1;
+  /* Square product images */
 }
 
 /* Responsive adjustments for cards */
@@ -4466,12 +4540,12 @@ details-modal,
   .tech-card-product .card__content {
     padding: 0.75rem;
   }
-  
+
   .tech-card-product .card__badge {
     font-size: 0.7rem;
     padding: 4px 8px;
   }
-  
+
   .tech-card-product .card__heading {
     font-size: 0.875rem;
   }
@@ -4650,7 +4724,7 @@ body.template-index .tech-hero-slideshow .slideshow__controls .slider-button:foc
   outline: 3px solid rgba(37, 99, 235, 0.8);
   outline-offset: 2px;
   background: rgba(37, 99, 235, 0.15);
-  box-shadow: 
+  box-shadow:
     0 0 0 4px rgba(37, 99, 235, 0.2),
     0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -4723,17 +4797,18 @@ body.template-index .tech-hero-slideshow slideshow-component {
 
 /* Mobile adjustments */
 @media screen and (max-width: 749px) {
+
   /* Manual mode controls */
   body.template-index .tech-hero-slideshow .slideshow__controls:not(.slideshow__controls--top) {
     bottom: 16px;
     gap: 1rem;
   }
-  
+
   /* Auto-rotate mode: Hide arrows on mobile */
   body.template-index .tech-hero-slideshow .slideshow__controls--top .slider-button {
     display: none;
   }
-  
+
   body.template-index .tech-hero-slideshow .slider-counter {
     padding: 6px 12px;
     font-size: 12px;
@@ -4791,25 +4866,25 @@ section.newsletter {
     padding-top: 2rem !important;
     padding-bottom: 1.5rem !important;
   }
-  
+
   .footer__content-top {
     padding-top: 1.5rem !important;
     padding-bottom: 1rem !important;
     margin-bottom: 1rem !important;
   }
-  
+
   .footer__content-bottom {
     padding-top: 1rem !important;
     margin-top: 1rem !important;
     /* Ensure space for WhatsApp/cookie floating elements */
     padding-bottom: 1rem !important;
   }
-  
+
   .newsletter__wrapper {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
+
   .newsletter.section,
   section.newsletter {
     padding-top: 1.5rem !important;
@@ -4823,7 +4898,7 @@ section.newsletter {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
-  
+
   .newsletter__wrapper {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
@@ -4845,9 +4920,11 @@ section.newsletter {
 
 /* Custom properties for delivery estimate colors (semantic colors) */
 .pdp-delivery-estimate {
-  --delivery-urgency-color: 238, 148, 65; /* Orange for urgency/clock */
+  --delivery-urgency-color: 238, 148, 65;
+  /* Orange for urgency/clock */
   --delivery-urgency-text: #d97706;
-  --delivery-success-color: 62, 214, 96; /* Green for success/check */
+  --delivery-success-color: 62, 214, 96;
+  /* Green for success/check */
   --delivery-success-text: #16a34a;
 }
 
@@ -5109,7 +5186,8 @@ section.newsletter {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: var(--ta-z-cookie-banner, 450); /* Above content, below WhatsApp */
+  z-index: var(--ta-z-cookie-banner, 450);
+  /* Above content, below WhatsApp */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
   transform: translateY(100%);
@@ -5202,7 +5280,8 @@ section.newsletter {
   align-items: center;
   gap: 0.5rem;
   flex-shrink: 0;
-  min-height: 44px; /* Touch target */
+  min-height: 44px;
+  /* Touch target */
   padding: 0.875rem 1.25rem;
   font-size: 1.3rem;
   font-weight: 600;
@@ -5242,6 +5321,7 @@ section.newsletter {
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
+
   /* When sticky CTA is visible, move WhatsApp button up */
   body.sticky-cta-active .whatsapp-float,
   body.sticky-cta-active .whatsapp-button-float,
@@ -5252,14 +5332,14 @@ section.newsletter {
     bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
     transition: bottom 0.25s ease;
   }
-  
+
   /* When cookie banner is visible, move sticky CTA up */
   body.cookie-visible .sticky-cta-bar,
   body:has(.cookie-banner.is-visible) .sticky-cta-bar,
   body:has(.cookie-banner:not([hidden])) .sticky-cta-bar {
     bottom: var(--cookie-banner-height, 80px);
   }
-  
+
   /* When both cookie banner AND sticky CTA are visible, move WhatsApp even higher */
   body.cookie-visible.sticky-cta-active .whatsapp-float,
   body.cookie-visible.sticky-cta-active .whatsapp-button-float,
@@ -5267,9 +5347,9 @@ section.newsletter {
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-button-float {
     bottom: calc(190px + env(safe-area-inset-bottom, 0px)) !important;
   }
-  
+
   /* Ensure sticky CTA doesn't interfere with cart drawer */
-  .cart-drawer.is-open ~ .sticky-cta-bar,
+  .cart-drawer.is-open~.sticky-cta-bar,
   body:has(.cart-drawer.active) .sticky-cta-bar,
   body:has(.cart-drawer[open]) .sticky-cta-bar,
   body.cart-drawer-open .sticky-cta-bar {
@@ -5277,7 +5357,7 @@ section.newsletter {
     opacity: 0;
     transform: translateY(100%);
   }
-  
+
   /* Ensure sticky CTA doesn't interfere with search overlay */
   body:has(.search-modal.is-open) .sticky-cta-bar,
   body:has(.predictive-search--active) .sticky-cta-bar,
@@ -5293,4 +5373,197 @@ section.newsletter {
   .sticky-cta-bar {
     display: none !important;
   }
+}
+
+/* =============================================================================
+   QUICK-ADD-MODAL FIX — NUCLEAR CSS REPAIR
+   Version: 2.0.0
+   Date: 2026-02-28
+   
+   The <quick-add-modal> custom element had ZERO CSS definitions anywhere,
+   causing it to render as a raw unstyled block-level element that broke
+   the entire page layout. This block defines all required modal styles.
+   ============================================================================= */
+
+/* --- BASE: Hide the custom element by default --- */
+quick-add-modal {
+  display: none;
+}
+
+/* --- OPEN STATE: Full-screen overlay --- */
+quick-add-modal[open],
+quick-add-modal.is-open {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  overflow-y: auto;
+  animation: quickAddFadeIn 0.25s ease;
+}
+
+@keyframes quickAddFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- CONTENT CARD: Centered dialog --- */
+quick-add-modal .quick-add-modal__content,
+quick-add-modal .quick-add-modal__content.global-settings-popup {
+  position: relative;
+  background: #ffffff;
+  max-width: 540px;
+  width: calc(100% - 2rem);
+  margin: 5vh auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: quickAddSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes quickAddSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- CLOSE BUTTON --- */
+quick-add-modal .quick-add-modal__toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.15s ease;
+}
+
+quick-add-modal .quick-add-modal__toggle:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+quick-add-modal .quick-add-modal__toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- CONTENT INFO CONTAINER (loaded via AJAX) --- */
+quick-add-modal .quick-add-modal__content-info {
+  padding: 2rem;
+}
+
+/* Product title inside quick-add */
+quick-add-modal .quick-add-modal__content-info .product__title h1 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Price inside quick-add */
+quick-add-modal .quick-add-modal__content-info .product__price {
+  margin-bottom: 1rem;
+}
+
+/* Quantity selector inside quick-add */
+quick-add-modal .quick-add-modal__content-info .product-form__input.product-form__quantity {
+  margin-bottom: 1rem;
+}
+
+/* Buy buttons inside quick-add - make primary CTA vibrant */
+quick-add-modal .quick-add-modal__content-info .product-form__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+quick-add-modal .quick-add-modal__content-info .product-form__submit,
+quick-add-modal .quick-add-modal__content-info .product-form__buttons button[name="add"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.9rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+quick-add-modal .quick-add-modal__content-info .product-form__submit:hover,
+quick-add-modal .quick-add-modal__content-info .product-form__buttons button[name="add"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+quick-add-modal .quick-add-modal__content-info .product-form__submit:disabled {
+  background: #94a3b8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- HIDE "Ver todos los detalles" inside quick-add modal --- */
+quick-add-modal .product__view-details,
+quick-add-modal a[data-scroll-to-description],
+quick-add-modal .quick-add-hidden {
+  display: none !important;
+}
+
+/* --- HIDE elements marked as quick-add-hidden in PDP context --- */
+.quick-add-modal__content-info .quick-add-hidden,
+.quick-add-modal__content-info .product__view-details {
+  display: none !important;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 749px) {
+
+  quick-add-modal[open] .quick-add-modal__content,
+  quick-add-modal.is-open .quick-add-modal__content {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    max-height: none;
+  }
+
+  quick-add-modal .quick-add-modal__content-info {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* --- PREVENT SCROLL when modal is open --- */
+body.quick-add-modal-open {
+  overflow: hidden;
 }

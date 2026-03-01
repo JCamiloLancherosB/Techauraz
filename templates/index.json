@@ -386,61 +386,6 @@
         "padding_bottom": 60
       }
     },
-    "modern_feature_cards_home": {
-      "type": "modern-feature-cards",
-      "blocks": {
-        "feature_card_1": {
-          "type": "card",
-          "settings": {
-            "icon": "rocket",
-            "title": "Envío Ultra Rápido",
-            "description": "Recibe tus productos en 2-5 días hábiles en toda Colombia. Procesamos tu pedido el mismo día para que lo tengas lo más pronto posible.",
-            "cta_text": "Ver envíos →",
-            "cta_link": "shopify://collections/all"
-          }
-        },
-        "feature_card_2": {
-          "type": "card",
-          "settings": {
-            "icon": "diamond",
-            "title": "Calidad Premium Garantizada",
-            "description": "Cada producto pasa rigurosos controles de calidad internacional antes de llegar a tus manos. Solo lo mejor para ti.",
-            "cta_text": "Ver productos →",
-            "cta_link": "shopify://collections/all"
-          }
-        },
-        "feature_card_3": {
-          "type": "card",
-          "settings": {
-            "icon": "lock",
-            "title": "Compra 100% Segura",
-            "description": "Pago encriptado con tecnología SSL. Opción de contraentrega en todo Colombia: primero ves, luego pagas.",
-            "cta_text": "Más información →",
-            "cta_link": "shopify://pages/contacto-techaura"
-          }
-        },
-        "feature_card_4": {
-          "type": "card",
-          "settings": {
-            "icon": "headset",
-            "title": "Soporte Inmediato por WhatsApp",
-            "description": "Nuestro equipo está listo para resolver tus dudas al instante. Escríbenos y te ayudamos en cada paso de tu compra.",
-            "cta_text": "Contáctanos →",
-            "cta_link": "shopify://pages/contacto-techaura"
-          }
-        }
-      },
-      "block_order": [
-        "feature_card_1",
-        "feature_card_2",
-        "feature_card_3",
-        "feature_card_4"
-      ],
-      "settings": {
-        "heading": "¿Por Qué Comprar con TechAura?",
-        "subheading": "Más de 5.000 clientes satisfechos en toda Colombia confían en nosotros"
-      }
-    },
     "newsletter_home": {
       "type": "newsletter",
       "blocks": {
@@ -454,7 +399,7 @@
         "paragraph_block": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Déjanos tu correo y recibe tu código VIP al instante. Cero spam.</p>"
+            "text": "<p>Déjanos tu correo y recibe tu código VIP al instante. Úsalo hoy mismo pagando en casa. <strong>Cero spam.<\/strong></p>"
           }
         },
         "email_form_block": {
@@ -483,7 +428,6 @@
     "featured_collection_bestsellers",
     "social_proof_home",
     "testimonials_carousel_home",
-    "modern_feature_cards_home",
     "newsletter_home"
   ]
 }

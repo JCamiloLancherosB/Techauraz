@@ -21,7 +21,7 @@
  * Usage: Auto-initializes on DOMContentLoaded
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Prevent multiple initializations
@@ -37,7 +37,7 @@
     /**
      * Initialize the delivery estimate module
      */
-    init: function() {
+    init: function () {
       // Prevent multiple initializations
       if (this.initialized) return;
 
@@ -64,7 +64,7 @@
      * Get current time in the configured timezone
      * Uses toLocaleString for timezone conversion - widely supported across browsers
      */
-    getNow: function() {
+    getNow: function () {
       try {
         return new Date(new Date().toLocaleString('en-US', { timeZone: this.config.timezone }));
       } catch (e) {
@@ -76,7 +76,7 @@
     /**
      * Check if a date is a weekend (Saturday or Sunday)
      */
-    isWeekend: function(date) {
+    isWeekend: function (date) {
       const day = date.getDay();
       return day === 0 || day === 6; // Sunday = 0, Saturday = 6
     },
@@ -86,7 +86,7 @@
      * Returns true if:
      * - Current time is before cutoff hour AND it's a weekday (Mon-Fri)
      */
-    isBeforeCutoff: function() {
+    isBeforeCutoff: function () {
       const now = this.getNow();
       const cutoffToday = new Date(now);
       cutoffToday.setHours(this.config.cutoffHour, 0, 0, 0);
@@ -100,7 +100,7 @@
      * If before cutoff on a weekday → start = today
      * Else start = next calendar day (then we add business days from there)
      */
-    getStartDate: function() {
+    getStartDate: function () {
       const now = this.getNow();
 
       if (this.isBeforeCutoff()) {
@@ -116,7 +116,7 @@
     /**
      * Add business days to a date (Mon-Fri only, skipping Sat/Sun)
      */
-    addBusinessDays: function(startDate, days) {
+    addBusinessDays: function (startDate, days) {
       const result = new Date(startDate);
       let added = 0;
 
@@ -133,26 +133,28 @@
 
     /**
      * Format date for display using Intl.DateTimeFormat
-     * Returns format like "30 ene" (day + short month)
+     * Phase 3: Long localized format — "jueves, 5 de marzo"
      */
-    formatDate: function(date) {
+    formatDate: function (date) {
       try {
-        const options = {
+        var options = {
+          weekday: 'long',
           day: 'numeric',
-          month: 'short'
+          month: 'long'
         };
         return date.toLocaleDateString(this.config.locale, options);
       } catch (e) {
         // Fallback formatting
-        const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-        return date.getDate() + ' ' + months[date.getMonth()];
+        var days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+        var months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+        return days[date.getDay()] + ', ' + date.getDate() + ' de ' + months[date.getMonth()];
       }
     },
 
     /**
      * Calculate estimated delivery date range
      */
-    getDeliveryDateRange: function() {
+    getDeliveryDateRange: function () {
       const startDate = this.getStartDate();
 
       const minDate = this.addBusinessDays(startDate, this.config.minBusinessDays);
@@ -166,20 +168,20 @@
 
     /**
      * Update the display with calculated delivery dates
+     * Phase 3: "Pídelo hoy y recíbelo entre el <strong>date</strong> y el <strong>date</strong>"
      */
-    update: function() {
+    update: function () {
       if (!this.container || !this.dateRangeEl) return;
 
-      const dateRange = this.getDeliveryDateRange();
-      
-      // Update the text to show "Llega entre {min} y {max}"
-      this.dateRangeEl.textContent = 'Llega entre ' + dateRange.min + ' y ' + dateRange.max;
+      var dateRange = this.getDeliveryDateRange();
+
+      this.dateRangeEl.innerHTML = 'Pídelo hoy y recíbelo entre el <strong>' + dateRange.min + '</strong> y el <strong>' + dateRange.max + '</strong>.';
     },
 
     /**
      * Clean up (for SPA navigation)
      */
-    destroy: function() {
+    destroy: function () {
       this.initialized = false;
       this.container = null;
       this.dateRangeEl = null;
@@ -189,7 +191,7 @@
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       DeliveryEstimate.init();
     });
   } else {

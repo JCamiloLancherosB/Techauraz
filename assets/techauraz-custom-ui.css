@@ -21,7 +21,8 @@
 .announcement-bar__container--sticky {
   position: sticky;
   top: 0;
-  z-index: var(--ta-z-announcement-bar, 100); /* See techauraz-tokens.css for z-index hierarchy */
+  z-index: var(--ta-z-announcement-bar, 100);
+  /* See techauraz-tokens.css for z-index hierarchy */
 }
 
 .announcement-bar__message {
@@ -127,6 +128,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(calc(var(--ta-ticker-scroll-distance, -50%)));
   }
@@ -185,21 +187,21 @@
   .announcement-ticker[data-ta-ticker-initialized="true"] .announcement-ticker__track {
     animation: none;
   }
-  
+
   /* Show items as static centered content */
   .announcement-ticker__viewport {
     overflow: hidden;
   }
-  
+
   .announcement-ticker__track {
     justify-content: center;
   }
-  
+
   /* Hide cloned items in reduced motion */
   .announcement-ticker__item[data-ta-cloned="true"] {
     display: none;
   }
-  
+
   /* Hide fade edges in reduced motion for cleaner static display */
   .announcement-ticker::before,
   .announcement-ticker::after {
@@ -213,22 +215,22 @@
     min-height: 3.6rem;
     height: 3.6rem;
   }
-  
+
   /* Smaller fade edges on mobile */
   .announcement-ticker::before,
   .announcement-ticker::after {
     width: 30px;
   }
-  
+
   .announcement-ticker__item {
     padding: 0 4px;
   }
-  
+
   .announcement-ticker__separator {
     margin: 0 10px;
     font-size: 0.65em;
   }
-  
+
   .announcement-ticker__message {
     font-size: 0.75rem;
     letter-spacing: 0.3px;
@@ -242,14 +244,16 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: var(--ta-z-whatsapp-fab, 500); /* Highest layer - always accessible for customer support */
+  z-index: 40;
+  /* Below sticky bars (450-460) but above page content */
   animation: fadeInUp 0.6s ease-out;
 }
 
 /* Desktop: Add bottom offset to avoid overlapping hero CTA and slideshow controls */
 @media screen and (min-width: 750px) {
   .whatsapp-float {
-    bottom: 100px; /* Increased offset on desktop to clear hero CTA buttons and slideshow controls */
+    bottom: 100px;
+    /* Increased offset on desktop to clear hero CTA buttons and slideshow controls */
     right: 30px;
   }
 }
@@ -346,10 +350,13 @@
 /* fadeInUp animation defined in base.css */
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.5;
     transform: scale(1.15);
@@ -357,9 +364,19 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  75% { transform: rotate(5deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
 }
 
 .whatsapp-button.shake {
@@ -371,6 +388,7 @@
     bottom: 15px;
     right: 15px;
   }
+
   .whatsapp-button {
     width: 56px;
     height: 56px;
@@ -379,10 +397,12 @@
     max-width: 56px;
     max-height: 56px;
   }
+
   .whatsapp-button svg {
     width: 28px;
     height: 28px;
   }
+
   .whatsapp-tooltip {
     display: none;
   }
@@ -403,8 +423,18 @@ body:has(.modal[open]) .whatsapp-float {
    ============================================================================= */
 
 /* Ensure all headings use consistent color */
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   color: var(--ta-text);
   line-height: var(--ta-leading-tight);
   letter-spacing: var(--ta-tracking-tight);
@@ -504,8 +534,8 @@ select:focus {
 }
 
 /* Collection filters */
-.facet-checkbox input:checked + label,
-.facet-checkbox input:checked + label::before {
+.facet-checkbox input:checked+label,
+.facet-checkbox input:checked+label::before {
   background: var(--ta-primary);
   border-color: var(--ta-primary);
 }
@@ -568,16 +598,16 @@ select:focus {
   .collection-placeholder {
     padding: var(--ta-space-2xl) var(--ta-space-lg);
   }
-  
+
   .collection-placeholder .icon-collection {
     width: 60px;
     height: 60px;
   }
-  
+
   .collection-placeholder__title {
     font-size: var(--ta-font-size-md);
   }
-  
+
   .collection-placeholder__text {
     font-size: var(--ta-font-size-xs);
   }
@@ -598,8 +628,8 @@ select:focus {
 }
 
 /* Remove any mystery whitespace between header and content */
-.shopify-section--header + .shopify-section,
-.shopify-section--announcement-bar + .shopify-section--header + .shopify-section {
+.shopify-section--header+.shopify-section,
+.shopify-section--announcement-bar+.shopify-section--header+.shopify-section {
   margin-top: 0;
   padding-top: 0;
 }
@@ -979,11 +1009,11 @@ select:focus {
   .ta-conv-newsletter-section {
     padding: var(--ta-space-2xl, 3.2rem) var(--ta-space-md, 1.2rem);
   }
-  
+
   .ta-conv-newsletter__inner h2 {
     font-size: var(--ta-font-size-h4, 2rem);
   }
-  
+
   .ta-conv-newsletter__inner p {
     font-size: var(--ta-font-size-sm, 1.4rem);
   }
@@ -1154,7 +1184,8 @@ select:focus {
 /* Footer section background color - TechAura brand */
 .footer.section-sections--22626285715765__footer-padding,
 .shopify-section-group-footer-group .footer {
-  z-index: 1; /* Reset from 999999 to sensible stacking */
+  z-index: 1;
+  /* Reset from 999999 to sensible stacking */
   background-color: #607891;
 }
 
@@ -1177,7 +1208,8 @@ select:focus {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: var(--ta-z-cookie-banner, 450); /* Above content, below WhatsApp */
+  z-index: var(--ta-z-cookie-banner, 450);
+  /* Above content, below WhatsApp */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transform: translateY(100%);
@@ -1266,18 +1298,19 @@ select:focus {
 
 /* Coordinate with WhatsApp and cookie banner */
 @media screen and (max-width: 749px) {
+
   body:has(.sticky-cta-bar--visible) .whatsapp-float,
   body:has(.sticky-cta-bar--visible) .whatsapp-button-float,
   body:has(.sticky-cta-bar--visible) [class*="whatsapp"][class*="float"] {
     bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
     transition: bottom 0.25s ease;
   }
-  
+
   /* When cookie banner is visible, adjust sticky CTA position */
   body:has(.cookie-banner.is-visible) .sticky-cta-bar {
     bottom: 80px;
   }
-  
+
   /* WhatsApp needs to move even higher when both are visible */
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-float,
   body:has(.cookie-banner.is-visible):has(.sticky-cta-bar--visible) .whatsapp-button-float {
@@ -1357,7 +1390,8 @@ select:focus {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: var(--ta-z-cookie-banner, 450); /* Above content, below WhatsApp */
+  z-index: var(--ta-z-cookie-banner, 450);
+  /* Above content, below WhatsApp */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transform: translateY(100%);
@@ -1446,18 +1480,19 @@ select:focus {
 
 /* Coordinate with WhatsApp button position */
 @media screen and (max-width: 749px) {
+
   body:has(.sticky-mobile-cta--visible) .whatsapp-float,
   body:has(.sticky-mobile-cta--visible) .whatsapp-button-float,
   body:has(.sticky-mobile-cta--visible) [class*="whatsapp"][class*="float"] {
     bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 1rem) !important;
     transition: bottom 0.25s ease;
   }
-  
+
   /* When cookie banner is visible, adjust sticky CTA position */
   body:has(.cookie-banner.is-visible) .sticky-mobile-cta {
     bottom: 80px;
   }
-  
+
   /* WhatsApp needs to move even higher when both are visible */
   body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-float,
   body:has(.cookie-banner.is-visible):has(.sticky-mobile-cta--visible) .whatsapp-button-float {

@@ -1,39 +1,89 @@
 {% comment %}
-    Renders product media
+    Renders product media — Phase 3 Performance Optimized
+    
+    Uses <picture> with AVIF/WebP sources and JPG fallback.
+    Hero image (first slide) gets fetchpriority="high" + decoding="sync".
+    Subsequent images get loading="lazy" + decoding="async".
 
     Accepts:
     - media: {Object} Product Media object
     - loop: {Boolean} Enable video looping (optional)
     - variant_image: {Boolean} Whether or not media is associated with a variant
+    - is_hero: {Boolean} True for LCP-critical first image (fetchpriority="high")
 
     Usage:
     {% render 'product-media',
       media: media,
       loop: section.settings.enable_video_looping,
-      variant_image: true
+      variant_image: true,
+      is_hero: forloop.first
     %}
 {% endcomment %}
 
 {%- if media.media_type == 'image' -%}
-  <img
-    class="global-media-settings global-media-settings--no-shadow{% if variant_image %} product__media-item--variant{% endif %}"
-    srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
-            {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
-            {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445 }} 1445w,{%- endif -%}
-            {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680 }} 1680w,{%- endif -%}
-            {%- if media.preview_image.width >= 2048 -%}{{ media.preview_image | image_url: width: 2048 }} 2048w,{%- endif -%}
-            {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200 }} 2200w,{%- endif -%}
-            {%- if media.preview_image.width >= 2890 -%}{{ media.preview_image | image_url: width: 2890 }} 2890w,{%- endif -%}
-            {%- if media.preview_image.width >= 4096 -%}{{ media.preview_image | image_url: width: 4096 }} 4096w,{%- endif -%}
-            {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
-    sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
-    src="{{ media.preview_image | image_url: width: 1445 }}"
-    alt="{{ media.alt | escape }}"
-    loading="lazy"
-    width="1100"
-    height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-    data-media-id="{{ media.id }}"
-  >
+  {%- comment -%}
+    PICTURE ELEMENT: Modern image architecture
+    - <source type="image/avif"> → Smallest, best compression (Chrome 85+, FF 93+)
+    - <source type="image/webp"> → Wide support fallback (Chrome 32+, FF 65+, Safari 14+)
+    - <img> → Universal JPG fallback
+    
+    Shopify CDN auto-serves AVIF/WebP via the format parameter.
+    Sizes: 550w (mobile), 1100w (tablet), 1445w (desktop), up to 2200w (retina)
+  {%- endcomment -%}
+
+  {%- liquid
+    assign img_alt = media.alt | default: media.preview_image.alt | escape
+    assign img_width = 1100
+    assign img_height = 1100 | divided_by: media.preview_image.aspect_ratio | ceil
+  -%}
+
+  <picture>
+    {%- comment -%} AVIF source — best compression, smallest file size {%- endcomment -%}
+    <source
+      type="image/avif"
+      srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550, format: 'avif' }} 550w,{%- endif -%}
+              {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100, format: 'avif' }} 1100w,{%- endif -%}
+              {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445, format: 'avif' }} 1445w,{%- endif -%}
+              {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680, format: 'avif' }} 1680w,{%- endif -%}
+              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'avif' }} 2200w,{%- endif -%}"
+      sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
+    >
+
+    {%- comment -%} WebP source — wide browser support fallback {%- endcomment -%}
+    <source
+      type="image/webp"
+      srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550, format: 'webp' }} 550w,{%- endif -%}
+              {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100, format: 'webp' }} 1100w,{%- endif -%}
+              {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445, format: 'webp' }} 1445w,{%- endif -%}
+              {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680, format: 'webp' }} 1680w,{%- endif -%}
+              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'webp' }} 2200w,{%- endif -%}"
+      sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
+    >
+
+    {%- comment -%} JPG fallback — universal compatibility {%- endcomment -%}
+    <img
+      class="global-media-settings global-media-settings--no-shadow{% if variant_image %} product__media-item--variant{% endif %}"
+      srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
+              {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445 }} 1445w,{%- endif -%}
+              {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680 }} 1680w,{%- endif -%}
+              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200 }} 2200w,{%- endif -%}
+              {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
+      sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
+      src="{{ media.preview_image | image_url: width: 1445 }}"
+      alt="{{ img_alt }}"
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      data-media-id="{{ media.id }}"
+      {%- if is_hero -%}
+        fetchpriority="high"
+        decoding="sync"
+      {%- else -%}
+        loading="lazy"
+        decoding="async"
+      {%- endif -%}
+    >
+  </picture>
 {%- else -%}
   {%- if media.media_type == 'model' -%}
     <div class="product-media-modal__model" data-media-id="{{ media.id }}">
@@ -64,6 +114,7 @@
         src="{{ media | image_url: width: 550, height: 550 }}"
         sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
         loading="lazy"
+        decoding="async"
         width="576"
         height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
         alt="{{ media.preview_image.alt | escape }}"

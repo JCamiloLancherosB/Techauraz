@@ -1,0 +1,90 @@
+{%- comment -%}
+  PDP FOMO Stock Counter — Phase 3
+  ================================
+  Renders a universally-applicable "units left" urgency banner
+  on ALL product detail pages. Driven by fomo-stock-engine.js.
+  
+  Usage (in product.json or main-product.liquid):
+    {% render 'pdp-fomo-stock', product: product %}
+{%- endcomment -%}
+
+<div class="pdp-fomo-stock" data-fomo-product-id="{{ product.id }}">
+  <span class="pdp-fomo-stock__icon">🔥</span>
+  <span class="pdp-fomo-stock__text">
+    ¡Últimas
+    <strong class="pdp-fomo-stock__count" data-fomo-stock-count>—</strong>
+    unidades disponibles!
+  </span>
+</div>
+
+<style>
+  /* ── FOMO Stock Counter ────────────────────────────── */
+  .pdp-fomo-stock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #FFF5F5;
+    border: 1px solid #FECACA;
+    border-radius: 0.6rem;
+    padding: 0.7rem 1rem;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+    color: #991B1B;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .pdp-fomo-stock__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .pdp-fomo-stock__count {
+    display: inline-block;
+    background: #EF4444;
+    color: #fff;
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0 0.15rem;
+    min-width: 1.6rem;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+    transition: transform 0.15s ease;
+  }
+
+  /* ── Pulse Micro-Animation (triggered by JS) ─────── */
+  .pdp-fomo-stock__count.fomo-stock--pulse {
+    animation: fomo-pulse 0.6s ease;
+  }
+
+  @keyframes fomo-pulse {
+    0% {
+      transform: scale(1);
+      background: #EF4444;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+    }
+    30% {
+      transform: scale(1.25);
+      background: #B91C1C;
+      box-shadow: 0 0 12px 4px rgba(239, 68, 68, 0.4);
+    }
+    60% {
+      transform: scale(0.95);
+      background: #DC2626;
+    }
+    100% {
+      transform: scale(1);
+      background: #EF4444;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+  }
+
+  /* ── Mobile ────────────────────────────────────────── */
+  @media screen and (max-width: 749px) {
+    .pdp-fomo-stock {
+      font-size: 1.3rem;
+      padding: 0.6rem 0.8rem;
+    }
+  }
+</style>

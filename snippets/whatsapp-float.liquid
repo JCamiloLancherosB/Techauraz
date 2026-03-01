@@ -1,24 +1,130 @@
 {% comment %}
-  WhatsApp Floating Button
-  - Displays a floating action button for WhatsApp contact
+  WhatsApp Floating Button — Context-Aware Routing (Phase 3)
+  - PDP pages: scrapes H1 product title, current price, and URL
+    to construct a pre-filled conversational wa.me message
+  - Non-PDP pages: fallback generic advisory message
+  - Tooltip auto-shows after 5s on desktop, pulse on mobile
   - Styles are in techauraz-custom-ui.css
-  - Behavior is in techauraz-custom-ui.js
 {% endcomment %}
 
-<div class="whatsapp-float">
-  <div class="whatsapp-tooltip">
-    ¿Necesitas ayuda? ¡Escríbenos!
+<div class="whatsapp-float" id="WhatsAppFloat" data-whatsapp-float>
+  <div class="whatsapp-tooltip" id="WhatsAppTooltip">
+    🟢 Cierra tu pedido por WhatsApp aquí
   </div>
   
   <a 
-    href="https://wa.me/573008602789?text=Hola%2C%20me%20encuentro%20interesado%20en%20los%20productos." 
+    href="#"
     class="whatsapp-button"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Contactar por WhatsApp"
+    id="WhatsAppRouterBtn"
+    role="button"
+    aria-label="Cierra tu pedido por WhatsApp"
   >
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-5.25 1.408 1.408-5.248-0.292-0.508c-1.207-2.100-1.843-4.479-1.843-6.957 0-7.51 6.11-13.617 13.617-13.617s13.617 6.107 13.617 13.617c0 7.508-6.108 13.467-13.68 13.467zM21.617 18.517c-0.375-0.188-2.217-1.092-2.558-1.217s-0.592-0.187-0.842 0.188-0.967 1.217-1.183 1.467-0.433 0.279-0.808 0.092-1.575-0.583-3-1.858c-1.108-0.992-1.858-2.217-2.075-2.592s-0.025-0.575 0.162-0.762c0.167-0.167 0.375-0.433 0.562-0.65s0.25-0.375 0.375-0.625 0.063-0.467-0.031-0.654-0.842-2.025-1.154-2.775c-0.308-0.733-0.617-0.625-0.842-0.625s-0.467-0.031-0.717-0.031-0.654 0.092-0.996 0.467-1.308 1.279-1.308 3.117 1.342 3.617 1.529 3.867 2.625 4.008 6.358 5.625c0.887 0.383 1.579 0.608 2.117 0.779 0.892 0.279 1.704 0.242 2.346 0.146 0.717-0.108 2.217-0.908 2.529-1.783s0.312-1.625 0.217-1.783-0.346-0.25-0.721-0.438z"/>
+      <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-5.25 1.408 1.408-5.248-0.292-0.508c-1.207-2.100-1.843-4.479-1.843-6.957 0-7.51 6.11-13.617 13.617-13.617s13.617 6.107 13.617 13.617c0 7.508-6.108 13.467-13.68 13.467zM21.617 18.517c-0.375-0.188-2.217-1.092-2.558-1.217s-0.592-0.187-0.842 0.188-0.967 1.217-1.183 1.467-0.433 0.279-0.808 0.092-1.575-0.583-3-1.858c-1.108-0.992-1.858-2.217-2.075-2.592s-0.025-0.575 0.162-0.762c0.167-0.167 0.375-0.433 0.562-0.65s0.25-0.375 0.375-0.625 0.063-0.467-0.031-0.654-0.842-2.025-1.154-2.775c-0.308-0.733-0.617-0.625-0.842-0.625s-0.467-0.031-0.717-0.031-0.654 0.092-0.996 0.467-1.308 1.279-1.308 3.117 1.342 3.617 1.529 3.867 2.625 4.008 6.358 5.625c0.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
     </svg>
   </a>
 </div>
+
+<script>
+  /* ========================================================
+     WhatsApp Context-Aware Router — Phase 3 Revenue Protocol
+     Lightweight IIFE (~1KB) · Zero dependencies · Mobile-first
+     ======================================================== */
+  (function() {
+    'use strict';
+
+    var WA_NUMBER   = '573008602789';
+    var SHOW_DELAY  = 5000;
+    var VISIBLE_TIME = 4000;
+
+    var btn     = document.getElementById('WhatsAppRouterBtn');
+    var tooltip = document.getElementById('WhatsAppTooltip');
+    var fab     = document.getElementById('WhatsAppFloat');
+    if (!btn) return;
+
+    /* ── Context Detection ─────────────────────────────── */
+    function isPDP() {
+      return document.body.classList.contains('template-product');
+    }
+
+    function getProductTitle() {
+      /* Primary: Dawn's .product__title wrapper → h1 */
+      var el = document.querySelector('.product__title h1');
+      if (el) return el.textContent.trim();
+      /* Fallback: any h1 on the page */
+      var h1 = document.querySelector('h1');
+      return h1 ? h1.textContent.trim() : '';
+    }
+
+    function getProductPrice() {
+      /* Priority 1: sale price (visible when on sale) */
+      var sale = document.querySelector('.price-item--sale.price-item--last');
+      if (sale) return sale.textContent.trim();
+      /* Priority 2: regular price (non-sale) */
+      var regular = document.querySelector('.price-item--last');
+      if (regular) return regular.textContent.trim();
+      /* Priority 3: any .price-item--regular */
+      var any = document.querySelector('.price-item--regular');
+      return any ? any.textContent.trim() : '';
+    }
+
+    /* ── URL Builder ───────────────────────────────────── */
+    function buildWhatsAppURL() {
+      var message;
+
+      if (isPDP()) {
+        var title = getProductTitle();
+        var price = getProductPrice();
+        var url   = window.location.href;
+
+        if (title && price) {
+          message = '\u00a1Hola equipo TechAura! \ud83d\udc4b Estoy viendo el producto: *'
+            + title + '* por *' + price
+            + '*. Me interesa pedirlo con Pago Contraentrega. \u00bfMe ayudan a confirmar mi pedido? \ud83d\ude80 Aqu\u00ed est\u00e1 el link: ' + url;
+        } else {
+          /* Partial context — still send URL */
+          message = '\u00a1Hola equipo TechAura! \ud83d\udc4b Estoy interesado en este producto: ' + url + ' \u00bfMe ayudan con info y disponibilidad?';
+        }
+      } else {
+        message = '\u00a1Hola TechAura! \ud83d\udc4b Necesito asesor\u00eda para elegir el gadget ideal. \u00bfMe ayudan?';
+      }
+
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
+    }
+
+    /* ── Click Handler ─────────────────────────────────── */
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open(buildWhatsAppURL(), '_blank', 'noopener,noreferrer');
+    });
+
+    /* ── Tooltip Logic (preserved from original) ─────── */
+    if (!tooltip || !fab) return;
+
+    var isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    if (isMobile) {
+      setTimeout(function() {
+        var b = fab.querySelector('.whatsapp-button');
+        if (b) {
+          b.style.transition = 'transform 0.3s ease';
+          b.style.transform = 'scale(1.15)';
+          setTimeout(function() {
+            b.style.transform = 'scale(1)';
+          }, 600);
+        }
+      }, SHOW_DELAY);
+    } else {
+      setTimeout(function() {
+        tooltip.style.opacity = '1';
+        tooltip.style.visibility = 'visible';
+        tooltip.style.right = '75px';
+        setTimeout(function() {
+          tooltip.style.opacity = '0';
+          tooltip.style.visibility = 'hidden';
+          tooltip.style.right = '70px';
+        }, VISIBLE_TIME);
+      }, SHOW_DELAY);
+    }
+  })();
+</script>

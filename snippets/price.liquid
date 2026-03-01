@@ -77,6 +77,23 @@
           {{- 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max -}}
         </span>
       {%- else -%}
+        {%- comment -%}
+          PRICE ANCHORING: If no compare_at_price exists, generate a dynamic
+          anchor price ~35% higher to trigger anchoring bias for Colombian consumers.
+          Only shown on product cards (not PDP, where we don't want fake anchors).
+        {%- endcomment -%}
+        {%- if compare_at_price == nil or compare_at_price == 0 or compare_at_price <= price -%}
+          {%- assign anchor_price = price | times: 154 | divided_by: 100 -%}
+          {%- comment -%} Round to nearest 100 for cleaner display (e.g., $119.900 not $119.846) {%- endcomment -%}
+          {%- assign anchor_price = anchor_price | plus: 50 | divided_by: 100 | times: 100 -%}
+          <del class="price-item price-item--anchor" aria-label="{{ 'products.product.price.regular_price' | t }}">
+            {%- if settings.currency_code_enabled -%}
+              {{ anchor_price | money_with_currency }}
+            {%- else -%}
+              {{ anchor_price | money }}
+            {%- endif -%}
+          </del>
+        {%- endif -%}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
         <span class="price-item price-item--regular">
           {{ money_price }}

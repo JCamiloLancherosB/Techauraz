@@ -938,3 +938,79 @@
     animation: none;
   }
 }
+
+/* =============================================================================
+   22. ANCHOR PRICE STYLING - Psychological "was" price for non-sale products
+   ============================================================================= */
+
+.price-item--anchor {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #cbd5e1;
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+
+/* On dark color scheme cards */
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price-item--anchor {
+  color: #94a3b8 !important;
+}
+
+/* Mobile: slightly smaller anchor */
+@media screen and (max-width: 749px) {
+  .price-item--anchor {
+    font-size: 0.8em;
+    margin-right: 0.3rem;
+  }
+}
+
+/* =============================================================================
+   23. REINFORCED CARD GRID ALIGNMENT
+   Ensures buttons always align at bottom edge regardless of title length
+   ============================================================================= */
+
+/* Guarantee all grid items stretch */
+.collection .grid__item,
+.product-grid .grid__item,
+.related-products .grid__item,
+[class*="featured-collection"] .grid__item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Card wrapper fills available height */
+.collection .card-wrapper.product-card-wrapper,
+.product-grid .card-wrapper.product-card-wrapper,
+.related-products .card-wrapper.product-card-wrapper,
+[class*="featured-collection"] .card-wrapper.product-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Card inner structure fills wrapper */
+.card-wrapper.product-card-wrapper .card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Content area fills remaining space below image */
+.card-wrapper.product-card-wrapper .card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Price + button group pushed to bottom */
+.card-wrapper.product-card-wrapper .card-information {
+  margin-top: auto;
+}
+
+.card-wrapper.product-card-wrapper .quick-add {
+  margin-top: auto;
+}
