@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Get product ID from section element for keying timers - DO NOT MODIFY
   const productSection = document.querySelector('[data-product-id]');
   const productId = productSection ? productSection.getAttribute('data-product-id') : null;
-  
+
   // Guard against duplicate initialization for this product
   if (productId && window.productEnhancementsInitialized.has(productId)) {
     // Development mode only - safely check for DEBUG flag
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     return;
   }
-  
+
   if (productId) {
     window.productEnhancementsInitialized.add(productId);
   }
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       scrollTimeout = setTimeout(() => {
         const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
         scrollDepth = Math.max(scrollDepth, scrollPercent);
-        
+
         if (scrollDepth >= 50 && !localStorage.getItem('scroll-engagement-shown')) {
           localStorage.setItem('scroll-engagement-shown', 'true');
           highlightBuyButton();
@@ -98,44 +98,30 @@ document.addEventListener('DOMContentLoaded', function () {
   // 5. Funciones de engagement
   function showEngagementPopup() {
     if (localStorage.getItem('engagement-popup-shown')) return;
-    
+
     const productTitle = productSection ? productSection.querySelector('.product__title') : null;
     const title = productTitle ? productTitle.textContent.trim() : 'este producto';
-    
+
     const popup = document.createElement('div');
-    popup.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      z-index: 1000;
-      max-width: 300px;
-      animation: slideInRight 0.5s ease;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    `;
-    
+    popup.className = 'pe-engagement-popup';
+
     popup.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-        <strong style="font-size: 16px;">💡 ¿Necesitas ayuda?</strong>
-        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0; margin: 0;">&times;</button>
+      <div class="pe-engagement-popup__header">
+        <strong class="pe-engagement-popup__title">💡 ¿Necesitas ayuda?</strong>
+        <button class="pe-engagement-popup__close" onclick="this.closest('.pe-engagement-popup').remove()" aria-label="Cerrar">&times;</button>
       </div>
-      <p style="margin: 0 0 15px 0; font-size: 14px; line-height: 1.4;">Nuestros expertos están aquí para ayudarte a elegir el producto perfecto.</p>
-      <button onclick="window.open('https://wa.me/1234567890?text=Hola, necesito ayuda con el producto ${encodeURIComponent(title)}', '_blank')" 
-              style="background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; width: 100%;">
+      <p class="pe-engagement-popup__body">Nuestros expertos están aquí para ayudarte a elegir el producto perfecto.</p>
+      <button class="pe-engagement-popup__cta" onclick="window.open('https://wa.me/573008602789?text=Hola, necesito ayuda con el producto ${encodeURIComponent(title)}', '_blank')">
         💬 Chatear por WhatsApp
       </button>
     `;
-    
+
     document.body.appendChild(popup);
     localStorage.setItem('engagement-popup-shown', 'true');
-    
+
     setTimeout(() => {
       if (document.body.contains(popup)) {
-        popup.classList.add('slide-out-animation');
+        popup.classList.add('pe-engagement-popup--hiding');
         setTimeout(() => popup.remove(), 300);
       }
     }, 10000);
@@ -144,9 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function highlightBuyButton() {
     const buyButton = document.querySelector('.product-form__cart-submit');
     if (!buyButton) return;
-    
+
     buyButton.classList.add('button-pulse-highlight');
-    
+
     setTimeout(() => {
       buyButton.classList.remove('button-pulse-highlight');
     }, 5000);
@@ -155,49 +141,28 @@ document.addEventListener('DOMContentLoaded', function () {
   function showPriceJustification() {
     const priceEl = document.querySelector('.product__price');
     if (!priceEl) return;
-    
+
     const justification = document.createElement('div');
-    justification.className = 'price-justification';
-    justification.style.cssText = `
-      background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-      border: 2px solid #9ae6b4;
-      border-radius: 15px;
-      padding: 20px;
-      margin-top: 15px;
-      animation: fadeIn 0.5s ease;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    `;
-    
+    justification.className = 'pe-price-justification';
+
     justification.innerHTML = `
-      <div style="display: flex; align-items: center; margin-bottom: 15px;">
-        <span style="font-size: 24px; margin-right: 12px;">💰</span>
-        <strong style="color: #38a169; font-size: 18px;">¿Por qué este precio es una ganga?</strong>
+      <div class="pe-price-justification__header">
+        <span class="pe-price-justification__emoji">💰</span>
+        <strong class="pe-price-justification__title">¿Por qué este precio es una ganga?</strong>
       </div>
-      <ul style="margin: 0; padding-left: 0; list-style: none; color: #2d3748;">
-        <li style="margin-bottom: 8px; padding-left: 25px; position: relative;">
-          <span style="position: absolute; left: 0; color: #38a169; font-weight: bold;">✓</span>
-          Calidad premium garantizada
-        </li>
-        <li style="margin-bottom: 8px; padding-left: 25px; position: relative;">
-          <span style="position: absolute; left: 0; color: #38a169; font-weight: bold;">✓</span>
-          Envío gratuito incluido
-        </li>
-        <li style="margin-bottom: 8px; padding-left: 25px; position: relative;">
-          <span style="position: absolute; left: 0; color: #38a169; font-weight: bold;">✓</span>
-          Garantía extendida de 30 días
-        </li>
-        <li style="margin-bottom: 0; padding-left: 25px; position: relative;">
-          <span style="position: absolute; left: 0; color: #38a169; font-weight: bold;">✓</span>
-          Soporte técnico especializado
-        </li>
+      <ul class="pe-price-justification__list">
+        <li><span class="pe-price-justification__check">✓</span>Calidad premium garantizada</li>
+        <li><span class="pe-price-justification__check">✓</span>Envío gratuito incluido</li>
+        <li><span class="pe-price-justification__check">✓</span>Garantía extendida de 30 días</li>
+        <li><span class="pe-price-justification__check">✓</span>Soporte técnico especializado</li>
       </ul>
     `;
-    
+
     priceEl.appendChild(justification);
-    
+
     setTimeout(() => {
       if (justification.parentNode) {
-        justification.style.animation = 'fadeIn 0.5s ease reverse';
+        justification.classList.add('pe-price-justification--hiding');
         setTimeout(() => justification.remove(), 500);
       }
     }, 8000);
@@ -206,36 +171,22 @@ document.addEventListener('DOMContentLoaded', function () {
   function showImageEngagement() {
     const mediaWrapper = document.querySelector('.product__media-wrapper');
     if (!mediaWrapper) return;
-    
+
     const engagement = document.createElement('div');
-    engagement.className = 'image-engagement';
-    engagement.style.cssText = `
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      background: rgba(0,0,0,0.85);
-      color: white;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      animation: slideInUp 0.5s ease;
-      z-index: 10;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    `;
-    
+    engagement.className = 'pe-image-engagement';
+
     engagement.innerHTML = `<p>📸 ¿Te gustan las imágenes? ¡Imagínate teniéndolo!</p>
-      <button class="image-engagement-button" onclick="document.querySelector('.product-form__cart-submit').scrollIntoView({behavior: 'smooth'}); this.parentElement.remove();">
+      <button class="pe-image-engagement__cta" onclick="document.querySelector('.product-form__cart-submit').scrollIntoView({behavior: 'smooth'}); this.parentElement.remove();">
         🛒 ¡Comprarlo ahora!
       </button>
     `;
-    
+
     mediaWrapper.style.position = 'relative';
     mediaWrapper.appendChild(engagement);
-    
+
     setTimeout(() => {
       if (engagement.parentNode) {
-        engagement.style.animation = 'slideInUp 0.5s ease reverse';
+        engagement.classList.add('pe-image-engagement--hiding');
         setTimeout(() => engagement.remove(), 500);
       }
     }, 8000);
@@ -244,25 +195,25 @@ document.addEventListener('DOMContentLoaded', function () {
   // 7. Optimización de imágenes lazy loading
   function initImageOptimization() {
     const images = document.querySelectorAll('img[loading="lazy"], .product__media img');
-    
+
     if ('IntersectionObserver' in window && images.length > 0) {
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target;
-            
+
             // Agregar placeholder mientras carga
             if (!img.complete) {
               img.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
               img.style.backgroundSize = '200% 100%';
               img.style.animation = 'loading 1.5s infinite';
-              
-              img.addEventListener('load', function() {
+
+              img.addEventListener('load', function () {
                 this.style.background = '';
                 this.style.animation = '';
               }, { once: true });
             }
-            
+
             observer.unobserve(img);
           }
         });
@@ -280,18 +231,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const detailsLink = document.querySelector('[data-scroll-to-description]');
     if (!detailsLink) return;
 
-    detailsLink.addEventListener('click', function(e) {
+    detailsLink.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.getElementById('product-description');
       if (!target) return;
-      
+
       const headerOffset = 80; // Adjust for fixed headers
       const elementPosition = target.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
+
       // Check user's motion preference
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
@@ -308,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const dots = slider.querySelectorAll('.slider-dot');
     const slides = slider.querySelectorAll('.product-hero-slide');
-    
+
     if (dots.length === 0 || slides.length === 0) return;
 
     let currentSlide = 0;
@@ -316,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSlide(index) {
       // Remove active class from all
       dots.forEach(dot => dot.classList.remove('active'));
-      
+
       // Add active to current
       if (dots[index]) {
         dots[index].classList.add('active');

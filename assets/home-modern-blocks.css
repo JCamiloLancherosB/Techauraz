@@ -8,81 +8,19 @@
  */
 
 /* ==============================================
-   SLIDESHOW CTA ENHANCEMENTS
+   SLIDESHOW CTA STYLES
    ============================================== */
 
-/* Ensure slideshow CTAs are professional and clickable - exceeds 44px min height */
-.slideshow-cta,
-.banner__buttons .button {
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--ta-space-md) var(--ta-space-2xl);
-  min-height: var(--ta-touch-comfortable); /* 48px - Exceeds 44px requirement */
-  font-weight: var(--ta-font-semibold);
-  border-radius: var(--ta-radius-pill);
-  text-decoration: none;
-  transition: var(--ta-transition-normal);
-  cursor: pointer;
-  border: 2px solid transparent;
-}
-
-.slideshow-cta.button--primary,
-.banner__buttons .button--primary {
-  background: var(--ta-gradient-cta);
-  color: var(--ta-text-inverse);
-  box-shadow: var(--ta-shadow-md);
-}
-
-.slideshow-cta.button--secondary,
-.banner__buttons .button--secondary {
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--ta-text-secondary);
-  border-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-}
-
-.slideshow-cta:hover,
-.banner__buttons .button:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--ta-shadow-lg);
-}
-
-.slideshow-cta.button--primary:hover {
-  filter: brightness(1.1);
-}
-
-.slideshow-cta.button--secondary:hover {
-  background: white;
-  border-color: var(--ta-info);
-}
-
-.slideshow-cta:focus,
-.banner__buttons .button:focus {
-  outline: 3px solid var(--ta-info);
-  outline-offset: 3px;
-}
-
-/* Ensure CTAs wrapper doesn't block interactions */
-.slideshow-ctas,
-.banner__buttons {
-  display: flex;
-  gap: var(--ta-space-lg);
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--ta-space-xl);
-  pointer-events: auto;
-  position: relative;
-  z-index: 10;
-}
+/*
+ * SLIDESHOW CTA styles have been consolidated into slideshow-enhancements.css
+ * (canonical source, scoped to .template-index slideshow-component).
+ * Do NOT re-add CTA styles here to avoid cascade conflicts.
+ */
 
 /* ==============================================
    TESTIMONIALS SECTION ENHANCEMENTS
    ============================================== */
-   
+
 /* NOTE: Base testimonials styling is in testimonials.css
    This file only provides additional enhancements */
 
@@ -92,7 +30,7 @@
 }
 
 /* Ensure consistent section flow - avoid back-to-back similar sections */
-.section + .section.testimonials-section {
+.section+.section.testimonials-section {
   border-top: 1px solid rgba(14, 165, 233, 0.08);
 }
 
@@ -110,7 +48,8 @@
   position: relative;
   z-index: 1;
   border-radius: var(--ta-radius-xl);
-  padding: var(--ta-space-2xl) var(--ta-space-xl) !important; /* Competes with !important in ui-ux-responsive-fixes.css */
+  padding: var(--ta-space-2xl) var(--ta-space-xl) !important;
+  /* Competes with !important in ui-ux-responsive-fixes.css */
   background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
   box-shadow: 0 20px 60px rgba(30, 58, 95, 0.4);
   text-align: center;
@@ -190,11 +129,9 @@
 }
 
 .newsletter .newsletter-form__button {
-  background: #3b82f6;
   border: none;
   border-radius: 0 8px 8px 0;
-  width: var(--ta-touch-comfortable);
-  height: var(--ta-touch-comfortable);
+  min-height: var(--ta-touch-comfortable);
   margin-right: 0;
   display: flex;
   align-items: center;
@@ -204,7 +141,22 @@
   color: white;
 }
 
-.newsletter .newsletter-form__button:hover {
+/* When button has .ta-cta-button class (text CTA), allow natural sizing */
+.newsletter .newsletter-form__button.ta-cta-button {
+  width: auto;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+}
+
+/* Fallback: icon-only button (no .ta-cta-button class) */
+.newsletter .newsletter-form__button:not(.ta-cta-button) {
+  background: #3b82f6;
+  width: var(--ta-touch-comfortable);
+  height: var(--ta-touch-comfortable);
+}
+
+.newsletter .newsletter-form__button:not(.ta-cta-button):hover {
   background: #2563eb;
   transform: translateY(-2px);
   box-shadow: var(--ta-shadow-md);
@@ -316,6 +268,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -352,6 +305,7 @@
 
 /* Mobile responsive for newsletter messages */
 @media screen and (max-width: 749px) {
+
   .newsletter-form__message--success,
   .newsletter-form__message--error {
     padding: var(--ta-space-sm, 0.75rem) var(--ta-space-md, 1rem);
@@ -840,6 +794,7 @@
 
 /* Extra small devices - adjustments for very small screens (below 360px) */
 @media screen and (max-width: 359px) {
+
   .newsletter .inline-richtext,
   .newsletter h2 {
     font-size: var(--ta-font-size-xl);
@@ -901,13 +856,14 @@ button:focus-visible {
    ANIMATIONS & TRANSITIONS
    ============================================== */
 
-/* NOTE: fadeInUp with 20px translateY - slightly subtler than base.css version (30px)
-   for smoother home page scroll animations */
-@keyframes fadeInUp {
+/* NOTE: fadeInUp-subtle uses 20px translateY — subtler than base.css version (30px).
+   Renamed to avoid @keyframes name collision with base.css. */
+@keyframes fadeInUp-subtle {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -915,7 +871,7 @@ button:focus-visible {
 }
 
 .scroll-trigger.animate--slide-in {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp-subtle 0.6s ease-out forwards;
 }
 
 /* Smooth scrolling for slider */
@@ -935,6 +891,7 @@ button:focus-visible {
    ============================================== */
 
 @media print {
+
   .newsletter,
   .slider-buttons {
     display: none;

@@ -1,21 +1,8 @@
 {% comment %}
-  ⚠️ DEPRECATED - Use "Beneficios Unificados" (modern-feature-cards) instead
+  Conversion-Focused Benefits Strip
   
-  This section has been consolidated into modern-feature-cards.liquid for:
-  - Avoid duplicity
-  - Better scannability (icon → title → 1 line → link)
-  - Unified CTA for higher conversions
-  
-  Conversion-Focused Benefits Section (Legacy)
-  
-  Displays scannable benefit blocks with icons and outcome-driven headlines.
-  
-  Accepts:
-  - heading: {String} Section heading
-  - benefits: {Array} Array of benefit objects with icon, title, and description
-  
-  Usage in section:
-  {% render 'benefits-conversion' %}
+  Displays 4 benefit cards in a horizontal grid with icons and outcome-driven copy.
+  Styled by visual-system-unified-2024.css
 {% endcomment %}
 
 {%- liquid
@@ -48,13 +35,13 @@
 
 {% schema %}
 {
-  "name": "⚠️ Beneficios (Deprecated)",
+  "name": "Beneficios de Compra",
   "class": "section",
   "tag": "section",
   "settings": [
     {
       "type": "paragraph",
-      "content": "⚠️ Esta sección ha sido reemplazada por 'Beneficios Unificados'. Use la nueva sección para mejor diseño y CTA unificado."
+      "content": "Muestra 4 beneficios en tarjetas horizontales con iconos y texto persuasivo."
     },
     {
       "type": "text",
@@ -92,7 +79,7 @@
   ],
   "presets": [
     {
-      "name": "⚠️ Beneficios (Deprecated)",
+      "name": "Beneficios de Compra",
       "blocks": [
         {
           "type": "benefit",

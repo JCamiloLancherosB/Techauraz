@@ -265,9 +265,13 @@
   <noscript><link rel="stylesheet" href="{{ 'techauraz-card-enhancements.css' | asset_url }}"></noscript>
 {%- endif -%}
 
+<!-- Visual System Unified - Global visual cohesion (cards, sections, benefits) -->
+<link rel="preload" href="{{ 'visual-system-unified-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
+
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
 <!-- Deferred: below-fold, non-critical -->
-<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
+<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all'" media="print">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 
 <!-- Announcement Bar Enhancements - Marquee styling with persuasive elements - 2026-01-29 -->

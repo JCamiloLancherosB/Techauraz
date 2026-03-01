@@ -402,6 +402,7 @@ main .section-header,
 
 /* Enhanced selectors for browsers with :has() support */
 @supports selector(:has(*)) {
+
   .section-header:has(.section-header__title),
   .section-header:has(.title-wrapper) {
     text-align: center;
@@ -467,21 +468,23 @@ h2.title {
 }
 
 @media screen and (min-width: 750px) {
+
   /* Content section headers - larger margin on desktop
    * Fallback selectors for all browsers */
   main .section-header,
   .content-for-layout .section-header {
     margin-bottom: 5rem;
   }
-  
+
   /* Enhanced selectors for browsers with :has() support */
   @supports selector(:has(*)) {
+
     .section-header:has(.section-header__title),
     .section-header:has(.title-wrapper) {
       margin-bottom: 5rem;
     }
   }
-  
+
   /* Navigation header reset - must not have margin */
   #shopify-section-header.section-header,
   .announcement-bar-section.section-header,
@@ -2388,19 +2391,19 @@ header-drawer {
   .footer.footer-enhanced {
     padding: 48px 16px 24px;
   }
-  
+
   .footer-grid {
     gap: 32px;
   }
-  
+
   .social-links {
     justify-content: center;
   }
 }
 
 /* Newsletter to footer smooth transition */
-.section + .footer,
-[class*="newsletter"] + .footer {
+.section+.footer,
+[class*="newsletter"]+.footer {
   margin-top: 0;
   border-top: none;
 }
@@ -3618,52 +3621,9 @@ header-drawer {
   transform: scale(1.05);
 }
 
-/* Button Styles - Premium gradient with enhanced contrast
-   NOTE: !important flags required here to override Shopify theme defaults 
-   and ensure consistent button styling across all product cards */
-.quick-add__submit {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  color: #ffffff !important;
-  border-radius: 8px !important;
-  font-size: 1.3rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.5px !important;
-  text-transform: uppercase !important;
-  border: none !important;
-  text-align: center !important;
-  padding: 12px 24px !important;
-  min-height: 44px !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
-}
-
-.quick-add__submit:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-  color: #ffffff !important;
-}
-
-.quick-add__submit:focus-visible {
-  outline: 3px solid #3b82f6 !important;
-  outline-offset: 2px !important;
-}
-
-.quick-add__submit:disabled {
-  opacity: 0.5 !important;
-  cursor: not-allowed !important;
-  transform: none !important;
-  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2) !important;
-}
-
-/* Desktop - larger buttons for better clickability */
-@media screen and (min-width: 990px) {
-  .quick-add__submit {
-    font-size: 1.4rem !important;
-    padding: 12px 24px !important;
-    min-height: 48px !important;
-  }
-}
+/* Quick-add button styles — CANONICAL SOURCE: techauraz-product-card.css
+   Removed duplicate declarations with !important that broke the token-based system.
+   See techauraz-product-card.css L301-358 for all quick-add styling. */
 
 /* Mobile Responsive Improvements */
 @media screen and (max-width: 749px) {
@@ -3692,11 +3652,6 @@ header-drawer {
     font-size: 1.5rem !important;
   }
 
-  .quick-add__submit {
-    font-size: 1.2rem !important;
-    padding: 0.75rem 1.2rem !important;
-    font-weight: 700 !important;
-  }
 
   /* Ensure card images are visible on mobile */
   /* !important flags needed to override conflicting base styles and ensure images display */
@@ -3743,10 +3698,7 @@ header-drawer {
     font-size: 1.6rem !important;
   }
 
-  .quick-add__submit {
-    font-size: 1.25rem !important;
-    padding: 0.85rem 1.5rem !important;
-  }
+
 }
 
 /* ============================================================
@@ -3848,23 +3800,7 @@ header-drawer {
   text-decoration: line-through;
 }
 
-/* Ensure quick-add button is visible and accessible */
-.quick-add__submit {
-  background-color: rgba(245, 158, 11, 0.9);
-  color: #ffffff;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.quick-add__submit:hover {
-  background-color: rgba(251, 191, 36, 1);
-  transform: translateY(-1px);
-}
-
-.quick-add__submit:focus-visible {
-  outline: 2px solid #fbbf24;
-  outline-offset: 2px;
-}
+/* quick-add button — see techauraz-product-card.css (canonical source) */
 
 /* Rating stars visibility */
 .rating-star {
@@ -4048,8 +3984,7 @@ header-drawer {
     width: 100%;
   }
 
-  .card__cta .button,
-  .quick-add__submit {
+  .card__cta .button {
     width: 100% !important;
     min-height: 44px !important;
     padding: 0.9rem 1rem !important;
@@ -4104,10 +4039,7 @@ header-drawer {
     font-size: 1.3rem !important;
   }
 
-  .quick-add__submit {
-    font-size: 1.1rem !important;
-    padding: 0.8rem !important;
-  }
+
 }
 
 /* Prevent grid overflow on mobile */
@@ -5232,23 +5164,27 @@ a.product__text {
 
 .product-media-container .media {
   padding-top: var(--ratio-percent);
-  aspect-ratio: var(--aspect-ratio, 1); /* Modern browsers: use CSS aspect-ratio with fallback */
+  aspect-ratio: var(--aspect-ratio, 1);
+  /* Modern browsers: use CSS aspect-ratio with fallback */
 }
 
 @supports (aspect-ratio: 1) {
   .product-media-container .media {
-    padding-top: 0; /* Remove padding-top when aspect-ratio is supported */
+    padding-top: 0;
+    /* Remove padding-top when aspect-ratio is supported */
   }
 }
 
 .product-media-container.constrain-height .media {
   padding-top: min(var(--constrained-height), var(--ratio-percent));
-  aspect-ratio: var(--aspect-ratio, 1); /* Modern browsers: use CSS aspect-ratio with fallback */
+  aspect-ratio: var(--aspect-ratio, 1);
+  /* Modern browsers: use CSS aspect-ratio with fallback */
 }
 
 @supports (aspect-ratio: 1) {
   .product-media-container.constrain-height .media {
-    padding-top: 0; /* Remove padding-top when aspect-ratio is supported */
+    padding-top: 0;
+    /* Remove padding-top when aspect-ratio is supported */
     max-height: var(--constrained-height);
   }
 }
@@ -5272,7 +5208,8 @@ a.product__text {
 }
 
 .product-model.deferred-media.media {
-  aspect-ratio: 1; /* 3D models are typically square */
+  aspect-ratio: 1;
+  /* 3D models are typically square */
 }
 
 @supports not (aspect-ratio: 1) {
@@ -5519,7 +5456,7 @@ a.product__text {
     padding-top: 0.5rem !important;
   }
 
-  .product__info-container > * + * {
+  .product__info-container>*+* {
     margin-top: 0.5rem;
   }
 }
@@ -7272,30 +7209,9 @@ body.menu-drawer-open {
   background: var(--ta-warning);
 }
 
-/* Quick add button - Enhanced premium styling */
+/* Quick-add button — see techauraz-product-card.css (canonical source) */
 .quick-add {
   margin-top: auto;
-}
-
-.quick-add__submit {
-  width: 100%;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.quick-add__submit:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 /* Collection card variations */
@@ -8683,7 +8599,7 @@ body.menu-drawer-open {
     display: flex !important;
     flex-direction: column !important;
   }
-  
+
   /* Card media - respect dynamic aspect ratio from --ratio-percent */
   .card__media,
   .card .media {
@@ -8733,8 +8649,7 @@ body.menu-drawer-open {
     line-height: 1 !important;
   }
 
-  /* Quick add button */
-  .quick-add__submit,
+  /* Quick add button — see techauraz-product-card.css */
   .card__cta {
     padding: 0.8rem 1rem !important;
     font-size: 1.2rem !important;
@@ -8839,8 +8754,7 @@ body.menu-drawer-open {
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
   }
 
-  /* Add to cart buttons */
-  .quick-add__submit,
+  /* Add to cart buttons (quick-add uses techauraz-product-card.css) */
   .product-form__submit,
   [class*="add-to-cart"] {
     width: 100%;
@@ -8862,8 +8776,6 @@ body.menu-drawer-open {
     justify-content: center;
   }
 
-  .quick-add__submit:hover,
-  .quick-add__submit:focus,
   .product-form__submit:hover,
   .product-form__submit:focus {
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
@@ -12553,10 +12465,7 @@ textarea:focus-visible,
     min-width: 44px;
   }
 
-  .quick-add__submit {
-    min-height: 48px;
-    font-size: 1.5rem;
-  }
+
 }
 
 /* Enhanced badge system for cards */

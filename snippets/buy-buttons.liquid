@@ -81,7 +81,6 @@
             id="ProductSubmitButton-{{ section_id }}-primary"
             type="button"
             class="product-form__submit button button--full-width p-buy-btn-primary"
-            style="background: #10b981; color: white; border: none; font-size: 1.2rem; font-weight: 800; padding: 1.2rem; border-radius: 8px; animation: btn-pulse 2s infinite ease-in-out; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);"
             onclick="document.querySelector('.product-form form').submit();"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
@@ -96,20 +95,14 @@
             </span>
           </button>
           
-          <style>
-            @keyframes btn-pulse {
-              0%, 100% { box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); transform: scale(1); }
-              50% { box-shadow: 0 4px 25px rgba(16, 185, 129, 0.7); transform: scale(1.02); }
-            }
-          </style>
+
 
           {%- comment -%} SECONDARY CTA: GHOST ADD TO CART {%- endcomment -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width button--secondary"
-            style="background: transparent; color: #1e293b; border: 2px solid #cbd5e1; font-weight: 600; padding: 1rem;"
+            class="product-form__submit button button--full-width button--secondary p-buy-btn-secondary"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
             {% endif %}
@@ -132,9 +125,7 @@
         <button
   type="submit"
   name="add"
-  class="product-form__submit button button--full-width button--primary"
-  onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
-  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
+  class="product-form__submit button button--full-width button--primary p-buy-btn-placeholder"
   disabled
 >
   🏷️ COMPRAR AHORA

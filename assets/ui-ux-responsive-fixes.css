@@ -606,6 +606,7 @@ img[src$=".svg"] {
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -934,12 +935,7 @@ slideshow-component .slider::-webkit-scrollbar {
     line-height: 1.3;
   }
 
-  /* Quick-add button sizing for mobile */
-  .quick-add__submit {
-    min-height: 44px;
-    font-size: 1.3rem;
-    padding: 0.9rem 1rem;
-  }
+
 }
 
 /* Mobile responsiveness - general (up to 749px) */
@@ -975,11 +971,7 @@ slideshow-component .slider::-webkit-scrollbar {
     font-size: 1.4rem;
   }
 
-  /* Quick-add button for tablet */
-  .quick-add__submit {
-    font-size: 1.35rem;
-    padding: 0.95rem 1.3rem;
-  }
+
 }
 
 /* Desktop responsiveness (990px-1279px) */
@@ -1879,124 +1871,11 @@ textarea:focus-visible {
   }
 }
 
-/* Benefits section - ensure proper responsive grid with standardized spacing */
-.ta-conv-benefits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  /* Mobile: 24px */
-  padding: 0;
-  /* Padding handled by ta-conv-section-spacing */
-  max-width: var(--page-width, 1200px);
-  margin: 0 auto;
-}
-
-@media screen and (min-width: 750px) {
-  .ta-conv-benefits {
-    gap: 2rem;
-    /* Desktop: 32px - Standardized */
-  }
-}
-
-.ta-conv-benefit {
-  display: flex;
-  flex-direction: column;
-  min-height: 280px;
-  justify-content: space-between;
-  text-align: center;
-  padding: 24px;
-  background: white;
-  border-radius: 16px;
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.ta-conv-benefit:hover {
-  transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
-}
-
-.ta-conv-benefit__icon,
-.ta-conv-benefit-icon {
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: 16px;
-  line-height: 1;
-}
-
-.ta-conv-benefit__title,
-.ta-conv-benefit-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #0f172a;
-  margin: 0 0 12px 0;
-  line-height: 1.3;
-}
-
-.ta-conv-benefit__description,
-.ta-conv-benefit-desc {
-  font-size: 14px;
-  color: #475569;
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
-}
-
-/* Button styles within benefit cards */
-.ta-conv-benefit .button {
-  margin-top: auto;
-  width: 100%;
-}
-
-/* Responsive: Benefits section */
-@media screen and (max-width: 749px) {
-  .ta-conv-benefits {
-    grid-template-columns: 1fr;
-  }
-
-  .ta-conv-benefit {
-    padding: 20px;
-    min-height: 240px;
-  }
-
-  .ta-conv-benefit__icon,
-  .ta-conv-benefit-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-  }
-}
-
-/* Section spacing improvements - Updated to match tech-section standards */
-.ta-conv-section-spacing {
-  padding: 3.5rem 2rem;
-  /* Desktop: 56px vertical, consistent gutters */
-}
-
-@media screen and (max-width: 749px) {
-  .ta-conv-section-spacing {
-    padding: 2rem 1rem;
-    /* Mobile: 32px vertical */
-  }
-}
-
-.ta-conv-section-heading {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--tech-ink, #0B1220);
-  margin-bottom: 3rem;
-  /* Desktop: 48px - consistent with tech-section */
-}
-
-@media screen and (max-width: 749px) {
-  .ta-conv-section-heading {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    /* Mobile: 32px - consistent with tech-section */
-  }
-}
+/*
+ * Benefits (.ta-conv-benefit), section spacing (.ta-conv-section-spacing),
+ * and section headings (.ta-conv-section-heading) are canonically defined in
+ * visual-system-unified-2024.css. Do NOT re-add here.
+ */
 
 /* =============================================================================
    13. FACET/FILTER ICON SIZE FIX - Fix oversized chevron icons

@@ -634,8 +634,8 @@
   /* ── Order Bump Component ─────────────────────────── */
   .cart-drawer__order-bump {
     margin: 0 1.5rem 1rem;
-    border: 2px dashed #F59E0B;
-    background: #FFFBEB;
+    border: 2px dashed var(--ta-warning, #F59E0B);
+    background: var(--ta-bg-warning, #FFFBEB);
     border-radius: 1rem;
     padding: 1.2rem;
     position: relative;
@@ -647,7 +647,7 @@
     top: 0;
     right: 0;
     background: linear-gradient(135deg, #F59E0B, #D97706);
-    color: #fff;
+    color: var(--ta-text-inverse, #fff);
     font-size: 1.1rem;
     font-weight: 700;
     padding: 0.3rem 1rem 0.3rem 0.8rem;
@@ -674,7 +674,7 @@
   .order-bump__title {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--ta-text-primary, #1e293b);
     margin: 0 0 0.3rem;
     line-height: 1.3;
   }
@@ -687,19 +687,19 @@
   }
 
   .order-bump__original-price {
-    color: #94a3b8;
+    color: var(--ta-text-disabled, #94a3b8);
     font-size: 1.2rem;
     text-decoration: line-through;
   }
 
   .order-bump__sale-price {
-    color: #dc2626;
+    color: var(--ta-error, #dc2626);
     font-weight: 800;
     font-size: 1.4rem;
   }
 
   .order-bump__reason {
-    color: #64748b;
+    color: var(--ta-text-muted, #64748b);
     font-size: 1.1rem;
     margin: 0;
     line-height: 1.4;
@@ -708,7 +708,7 @@
   .order-bump__cta {
     flex-shrink: 0;
     background: linear-gradient(135deg, #F59E0B, #D97706);
-    color: #fff;
+    color: var(--ta-text-inverse, #fff);
     border: none;
     border-radius: 0.6rem;
     padding: 0.7rem 1rem;
@@ -730,7 +730,7 @@
   }
 
   .order-bump__cta--added {
-    background: #10b981;
+    background: var(--ta-success, #10b981);
     pointer-events: none;
   }
 
@@ -744,11 +744,11 @@
 
   /* ── Shipping Bar Enhancement ──────────────────────── */
   .cart-drawer__shipping-bar--unlocked {
-    background: #ecfdf5 !important;
+    background: var(--ta-bg-success, #ecfdf5);
   }
 
   .cart-drawer__shipping-bar--unlocked .shipping-bar__fill {
-    background: linear-gradient(135deg, #10b981, #059669) !important;
+    background: linear-gradient(135deg, var(--ta-success, #10b981), #059669);
   }
 
   /* ── Mobile Order Bump Adjustments ─────────────────── */

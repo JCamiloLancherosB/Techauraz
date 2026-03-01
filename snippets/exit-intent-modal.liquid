@@ -69,7 +69,7 @@
   /* ── Card ───────────────────────────────────────────── */
   .ei-modal__card {
     position: relative;
-    background: #fff;
+    background: var(--ta-surface, #fff);
     border-radius: 1.2rem;
     padding: 2.5rem 2rem 2rem;
     max-width: 440px;
@@ -90,7 +90,7 @@
     right: 1rem;
     background: none;
     border: none;
-    color: #94a3b8;
+    color: var(--ta-text-disabled, #94a3b8);
     cursor: pointer;
     padding: 0.3rem;
     border-radius: 0.3rem;
@@ -98,8 +98,8 @@
   }
 
   .ei-modal__close:hover {
-    color: #1e293b;
-    background: #f1f5f9;
+    color: var(--ta-text-primary, #1e293b);
+    background: var(--ta-bg-secondary, #f1f5f9);
   }
 
   /* ── Content ────────────────────────────────────────── */
@@ -112,7 +112,7 @@
   .ei-modal__headline {
     font-size: 2rem;
     font-weight: 800;
-    color: #0f172a;
+    color: var(--ta-text-primary, #0f172a);
     margin: 0 0 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -120,13 +120,13 @@
 
   .ei-modal__body {
     font-size: 1.4rem;
-    color: #475569;
+    color: var(--ta-text-secondary, #475569);
     line-height: 1.6;
     margin: 0 0 1.5rem;
   }
 
   .ei-modal__body strong {
-    color: #0f172a;
+    color: var(--ta-text-primary, #0f172a);
   }
 
   /* ── Primary CTA (pulsing green) ────────────────────── */
@@ -134,7 +134,7 @@
     display: block;
     width: 100%;
     background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: #fff;
+    color: var(--ta-text-inverse, #fff);
     border: none;
     border-radius: 0.7rem;
     padding: 1rem 1.5rem;
@@ -166,7 +166,7 @@
     width: 100%;
     background: none;
     border: none;
-    color: #94a3b8;
+    color: var(--ta-text-disabled, #94a3b8);
     font-size: 1.2rem;
     cursor: pointer;
     margin-top: 1rem;
@@ -177,7 +177,7 @@
   }
 
   .ei-modal__dismiss:hover {
-    color: #64748b;
+    color: var(--ta-text-muted, #64748b);
   }
 
   /* ── Mobile ─────────────────────────────────────────── */

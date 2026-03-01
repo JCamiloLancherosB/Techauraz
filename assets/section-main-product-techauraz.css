@@ -126,10 +126,11 @@
   text-transform: uppercase;
   letter-spacing: var(--ta-tracking-wide, 0.025em);
   line-height: var(--ta-leading-normal, 1.5);
-  animation: pulse-badge 2s infinite;
+  animation: pulse-badge-pdp 2s infinite;
 }
 
-@keyframes pulse-badge {
+/* Renamed from pulse-badge to avoid collision with base.css variant (has box-shadow) */
+@keyframes pulse-badge-pdp {
 
   0%,
   100% {
@@ -1540,5 +1541,320 @@
   .product__description--enhanced {
     padding: 16px;
     margin: 24px 0;
+  }
+}
+
+/* =============================================================================
+   11. PRODUCT DESCRIPTION — Intro & Feature List
+   Moved from inline styles in main-product.liquid (2026-02-28)
+   ============================================================================= */
+
+.product-description__intro {
+  font-size: var(--ta-font-size-sm, 1.1rem);
+  line-height: 1.7;
+  color: var(--ta-text-secondary, #334155);
+}
+
+.product-description__features {
+  list-style: none;
+  padding-left: 0;
+  margin-top: var(--ta-space-lg, 1.5rem);
+}
+
+.product-description__features li {
+  margin-bottom: var(--ta-space-md, 1rem);
+  line-height: 1.6;
+  font-size: var(--ta-font-size-sm, 1.05rem);
+}
+
+/* =============================================================================
+   12. BUY BUTTON CTAs — Primary (COD) & Secondary (Add to Cart)
+   Moved from inline styles in buy-buttons.liquid & sticky-add-to-cart.liquid (2026-02-28)
+   ============================================================================= */
+
+/* Primary CTA — "COMPRAR Y PAGAR EN CASA" (COD green pulse) */
+.p-buy-btn-primary {
+  background: var(--ta-success, #10b981);
+  color: var(--ta-text-inverse, #ffffff);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 1.2rem;
+  border-radius: 8px;
+  animation: btn-pulse 2s infinite ease-in-out;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.p-buy-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.p-buy-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+/* Secondary CTA — "Agregar al Carrito" (ghost) */
+.p-buy-btn-secondary {
+  background: transparent;
+  color: var(--ta-text-primary, #1e293b);
+  border: 2px solid var(--ta-border, #cbd5e1);
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.p-buy-btn-secondary:hover {
+  border-color: var(--ta-primary, #3b82f6);
+  color: var(--ta-primary, #3b82f6);
+  transform: translateY(-1px);
+}
+
+/* Sticky bar button (compact variant) */
+.sticky-add-to-cart__button {
+  background: var(--ta-success, #10b981);
+  color: var(--ta-text-inverse, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 800;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  animation: btn-pulse 2s infinite ease-in-out;
+}
+
+.sticky-add-to-cart__btn-text {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+/* Disabled product placeholder button */
+.p-buy-btn-placeholder {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.p-buy-btn-placeholder:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Shared keyframe for buy buttons */
+@keyframes btn-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 4px 25px rgba(16, 185, 129, 0.7);
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .p-buy-btn-primary,
+  .sticky-add-to-cart__button {
+    animation: none;
+  }
+}
+
+/* =============================================================================
+   13. JS ENGAGEMENT POPUPS — product-enhancements.js
+   Moved from inline style.cssText + innerHTML (2026-02-28)
+   ============================================================================= */
+
+/* Engagement Popup — "¿Necesitas ayuda?" WhatsApp CTA */
+.pe-engagement-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--ta-text-inverse, #fff);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 300px;
+  animation: pe-slideInRight 0.5s ease;
+}
+
+.pe-engagement-popup--hiding {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.pe-engagement-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.pe-engagement-popup__title {
+  font-size: 16px;
+}
+
+.pe-engagement-popup__close {
+  background: none;
+  border: none;
+  color: var(--ta-text-inverse, #fff);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.pe-engagement-popup__body {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.pe-engagement-popup__cta {
+  background: #25D366;
+  color: var(--ta-text-inverse, #fff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  width: 100%;
+}
+
+/* Price Justification — "¿Por qué este precio es una ganga?" */
+.pe-price-justification {
+  background: linear-gradient(135deg, var(--ta-bg-success, #f0fff4) 0%, #e6fffa 100%);
+  border: 2px solid var(--ta-border-success, #9ae6b4);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 15px;
+  animation: pe-fadeIn 0.5s ease;
+}
+
+.pe-price-justification--hiding {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.pe-price-justification__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.pe-price-justification__emoji {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.pe-price-justification__title {
+  color: var(--ta-success, #38a169);
+  font-size: 18px;
+}
+
+.pe-price-justification__list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  color: var(--ta-text-primary, #2d3748);
+}
+
+.pe-price-justification__list li {
+  margin-bottom: 8px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.pe-price-justification__list li:last-child {
+  margin-bottom: 0;
+}
+
+.pe-price-justification__check {
+  position: absolute;
+  left: 0;
+  color: var(--ta-success, #38a169);
+  font-weight: bold;
+}
+
+/* Image Engagement — "¡Imagínate teniéndolo!" overlay */
+.pe-image-engagement {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  color: var(--ta-text-inverse, #fff);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  animation: pe-slideInUp 0.5s ease;
+  z-index: 10;
+}
+
+.pe-image-engagement--hiding {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.pe-image-engagement__cta {
+  background: var(--ta-success, #10b981);
+  color: var(--ta-text-inverse, #fff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Shared keyframes for JS popups */
+@keyframes pe-slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pe-fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pe-slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

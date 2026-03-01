@@ -51,12 +51,12 @@
   .ta-delivery-estimate {
     display: flex;
     align-items: center;
-    background: #F0FDF4;
-    border: 1px solid #BBF7D0;
+    background: var(--ta-bg-success, #F0FDF4);
+    border: 1px solid var(--ta-border-success, #BBF7D0);
     border-radius: 0.5rem;
     padding: 0.6rem 1rem;
     margin: 0.8rem 0;
-    color: #15803D;
+    color: var(--ta-success-dark, #15803D);
     font-size: 1.35rem;
     line-height: 1.5;
   }
@@ -72,7 +72,7 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    color: #16A34A;
+    color: var(--ta-success, #16A34A);
   }
 
   .ta-delivery-estimate__text {
@@ -80,7 +80,7 @@
   }
 
   .ta-delivery-estimate__date-range strong {
-    color: #166534;
+    color: var(--ta-success-dark, #166534);
   }
 
   @media screen and (max-width: 749px) {

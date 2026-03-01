@@ -21,10 +21,9 @@
 
   {%- comment -%}
     Load shared CSS assets once at section level (not per card)
-    These styles support volume pricing and visual system for product cards (rating styles are in base.css)
+    Note: visual-system-unified-2024.css is loaded globally in theme.liquid
   {%- endcomment -%}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
-  {{ 'visual-system-unified-2024.css' | asset_url | stylesheet_tag }}
 
   {{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}
 
@@ -136,40 +135,12 @@
                     price_class: 'price--large'
                   -%}
                   
-                  {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
-                  <div class="pdp-urgency-injectors" style="margin-top: 1.5rem; background: #fff8f1; border: 1px solid #ffedd5; padding: 1rem; border-radius: 8px;">
-                    <p class="urgency-pulse" style="color: #ef4444; font-weight: 800; animation: p-pulse 2s infinite; font-size: 1.05rem; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
-                      <span style="font-size: 1.2rem;">🔥</span> ¡Últimas <span id="random-stock" style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; margin: 0 2px;">5</span> unidades disponibles!
-                    </p>
-                    <p class="delivery-estimator" style="color: #10b981; font-weight: 600; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 6px;">
-                      <span style="font-size: 1.1rem;">🚚</span> Pídelo hoy y recíbelo entre el <strong id="date-min"></strong> y el <strong id="date-max"></strong>
-                    </p>
-                  </div>
-                  <style>
-                    @keyframes p-pulse {
-                      0%, 100% { opacity: 1; transform: scale(1); }
-                      50% { opacity: 0.8; transform: scale(1.02); }
-                    }
-                  </style>
-                  <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                      const stockEl = document.getElementById('random-stock');
-                      if (stockEl) {
-                        stockEl.innerText = Math.floor(Math.random() * 5) + 3; // Random 3-7
-                      }
-                      const dateObj = new Date();
-                      const options = { month: 'short', day: 'numeric' };
-                      const minDate = new Date(dateObj.getTime() + 2 * 24 * 60 * 60 * 1000);
-                      const maxDate = new Date(dateObj.getTime() + 5 * 24 * 60 * 60 * 1000);
-                      const minEl = document.getElementById('date-min');
-                      const maxEl = document.getElementById('date-max');
-                      if (minEl && maxEl) {
-                        minEl.innerText = minDate.toLocaleDateString('es-CO', options);
-                        maxEl.innerText = maxDate.toLocaleDateString('es-CO', options);
-                      }
-                    });
-                  </script>
-                  {%- endif -%}
+                  {%- comment -%}
+                    Urgency elements (stock counter + delivery estimate) are rendered via
+                    product.json blocks: pdp_fomo_stock and pdp_delivery_estimate.
+                    See snippets/pdp-fomo-stock.liquid and snippets/pdp-delivery-estimate.liquid.
+                    Removed inline duplicate that was hardcoded for Power Bank only (2026-02-28).
+                  {%- endcomment -%}
                 </div>
 
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -254,13 +225,13 @@
                     </div>
                     <div class="product-description__content">
                       {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
-                        <p style="font-size: 1.1rem; line-height: 1.7; color: #334155;">No vuelvas a quedarte sin batería en el momento más importante. La <strong>Power Bank Transparente 20.000 mAh</strong> está diseñada para un rendimiento extremo con un look futurista.</p>
-                        <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                          <li style="margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem;">✅ <strong>Energía Inagotable:</strong> 20.000 mAh de capacidad real. Carga tu smartphone de 0 a 100% hasta 4 veces.</li>
-                          <li style="margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem;">✅ <strong>Diseño Cyber-Premium:</strong> Carcasa transparente minimalista que roba miradas en cualquier setup.</li>
-                          <li style="margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem;">✅ <strong>Lista para Viajar:</strong> Cumple normativas de aviación para llevarla en cabina sin estrés.</li>
-                          <li style="margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem;">✅ <strong>Carga Ultra Rápida 22.5W:</strong> Obtén un 50% de batería en solo 30 minutos gracias a su tecnología de carga rápida avanzada.</li>
-                          <li style="margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem;">✅ <strong>Protección Total:</strong> Chip inteligente que protege contra sobrecalentamiento, cortocircuitos y sobrecargas eléctricas.</li>
+                        <p class="product-description__intro">No vuelvas a quedarte sin batería en el momento más importante. La <strong>Power Bank Transparente 20.000 mAh</strong> está diseñada para un rendimiento extremo con un look futurista.</p>
+                        <ul class="product-description__features">
+                          <li>✅ <strong>Energía Inagotable:</strong> 20.000 mAh de capacidad real. Carga tu smartphone de 0 a 100% hasta 4 veces.</li>
+                          <li>✅ <strong>Diseño Cyber-Premium:</strong> Carcasa transparente minimalista que roba miradas en cualquier setup.</li>
+                          <li>✅ <strong>Lista para Viajar:</strong> Cumple normativas de aviación para llevarla en cabina sin estrés.</li>
+                          <li>✅ <strong>Carga Ultra Rápida 22.5W:</strong> Obtén un 50% de batería en solo 30 minutos gracias a su tecnología de carga rápida avanzada.</li>
+                          <li>✅ <strong>Protección Total:</strong> Chip inteligente que protege contra sobrecalentamiento, cortocircuitos y sobrecargas eléctricas.</li>
                         </ul>
                       {%- else -%}
                         {{ product.description | replace: '(valor percibido alto)', '' | replace: 'valor percibido alto', '' }}

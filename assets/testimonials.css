@@ -51,8 +51,8 @@
 
 /* ---- Card ---- */
 .testimonials-wall__card {
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
+  background: var(--ta-surface, #ffffff);
+  border: 1px solid var(--ta-border-light, #f1f5f9);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
@@ -121,11 +121,11 @@
 }
 
 .testimonials-wall__star--filled {
-  color: #f59e0b;
+  color: var(--ta-warning, #f59e0b);
 }
 
 .testimonials-wall__star--empty {
-  color: #e2e8f0;
+  color: var(--ta-border, #e2e8f0);
 }
 
 /* ---- Review Text ---- */
@@ -139,7 +139,7 @@
 .testimonials-wall__text p {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #334155;
+  color: var(--ta-text-secondary, #334155);
   margin: 0;
 }
 
@@ -181,11 +181,11 @@
 }
 
 .testimonials-wall__avatar--placeholder {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #2563eb 100%));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--ta-text-inverse, #fff);
   font-weight: 700;
   font-size: 1rem;
 }
@@ -200,7 +200,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 0.85rem;
-  color: #0f172a;
+  color: var(--ta-text-primary, #0f172a);
 }
 
 .testimonials-wall__city {
@@ -208,17 +208,17 @@
   align-items: center;
   gap: 0.25rem;
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--ta-text-muted, #64748b);
 }
 
 .testimonials-wall__city svg {
   flex-shrink: 0;
-  color: #94a3b8;
+  color: var(--ta-text-disabled, #94a3b8);
 }
 
 /* ---- Verified Badge ---- */
 .testimonials-wall__verified {
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--ta-border-light, #f1f5f9);
   padding-top: 0.5rem;
 }
 
@@ -227,7 +227,7 @@
   align-items: center;
   font-size: 0.7rem;
   font-weight: 600;
-  color: #059669;
+  color: var(--ta-success, #059669);
   letter-spacing: 0.02em;
 }
 

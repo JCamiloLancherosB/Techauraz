@@ -103,7 +103,6 @@
     <button
       type="button"
       class="sticky-add-to-cart__button"
-      style="background: #10b981; color: white; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 800; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; animation: btn-pulse 2s infinite ease-in-out;"
       data-sticky-add-btn
       {%- if product.selected_or_first_available_variant.available == false -%}
         disabled
@@ -111,7 +110,7 @@
       {%- endif -%}
       aria-label="{% if product.selected_or_first_available_variant.available %}Comprar {{ product.title | truncate: 20 }}{% else %}Producto agotado{% endif %}"
     >
-      <span class="sticky-add-to-cart__btn-text" style="font-size: 0.95rem; text-transform: uppercase;">
+      <span class="sticky-add-to-cart__btn-text">
         {%- if product.selected_or_first_available_variant.available == false -%}
           AGOTADO
         {%- else -%}

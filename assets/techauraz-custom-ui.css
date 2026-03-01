@@ -650,104 +650,9 @@ select:focus {
 
 /* =============================================================================
    1. BENEFITS SECTION - "¿Por qué comprar con nosotros?"
-   Fix: Improve contrast, readability, consistent icons, tighter spacing
+   Canonical styles are in visual-system-unified-2024.css
+   Do NOT re-add benefit styles here to avoid cascade conflicts.
    ============================================================================= */
-
-/* Override faint text colors for better contrast */
-.ta-conv-benefit {
-  display: flex;
-  flex-direction: column;
-  min-height: 280px;
-  justify-content: space-between;
-  background: var(--ta-surface, #ffffff);
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  transition: var(--ta-transition-normal);
-  box-shadow: var(--ta-shadow-sm);
-}
-
-.ta-conv-benefit:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: var(--ta-shadow-card-hover);
-  transform: translateY(-4px);
-}
-
-/* Icon consistency - fixed size, centered alignment */
-.ta-conv-benefit__icon,
-.ta-conv-benefit-icon {
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: 16px;
-  line-height: 1;
-}
-
-/* Title - strong contrast, readable */
-.ta-conv-benefit__title,
-.ta-conv-benefit-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ta-text, #0f172a);
-  margin: 0 0 12px 0;
-  line-height: 1.3;
-}
-
-/* Description - good contrast, flex-grow for alignment */
-.ta-conv-benefit__description,
-.ta-conv-benefit-desc {
-  font-size: 14px;
-  font-weight: var(--ta-font-normal, 400);
-  color: var(--ta-text-secondary, #475569);
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
-}
-
-/* Button styles within benefit cards */
-.ta-conv-benefit .button {
-  margin-top: auto;
-  width: 100%;
-}
-
-/* Benefits grid - consistent sizing */
-.ta-conv-benefits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-  gap: var(--ta-space-xl, 2.4rem);
-}
-
-/* Section heading style */
-.ta-conv-section-heading {
-  font-size: var(--ta-font-size-h2, 3.6rem);
-  font-weight: var(--ta-font-bold, 700);
-  color: var(--ta-text, #0f172a);
-  text-align: center;
-  margin-bottom: var(--ta-space-2xl, 3.2rem);
-}
-
-@media screen and (max-width: 749px) {
-  .ta-conv-benefits {
-    grid-template-columns: 1fr;
-    gap: var(--ta-space-lg, 1.6rem);
-  }
-
-  .ta-conv-benefit {
-    padding: 20px;
-    min-height: 240px;
-  }
-
-  .ta-conv-benefit__icon,
-  .ta-conv-benefit-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-  }
-
-  .ta-conv-section-heading {
-    font-size: var(--ta-font-size-h3, 2.4rem);
-    margin-bottom: var(--ta-space-xl, 2.4rem);
-  }
-}
 
 /* =============================================================================
    2. CATEGORY NAVIGATION - Consistent cards with clear labels
@@ -849,23 +754,7 @@ select:focus {
   font-weight: var(--ta-font-medium, 500);
 }
 
-/* Primary CTA - visually dominant */
-.quick-add__submit.button--secondary {
-  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6, #2563eb));
-  color: var(--ta-primary-contrast, #ffffff);
-  border: none;
-  font-weight: var(--ta-font-bold, 700);
-  text-transform: uppercase;
-  letter-spacing: var(--ta-tracking-wide, 0.025em);
-  box-shadow: var(--ta-shadow-button);
-  transition: var(--ta-transition-fast);
-}
-
-.quick-add__submit.button--secondary:hover {
-  background: var(--ta-gradient-primary-hover);
-  box-shadow: var(--ta-shadow-button-hover);
-  transform: translateY(-2px);
-}
+/* quick-add__submit — see techauraz-product-card.css (canonical source) */
 
 /* Image aspect ratio consistency - prevent overly tall images */
 .card__media .media {

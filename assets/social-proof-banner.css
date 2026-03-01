@@ -206,3 +206,18 @@
         margin-bottom: 2rem;
     }
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+    .social-proof-banner::before {
+        animation: none;
+    }
+
+    .social-proof-banner__stat-inner {
+        transition: none;
+    }
+
+    .social-proof-banner__stat-inner:hover {
+        transform: none;
+    }
+}
