@@ -157,8 +157,6 @@
     {%- comment -%} Scripts del rediseño {%- endcomment -%}
     {%- if template.name == 'product' -%}
       <script src="{{ 'cross-sell.js' | asset_url }}" defer="defer"></script>
-      {%- comment -%} Phase 3: FOMO stock depletion engine {%- endcomment -%}
-      <script src="{{ 'fomo-stock-engine.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     
     {%- comment -%} Purchase notifications - cargar solo en home y product {%- endcomment -%}

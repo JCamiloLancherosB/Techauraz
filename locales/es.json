@@ -375,14 +375,24 @@
       "continue_shopping_cta": "Ver productos destacados",
       "shipping_remaining": "<strong>¡Te faltan {{ remaining }} para envío GRATIS!</strong>",
       "shipping_free": "<strong>¡Tienes envío GRATIS!</strong>",
+      "shipping_bar_remaining": "🚚 Te faltan <strong>{{ remaining }}</strong> para <strong>ENVÍO GRATIS</strong>",
+      "shipping_bar_free": "🥳 ¡Desbloqueaste <strong>ENVÍO GRATIS</strong> a toda Colombia!",
+      "checkout_cod": "🔒 PAGAR AL RECIBIR (CONTRAENTREGA)",
       "cod_top_title": "PAGA EN CASA",
       "cod_top_pay_on_delivery": "✓ Paga al recibir tu pedido",
       "cod_top_no_bank_data": "✓ Sin datos bancarios",
       "cod_top_delivery_time": "✓ Entrega en 2-4 días",
+      "order_bump": {
+        "badge": "⚡ Oferta Relámpago",
+        "reason": "El complemento perfecto — carga tu dispositivo 3x más rápido 🔌",
+        "cta": "➕ Agregar Oferta",
+        "added": "✓ Agregado"
+      },
       "trust_badges": {
         "free_shipping": "Envío Gratis +$150.000",
         "secure_payment": "Pago Seguro",
-        "return_guarantee": "Garantía de Devolución"
+        "return_guarantee": "Garantía de Devolución",
+        "easy_return": "Devolución fácil"
       }
     },
     "footer": {

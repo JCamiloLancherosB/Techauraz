@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- comment -%}
+  REMOVED (2026-03-02): 5 orphaned CSS references that generated 404 errors.
+  section-header.css, component-list-menu.css, component-search.css,
+  component-menu-drawer.css, component-cart-items.css — all inlined in base.css.
+{%- endcomment -%}
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -351,8 +351,9 @@
     setHeaderHeight() {
       if (!this.header) return;
 
-      // Get the actual rendered height of the header
+      // Get the actual rendered height and set CSS custom property
       const headerHeight = this.header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
     }
 
     onScroll() {
