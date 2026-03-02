@@ -5,7 +5,7 @@
   - show_discount: {Boolean} Show 15% OFF badge
   - show_free_shipping: {Boolean} Show free shipping badge
   - show_cod: {Boolean} Show cash on delivery badge
-  - show_warranty: {Boolean} Show 15 days warranty badge
+  - show_warranty: {Boolean} Show 30 days warranty badge
   - show_low_stock: {Boolean} Show low stock badge
   - badge_style: {String} Style variant (default, compact)
 
@@ -43,7 +43,7 @@
       <svg class="promo-badge__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M0 2.5A1.5 1.5 0 011.5 1H11a1.5 1.5 0 011.5 1.5v7a1.5 1.5 0 01-1.5 1.5h-.5v1.5a1 1 0 01-1 1h-1a1 1 0 01-1-1V11H5v1.5a1 1 0 01-1 1H3a1 1 0 01-1-1V11h-.5A1.5 1.5 0 010 9.5v-7zm3.5 7.5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z" fill="currentColor"/>
       </svg>
-      Envío gratis
+      Envío gratis +$150k
     </span>
   {%- endif -%}
   
@@ -57,11 +57,11 @@
   {%- endif -%}
   
   {%- if show_warranty -%}
-    <span class="promo-badge promo-badge--warranty" aria-label="Garantía de 15 días">
+    <span class="promo-badge promo-badge--warranty" aria-label="Garantía de 30 días">
       <svg class="promo-badge__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M8 0L1 3v5c0 4.4 3 8.5 7 10 4-1.5 7-5.6 7-10V3l-7-3zm4.5 6.5L7 12 4.5 9.5l1-1L7 10l4.5-4.5 1 1z" fill="currentColor"/>
       </svg>
-      Garantía 15 días
+      Garantía 30 días
     </span>
   {%- endif -%}
   

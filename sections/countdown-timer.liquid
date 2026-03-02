@@ -1,3 +1,4 @@
+{% if section.settings.enable_section %}
 <div class="countdown-timer section-{{ section.id }}-padding">
   <div class="countdown-timer__container page-width">
     {% if section.settings.heading != blank %}
@@ -50,20 +51,29 @@
       const minutesElement = countdownElement.querySelector('[data-countdown-minutes]');
       const secondsElement = countdownElement.querySelector('[data-countdown-seconds]');
 
-      // Configuración: días y horas hasta el final de la oferta
       const daysToAdd = {{ section.settings.days_to_add | default: 2 }};
       const hoursToAdd = {{ section.settings.hours_to_add | default: 12 }};
+      const storageKey = 'techauraz_countdown_end_{{ section.id }}';
+
+      // Retrieve or calculate end date with localStorage persistence
+      let endTimestamp = localStorage.getItem(storageKey);
       
-      // Calcular fecha objetivo
-      const now = new Date();
-      const endDate = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000) + (hoursToAdd * 60 * 60 * 1000));
+      if (!endTimestamp) {
+        const now = new Date();
+        const endDate = new Date(now.getTime() + (daysToAdd * 24 * 60 * 60 * 1000) + (hoursToAdd * 60 * 60 * 1000));
+        endTimestamp = endDate.getTime();
+        localStorage.setItem(storageKey, endTimestamp);
+      } else {
+        endTimestamp = parseInt(endTimestamp, 10);
+      }
 
       function updateCountdown() {
         const now = new Date().getTime();
-        const distance = endDate - now;
+        const distance = endTimestamp - now;
 
         if (distance < 0) {
-          // El contador ha terminado
+          // Timer expired — remove stored value so next visit gets a fresh countdown
+          localStorage.removeItem(storageKey);
           daysElement.textContent = '0';
           hoursElement.textContent = '00';
           minutesElement.textContent = '00';
@@ -82,7 +92,6 @@
         secondsElement.textContent = String(seconds).padStart(2, '0');
       }
 
-      // Actualizar inmediatamente y luego cada segundo
       updateCountdown();
       setInterval(updateCountdown, 1000);
     }
@@ -97,6 +106,7 @@
   }
 })();
 </script>
+{% endif %}
 
 {% schema %}
 {

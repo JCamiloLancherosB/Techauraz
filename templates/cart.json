@@ -47,7 +47,7 @@
     },
     "order": [
         "cart-items",
-        "recently-viewed",
-        "cart-footer"
+        "cart-footer",
+        "recently-viewed"
     ]
 }

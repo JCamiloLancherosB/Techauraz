@@ -1,24 +1,42 @@
 {% schema %}
 {
-"name": "USB Beneficios",
-"tag": "section",
-"class": "usb-landing usb-benefits-bar",
-"settings": [
-{ "type": "text", "id": "title", "label": "Título (opcional)", "default": "¿Por qué TechAura?" }
-],
-"blocks": [
-{
-"type": "item",
-"name": "Beneficio",
-"settings": [
-{ "type": "text", "id": "icon", "label": "Emoji/Icono", "default": "⚡" },
-{ "type": "text", "id": "heading", "label": "Encabezado", "default": "Capacidad Real Verificada" },
-{ "type": "text", "id": "text", "label": "Texto", "default": "Probamos cada lote antes de enviarlo." }
-]
-}
-],
-"presets": [{ "name": "USB Beneficios" }]
+  "name": "USB Beneficios",
+  "tag": "section",
+  "class": "usb-landing usb-benefits-bar",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título (opcional)", "default": "¿Por qué TechAura?" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Beneficio",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji/Icono", "default": "⚡" },
+        { "type": "text", "id": "heading", "label": "Encabezado", "default": "Capacidad Real Verificada" },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Probamos cada lote antes de enviarlo." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "USB Beneficios" }]
 }
 {% endschema %}
 
-<div class="usb-landing"> <section class="usb-section usb-benefits" data-animate> <div class="usb-container"> {% if section.settings.title != blank %} <h2 class="usb-benefits__title">{{ section.settings.title }}</h2> {% endif %} <div class="usb-benefits__grid"> {% for block in section.blocks %} <div class="usb-benefit"> <div class="usb-benefit__icon">{{ block.settings.icon }}</div> <h3>{{ block.settings.heading }}</h3> <p>{{ block.settings.text }}</p> </div> {% endfor %} </div> </div> </section> </div>
+<div class="usb-landing">
+  <section class="usb-section usb-benefits" data-animate>
+    <div class="usb-container">
+      {% if section.settings.title != blank %}
+        <h2 class="usb-benefits__title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      <div class="usb-benefits__grid">
+        {% for block in section.blocks %}
+          <div class="usb-benefit" {{ block.shopify_attributes }}>
+            <div class="usb-benefit__icon">{{ block.settings.icon }}</div>
+            <h3>{{ block.settings.heading }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>

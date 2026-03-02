@@ -18,7 +18,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--ta-z-popover, 320);
   background: var(--ta-bg, #ffffff);
   border-radius: 0 0 var(--ta-radius-lg, 1.2rem) var(--ta-radius-lg, 1.2rem);
   box-shadow: var(--ta-shadow-lg, 0 10px 40px rgba(0, 0, 0, 0.15));
@@ -424,7 +424,7 @@ predictive-search[loading] #predictive-search-results-groups-wrapper {
     padding: 1.6rem;
     padding-top: calc(var(--ta-header-height, 6.4rem) + 1.6rem);
     background: var(--ta-bg, #ffffff);
-    z-index: 999;
+    z-index: var(--ta-z-modal, 410);
     display: flex;
     flex-direction: column;
   }
@@ -515,6 +515,7 @@ predictive-search[loading] #predictive-search-results-groups-wrapper {
       opacity: 0;
       transform: translateY(-8px) scale(0.98);
     }
+
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -549,6 +550,7 @@ predictive-search[loading] #predictive-search-results-groups-wrapper {
 
 /* Hide duplicate pages list on mobile */
 @media screen and (max-width: 749px) {
+
   #predictive-search-results-pages-list-desktop,
   [id^="predictive-search-option-page-desktop-"],
   [id^="predictive-search-option-article-desktop-"] {
@@ -558,6 +560,7 @@ predictive-search[loading] #predictive-search-results-groups-wrapper {
 
 /* Hide mobile pages list on desktop */
 @media screen and (min-width: 750px) {
+
   #predictive-search-results-pages-list-mobile,
   [id^="predictive-search-option-page-mobile-"],
   [id^="predictive-search-option-article-mobile-"] {

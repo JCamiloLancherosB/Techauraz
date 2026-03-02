@@ -14,7 +14,8 @@
 {% endcomment %}
 
 {%- liquid
-  assign phone = phone | default: '+573008602789'
+  assign phone_raw = phone | default: '+573008602789'
+  assign phone_clean = phone_raw | replace: '+', '' | replace: ' ', '' | replace: '-', ''
   
   if product
     assign default_message = 'Hola! Me interesa el producto: ' | append: product.title | append: ' (' | append: shop.url | append: product.url | append: ')'
@@ -23,7 +24,8 @@
   endif
   
   assign message = message | default: default_message
-  assign whatsapp_url = 'https://wa.me/' | append: phone | append: '?text=' | append: message | url_encode
+  assign message_encoded = message | url_encode
+  assign whatsapp_url = 'https://wa.me/' | append: phone_clean | append: '?text=' | append: message_encoded
 -%}
 
 <a href="{{ whatsapp_url }}" 

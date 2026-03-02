@@ -9,7 +9,7 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign free_shipping_threshold = 0
+  assign free_shipping_threshold = 15000000
   assign cart_total = cart.total_price
   assign remaining = free_shipping_threshold | minus: cart_total
   assign progress_percent = 100

@@ -76,7 +76,7 @@
     -%}
     {%- for link in social_links -%}
       {%- if link != blank -%}
-        {{ link | json }}{% unless forloop.last %},{% endunless %}
+        {{ link | json }}{%- if forloop.last == false -%},{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
   ]

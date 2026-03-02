@@ -242,17 +242,22 @@
     const whatsappBtn = document.querySelector('.whatsapp-button');
     if (!whatsappBtn) return;
 
-    // Initial shake after delay
-    setTimeout(() => {
-      whatsappBtn.classList.add('shake');
-      setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
-    }, 1000);
+    // Initial shake after delay (only if reduced motion is not preferred)
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!prefersReducedMotion.matches) {
+      setTimeout(() => {
+        whatsappBtn.classList.add('shake');
+        setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
+      }, 1000);
 
-    // Periodic shake
-    setInterval(() => {
-      whatsappBtn.classList.add('shake');
-      setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
-    }, 15000);
+      // Periodic shake
+      setInterval(() => {
+        if (!prefersReducedMotion.matches) {
+          whatsappBtn.classList.add('shake');
+          setTimeout(() => whatsappBtn.classList.remove('shake'), 500);
+        }
+      }, 15000);
+    }
 
     // Track clicks (only if gtag is loaded)
     whatsappBtn.addEventListener('click', function () {

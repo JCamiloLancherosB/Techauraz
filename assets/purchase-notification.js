@@ -24,11 +24,11 @@ class PurchaseNotification {
       locations: options.locations || ['Colombia', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'],
       ...options
     };
-    
+
     this.notificationQueue = [];
     this.currentNotification = null;
     this.notificationCount = 0;
-    
+
     // Solo inicializar si está explícitamente habilitado Y hay productos reales configurados
     // Nota: Anteriormente el sistema era opt-out (había que deshabilitarlo explícitamente),
     // ahora es opt-in (debe habilitarse explícitamente) para mejorar la confianza del usuario
@@ -49,13 +49,7 @@ class PurchaseNotification {
   createNotificationContainer() {
     const container = document.createElement('div');
     container.id = 'purchase-notifications';
-    container.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9998;
-      max-width: 350px;
-    `;
+    container.className = 'purchase-notifications';
     document.body.appendChild(container);
   }
 
@@ -66,7 +60,7 @@ class PurchaseNotification {
     // Mostrar primera notificación después del delay inicial
     setTimeout(() => {
       this.showNotification();
-      
+
       // Continuar mostrando notificaciones
       this.intervalId = setInterval(() => {
         if (this.notificationCount < this.options.maxNotifications) {
@@ -84,19 +78,19 @@ class PurchaseNotification {
    */
   showNotification() {
     const data = this.generateNotificationData();
-    
+
     // No mostrar notificación si no hay datos reales - salir silenciosamente
     if (!data) {
       return;
     }
-    
+
     const notification = this.createNotification(data);
-    
+
     const container = document.getElementById('purchase-notifications');
     if (!container) return;
-    
+
     container.appendChild(notification);
-    
+
     // Animar entrada
     setTimeout(() => {
       notification.classList.add('show');
@@ -119,15 +113,15 @@ class PurchaseNotification {
    */
   generateNotificationData() {
     const product = this.getRandomProduct();
-    
+
     // Si no hay producto real, no generar notificación
     if (!product) {
       return null;
     }
-    
+
     const location = this.getRandomLocation();
     const timeAgo = this.getRandomTimeAgo();
-    
+
     return {
       productName: product.name,
       productImage: product.image,
@@ -164,115 +158,110 @@ class PurchaseNotification {
       </a>
     `;
 
-    // Agregar estilos inline para asegurar que se vean correctamente
-    notification.style.cssText = `
-      background: var(--bg-card, #16162a);
-      border: 1px solid var(--border-glow, rgba(99, 102, 241, 0.5));
-      border-radius: var(--radius-lg, 0.75rem);
-      box-shadow: var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.5));
-      margin-bottom: 1rem;
-      overflow: hidden;
-      transform: translateX(-120%);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      opacity: 0;
-    `;
-
-    notification.querySelector('.purchase-notification__link').style.cssText = `
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 1rem;
-      position: relative;
-    `;
-
-    notification.querySelector('.purchase-notification__content').style.cssText = `
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    `;
-
-    notification.querySelector('.purchase-notification__image').style.cssText = `
-      width: 60px;
-      height: 60px;
-      flex-shrink: 0;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      background: var(--bg-tertiary, #252542);
-    `;
-
-    notification.querySelector('.purchase-notification__image img').style.cssText = `
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    `;
-
-    notification.querySelector('.purchase-notification__info').style.cssText = `
-      flex: 1;
-    `;
-
-    notification.querySelector('.purchase-notification__badge').style.cssText = `
-      display: inline-block;
-      padding: 0.25rem 0.5rem;
-      background: var(--success, #10b981);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 600;
-      border-radius: 9999px;
-      margin-bottom: 0.5rem;
-    `;
-
-    notification.querySelector('.purchase-notification__text').style.cssText = `
-      font-size: 0.85rem;
-      color: var(--text-secondary, #94a3b8);
-      margin: 0.25rem 0;
-    `;
-
-    notification.querySelector('.purchase-notification__product').style.cssText = `
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-primary, #f8fafc);
-      margin: 0.25rem 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    `;
-
-    notification.querySelector('.purchase-notification__time').style.cssText = `
-      font-size: 0.75rem;
-      color: var(--text-muted, #64748b);
-      margin: 0.25rem 0;
-    `;
-
-    notification.querySelector('.purchase-notification__close').style.cssText = `
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: none;
-      border: none;
-      color: var(--text-muted, #64748b);
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0.25rem;
-      opacity: 0.6;
-      transition: opacity 0.2s ease;
-    `;
-
-    // Agregar clase show para animación
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-      .purchase-notification.show {
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-      }
-      .purchase-notification__close:hover {
-        opacity: 1 !important;
-      }
-    `;
+    // Inject shared styles once
     if (!document.getElementById('purchase-notification-styles')) {
+      const styleElement = document.createElement('style');
       styleElement.id = 'purchase-notification-styles';
+      styleElement.textContent = `
+        .purchase-notifications {
+          position: fixed;
+          bottom: 20px;
+          left: 20px;
+          z-index: var(--ta-z-notification, 510);
+          max-width: 350px;
+        }
+        .purchase-notification {
+          background: var(--bg-card, #16162a);
+          border: 1px solid var(--border-glow, rgba(99, 102, 241, 0.5));
+          border-radius: var(--radius-lg, 0.75rem);
+          box-shadow: var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.5));
+          margin-bottom: 1rem;
+          overflow: hidden;
+          transform: translateX(-120%);
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          opacity: 0;
+        }
+        .purchase-notification.show {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        .purchase-notification__link {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+          padding: 1rem;
+          position: relative;
+        }
+        .purchase-notification__content {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+        }
+        .purchase-notification__image {
+          width: 60px;
+          height: 60px;
+          flex-shrink: 0;
+          border-radius: 0.5rem;
+          overflow: hidden;
+          background: var(--bg-tertiary, #252542);
+        }
+        .purchase-notification__image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .purchase-notification__info {
+          flex: 1;
+        }
+        .purchase-notification__badge {
+          display: inline-block;
+          padding: 0.25rem 0.5rem;
+          background: var(--success, #10b981);
+          color: var(--ta-text-inverse, #fff);
+          font-size: 0.7rem;
+          font-weight: 600;
+          border-radius: 9999px;
+          margin-bottom: 0.5rem;
+        }
+        .purchase-notification__text {
+          font-size: 0.85rem;
+          color: var(--text-secondary, #94a3b8);
+          margin: 0.25rem 0;
+        }
+        .purchase-notification__product {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: var(--text-primary, #f8fafc);
+          margin: 0.25rem 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .purchase-notification__time {
+          font-size: 0.75rem;
+          color: var(--text-muted, #64748b);
+          margin: 0.25rem 0;
+        }
+        .purchase-notification__close {
+          position: absolute;
+          top: 0.5rem;
+          right: 0.5rem;
+          background: none;
+          border: none;
+          color: var(--text-muted, #64748b);
+          font-size: 1.5rem;
+          cursor: pointer;
+          line-height: 1;
+          padding: 0.25rem;
+          opacity: 0.6;
+          transition: opacity 0.2s ease;
+        }
+        .purchase-notification__close:hover {
+          opacity: 1;
+        }
+      `;
       document.head.appendChild(styleElement);
     }
 
@@ -354,7 +343,7 @@ if (document.readyState === 'loading') {
 function initPurchaseNotifications() {
   // Verificar si las notificaciones están habilitadas en la sección
   const notificationSection = document.querySelector('[data-purchase-notifications]');
-  
+
   if (notificationSection) {
     const config = {
       enabled: notificationSection.dataset.enabled !== 'false',
@@ -363,7 +352,7 @@ function initPurchaseNotifications() {
       displayDuration: parseInt(notificationSection.dataset.displayDuration) || 8000,
       maxNotifications: parseInt(notificationSection.dataset.maxNotifications) || 5
     };
-    
+
     window.purchaseNotifications = new PurchaseNotification(config);
   }
 }

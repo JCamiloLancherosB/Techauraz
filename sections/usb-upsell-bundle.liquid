@@ -1,24 +1,64 @@
 {% schema %}
 {
-"name": "USB Upsell",
-"tag": "section",
-"class": "usb-landing usb-upsell-section",
-"settings": [
-{ "type": "text", "id": "heading", "label": "Título", "default": "Añade más valor a tu pedido" }
-],
-"blocks": [
-{
-"type": "product",
-"name": "Producto Upsell",
-"settings": [
-{ "type": "product", "id": "product", "label": "Producto" },
-{ "type": "text", "id": "badge", "label": "Badge", "default": "Recomendado" },
-{ "type": "text", "id": "benefit", "label": "Beneficio rápido", "default": "Graba tu logo" }
-]
-}
-],
-"presets": [{ "name": "USB Upsell" }]
+  "name": "USB Upsell",
+  "tag": "section",
+  "class": "usb-landing usb-upsell-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Añade más valor a tu pedido" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Producto Upsell",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Recomendado" },
+        { "type": "text", "id": "benefit", "label": "Beneficio rápido", "default": "Graba tu logo" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "USB Upsell" }]
 }
 {% endschema %}
 
-<div class="usb-landing"> <section class="usb-section usb-upsell" data-animate> <div class="usb-container"> <h2>{{ section.settings.heading }}</h2> <div class="usb-upsell__grid"> {% for block in section.blocks %} {% assign p = block.settings.product %} {% if p %} <div class="usb-upsell-item"> {% if block.settings.badge != blank %}<span class="usb-upsell-badge">{{ block.settings.badge }}</span>{% endif %} <a href="{{ p.url }}" class="usb-upsell-img"> {% if p.featured_image %} <img src="{{ p.featured_image | image_url: width: 360 }}" width="{{ p.featured_image.width }}" height="{{ p.featured_image.height }}" loading="lazy" alt="{{ p.title | escape }}"> {% endif %} </a> <h3 class="usb-upsell-title">{{ p.title }}</h3> <p class="usb-upsell-benefit">{{ block.settings.benefit }}</p> <p class="usb-upsell-price">{{ p.price | money_without_trailing_zeros }}</p> <form method="post" action="/cart/add"> <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}"> <button type="submit" class="usb-btn usb-btn--small">Añadir</button> </form> </div> {% endif %} {% endfor %} </div> </div> </section> </div>
+<div class="usb-landing">
+  <section class="usb-section usb-upsell" data-animate>
+    <div class="usb-container">
+      <h2>{{ section.settings.heading }}</h2>
+
+      <div class="usb-upsell__grid">
+        {% for block in section.blocks %}
+          {% assign p = block.settings.product %}
+          {% if p %}
+            <div class="usb-upsell-item" {{ block.shopify_attributes }}>
+              {% if block.settings.badge != blank %}
+                <span class="usb-upsell-badge">{{ block.settings.badge }}</span>
+              {% endif %}
+
+              <a href="{{ p.url }}" class="usb-upsell-img">
+                {% if p.featured_image %}
+                  <img
+                    src="{{ p.featured_image | image_url: width: 360 }}"
+                    width="{{ p.featured_image.width }}"
+                    height="{{ p.featured_image.height }}"
+                    loading="lazy"
+                    alt="{{ p.title | escape }}"
+                  >
+                {% endif %}
+              </a>
+
+              <h3 class="usb-upsell-title">{{ p.title }}</h3>
+              <p class="usb-upsell-benefit">{{ block.settings.benefit }}</p>
+              <p class="usb-upsell-price">{{ p.price | money_without_trailing_zeros }}</p>
+
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                <button type="submit" class="usb-btn usb-btn--small">Añadir</button>
+              </form>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>

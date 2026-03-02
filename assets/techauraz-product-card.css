@@ -956,7 +956,7 @@
 
 /* On dark color scheme cards */
 [class*="color-scheme-"] .card-wrapper.product-card-wrapper .price-item--anchor {
-  color: #94a3b8 !important;
+  color: var(--ta-text-muted, #94a3b8);
 }
 
 /* Mobile: slightly smaller anchor */

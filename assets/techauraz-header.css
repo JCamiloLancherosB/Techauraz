@@ -182,9 +182,10 @@
    ============================================ */
 
 .header__icons {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: var(--tech-space-1, 4px);
+  gap: 1.5rem;
   flex-shrink: 0;
 }
 
@@ -363,6 +364,7 @@ body.overflow-hidden-desktop {
    ============================================================================= */
 
 @media screen and (min-width: 990px) {
+
   /* Ensure inline menu is visible on desktop */
   .header__inline-menu {
     display: flex;
@@ -397,7 +399,7 @@ body.overflow-hidden-desktop {
   }
 
   /* Rotate caret when menu is open */
-  details[open] > summary .icon-caret {
+  details[open]>summary .icon-caret {
     transform: rotate(180deg);
   }
 
@@ -410,10 +412,11 @@ body.overflow-hidden-desktop {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     min-width: 480px;
-    max-width: min(90vw, 900px); /* Constrain to viewport width */
-    background: #ffffff;
+    max-width: min(90vw, 900px);
+    /* Constrain to viewport width */
+    background: var(--ta-surface, #ffffff);
     border-radius: 12px;
-    box-shadow: 
+    box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 10px 15px -3px rgba(0, 0, 0, 0.1),
       0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -428,7 +431,7 @@ body.overflow-hidden-desktop {
   }
 
   /* Open state */
-  details[open] > .mega-menu__content {
+  details[open]>.mega-menu__content {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -526,9 +529,9 @@ body.overflow-hidden-desktop {
     top: calc(100% + 4px);
     left: 0;
     min-width: 240px;
-    background: #ffffff;
+    background: var(--ta-surface, #ffffff);
     border-radius: 10px;
-    box-shadow: 
+    box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -536,14 +539,14 @@ body.overflow-hidden-desktop {
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: 
+    transition:
       opacity 0.2s ease,
       visibility 0.2s ease,
       transform 0.2s ease;
     z-index: var(--ta-z-dropdown, 310);
   }
 
-  details[open] > .header__submenu.list-menu--disclosure {
+  details[open]>.header__submenu.list-menu--disclosure {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -579,6 +582,7 @@ body.overflow-hidden-desktop {
    ============================================================================= */
 
 @media screen and (max-width: 989px) {
+
   /* Drawer container - ensure full height and proper positioning */
   .menu-drawer {
     position: fixed;
@@ -586,8 +590,10 @@ body.overflow-hidden-desktop {
     left: 0;
     width: 100%;
     max-width: 400px;
-    height: 100vh; /* Fallback for older browsers */
-    height: 100dvh; /* Dynamic viewport height for mobile browsers (iOS Safari 15.4+, Chrome 108+) */
+    height: 100vh;
+    /* Fallback for older browsers */
+    height: 100dvh;
+    /* Dynamic viewport height for mobile browsers (iOS Safari 15.4+, Chrome 108+) */
     background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -598,7 +604,7 @@ body.overflow-hidden-desktop {
   }
 
   /* Open state */
-  details[open].menu-opening > .menu-drawer,
+  details[open].menu-opening>.menu-drawer,
   .menu-drawer.is-open {
     transform: translateX(0);
   }
@@ -633,7 +639,7 @@ body.overflow-hidden-desktop {
   .menu-drawer__shop-name {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #f8fafc;
+    color: var(--ta-text-inverse, #f8fafc);
     margin: 0;
   }
 
@@ -642,7 +648,7 @@ body.overflow-hidden-desktop {
      ========================================================================== */
   .menu-drawer__promo {
     background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-    color: #ffffff;
+    color: var(--ta-surface, #ffffff);
     text-align: center;
     padding: 1rem 1.5rem;
     font-size: 1.35rem;
@@ -677,11 +683,11 @@ body.overflow-hidden-desktop {
     margin: 0;
   }
 
-  .menu-drawer__menu > li {
+  .menu-drawer__menu>li {
     border-bottom: 1px solid rgba(148, 163, 184, 0.08);
   }
 
-  .menu-drawer__menu > li:last-child {
+  .menu-drawer__menu>li:last-child {
     border-bottom: none;
   }
 
@@ -689,11 +695,12 @@ body.overflow-hidden-desktop {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 52px; /* Minimum tap target of 48px + padding */
+    min-height: 52px;
+    /* Minimum tap target of 48px + padding */
     padding: 1rem 1.5rem;
     font-size: 1.6rem;
     font-weight: 500;
-    color: #f1f5f9;
+    color: var(--ta-text-inverse, #f1f5f9);
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
     /* Touch optimization */
@@ -708,27 +715,27 @@ body.overflow-hidden-desktop {
     padding: 0.875rem 1.5rem 0.875rem 2.5rem;
     font-size: 1.5rem;
     font-weight: 400;
-    color: #e2e8f0;
+    color: var(--ta-border, #e2e8f0);
   }
 
   /* Third level items */
   .menu-drawer__submenu .menu-drawer__submenu .menu-drawer__menu-item {
     padding-left: 3.5rem;
     font-size: 1.4rem;
-    color: #cbd5e1;
+    color: var(--ta-text-muted, #cbd5e1);
   }
 
   /* Hover/Focus states */
   .menu-drawer__menu-item:hover,
   .menu-drawer__menu-item:focus {
     background-color: rgba(251, 191, 36, 0.1);
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
   }
 
   /* Active/current page */
   .menu-drawer__menu-item--active {
     background-color: rgba(251, 191, 36, 0.15);
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
     border-left: 3px solid #fbbf24;
     padding-left: calc(1.5rem - 3px);
   }
@@ -736,7 +743,8 @@ body.overflow-hidden-desktop {
   /* Focus visible for accessibility - inset outline for mobile drawer elements */
   .menu-drawer__menu-item:focus-visible {
     outline: 2px solid #fbbf24;
-    outline-offset: -2px; /* Inset outline works better for full-width items in dark drawer */
+    outline-offset: -2px;
+    /* Inset outline works better for full-width items in dark drawer */
     border-radius: 0;
   }
 
@@ -747,14 +755,14 @@ body.overflow-hidden-desktop {
   .menu-drawer__menu-item .icon-caret {
     width: 20px;
     height: 20px;
-    color: #94a3b8;
+    color: var(--ta-text-muted, #94a3b8);
     transition: color 0.2s ease, transform 0.2s ease;
     flex-shrink: 0;
   }
 
   .menu-drawer__menu-item:hover .icon-arrow,
   .menu-drawer__menu-item:hover .icon-caret {
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
   }
 
   /* Arrow slides right on hover */
@@ -763,7 +771,7 @@ body.overflow-hidden-desktop {
   }
 
   /* Caret rotates when submenu is open */
-  details[open] > .menu-drawer__menu-item .icon-caret {
+  details[open]>.menu-drawer__menu-item .icon-caret {
     transform: rotate(180deg);
   }
 
@@ -781,7 +789,7 @@ body.overflow-hidden-desktop {
     background: rgba(30, 41, 59, 0.8);
     border: 1px solid rgba(251, 191, 36, 0.3);
     border-radius: 8px;
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
     font-size: 1.4rem;
     font-weight: 600;
     text-decoration: none;
@@ -797,7 +805,7 @@ body.overflow-hidden-desktop {
     width: 18px;
     height: 18px;
     transform: rotate(180deg);
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
   }
 
   /* ==========================================================================
@@ -820,7 +828,7 @@ body.overflow-hidden-desktop {
     min-height: 48px;
     padding: 0.875rem 1.25rem;
     background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-    color: #ffffff;
+    color: var(--ta-surface, #ffffff);
     border-radius: 8px;
     font-size: 1.5rem;
     font-weight: 600;
@@ -849,7 +857,7 @@ body.overflow-hidden-desktop {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 8px;
-    color: #f1f5f9;
+    color: var(--ta-text-inverse, #f1f5f9);
     font-size: 1.4rem;
     font-weight: 500;
     text-decoration: none;
@@ -860,7 +868,7 @@ body.overflow-hidden-desktop {
   .menu-drawer__account:hover {
     background: rgba(251, 191, 36, 0.1);
     border-color: rgba(251, 191, 36, 0.3);
-    color: #fbbf24;
+    color: var(--ta-warning, #fbbf24);
   }
 
   .menu-drawer__account .icon-account {
@@ -891,13 +899,13 @@ body.overflow-hidden-desktop {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 50%;
-    color: #94a3b8;
+    color: var(--ta-text-muted, #94a3b8);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
   .menu-drawer .list-social__link:hover {
     background: rgba(251, 191, 36, 0.1);
-    border-color: #fbbf24;
+    border-color: var(--ta-warning, #fbbf24);
     color: #fbbf24;
     transform: translateY(-2px);
   }
@@ -939,11 +947,12 @@ body.overflow-hidden-desktop {
 
 /* Skip to content link enhancement */
 .skip-to-content-link:focus {
-  z-index: 9999;
+  z-index: var(--ta-z-skip-link, 9999);
 }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
+
   .mega-menu__content,
   .header__submenu,
   .menu-drawer,
@@ -968,7 +977,7 @@ body.overflow-hidden-desktop {
    ============================================================================= */
 
 /* Drawer overlay (background behind drawer) */
-menu-drawer > details > summary::before,
-header-drawer > details > summary::before {
+menu-drawer>details>summary::before,
+header-drawer>details>summary::before {
   z-index: var(--ta-z-menu-drawer-overlay, 220);
 }

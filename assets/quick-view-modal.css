@@ -193,8 +193,13 @@
 }
 
 @keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* =============================================================================
@@ -493,6 +498,7 @@
 .quick-view-modal__quantity-input::-webkit-outer-spin-button,
 .quick-view-modal__quantity-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
@@ -592,12 +598,17 @@
 }
 
 .quick-view-modal__spinner {
-  animation: spin 1s linear infinite;
+  animation: qv-spin 1s linear infinite;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes qv-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* =============================================================================
@@ -655,7 +666,8 @@
 
   .quick-view-modal__gallery {
     padding: var(--ta-space-lg, 1.6rem);
-    padding-top: calc(var(--ta-space-lg, 1.6rem) + 50px); /* Account for close button */
+    padding-top: calc(var(--ta-space-lg, 1.6rem) + 50px);
+    /* Account for close button */
   }
 
   .quick-view-modal__main-image {
@@ -728,6 +740,7 @@ body.quick-view-modal-open {
    ============================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .quick-view-modal,
   .quick-view-modal__container,
   .quick-view-modal__close,

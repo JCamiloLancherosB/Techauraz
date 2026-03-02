@@ -187,7 +187,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: #f1f5f9;
+  background: var(--ta-bg-secondary, #f1f5f9);
   /* Light gray fallback background */
 }
 
@@ -543,8 +543,8 @@
 }
 
 .template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: var(--ta-primary, #2563eb);
+  border-color: var(--ta-primary, #2563eb);
   width: 14px;
   height: 14px;
   box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);

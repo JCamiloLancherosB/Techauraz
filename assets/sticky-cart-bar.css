@@ -21,23 +21,23 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 460;
-  
+  z-index: var(--ta-z-lightbox, 460);
+
   /* Visual styling */
   background: var(--ta-surface-elevated, #ffffff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
-  
+
   /* Animation - starts hidden below viewport */
   transform: translateY(100%);
   opacity: 0;
   visibility: hidden;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              visibility 0.3s;
-  
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.3s;
+
   /* iOS safe area support for notch devices */
   padding-bottom: env(safe-area-inset-bottom, 0);
-  
+
   /* Hidden by default on all screens - JS enables on mobile */
   display: none;
 }
@@ -55,7 +55,7 @@
     transition: opacity 0.15s ease, visibility 0.15s;
     transform: translateY(0);
   }
-  
+
   .sticky-add-to-cart:not(.sticky-add-to-cart--visible) {
     opacity: 0;
   }
@@ -123,7 +123,8 @@
 
 .sticky-add-to-cart__info {
   flex: 1;
-  min-width: 0; /* Allow text truncation */
+  min-width: 0;
+  /* Allow text truncation */
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -280,8 +281,13 @@
 }
 
 @keyframes sticky-cart-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Success state (brief animation after add to cart) */
@@ -295,6 +301,7 @@
 
 /* Move WhatsApp button up when sticky bar is visible */
 @media screen and (max-width: 767px) {
+
   body.sticky-add-to-cart-active .whatsapp-float,
   body.sticky-add-to-cart-active .whatsapp-button-float,
   body.sticky-add-to-cart-active [class*="whatsapp"][class*="float"] {
@@ -317,6 +324,7 @@
 /* Also support :has() for browsers that support it */
 @supports selector(:has(*)) {
   @media screen and (max-width: 767px) {
+
     body:has(.sticky-add-to-cart--visible) .whatsapp-float,
     body:has(.sticky-add-to-cart--visible) .whatsapp-button-float,
     body:has(.sticky-add-to-cart--visible) [class*="whatsapp"][class*="float"] {
@@ -343,7 +351,7 @@
   .sticky-add-to-cart {
     display: none !important;
   }
-  
+
   /* Reset WhatsApp position on larger screens */
   body.sticky-add-to-cart-active .whatsapp-float,
   body.sticky-add-to-cart-active .whatsapp-button-float {

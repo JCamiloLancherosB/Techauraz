@@ -65,6 +65,7 @@
 
     /* ── Micro-Animation ────────────────────────────────── */
     function triggerPulse() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         countEl.classList.remove(PULSE_CLASS);
         /* Force reflow to restart animation */
         void countEl.offsetWidth;

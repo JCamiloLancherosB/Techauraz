@@ -20,13 +20,13 @@
 
 .product-social-proof__item--stock {
   background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-  border: 1px solid #fbbf24;
+  border: 1px solid var(--ta-warning, #fbbf24);
   color: #92400e;
 }
 
 .product-social-proof__item--reviews {
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 1px solid #22c55e;
+  border: 1px solid var(--ta-success, #22c55e);
   color: #166534;
 }
 

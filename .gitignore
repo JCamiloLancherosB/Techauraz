@@ -23,3 +23,14 @@ build/
 
 # Shopify CLI
 .shopify/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# AI/agent artifacts
+.claude/
+.gemini/

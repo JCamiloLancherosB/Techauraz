@@ -618,15 +618,7 @@ main[role="main"] {
   --tech-heading-line-height: var(--ta-leading-tight);
   --tech-heading-letter-spacing: var(--ta-tracking-tight);
 
-  /* Legacy spacing from base.css */
-  --space-xs: var(--ta-space-sm);
-  --space-sm: var(--ta-space-md);
-  --space-md: var(--ta-space-lg);
-  --space-lg: var(--ta-space-xl);
-  --space-xl: var(--ta-space-2xl);
-  --space-2xl: var(--ta-space-3xl);
-  --space-3xl: 4rem;
-  --space-4xl: 6rem;
+  /* REMOVED: --space-* legacy aliases (2026-03-02) — zero references */
 
   /* Legacy radius from base.css */
   --radius-sm: var(--ta-radius-sm);
@@ -637,10 +629,7 @@ main[role="main"] {
   --radius-pill: var(--ta-radius-pill);
   --radius-circle: var(--ta-radius-full);
 
-  /* Legacy transitions */
-  --transition-fast: var(--ta-transition-fast);
-  --transition-base: var(--ta-transition-normal);
-  --transition-slow: var(--ta-transition-slow);
+  /* REMOVED: --transition-* legacy aliases (2026-03-02) — zero references */
 
   /* Legacy home-modern-blocks.css mappings */
   --home-primary-blue: var(--ta-info);

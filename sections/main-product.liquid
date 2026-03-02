@@ -119,11 +119,7 @@
 
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight tracking-tight">Power Bank Transparente 20.000 mAh</h1>
-                  {%- else -%}
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight tracking-tight">{{ product.title | escape }}</h1>
-                  {%- endif -%}
+                    <h1>{{ product.title | escape }}</h1>
                 </div>
 
               {%- when 'price' -%}
@@ -218,24 +214,14 @@
                 </p>
 
               {%- when 'description' -%}
-                {%- if product.description != blank or product.title contains 'Power Bank' -%}
+                {%- if product.description != blank -%}
                   <div id="product-description" class="product__description rte quick-add-hidden product__description--enhanced" {{ block.shopify_attributes }}>
                     <div class="product-description__header">
                       <h3 class="product-description__title">✨ Descubre Todo Sobre Este Producto</h3>
                     </div>
                     <div class="product-description__content">
-                      {%- if product.title contains 'Power Bank' or product.title contains 'Powerbank' -%}
-                        <p class="product-description__intro">No vuelvas a quedarte sin batería en el momento más importante. La <strong>Power Bank Transparente 20.000 mAh</strong> está diseñada para un rendimiento extremo con un look futurista.</p>
-                        <ul class="product-description__features">
-                          <li>✅ <strong>Energía Inagotable:</strong> 20.000 mAh de capacidad real. Carga tu smartphone de 0 a 100% hasta 4 veces.</li>
-                          <li>✅ <strong>Diseño Cyber-Premium:</strong> Carcasa transparente minimalista que roba miradas en cualquier setup.</li>
-                          <li>✅ <strong>Lista para Viajar:</strong> Cumple normativas de aviación para llevarla en cabina sin estrés.</li>
-                          <li>✅ <strong>Carga Ultra Rápida 22.5W:</strong> Obtén un 50% de batería en solo 30 minutos gracias a su tecnología de carga rápida avanzada.</li>
-                          <li>✅ <strong>Protección Total:</strong> Chip inteligente que protege contra sobrecalentamiento, cortocircuitos y sobrecargas eléctricas.</li>
-                        </ul>
-                      {%- else -%}
-                        {{ product.description | replace: '(valor percibido alto)', '' | replace: 'valor percibido alto', '' }}
-                      {%- endif -%}
+                      {%- comment -%} Safety filter: strip internal dropshipping notes that may leak into product descriptions {%- endcomment -%}
+                      {{ product.description | replace: '(valor percibido alto)', '' | replace: 'valor percibido alto', '' }}
                     </div>
                   </div>
                 {%- endif -%}

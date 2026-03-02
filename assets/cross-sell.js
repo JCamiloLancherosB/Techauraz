@@ -19,15 +19,15 @@ class CrossSell {
    */
   initBundleDeals() {
     const bundleButtons = document.querySelectorAll('.bundle-deal__action .btn');
-    
+
     bundleButtons.forEach(button => {
       button.addEventListener('click', async (e) => {
         e.preventDefault();
         const bundleEl = button.closest('.bundle-deal');
         const productIds = bundleEl.dataset.productIds?.split(',') || [];
-        
+
         if (productIds.length === 0) return;
-        
+
         this.addBundleToCart(productIds, button);
       });
     });
@@ -39,7 +39,7 @@ class CrossSell {
   initFrequentlyBought() {
     const checkboxes = document.querySelectorAll('.frequently-bought__checkbox');
     const addButton = document.querySelector('.frequently-bought__action .btn');
-    
+
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', () => {
         this.updateFrequentlyBoughtTotal();
@@ -67,13 +67,13 @@ class CrossSell {
    */
   initQuickAdd() {
     const quickAddButtons = document.querySelectorAll('.cross-sell-item__action .btn');
-    
+
     quickAddButtons.forEach(button => {
       button.addEventListener('click', async (e) => {
         e.preventDefault();
         const item = button.closest('.cross-sell-item');
         const variantId = item.dataset.variantId;
-        
+
         if (variantId) {
           await this.addToCart(variantId, 1, button);
         }
@@ -98,7 +98,7 @@ class CrossSell {
   updateFrequentlyBoughtTotal() {
     const checkboxes = document.querySelectorAll('.frequently-bought__checkbox:checked');
     let total = 0;
-    
+
     checkboxes.forEach(checkbox => {
       const item = checkbox.closest('.frequently-bought__item');
       const priceEl = item.querySelector('.frequently-bought__item-price');
@@ -139,7 +139,7 @@ class CrossSell {
         button.textContent = '✓ Agregado';
         this.showSuccessNotification('Bundle agregado al carrito');
         this.updateCartCount();
-        
+
         setTimeout(() => {
           button.textContent = originalText;
           button.disabled = false;
@@ -151,7 +151,7 @@ class CrossSell {
       console.error('Error:', error);
       button.textContent = 'Error';
       this.showErrorNotification('No se pudo agregar al carrito');
-      
+
       setTimeout(() => {
         button.textContent = originalText;
         button.disabled = false;
@@ -180,7 +180,7 @@ class CrossSell {
         button.textContent = '✓ Agregados';
         this.showSuccessNotification(`${items.length} productos agregados al carrito`);
         this.updateCartCount();
-        
+
         setTimeout(() => {
           button.textContent = originalText;
           button.disabled = false;
@@ -192,7 +192,7 @@ class CrossSell {
       console.error('Error:', error);
       button.textContent = 'Error';
       this.showErrorNotification('No se pudieron agregar los productos');
-      
+
       setTimeout(() => {
         button.textContent = originalText;
         button.disabled = false;
@@ -224,7 +224,7 @@ class CrossSell {
         button.textContent = '✓ Agregado';
         this.showSuccessNotification('Producto agregado al carrito');
         this.updateCartCount();
-        
+
         setTimeout(() => {
           button.textContent = originalText;
           button.disabled = false;
@@ -236,7 +236,7 @@ class CrossSell {
       console.error('Error:', error);
       button.textContent = 'Error';
       this.showErrorNotification('No se pudo agregar al carrito');
-      
+
       setTimeout(() => {
         button.textContent = originalText;
         button.disabled = false;
@@ -291,26 +291,41 @@ class CrossSell {
    * Muestra notificación genérica
    */
   showNotification(message, type = 'success') {
+    // Inject shared styles once
+    if (!document.getElementById('cross-sell-notification-styles')) {
+      const style = document.createElement('style');
+      style.id = 'cross-sell-notification-styles';
+      style.textContent = `
+        .cs-notification {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          padding: 1rem 1.5rem;
+          color: var(--ta-text-inverse, #fff);
+          border-radius: var(--radius-md, 0.5rem);
+          box-shadow: var(--shadow-lg, 0 10px 25px rgba(0,0,0,0.3));
+          z-index: var(--ta-z-toast, 500);
+          animation: pe-slideInRight 0.3s ease;
+        }
+        .cs-notification--success { background: var(--ta-success, #10b981); }
+        .cs-notification--error { background: var(--ta-error, #ef4444); }
+        .cs-notification--hiding {
+          opacity: 0;
+          transform: translateX(100%);
+          transition: opacity 0.3s, transform 0.3s;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     const notification = document.createElement('div');
-    notification.className = `notification notification--${type}`;
-    notification.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 1rem 1.5rem;
-      background: ${type === 'success' ? 'var(--success)' : 'var(--error)'};
-      color: #fff;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      z-index: 9999;
-      animation: slideInRight 0.3s ease;
-    `;
+    notification.className = `cs-notification cs-notification--${type}`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
-      notification.classList.add('slide-out-animation');
+      notification.classList.add('cs-notification--hiding');
       setTimeout(() => {
         notification.remove();
       }, 300);

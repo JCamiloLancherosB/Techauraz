@@ -291,18 +291,6 @@
                       {{ 'accessibility.total_reviews' | t -}}
                     </span>
                   </p>
-                {%- else -%}
-                  {%- comment -%}
-                    CRO Social Proof Fallback: Show 5-star visual for products without reviews.
-                    Uses deterministic pseudo-random count based on product ID for consistency.
-                  {%- endcomment -%}
-                  {%- assign star_seed = card_product.id | modulo: 53 | plus: 20 -%}
-                  <div class="rating rating--social-proof" role="img" aria-label="4.8 de 5 estrellas">
-                    <span class="rating-stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
-                  </div>
-                  <p class="rating-count caption">
-                    <span aria-hidden="true">({{ star_seed }})</span>
-                  </p>
                 {%- endif -%}
               </div>
             {%- endif -%}

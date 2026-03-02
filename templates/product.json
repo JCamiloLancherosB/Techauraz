@@ -217,7 +217,7 @@
                 "item_4": {
                     "type": "item",
                     "settings": {
-                        "item": "Garantía de 15 días"
+                        "item": "Garantía de 30 días"
                     }
                 }
             },
@@ -268,8 +268,8 @@
                 "usage_heading": "Cómo se Usa",
                 "show_warranty_section": true,
                 "warranty_heading": "Garantía y Soporte",
-                "warranty_period_label": "Garantía de 1 mes",
-                "warranty_description": "Todos nuestros productos incluyen garantía de 1 mes contra defectos de fabricación. Si algo falla, te lo reemplazamos sin costo.",
+                "warranty_period_label": "Garantía de 30 días",
+                "warranty_description": "Todos nuestros productos incluyen garantía de 30 días contra defectos de fabricación. Si algo falla, te lo reemplazamos sin costo.",
                 "whatsapp_label": "Soporte por WhatsApp",
                 "whatsapp_description": "¿Dudas o necesitas ayuda? Escríbenos por WhatsApp y te atendemos de inmediato.",
                 "whatsapp_phone": "+573008602789",
@@ -363,7 +363,7 @@
         "purchase_notification": {
             "type": "purchase-notification",
             "settings": {
-                "enable_notifications": true,
+                "enable_notifications": false,
                 "interval": 15
             }
         },

@@ -6,7 +6,6 @@
 {% endcomment %}
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -69,8 +68,8 @@
         </button>
       </div>
       
-      {%- comment -%} Free Shipping Progress Bar — $120.000 COP threshold (Phase 3) {%- endcomment -%}
-      {%- assign free_shipping_threshold = 12000000 -%}
+      {%- comment -%} Free Shipping Progress Bar — $150.000 COP threshold (Phase 3) {%- endcomment -%}
+      {%- assign free_shipping_threshold = 15000000 -%}
       {%- if cart != empty -%}
         {%- assign cart_total = cart.total_price -%}
         {%- assign remaining = free_shipping_threshold | minus: cart_total -%}
@@ -554,7 +553,7 @@
         <!-- Start blocks -->
         <!-- Subtotals -->
 
-        <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
+        <div class="cart-drawer__footer">
           <div>
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -588,7 +587,7 @@
           
         </div>
 
-        <div class="cart__ctas" {{ block.shopify_attributes }}>
+        <div class="cart__ctas">
           {%- comment -%} Trust Badges — reduce checkout anxiety {%- endcomment -%}
           <div class="cart-drawer__trust-strip">
             <span class="cart-drawer__trust-item">

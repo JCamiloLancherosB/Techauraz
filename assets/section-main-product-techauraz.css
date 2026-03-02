@@ -1393,7 +1393,7 @@
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
-  border: 2px solid #3b82f6;
+  border: 2px solid var(--ta-primary, #3b82f6);
   width: 100%;
   transition: all 0.3s ease;
 }
@@ -1415,9 +1415,9 @@
   flex-wrap: wrap;
   gap: 8px;
   padding: 16px;
-  background: #f8fafc;
+  background: var(--ta-bg-secondary, #f8fafc);
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--ta-border, #e2e8f0);
   margin: 16px 0;
 }
 
@@ -1432,7 +1432,7 @@
   font-size: 0.8rem;
   color: #475569;
   font-weight: 500;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--ta-border, #e2e8f0);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1686,7 +1686,7 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: var(--ta-z-toast, 500);
   max-width: 300px;
   animation: pe-slideInRight 0.5s ease;
 }

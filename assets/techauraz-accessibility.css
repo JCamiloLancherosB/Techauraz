@@ -12,7 +12,7 @@
     position: absolute;
     top: -100%;
     left: 0;
-    z-index: 9999;
+    z-index: var(--ta-z-skip-link, 9999);
     padding: 1rem 2rem;
     background: var(--ta-primary, #1E3A5F);
     color: #fff;
@@ -124,25 +124,8 @@ input[type="submit"],
     }
 }
 
-/* ----------------------------------------
-   Cart Checkout Button — CTA Gradient
-   ---------------------------------------- */
-.cart__checkout-button.cart__checkout-button--cod {
-    background: var(--ta-cta-gradient, linear-gradient(135deg, #00D4AA 0%, #00B894 100%));
-    color: var(--ta-cta-contrast, #0F172A);
-    font-weight: 800;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border: none;
-    box-shadow: 0 4px 14px rgba(0, 212, 170, 0.3);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.cart__checkout-button.cart__checkout-button--cod:hover {
-    box-shadow: 0 6px 20px rgba(0, 212, 170, 0.5);
-    transform: translateY(-2px);
-}
+/* NOTE: .cart__checkout-button--cod REMOVED (2026-03-02)
+   Canonical version in techauraz-utilities.css */
 
 /* ----------------------------------------
    Screen Reader Only — Enhanced
