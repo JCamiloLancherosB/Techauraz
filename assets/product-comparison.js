@@ -12,7 +12,7 @@
  * - Integration with product cards
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Configuration
@@ -84,7 +84,7 @@
           this.products = JSON.parse(stored);
         }
       } catch (e) {
-        console.warn('ProductComparison: Error loading from storage', e);
+        // Silent catch — production
         this.products = [];
       }
     }
@@ -93,7 +93,7 @@
       try {
         localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.products));
       } catch (e) {
-        console.warn('ProductComparison: Error saving to storage', e);
+        // Silent catch — production
       }
     }
 
@@ -360,7 +360,7 @@
 
     handleCompareButtonClick(button) {
       const handle = button.dataset.productHandle;
-      
+
       if (this.isInComparison(handle)) {
         this.removeProduct(handle);
       } else {
@@ -380,7 +380,7 @@
 
     copyShareURL() {
       const url = this.getShareURL();
-      
+
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url)
           .then(() => this.showNotification(t('linkCopied'), 'success'))
@@ -397,14 +397,14 @@
       textarea.style.opacity = '0';
       document.body.appendChild(textarea);
       textarea.select();
-      
+
       try {
         document.execCommand('copy');
         this.showNotification(t('linkCopied'), 'success');
       } catch (e) {
         this.showNotification(t('copyError'), 'error');
       }
-      
+
       document.body.removeChild(textarea);
     }
 

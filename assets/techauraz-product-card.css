@@ -47,6 +47,9 @@
   border: 1px solid var(--ta-border-light, #f1f5f9);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--card-shadow-rest);
+
+  /* CWV: CSS containment — reduces paint/layout cost for off-screen cards */
+  contain: layout style paint;
 }
 
 .card-wrapper.product-card-wrapper:hover {

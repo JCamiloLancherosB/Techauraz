@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Only initialize if modal exists
@@ -59,7 +59,7 @@
       strings = { ...strings, ...JSON.parse(stringsEl.textContent) };
     }
   } catch (e) {
-    console.warn('Quick View: Could not parse localized strings', e);
+    // Silent catch — production
   }
 
   // ==========================================================================
@@ -99,7 +99,7 @@
     }
     const value = parseInt(cents, 10);
     if (isNaN(value)) return '$0';
-    
+
     // Format as Colombian Pesos
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -289,7 +289,7 @@
       modal.classList.add('is-loading');
 
       const response = await fetch(`/products/${handle}.js`);
-      
+
       if (!response.ok) {
         throw new Error(`Failed to fetch product: ${response.status}`);
       }
@@ -412,11 +412,11 @@
           <span class="quick-view-modal__variant-label">${option}</span>
           <div class="quick-view-modal__variant-options">
             ${values.map(value => {
-              // Check if any variant with this value is available
-              const isAvailable = product.variants.some(v => 
-                v.options[optionIndex] === value && v.available
-              );
-              return `
+        // Check if any variant with this value is available
+        const isAvailable = product.variants.some(v =>
+          v.options[optionIndex] === value && v.available
+        );
+        return `
                 <button 
                   type="button"
                   class="quick-view-modal__variant-option${!isAvailable ? ' is-disabled' : ''}"
@@ -427,7 +427,7 @@
                   ${value}
                 </button>
               `;
-            }).join('')}
+      }).join('')}
           </div>
         </div>
       `;
@@ -475,7 +475,7 @@
     if (variant.featured_image) {
       const imageSrc = variant.featured_image.src.replace(/\.([^\.]+)$/, '_800x800.$1');
       elements.mainImage.src = imageSrc;
-      
+
       // Update thumbnail active state
       updateThumbnailActive(variant.featured_image.src);
     }
@@ -580,7 +580,7 @@
         // Fetch updated cart and render
         const cartResponse = await fetch('/cart.js');
         const cartData = await cartResponse.json();
-        
+
         // Publish cart update event for other components
         if (typeof publish === 'function') {
           publish('cart:update', { source: 'quick-view', cartData });
@@ -608,13 +608,13 @@
         btn.classList.remove('is-success');
         btn.disabled = false;
         closeModal();
-        
+
         // Open cart drawer if it exists and has open method
         if (cartDrawer && typeof cartDrawer.open === 'function') {
           try {
             cartDrawer.open();
           } catch (e) {
-            console.warn('Quick View: Could not open cart drawer', e);
+            // Silent catch — production
           }
         }
       }, 1500);
@@ -623,7 +623,7 @@
       console.error('Quick View: Error adding to cart', error);
       btn.classList.remove('is-loading');
       btn.disabled = false;
-      
+
       // Show error state on button briefly instead of alert
       btn.classList.add('is-error');
       const originalText = btn.querySelector('.quick-view-modal__add-to-cart-text');
@@ -645,7 +645,7 @@
     try {
       const response = await fetch('/cart.js');
       const cart = await response.json();
-      
+
       const bubbles = document.querySelectorAll('.cart-count-bubble');
       bubbles.forEach(bubble => {
         const countEl = bubble.querySelector('[aria-hidden="true"]') || bubble;

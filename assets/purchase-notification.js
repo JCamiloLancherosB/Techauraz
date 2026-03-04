@@ -138,18 +138,18 @@ class PurchaseNotification {
     const notification = document.createElement('div');
     notification.className = 'purchase-notification';
     notification.innerHTML = `
-      <a href="${data.productUrl}" class="purchase-notification__link">
+      <a href="${this.escapeHtml(data.productUrl)}" class="purchase-notification__link">
         <div class="purchase-notification__content">
           <div class="purchase-notification__image">
-            <img src="${data.productImage}" alt="${data.productName}" loading="lazy">
+            <img src="${this.escapeHtml(data.productImage)}" alt="${this.escapeHtml(data.productName)}" loading="lazy">
           </div>
           <div class="purchase-notification__info">
             <div class="purchase-notification__badge">✓ Compra verificada</div>
             <p class="purchase-notification__text">
-              <strong>Alguien en ${data.location}</strong> compró
+              <strong>Alguien en ${this.escapeHtml(data.location)}</strong> compró
             </p>
-            <p class="purchase-notification__product">${data.productName}</p>
-            <p class="purchase-notification__time">${data.timeAgo}</p>
+            <p class="purchase-notification__product">${this.escapeHtml(data.productName)}</p>
+            <p class="purchase-notification__time">${this.escapeHtml(data.timeAgo)}</p>
           </div>
         </div>
         <button class="purchase-notification__close" aria-label="Cerrar notificación">
@@ -330,6 +330,16 @@ class PurchaseNotification {
     if (container) {
       container.remove();
     }
+  }
+
+  /**
+   * Escapa HTML para prevenir XSS
+   */
+  escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
   }
 }
 

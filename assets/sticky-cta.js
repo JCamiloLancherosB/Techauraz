@@ -17,7 +17,7 @@ class StickyCTABar {
     this.buyButton = element.querySelector('[data-sticky-buy]');
     this.addButton = element.querySelector('[data-sticky-add]');
     this.priceContainer = element.querySelector('[data-sticky-price]');
-    
+
     // Bind handlers for proper cleanup
     this.handleVariantChange = this.handleVariantChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -25,17 +25,17 @@ class StickyCTABar {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handlePageHide = this.handlePageHide.bind(this);
-    
+
     // Resize timeout for debouncing
     this.resizeTimeout = null;
-    
+
     // Find primary CTA elements - multiple fallback selectors
     this.submitButton = this.findPrimaryButton();
     this.buyNowButton = this.findBuyNowButton();
-    
+
     this.init();
   }
-  
+
   findPrimaryButton() {
     const selectors = [
       '.product-form__submit[id^="ProductSubmitButton-"]',
@@ -43,17 +43,17 @@ class StickyCTABar {
       '.product-form__submit',
       '[name="add"]'
     ];
-    
+
     for (const selector of selectors) {
       const button = document.querySelector(selector);
       if (button) return button;
     }
     return null;
   }
-  
+
   findBuyNowButton() {
     return document.querySelector('.shopify-payment-button__button') ||
-           document.querySelector('.tech-cta-primary .shopify-payment-button__button');
+      document.querySelector('.tech-cta-primary .shopify-payment-button__button');
   }
 
   init() {
@@ -62,30 +62,30 @@ class StickyCTABar {
       this.element.style.display = 'none';
       return;
     }
-    
+
     // Show/hide based on scroll position
     this.handleScroll();
     window.addEventListener('scroll', this.handleScroll, { passive: true });
-    
+
     // Handle buy button click - triggers Buy Now by default
     if (this.buyButton) {
       this.buyButton.addEventListener('click', this.handleBuyClick);
     }
-    
+
     // Handle add to cart button click
     if (this.addButton) {
       this.addButton.addEventListener('click', this.handleAddClick);
     }
 
     document.addEventListener('variant:change', this.handleVariantChange);
-    
+
     // Handle resize with debounce
     window.addEventListener('resize', this.handleResize);
-    
+
     // Cleanup on page hide
     window.addEventListener('pagehide', this.handlePageHide);
   }
-  
+
   handleResize() {
     if (this.resizeTimeout) {
       clearTimeout(this.resizeTimeout);
@@ -98,16 +98,16 @@ class StickyCTABar {
       }
     }, 150);
   }
-  
+
   handlePageHide() {
     this.destroy();
   }
-  
+
   handleBuyClick(e) {
     e.preventDefault();
     const action = this.buyButton.dataset.action || 'buy-now';
     let targetButton;
-    
+
     if (action === 'buy-now') {
       // Try Buy Now (accelerated checkout) first
       targetButton = this.buyNowButton || this.submitButton;
@@ -115,16 +115,16 @@ class StickyCTABar {
       // Add to Cart action
       targetButton = this.submitButton;
     }
-    
+
     this.triggerButtonClick(targetButton);
   }
-  
+
   handleAddClick(e) {
     e.preventDefault();
     // Add to cart always uses the submit button
     this.triggerButtonClick(this.submitButton);
   }
-  
+
   triggerButtonClick(targetButton) {
     if (targetButton && typeof targetButton.click === 'function') {
       // Scroll to product form for user context
@@ -132,7 +132,7 @@ class StickyCTABar {
       if (productForm) {
         productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      
+
       // Small delay to allow scroll before triggering action
       setTimeout(() => {
         targetButton.click();
@@ -148,21 +148,21 @@ class StickyCTABar {
       clearTimeout(this.resizeTimeout);
       this.resizeTimeout = null;
     }
-    
+
     // Remove all event listeners
     document.removeEventListener('variant:change', this.handleVariantChange);
     window.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('pagehide', this.handlePageHide);
-    
+
     if (this.buyButton) {
       this.buyButton.removeEventListener('click', this.handleBuyClick);
     }
-    
+
     if (this.addButton) {
       this.addButton.removeEventListener('click', this.handleAddClick);
     }
-    
+
     // Remove instance reference from element
     if (this.element._stickyCTAInstance === this) {
       delete this.element._stickyCTAInstance;
@@ -171,18 +171,18 @@ class StickyCTABar {
 
   handleVariantChange(event) {
     if (!event.detail || !event.detail.variant) return;
-    
+
     const variant = event.detail.variant;
-    
+
     // Update price display
     if (this.priceContainer && variant.price !== undefined) {
       this.updatePriceDisplay(variant.price, variant.compare_at_price);
     }
-    
+
     // Update button states
     this.updateButtonState(variant.available);
   }
-  
+
   updatePriceDisplay(price, compareAtPrice) {
     this.priceContainer.innerHTML = '';
 
@@ -205,16 +205,16 @@ class StickyCTABar {
       this.priceContainer.appendChild(regularPriceSpan);
     }
   }
-  
+
   updateButtonState(isAvailable) {
     // Get button texts from data attributes
     const buyButtonText = this.element.dataset.buyButtonText || 'Comprar ahora';
     const addButtonText = this.element.dataset.addButtonText || 'Añadir';
-    
+
     // Update buy button
     if (this.buyButton) {
       const buyTextSpan = this.buyButton.querySelector('.sticky-cta-bar__text');
-      
+
       if (isAvailable) {
         this.buyButton.disabled = false;
         this.buyButton.removeAttribute('aria-disabled');
@@ -227,11 +227,11 @@ class StickyCTABar {
         this.buyButton.setAttribute('aria-label', 'Producto agotado');
       }
     }
-    
+
     // Update add button
     if (this.addButton) {
       const addTextSpan = this.addButton.querySelector('.sticky-cta-bar__text');
-      
+
       if (isAvailable) {
         this.addButton.disabled = false;
         this.addButton.removeAttribute('aria-disabled');
@@ -253,7 +253,7 @@ class StickyCTABar {
           return Shopify.formatMoney(priceValue);
         }
       } catch (e) {
-        console.warn('Shopify.formatMoney failed, using fallback', e);
+        // Silent catch — production
       }
 
       const currency = (typeof Shopify !== 'undefined' && Shopify.currency && Shopify.currency.active)
@@ -281,7 +281,7 @@ class StickyCTABar {
       this.hideStickyBar();
       return;
     }
-    
+
     const scrollPosition = window.scrollY;
     const mainButton = this.submitButton;
     const footer = document.querySelector('footer');
@@ -301,14 +301,14 @@ class StickyCTABar {
       this.hideStickyBar();
     }
   }
-  
+
   showStickyBar() {
     this.element.style.display = 'block';
     this.element.classList.add('sticky-cta-bar--visible');
     this.element.setAttribute('aria-hidden', 'false');
     document.body.classList.add('sticky-cta-active');
   }
-  
+
   hideStickyBar() {
     this.element.classList.remove('sticky-cta-bar--visible');
     this.element.setAttribute('aria-hidden', 'true');
@@ -329,12 +329,12 @@ class StickyCTABar {
  */
 function initStickyCTABar(element) {
   if (!element) return null;
-  
+
   // Destroy existing instance if present
   if (element._stickyCTAInstance) {
     element._stickyCTAInstance.destroy();
   }
-  
+
   // Create new instance and store reference
   const instance = new StickyCTABar(element);
   element._stickyCTAInstance = instance;

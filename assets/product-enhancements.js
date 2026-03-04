@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
           highlightBuyButton();
         }
       }, 100);
-    });
+    }, { passive: true });
 
     // Clicks en precio
     const priceElements = document.querySelectorAll('.price, .product__price');
@@ -324,12 +324,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     slider.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
-    });
+    }, { passive: true });
 
     slider.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
-    });
+    }, { passive: true });
 
     function handleSwipe() {
       if (touchEndX < touchStartX - 50) {
@@ -349,24 +349,24 @@ document.addEventListener('DOMContentLoaded', function () {
   try {
     initSmoothScrollToDescription();
   } catch (e) {
-    console.warn('Smooth scroll init failed:', e);
+    // Silent catch — production
   }
 
   try {
     initHeroSlider();
   } catch (e) {
-    console.warn('Hero slider init failed:', e);
+    // Silent catch — production
   }
 
   try {
     initUserBehaviorTracking();
   } catch (e) {
-    console.warn('User behavior tracking init failed:', e);
+    // Silent catch — production
   }
 
   try {
     initImageOptimization();
   } catch (e) {
-    console.warn('Image optimization init failed:', e);
+    // Silent catch — production
   }
 });

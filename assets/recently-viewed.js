@@ -10,7 +10,7 @@
  * - Handles localStorage quota exceeded errors
  */
 
-(function() {
+(function () {
   'use strict';
 
   const STORAGE_KEY = 'shopify_recently_viewed';
@@ -39,28 +39,28 @@
    */
   function getRecentlyViewed() {
     if (!isLocalStorageAvailable()) return [];
-    
+
     try {
       const data = localStorage.getItem(STORAGE_KEY);
       if (!data) return [];
-      
+
       const products = JSON.parse(data);
       const now = Date.now();
-      
+
       // Filter out expired products
       const validProducts = products.filter(product => {
         const age = now - (product.timestamp || 0);
         return age < EXPIRY_MS;
       });
-      
+
       // If some products were expired, update storage
       if (validProducts.length !== products.length) {
         saveRecentlyViewed(validProducts);
       }
-      
+
       return validProducts;
     } catch (e) {
-      console.warn('Error reading recently viewed products:', e);
+      // Silent catch — production
       return [];
     }
   }
@@ -71,7 +71,7 @@
    */
   function saveRecentlyViewed(products) {
     if (!isLocalStorageAvailable()) return;
-    
+
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
     } catch (e) {
@@ -93,12 +93,12 @@
    */
   function addProduct(product) {
     if (!product || !product.handle) return;
-    
+
     const products = getRecentlyViewed();
-    
+
     // Remove existing entry for this product (to move it to the front)
     const filtered = products.filter(p => p.handle !== product.handle);
-    
+
     // Add new product at the beginning with timestamp
     const newProduct = {
       handle: product.handle,
@@ -109,14 +109,14 @@
       url: product.url || `/products/${product.handle}`,
       timestamp: Date.now()
     };
-    
+
     filtered.unshift(newProduct);
-    
+
     // Trim to max products (FIFO)
     const trimmed = filtered.slice(0, MAX_PRODUCTS);
-    
+
     saveRecentlyViewed(trimmed);
-    
+
     // Dispatch event for other tabs and components
     window.dispatchEvent(new CustomEvent('recentlyViewedUpdated', {
       detail: { products: trimmed }
@@ -129,10 +129,10 @@
   function trackProductView() {
     // Only track on product pages
     if (!window.location.pathname.includes('/products/')) return;
-    
+
     // Get product data from the page (check namespaced variable first, then fallback)
     const productData = window.RecentlyViewedProductData || window.ShopifyAnalytics?.meta?.product;
-    
+
     if (productData) {
       addProduct({
         handle: productData.handle,
@@ -144,7 +144,7 @@
       });
       return;
     }
-    
+
     // Fallback: Try to extract from JSON-LD structured data
     const jsonLdScript = document.querySelector('script[type="application/ld+json"]');
     if (jsonLdScript) {
@@ -181,37 +181,39 @@
     }
 
     connectedCallback() {
+      // Bind handlers for cleanup in disconnectedCallback
+      this._onStorage = (e) => { if (e.key === STORAGE_KEY) this.render(); };
+      this._onUpdate = () => { this.render(); };
       this.init();
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('storage', this._onStorage);
+      window.removeEventListener('recentlyViewedUpdated', this._onUpdate);
     }
 
     init() {
       this.currentHandle = this.dataset.currentProduct || '';
       this.maxDisplay = parseInt(this.dataset.maxDisplay, 10) || 10;
       this.autoHide = this.dataset.autoHide === 'true';
-      
+
       this.render();
-      
+
       // Listen for updates from other tabs
-      window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) {
-          this.render();
-        }
-      });
-      
+      window.addEventListener('storage', this._onStorage);
+
       // Listen for updates from same page
-      window.addEventListener('recentlyViewedUpdated', () => {
-        this.render();
-      });
+      window.addEventListener('recentlyViewedUpdated', this._onUpdate);
     }
 
     getProducts() {
       let products = getRecentlyViewed();
-      
+
       // Exclude current product if on product page
       if (this.currentHandle) {
         products = products.filter(p => p.handle !== this.currentHandle);
       }
-      
+
       // Limit to max display
       return products.slice(0, this.maxDisplay);
     }
@@ -219,9 +221,9 @@
     render() {
       const products = this.getProducts();
       const container = this.querySelector('[data-recently-viewed-content]');
-      
+
       if (!container) return;
-      
+
       // Auto-hide if empty and auto-hide is enabled
       if (products.length === 0) {
         if (this.autoHide) {
@@ -231,21 +233,21 @@
         }
         return;
       }
-      
+
       this.classList.remove('is-hidden');
       container.innerHTML = this.renderCarousel(products);
-      
+
       // Setup carousel controls
       this.carousel = this.querySelector('[data-recently-viewed-carousel]');
       this.wrapper = this.querySelector('[data-recently-viewed-wrapper]');
       this.prevBtn = this.querySelector('[data-recently-viewed-prev]');
       this.nextBtn = this.querySelector('[data-recently-viewed-next]');
-      
+
       if (this.carousel) {
         this.setupNavigation();
         this.updateScrollState();
       }
-      
+
       // Trigger animation
       if (this.dataset.animate !== undefined) {
         requestAnimationFrame(() => {
@@ -266,7 +268,7 @@
 
     renderCarousel(products) {
       const items = products.map(product => this.renderProductCard(product)).join('');
-      
+
       return `
         <div class="recently-viewed__carousel-wrapper" data-recently-viewed-wrapper>
           <button type="button" class="recently-viewed__nav recently-viewed__nav--prev" data-recently-viewed-prev aria-label="Anterior">
@@ -291,7 +293,7 @@
     renderProductCard(product) {
       const hasComparePrice = product.compareAtPrice && product.compareAtPrice > product.price;
       const priceClass = hasComparePrice ? 'recently-viewed__product-price--sale' : '';
-      
+
       /**
        * Format price for display.
        * Shopify stores prices in the smallest currency unit (cents for COP).
@@ -302,15 +304,15 @@
         if (!price) return '';
         const numPrice = typeof price === 'number' ? price : parseFloat(price);
         if (isNaN(numPrice)) return String(price);
-        
+
         // Shopify prices are typically in cents (multiply by 100)
         // Check if the value looks like it's already in cents (>= 100)
         const displayPrice = numPrice >= 100 ? numPrice / 100 : numPrice;
-        
+
         // Use Shopify's currency settings if available, fallback to COP
         const currency = window.Shopify?.currency?.active || 'COP';
         const locale = document.documentElement.lang || 'es-CO';
-        
+
         try {
           return new Intl.NumberFormat(locale, {
             style: 'currency',
@@ -323,18 +325,21 @@
           return `$${displayPrice.toLocaleString()}`;
         }
       };
-      
+
       const priceHtml = product.price ? `
         <span class="recently-viewed__product-price ${priceClass}">${formatPrice(product.price)}</span>
         ${hasComparePrice ? `<span class="recently-viewed__product-compare-price">${formatPrice(product.compareAtPrice)}</span>` : ''}
       ` : '';
-      
+
       const imageHtml = product.image ? `
         <img 
           src="${this.escapeHtml(this.getOptimizedImageUrl(product.image, 400))}" 
           alt="${this.escapeHtml(product.title)}"
           class="recently-viewed__product-image"
           loading="lazy"
+          decoding="async"
+          width="400"
+          height="400"
         >
       ` : `
         <div class="recently-viewed__product-placeholder" aria-hidden="true">
@@ -345,7 +350,7 @@
           </svg>
         </div>
       `;
-      
+
       return `
         <li class="recently-viewed__item">
           <a href="${this.escapeHtml(product.url)}" class="recently-viewed__product-card">
@@ -365,26 +370,26 @@
 
     getOptimizedImageUrl(url, width) {
       if (!url || typeof url !== 'string') return '';
-      
+
       // Validate and handle Shopify CDN URLs only
       // Use URL parsing to properly validate the hostname
       try {
         const parsedUrl = new URL(url);
         const hostname = parsedUrl.hostname;
-        
+
         // Only process if it's a legitimate Shopify CDN hostname
         // Must end with .cdn.shopify.com (subdomain) or be exactly cdn.shopify.com
-        const isShopifyCdn = hostname === 'cdn.shopify.com' || 
-                            hostname.endsWith('.cdn.shopify.com') ||
-                            hostname.endsWith('.myshopify.com');
-        
+        const isShopifyCdn = hostname === 'cdn.shopify.com' ||
+          hostname.endsWith('.cdn.shopify.com') ||
+          hostname.endsWith('.myshopify.com');
+
         if (isShopifyCdn && /\.(jpg|jpeg|png|gif|webp)/i.test(url)) {
           return url.replace(/(_\d+x\d*)?(\.(jpg|jpeg|png|gif|webp))(\?.*)?$/i, `_${width}x$2$4`);
         }
       } catch (e) {
         // Invalid URL - return as-is
       }
-      
+
       return url;
     }
 
@@ -408,20 +413,20 @@
       if (this.nextBtn) {
         this.nextBtn.addEventListener('click', () => this.scroll('next'));
       }
-      
+
       if (this.carousel) {
-        this.carousel.addEventListener('scroll', () => this.updateScrollState());
+        this.carousel.addEventListener('scroll', () => this.updateScrollState(), { passive: true });
       }
     }
 
     scroll(direction) {
       if (!this.carousel) return;
-      
+
       const scrollAmount = this.carousel.offsetWidth * 0.8;
-      const newScrollLeft = direction === 'next' 
-        ? this.carousel.scrollLeft + scrollAmount 
+      const newScrollLeft = direction === 'next'
+        ? this.carousel.scrollLeft + scrollAmount
         : this.carousel.scrollLeft - scrollAmount;
-      
+
       this.carousel.scrollTo({
         left: newScrollLeft,
         behavior: 'smooth'
@@ -430,11 +435,11 @@
 
     updateScrollState() {
       if (!this.carousel || !this.wrapper) return;
-      
+
       const { scrollLeft, scrollWidth, clientWidth } = this.carousel;
       const canScrollLeft = scrollLeft > 5;
       const canScrollRight = scrollLeft < scrollWidth - clientWidth - 5;
-      
+
       // Update navigation buttons
       if (this.prevBtn) {
         this.prevBtn.disabled = !canScrollLeft;
@@ -442,7 +447,7 @@
       if (this.nextBtn) {
         this.nextBtn.disabled = !canScrollRight;
       }
-      
+
       // Update fade effect classes
       this.wrapper.classList.toggle('has-scroll-left', canScrollLeft);
       this.wrapper.classList.toggle('has-scroll-right', canScrollRight);

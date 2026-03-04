@@ -67,6 +67,7 @@
     <meta name="country" content="Colombia">
     <meta name="language" content="es-CO">
     <meta name="distribution" content="Colombia">
+    <meta property="og:locale" content="es_CO">
     
     <!-- SEO Esencial TechAura -->
     <meta name="author" content="TechAura">
@@ -222,11 +223,9 @@
      ============================================================================= -->
 
 <!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
-<link rel="preload" href="{{ 'techauraz-tokens.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-tokens.css' | asset_url }}"></noscript>
+<link rel="stylesheet" href="{{ 'techauraz-tokens.css' | asset_url }}">
 
-<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
+<link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
 
 <!-- UI/UX and Responsiveness Fixes - 2026-01-20 -->
 <link rel="preload" href="{{ 'ui-ux-responsive-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">

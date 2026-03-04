@@ -9021,3 +9021,51 @@ select:focus {
 /* =============================================================================
    END OF FONT SIZE CONSISTENCY IMPROVEMENTS
    ============================================================================= */
+
+/* =============================================================================
+   CORE WEB VITALS — content-visibility: auto
+   =============================================================================
+   Skips rendering of off-screen Shopify sections to reduce initial paint work.
+   The browser will only render visible sections, significantly improving LCP.
+   contain-intrinsic-size provides a placeholder height to prevent CLS.
+   Guideline: Addy Osmani's web-quality-skills / core-web-vitals
+   ============================================================================= */
+
+/* Below-fold sections: skip rendering until scrolled into view */
+.shopify-section:nth-child(n+3) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Section-specific intrinsic sizes for better CLS prevention */
+.shopify-section--testimonials-carousel,
+.shopify-section--testimonials {
+  contain-intrinsic-size: auto 400px;
+}
+
+.shopify-section--product-faq,
+.shopify-section--faq {
+  contain-intrinsic-size: auto 600px;
+}
+
+.shopify-section--recently-viewed {
+  contain-intrinsic-size: auto 450px;
+}
+
+.shopify-section--product-comparison {
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Respect prefers-reduced-data: don't lazy-render if user wants minimal data */
+@supports (content-visibility: auto) {
+
+  /* Footer should always be rendered for accessibility (links, legal) */
+  .shopify-section--footer,
+  .shopify-section-group-footer-group .shopify-section {
+    content-visibility: visible;
+  }
+}
+
+/* =============================================================================
+   END OF CORE WEB VITALS OPTIMIZATIONS
+   ============================================================================= */

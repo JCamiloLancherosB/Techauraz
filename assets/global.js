@@ -645,7 +645,7 @@ class SliderComponent extends HTMLElement {
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
 
-    this.slider.addEventListener('scroll', this.update.bind(this));
+    this.slider.addEventListener('scroll', this.update.bind(this), { passive: true });
     this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
     this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
   }
@@ -656,16 +656,16 @@ class SliderComponent extends HTMLElement {
       // Batch all DOM reads together to prevent layout thrashing
       const sliderWidth = this.slider.clientWidth;
       const items = Array.from(this.sliderItems);
-      
+
       // Filter visible items without storing references
       this.sliderItemsToShow = items.filter(element => element.clientWidth > 0);
-      
+
       if (this.sliderItemsToShow.length < 2) return;
-      
+
       // Batch offsetLeft reads
       const firstItemOffset = this.sliderItemsToShow[0].offsetLeft;
       const secondItemOffset = this.sliderItemsToShow[1].offsetLeft;
-      
+
       this.sliderItemOffset = secondItemOffset - firstItemOffset;
       this.slidesPerPage = Math.floor(
         (sliderWidth - firstItemOffset) / this.sliderItemOffset
@@ -726,7 +726,7 @@ class SliderComponent extends HTMLElement {
     const lastVisibleSlide = sliderWidth + scrollLeft - offset;
     const elementLeft = element.offsetLeft;
     const elementRight = elementLeft + element.clientWidth;
-    
+
     return elementRight <= lastVisibleSlide && elementLeft >= scrollLeft;
   }
 
@@ -766,7 +766,7 @@ class SlideshowComponent extends SliderComponent {
 
     this.sliderControlLinksArray = Array.from(this.sliderControlWrapper.querySelectorAll('.slider-counter__link'));
     this.sliderControlLinksArray.forEach((link) => link.addEventListener('click', this.linkToSlide.bind(this)));
-    this.slider.addEventListener('scroll', this.setSlideVisibility.bind(this));
+    this.slider.addEventListener('scroll', this.setSlideVisibility.bind(this), { passive: true });
     this.setSlideVisibility();
 
     if (this.announcementBarSlider) {
@@ -974,7 +974,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -1144,8 +1144,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
