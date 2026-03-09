@@ -258,7 +258,7 @@
 {%- endif -%}
 
 <!-- Visual System Unified - Global visual cohesion (cards, sections, benefits) -->
-<link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="preload" href="{{ 'visual-system-unified-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
 
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
@@ -266,7 +266,7 @@
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 
 <!-- Header, Announcement Bar & Slideshow UI/UX Fixes - 2026-02-04 -->
-<link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="preload" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
 
 <!-- Accessibility - Focus indicators, touch targets, WCAG 2.2 AA -->
