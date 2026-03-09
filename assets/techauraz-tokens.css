@@ -1366,17 +1366,12 @@ details summary:focus-visible,
     }
   }
 
-  /* Section heading variants for different color schemes */
-  .ta-section-heading--inverse,
-  [class*="color-scheme-"] .ta-section-heading,
-  [class*="color-scheme-"] .section-heading,
-  [class*="color-scheme-"] .title-wrapper .title,
-  [class*="color-scheme-"] h2.title {
+  /* Section heading variants - ONLY explicit inverse class gets white text */
+  .ta-section-heading--inverse {
     color: var(--ta-text-inverse, #ffffff);
   }
 
-  .ta-section-subtitle--inverse,
-  [class*="color-scheme-"] .ta-section-subtitle {
+  .ta-section-subtitle--inverse {
     color: rgba(255, 255, 255, 0.85);
   }
 
