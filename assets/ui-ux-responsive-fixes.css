@@ -71,8 +71,7 @@
 .utility-bar {
   position: relative !important;
   width: 100%;
-  /* Ensure it has background from color scheme */
-  background-color: inherit;
+  /* Color scheme applies via color-{{ scheme }} class from Liquid */
 }
 
 /* =============================================================================
