@@ -68,28 +68,16 @@
         </button>
       </div>
       
-      {%- comment -%} Free Shipping Progress Bar — configurable threshold (Phase 3) {%- endcomment -%}
-      {%- assign free_shipping_threshold = settings.free_shipping_threshold | default: 15000000 -%}
+      {%- comment -%} Free Shipping Confirmation — envío gratis sin monto mínimo {%- endcomment -%}
       {%- if cart != empty -%}
-        {%- assign cart_total = cart.total_price -%}
-        {%- assign remaining = free_shipping_threshold | minus: cart_total -%}
-        {%- assign progress = cart_total | times: 100.0 | divided_by: free_shipping_threshold -%}
-        {%- if progress > 100 -%}{%- assign progress = 100 -%}{%- endif -%}
-        <div class="cart-drawer__shipping-bar{% if remaining <= 0 %} cart-drawer__shipping-bar--unlocked{% endif %}">
+        <div class="cart-drawer__shipping-bar cart-drawer__shipping-bar--unlocked">
           <div class="shipping-bar__message">
-            {%- if remaining > 0 -%}
-              {%- assign remaining_money = remaining | money -%}
-              <p class="shipping-bar__text">
-                {{ 'sections.cart.shipping_bar_remaining' | t: remaining: remaining_money }}
-              </p>
-            {%- else -%}
-              <p class="shipping-bar__text shipping-bar__text--success">
-                {{ 'sections.cart.shipping_bar_free' | t }}
-              </p>
-            {%- endif -%}
+            <p class="shipping-bar__text shipping-bar__text--success">
+              {{ 'sections.cart.shipping_bar_free' | t | default: '¡Tu envío es GRATIS! Sin monto mínimo 🎉' }}
+            </p>
           </div>
-          <div class="shipping-bar__progress" role="progressbar" aria-valuenow="{{ progress | round }}" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso hacia envío gratis">
-            <div class="shipping-bar__fill" style="width: {{ progress | round }}%;"></div>
+          <div class="shipping-bar__progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Envío gratis incluido">
+            <div class="shipping-bar__fill" style="width: 100%;"></div>
           </div>
         </div>
       {%- endif -%}

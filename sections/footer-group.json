@@ -14,18 +14,32 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "block_tienda": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Tienda",
+            "menu": "main-menu"
+          }
+        },
+        "block_info": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Información",
+            "menu": "footer"
+          }
+        },
         "block_ayuda": {
           "type": "text",
           "settings": {
-            "heading": "Ayuda",
-            "subtext": "<p><strong>Envíos:</strong> 2-5 días hábiles a toda Colombia</p><p><strong>Devoluciones:</strong> 30 días de garantía</p><p><strong>Contacto:</strong> <a href=\"https://wa.me/573008602789\">WhatsApp +57 300 860 2789</a></p>"
+            "heading": "¿Necesitas Ayuda?",
+            "subtext": "<p><strong>Envíos:</strong> 2-5 días hábiles gratis a toda Colombia</p><p><strong>Devoluciones:</strong> 30 días de garantía total</p><p><strong>WhatsApp:</strong> <a href=\"https://wa.me/573008602789\">+57 300 860 2789</a></p><p><strong>Horario:</strong> Lun-Sáb 8am a 9pm</p>"
           }
         },
         "block_confianza": {
           "type": "text",
           "settings": {
-            "heading": "Compra Segura",
-            "subtext": "<p><strong>Pago contraentrega</strong> - Paga al recibir</p><p><strong>Garantía 30 días</strong> - Compra tranquilo</p><p><strong>Envío gratis</strong> - A toda Colombia</p>"
+            "heading": "Compra con Confianza",
+            "subtext": "<p>✅ <strong>Pago contraentrega</strong> — Paga al recibir</p><p>✅ <strong>Envío 100% gratis</strong> — Sin monto mínimo</p><p>✅ <strong>Garantía 30 días</strong> — O tu dinero de vuelta</p><p>✅ <strong>Marca colombiana</strong> — Soporte real y cercano</p>"
           }
         },
         "block_brand": {
@@ -36,6 +50,8 @@
         }
       },
       "block_order": [
+        "block_tienda",
+        "block_info",
         "block_ayuda",
         "block_confianza",
         "block_brand"
@@ -43,16 +59,16 @@
       "custom_css": [],
       "settings": {
         "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "newsletter_enable": false,
-        "newsletter_heading": "Suscríbete a nuestro email",
+        "newsletter_enable": true,
+        "newsletter_heading": "🎁 Ofertas exclusivas directo a tu correo",
         "enable_follow_on_shop": false,
         "show_social": true,
-        "enable_country_selector": true,
+        "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 0,
-        "padding_top": 28,
+        "padding_top": 40,
         "padding_bottom": 28
       }
     }

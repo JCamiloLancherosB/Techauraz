@@ -1,41 +1,20 @@
 {%- comment -%}
-  Cart Drawer Free Shipping Progress Bar
+  Cart Drawer Free Shipping Banner
   =======================================
-  Shows a visual progress bar toward free shipping threshold.
-  Displays dynamically based on cart total.
+  Envío GRATIS sin monto mínimo.
+  Always shows free shipping confirmation.
   
   Usage: {% render 'cart-shipping-bar' %}
-  Place inside the cart drawer after the cart items list.
 {%- endcomment -%}
 
-{%- liquid
-  assign free_shipping_threshold = 15000000
-  assign cart_total = cart.total_price
-  assign remaining = free_shipping_threshold | minus: cart_total
-  assign progress_percent = 100
-  
-  if free_shipping_threshold > 0
-    if cart_total < free_shipping_threshold
-      assign progress_percent = cart_total | times: 100 | divided_by: free_shipping_threshold
-    endif
-  endif
--%}
-
 <div class="cart-shipping-bar" data-shipping-bar>
-  {%- if free_shipping_threshold > 0 and cart_total < free_shipping_threshold -%}
-    <div class="cart-shipping-bar__message">
-      {% render 'icon-system', icon: 'shipping', size: 18, color: 'var(--ta-accent, #00D4AA)' %}
-      <span>¡Añade <strong>{{ remaining | money }}</strong> más para <strong>envío GRATIS</strong>!</span>
-    </div>
-  {%- else -%}
-    <div class="cart-shipping-bar__message cart-shipping-bar__message--success">
-      {% render 'icon-system', icon: 'check-circle', size: 18, color: 'var(--ta-success, #10b981)' %}
-      <span><strong>¡Felicitaciones!</strong> Tu envío es <strong>GRATIS</strong> 🎉</span>
-    </div>
-  {%- endif -%}
+  <div class="cart-shipping-bar__message cart-shipping-bar__message--success">
+    {% render 'icon-system', icon: 'check-circle', size: 18, color: 'var(--ta-success, #10b981)' %}
+    <span><strong>¡Tu envío es GRATIS!</strong> Sin monto mínimo 🎉</span>
+  </div>
 
   <div class="cart-shipping-bar__track">
-    <div class="cart-shipping-bar__progress" style="width: {{ progress_percent }}%"></div>
+    <div class="cart-shipping-bar__progress" style="width: 100%"></div>
   </div>
 </div>
 

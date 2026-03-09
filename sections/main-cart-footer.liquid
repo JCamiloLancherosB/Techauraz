@@ -57,37 +57,18 @@
                 </small>
               </div>
             {%- else -%}
-              {%- comment -%} Free Shipping Banner {%- endcomment -%}
-              {%- assign free_shipping_threshold = 150000 -%}
-              {%- assign cart_total = cart.total_price -%}
-              {%- assign remaining = free_shipping_threshold | minus: cart_total -%}
-              
+              {%- comment -%} Free Shipping Banner — envío gratis sin monto mínimo {%- endcomment -%}
               <div class="cart__free-shipping-banner">
-                {%- if remaining > 0 -%}
-                  <svg class="free-shipping-banner__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <rect x="1" y="3" width="15" height="13"></rect>
-                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                  </svg>
-                  <div class="free-shipping-banner__content">
-                    <p class="free-shipping-banner__text">
-                      <strong>¡Solo te faltan {{ remaining | money }} para envío GRATIS!</strong>
-                    </p>
-                    <p class="free-shipping-banner__subtext">Añade más productos para alcanzar el envío gratis</p>
-                  </div>
-                {%- else -%}
-                  <svg class="free-shipping-banner__icon free-shipping-banner__icon--success" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                  <div class="free-shipping-banner__content">
-                    <p class="free-shipping-banner__text free-shipping-banner__text--success">
-                      <strong>¡Felicidades! Tienes ENVÍO GRATIS</strong>
-                    </p>
-                    <p class="free-shipping-banner__subtext">Tu pedido califica para envío sin costo</p>
-                  </div>
-                {%- endif -%}
+                <svg class="free-shipping-banner__icon free-shipping-banner__icon--success" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <div class="free-shipping-banner__content">
+                  <p class="free-shipping-banner__text free-shipping-banner__text--success">
+                    <strong>¡Tu envío es GRATIS!</strong> Sin monto mínimo
+                  </p>
+                  <p class="free-shipping-banner__subtext">Todos los pedidos incluyen envío gratis a toda Colombia 🇨🇴</p>
+                </div>
               </div>
 
               {%- comment -%} Payment Options {%- endcomment -%}
