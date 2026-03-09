@@ -737,18 +737,17 @@
   outline-offset: 2px;
 }
 
-/* Section title styling - inherit from Shopify's color scheme text color */
+/* Section title styling - use Shopify's color scheme text color */
 [class*="color-scheme-"] .title,
 [class*="color-scheme-"] h2.title,
 [class*="color-scheme-"] .inline-richtext {
-  color: inherit;
+  color: rgb(var(--color-foreground));
 }
 
 /* Section description on any color scheme background */
 [class*="color-scheme-"] .collection__description,
 [class*="color-scheme-"] .rte {
-  color: inherit;
-  opacity: 0.85;
+  color: rgba(var(--color-foreground), 0.85);
 }
 
 /* View all button on dark background */

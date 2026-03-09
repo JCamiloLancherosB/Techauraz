@@ -71,7 +71,9 @@
 .utility-bar {
   position: relative !important;
   width: 100%;
-  /* Color scheme applies via color-{{ scheme }} class from Liquid */
+  /* Apply Shopify color scheme background and text colors */
+  background-color: rgba(var(--color-background), 1);
+  color: rgb(var(--color-foreground));
 }
 
 /* =============================================================================
