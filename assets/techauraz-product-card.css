@@ -737,18 +737,11 @@
   outline-offset: 2px;
 }
 
-/* Section title styling - use Shopify's color scheme text color */
-[class*="color-scheme-"] .title,
-[class*="color-scheme-"] h2.title,
-[class*="color-scheme-"] .inline-richtext {
-  color: rgb(var(--color-foreground));
-}
+/* Section title styling - let Shopify's color scheme handle text color naturally */
+/* REMOVED: was forcing white text on ALL sections including light-background ones */
 
-/* Section description on any color scheme background */
-[class*="color-scheme-"] .collection__description,
-[class*="color-scheme-"] .rte {
-  color: rgba(var(--color-foreground), 0.85);
-}
+/* Section description - let Shopify color scheme handle naturally */
+/* REMOVED: was forcing white/opacity on light-background sections */
 
 /* View all button on dark background */
 [class*="color-scheme-"] .collection__view-all .button {

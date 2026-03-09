@@ -71,9 +71,20 @@
 .utility-bar {
   position: relative !important;
   width: 100%;
-  /* Apply Shopify color scheme background and text colors */
-  background-color: rgba(var(--color-background), 1);
-  color: rgb(var(--color-foreground));
+}
+
+/* Ensure announcement bar gets its color scheme background & text */
+.utility-bar[class*="color-scheme-"] {
+  background: var(--gradient-background, var(--color-scheme-background, #0f172a));
+  color: var(--color-scheme-text, #ffffff);
+}
+
+/* Make sure child text elements inherit the correct color */
+.utility-bar[class*="color-scheme-"] .announcement-bar__message,
+.utility-bar[class*="color-scheme-"] .announcement-ticker__message,
+.utility-bar[class*="color-scheme-"] a,
+.utility-bar[class*="color-scheme-"] span {
+  color: inherit;
 }
 
 /* =============================================================================
