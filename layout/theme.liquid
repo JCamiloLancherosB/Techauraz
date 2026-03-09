@@ -258,19 +258,19 @@
 {%- endif -%}
 
 <!-- Visual System Unified - Global visual cohesion (cards, sections, benefits) -->
-<link rel="preload" href="{{ 'visual-system-unified-2024.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
 
 <!-- Utility Classes - Helper classes using design tokens - 2026-01-29 -->
-<link rel="preload" href="{{ 'techauraz-utilities.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 
 <!-- Header, Announcement Bar & Slideshow UI/UX Fixes - 2026-02-04 -->
-<link rel="preload" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
 
 <!-- Accessibility - Focus indicators, touch targets, WCAG 2.2 AA -->
-<link rel="preload" href="{{ 'techauraz-accessibility.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}"></noscript>
 
 
@@ -326,68 +326,6 @@
 
     <!-- Google Webmaster Tools Site Verification -->
     <meta name="google-site-verification" content="fj7UYrB5GV0ojQhLbYR8XqrgfSDiY8Bcqz-npt1MvQo" />
-<!-- GOOGLE TAG MANAGER - OPTIMIZED -->
-<script>
-(function(w,d,s,l,i){
-  // Performance optimization: load GTM only after user engagement
-  var GTM_DELAY = 8000;           // Auto-load after 8s if no interaction
-  var GTM_INTERACTION_DELAY = 100; // Short delay after first interaction
-  
-  function loadGTM() {
-    if (w.gtmLoaded) return;
-    w.gtmLoaded = true;
-    
-    w[l]=w[l]||[];
-    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true;
-    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-    f.parentNode.insertBefore(j,f);
-  }
-  
-  var timer = setTimeout(loadGTM, GTM_DELAY);
-  
-  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
-    w.addEventListener(e, function() {
-      clearTimeout(timer);
-      setTimeout(loadGTM, GTM_INTERACTION_DELAY);
-    }, { once: true, passive: true });
-  });
-})(window,document,'script','dataLayer','GTM-PB6TD2ZD');
-</script>
-<!-- FACEBOOK PIXEL - OPTIMIZED -->
-<script>
-(function() {
-  // Performance optimization: load FB Pixel after GTM, on interaction only
-  var FB_DELAY = 10000;           // Auto-load after 10s if no interaction
-  var FB_INTERACTION_DELAY = 300; // Delay after interaction (FB is heavy)
-  
-  var fbLoaded = false;
-  
-  function loadFBPixel() {
-    if (fbLoaded) return;
-    fbLoaded = true;
-    
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', '809161240853412');
-    fbq('track', 'PageView');
-  }
-  
-  var timer = setTimeout(loadFBPixel, FB_DELAY);
-  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
-    window.addEventListener(e, function() {
-      clearTimeout(timer);
-      setTimeout(loadFBPixel, FB_INTERACTION_DELAY);
-    }, { once: true, passive: true });
-  });
-})();
-</script>
 
 </head>
 
@@ -486,5 +424,57 @@
     {% render 'whatsapp-float' %}
 
 <script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer="defer"></script>
+
+<!-- GOOGLE TAG MANAGER - OPTIMIZED (moved from <head> for LCP) -->
+<script>
+(function(w,d,s,l,i){
+  var GTM_DELAY = 8000;
+  var GTM_INTERACTION_DELAY = 100;
+  function loadGTM() {
+    if (w.gtmLoaded) return;
+    w.gtmLoaded = true;
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  }
+  var timer = setTimeout(loadGTM, GTM_DELAY);
+  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
+    w.addEventListener(e, function() {
+      clearTimeout(timer);
+      setTimeout(loadGTM, GTM_INTERACTION_DELAY);
+    }, { once: true, passive: true });
+  });
+})(window,document,'script','dataLayer','GTM-PB6TD2ZD');
+</script>
+<!-- FACEBOOK PIXEL - OPTIMIZED (moved from <head> for LCP) -->
+<script>
+(function() {
+  var FB_DELAY = 10000;
+  var FB_INTERACTION_DELAY = 300;
+  var fbLoaded = false;
+  function loadFBPixel() {
+    if (fbLoaded) return;
+    fbLoaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '809161240853412');
+    fbq('track', 'PageView');
+  }
+  var timer = setTimeout(loadFBPixel, FB_DELAY);
+  ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'].forEach(function(e) {
+    window.addEventListener(e, function() {
+      clearTimeout(timer);
+      setTimeout(loadFBPixel, FB_INTERACTION_DELAY);
+    }, { once: true, passive: true });
+  });
+})();
+</script>
 
 </body> </html>

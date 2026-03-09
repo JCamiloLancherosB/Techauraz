@@ -3,8 +3,8 @@
   <link 
     rel="preload" 
     as="image" 
-    href="{{ section.blocks.first.settings.image | image_url: width: 1920, format: 'pjpg' }}"
-    imagesrcset="{{ section.blocks.first.settings.image | image_url: width: 750, format: 'pjpg' }} 750w, {{ section.blocks.first.settings.image | image_url: width: 1100, format: 'pjpg' }} 1100w, {{ section.blocks.first.settings.image | image_url: width: 1500, format: 'pjpg' }} 1500w, {{ section.blocks.first.settings.image | image_url: width: 1920, format: 'pjpg' }} 1920w"
+    href="{{ section.blocks.first.settings.image | image_url: width: 1920, format: 'webp' }}"
+    imagesrcset="{{ section.blocks.first.settings.image | image_url: width: 750, format: 'webp' }} 750w, {{ section.blocks.first.settings.image | image_url: width: 1100, format: 'webp' }} 1100w, {{ section.blocks.first.settings.image | image_url: width: 1500, format: 'webp' }} 1500w, {{ section.blocks.first.settings.image | image_url: width: 1920, format: 'webp' }} 1920w"
     imagesizes="(max-width: 749px) 100vw, (max-width: 1200px) 85vw, 1920px"
     fetchpriority="high">
 {%- endif -%}
@@ -76,7 +76,7 @@
   {%- endif -%}
 
   <div
-    class="tech-hero__media slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% unless reference_image %} slideshow--placeholder{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="tech-hero__media slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% unless reference_image %} slideshow--placeholder{% endunless %}"
     id="Slider-{{ section.id }}"
     aria-live="polite"
     aria-atomic="true"
@@ -104,10 +104,7 @@
                 assign sizes = '100vw'
                 assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
               endif
-              assign fetch_priority = 'auto'
-              if section.index == 1
-                assign fetch_priority = 'high'
-              endif
+              assign fetch_priority = 'high'
             -%}
             {%- if forloop.first %}
               {{
