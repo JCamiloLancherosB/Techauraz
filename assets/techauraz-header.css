@@ -41,8 +41,10 @@
 
 .header-wrapper {
   position: relative;
+  width: 100%;
   background: var(--tech-bg-card, #ffffff);
   z-index: var(--tech-z-sticky, 200);
+  overflow: hidden;
 }
 
 /* Show border only when modifier class is present */
@@ -72,11 +74,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   height: var(--tech-header-height, 70px);
   padding: 0 var(--tech-space-4, 16px);
   gap: var(--tech-space-4, 16px);
   max-width: 1400px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 990px) {
@@ -104,6 +108,7 @@
   transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
   border-radius: var(--tech-radius-md, 8px);
   -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 .header__icon--menu:hover,
