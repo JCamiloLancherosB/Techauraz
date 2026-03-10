@@ -4203,3 +4203,82 @@ quick-add-modal .quick-add-hidden {
 body.quick-add-modal-open {
   overflow: hidden;
 }
+
+/* =============================================================================
+   GREEN CONVERSION CTA — PDP "Agregar al carrito" button
+   Matches the product card green CTA for visual consistency.
+   ============================================================================= */
+
+.product-form__submit,
+.product-form__submit.button--secondary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-form__submit:hover,
+.product-form__submit.button--secondary:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+  transform: translateY(-2px);
+}
+
+.product-form__submit:active,
+.product-form__submit.button--secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.product-form__submit[disabled] {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%) !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =============================================================================
+   HOMEPAGE SECTION FLOW — Subtle separators & elevation for premium feel
+   ============================================================================= */
+
+/* Benefits bar elevation */
+.shopify-section .benefits-bar,
+.shopify-section .trust-badges-section {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Subtle section dividers between major homepage sections */
+.shopify-section+.shopify-section {
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Remove divider where sections have their own dark backgrounds */
+.shopify-section:has(.newsletter),
+.shopify-section:has(.footer),
+.shopify-section:has(.testimonials-section) {
+  border-top: none;
+}
+
+/* Section headings — consistent modern typography */
+.shopify-section .section-header__title,
+.shopify-section .title,
+.shopify-section h2.title-wrapper-hdr {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Quick-add modal green CTA */
+quick-add-modal .product-form__submit,
+quick-add-modal .product-form__buttons button[name="add"] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+}
+
+quick-add-modal .product-form__submit:hover,
+quick-add-modal .product-form__buttons button[name="add"]:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+}
