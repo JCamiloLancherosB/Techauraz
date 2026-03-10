@@ -104,12 +104,17 @@
   align-items: center;
 }
 
-/* Track that scrolls - animation set by JS */
+/* Track that scrolls - animation driven by JS-set CSS custom properties */
 .announcement-ticker__track {
   display: flex;
   align-items: center;
   white-space: nowrap;
   will-change: transform;
+}
+
+/* Once JS initializes the ticker, apply the marquee animation */
+.announcement-ticker[data-ta-ticker-initialized="true"] .announcement-ticker__track {
+  animation: ta-marquee-scroll var(--ta-ticker-duration, 30s) linear infinite;
 }
 
 /* Pause animation during resize/setup */
