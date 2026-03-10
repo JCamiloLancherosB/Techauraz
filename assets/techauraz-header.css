@@ -83,7 +83,7 @@
 @media screen and (min-width: 990px) {
   .header {
     padding: 0 var(--tech-space-8, 32px);
-    gap: var(--tech-space-6, 24px);
+    gap: var(--tech-space-3, 12px);
   }
 }
 
@@ -111,7 +111,7 @@
 .header__icon--menu:hover,
 .header__icon--menu:focus {
   background: var(--tech-color-gray-100, #f1f5f9);
-  color: var(--tech-color-primary, #2563eb);
+  color: rgb(var(--color-foreground));
 }
 
 .header__icon--menu:focus-visible {
@@ -315,21 +315,23 @@
    MOBILE MENU DRAWER ENHANCEMENTS
    ============================================ */
 
+/* The menu-drawer-container is a <details> element.
+   Default state: NOT fixed — hamburger stays in normal flow.
+   Open state: goes fixed to create the fullscreen drawer overlay. */
 .menu-drawer-container {
+  position: static;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.menu-drawer-container[open],
+.menu-drawer-container.is-open {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: var(--tech-z-drawer, 400);
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.menu-drawer-container[open],
-.menu-drawer-container.is-open {
-  pointer-events: auto;
-  visibility: visible;
 }
 
 .menu-drawer__overlay {
