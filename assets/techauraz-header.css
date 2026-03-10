@@ -44,7 +44,6 @@
   width: 100%;
   background: var(--tech-bg-card, #ffffff);
   z-index: var(--tech-z-sticky, 200);
-  overflow: hidden;
 }
 
 /* Show border only when modifier class is present */
@@ -985,4 +984,130 @@ body.overflow-hidden-desktop {
 menu-drawer>details>summary::before,
 header-drawer>details>summary::before {
   z-index: var(--ta-z-menu-drawer-overlay, 220);
+}
+
+/* =============================================================================
+   MOBILE / TABLET HEADER RESPONSIVENESS
+   Fix hamburger visibility, header overflow, and icon layout on narrow viewports.
+   ============================================================================= */
+
+/* The header-wrapper should not hide horizontal overflow, but must prevent
+   content from expanding the viewport. Use overflow-x: clip (not hidden)
+   to avoid breaking mega-menu dropdowns */
+.header-wrapper {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* The menu-drawer-container details has visibility:hidden + pointer-events:none
+   to hide the DRAWER, but the <summary> (hamburger icon) must remain visible.
+   Force the summary to be visible regardless of the container state. */
+.menu-drawer-container>summary.header__icon--menu,
+header-drawer>details>summary.header__icon--menu {
+  visibility: visible !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px;
+  min-height: 44px;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+/* Ensure the header-drawer custom element doesn't collapse */
+header-drawer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+header-drawer>details {
+  position: relative;
+}
+
+/* ---- Mobile (< 990px) ---- */
+@media screen and (max-width: 989px) {
+
+  /* Header must contain all elements within the viewport */
+  .header {
+    flex-wrap: nowrap;
+    padding: 0 12px;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  /* Logo shouldn't take up too much space */
+  .header__heading {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .header__heading-link {
+    margin-right: 0;
+  }
+
+  .header__heading-logo {
+    height: 32px;
+    max-height: 32px;
+    max-width: 120px;
+  }
+
+  /* Icons container shrinks to fit */
+  .header__icons {
+    flex: 0 0 auto;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  /* Each icon should be compact on mobile */
+  .header__icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+  }
+
+  .header__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Hide CTA button on mobile (already has small-hide class but enforce) */
+  .header__cta {
+    display: none !important;
+  }
+
+  /* Hide account icon on mobile when menu is available (moved to drawer) */
+  .header__icon--account.small-hide {
+    display: none !important;
+  }
+}
+
+/* ---- Extra Small Mobile (< 400px) ---- */
+@media screen and (max-width: 399px) {
+
+  .header {
+    padding: 0 8px;
+    gap: 4px;
+  }
+
+  .header__heading-logo {
+    height: 28px;
+    max-height: 28px;
+    max-width: 100px;
+  }
+
+  .header__icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  .header__icon svg {
+    width: 18px;
+    height: 18px;
+  }
 }
