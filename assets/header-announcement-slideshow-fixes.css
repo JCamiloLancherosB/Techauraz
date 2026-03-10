@@ -46,19 +46,18 @@ body.scrolled-past-header .announcement-bar-section {
    PROBLEM 2: HEADER ICONS - CONSISTENT VISUAL STYLE
    ============================================================================= */
 
-/* Ensure all header icons have consistent circular hover area */
+/* Ensure all header icons have consistent rounded-square hover area */
 .header__icon,
 .header__icon--search,
 .header__icon--account,
 .header__icon--cart {
-  border-radius: 50%;
+  border-radius: 8px;
 }
 
 /* Enhanced hover effect for icons */
 .header__icon:hover,
 .header__icon:focus-visible {
   background: rgba(59, 130, 246, 0.1);
-  transform: scale(1.05);
 }
 
 /* Hide close icon from search button (if it appears as Q×) */
@@ -147,15 +146,10 @@ body.scrolled-past-header .announcement-bar-section {
    PROBLEM 4: HEADER LOGO & NAVIGATION
    ============================================================================= */
 
-/* Logo container - subtle improvements */
+/* Logo container - clean, no artificial box */
 .header__heading-logo-wrapper {
-  padding: 8px;
-  border-radius: 12px;
-  transition: background-color 0.2s ease;
-}
-
-.header__heading-link:hover .header__heading-logo-wrapper {
-  background: rgba(59, 130, 246, 0.05);
+  padding: 0;
+  border-radius: 0;
 }
 
 /* Active navigation link - enhanced visibility */
@@ -179,7 +173,7 @@ body.scrolled-past-header .announcement-bar-section {
 
 /* Improved menu spacing */
 .header__inline-menu .header__menu-list {
-  gap: 8px;
+  gap: var(--tech-space-2, 8px);
 }
 
 /* =============================================================================
