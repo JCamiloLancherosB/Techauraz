@@ -838,12 +838,18 @@
 }
 
 /* Autoplay pause/play button — repositioned to bottom-right corner
-   so it doesn't overlap the hero heading and CTAs */
-.slideshow__autoplay {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  z-index: 20;
+   so it doesn't overlap the hero heading and CTAs.
+   !important on position is required to override ui-ux-responsive-fixes.css
+   which sets .slideshow__controls children to position: relative via cascade. */
+slideshow-component .slideshow__autoplay,
+.template-index slideshow-component .slideshow__autoplay,
+.slideshow__controls--top .slideshow__autoplay {
+  position: absolute !important;
+  bottom: 16px !important;
+  right: 16px !important;
+  top: auto !important;
+  left: auto !important;
+  z-index: 25;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -855,13 +861,18 @@
   border-radius: 50%;
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   padding: 0;
+  margin: 0;
   color: rgba(255, 255, 255, 0.8);
   transition: background 0.2s ease, color 0.2s ease;
   pointer-events: auto;
+  transform: none !important;
 }
 
-.slideshow__autoplay:hover {
+slideshow-component .slideshow__autoplay:hover,
+.template-index slideshow-component .slideshow__autoplay:hover {
   background: rgba(0, 0, 0, 0.55);
   color: #ffffff;
 }

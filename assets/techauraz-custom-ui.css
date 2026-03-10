@@ -1115,15 +1115,12 @@ select:focus {
 /* =============================================================================
    FIX: Center orphan items in the last row of product grids.
    When a 4-col grid has 5 items, the 5th card sits alone left-aligned.
-   This centers the last grid row's orphan items.
+   Uses :nth-child to detect a solo orphan in the last row and center it.
    ============================================================================= */
-.product-grid.grid--4-col-desktop {
-  justify-items: center;
-}
 
-/* On desktop, allow the last orphan row to center nicely */
+/* Desktop 4-col grid: center orphan when 1 item in last row (5, 9, 13... items) */
 @media screen and (min-width: 990px) {
-  .collection--full-width .product-grid.grid--4-col-desktop {
-    justify-content: center;
+  .product-grid.grid--4-col-desktop>.grid__item:last-child:nth-child(4n + 1) {
+    grid-column: 2 / 3;
   }
 }
