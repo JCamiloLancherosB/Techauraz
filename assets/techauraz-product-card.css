@@ -269,11 +269,11 @@
   margin: var(--ta-space-sm, 0.8rem) 0;
 }
 
-/* Regular price - prominent success green with enhanced hierarchy */
+/* Regular price - prominent with enhanced hierarchy */
 .card-wrapper.product-card-wrapper .price .price-item--regular {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #10b981;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
   letter-spacing: var(--ta-tracking-tight, -0.025em);
 }
 
@@ -301,44 +301,61 @@
   margin-top: auto;
 }
 
+/* Base button style - green conversion CTA */
 .card-wrapper.product-card-wrapper .quick-add__submit {
   width: 100%;
   min-height: var(--ta-touch-comfortable, 48px);
   padding: 12px 24px;
   font-size: var(--ta-font-size-sm, 1.4rem);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--ta-space-sm, 0.8rem);
   position: relative;
   z-index: 3;
+  /* Green conversion gradient — matches hero CTA */
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
 }
 
-/* Primary button style - Enhanced gradient for better contrast */
+/* Hover: deeper green + lift */
+.card-wrapper.product-card-wrapper .quick-add__submit:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+  transform: translateY(-2px);
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Override for button--secondary (some themes add this class) */
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  box-shadow: var(--ta-shadow-button, 0 4px 12px rgba(37, 99, 235, 0.3));
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  box-shadow: var(--ta-shadow-button-hover, 0 6px 16px rgba(37, 99, 235, 0.4));
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
   transform: translateY(-2px);
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:active {
   transform: translateY(0);
-  box-shadow: var(--ta-shadow-button-active, 0 2px 8px rgba(37, 99, 235, 0.3));
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 /* Sold out / disabled state */

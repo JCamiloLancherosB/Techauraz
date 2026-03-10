@@ -44,6 +44,8 @@
   width: 100%;
   background: var(--tech-bg-card, #ffffff);
   z-index: var(--tech-z-sticky, 200);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Show border only when modifier class is present */
@@ -57,8 +59,13 @@
   top: 0;
   left: 0;
   right: 0;
-  box-shadow: var(--tech-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.08));
-  transition: transform var(--tech-transition-normal, 250ms ease);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
+  transition: transform var(--tech-transition-normal, 250ms ease),
+    background 300ms ease;
 }
 
 .shopify-section-header-hidden .header-wrapper {
@@ -74,7 +81,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: var(--tech-header-height, 70px);
+  height: var(--tech-header-height, 76px);
   padding: 0 var(--tech-space-4, 16px);
   gap: var(--tech-space-4, 16px);
   box-sizing: border-box;
