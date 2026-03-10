@@ -837,16 +837,33 @@
   }
 }
 
-/* Autoplay pause/play button */
+/* Autoplay pause/play button — repositioned to bottom-right corner
+   so it doesn't overlap the hero heading and CTAs */
 .slideshow__autoplay {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 20;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  color: inherit;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.8);
+  transition: background 0.2s ease, color 0.2s ease;
+  pointer-events: auto;
+}
+
+.slideshow__autoplay:hover {
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
 }
 
 .slideshow__autoplay .icon--play {

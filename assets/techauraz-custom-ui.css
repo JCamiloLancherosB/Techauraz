@@ -1097,3 +1097,33 @@ select:focus {
    Reason: Canonical version with full WhatsApp/cookie/cart coordination
    lives in ui-ux-responsive-fixes.css (STICKY CTA BAR section). */
 
+/* =============================================================================
+   FIX: Floating slider buttons on desktop for non-desktop-slider collections
+   When enable_desktop_slider is false, slider buttons are rendered for mobile swipe
+   but should be hidden on desktop viewports.
+   ============================================================================= */
+@media screen and (min-width: 990px) {
+
+  /* Hide slider-buttons in featured collections that don't use desktop slider.
+     .slider-component-desktop is only added when enable_desktop_slider is true.
+     When absent, hide the buttons on desktop. */
+  slider-component:not(.slider-component-desktop)>.slider-buttons {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   FIX: Center orphan items in the last row of product grids.
+   When a 4-col grid has 5 items, the 5th card sits alone left-aligned.
+   This centers the last grid row's orphan items.
+   ============================================================================= */
+.product-grid.grid--4-col-desktop {
+  justify-items: center;
+}
+
+/* On desktop, allow the last orphan row to center nicely */
+@media screen and (min-width: 990px) {
+  .collection--full-width .product-grid.grid--4-col-desktop {
+    justify-content: center;
+  }
+}

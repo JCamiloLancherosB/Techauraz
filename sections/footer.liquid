@@ -63,12 +63,29 @@
                     {%- if block.settings.menu != blank -%}
                       <ul class="footer-block__details-content list-unstyled">
                         {%- for link in block.settings.menu.links -%}
+                          {%- liquid
+                            assign link_title_es = link.title
+                            case link.title
+                              when 'Refund Policy', 'Refund policy'
+                                assign link_title_es = 'Política de reembolso'
+                              when 'Shipping Policy', 'Shipping policy'
+                                assign link_title_es = 'Política de envíos'
+                              when 'Terms of Service', 'Terms of service'
+                                assign link_title_es = 'Términos de servicio'
+                              when 'Privacy Policy', 'Privacy policy'
+                                assign link_title_es = 'Política de privacidad'
+                              when 'Contact Information', 'Contact information'
+                                assign link_title_es = 'Información de contacto'
+                              when 'Legal Notice', 'Legal notice'
+                                assign link_title_es = 'Aviso legal'
+                            endcase
+                          -%}
                           <li>
                             <a
                               href="{{ link.url }}"
                               class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
                             >
-                              {{ link.title }}
+                              {{ link_title_es }}
                             </a>
                           </li>
                         {%- endfor -%}
@@ -137,7 +154,7 @@
               {%- if section.settings.newsletter_heading != blank -%}
                 <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
               {%- endif -%}
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form', data-success-message: 'newsletter.success' | t -%}
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="newsletter-form__field-wrapper">
                   <div class="field">
