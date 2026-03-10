@@ -1001,20 +1001,29 @@ header-drawer>details>summary::before {
 
 /* The menu-drawer-container details has visibility:hidden + pointer-events:none
    to hide the DRAWER, but the <summary> (hamburger icon) must remain visible.
-   Force the summary to be visible regardless of the container state. */
+   Force visibility on all viewports, but only force display on mobile/tablet. */
 .menu-drawer-container>summary.header__icon--menu,
 header-drawer>details>summary.header__icon--menu {
   visibility: visible !important;
   pointer-events: auto !important;
-  display: flex !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px;
-  min-height: 44px;
   opacity: 1 !important;
   position: relative;
   z-index: 5;
   flex-shrink: 0;
+}
+
+/* Only force-show hamburger on mobile/tablet — desktop hides it via
+   .header:not(.drawer-menu) .header__icon--menu { display: none } */
+@media screen and (max-width: 989px) {
+
+  .menu-drawer-container>summary.header__icon--menu,
+  header-drawer>details>summary.header__icon--menu {
+    display: flex !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
 /* Ensure the header-drawer custom element doesn't collapse */
@@ -1037,6 +1046,8 @@ header-drawer>details {
     padding: 0 12px;
     gap: 8px;
     min-width: 0;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
 
   /* Logo shouldn't take up too much space */
