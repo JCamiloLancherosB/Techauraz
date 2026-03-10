@@ -340,9 +340,28 @@
           <ul class="policies list-unstyled">
             {%- for policy in shop.policies -%}
               {%- if policy != blank -%}
+                {%- liquid
+                  assign policy_title_es = policy.title
+                  case policy.title
+                    when 'Privacy policy'
+                      assign policy_title_es = 'Política de privacidad'
+                    when 'Terms of service'
+                      assign policy_title_es = 'Términos del servicio'
+                    when 'Refund policy'
+                      assign policy_title_es = 'Política de reembolso'
+                    when 'Shipping policy'
+                      assign policy_title_es = 'Política de envío'
+                    when 'Contact information'
+                      assign policy_title_es = 'Información de contacto'
+                    when 'Legal notice'
+                      assign policy_title_es = 'Aviso legal'
+                    when 'Subscription policy'
+                      assign policy_title_es = 'Política de suscripción'
+                  endcase
+                -%}
                 <li>
                   <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title }}</a></small
+                    ><a href="{{ policy.url }}">{{ policy_title_es }}</a></small
                   >
                 </li>
               {%- endif -%}

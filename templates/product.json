@@ -285,28 +285,28 @@
             "type": "product-faq",
             "blocks": {
                 "faq_1": {
-                    "type": "faq",
+                    "type": "faq_item",
                     "settings": {
                         "question": "¿Cuánto tarda en llegar mi pedido?",
                         "answer": "<p>Tu pedido llegará en <strong>2 a 5 días hábiles</strong> a cualquier parte de Colombia. El envío es <strong>completamente GRATIS</strong> y recibirás un número de seguimiento para rastrear tu paquete en tiempo real.</p>"
                     }
                 },
                 "faq_2": {
-                    "type": "faq",
+                    "type": "faq_item",
                     "settings": {
                         "question": "¿Puedo pagar cuando reciba el producto?",
                         "answer": "<p>¡Por supuesto! Ofrecemos <strong>pago contra entrega</strong> en toda Colombia sin ningún costo adicional. Pagas en efectivo o con tarjeta directamente al mensajero cuando recibas tu producto. También aceptamos pagos en línea con tarjetas de crédito, débito, PSE y más.</p>"
                     }
                 },
                 "faq_3": {
-                    "type": "faq",
+                    "type": "faq_item",
                     "settings": {
                         "question": "¿Qué garantía tiene el producto?",
                         "answer": "<p>Todos nuestros productos incluyen <strong>garantía de 30 días</strong> por defectos de fabricación. Además, tienes <strong>30 días para devolución</strong> si no estás completamente satisfecho. Te devolvemos el 100% de tu dinero, sin complicaciones ni preguntas.</p>"
                     }
                 },
                 "faq_4": {
-                    "type": "faq",
+                    "type": "faq_item",
                     "settings": {
                         "question": "¿Es seguro comprar aquí?",
                         "answer": "<p><strong>¡Totalmente seguro!</strong> Procesamos todos los pagos a través de plataformas certificadas y encriptadas. Nunca almacenamos información sensible de tus tarjetas. Además, miles de clientes satisfechos respaldan nuestra tienda con excelentes reseñas.</p>"

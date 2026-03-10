@@ -140,6 +140,7 @@
     {%- comment -%} SEO: Collection Page Structured Data {%- endcomment -%}
     {%- if template.name == 'collection' and collection -%}
       {% render 'schema-collection', collection: collection %}
+      {% render 'schema-itemlist', collection: collection %}
     {%- endif -%}
 
     {%- comment -%} SEO: Article/Blog Structured Data {%- endcomment -%}
