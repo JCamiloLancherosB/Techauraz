@@ -1,0 +1,205 @@
+/**
+ * TECHAURAZ SLIDESHOW FIXES — March 2026
+ * ========================================
+ * Fixes: pause button hidden, full-width edges, improved CTA buttons,
+ *        better arrow positioning, edge-to-edge announcement bar
+ */
+
+/* =============================================================================
+   HIDE PAUSE BUTTON
+   ============================================================================= */
+.slideshow__autoplay,
+.slider-button[data-autoplay-button],
+button[data-autoplay-button] {
+    display: none !important;
+}
+
+/* =============================================================================
+   ANNOUNCEMENT BAR — EDGE TO EDGE (remove white borders)
+   ============================================================================= */
+.announcement-bar-section,
+.utility-bar-section,
+.shopify-section-announcement-bar,
+#shopify-section-sections--26145484341557__announcement-bar {
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+}
+
+.announcement-bar {
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+/* Ensure the parent containers are full-width */
+.section-header,
+.shopify-section-group-header-group {
+    overflow: visible;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* =============================================================================
+   HEADER — FULL WIDTH (fix cutoff)
+   ============================================================================= */
+.header-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Ensure header section is also full-width */
+.shopify-section-header {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible;
+}
+
+/* =============================================================================
+   SLIDESHOW — EDGE TO EDGE
+   ============================================================================= */
+.tech-hero,
+.tech-hero-slideshow {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.tech-hero-slideshow slideshow-component {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =============================================================================
+   SLIDESHOW CTA BUTTONS — Premium Design
+   ============================================================================= */
+.slideshow-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.slideshow-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 36px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 50px;
+    min-width: 180px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+
+/* Primary CTA — Green gradient */
+.slideshow-cta.button--primary {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+}
+
+.slideshow-cta.button--primary:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 6px 28px rgba(16, 185, 129, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Secondary CTA — Glassmorphism outline */
+.slideshow-cta.button--secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.slideshow-cta.button--secondary:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* =============================================================================
+   SLIDER ARROWS — Better Positioning & Size
+   ============================================================================= */
+.slideshow__controls {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.slideshow__controls--top {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.slideshow__controls .slider-button {
+    pointer-events: all;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.slideshow__controls .slider-button:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.08);
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+    .slideshow-cta {
+        padding: 14px 28px;
+        font-size: 13px;
+        min-width: 140px;
+    }
+
+    .slideshow__controls .slider-button {
+        width: 38px;
+        height: 38px;
+    }
+}

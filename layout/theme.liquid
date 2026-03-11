@@ -311,6 +311,9 @@
   <noscript><link rel="stylesheet" href="{{ 'social-proof-toast.css' | asset_url }}"></noscript>
 {%- endif -%}
 
+<!-- Slideshow & Header Fixes (GLOBAL) -->
+<link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}"></noscript>
 
     <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
@@ -437,6 +440,7 @@
     {%- comment -%} 2030 Advanced Systems {%- endcomment -%}
     <script src="{{ 'scroll-reveal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'micro-interactions.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'slideshow-autoplay-force.js' | asset_url }}" defer="defer"></script>
     {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
       <script src="{{ 'social-proof-toast.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
