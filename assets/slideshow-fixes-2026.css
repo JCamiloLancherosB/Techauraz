@@ -23,8 +23,23 @@ button[data-autoplay-button] {
 
 .header-wrapper {
     background: #ffffff !important;
+    background-color: #ffffff !important;
     border-bottom: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Override Shopify .gradient class that applies --gradient-background via base.css */
+.header-wrapper.gradient {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+}
+
+/* Override any color-scheme that makes header foreground white */
+.header-wrapper[class*="color-scheme-"] {
+    --color-foreground: 30, 41, 59;
+    --color-background: 255, 255, 255;
+    --gradient-background: #ffffff;
 }
 
 .header-wrapper,
