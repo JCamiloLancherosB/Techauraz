@@ -51,11 +51,10 @@ button[data-autoplay-button] {
     color: #1e293b !important;
 }
 
-/* Sticky state keeps white bg */
+/* Sticky state also fully opaque */
 .shopify-section-header-sticky .header-wrapper {
-    background: rgba(255, 255, 255, 0.97) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: #ffffff !important;
+    background-color: #ffffff !important;
 }
 
 /* =============================================================================

@@ -42,10 +42,11 @@
 .header-wrapper {
   position: relative;
   width: 100%;
-  background: #ffffff;
-  z-index: var(--tech-z-sticky, 200);
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  z-index: 500;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 /* Show border only when modifier class is present */
@@ -59,13 +60,12 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
-  transition: transform var(--tech-transition-normal, 250ms ease),
-    background 300ms ease;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+  z-index: 500;
+  transition: transform 250ms ease;
 }
 
 .shopify-section-header-hidden .header-wrapper {
