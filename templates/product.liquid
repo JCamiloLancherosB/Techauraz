@@ -5,10 +5,122 @@
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 {%- comment -%}
-  TechAura Product Template — Liquid-based template
-  This uses a liquid template format as an alternative to product.json.
-  March 2026 — Conversion-optimized PDP
+  ===================================================================
+  TechAura Product Template — 2026 Conversion-Optimized PDP
+  ===================================================================
+  
+  Uses .liquid format instead of .json due to Shopify GitHub sync
+  issue with JSON templates (confirmed 2026-03-11).
+  
+  Section order follows the high-conversion PDP funnel:
+  1. Hero (gallery + buy box) — ATF conversion zone
+  2. Trust strip — immediate reassurance
+  3. Benefits — value proposition
+  4. Content box (includes, features, FAQ, usage)
+  5. Social proof (testimonials + reviews)
+  6. Cross-sell & related products — AOV boosters
+  7. Sticky mobile CTA — mobile conversion rescue
+  ===================================================================
 {%- endcomment -%}
 
+{%- comment -%}
+  ===== ABOVE THE FOLD: Product Hero =====
+  Gallery + Buy Box + Trust indicators
+{%- endcomment -%}
 {% section 'main-product' %}
+
+{%- comment -%}
+  ===== TRUST STRIP =====
+  Envío gratis, Garantía, Pago contraentrega
+{%- endcomment -%}
+{% section 'product-trust-strip' %}
+
+{%- comment -%}
+  ===== COUNTDOWN TIMER =====
+  Urgency for limited-time offers
+{%- endcomment -%}
+{% section 'countdown-timer' %}
+
+{%- comment -%}
+  ===== BENEFITS =====
+  Value proposition cards
+{%- endcomment -%}
+{% section 'product-benefits' %}
+
+{%- comment -%}
+  ===== WHAT'S INCLUDED =====
+  Box contents list
+{%- endcomment -%}
+{% section 'product-includes' %}
+
+{%- comment -%}
+  ===== TECHNICAL FEATURES =====
+  Specs grid
+{%- endcomment -%}
+{% section 'product-features' %}
+
+{%- comment -%}
+  ===== HOW TO USE + WARRANTY =====
+  Usage steps + guarantee info
+{%- endcomment -%}
+{% section 'product-usage-warranty' %}
+
+{%- comment -%}
+  ===== SHIPPING TIMELINE =====
+  Visual delivery process
+{%- endcomment -%}
+{% section 'shipping-timeline' %}
+
+{%- comment -%}
+  ===== SHIPPING & RETURNS =====
+  Payment methods + return policy
+{%- endcomment -%}
+{% section 'shipping-returns' %}
+
+{%- comment -%}
+  ===== FAQ =====
+  Common purchase questions (SEO + conversion)
+{%- endcomment -%}
+{% section 'product-faq' %}
+
+{%- comment -%}
+  ===== TESTIMONIALS =====
+  Social proof from real customers
+{%- endcomment -%}
+{% section 'product-testimonials' %}
+
+{%- comment -%}
+  ===== REVIEWS SUMMARY =====
+  Star ratings + review count
+{%- endcomment -%}
+{% section 'product-reviews-summary' %}
+
+{%- comment -%}
+  ===== CROSS-SELL =====
+  "Complete your purchase" recommendations
+{%- endcomment -%}
+{% section 'cross-sell' %}
+
+{%- comment -%}
+  ===== RELATED PRODUCTS =====
+  "You may also like" grid
+{%- endcomment -%}
 {% section 'related-products' %}
+
+{%- comment -%}
+  ===== RECENTLY VIEWED =====
+  Browsing history products
+{%- endcomment -%}
+{% section 'recently-viewed' %}
+
+{%- comment -%}
+  ===== STICKY MOBILE CTA =====
+  Fixed bottom bar on mobile for instant add-to-cart
+{%- endcomment -%}
+{% section 'sticky-mobile-cta' %}
+
+{%- comment -%}
+  ===== PURCHASE NOTIFICATION =====
+  Social proof popup (optional)
+{%- endcomment -%}
+{% section 'purchase-notification' %}
