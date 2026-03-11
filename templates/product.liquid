@@ -1,0 +1,14 @@
+{{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}
+{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  TechAura Product Template — Liquid-based template
+  This uses a liquid template format as an alternative to product.json.
+  March 2026 — Conversion-optimized PDP
+{%- endcomment -%}
+
+{% section 'main-product' %}
+{% section 'related-products' %}
