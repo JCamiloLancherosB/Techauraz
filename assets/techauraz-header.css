@@ -42,10 +42,10 @@
 .header-wrapper {
   position: relative;
   width: 100%;
-  background: var(--tech-bg-card, #ffffff);
+  background: #ffffff;
   z-index: var(--tech-z-sticky, 200);
   padding: 8px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Show border only when modifier class is present */

@@ -50,18 +50,28 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   HEADER — FULL WIDTH (fix cutoff)
+   HEADER — FULL WIDTH (fix cutoff) + SOLID WHITE BACKGROUND
    ============================================================================= */
 .header-wrapper {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
     box-sizing: border-box;
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 .header {
     width: 100% !important;
     max-width: 100% !important;
+}
+
+/* Force dark text on all header elements regardless of color scheme */
+.header-wrapper,
+.header-wrapper .header__heading-link .h2,
+.header-wrapper .header__menu-link,
+.header-wrapper .header__icon {
+    color: #1e293b !important;
 }
 
 /* Ensure header section is also full-width */
