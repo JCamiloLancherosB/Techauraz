@@ -1,0 +1,281 @@
+/* =============================================================================
+   ENHANCED 404 PAGE — TechAura 2030
+   Conversion-focused 404 with product rescue and search
+   ============================================================================= */
+
+.ta-404 {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    background: linear-gradient(180deg, #fafbfc 0%, #f1f5f9 100%);
+}
+
+.ta-404__container {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- Hero --- */
+.ta-404__hero {
+    margin-bottom: 2.5rem;
+}
+
+.ta-404__code {
+    font-size: clamp(5rem, 12vw, 9rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #10b981, #059669, #0ea5e9);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    animation: ta-404-gradient 4s ease infinite;
+    user-select: none;
+}
+
+@keyframes ta-404-gradient {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.ta-404__heading {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.ta-404__message {
+    font-size: 1.05rem;
+    color: #64748b;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- Search --- */
+.ta-404__search {
+    margin-bottom: 2.5rem;
+}
+
+.ta-404__search-form {
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto 1rem;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ta-404__search-input {
+    flex: 1;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    background: #fff;
+    outline: none;
+    color: #1e293b;
+}
+
+.ta-404__search-input::placeholder {
+    color: #94a3b8;
+}
+
+.ta-404__search-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.ta-404__search-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.ta-404__suggestions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    flex-wrap: wrap;
+}
+
+.ta-404__suggestions a {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.ta-404__suggestions a:hover {
+    color: #059669;
+    text-decoration: underline;
+}
+
+/* --- Products Grid --- */
+.ta-404__products {
+    margin-bottom: 2.5rem;
+}
+
+.ta-404__products-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 1.5rem;
+}
+
+.ta-404__products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.ta-404__product-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ta-404__product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.ta-404__product-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+.ta-404__product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.ta-404__product-card:hover .ta-404__product-image img {
+    transform: scale(1.05);
+}
+
+.ta-404__product-info {
+    padding: 0.75rem;
+}
+
+.ta-404__product-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.25rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ta-404__product-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #10b981;
+    margin: 0;
+}
+
+/* --- Help CTAs --- */
+.ta-404__help p {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0 0 1rem;
+}
+
+.ta-404__help-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.ta-404__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.ta-404__btn--primary {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.ta-404__btn--primary:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.ta-404__btn--whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+.ta-404__btn--whatsapp:hover {
+    background: linear-gradient(135deg, #128c7e, #075e54);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* --- Mobile --- */
+@media screen and (max-width: 749px) {
+    .ta-404__products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .ta-404__code {
+        font-size: 5rem;
+    }
+
+    .ta-404__heading {
+        font-size: 1.5rem;
+    }
+
+    .ta-404__help-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ta-404__btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}

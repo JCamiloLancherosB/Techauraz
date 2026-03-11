@@ -1,0 +1,72 @@
+/* =============================================================================
+   MICRO-INTERACTIONS CSS — TechAura 2030
+   ============================================================================= */
+
+/* --- Button Ripple Effect --- */
+.ta-ripple {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(0);
+    animation: ta-ripple-expand 0.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes ta-ripple-expand {
+    to {
+        transform: scale(120);
+        opacity: 0;
+    }
+}
+
+/* --- Card Glow Effect (mouse-following highlight) --- */
+.card-wrapper.product-card-wrapper,
+.category-card {
+    --glow-x: 50%;
+    --glow-y: 50%;
+}
+
+.card-wrapper.product-card-wrapper::after,
+.category-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(300px circle at var(--glow-x) var(--glow-y),
+            rgba(16, 185, 129, 0.08) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.card-wrapper.product-card-wrapper:hover::after,
+.category-card:hover::after {
+    opacity: 1;
+}
+
+/* --- Magnetic hover CTA smooth return --- */
+.quick-add__submit,
+.product-form__submit,
+.ta-cta-button,
+.slideshow__button {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.3s ease,
+        box-shadow 0.3s ease !important;
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+    .ta-ripple {
+        display: none;
+    }
+
+    .card-wrapper.product-card-wrapper::after,
+    .category-card::after {
+        display: none;
+    }
+}

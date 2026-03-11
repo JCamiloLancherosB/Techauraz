@@ -1,0 +1,92 @@
+{%- comment -%}
+  ENHANCED 404 PAGE — TechAura 2030
+  Converts lost visitors into shoppers with product recommendations,
+  search, and WhatsApp support CTA.
+{%- endcomment -%}
+
+{{ 'section-404-enhanced.css' | asset_url | stylesheet_tag }}
+
+<div class="ta-404">
+  <div class="ta-404__container page-width">
+    {%- comment -%} Hero area with animated glitch text {%- endcomment -%}
+    <div class="ta-404__hero">
+      <div class="ta-404__code" aria-hidden="true">404</div>
+      <h1 class="ta-404__heading">¡Ups! Página no encontrada</h1>
+      <p class="ta-404__message">
+        El producto o página que buscas no está disponible en este momento.
+        Pero tenemos muchas opciones increíbles para ti 👇
+      </p>
+    </div>
+
+    {%- comment -%} Search bar {%- endcomment -%}
+    <div class="ta-404__search">
+      <form action="{{ routes.search_url }}" method="GET" role="search" class="ta-404__search-form">
+        <input 
+          type="search" 
+          name="q" 
+          placeholder="Busca productos, categorías..." 
+          class="ta-404__search-input"
+          aria-label="Buscar productos"
+          autocomplete="off"
+        >
+        <button type="submit" class="ta-404__search-btn" aria-label="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+      <div class="ta-404__suggestions">
+        <span>Popular:</span>
+        <a href="/collections/all">Catálogo completo</a>
+        <a href="/">Página principal</a>
+      </div>
+    </div>
+
+    {%- comment -%} Featured products rescue {%- endcomment -%}
+    <div class="ta-404__products">
+      <h2 class="ta-404__products-heading">🔥 Productos que te encantarán</h2>
+      <div class="ta-404__products-grid">
+        {%- assign recommended = collections.all.products | slice: 0, 4 -%}
+        {%- for product in recommended -%}
+          <a href="{{ product.url }}" class="ta-404__product-card">
+            <div class="ta-404__product-image">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 280 | image_tag: loading: 'lazy', alt: product.title }}
+              {%- endif -%}
+            </div>
+            <div class="ta-404__product-info">
+              <h3 class="ta-404__product-title">{{ product.title | truncate: 40 }}</h3>
+              <p class="ta-404__product-price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Help CTA {%- endcomment -%}
+    <div class="ta-404__help">
+      <p>¿Necesitas ayuda encontrando algo?</p>
+      <div class="ta-404__help-actions">
+        <a href="/" class="ta-404__btn ta-404__btn--primary">
+          🏠 Ir al inicio
+        </a>
+        <a href="https://wa.me/573008602789?text=Hola!%20Necesito%20ayuda%20encontrando%20un%20producto" 
+           class="ta-404__btn ta-404__btn--whatsapp"
+           target="_blank"
+           rel="noopener noreferrer">
+          💬 WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404 Mejorado",
+  "tag": "section",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}
