@@ -59,11 +59,16 @@ button[data-autoplay-button] {
     box-sizing: border-box;
     background: #ffffff !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    position: relative !important;
+    z-index: 1000 !important;
+    min-height: 70px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .header {
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 68px;
 }
 
 /* Force dark text on all header elements regardless of color scheme */
@@ -74,11 +79,20 @@ button[data-autoplay-button] {
     color: #1e293b !important;
 }
 
-/* Ensure header section is also full-width */
+/* Ensure header section sits above everything */
 .shopify-section-header {
     width: 100% !important;
     max-width: 100% !important;
     overflow: visible;
+    position: relative !important;
+    z-index: 999 !important;
+    background: #ffffff !important;
+}
+
+/* Ensure header group is also full-width and above sidebar */
+.shopify-section-group-header-group {
+    position: relative;
+    z-index: 998;
 }
 
 /* =============================================================================
