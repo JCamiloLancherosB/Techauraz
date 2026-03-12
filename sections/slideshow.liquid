@@ -242,6 +242,23 @@
   <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{%- comment -%} HD Image Override — replace low-res Shopify uploads with hi-res theme assets {%- endcomment -%}
+<style>
+  {%- for block in section.blocks -%}
+    {%- assign slide_index = forloop.index -%}
+    {%- assign asset_name = 'hero-slide-' | append: slide_index | append: '.png' -%}
+    #Slide-{{ section.id }}-{{ slide_index }} .slideshow__media {
+      background-image: url({{ asset_name | asset_url }});
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    #Slide-{{ section.id }}-{{ slide_index }} .slideshow__media img {
+      opacity: 0;
+    }
+  {%- endfor -%}
+</style>
+
 {% schema %}
 {
   "name": "t:sections.slideshow.name",
