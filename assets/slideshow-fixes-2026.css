@@ -1,8 +1,8 @@
 /**
  * TECHAURAZ SLIDESHOW & HEADER FIXES — March 2026
  * =================================================
- * Safe overrides for: pause button, header colors, CTA buttons,
- * announcement bar full-width, header positioning
+ * Fixes: pause button, header white bg, announcement bar full-width,
+ * text overlay modern styling, CTA buttons, header alignment
  */
 
 /* =============================================================================
@@ -14,7 +14,7 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   2. HEADER — Solid white background, dark text, proper stacking
+   2. HEADER — Solid white, dark text, proper stacking & alignment
    ============================================================================= */
 .shopify-section-header {
     position: relative;
@@ -27,23 +27,21 @@ button[data-autoplay-button] {
     background-color: #ffffff !important;
     border-bottom: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    padding: 0 !important;
 }
 
-/* Override Shopify .gradient class */
 .header-wrapper.gradient {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
 }
 
-/* Override color-scheme variables on header */
 .header-wrapper[class*="color-"] {
     --color-foreground: 30, 41, 59;
     --color-background: 255, 255, 255;
     --gradient-background: #ffffff;
 }
 
-/* Force dark text on all header elements */
 .header-wrapper,
 .header-wrapper .header__heading-link .h2,
 .header-wrapper .header__menu-link,
@@ -53,15 +51,41 @@ button[data-autoplay-button] {
     color: #1e293b !important;
 }
 
-/* Sticky state — fully opaque white */
+/* Sticky state — fully opaque */
 .shopify-section-header-sticky .header-wrapper {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
 }
 
+/* Header alignment — full width, compact, well-spaced */
+.header.page-width {
+    max-width: 100% !important;
+    padding: 10px 24px !important;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+}
+
+/* Logo sizing */
+.header__heading-logo-wrapper {
+    max-width: 50px;
+}
+
+.header__heading-logo {
+    max-height: 45px !important;
+    width: auto !important;
+}
+
+/* Nav links — properly sized and spaced */
+.header__menu-link {
+    font-size: 14px !important;
+    padding: 8px 14px !important;
+    white-space: nowrap;
+}
+
 /* =============================================================================
-   3. ANNOUNCEMENT BAR — Full width content (remove page-width constraint)
+   3. ANNOUNCEMENT BAR — Full-width, no white gaps
    ============================================================================= */
 .announcement-bar-section .utility-bar .page-width {
     max-width: 100% !important;
@@ -80,27 +104,58 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   4. SLIDESHOW CTA BUTTONS — Premium Design
+   4. SLIDESHOW TEXT OVERLAY — Modern glassmorphism design
+   ============================================================================= */
+.slideshow__text.banner__box {
+    background: rgba(15, 23, 42, 0.75) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 40px 48px !important;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.slideshow__text .banner__heading {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+    line-height: 1.15 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.slideshow__text .banner__text,
+.slideshow__text .banner__text p {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-top: 8px;
+}
+
+/* =============================================================================
+   5. CTA BUTTONS — Premium Design
    ============================================================================= */
 .slideshow-ctas {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .slideshow-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 36px;
-    font-size: 15px;
+    padding: 14px 32px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 50px;
-    min-width: 180px;
+    min-width: 160px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
@@ -133,7 +188,7 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   5. SLIDER ARROWS — Glassmorphism
+   6. SLIDER ARROWS — Glassmorphism circles
    ============================================================================= */
 .slideshow__controls .slider-button {
     width: 48px;
@@ -152,17 +207,50 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   6. RESPONSIVE
+   7. SLIDESHOW IMAGES — Crisp, high quality
+   ============================================================================= */
+.slideshow__media img {
+    object-fit: cover !important;
+    image-rendering: auto;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Remove any ambient animation blur */
+.slideshow__media.animate--ambient img {
+    animation: none !important;
+}
+
+/* =============================================================================
+   8. RESPONSIVE
    ============================================================================= */
 @media screen and (max-width: 749px) {
+    .header.page-width {
+        padding: 8px 16px !important;
+        min-height: 56px;
+    }
+
     .slideshow-cta {
-        padding: 14px 28px;
+        padding: 12px 24px;
         font-size: 13px;
-        min-width: 140px;
+        min-width: 130px;
+    }
+
+    .slideshow__text.banner__box {
+        padding: 24px 20px !important;
+        border-radius: 16px !important;
+        max-width: 90%;
     }
 
     .slideshow__controls .slider-button {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+    .slideshow__text.banner__box {
+        padding: 32px 36px !important;
+        max-width: 500px;
     }
 }
