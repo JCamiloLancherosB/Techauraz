@@ -1,7 +1,8 @@
 /**
  * TECHAURAZ SLIDESHOW & HEADER FIXES — March 2026
  * =================================================
- * Safe overrides only — no viewport tricks that break Shopify's DOM
+ * Safe overrides for: pause button, header colors, CTA buttons,
+ * announcement bar full-width, header positioning
  */
 
 /* =============================================================================
@@ -13,7 +14,7 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   2. HEADER — Solid white, always visible above content
+   2. HEADER — Solid white background, dark text, proper stacking
    ============================================================================= */
 .shopify-section-header {
     position: relative;
@@ -28,20 +29,21 @@ button[data-autoplay-button] {
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Override Shopify .gradient class that applies --gradient-background via base.css */
+/* Override Shopify .gradient class */
 .header-wrapper.gradient {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
 }
 
-/* Override any color-scheme that makes header foreground white */
-.header-wrapper[class*="color-scheme-"] {
+/* Override color-scheme variables on header */
+.header-wrapper[class*="color-"] {
     --color-foreground: 30, 41, 59;
     --color-background: 255, 255, 255;
     --gradient-background: #ffffff;
 }
 
+/* Force dark text on all header elements */
 .header-wrapper,
 .header-wrapper .header__heading-link .h2,
 .header-wrapper .header__menu-link,
@@ -51,14 +53,34 @@ button[data-autoplay-button] {
     color: #1e293b !important;
 }
 
-/* Sticky state also fully opaque */
+/* Sticky state — fully opaque white */
 .shopify-section-header-sticky .header-wrapper {
     background: #ffffff !important;
     background-color: #ffffff !important;
+    background-image: none !important;
 }
 
 /* =============================================================================
-   3. SLIDESHOW CTA BUTTONS — Premium Design
+   3. ANNOUNCEMENT BAR — Full width content (remove page-width constraint)
+   ============================================================================= */
+.announcement-bar-section .utility-bar .page-width {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.utility-bar {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.announcement-ticker__viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* =============================================================================
+   4. SLIDESHOW CTA BUTTONS — Premium Design
    ============================================================================= */
 .slideshow-ctas {
     display: flex;
@@ -83,7 +105,6 @@ button[data-autoplay-button] {
     cursor: pointer;
 }
 
-/* Primary CTA — Green gradient */
 .slideshow-cta.button--primary {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     color: #ffffff !important;
@@ -97,7 +118,6 @@ button[data-autoplay-button] {
     transform: translateY(-2px);
 }
 
-/* Secondary CTA — Glass outline */
 .slideshow-cta.button--secondary {
     background: rgba(255, 255, 255, 0.08) !important;
     color: #ffffff !important;
@@ -113,7 +133,7 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   4. SLIDER ARROWS — Glassmorphism style
+   5. SLIDER ARROWS — Glassmorphism
    ============================================================================= */
 .slideshow__controls .slider-button {
     width: 48px;
@@ -132,7 +152,7 @@ button[data-autoplay-button] {
 }
 
 /* =============================================================================
-   5. RESPONSIVE
+   6. RESPONSIVE
    ============================================================================= */
 @media screen and (max-width: 749px) {
     .slideshow-cta {
