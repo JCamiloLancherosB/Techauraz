@@ -54,18 +54,15 @@
   border-bottom: 1px solid var(--tech-color-gray-200, #e2e8f0);
 }
 
-/* Sticky States */
+/* Sticky States — keep relative to prevent slideshow overlap */
 .shopify-section-header-sticky .header-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   background: #ffffff !important;
   background-color: #ffffff !important;
   border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
   z-index: 500;
-  transition: transform 250ms ease;
 }
 
 .shopify-section-header-hidden .header-wrapper {
