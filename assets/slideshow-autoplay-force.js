@@ -1,36 +1,21 @@
 /**
- * TECHAURAZ SLIDESHOW AUTOPLAY + HEADER FIX — March 2026
- * Forces autoplay on slideshow, forces white header background,
- * and slows down slideshow speed to 9 seconds.
+ * TECHAURAZ SLIDESHOW AUTOPLAY — March 2026 (v3)
+ * Forces 6-second autoplay interval.
+ * Pauses on hover (desktop), visibility change, and IntersectionObserver.
+ * Uses MutationObserver to detect slideshow-component.
  */
 (function () {
     'use strict';
 
-    function forceHeaderWhite() {
-        var hw = document.querySelector('.header-wrapper');
-        if (hw) {
-            hw.style.setProperty('background', '#ffffff', 'important');
-            hw.style.setProperty('background-color', '#ffffff', 'important');
-            hw.style.setProperty('background-image', 'none', 'important');
-        }
-        var headerElements = document.querySelectorAll(
-            '.header__menu-link, .header__icon, .header__heading-link, .header a, .header summary'
-        );
-        headerElements.forEach(function (el) {
-            el.style.setProperty('color', '#1e293b', 'important');
-        });
-        var headerSVGs = document.querySelectorAll('.header__icon svg');
-        headerSVGs.forEach(function (svg) {
-            svg.style.setProperty('color', '#1e293b', 'important');
-        });
-    }
+    var SLIDE_INTERVAL = 6;
+    var isPaused = false;
+    var comp = null;
 
     function forceAutoplay() {
         var sliders = document.querySelectorAll('[data-autoplay]');
         sliders.forEach(function (slider) {
             slider.setAttribute('data-autoplay', 'true');
-            // Force slower speed — 9 seconds between slides
-            slider.setAttribute('data-speed', '9');
+            slider.setAttribute('data-speed', String(SLIDE_INTERVAL));
         });
 
         var pauseButtons = document.querySelectorAll('.slideshow__autoplay, [data-autoplay-button]');
@@ -39,41 +24,116 @@
         });
 
         var components = document.querySelectorAll('slideshow-component');
-        components.forEach(function (comp) {
-            if (comp.autoplayButtonIsSetToPlay === false || !comp.autoplayButtonIsSetToPlay) {
-                if (typeof comp.play === 'function') {
-                    comp.play();
-                } else if (comp.sliderAutoplayButton) {
-                    comp.autoplayButtonIsSetToPlay = true;
-                    comp.setAutoPlay();
+        if (components.length > 0) {
+            comp = components[0];
+        }
+        components.forEach(function (c) {
+            if (c.autoplayButtonIsSetToPlay === false || !c.autoplayButtonIsSetToPlay) {
+                if (typeof c.play === 'function') {
+                    c.play();
+                } else if (c.sliderAutoplayButton) {
+                    c.autoplayButtonIsSetToPlay = true;
+                    c.setAutoPlay();
                 }
+            }
+        });
+
+        return components.length > 0;
+    }
+
+    function pauseSlideshow() {
+        if (isPaused || !comp) return;
+        isPaused = true;
+        if (typeof comp.pause === 'function') {
+            comp.pause();
+        }
+    }
+
+    function resumeSlideshow() {
+        if (!isPaused || !comp) return;
+        isPaused = false;
+        if (typeof comp.play === 'function') {
+            comp.play();
+        }
+    }
+
+    function setupHoverPause() {
+        if (!comp) return;
+        comp.addEventListener('mouseenter', pauseSlideshow);
+        comp.addEventListener('mouseleave', resumeSlideshow);
+    }
+
+    function setupIntersectionObserver() {
+        if (!comp || !('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    resumeSlideshow();
+                } else {
+                    pauseSlideshow();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(comp);
+    }
+
+    function setupVisibilityPause() {
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                pauseSlideshow();
+            } else {
+                resumeSlideshow();
             }
         });
     }
 
-    function applyFixes() {
-        forceHeaderWhite();
-        forceAutoplay();
+    function init() {
+        if (forceAutoplay()) {
+            setupHoverPause();
+            setupIntersectionObserver();
+            setupVisibilityPause();
+            return;
+        }
+
+        // Watch for slideshow-component to appear
+        var observer = new MutationObserver(function (mutations) {
+            for (var i = 0; i < mutations.length; i++) {
+                var added = mutations[i].addedNodes;
+                for (var j = 0; j < added.length; j++) {
+                    var node = added[j];
+                    if (node.nodeType === 1 && (node.tagName === 'SLIDESHOW-COMPONENT' || node.querySelector('slideshow-component'))) {
+                        setTimeout(function () {
+                            forceAutoplay();
+                            setupHoverPause();
+                            setupIntersectionObserver();
+                            setupVisibilityPause();
+                        }, 200);
+                        observer.disconnect();
+                        return;
+                    }
+                }
+            }
+        });
+
+        observer.observe(document.body || document.documentElement, {
+            childList: true,
+            subtree: true
+        });
+
+        setTimeout(function () {
+            observer.disconnect();
+            forceAutoplay();
+            setupHoverPause();
+            setupIntersectionObserver();
+            setupVisibilityPause();
+        }, 4000);
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-            applyFixes();
-            setTimeout(applyFixes, 300);
-            setTimeout(applyFixes, 1000);
-        });
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        applyFixes();
-        setTimeout(applyFixes, 300);
-        setTimeout(applyFixes, 1000);
+        init();
     }
-
-    var lastScrollHandled = 0;
-    window.addEventListener('scroll', function () {
-        var now = Date.now();
-        if (now - lastScrollHandled > 200) {
-            lastScrollHandled = now;
-            forceHeaderWhite();
-        }
-    }, { passive: true });
 })();

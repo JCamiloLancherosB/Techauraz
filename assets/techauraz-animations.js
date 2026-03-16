@@ -1,43 +1,16 @@
 /**
  * =============================================================================
- * TECHAURAZ ANIMATIONS & ENHANCEMENTS
- * Version: 2.0.0
+ * TECHAURAZ PDP ENHANCEMENTS
+ * Version: 3.0.0 — March 2026
  * =============================================================================
  *
- * Consolidated module for Techauraz-specific UI enhancements.
+ * Metafield theme style handler — applies PDP warm theme via metafield.
  *
- * Contents:
- * 1. Image lazy-loading handler — adds `.loaded` class to lazy images
- * 2. Metafield theme style handler — applies PDP warm theme via metafield
- *
- * Note: Scroll-trigger animations are handled by Dawn core (animations.js).
- *       Animated-benefits animations are handled by animated-benefits.js.
+ * Note: Image lazy-loading is handled by image-loading.js (global).
+ *       Scroll-trigger animations are handled by Dawn core (animations.js).
  *
  * =============================================================================
  */
-
-/**
- * Adds a `loaded` class to every lazy-loaded image once it finishes loading.
- * Images that are already complete when the script runs are handled
- * synchronously; others get a one-time `load` event listener.
- *
- * @returns {void}
- */
-(function initImageLazyLoadHandler() {
-  'use strict';
-
-  const images = document.querySelectorAll('img[loading="lazy"]');
-
-  images.forEach(function (img) {
-    if (img.complete) {
-      img.classList.add('loaded');
-    } else {
-      img.addEventListener('load', function () {
-        this.classList.add('loaded');
-      });
-    }
-  });
-})();
 
 /**
  * Applies a warm CRO theme class to the PDP container when the product

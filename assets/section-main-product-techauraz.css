@@ -12,16 +12,16 @@
    ============================================================================= */
 
 .text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+  font-size: var(--ta-text-3xl);
+  line-height: var(--ta-leading-tight, 1.1);
 }
 
 .font-extrabold {
-  font-weight: 800;
+  font-weight: var(--ta-font-extrabold, 800);
 }
 
 .text-slate-900 {
-  color: #0f172a;
+  color: var(--ta-neutral-900, #0f172a);
 }
 
 .mb-3 {
@@ -29,11 +29,11 @@
 }
 
 .leading-tight {
-  line-height: 1.25;
+  line-height: var(--ta-leading-tight, 1.1);
 }
 
 .tracking-tight {
-  letter-spacing: -0.025em;
+  letter-spacing: var(--ta-tracking-tight, -0.025em);
 }
 
 @media screen and (min-width: 750px) {
@@ -80,9 +80,9 @@
     gap: 2.5rem;
   }
 
-  /* Large media setting */
+  /* Gallery 55% : Buy box 45% */
   .product--large.grid.grid--2-col-tablet {
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 55% 45%;
   }
 
   /* Medium media setting */
@@ -142,26 +142,30 @@
   }
 }
 
-/* Price styling with improved contrast and readability */
+/* Price styling — mono font, 3xl size */
 .price--large .price-item--regular {
-  font-size: var(--ta-font-size-h2, 2.4rem);
+  font-size: var(--ta-text-3xl);
   font-weight: var(--ta-font-extrabold, 800);
-  color: var(--ta-success, #10b981);
-  line-height: var(--ta-leading-tight, 1.2);
+  font-family: var(--ta-font-mono);
+  color: var(--ta-neutral-900, #0f172a);
+  line-height: var(--ta-leading-tight, 1.1);
 }
 
 .price--large.price--on-sale .price-item--regular {
-  font-size: var(--ta-font-size-sm, 1.4rem);
-  color: var(--ta-text-muted, #64748b);
+  font-size: var(--ta-text-lg);
+  color: var(--ta-neutral-400, #94a3b8);
   text-decoration: line-through;
+  text-decoration-thickness: 2px;
   line-height: var(--ta-leading-normal, 1.5);
+  font-weight: 400;
 }
 
 .price--large .price-item--sale {
-  font-size: var(--ta-font-size-h1, 2.8rem);
+  font-size: var(--ta-text-3xl);
   font-weight: var(--ta-font-extrabold, 800);
+  font-family: var(--ta-font-mono);
   color: var(--ta-success, #10b981);
-  line-height: var(--ta-leading-tight, 1.2);
+  line-height: var(--ta-leading-tight, 1.1);
 }
 
 /* Installment/shipping highlights */
@@ -202,30 +206,31 @@
 .tech-cta-primary .shopify-payment-button__button,
 .product-form__cta-primary .shopify-payment-button__button {
   width: 100%;
-  min-height: var(--ta-touch-comfortable, 52px);
-  font-size: var(--ta-font-size-md, 1.6rem);
-  font-weight: var(--ta-font-bold, 700);
-  border-radius: var(--ta-radius-button, 8px);
+  min-height: 56px;
+  font-size: var(--ta-text-lg);
+  font-weight: 700;
+  border-radius: var(--ta-radius-xl, 12px);
   text-transform: uppercase;
-  letter-spacing: var(--ta-tracking-wide, 0.025em);
+  letter-spacing: 0.04em;
   line-height: var(--ta-leading-normal, 1.5);
-  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)) !important;
-  color: var(--ta-text-inverse, #ffffff) !important;
-  box-shadow: var(--ta-shadow-primary, 0 4px 14px rgba(37, 99, 235, 0.4));
-  transition: var(--ta-transition-normal, all 0.25s ease);
+  background: var(--ta-gradient-cta) !important;
+  color: var(--ta-cta-contrast, #ffffff) !important;
+  box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
 }
 
 .tech-cta-primary .shopify-payment-button__button:hover,
 .product-form__cta-primary .shopify-payment-button__button:hover {
   transform: translateY(-2px);
-  box-shadow: var(--ta-shadow-primary-lg, 0 6px 20px rgba(37, 99, 235, 0.5));
+  background: var(--ta-gradient-cta-hover) !important;
+  box-shadow: 0 8px 28px var(--ta-glow-cta, rgba(245, 158, 11, 0.5));
 }
 
 .tech-cta-primary .shopify-payment-button__button:active,
 .product-form__cta-primary .shopify-payment-button__button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 2px 8px var(--ta-glow-cta, rgba(245, 158, 11, 0.3));
 }
 
 /* Secondary CTA - Agregar al carrito */
@@ -617,8 +622,8 @@
   font-size: var(--ta-font-size-sm, 1.4rem);
   font-weight: var(--ta-font-semibold, 600);
   border-radius: var(--ta-radius-button, 8px);
-  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
-  color: var(--ta-text-inverse, #ffffff);
+  background: var(--ta-gradient-cta);
+  color: var(--ta-cta-contrast, #ffffff);
   border: none;
   cursor: pointer;
   transition: var(--ta-transition-fast, all 0.15s ease);

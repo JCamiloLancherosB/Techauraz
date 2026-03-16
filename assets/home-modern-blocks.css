@@ -50,7 +50,7 @@
   border-radius: var(--ta-radius-xl);
   padding: var(--ta-space-2xl) var(--ta-space-xl) !important;
   /* Competes with !important in ui-ux-responsive-fixes.css */
-  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  background: var(--ta-gradient-primary, linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%));
   box-shadow: 0 20px 60px rgba(30, 58, 95, 0.4);
   text-align: center;
 }
@@ -100,7 +100,7 @@
 .newsletter-form .field {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: var(--ta-radius-xl, 16px);
   overflow: hidden;
   box-shadow: var(--ta-shadow-lg);
   display: flex;
@@ -111,9 +111,10 @@
 .newsletter .newsletter-form .field__input {
   background: transparent;
   border: none;
-  border-radius: 8px 0 0 8px;
+  border-radius: var(--ta-radius-xl, 16px) 0 0 var(--ta-radius-xl, 16px);
   padding: var(--ta-space-lg) var(--ta-space-xl);
   font-size: var(--ta-font-size-md);
+  min-height: 48px;
   flex: 1;
   color: #ffffff;
 }
@@ -128,38 +129,49 @@
   box-shadow: none;
 }
 
+/* CRO: Amber CTA button — high contrast against dark newsletter bg */
 .newsletter .newsletter-form__button {
   border: none;
-  border-radius: 0 8px 8px 0;
-  min-height: var(--ta-touch-comfortable);
+  border-radius: 0 var(--ta-radius-xl, 16px) var(--ta-radius-xl, 16px) 0;
+  min-height: 48px;
   margin-right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--ta-transition-normal);
   flex-shrink: 0;
-  color: white;
+  color: var(--ta-cta-contrast, #ffffff);
+  background: var(--ta-gradient-cta) !important;
 }
 
-/* When button has .ta-cta-button class (text CTA), allow natural sizing */
+/* Named CTA button "Suscribirme" */
 .newsletter .newsletter-form__button.ta-cta-button {
   width: auto;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0 8px 8px 0;
-  font-size: 0.85rem;
+  padding: 0 1.5rem;
+  border-radius: 0 var(--ta-radius-xl, 16px) var(--ta-radius-xl, 16px) 0;
+  font-size: var(--ta-text-sm);
+  font-weight: 600;
 }
 
-/* Fallback: icon-only button (no .ta-cta-button class) */
+/* Fallback: icon-only button */
 .newsletter .newsletter-form__button:not(.ta-cta-button) {
-  background: var(--ta-primary, #3b82f6);
-  width: var(--ta-touch-comfortable);
-  height: var(--ta-touch-comfortable);
+  background: var(--ta-gradient-cta) !important;
+  width: 56px;
+  height: 48px;
 }
 
 .newsletter .newsletter-form__button:not(.ta-cta-button):hover {
-  background: var(--ta-primary-hover, #2563eb);
+  background: var(--ta-gradient-cta-hover) !important;
   transform: translateY(-2px);
-  box-shadow: var(--ta-shadow-md);
+  box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
+}
+
+/* CRO: Privacy reassurance note below form */
+.newsletter__privacy-note {
+  font-size: var(--ta-text-xs);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.75rem;
+  text-align: center;
 }
 
 .newsletter-form__button svg {
@@ -322,7 +334,7 @@
    ============================================== */
 
 .footer {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  background: var(--ta-gradient-primary-dark, linear-gradient(180deg, #1e293b 0%, #0f172a 100%));
   color: rgba(255, 255, 255, 0.9);
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
@@ -360,7 +372,7 @@
   padding-bottom: 0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-left: 3px solid var(--color-primary, #2563eb);
+  border-left: 3px solid var(--ta-accent, #3b82f6);
   border-top: none;
   border-bottom: none;
 }
@@ -404,7 +416,7 @@
 
 .footer-enhanced .footer-block__details-content a:hover,
 .footer-enhanced .footer-block .list-menu__item:hover {
-  color: #3b82f6;
+  color: var(--ta-accent, #3b82f6);
   transform: translateX(4px);
 }
 
@@ -513,7 +525,7 @@
 
 .footer-enhanced .footer__content-bottom a {
   font-size: 0.8125rem;
-  color: #94a3b8;
+  color: var(--ta-neutral-400, #94a3b8);
 }
 
 .footer__content-bottom-wrapper {
@@ -579,7 +591,7 @@
 /* Copyright section - refined typography */
 .footer-enhanced .footer__copyright {
   font-size: 0.8125rem;
-  color: #94a3b8;
+  color: var(--ta-neutral-400, #94a3b8);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -587,19 +599,19 @@
 }
 
 .footer-enhanced .copyright__content {
-  color: #94a3b8;
+  color: var(--ta-neutral-400, #94a3b8);
   font-size: 0.8125rem;
 }
 
 .footer-enhanced .copyright__content a {
-  color: #94a3b8;
+  color: var(--ta-neutral-400, #94a3b8);
   font-size: 0.8125rem;
   transition: color 0.2s ease;
   text-decoration: none;
 }
 
 .footer-enhanced .copyright__content a:hover {
-  color: #3b82f6;
+  color: var(--ta-accent, #3b82f6);
 }
 
 /* Policies list */
@@ -681,8 +693,8 @@
   }
 
   .footer__blocks-wrapper {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem 4rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem 3rem;
   }
 
   .footer__content-bottom-wrapper {
@@ -743,7 +755,7 @@
     margin-bottom: 1rem;
     padding-bottom: 0;
     padding-left: 12px;
-    border-left: 3px solid var(--color-primary, #2563eb);
+    border-left: 3px solid var(--ta-accent, #3b82f6);
   }
 
   .footer-block__details-content {

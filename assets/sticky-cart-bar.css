@@ -236,15 +236,16 @@
   letter-spacing: 0.025em;
   border: none;
   border-radius: var(--ta-radius-button, 8px);
-  background: var(--ta-gradient-primary, linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%));
-  color: var(--ta-text-inverse, #ffffff);
+  /* CRO: Amber gradient — consistent with site-wide conversion color */
+  background: var(--ta-gradient-cta);
+  color: var(--ta-cta-contrast, #ffffff);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sticky-add-to-cart__button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 12px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 .sticky-add-to-cart__button:active:not(:disabled) {

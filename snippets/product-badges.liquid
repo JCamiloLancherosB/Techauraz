@@ -1,8 +1,8 @@
 {% comment %}
-  Product Badges Snippet
-  Muestra badges dinámicos en productos (Nuevo, Descuento, Bestseller, Bajo Stock)
+  Product Badges Snippet — v2 (Prompt 5 redesign)
+  Shows dynamic badges on products (Sale, New, HOT, Bestseller, Low Stock)
   
-  Uso:
+  Usage:
   {% render 'product-badges', product: product, show_discount: true, show_new: true %}
 {% endcomment %}
 
@@ -11,38 +11,46 @@
   assign show_new = show_new | default: true
   assign show_bestseller = show_bestseller | default: false
   assign show_low_stock = show_low_stock | default: false
+  assign show_hot = show_hot | default: true
   assign position = position | default: 'top-left'
 %}
 
 <div class="product-badges product-badges--{{ position }}">
-  {% comment %} Badge de Descuento {% endcomment %}
+  {% comment %} Sale badge — red, rounded-full {% endcomment %}
   {% if show_discount and product.compare_at_price > product.price %}
     {% assign discount_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-    <span class="product-badge product-badge--discount">
-      -{{ discount_percent }}%
+    <span class="product-badge product-badge--discount card__badge card__badge--sale card__badge--pill" aria-label="{{ 'products.product.on_sale' | t }}, {{ discount_percent }}% {{ 'products.product.price.sale' | t | default: 'de descuento' }}">
+      SALE -{{ discount_percent }}%
     </span>
   {% endif %}
 
-  {% comment %} Badge de Nuevo {% endcomment %}
+  {% comment %} New badge — primary blue {% endcomment %}
   {% if show_new %}
     {% assign current_timestamp = 'now' | date: '%s' | plus: 0 %}
     {% assign publish_timestamp = product.published_at | date: '%s' | plus: 0 %}
     {% assign days_since_publish = current_timestamp | minus: publish_timestamp | divided_by: 86400 %}
     {% if days_since_publish <= 30 %}
-      <span class="product-badge product-badge--new">
-        Nuevo
+      <span class="product-badge product-badge--new card__badge card__badge--new card__badge--pill" aria-label="Producto nuevo">
+        NUEVO
       </span>
     {% endif %}
   {% endif %}
 
-  {% comment %} Badge de Bestseller {% endcomment %}
+  {% comment %} HOT badge — amber gradient {% endcomment %}
+  {% if show_hot and product.tags contains 'hot' %}
+    <span class="product-badge product-badge--hot card__badge card__badge--hot card__badge--pill" aria-label="Producto popular">
+      HOT 🔥
+    </span>
+  {% endif %}
+
+  {% comment %} Bestseller badge {% endcomment %}
   {% if show_bestseller and product.tags contains 'bestseller' %}
-    <span class="product-badge product-badge--bestseller">
+    <span class="product-badge product-badge--bestseller card__badge card__badge--pill" aria-label="Producto más vendido">
       Bestseller
     </span>
   {% endif %}
 
-  {% comment %} Badge de Bajo Stock {% endcomment %}
+  {% comment %} Low Stock badge {% endcomment %}
   {% if show_low_stock %}
     {% assign total_inventory = 0 %}
     {% for variant in product.variants %}
@@ -53,15 +61,15 @@
       {% endif %}
     {% endfor %}
     {% if total_inventory > 0 and total_inventory <= 10 %}
-      <span class="product-badge product-badge--low-stock">
+      <span class="product-badge product-badge--low-stock card__badge card__badge--pill" aria-label="Quedan pocas unidades, solo {{ total_inventory }}">
         ¡Solo quedan {{ total_inventory }}!
       </span>
     {% endif %}
   {% endif %}
 
-  {% comment %} Badge de Envío Gratis {% endcomment %}
+  {% comment %} Free shipping badge {% endcomment %}
   {% if product.tags contains 'free-shipping' %}
-    <span class="product-badge product-badge--free-shipping">
+    <span class="product-badge product-badge--free-shipping card__badge card__badge--pill" aria-label="Envío gratis">
       Envío Gratis
     </span>
   {% endif %}

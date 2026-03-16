@@ -1,151 +1,161 @@
 /**
  * =============================================================================
  * TECHAURAZ DESIGN TOKENS
- * Version: 2.0.0
- * Updated: 2026-02-28
+ * Version: 3.0.0
+ * Updated: 2026-03-16
  * =============================================================================
- * 
+ *
  * Single source of truth for all design tokens.
  * Load this file BEFORE other custom CSS to establish the design foundation.
- * 
+ *
  * Naming convention: --ta-* (TechAura prefix)
- * 
+ *
  * CONTENTS:
- * 0. CSS Isolation Layer (prevents external style interference)
- * 1. Brand Colors
+ * 0. CSS Isolation Layer
+ * 1. Brand Colors (with neutral scale 50-950)
  * 2. Gradient Tokens
  * 3. Typography Scale
  * 4. Spacing Scale
  * 5. Border Radii
  * 6. Shadows
- * 7. Layout Heights
- * 8. Transitions + Z-Index Hierarchy
- * 9. Legacy Compatibility Mapping
- * 10. Global Button Styles
- * 
+ * 7. Layout Heights & Widths
+ * 8. Transitions
+ * 9. Z-Index Hierarchy
+ * 10. Legacy Compatibility Mapping
+ * 11. Global Button Styles
+ * 12. Headings
+ * 13. Section Backgrounds
+ * 14. Unified Focus-Visible Styles
+ * 15. CLS Prevention
+ * 16. Dark Section Contrast
+ * 17. Chip / Badge Styles
+ * 18. Section Heading Styles
+ * 19. Card Base Styles
+ * 20. Mobile Responsive Typography
+ * 21. Accessibility (Reduced Motion, High Contrast)
+ *
  * NOTE: Shopify's adopted-style-sheet (injected via content_for_header)
  * uses browser's Constructable Stylesheets API. Our styles load after
  * content_for_header, so they take precedence in the CSS cascade.
- * The CSS isolation layer below provides additional protection.
  * =============================================================================
  */
 
 /* =============================================================================
    0. CSS ISOLATION LAYER
-   =============================================================================
-   Ensures TechAura styles take precedence over any externally injected styles.
-   Uses :where() for zero specificity where appropriate, and higher specificity
-   selectors for critical overrides.
    ============================================================================= */
 
-/* Reset any potential interference on core layout elements */
 html.shopify-design-mode,
 html:not(.shopify-design-mode) {
-  /* Ensure our font-size base is applied */
   font-size: 62.5%;
 }
 
-/* Protect our main content area from external style interference */
 #MainContent,
 .content-for-layout,
 main[role="main"] {
-  /* Establish our own stacking context */
   isolation: isolate;
 }
 
-/*
- * CSS custom properties are defined at :root level below.
- * This ensures our tokens take precedence over any injected styles
- * because :root has equal specificity and our styles load later in cascade.
- */
-
 /* =============================================================================
-   1. BRAND COLORS - Premium Tech Palette
+   1. BRAND COLORS — Premium Tech Palette
    ============================================================================= */
 :root {
-  /* ----------------------------------------
-     Primary Brand Colors - Deep Blue System
-     ---------------------------------------- */
-  --ta-primary: #1E3A5F;
-  --ta-primary-hover: #162D4A;
-  --ta-primary-active: #0F2035;
+  /* ---- Primary Brand Scale (navy-to-deep-blue) ---- */
+  --ta-primary-100: #DBEAFE;
+  --ta-primary-300: #93C5FD;
+  --ta-primary-500: #1E3A5F;
+  --ta-primary-700: #162D4A;
+  --ta-primary-900: #0F2035;
+
+  --ta-primary: var(--ta-primary-500);
+  --ta-primary-hover: var(--ta-primary-700);
+  --ta-primary-active: var(--ta-primary-900);
   --ta-primary-light: #2563EB;
   --ta-primary-lighter: #3B82F6;
   --ta-primary-contrast: #ffffff;
 
-  /* ----------------------------------------
-     Secondary Colors - Blue Accents
-     ---------------------------------------- */
+  /* ---- Secondary Colors ---- */
   --ta-secondary: #2563EB;
   --ta-secondary-hover: #1D4ED8;
   --ta-secondary-light: #3B82F6;
 
-  /* ----------------------------------------
-     Accent Colors - Teal-Green CTA  
-     (High-contrast persuasion color for buy buttons)
-     ---------------------------------------- */
-  --ta-accent: #00D4AA;
-  --ta-accent-hover: #00B894;
-  --ta-accent-light: #34EDCA;
-  --ta-accent-dark: #009B7D;
+  /* ---- Accent — Electric Blue (hover/highlight) ---- */
+  --ta-accent-100: #DBEAFE;
+  --ta-accent-300: #93C5FD;
+  --ta-accent-500: #3B82F6;
+  --ta-accent: var(--ta-accent-500);
+  --ta-accent-hover: #2563EB;
+  --ta-accent-light: #60A5FA;
+  --ta-accent-dark: #1D4ED8;
 
-  /* ----------------------------------------
-     CTA Color (dedicated conversion color)
-     ---------------------------------------- */
-  --ta-cta: #00D4AA;
-  --ta-cta-hover: #00B894;
-  --ta-cta-active: #009B7D;
-  --ta-cta-contrast: #0F172A;
-  --ta-cta-gradient: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
+  /* ---- CTA — Warm Amber/Orange (conversion-optimized) ----
+     WCAG AA: #D97706 on white = 4.79:1 ✓
+     WCAG AA: #ffffff on #D97706 = 4.79:1 ✓
+     WCAG AA: #ffffff on #B45309 = 6.41:1 ✓ */
+  --ta-cta: #F59E0B;
+  --ta-cta-hover: #D97706;
+  --ta-cta-active: #B45309;
+  --ta-cta-contrast: #ffffff;
+  --ta-cta-light: #FCD34D;
+  --ta-cta-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
 
-  /* ----------------------------------------
-     Background Colors
-     ---------------------------------------- */
+  /* ---- Neutral Scale (blue-tinted grays) ---- */
+  --ta-neutral-50: #f8fafc;
+  --ta-neutral-100: #f1f5f9;
+  --ta-neutral-200: #e2e8f0;
+  --ta-neutral-300: #cbd5e1;
+  --ta-neutral-400: #94a3b8;
+  --ta-neutral-500: #64748b;
+  --ta-neutral-600: #475569;
+  --ta-neutral-700: #334155;
+  --ta-neutral-800: #1e293b;
+  --ta-neutral-900: #0f172a;
+  --ta-neutral-950: #020617;
+
+  /* ---- Background / Surface Colors ---- */
   --ta-bg: #ffffff;
-  --ta-bg-secondary: #f8fafc;
-  --ta-bg-tertiary: #f1f5f9;
+  --ta-bg-secondary: var(--ta-neutral-50);
+  --ta-bg-tertiary: var(--ta-neutral-100);
   --ta-surface: #ffffff;
   --ta-surface-elevated: #ffffff;
+  --ta-surface-modal: #ffffff;
   --ta-bg-overlay: rgba(15, 23, 42, 0.75);
 
-  /* ----------------------------------------
-     Text Colors
-     ---------------------------------------- */
-  --ta-text: #0f172a;
-  --ta-text-secondary: #1e293b;
-  --ta-text-muted: #64748b;
+  /* ---- Text Colors ---- */
+  --ta-text: var(--ta-neutral-900);
+  --ta-text-secondary: var(--ta-neutral-800);
+  --ta-text-muted: var(--ta-neutral-500);
   --ta-text-inverse: #ffffff;
-  --ta-text-link: #2563EB;
+  --ta-text-link: var(--ta-secondary);
+  --ta-text-on-primary: #ffffff;
+  --ta-text-on-cta: var(--ta-cta-contrast);
 
-  /* ----------------------------------------
-     Border Colors
-     ---------------------------------------- */
-  --ta-border: #e2e8f0;
-  --ta-border-light: #f1f5f9;
-  --ta-border-hover: #2563EB;
-  --ta-border-focus: #2563EB;
+  /* ---- Border Colors ---- */
+  --ta-border: var(--ta-neutral-200);
+  --ta-border-light: var(--ta-neutral-100);
+  --ta-border-hover: var(--ta-secondary);
+  --ta-border-focus: var(--ta-secondary);
 
-  /* ----------------------------------------
-     State Colors
-     ---------------------------------------- */
+  /* ---- Semantic State Colors ---- */
   --ta-success: #10b981;
   --ta-success-light: #34d399;
+  --ta-success-dark: #059669;
+  --ta-success-bg: #ECFDF5;
   --ta-warning: #f59e0b;
   --ta-warning-light: #fbbf24;
+  --ta-warning-dark: #d97706;
   --ta-error: #ef4444;
   --ta-error-light: #f87171;
+  --ta-error-dark: #dc2626;
   --ta-info: #3b82f6;
 
-  /* ----------------------------------------
-     Sale/Offer Colors
-     ---------------------------------------- */
+  /* ---- Sale / Urgency Colors ---- */
   --ta-sale: #EF4444;
   --ta-sale-bg: #FEF2F2;
   --ta-sale-gradient: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
 }
 
 /* =============================================================================
-   2. GRADIENT TOKENS - Subtle Premium Effects
+   2. GRADIENT TOKENS
    ============================================================================= */
 :root {
   /* Primary gradients */
@@ -153,111 +163,115 @@ main[role="main"] {
   --ta-gradient-primary-hover: linear-gradient(135deg, #2563EB 0%, #1E3A5F 100%);
   --ta-gradient-primary-dark: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%);
 
-  /* Button-specific gradients (bright blue — high contrast on any background) */
+  /* Button-specific gradients (blue) */
   --ta-gradient-button: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   --ta-gradient-button-hover: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
 
-  /* Secondary gradients */
+  /* CTA button gradients (warm amber/orange — conversion-optimized) */
+  --ta-gradient-cta: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  --ta-gradient-cta-hover: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+  --ta-gradient-cta-active: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+
+  /* Secondary / Accent gradients */
   --ta-gradient-secondary: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  --ta-gradient-accent: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
+  --ta-gradient-accent: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
 
   /* Premium background gradients */
   --ta-gradient-bg-subtle: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f1f5f9 100%);
   --ta-gradient-bg-section: linear-gradient(135deg, rgba(30, 58, 95, 0.05) 0%, rgba(0, 212, 170, 0.05) 100%);
   --ta-gradient-bg-hero: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.7) 100%);
+  --ta-gradient-hero-overlay: linear-gradient(to right, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.4) 50%, transparent 100%);
 
-  /* Action gradients */
+  /* State gradients */
   --ta-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
   --ta-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  --ta-gradient-cta: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
 
-  /* Tech glow effect */
+  /* Card hover glow (primary-300 at 20%) */
+  --ta-glow-card-hover: 0 8px 30px rgba(147, 197, 253, 0.2);
+
+  /* Section divider gradient line */
+  --ta-gradient-divider: linear-gradient(90deg, transparent 0%, var(--ta-neutral-200) 20%, var(--ta-neutral-200) 80%, transparent 100%);
+
+  /* Glow effects */
   --ta-glow-primary: rgba(30, 58, 95, 0.3);
-  --ta-glow-secondary: rgba(0, 212, 170, 0.3);
-  --ta-glow-cta: rgba(0, 212, 170, 0.4);
+  --ta-glow-secondary: rgba(59, 130, 246, 0.3);
+  --ta-glow-cta: rgba(245, 158, 11, 0.4);
 }
 
 /* =============================================================================
    3. TYPOGRAPHY SCALE
    Note: base.css uses 62.5% root font-size, making 1rem = 10px
-   All rem values below are calculated with this in mind:
-   - 1.6rem = 16px (standard body text)
-   - 4.8rem = 48px (h1 headlines)
+   All clamp() values are scaled 1.6× from standard rem to match.
    ============================================================================= */
 :root {
-  /* ----------------------------------------
-     Font Families
-     ---------------------------------------- */
-  --ta-font-body: var(--font-body-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  --ta-font-heading: var(--font-heading-family, var(--ta-font-body));
-  --ta-font-mono: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  /* ---- Font Families ---- */
+  --ta-font-heading: var(--font-heading-family, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  --ta-font-body: var(--font-body-family, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  --ta-font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
 
-  /* ----------------------------------------
-     Base Font Size (body text = 16px)
-     ---------------------------------------- */
-  --ta-font-size-base: 1.6rem;
-  /* 16px at 62.5% root */
+  /* ---- Fluid Type Scale (clamp: mobile → desktop) ----
+     Formula: clamp(min, preferred, max)
+     Values scaled 1.6× for 62.5% root where 1rem = 10px */
+  --ta-text-xs: clamp(1.11rem, 1.06rem + 0.29vw, 1.28rem);
+  --ta-text-sm: clamp(1.33rem, 1.25rem + 0.43vw, 1.54rem);
+  --ta-text-base: clamp(1.6rem, 1.49rem + 0.58vw, 1.84rem);
+  --ta-text-lg: clamp(1.92rem, 1.76rem + 0.8vw, 2.21rem);
+  --ta-text-xl: clamp(2.3rem, 2.08rem + 1.12vw, 2.66rem);
+  --ta-text-2xl: clamp(2.76rem, 2.45rem + 1.6vw, 3.2rem);
+  --ta-text-3xl: clamp(3.32rem, 2.86rem + 2.27vw, 3.84rem);
+  --ta-text-4xl: clamp(3.98rem, 3.34rem + 3.2vw, 4.61rem);
+  --ta-text-hero: clamp(4.78rem, 3.84rem + 4.69vw, 5.76rem);
 
-  /* ----------------------------------------
-     Heading Scale (modular scale ~1.25)
-     ---------------------------------------- */
-  --ta-font-size-h1: 4.8rem;
-  /* 48px - Hero headlines */
-  --ta-font-size-h2: 3.6rem;
-  /* 36px - Section titles */
-  --ta-font-size-h3: 2.4rem;
-  /* 24px - Subsections */
-  --ta-font-size-h4: 2rem;
-  /* 20px - Card titles */
+  /* ---- Legacy Static Scale (backward compat aliases) ---- */
+  --ta-font-size-xs: var(--ta-text-xs);
+  --ta-font-size-sm: var(--ta-text-sm);
+  --ta-font-size-md: var(--ta-text-base);
+  --ta-font-size-base: var(--ta-text-base);
+  --ta-font-size-lg: var(--ta-text-lg);
+  --ta-font-size-xl: var(--ta-text-xl);
+  --ta-font-size-2xl: var(--ta-text-2xl);
+  --ta-font-size-3xl: var(--ta-text-3xl);
+  --ta-font-size-4xl: var(--ta-text-4xl);
+  --ta-font-size-hero: var(--ta-text-hero);
 
-  /* ----------------------------------------
-     Body Text Scale
-     ---------------------------------------- */
-  --ta-font-size-xs: 1.2rem;
-  /* 12px - Small labels */
-  --ta-font-size-sm: 1.4rem;
-  /* 14px - Secondary text */
-  --ta-font-size-md: 1.6rem;
-  /* 16px - Body text */
-  --ta-font-size-lg: 1.8rem;
-  /* 18px - Large body */
-  --ta-font-size-xl: 2rem;
-  /* 20px - Lead text */
+  /* ---- Heading Sizes (mapped to fluid scale) ---- */
+  --ta-font-size-h1: var(--ta-text-4xl);
+  --ta-font-size-h2: var(--ta-text-3xl);
+  --ta-font-size-h3: var(--ta-text-2xl);
+  --ta-font-size-h4: var(--ta-text-xl);
 
-  /* ----------------------------------------
-     Line Heights
-     ---------------------------------------- */
+  /* ---- Line Heights ---- */
   --ta-leading-none: 1;
-  --ta-leading-tight: 1.2;
-  --ta-leading-snug: 1.375;
+  --ta-leading-tight: 1.1;
+  --ta-leading-snug: 1.2;
   --ta-leading-normal: 1.5;
-  --ta-leading-relaxed: 1.625;
+  --ta-leading-relaxed: 1.6;
   --ta-leading-loose: 1.8;
 
-  /* ----------------------------------------
-     Font Weights
-     ---------------------------------------- */
+  /* ---- Font Weights ---- */
   --ta-font-normal: 400;
   --ta-font-medium: 500;
   --ta-font-semibold: 600;
   --ta-font-bold: 700;
   --ta-font-extrabold: 800;
 
-  /* ----------------------------------------
-     Letter Spacing
-     ---------------------------------------- */
+  /* ---- Letter Spacing ---- */
   --ta-tracking-tighter: -0.05em;
   --ta-tracking-tight: -0.025em;
   --ta-tracking-normal: 0;
   --ta-tracking-wide: 0.025em;
   --ta-tracking-wider: 0.05em;
   --ta-tracking-widest: 0.1em;
+
+  /* ---- Gradient Text ---- */
+  --ta-gradient-text: linear-gradient(135deg, var(--ta-primary) 0%, var(--ta-accent) 100%);
 }
 
 /* =============================================================================
    4. SPACING SCALE
    ============================================================================= */
 :root {
+  /* Named scale */
   --ta-space-0: 0;
   --ta-space-xs: 0.4rem;
   /* 4px */
@@ -274,23 +288,38 @@ main[role="main"] {
   --ta-space-3xl: 4.8rem;
   /* 48px */
 
-  /* Additional granular spacing */
+  /* Numeric scale (4px base unit) */
   --ta-space-1: 0.4rem;
+  /* 4px */
   --ta-space-2: 0.8rem;
+  /* 8px */
   --ta-space-3: 1.2rem;
+  /* 12px */
   --ta-space-4: 1.6rem;
+  /* 16px */
   --ta-space-5: 2rem;
+  /* 20px */
   --ta-space-6: 2.4rem;
+  /* 24px */
   --ta-space-8: 3.2rem;
+  /* 32px */
   --ta-space-10: 4rem;
+  /* 40px */
   --ta-space-12: 4.8rem;
+  /* 48px */
   --ta-space-16: 6.4rem;
+  /* 64px */
+  --ta-space-20: 8rem;
+  /* 80px */
+  --ta-space-24: 9.6rem;
+  /* 96px */
 }
 
 /* =============================================================================
    5. BORDER RADII
    ============================================================================= */
 :root {
+  /* Scale */
   --ta-radius-none: 0;
   --ta-radius-sm: 4px;
   --ta-radius-md: 8px;
@@ -300,7 +329,7 @@ main[role="main"] {
   --ta-radius-pill: 9999px;
   --ta-radius-full: 50%;
 
-  /* Specific component radii */
+  /* Component radii */
   --ta-radius-button: 8px;
   --ta-radius-card: 12px;
   --ta-radius-input: 8px;
@@ -311,7 +340,7 @@ main[role="main"] {
    6. SHADOWS
    ============================================================================= */
 :root {
-  /* Elevation shadows */
+  /* Elevation scale */
   --ta-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --ta-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --ta-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -319,13 +348,13 @@ main[role="main"] {
   --ta-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   --ta-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-  /* Blue-tinted shadows for tech aesthetic */
+  /* Blue-tinted semantic shadows */
   --ta-shadow-primary: 0 4px 14px 0 rgba(37, 99, 235, 0.4);
   --ta-shadow-primary-lg: 0 8px 25px 0 rgba(37, 99, 235, 0.5);
   --ta-shadow-card: 0 4px 12px rgba(15, 23, 42, 0.08);
   --ta-shadow-card-hover: 0 20px 30px -5px rgba(37, 99, 235, 0.2), 0 10px 15px -6px rgba(37, 99, 235, 0.15);
 
-  /* Button-specific shadows */
+  /* Button shadows */
   --ta-shadow-button: 0 4px 12px rgba(37, 99, 235, 0.3);
   --ta-shadow-button-hover: 0 6px 16px rgba(37, 99, 235, 0.4);
   --ta-shadow-button-active: 0 2px 8px rgba(37, 99, 235, 0.3);
@@ -336,32 +365,26 @@ main[role="main"] {
 }
 
 /* =============================================================================
-   7. LAYOUT HEIGHTS
+   7. LAYOUT HEIGHTS & WIDTHS
    ============================================================================= */
 :root {
-  /* Header system heights */
+  /* Header system — SINGLE source of truth */
   --ta-height-topbar: 40px;
-  /* Announcement bar */
   --ta-height-header: 80px;
-  /* Main header */
-  --ta-height-header-mobile: 64px;
-  --ta-height-stack: 120px;
-  /* Topbar + header combined */
-  --ta-height-stack-mobile: 104px;
+  --ta-height-header-mobile: 60px;
+  --ta-height-stack: calc(var(--ta-height-topbar) + var(--ta-height-header));
+  --ta-height-stack-mobile: calc(var(--ta-height-topbar) + var(--ta-height-header-mobile));
+  --ta-announcement-bar-height: var(--ta-height-topbar);
+  --ta-header-height-desktop: var(--ta-height-header);
 
   /* Page layout */
   --ta-width-page: 1200px;
   --ta-width-page-wide: 1400px;
   --ta-width-content: 720px;
 
-  /* Minimum touch targets */
+  /* Touch targets (WCAG) */
   --ta-touch-min: 44px;
   --ta-touch-comfortable: 48px;
-
-  /* Legacy compatibility - keep these for existing code */
-  --tech-topbar-h: var(--ta-height-topbar);
-  --tech-header-h: var(--ta-height-header);
-  --tech-stack-h: calc(var(--tech-topbar-h) + var(--tech-header-h));
 }
 
 /* =============================================================================
@@ -384,71 +407,69 @@ main[role="main"] {
   --ta-transition-normal: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --ta-transition-slow: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --ta-transition-colors: color, background-color, border-color 250ms ease;
+}
 
-  /* =============================================================================
-     Z-INDEX HIERARCHY SYSTEM
-     Centralized z-index values to prevent stacking conflicts
-     =============================================================================
-     
-     LAYER STACK (from bottom to top):
-     Base content:     0-99      (page content, sections)
-     Overlays:        100-199    (announcement bars, headers, sticky elements)
-     Drawers:         200-299    (cart drawer, navigation drawer)
-     Dropdowns:       300-399    (mega menus, popovers)
-     Modals:          400-499    (cookie banner, lightboxes)
-     Toast/FAB:       500-599    (WhatsApp button, notifications)
-     Critical:        1000+      (loading overlays, emergency dialogs)
-     
-     ============================================================================= */
-
-  /* Base content layer (0-99) */
+/* =============================================================================
+   9. Z-INDEX HIERARCHY
+   =============================================================================
+   Base content:     0-99
+   Overlays:        100-199   (announcement bars, headers, sticky elements)
+   Drawers:         200-299   (cart drawer, navigation drawer)
+   Dropdowns:       300-399   (mega menus, popovers)
+   Modals:          400-499   (cookie banner, lightboxes)
+   Toast/FAB:       500-599   (WhatsApp button, notifications)
+   Critical:        1000+     (loading overlays, emergency dialogs)
+   ============================================================================= */
+:root {
+  /* Base (0-99) */
   --ta-z-base: 0;
   --ta-z-content: 1;
   --ta-z-elevated: 10;
   --ta-z-slideshow-controls: 20;
   --ta-z-card-badge: 30;
 
-  /* Overlay/Sticky layer (100-199) */
+  /* Overlay/Sticky (100-199) */
   --ta-z-announcement-bar: 100;
   --ta-z-header: 101;
   --ta-z-sticky-header: 102;
   --ta-z-sticky-cart: 105;
 
-  /* Drawer layer (200-299) */
+  /* Drawer (200-299) */
   --ta-z-cart-drawer-overlay: 200;
   --ta-z-cart-drawer: 210;
   --ta-z-menu-drawer-overlay: 220;
   --ta-z-menu-drawer: 230;
   --ta-z-drawer-close: 250;
 
-  /* Dropdown layer (300-399) */
+  /* Dropdown (300-399) */
   --ta-z-mega-menu: 300;
   --ta-z-dropdown: 310;
   --ta-z-popover: 320;
   --ta-z-tooltip: 350;
 
-  /* Modal layer (400-499) */
+  /* Modal (400-499) */
   --ta-z-modal-overlay: 400;
   --ta-z-modal: 410;
   --ta-z-cookie-banner: 450;
   --ta-z-lightbox: 460;
 
-  /* Toast/FAB layer (500-599) */
+  /* Toast/FAB (500-599) */
   --ta-z-toast: 500;
   --ta-z-whatsapp-fab: 500;
   --ta-z-notification: 510;
 
-  /* Critical layer (1000+) */
+  /* Critical (1000+) */
   --ta-z-loading: 1000;
   --ta-z-skip-link: 9999;
 }
 
 /* =============================================================================
-   9. LEGACY COMPATIBILITY MAPPING
-   Maps old --color-*, --tech-* variables to new --ta-* tokens
+   10. LEGACY COMPATIBILITY MAPPING
+   Maps old --color-*, --tech-*, --home-*, --shadow-*, --radius-* variables
+   to new --ta-* tokens. All actively consumed aliases are preserved here.
    ============================================================================= */
 :root {
-  /* Legacy color mappings (from base.css) */
+  /* ---- --color-* aliases (consumed by 14 CSS files) ---- */
   --color-primary: var(--ta-primary);
   --color-primary-dark: var(--ta-primary-hover);
   --color-primary-darker: var(--ta-primary-active);
@@ -487,6 +508,7 @@ main[role="main"] {
   --color-border-hover: var(--ta-border-hover);
   --color-border-focus: var(--ta-border-focus);
 
+  /* ---- --shadow-* bare aliases (consumed by base.css, faq-accordion.css) ---- */
   --shadow-primary: var(--ta-glow-primary);
   --shadow-card: rgba(15, 23, 42, 0.08);
   --shadow-sm: var(--ta-shadow-sm);
@@ -496,7 +518,20 @@ main[role="main"] {
   --shadow-card-hover: var(--ta-shadow-card-hover);
   --shadow-button: var(--ta-shadow-button);
 
-  /* Legacy --tech-* mappings (consolidated from techauraz-design-tokens.css) */
+  /* ---- --radius-* bare aliases (consumed by base.css) ---- */
+  --radius-sm: var(--ta-radius-sm);
+  --radius-md: var(--ta-radius-md);
+  --radius-lg: var(--ta-radius-lg);
+  --radius-xl: var(--ta-radius-xl);
+  --radius-2xl: var(--ta-radius-2xl);
+  --radius-pill: var(--ta-radius-pill);
+  --radius-circle: var(--ta-radius-full);
+
+  /* ---- --tech-* core aliases (consumed by utilities, header, comparison) ---- */
+  --tech-topbar-h: var(--ta-height-topbar);
+  --tech-header-h: var(--ta-height-header);
+  --tech-stack-h: var(--ta-height-stack);
+
   --tech-bg: var(--ta-bg);
   --tech-surface: var(--ta-bg-secondary);
   --tech-ink: var(--ta-text);
@@ -507,73 +542,73 @@ main[role="main"] {
   --tech-border: var(--ta-border);
   --tech-border-light: var(--ta-border-light);
 
-  /* --tech-* color tokens */
-  --tech-color-primary: #2563eb;
-  --tech-color-primary-hover: #1d4ed8;
+  /* ---- --tech-color-* aliases (consumed by product-comparison, header, utilities) ---- */
+  --tech-color-primary: var(--ta-secondary);
+  --tech-color-primary-hover: var(--ta-secondary-hover);
   --tech-color-primary-bg: rgba(37, 99, 235, 0.1);
-  --tech-color-secondary: #0f172a;
-  --tech-color-accent: #f59e0b;
-  --tech-color-success: #22c55e;
-  --tech-color-error: #dc2626;
-  --tech-color-gray-100: #f1f5f9;
-  --tech-color-gray-200: #e2e8f0;
-  --tech-color-gray-300: #cbd5e1;
-  --tech-color-gray-400: #94a3b8;
+  --tech-color-secondary: var(--ta-neutral-900);
+  --tech-color-accent: var(--ta-warning);
+  --tech-color-success: var(--ta-success-light);
+  --tech-color-error: var(--ta-error-dark);
+  --tech-color-gray-100: var(--ta-neutral-100);
+  --tech-color-gray-200: var(--ta-neutral-200);
+  --tech-color-gray-300: var(--ta-neutral-300);
+  --tech-color-gray-400: var(--ta-neutral-400);
   --tech-color-background: #f5f5f5;
   --tech-color-background-alt: #fafafa;
   --tech-color-background-hover: #f0f4ff;
   --tech-color-border: #e5e5e5;
   --tech-color-border-light: #f0f0f0;
-  --tech-color-surface: #ffffff;
+  --tech-color-surface: var(--ta-surface);
   --tech-color-text: #333333;
   --tech-color-text-secondary: #666666;
 
-  /* --tech-* background and text tokens */
-  --tech-bg-card: #ffffff;
-  --tech-bg-card-dark: #1e293b;
+  /* ---- --tech-* background/text aliases ---- */
+  --tech-bg-card: var(--ta-surface);
+  --tech-bg-card-dark: var(--ta-neutral-800);
   --tech-bg-overlay: rgba(15, 23, 42, 0.8);
-  --tech-text-primary: #0f172a;
-  --tech-text-secondary: #475569;
-  --tech-text-inverted: #ffffff;
+  --tech-text-primary: var(--ta-text);
+  --tech-text-secondary: var(--ta-neutral-600);
+  --tech-text-inverted: var(--ta-text-inverse);
   --tech-text-xs: 0.75rem;
   --tech-text-sm: 0.875rem;
   --tech-text-base: 1rem;
   --tech-text-lg: 1.125rem;
   --tech-text-xl: 1.25rem;
 
-  /* --tech-* typography tokens */
-  --tech-font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --tech-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --tech-font-medium: 500;
-  --tech-font-semibold: 600;
-  --tech-font-bold: 700;
+  /* ---- --tech-* typography aliases ---- */
+  --tech-font-display: var(--ta-font-heading);
+  --tech-font-body: var(--ta-font-body);
+  --tech-font-medium: var(--ta-font-medium);
+  --tech-font-semibold: var(--ta-font-semibold);
+  --tech-font-bold: var(--ta-font-bold);
   --tech-leading-tight: 1.25;
-  --tech-leading-relaxed: 1.625;
-  --tech-tracking-wide: 0.025em;
+  --tech-leading-relaxed: var(--ta-leading-relaxed);
+  --tech-tracking-wide: var(--ta-tracking-wide);
 
-  /* --tech-* gradient tokens */
-  --tech-gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  /* ---- --tech-* gradient aliases ---- */
+  --tech-gradient-primary: var(--ta-gradient-button);
   --tech-gradient-primary-hover: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  --tech-gradient-success: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  --tech-gradient-sale: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --tech-gradient-success: var(--ta-gradient-success);
+  --tech-gradient-sale: var(--ta-sale-gradient);
   --tech-gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
   --tech-gradient-newsletter: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1a1f36 100%);
 
-  /* --tech-* shadow tokens */
-  --tech-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* ---- --tech-* shadow aliases ---- */
+  --tech-shadow-md: var(--ta-shadow-card);
   --tech-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --tech-shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.35);
+  --tech-shadow-primary: var(--ta-shadow-primary);
   --tech-shadow-primary-hover: 0 6px 20px rgba(37, 99, 235, 0.45);
   --tech-shadow-success: 0 4px 14px rgba(34, 197, 94, 0.35);
 
-  /* --tech-* radius tokens */
-  --tech-radius-md: 8px;
-  --tech-radius-badge: 4px;
-  --tech-radius-button: 8px;
-  --tech-radius-card: 12px;
-  --tech-radius-full: 9999px;
+  /* ---- --tech-* radius aliases ---- */
+  --tech-radius-md: var(--ta-radius-md);
+  --tech-radius-badge: var(--ta-radius-sm);
+  --tech-radius-button: var(--ta-radius-button);
+  --tech-radius-card: var(--ta-radius-card);
+  --tech-radius-full: var(--ta-radius-pill);
 
-  /* --tech-* spacing tokens (numeric scale) */
+  /* ---- --tech-* spacing aliases ---- */
   --tech-space-1: 4px;
   --tech-space-2: 8px;
   --tech-space-3: 12px;
@@ -584,7 +619,6 @@ main[role="main"] {
   --tech-space-24: 96px;
   --tech-section-gap: 60px;
 
-  /* --tech-* named spacing (Dawn compat) */
   --tech-space-2xs: var(--ta-space-xs);
   --tech-space-xs: var(--ta-space-sm);
   --tech-space-sm: var(--ta-space-md);
@@ -593,21 +627,21 @@ main[role="main"] {
   --tech-space-xl: var(--ta-space-2xl);
   --tech-space-2xl: var(--ta-space-3xl);
 
-  /* --tech-* transition tokens */
+  /* ---- --tech-* transition aliases ---- */
   --tech-transition-normal: 250ms ease;
   --tech-transition-slow: 350ms ease;
   --tech-transition-colors: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
   --tech-transition-transform: transform 250ms ease;
   --tech-transition-all: all 250ms ease;
 
-  /* --tech-* layout tokens */
+  /* ---- --tech-* layout aliases ---- */
   --tech-header-height: 70px;
-  --tech-announcement-height: 40px;
-  --tech-button-height: 48px;
+  --tech-announcement-height: var(--ta-height-topbar);
+  --tech-button-height: var(--ta-touch-comfortable);
   --tech-z-sticky: 200;
   --tech-z-drawer: 400;
 
-  /* --tech-* button tokens */
+  /* ---- --tech-* button aliases ---- */
   --tech-button-radius: var(--ta-radius-button);
   --tech-button-shadow: var(--ta-shadow-button);
   --tech-button-shadow-hover: var(--ta-shadow-button-hover);
@@ -618,20 +652,7 @@ main[role="main"] {
   --tech-heading-line-height: var(--ta-leading-tight);
   --tech-heading-letter-spacing: var(--ta-tracking-tight);
 
-  /* REMOVED: --space-* legacy aliases (2026-03-02) — zero references */
-
-  /* Legacy radius from base.css */
-  --radius-sm: var(--ta-radius-sm);
-  --radius-md: var(--ta-radius-md);
-  --radius-lg: var(--ta-radius-lg);
-  --radius-xl: var(--ta-radius-xl);
-  --radius-2xl: var(--ta-radius-2xl);
-  --radius-pill: var(--ta-radius-pill);
-  --radius-circle: var(--ta-radius-full);
-
-  /* REMOVED: --transition-* legacy aliases (2026-03-02) — zero references */
-
-  /* Legacy home-modern-blocks.css mappings */
+  /* ---- --home-* aliases (consumed by ui-ux-responsive-fixes.css) ---- */
   --home-primary-blue: var(--ta-info);
   --home-primary-green: var(--ta-success);
   --home-gradient-primary: var(--ta-gradient-cta);
@@ -640,15 +661,97 @@ main[role="main"] {
   --home-shadow-heavy: var(--ta-shadow-lg);
   --home-border-radius: var(--ta-radius-card);
   --home-transition: var(--ta-transition-normal);
+
+  /* ---- --ta-conv-* aliases (consumed by techauraz-utilities.css) ---- */
+  --ta-conv-primary: var(--ta-primary);
+  --ta-conv-primary-hover: var(--ta-primary-hover);
+  --ta-conv-secondary: var(--ta-accent);
+  --ta-conv-secondary-hover: var(--ta-accent-hover);
+  --ta-conv-trust: var(--ta-text);
 }
 
 /* =============================================================================
-   10. GLOBAL BUTTON STYLES
-   Primary, Secondary, Ghost variants with hover/focus states
-   Ensures WCAG AA contrast (4.5:1 for normal text)
+   10b. DARK-MODE PREPARATION
+   Remaps all surface, background, text, and border tokens.
+   To activate: add data-theme="dark" to <html> via JS toggle.
+   DO NOT remove — this is an inactive preparation layer.
    ============================================================================= */
 
-/* Base button reset and shared styles */
+[data-theme="dark"] {
+  /* Backgrounds & Surfaces */
+  --ta-bg: #0f172a;
+  --ta-bg-secondary: #1e293b;
+  --ta-bg-tertiary: #334155;
+  --ta-surface: #1e293b;
+  --ta-surface-elevated: #334155;
+  --ta-surface-modal: #1e293b;
+  --ta-bg-overlay: rgba(0, 0, 0, 0.8);
+
+  /* Text */
+  --ta-text: #f1f5f9;
+  --ta-text-secondary: #e2e8f0;
+  --ta-text-muted: #94a3b8;
+  --ta-text-inverse: #0f172a;
+  --ta-text-link: #60a5fa;
+
+  /* Borders */
+  --ta-border: #334155;
+  --ta-border-light: #1e293b;
+  --ta-border-hover: #60a5fa;
+  --ta-border-focus: #60a5fa;
+
+  /* Primary (lighten for readability on dark) */
+  --ta-primary: #3B82F6;
+  --ta-primary-hover: #60A5FA;
+  --ta-primary-active: #93C5FD;
+  --ta-primary-light: #60a5fa;
+  --ta-primary-lighter: #93c5fd;
+  --ta-primary-contrast: #0f172a;
+
+  /* CTA stays warm amber — high contrast on dark */
+  --ta-cta: #FBBF24;
+  --ta-cta-hover: #F59E0B;
+  --ta-cta-active: #D97706;
+  --ta-cta-contrast: #0f172a;
+
+  /* Accent */
+  --ta-accent: #60A5FA;
+  --ta-accent-hover: #93C5FD;
+  --ta-accent-light: #BFDBFE;
+  --ta-accent-dark: #3B82F6;
+
+  /* Semantic (slightly lighter for dark backgrounds) */
+  --ta-success: #34d399;
+  --ta-success-light: #6ee7b7;
+  --ta-error: #f87171;
+  --ta-error-light: #fca5a5;
+  --ta-warning: #fbbf24;
+  --ta-warning-light: #fde68a;
+  --ta-info: #60a5fa;
+  --ta-sale: #f87171;
+  --ta-sale-bg: rgba(239, 68, 68, 0.15);
+
+  /* Shadows (darker, more pronounced) */
+  --ta-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --ta-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --ta-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --ta-shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --ta-shadow-card-hover: 0 20px 30px -5px rgba(59, 130, 246, 0.2);
+  --ta-shadow-button: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Gradients */
+  --ta-gradient-bg-subtle: linear-gradient(180deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+  --ta-gradient-bg-section: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(96, 165, 250, 0.05) 100%);
+  --ta-gradient-divider: linear-gradient(90deg, transparent 0%, #334155 20%, #334155 80%, transparent 100%);
+}
+
+/* =============================================================================
+   11. GLOBAL BUTTON STYLES
+   Primary, Secondary, Ghost variants with hover/focus states
+   WCAG AA contrast (4.5:1 for normal text)
+   ============================================================================= */
+
+/* Base button reset */
 .ta-btn,
 .button,
 .btn,
@@ -673,7 +776,7 @@ main[role="main"] {
   isolation: isolate;
 }
 
-/* Primary Button - High contrast CTA (AA compliant: white #fff on blue #2563eb = 5.17:1) */
+/* Primary Button */
 .ta-btn--primary,
 .button--primary {
   background: var(--ta-gradient-primary);
@@ -703,7 +806,7 @@ main[role="main"] {
   outline-offset: 3px;
 }
 
-/* Secondary Button - Outlined style */
+/* Secondary Button */
 .ta-btn--secondary,
 .button--secondary {
   background: transparent;
@@ -734,7 +837,7 @@ main[role="main"] {
   outline-offset: 2px;
 }
 
-/* Ghost Button - Minimal/text style */
+/* Ghost Button */
 .ta-btn--ghost,
 .button--ghost {
   background: transparent;
@@ -762,7 +865,7 @@ main[role="main"] {
   outline-offset: 2px;
 }
 
-/* Disabled state for all buttons */
+/* Disabled state */
 .ta-btn:disabled,
 .ta-btn[aria-disabled="true"],
 .button:disabled,
@@ -776,13 +879,12 @@ main[role="main"] {
   box-shadow: none;
 }
 
-/* Full-width variant */
+/* Size variants */
 .ta-btn--full,
 .button--full-width {
   width: 100%;
 }
 
-/* Small button variant */
 .ta-btn--sm,
 .button--small {
   padding: var(--ta-space-sm) var(--ta-space-lg);
@@ -790,7 +892,6 @@ main[role="main"] {
   font-size: var(--ta-font-size-xs);
 }
 
-/* Large button variant */
 .ta-btn--lg,
 .button--large {
   padding: var(--ta-space-lg) var(--ta-space-2xl);
@@ -799,8 +900,9 @@ main[role="main"] {
 }
 
 /* =============================================================================
-   HEADINGS - Apply token styles to all headings
+   12. HEADINGS — Apply token styles
    ============================================================================= */
+
 h1,
 .h1 {
   font-size: var(--ta-font-size-h1);
@@ -836,8 +938,9 @@ h4,
 }
 
 /* =============================================================================
-   SECTION BACKGROUNDS - Using tokens
+   13. SECTION BACKGROUNDS
    ============================================================================= */
+
 .ta-section--primary {
   background: var(--ta-bg);
 }
@@ -855,76 +958,11 @@ h4,
 }
 
 /* =============================================================================
-   MOBILE RESPONSIVE TYPOGRAPHY
-   ============================================================================= */
-@media screen and (max-width: 749px) {
-  :root {
-    --ta-font-size-h1: 3.2rem;
-    --ta-font-size-h2: 2.4rem;
-    --ta-font-size-h3: 2rem;
-    --ta-font-size-h4: 1.8rem;
-  }
-
-  .ta-btn,
-  .button,
-  .btn,
-  [class*="button--"] {
-    padding: var(--ta-space-md) var(--ta-space-lg);
-    font-size: var(--ta-font-size-xs);
-  }
-}
-
-/* =============================================================================
-   ACCESSIBILITY - Reduced motion support
-   ============================================================================= */
-@media (prefers-reduced-motion: reduce) {
-
-  .ta-btn,
-  .button,
-  .btn,
-  [class*="button--"] {
-    transition: none;
-    transform: none !important;
-  }
-
-  .ta-btn:hover,
-  .button:hover,
-  .btn:hover,
-  [class*="button--"]:hover {
-    transform: none !important;
-  }
-}
-
-/* =============================================================================
-   HIGH CONTRAST MODE - Enhanced accessibility
-   ============================================================================= */
-@media (prefers-contrast: high) {
-  :root {
-    --ta-primary: #1d4ed8;
-    --ta-primary-contrast: #ffffff;
-    --ta-border: #1e293b;
-    --ta-shadow-button: none;
-    --ta-shadow-button-hover: none;
-  }
-
-  .ta-btn--primary,
-  .button--primary {
-    border: 2px solid var(--ta-primary-contrast);
-  }
-
-  .ta-btn--secondary,
-  .button--secondary {
-    border-width: 3px;
-  }
-}
-
-/* =============================================================================
-   11. UNIFIED FOCUS-VISIBLE STYLES
-   Consistent, accessible focus indicators for all interactive elements
-   WCAG 2.1 requires visible focus indicators with 3:1 contrast ratio
+   14. UNIFIED FOCUS-VISIBLE STYLES
+   Consistent, accessible focus indicators — WCAG 2.1
    ============================================================================= */
 
-/* --- Default focus-visible style for all interactive elements --- */
+/* Default focus-visible */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -948,7 +986,7 @@ summary:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* --- Links: Underline + outline for maximum visibility --- */
+/* Links */
 a:focus-visible {
   outline-color: var(--ta-primary, #2563eb);
   text-decoration: underline;
@@ -956,7 +994,7 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
-/* --- Buttons: High-contrast focus ring --- */
+/* Buttons: High-contrast focus ring */
 .button:focus-visible,
 .btn:focus-visible,
 .ta-btn:focus-visible,
@@ -967,20 +1005,18 @@ button:focus-visible {
   box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.25);
 }
 
-/* Primary buttons on dark backgrounds need different focus color */
 .button--primary:focus-visible,
 .ta-btn--primary:focus-visible {
   outline-color: var(--ta-warning-light, #fbbf24);
 }
 
-/* Secondary buttons can use primary color focus */
 .button--secondary:focus-visible,
 .ta-btn--secondary:focus-visible {
   outline-color: var(--ta-primary, #2563eb);
   box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2);
 }
 
-/* --- Cards: Full card focus indication --- */
+/* Cards */
 .card:focus-visible,
 .card-wrapper:focus-visible,
 .product-card:focus-visible,
@@ -990,14 +1026,13 @@ button:focus-visible {
   border-radius: var(--ta-radius-card, 12px);
 }
 
-/* Card links that span the entire card */
 .card-wrapper__link--overlay:focus-visible,
 .full-unstyled-link:focus-visible {
   outline: 3px solid var(--ta-primary, #2563eb);
   outline-offset: 4px;
 }
 
-/* --- Form inputs: Visible border change + outline --- */
+/* Form inputs */
 input[type="text"]:focus-visible,
 input[type="email"]:focus-visible,
 input[type="tel"]:focus-visible,
@@ -1012,7 +1047,7 @@ select:focus-visible {
   box-shadow: var(--ta-ring-focus, 0 0 0 3px rgba(37, 99, 235, 0.4));
 }
 
-/* --- Icon buttons (header icons, close buttons) --- */
+/* Icon buttons */
 .header__icon:focus-visible,
 .icon-button:focus-visible,
 .modal__toggle:focus-visible,
@@ -1024,7 +1059,7 @@ select:focus-visible {
   border-radius: var(--ta-radius-full, 50%);
 }
 
-/* --- Menu items and navigation links --- */
+/* Navigation */
 .header__menu-item:focus-visible,
 .list-menu__item:focus-visible,
 .list-menu__item--link:focus-visible,
@@ -1037,7 +1072,7 @@ nav a:focus-visible,
   border-radius: var(--ta-radius-sm, 4px);
 }
 
-/* --- Slider/carousel controls --- */
+/* Slider controls */
 .slider-button:focus-visible,
 .slider-counter__link:focus-visible,
 .slideshow-cta:focus-visible {
@@ -1045,14 +1080,14 @@ nav a:focus-visible,
   outline-offset: 3px;
 }
 
-/* --- Quick add buttons on product cards --- */
+/* Quick add */
 .quick-add__submit:focus-visible {
   outline: 3px solid var(--ta-warning-light, #fbbf24);
   outline-offset: 3px;
   box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.3);
 }
 
-/* --- Pagination --- */
+/* Pagination */
 .pagination__item:focus-visible,
 .pagination__link:focus-visible {
   outline: 2px solid var(--ta-primary, #2563eb);
@@ -1060,7 +1095,7 @@ nav a:focus-visible,
   border-radius: var(--ta-radius-sm, 4px);
 }
 
-/* --- Disclosure/accordion toggles --- */
+/* Disclosure/accordion */
 details summary:focus-visible,
 .disclosure__button:focus-visible,
 .accordion__title:focus-visible {
@@ -1070,21 +1105,13 @@ details summary:focus-visible,
 }
 
 /* =============================================================================
-   12. CLS PREVENTION - Reserve space for dynamic elements
-   Prevents Cumulative Layout Shift from header/hero
+   15. CLS PREVENTION — Reserve space for dynamic elements
    ============================================================================= */
 
-/* --- Header height reservation --- */
-:root {
-  --ta-header-height-mobile: 60px;
-  --ta-header-height-desktop: 80px;
-  --ta-announcement-bar-height: 40px;
-}
-
-/* Sticky header wrapper - reserve minimum height */
+/* Header height reservation */
 .header-wrapper,
 .shopify-section-header-sticky {
-  min-height: var(--ta-header-height-mobile);
+  min-height: var(--ta-height-header-mobile);
 }
 
 @media screen and (min-width: 750px) {
@@ -1095,7 +1122,7 @@ details summary:focus-visible,
   }
 }
 
-/* --- Hero/Slideshow CLS prevention --- */
+/* Hero/Slideshow CLS prevention */
 .slideshow,
 .banner,
 .hero,
@@ -1103,21 +1130,18 @@ details summary:focus-visible,
 [class*="banner--"],
 .shopify-section--slideshow,
 .shopify-section--image-banner {
-  /* Reserve minimum height to prevent CLS */
   min-height: 222px;
   contain: layout;
 }
 
 @media screen and (min-width: 750px) {
 
-  /* Slideshow slides - fixed dimensions */
   .slideshow__slide,
   .banner__media {
     min-height: inherit;
     position: relative;
   }
 
-  /* Images with aspect ratio to prevent CLS */
   .slideshow__media img,
   .banner__media img,
   .hero__media img {
@@ -1126,300 +1150,419 @@ details summary:focus-visible,
     height: auto;
     object-fit: cover;
   }
+}
 
-  @media screen and (max-width: 749px) {
+@media screen and (max-width: 749px) {
 
-    .slideshow__media img,
-    .banner__media img,
-    .hero__media img {
-      aspect-ratio: 4 / 3;
-    }
+  .slideshow__media img,
+  .banner__media img,
+  .hero__media img {
+    aspect-ratio: 4 / 3;
   }
+}
 
-  /* =============================================================================
-   13. DARK SECTION CONTRAST - CTA buttons and text visibility
+/* =============================================================================
+   16. DARK SECTION CONTRAST
    Ensures WCAG AA contrast (4.5:1) for text on dark backgrounds
+   =============================================================================
+   BUG FIX (v3.0): These styles were previously nested inside
+   @media (min-width: 750px) and didn't apply on mobile.
    ============================================================================= */
 
-  /* --- Dark section text colors --- */
-  .color-inverse,
-  .color-scheme--inverse,
-  [data-color-scheme="inverse"],
-  .banner--dark,
-  .slideshow--dark,
-  .section--dark,
-  .gradient--dark {
-    --ta-text: #ffffff;
-    --ta-text-secondary: rgba(255, 255, 255, 0.9);
-    --ta-text-muted: rgba(255, 255, 255, 0.7);
-  }
+/* Dark section text colors */
+.color-inverse,
+.color-scheme--inverse,
+[data-color-scheme="inverse"],
+.banner--dark,
+.slideshow--dark,
+.section--dark,
+.gradient--dark {
+  --ta-text: #ffffff;
+  --ta-text-secondary: rgba(255, 255, 255, 0.9);
+  --ta-text-muted: rgba(255, 255, 255, 0.7);
+}
 
-  /* Primary CTA on dark backgrounds - high contrast */
-  .color-inverse .button--primary,
-  .banner--dark .button--primary,
-  .slideshow--dark .button--primary,
-  [data-color-scheme="inverse"] .button--primary {
-    background: var(--ta-primary-contrast, #ffffff);
-    color: var(--ta-primary, #2563eb);
-    border: 2px solid transparent;
-  }
+/* Primary CTA on dark backgrounds */
+.color-inverse .button--primary,
+.banner--dark .button--primary,
+.slideshow--dark .button--primary,
+[data-color-scheme="inverse"] .button--primary {
+  background: var(--ta-primary-contrast, #ffffff);
+  color: var(--ta-primary, #2563eb);
+  border: 2px solid transparent;
+}
 
-  .color-inverse .button--primary:hover,
-  .banner--dark .button--primary:hover,
-  .slideshow--dark .button--primary:hover,
-  [data-color-scheme="inverse"] .button--primary:hover {
-    background: var(--ta-bg-secondary, #f8fafc);
-    color: var(--ta-primary-hover, #1e40af);
-    transform: translateY(-2px);
-  }
+.color-inverse .button--primary:hover,
+.banner--dark .button--primary:hover,
+.slideshow--dark .button--primary:hover,
+[data-color-scheme="inverse"] .button--primary:hover {
+  background: var(--ta-bg-secondary, #f8fafc);
+  color: var(--ta-primary-hover, #1e40af);
+  transform: translateY(-2px);
+}
 
-  /* Secondary CTA on dark backgrounds */
-  .color-inverse .button--secondary,
-  .banner--dark .button--secondary,
-  .slideshow--dark .button--secondary,
-  [data-color-scheme="inverse"] .button--secondary {
-    background: transparent;
-    color: var(--ta-primary-contrast, #ffffff);
-    border: 2px solid var(--ta-primary-contrast, #ffffff);
-  }
+/* Secondary CTA on dark backgrounds */
+.color-inverse .button--secondary,
+.banner--dark .button--secondary,
+.slideshow--dark .button--secondary,
+[data-color-scheme="inverse"] .button--secondary {
+  background: transparent;
+  color: var(--ta-primary-contrast, #ffffff);
+  border: 2px solid var(--ta-primary-contrast, #ffffff);
+}
 
-  .color-inverse .button--secondary:hover,
-  .banner--dark .button--secondary:hover,
-  .slideshow--dark .button--secondary:hover,
-  [data-color-scheme="inverse"] .button--secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--ta-primary-contrast, #ffffff);
-  }
+.color-inverse .button--secondary:hover,
+.banner--dark .button--secondary:hover,
+.slideshow--dark .button--secondary:hover,
+[data-color-scheme="inverse"] .button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--ta-primary-contrast, #ffffff);
+}
 
-  /* Focus states on dark backgrounds - use contrasting yellow */
-  .color-inverse :focus-visible,
-  .banner--dark :focus-visible,
-  .slideshow--dark :focus-visible,
-  [data-color-scheme="inverse"] :focus-visible {
-    outline-color: var(--ta-warning-light, #fbbf24);
-  }
+/* Focus on dark backgrounds */
+.color-inverse :focus-visible,
+.banner--dark :focus-visible,
+.slideshow--dark :focus-visible,
+[data-color-scheme="inverse"] :focus-visible {
+  outline-color: var(--ta-warning-light, #fbbf24);
+}
 
-  /* Ensure hero/banner text meets contrast requirements */
-  .banner__heading,
-  .slideshow__heading,
-  .banner__text,
-  .slideshow__text,
-  .hero__title,
-  .hero__subtitle {
-    /* Text shadow for better readability on image backgrounds */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  }
+/* Hero/banner text readability */
+.banner__heading,
+.slideshow__heading,
+.banner__text,
+.slideshow__text,
+.hero__title,
+.hero__subtitle {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
 
-  /* Banner box (overlay content) - premium glass morphism, not a "patch" */
-  .banner__box,
-  .slideshow__text-wrapper {
-    /* Premium glass morphism effect */
-    background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: var(--ta-space-lg, 1.6rem) var(--ta-space-xl, 2rem);
-    border-radius: var(--ta-radius-lg, 16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
+/* Banner overlay — premium glass morphism */
+.banner__box,
+.slideshow__text-wrapper {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: var(--ta-space-lg, 1.6rem) var(--ta-space-xl, 2rem);
+  border-radius: var(--ta-radius-lg, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
 
-  /* =============================================================================
-   14. UNIFIED CHIP/BADGE STYLES
+/* =============================================================================
+   17. UNIFIED CHIP / BADGE STYLES
    Trust indicators: envío gratis, pago seguro, garantía, etc.
-   Consistent styling using design tokens
+   =============================================================================
+   BUG FIX (v3.0): These styles were previously nested inside
+   @media (min-width: 750px) and didn't apply on mobile.
    ============================================================================= */
 
-  /* Base chip styles - works for trust indicators, tags, labels */
+.ta-chip,
+.trust-indicator,
+.ta-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ta-space-xs, 0.4rem);
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
+  font-size: var(--ta-font-size-xs, 1.2rem);
+  font-weight: var(--ta-font-semibold, 600);
+  line-height: var(--ta-leading-tight, 1.2);
+  border-radius: var(--ta-radius-pill, 9999px);
+  white-space: nowrap;
+  transition: var(--ta-transition-fast);
+}
+
+/* Success chip */
+.ta-chip--success,
+.trust-indicator--success,
+.ta-trust-chip {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
+  color: var(--ta-success, #10b981);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.ta-chip--success:hover,
+.trust-indicator--success:hover,
+.ta-trust-chip:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Primary chip */
+.ta-chip--primary {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+  color: var(--ta-primary, #2563eb);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.ta-chip--primary:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
+  border-color: rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Warning chip */
+.ta-chip--warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+  color: #92400e;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.ta-chip--warning:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+/* Neutral chip */
+.ta-chip--neutral {
+  background: var(--ta-bg-secondary, #f8fafc);
+  color: var(--ta-text-muted, #64748b);
+  border: 1px solid var(--ta-border, #e2e8f0);
+}
+
+.ta-chip--neutral:hover {
+  background: var(--ta-bg-tertiary, #f1f5f9);
+  border-color: var(--ta-border-hover, #3b82f6);
+}
+
+.ta-chip__icon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+/* =============================================================================
+   18. UNIFIED SECTION HEADING STYLES
+   ============================================================================= */
+
+.ta-section-heading,
+.section-heading,
+.title-wrapper .title,
+h2.title {
+  font-family: var(--ta-font-heading);
+  font-size: var(--ta-text-3xl);
+  font-weight: var(--ta-font-bold, 700);
+  line-height: var(--ta-leading-snug, 1.2);
+  letter-spacing: var(--ta-tracking-tight, -0.025em);
+  color: var(--ta-text, #0f172a);
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: var(--ta-space-xl, 2.4rem);
+}
+
+.ta-section-header {
+  text-align: center;
+  margin-bottom: var(--ta-space-2xl, 3.2rem);
+}
+
+.ta-section-header .ta-section-heading {
+  margin-bottom: var(--ta-space-sm, 0.8rem);
+}
+
+.ta-section-subtitle {
+  font-size: var(--ta-text-base);
+  color: var(--ta-text-muted, #64748b);
+  line-height: var(--ta-leading-relaxed, 1.6);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* Section heading variants */
+.ta-section-heading--inverse {
+  color: var(--ta-text-inverse, #ffffff);
+}
+
+.ta-section-subtitle--inverse {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =============================================================================
+   19. UNIFIED CARD BASE STYLES
+   =============================================================================
+   BUG FIX (v3.0): These styles were previously nested inside
+   @media (min-width: 750px) and didn't apply on mobile.
+   ============================================================================= */
+
+.ta-card {
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #f1f5f9);
+  border-radius: var(--ta-radius-card, 12px);
+  box-shadow: var(--ta-shadow-sm);
+  transition: var(--ta-transition-normal);
+  overflow: hidden;
+}
+
+.ta-card:hover {
+  border-color: var(--ta-border-hover, #3b82f6);
+  box-shadow: var(--ta-shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.ta-card--padded {
+  padding: var(--ta-space-lg, 1.6rem);
+}
+
+.ta-card--padded-lg {
+  padding: var(--ta-space-xl, 2.4rem);
+}
+
+/* =============================================================================
+   20. MOBILE RESPONSIVE TYPOGRAPHY
+   ============================================================================= */
+@media screen and (max-width: 749px) {
+  :root {
+    --ta-font-size-h1: 3.2rem;
+    --ta-font-size-h2: 2.4rem;
+    --ta-font-size-h3: 2rem;
+    --ta-font-size-h4: 1.8rem;
+  }
+
+  .ta-btn,
+  .button,
+  .btn,
+  [class*="button--"] {
+    padding: var(--ta-space-md) var(--ta-space-lg);
+    font-size: var(--ta-font-size-xs);
+  }
+}
+
+/* =============================================================================
+   21. ACCESSIBILITY
+   ============================================================================= */
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .ta-btn,
+  .button,
+  .btn,
+  [class*="button--"] {
+    transition: none;
+    transform: none !important;
+  }
+
+  .ta-btn:hover,
+  .button:hover,
+  .btn:hover,
+  [class*="button--"]:hover {
+    transform: none !important;
+  }
+
   .ta-chip,
   .trust-indicator,
-  .ta-trust-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ta-space-xs, 0.4rem);
-    padding: var(--ta-space-xs, 0.4rem) var(--ta-space-sm, 0.8rem);
-    font-size: var(--ta-font-size-xs, 1.2rem);
-    font-weight: var(--ta-font-semibold, 600);
-    line-height: var(--ta-leading-tight, 1.2);
-    border-radius: var(--ta-radius-pill, 9999px);
-    white-space: nowrap;
-    transition: var(--ta-transition-fast);
-  }
-
-  /* Success chip - for positive indicators (envío gratis, garantía) */
-  .ta-chip--success,
-  .trust-indicator--success,
-  .ta-trust-chip {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
-    color: var(--ta-success, #10b981);
-    border: 1px solid rgba(16, 185, 129, 0.25);
-  }
-
-  .ta-chip--success:hover,
-  .trust-indicator--success:hover,
-  .ta-trust-chip:hover {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 197, 94, 0.15) 100%);
-    border-color: rgba(16, 185, 129, 0.4);
-    transform: translateY(-1px);
-  }
-
-  /* Primary chip - for brand-related indicators */
-  .ta-chip--primary {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
-    color: var(--ta-primary, #2563eb);
-    border: 1px solid rgba(37, 99, 235, 0.25);
-  }
-
-  .ta-chip--primary:hover {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
-    border-color: rgba(37, 99, 235, 0.4);
-    transform: translateY(-1px);
-  }
-
-  /* Warning chip - for urgency/attention indicators */
-  .ta-chip--warning {
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
-    color: #92400e;
-    border: 1px solid rgba(251, 191, 36, 0.3);
-  }
-
-  .ta-chip--warning:hover {
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
-    border-color: rgba(251, 191, 36, 0.5);
-  }
-
-  /* Neutral chip - for general labels */
-  .ta-chip--neutral {
-    background: var(--ta-bg-secondary, #f8fafc);
-    color: var(--ta-text-muted, #64748b);
-    border: 1px solid var(--ta-border, #e2e8f0);
-  }
-
-  .ta-chip--neutral:hover {
-    background: var(--ta-bg-tertiary, #f1f5f9);
-    border-color: var(--ta-border-hover, #3b82f6);
-  }
-
-  /* Chip with icon */
-  .ta-chip__icon {
-    flex-shrink: 0;
-    width: 1em;
-    height: 1em;
-  }
-
-  /* =============================================================================
-   15. UNIFIED SECTION HEADING STYLES
-   Consistent styling for "Productos destacados", "Más vendidos", etc.
-   ============================================================================= */
-
-  /* Base section heading - unified across all pages */
-  .ta-section-heading,
-  .section-heading,
-  .title-wrapper .title,
-  h2.title {
-    font-family: var(--ta-font-heading);
-    font-size: var(--ta-font-size-h2, 3.6rem);
-    font-weight: var(--ta-font-bold, 700);
-    line-height: var(--ta-leading-tight, 1.2);
-    letter-spacing: var(--ta-tracking-tight, -0.025em);
-    color: var(--ta-text, #0f172a);
-    text-align: center;
-    margin-bottom: var(--ta-space-xl, 2.4rem);
-  }
-
-  /* Section heading with subtitle support */
-  .ta-section-header {
-    text-align: center;
-    margin-bottom: var(--ta-space-2xl, 3.2rem);
-  }
-
-  .ta-section-header .ta-section-heading {
-    margin-bottom: var(--ta-space-sm, 0.8rem);
-  }
-
-  .ta-section-subtitle {
-    font-size: var(--ta-font-size-md, 1.6rem);
-    color: var(--ta-text-muted, #64748b);
-    line-height: var(--ta-leading-relaxed, 1.625);
-    max-width: 60ch;
-    margin-inline: auto;
-  }
-
-  /* Mobile responsive typography for section headings */
-  @media screen and (max-width: 749px) {
-
-    .ta-section-heading,
-    .section-heading,
-    .title-wrapper .title,
-    h2.title {
-      font-size: var(--ta-font-size-h2, 2.4rem);
-      margin-bottom: var(--ta-space-lg, 1.6rem);
-    }
-
-    .ta-section-header {
-      margin-bottom: var(--ta-space-xl, 2.4rem);
-    }
-
-    .ta-section-subtitle {
-      font-size: var(--ta-font-size-sm, 1.4rem);
-    }
-  }
-
-  /* Section heading variants - ONLY explicit inverse class gets white text */
-  .ta-section-heading--inverse {
-    color: var(--ta-text-inverse, #ffffff);
-  }
-
-  .ta-section-subtitle--inverse {
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  /* =============================================================================
-   16. UNIFIED CARD BASE STYLES
-   Ensures all card types use consistent tokens
-   ============================================================================= */
-
-  /* Card base - applies to product cards, benefit cards, feature cards */
+  .ta-trust-chip,
   .ta-card {
-    background: var(--ta-bg, #ffffff);
-    border: 1px solid var(--ta-border-light, #f1f5f9);
-    border-radius: var(--ta-radius-card, 12px);
-    box-shadow: var(--ta-shadow-sm);
-    transition: var(--ta-transition-normal);
-    overflow: hidden;
+    transition: none;
   }
 
+  .ta-chip:hover,
+  .trust-indicator:hover,
+  .ta-trust-chip:hover,
   .ta-card:hover {
-    border-color: var(--ta-border-hover, #3b82f6);
-    box-shadow: var(--ta-shadow-card-hover);
-    transform: translateY(-4px);
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --ta-primary: #1d4ed8;
+    --ta-primary-contrast: #ffffff;
+    --ta-border: #1e293b;
+    --ta-shadow-button: none;
+    --ta-shadow-button-hover: none;
   }
 
-  /* Card padding variants */
-  .ta-card--padded {
-    padding: var(--ta-space-lg, 1.6rem);
+  .ta-btn--primary,
+  .button--primary {
+    border: 2px solid var(--ta-primary-contrast);
   }
 
-  .ta-card--padded-lg {
-    padding: var(--ta-space-xl, 2.4rem);
+  .ta-btn--secondary,
+  .button--secondary {
+    border-width: 3px;
   }
+}
 
-  /* Accessibility: reduced motion */
-  @media (prefers-reduced-motion: reduce) {
+/* =============================================================================
+   22. PRICE TYPOGRAPHY — Conversion-critical elements
+   Font-family: mono for price readability and scanning speed.
+   ============================================================================= */
 
-    .ta-chip,
-    .trust-indicator,
-    .ta-trust-chip,
-    .ta-card {
-      transition: none;
-    }
+/* Current/sale price — most prominent element on cards */
+.ta-price-current {
+  font-family: var(--ta-font-mono);
+  font-size: var(--ta-text-2xl);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: var(--ta-success, #10b981);
+  letter-spacing: -0.02em;
+  line-height: var(--ta-leading-tight, 1.1);
+}
 
-    .ta-chip:hover,
-    .trust-indicator:hover,
-    .ta-trust-chip:hover,
-    .ta-card:hover {
-      transform: none;
-    }
-  }
+/* Compare at / original price — crossed out */
+.ta-price-compare {
+  font-family: var(--ta-font-mono);
+  font-size: var(--ta-text-lg);
+  font-weight: var(--ta-font-normal, 400);
+  color: var(--ta-neutral-400, #94a3b8);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  line-height: var(--ta-leading-snug, 1.2);
+}
+
+/* Savings pill — urgency driver */
+.ta-price-savings {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--ta-font-body);
+  font-size: var(--ta-text-sm);
+  font-weight: var(--ta-font-bold, 700);
+  color: var(--ta-error-dark, #dc2626);
+  background: var(--ta-sale-bg, #FEF2F2);
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--ta-radius-pill, 9999px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   23. TEXT UTILITY CLASSES
+   ============================================================================= */
+
+/* Text wrapping */
+.ta-text-balance {
+  text-wrap: balance;
+}
+
+.ta-text-pretty {
+  text-wrap: pretty;
+}
+
+/* Gradient text */
+.ta-text-gradient {
+  background: var(--ta-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Line-clamped truncation */
+.ta-text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ta-text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

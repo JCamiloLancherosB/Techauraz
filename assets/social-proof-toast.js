@@ -1,9 +1,9 @@
 /* =============================================================================
-   SOCIAL PROOF TOAST — TechAura 2030
+   SOCIAL PROOF TOAST — TechAura Prompt 8
    
    Floating purchase notifications that show real-time social proof.
    Rotates through realistic Colombian buyer data.
-   Auto-dismiss, rate-limited, mobile-optimized.
+   Auto-dismiss after 4s, rate-limited, max 5 per session.
    ============================================================================= */
 
 (function () {
@@ -11,10 +11,12 @@
 
     // Configuration
     var CONFIG = {
-        initialDelay: 12000,    // 12s before first toast
-        interval: 35000,        // 35s between toasts
-        displayDuration: 6000,  // 6s visible
-        maxToasts: 20,          // stop after N toasts per session
+        initialDelayMin: 8000,  // 8-12s before first toast (randomized)
+        initialDelayMax: 12000,
+        intervalMin: 25000,     // 25-40s between toasts (randomized)
+        intervalMax: 40000,
+        displayDuration: 4000,  // 4s visible
+        maxToasts: 5,           // stop after 5 toasts per session
     };
 
     // Realistic Colombian buyer data
@@ -74,12 +76,12 @@
             '  <div class="ta-social-toast__content">',
             '    <p class="ta-social-toast__message"></p>',
             '    <p class="ta-social-toast__detail"></p>',
+            '    <span class="ta-social-toast__verified">Compra verificada</span>',
             '  </div>',
             '</div>'
         ].join('');
         document.body.appendChild(toastEl);
 
-        // Close button
         toastEl.querySelector('.ta-social-toast__close').addEventListener('click', function () {
             hideToast();
         });
@@ -96,7 +98,7 @@
         // Update content
         var imgContainer = toastEl.querySelector('.ta-social-toast__image');
         if (product.image) {
-            imgContainer.innerHTML = '<img src="' + product.image + '" alt="" width="56" height="56" loading="lazy">';
+            imgContainer.innerHTML = '<img src="' + product.image + '" alt="" width="48" height="48" loading="lazy">';
         }
         toastEl.querySelector('.ta-social-toast__message').textContent =
             name + ' de ' + city + ' compró';
@@ -117,6 +119,20 @@
         }
     }
 
+    function randBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function scheduleNext() {
+        var delay = randBetween(CONFIG.intervalMin, CONFIG.intervalMax);
+        setTimeout(function () {
+            showToast();
+            if (toastCount < CONFIG.maxToasts) {
+                scheduleNext();
+            }
+        }, delay);
+    }
+
     function init() {
         // Don't show on checkout or cart pages
         if (location.pathname.includes('/checkout') || location.pathname.includes('/cart')) return;
@@ -126,11 +142,14 @@
 
         createToastContainer();
 
-        // Start rotation
+        // Start rotation with randomized initial delay
+        var initialDelay = randBetween(CONFIG.initialDelayMin, CONFIG.initialDelayMax);
         setTimeout(function () {
             showToast();
-            setInterval(showToast, CONFIG.interval);
-        }, CONFIG.initialDelay);
+            if (toastCount < CONFIG.maxToasts) {
+                scheduleNext();
+            }
+        }, initialDelay);
     }
 
     // Run on DOM ready

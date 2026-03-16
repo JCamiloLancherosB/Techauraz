@@ -1,52 +1,148 @@
 /**
- * HEADER, ANNOUNCEMENT BAR & SLIDESHOW UI/UX FIXES
+ * HEADER, ANNOUNCEMENT BAR & SLIDESHOW UI/UX FIXES — Prompt 7
  * =================================================
- * Purpose: Fix visual inconsistencies and improve UX
  * 
- * PROBLEMS ADDRESSED:
- * 1. Announcement Bar - Disappears on scroll leaving empty space
- * 2. Header Icons - Inconsistent styles and sizes
- * 3. Slideshow Navigation - Inconsistent button styles
- * 4. Header Logo & Navigation - Improve active state visibility
- * 5. Slideshow Content - Better title contrast
+ * SECTIONS:
+ * 1. Announcement bar crossfade + dismiss
+ * 2. Header icons
+ * 3. Slideshow navigation
+ * 4. Header active nav
+ * 5. Slideshow content
  * 
  * Dependencies: Requires techauraz-header.css and slideshow-enhancements.css
  */
 
 /* =============================================================================
-   PROBLEM 1: ANNOUNCEMENT BAR - SMOOTH HIDE WITHOUT EMPTY SPACE
+   1. ANNOUNCEMENT BAR — Crossfade rotating messages
    ============================================================================= */
 
-/* Base announcement bar section - ensure smooth transitions */
+/* Section wrapper — hides on scroll */
 .announcement-bar-section {
   position: relative;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 36px;
+  overflow: hidden;
 }
 
-/* When scrolled, hide announcement bar smoothly without leaving space */
-body.scrolled-past-header .announcement-bar-section {
-  /* Move the bar up and out of view */
+/* When scrolled OR dismissed, hide announcement bar */
+body.scrolled-past-header .announcement-bar-section,
+.announcement-bar-section.is-dismissed {
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
+  max-height: 0;
 }
 
-/* Alternative: Keep announcement bar fixed to top (optional behavior) */
-/* Uncomment below if you prefer the bar to stay visible when scrolling */
-/*
-.announcement-bar-section.announcement-bar--sticky {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* Announcement bar — primary-700 background */
+.announcement-bar {
+  background: var(--ta-primary-700, #1e3a5f) !important;
+  color: #ffffff !important;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
-*/
+
+/* Gradient variant */
+.announcement-bar--gradient {
+  background: linear-gradient(135deg, var(--ta-primary-700, #1e3a5f) 0%, var(--ta-primary-900, #0f172a) 100%) !important;
+}
+
+/* Crossfade message container */
+.announcement-bar__messages {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual message — stacked with opacity transitions */
+.announcement-bar__message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 600ms ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 40px;
+}
+
+.announcement-bar__message.is-active {
+  opacity: 1;
+}
+
+/* Message text styling */
+.announcement-bar__message-text,
+.announcement-bar__text {
+  font-size: var(--ta-text-xs) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  text-decoration: none;
+  text-align: center;
+}
+
+.announcement-bar__message-text a,
+.announcement-bar__text a {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Dismiss button (X) */
+.announcement-bar__dismiss {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  transition: color 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+
+.announcement-bar__dismiss:hover {
+  color: #ffffff;
+}
+
+/* Mobile: truncate if needed */
+@media screen and (max-width: 749px) {
+  .announcement-bar__message {
+    padding: 0 32px;
+  }
+
+  .announcement-bar__message-text,
+  .announcement-bar__text {
+    font-size: 1rem !important;
+    letter-spacing: 0.03em !important;
+  }
+}
 
 /* =============================================================================
-   PROBLEM 2: HEADER ICONS - CONSISTENT VISUAL STYLE
+   2. HEADER ICONS — Consistent visual style
    ============================================================================= */
 
-/* Ensure all header icons have consistent rounded-square hover area */
 .header__icon,
 .header__icon--search,
 .header__icon--account,
@@ -54,44 +150,33 @@ body.scrolled-past-header .announcement-bar-section {
   border-radius: 8px;
 }
 
-/* Enhanced hover effect for icons */
 .header__icon:hover,
 .header__icon:focus-visible {
   background: rgba(59, 130, 246, 0.1);
 }
 
-/* Hide close icon from search button (if it appears as Q×) */
 .header__icon--search .icon-close {
   display: none;
 }
 
 /* =============================================================================
-   PROBLEM 3: SLIDESHOW NAVIGATION - UNIFIED BUTTON STYLE
+   3. SLIDESHOW NAVIGATION — Unified button style
    ============================================================================= */
 
-/* Ensure navigation buttons have consistent styling across all slides */
 .template-index .slideshow__controls--top .slider-button {
-  /* Consistent size */
   width: 48px;
   height: 48px;
   min-width: 48px;
   min-height: 48px;
-
-  /* Unified glassmorphism effect */
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 2px solid rgba(30, 58, 95, 0.2);
   border-radius: 50%;
-
-  /* Shadow for depth */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  /* Smooth transitions */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Enhanced hover state */
 .template-index .slideshow__controls--top .slider-button:hover {
   background: var(--ta-surface, #ffffff);
   border-color: var(--ta-primary, #3b82f6);
@@ -99,7 +184,6 @@ body.scrolled-past-header .announcement-bar-section {
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
 }
 
-/* Icon color within buttons */
 .template-index .slideshow__controls--top .slider-button svg,
 .template-index .slideshow__controls--top .slider-button .icon {
   width: 20px;
@@ -107,16 +191,14 @@ body.scrolled-past-header .announcement-bar-section {
   color: var(--ta-primary-dark, #1e3a5f);
 }
 
-/* Position buttons consistently */
 .template-index .slideshow__controls--top {
   padding: 0 1.5rem;
 }
 
 /* =============================================================================
-   SLIDESHOW PAGINATION DOTS - IMPROVED VISIBILITY
+   SLIDESHOW PAGINATION DOTS
    ============================================================================= */
 
-/* Enhanced dot styling for better visibility */
 .template-index slideshow-component .slider-counter__link--dots .dot {
   width: 12px;
   height: 12px;
@@ -126,7 +208,6 @@ body.scrolled-past-header .announcement-bar-section {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Active dot with blue accent */
 .template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
   background: var(--ta-primary, #3b82f6);
   border-color: var(--ta-primary, #3b82f6);
@@ -135,7 +216,6 @@ body.scrolled-past-header .announcement-bar-section {
   box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
 }
 
-/* Hover state for dots */
 .template-index slideshow-component .slider-counter__link--dots:hover .dot {
   background: rgba(59, 130, 246, 0.7);
   border-color: rgba(59, 130, 246, 0.9);
@@ -143,23 +223,20 @@ body.scrolled-past-header .announcement-bar-section {
 }
 
 /* =============================================================================
-   PROBLEM 4: HEADER LOGO & NAVIGATION
+   4. HEADER ACTIVE NAV — Enhanced visibility
    ============================================================================= */
 
-/* Logo container - clean, no artificial box */
 .header__heading-logo-wrapper {
   padding: 0;
   border-radius: 0;
 }
 
-/* Active navigation link - enhanced visibility */
 .header__menu-link[aria-current="page"] {
-  color: var(--ta-primary, #3b82f6);
+  color: var(--ta-primary-600, #2563eb);
   font-weight: 600;
   position: relative;
 }
 
-/* Active link underline indicator */
 .header__menu-link[aria-current="page"]::after {
   content: '';
   position: absolute;
@@ -167,23 +244,21 @@ body.scrolled-past-header .announcement-bar-section {
   left: 12px;
   right: 12px;
   height: 2px;
-  background: var(--ta-primary, #3b82f6);
+  background: var(--ta-primary-600, #2563eb);
   border-radius: 2px;
+  transform: scaleX(1);
 }
 
-/* Improved menu spacing */
 .header__inline-menu .header__menu-list {
   gap: var(--tech-space-2, 8px);
 }
 
 /* =============================================================================
-   PROBLEM 5: SLIDESHOW CONTENT BOX - BETTER READABILITY
+   5. SLIDESHOW CONTENT — Better readability
    ============================================================================= */
 
-/* Override golden gradient title with white for better readability */
 .template-index slideshow-component .banner__heading,
 .slideshow__text-wrapper .banner__heading {
-  /* Override the existing golden gradient with solid white */
   background: none !important;
   -webkit-background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
@@ -192,7 +267,6 @@ body.scrolled-past-header .announcement-bar-section {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced subtitle readability */
 .slideshow__text-wrapper .banner__text,
 .template-index slideshow-component .banner__text {
   color: rgba(255, 255, 255, 0.95);
@@ -200,7 +274,6 @@ body.scrolled-past-header .announcement-bar-section {
   line-height: 1.6;
 }
 
-/* Enhanced glassmorphism for content box */
 .slideshow__text-wrapper .banner__box,
 .template-index .tech-hero__overlay .banner__box {
   background: rgba(15, 23, 42, 0.88);
@@ -210,7 +283,6 @@ body.scrolled-past-header .announcement-bar-section {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Primary CTA button styling */
 .slideshow .button--primary,
 .banner__box .button--primary {
   background: var(--ta-primary, #3b82f6);
@@ -228,7 +300,6 @@ body.scrolled-past-header .announcement-bar-section {
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-/* Secondary CTA button styling */
 .slideshow .button--secondary,
 .banner__box .button--secondary {
   background: transparent;
@@ -247,19 +318,102 @@ body.scrolled-past-header .announcement-bar-section {
 }
 
 /* =============================================================================
+   6. SEARCH OVERLAY — Full-width dropdown
+   ============================================================================= */
+
+.predictive-search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: var(--ta-z-search-overlay, 600);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.predictive-search-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.predictive-search-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: var(--ta-shadow-xl,
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1));
+  transform: translateY(-100%);
+  transition: transform 200ms ease;
+}
+
+.predictive-search-overlay.is-active .predictive-search-form {
+  transform: translateY(0);
+}
+
+.predictive-search-form__input {
+  width: 100%;
+  height: 48px;
+  border: 2px solid var(--ta-neutral-200, #e2e8f0);
+  border-radius: var(--ta-radius-lg, 12px);
+  padding: 0 1rem;
+  font-size: var(--ta-text-base);
+  color: var(--ta-neutral-900, #0f172a);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.predictive-search-form__input:focus {
+  border-color: var(--ta-primary-500, #3b82f6);
+}
+
+.predictive-search-form__input::placeholder {
+  color: var(--ta-neutral-400, #94a3b8);
+}
+
+/* Predictive result items */
+.predictive-search__result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--ta-border-light, #f1f5f9);
+}
+
+.predictive-search__result-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--ta-radius-md, 8px);
+}
+
+.predictive-search__result-title {
+  font-size: var(--ta-text-sm);
+  font-weight: 500;
+  color: var(--ta-neutral-800, #1e293b);
+}
+
+.predictive-search__result-price {
+  font-family: var(--ta-font-mono);
+  font-size: var(--ta-text-sm);
+  font-weight: 600;
+  color: var(--ta-neutral-600, #475569);
+}
+
+/* =============================================================================
    RESPONSIVE ADJUSTMENTS
    ============================================================================= */
 
-/* Mobile: Adjust content box padding and button sizes */
 @media screen and (max-width: 749px) {
 
-  /* Smaller content box padding on mobile */
   .slideshow__text-wrapper .banner__box,
   .template-index .tech-hero__overlay .banner__box {
     padding: 24px 20px;
   }
 
-  /* Smaller navigation buttons on mobile */
   .template-index .slideshow__controls--top .slider-button {
     width: 40px;
     height: 40px;
@@ -273,7 +427,6 @@ body.scrolled-past-header .announcement-bar-section {
     height: 16px;
   }
 
-  /* Adjust button padding on mobile */
   .slideshow .button--primary,
   .banner__box .button--primary {
     padding: 12px 24px;
@@ -287,7 +440,6 @@ body.scrolled-past-header .announcement-bar-section {
   }
 }
 
-/* Tablet: Medium adjustments */
 @media screen and (min-width: 750px) and (max-width: 989px) {
 
   .slideshow__text-wrapper .banner__box,

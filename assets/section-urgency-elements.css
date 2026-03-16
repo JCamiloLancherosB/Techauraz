@@ -1,8 +1,8 @@
-/* Urgency Elements Section - Stock indicator states
-   Moved from inline styles in sections/urgency-elements.liquid
-   Load via stylesheet_tag in section for scoped loading.
+/* Urgency Elements Section CSS — TechAura Prompt 8
+   Stock indicator states + countdown digit cards + views counter + low-stock
 */
 
+/* ---- Stock indicator states ---- */
 .urgency-stock--low {
   background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
   border-color: var(--ta-warning, #fbbf24);
@@ -19,4 +19,183 @@
   background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
   border-color: var(--ta-error, #ef4444);
   color: #991b1b;
+}
+
+/* =============================================================================
+   COUNTDOWN TIMER — Digit card blocks
+   ============================================================================= */
+
+.countdown-timer__heading {
+  text-align: center;
+  font-size: var(--ta-text-lg);
+  font-weight: 700;
+  color: var(--ta-neutral-900, #0f172a);
+  margin-bottom: 1rem;
+}
+
+.countdown-timer__digits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.countdown-timer__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.countdown-timer__digit {
+  background: var(--ta-primary-900, #0f172a);
+  color: #ffffff;
+  font-family: var(--ta-font-mono);
+  font-size: 2rem;
+  font-weight: 800;
+  width: 56px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ta-radius-md, 8px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  transition: transform 150ms ease;
+}
+
+/* Flip animation on digit change */
+.countdown-timer__digit.digit-flip {
+  animation: digitFlip 300ms ease;
+}
+
+@keyframes digitFlip {
+  0% {
+    transform: perspective(200px) rotateX(-30deg);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: perspective(200px) rotateX(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: perspective(200px) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.countdown-timer__label {
+  font-size: var(--ta-text-xs);
+  font-weight: 500;
+  color: var(--ta-neutral-500, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.countdown-timer__separator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ta-neutral-400, #94a3b8);
+  padding-bottom: 20px;
+}
+
+/* Mobile */
+@media screen and (max-width: 749px) {
+  .countdown-timer__digit {
+    font-size: 1.5rem;
+    width: 44px;
+    height: 52px;
+  }
+}
+
+/* =============================================================================
+   PRODUCT VIEWS COUNTER — Pulsing dot
+   ============================================================================= */
+
+.product-views-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: var(--ta-radius-md, 8px);
+  margin: 0.5rem 0;
+}
+
+.product-views-counter__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ta-success, #22c55e);
+  animation: viewsDotPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes viewsDotPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
+}
+
+.product-views-counter__text {
+  font-size: var(--ta-text-sm);
+  color: var(--ta-neutral-700, #334155);
+  font-weight: 500;
+}
+
+.product-views-counter__count {
+  font-weight: 700;
+  color: var(--ta-neutral-900, #0f172a);
+}
+
+/* =============================================================================
+   LOW-STOCK INDICATOR — Below add-to-cart
+   ============================================================================= */
+
+.low-stock-indicator {
+  margin: 0.75rem 0;
+}
+
+.low-stock-indicator__text {
+  font-size: var(--ta-text-sm);
+  font-weight: 600;
+  color: var(--ta-error, #dc2626);
+  margin-bottom: 6px;
+}
+
+.low-stock-indicator__bar {
+  height: 6px;
+  background: var(--ta-neutral-100, #f1f5f9);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.low-stock-indicator__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ta-error, #ef4444), var(--ta-warning, #f59e0b));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown-timer__digit.digit-flip {
+    animation: none;
+  }
+
+  .product-views-counter__dot {
+    animation: none;
+  }
 }

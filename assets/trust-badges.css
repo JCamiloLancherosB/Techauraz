@@ -56,6 +56,17 @@
   gap: 0.5rem;
   flex: 0 1 auto;
   min-width: 0;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid var(--ta-border-light, #f1f5f9);
+  border-radius: var(--ta-radius-md, 8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.trust-badges-inline__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .trust-badges-inline__icon {
@@ -63,7 +74,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--trust-badge-icon-color, #6B46C1);
+  color: var(--ta-primary-500, #3b82f6);
 }
 
 .trust-badges-inline__icon .icon {
@@ -147,7 +158,7 @@
 }
 
 .trust-badges-inline--product .trust-badges-inline__icon .icon {
-  color: #10b981;
+  color: var(--ta-primary-500, #3b82f6);
 }
 
 /* Cart context */

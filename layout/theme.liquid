@@ -220,7 +220,7 @@
      This is normal Shopify behavior and should not interfere with our styles
      as long as the loading order is maintained.
      
-     Last updated: 2026-02-09
+     Last updated: 2026-03-13
      ============================================================================= -->
 
 <!-- TechAura Design Tokens - MUST load first to establish CSS custom properties -->
@@ -305,7 +305,7 @@
 <link rel="stylesheet" href="{{ 'micro-interactions.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'micro-interactions.css' | asset_url }}"></noscript>
 
-{%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
+{%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
   <!-- Social Proof Toast CSS (PAGES WITH PRODUCTS ONLY) -->
   <link rel="stylesheet" href="{{ 'social-proof-toast.css' | asset_url }}" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="{{ 'social-proof-toast.css' | asset_url }}"></noscript>
@@ -314,6 +314,20 @@
 <!-- Slideshow & Header Fixes (GLOBAL) -->
 <link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}"></noscript>
+
+<!-- 2026 CRO Best Practices — scroll, typography, performance, animations (GLOBAL) -->
+<link rel="stylesheet" href="{{ 'techauraz-2026-cro.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-2026-cro.css' | asset_url }}"></noscript>
+
+<!-- Global Polish — WhatsApp FAB, scroll-to-top, form inputs, cart drawer, page fade-in -->
+<link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}"></noscript>
+
+{%- if template.name == 'product' -%}
+  <!-- PDP Premium Design — gallery, buy box, trust badges, benefits (PRODUCT ONLY) -->
+  <link rel="preload" href="{{ 'techauraz-pdp-premium.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'techauraz-pdp-premium.css' | asset_url }}"></noscript>
+{%- endif -%}
 
     <!-- Preload de Fuentes -->
     {%- unless settings.type_body_font.system? -%}
@@ -426,7 +440,9 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
+    {%- if template.name == 'product' -%}
+      <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
     {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
@@ -439,8 +455,10 @@
     {%- comment -%} 2030 Advanced Systems {%- endcomment -%}
     <script src="{{ 'scroll-reveal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'micro-interactions.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'slideshow-autoplay-force.js' | asset_url }}" defer="defer"></script>
-    {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
+    {%- if template.name == 'index' -%}
+      <script src="{{ 'slideshow-autoplay-force.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
       <script src="{{ 'social-proof-toast.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 

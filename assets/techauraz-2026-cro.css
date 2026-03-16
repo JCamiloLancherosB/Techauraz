@@ -1,0 +1,261 @@
+/* =============================================================================
+   TECHAURAZ 2026 CRO BEST PRACTICES
+   Advanced CSS features for conversion rate optimization
+   
+   Features:
+   - Smooth scroll behavior
+   - Entry animations via @starting-style
+   - Rendering performance with content-visibility & contain
+   - Modern typography with text-wrap: pretty
+   - Scroll-triggered reveal animations
+   - Accessible reduced-motion support
+   - Color-mix for dynamic hover states
+   ============================================================================= */
+
+/* =============================================================================
+   1. SMOOTH SCROLL & TYPOGRAPHY FOUNDATIONS
+   ============================================================================= */
+
+html {
+    scroll-behavior: smooth;
+    /* Prevent overscroll bouncing on iOS/Chrome */
+    overscroll-behavior-y: none;
+}
+
+/* Modern typography — improved line breaking for readability */
+p,
+li,
+dd,
+figcaption,
+blockquote {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+/* =============================================================================
+   2. PERFORMANCE — Contain & content-visibility
+   ============================================================================= */
+
+/* Product cards — contain layout to avoid cross-card reflow */
+.card-wrapper.product-card-wrapper,
+.card-wrapper.product-card-wrapper .card {
+    contain: layout style;
+}
+
+/* Below-fold sections get content-visibility for render skipping */
+.shopify-section:nth-child(n+4):not(.shopify-section--header) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+}
+
+/* =============================================================================
+   3. SCROLL-TRIGGERED REVEAL ANIMATIONS
+   Uses IntersectionObserver-driven class toggle for smooth entry
+   ============================================================================= */
+
+/* Elements that should animate in on scroll */
+.ta-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ta-reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered reveals for grid items */
+.ta-reveal--stagger:nth-child(1) {
+    transition-delay: 0ms;
+}
+
+.ta-reveal--stagger:nth-child(2) {
+    transition-delay: 80ms;
+}
+
+.ta-reveal--stagger:nth-child(3) {
+    transition-delay: 160ms;
+}
+
+.ta-reveal--stagger:nth-child(4) {
+    transition-delay: 240ms;
+}
+
+.ta-reveal--stagger:nth-child(5) {
+    transition-delay: 320ms;
+}
+
+.ta-reveal--stagger:nth-child(6) {
+    transition-delay: 400ms;
+}
+
+/* Fade-in variants */
+.ta-reveal--fade-up {
+    transform: translateY(32px);
+}
+
+.ta-reveal--fade-left {
+    opacity: 0;
+    transform: translateX(-24px);
+}
+
+.ta-reveal--fade-right {
+    opacity: 0;
+    transform: translateX(24px);
+}
+
+.ta-reveal--fade-left.ta-reveal--visible,
+.ta-reveal--fade-right.ta-reveal--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale-in for images and cards */
+.ta-reveal--scale {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.ta-reveal--scale.ta-reveal--visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =============================================================================
+   4. ENTRY ANIMATIONS via @starting-style (Progressive Enhancement)
+   For browsers supporting CSS @starting-style (Chrome 117+, Safari 17.5+)
+   ============================================================================= */
+
+@supports (animation-timeline: view()) {
+
+    /* View-driven animations for sections scrolled into view */
+    .shopify-section:not(.shopify-section--header):not(.section-header) {
+        animation: ta-section-reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 30%;
+    }
+
+    @keyframes ta-section-reveal {
+        from {
+            opacity: 0.7;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* =============================================================================
+   5. INTERACTIVE HOVER STATES — color-mix for dynamic blending
+   ============================================================================= */
+
+/* Button hover using color-mix — creates perfectly blended hover colors */
+@supports (color: color-mix(in oklch, red, blue)) {
+
+    .button--primary:hover,
+    .btn-primary:hover,
+    .slideshow-cta.button--primary:hover {
+        background: color-mix(in oklch, var(--ta-primary, #3b82f6) 85%, black);
+    }
+
+    .card-wrapper:hover .card {
+        border-color: color-mix(in oklch, var(--ta-primary, #3b82f6) 30%, transparent);
+    }
+}
+
+/* =============================================================================
+   6. TOUCH & INTERACTION FEEDBACK
+   ============================================================================= */
+
+/* Active press feedback for all buttons */
+button:active:not(:disabled),
+a.button:active,
+.slideshow-cta:active,
+.whatsapp-button:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+}
+
+/* Better focus-visible ring for keyboard users */
+:focus-visible {
+    outline: 3px solid var(--ta-primary, #3b82f6);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* =============================================================================
+   7. REDUCED MOTION — Respect user accessibility preferences
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .ta-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .ta-reveal--visible {
+        transition: none;
+    }
+
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =============================================================================
+   8. SCROLL SNAP — Smooth mobile slideshow swiping
+   ============================================================================= */
+
+/* Apply scroll-snap to slideshow for mobile swipe */
+@media screen and (max-width: 749px) {
+    .slideshow .slider {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+
+    .slideshow .slider .slideshow__slide {
+        scroll-snap-align: center;
+    }
+}
+
+/* =============================================================================
+   9. SMOOTH ACCORDION ANIMATIONS (2026 CSS)
+   ============================================================================= */
+
+@supports (interpolate-size: allow-keywords) {
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    details .accordion__content {
+        height: 0;
+        overflow: clip;
+        transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    details[open] .accordion__content {
+        height: auto;
+    }
+}

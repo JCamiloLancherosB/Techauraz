@@ -1,103 +1,105 @@
 /*
- * Slideshow Enhancements - Slider Controls & CTAs
- * Purpose: Improve visibility and positioning of slideshow controls and call-to-action buttons
+ * Slideshow Enhancements — Prompt 4 Redesign (March 2026)
+ * Purpose: Premium hero slideshow with crossfade transitions, left-aligned layout,
+ *          amber CTA gradient, staggered animations, and pill indicators.
  * Scoped to: .template-index (home page) slideshow component
- * Updated: 2026-01-28 - Fixed image proportions, overlay alignment, unified CTA rendering
  */
 
 /* =============================================================================
-   SLIDESHOW IMAGE VISIBILITY & ASPECT RATIO FIXES
-   Critical: Ensure all slides show images with correct proportions
-   Mobile: 16:9 aspect ratio (56.25% padding-bottom)
-   Desktop: Wider hero with max-height constraints
+   1. HERO WRAPPER & ASPECT RATIO (CLS Prevention)
    ============================================================================= */
 
-/* Tech hero wrapper hooks (scoped to home page) */
 .template-index .tech-hero {
   position: relative;
   overflow: hidden;
-  /* Creates new stacking context to ensure z-index within hero doesn't affect header */
   isolation: isolate;
 }
 
-/* Container for proper aspect ratio handling */
 .template-index .tech-hero-slideshow {
   width: 100%;
-  /* 
-   * Mobile: Use aspect-ratio for proper proportions
-   * Fallback: min-height provides consistent height for browsers without aspect-ratio support
-   */
-  aspect-ratio: 16 / 9;
-  min-height: 280px;
-  max-height: 400px;
+  aspect-ratio: 4 / 3;
+  min-height: 320px;
+  max-height: 520px;
 }
 
 @media screen and (min-width: 750px) {
   .template-index .tech-hero-slideshow {
-    aspect-ratio: 21 / 9;
-    min-height: 350px;
-    max-height: 500px;
+    aspect-ratio: 16 / 7;
+    min-height: 400px;
+    max-height: 600px;
   }
 }
 
 @media screen and (min-width: 990px) {
   .template-index .tech-hero-slideshow {
-    aspect-ratio: 21 / 8;
-    min-height: 400px;
-    max-height: 560px;
+    min-height: 480px;
+    max-height: 680px;
   }
 }
 
-.template-index .tech-hero__media {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* =============================================================================
+   2. CROSSFADE TRANSITIONS
+   Slides stack on top of each other; active slide fades in.
+   ============================================================================= */
+
+/* Override Dawn's horizontal slider to stacked positioning */
+.template-index .tech-hero__media.slideshow,
+.template-index .tech-hero__media.slider {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  padding-bottom: 0;
 }
 
-/* 
- * Overlay alignment - centered across all breakpoints
- * This flexbox centering applies to .tech-hero__overlay (scoped to homepage)
- * The .slideshow__text-wrapper styles below handle general banner content
- */
-.template-index .tech-hero__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.template-index .tech-hero .slideshow__slide {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 800ms ease-in-out, visibility 0s linear 800ms;
+  z-index: 1;
+  min-height: 320px;
+  max-height: 520px;
+  width: 100% !important;
+  scroll-snap-align: none;
+  transform: none !important;
 }
 
-.template-index .tech-hero__overlay .banner__box,
-.template-index .tech-hero__overlay .slideshow-ctas {
-  pointer-events: auto;
+.template-index .tech-hero .slideshow__slide.is-active,
+.template-index .tech-hero .slideshow__slide[aria-hidden="false"],
+.template-index .tech-hero .slideshow__slide:first-child:not(.is-next):not(.is-prev) {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 800ms ease-in-out, visibility 0s linear 0s;
+  z-index: 2;
 }
+
+@media screen and (min-width: 750px) {
+  .template-index .tech-hero .slideshow__slide {
+    min-height: 400px;
+    max-height: 600px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .template-index .tech-hero .slideshow__slide {
+    min-height: 480px;
+    max-height: 680px;
+  }
+}
+
+/* =============================================================================
+   3. IMAGE SIZING
+   ============================================================================= */
 
 .template-index .tech-hero__media,
 .template-index .tech-hero .slideshow__slide {
-  min-height: 280px;
   height: 100%;
 }
 
-@media screen and (min-width: 750px) {
-
-  .template-index .tech-hero__media,
-  .template-index .tech-hero .slideshow__slide {
-    min-height: 350px;
-  }
-}
-
-@media screen and (min-width: 990px) {
-
-  .template-index .tech-hero__media,
-  .template-index .tech-hero .slideshow__slide {
-    min-height: 502px;
-    max-height: 560px;
-  }
-}
-
-/* Image sizing - object-fit: cover with position center */
 .template-index .tech-hero__media img,
 .template-index .tech-hero__media .slideshow__media img,
 .template-index .tech-hero__media .banner__media img {
@@ -107,26 +109,428 @@
   object-position: center center;
 }
 
+.slideshow__media,
+.banner__media {
+  min-height: 320px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--ta-bg-secondary, #f1f5f9);
+}
+
+.slideshow__media img,
+.banner__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
 /* =============================================================================
-   SLIDESHOW CONTROLS - Single unified control set
-   Position: Auto-rotate mode = arrows on sides (top), Manual mode = controls at bottom
+   4. GRADIENT OVERLAY — Left text-safe zone
+   Desktop: dark left → transparent right (product visible on right)
+   Mobile: darker center for centered text legibility
    ============================================================================= */
 
-/* Base control positioning for manual mode (dots/counter at bottom) */
+.slideshow__media::after,
+.banner__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Mobile: stronger center overlay for centered text */
+.slideshow__media::after {
+  background: linear-gradient(180deg,
+      rgba(15, 23, 42, 0.5) 0%,
+      rgba(15, 23, 42, 0.7) 40%,
+      rgba(15, 23, 42, 0.6) 100%);
+}
+
+/* Desktop: left-weighted overlay for left-aligned content */
+@media screen and (min-width: 750px) {
+  .slideshow__media::after {
+    background: linear-gradient(to right,
+        rgba(15, 23, 42, 0.85) 0%,
+        rgba(15, 23, 42, 0.4) 50%,
+        transparent 100%);
+  }
+}
+
+.slideshow__media img {
+  position: relative;
+  z-index: 0;
+}
+
+/* =============================================================================
+   5. CONTENT OVERLAY — Left-aligned (desktop), centered (mobile)
+   ============================================================================= */
+
+.template-index .tech-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  /* Mobile: center, Desktop: left-align */
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .template-index .tech-hero__overlay {
+    justify-content: flex-start;
+    padding: 3rem 4rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .template-index .tech-hero__overlay {
+    padding: 4rem 6rem;
+  }
+}
+
+.template-index .tech-hero__overlay .banner__box,
+.template-index .tech-hero__overlay .slideshow-ctas,
+.template-index .tech-hero__overlay .slide-trust-row {
+  pointer-events: auto;
+}
+
+/* Text box — transparent, no glassmorphism, left-aligned on desktop */
+.slideshow__text-wrapper,
+.banner__content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+
+  .slideshow__text-wrapper,
+  .banner__content {
+    justify-content: flex-start;
+    padding: 2rem 4rem;
+  }
+}
+
+.slideshow__text-wrapper .banner__box,
+.banner__content .banner__box {
+  pointer-events: auto;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1.5rem;
+  max-width: 100%;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+
+  .slideshow__text-wrapper .banner__box,
+  .banner__content .banner__box {
+    padding: 2rem 0;
+    max-width: 55%;
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 990px) {
+
+  .slideshow__text-wrapper .banner__box,
+  .banner__content .banner__box {
+    max-width: 50%;
+  }
+}
+
+/* =============================================================================
+   6. STAGGERED CONTENT ANIMATIONS
+   Heading → Subheading → CTAs → Trust fade in sequentially
+   ============================================================================= */
+
+@keyframes slideContentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* All content starts invisible */
+.template-index .tech-hero .slideshow__slide .banner__heading,
+.template-index .tech-hero .slideshow__slide .banner__text,
+.template-index .tech-hero .slideshow__slide .banner__buttons,
+.template-index .tech-hero .slideshow__slide .slide-trust-row {
+  opacity: 0;
+}
+
+/* Active slide triggers staggered animation */
+.template-index .tech-hero .slideshow__slide.is-active .banner__heading,
+.template-index .tech-hero .slideshow__slide[aria-hidden="false"] .banner__heading {
+  animation: slideContentFadeIn 600ms ease-out 100ms forwards;
+}
+
+.template-index .tech-hero .slideshow__slide.is-active .banner__text,
+.template-index .tech-hero .slideshow__slide[aria-hidden="false"] .banner__text {
+  animation: slideContentFadeIn 600ms ease-out 200ms forwards;
+}
+
+.template-index .tech-hero .slideshow__slide.is-active .banner__buttons,
+.template-index .tech-hero .slideshow__slide[aria-hidden="false"] .banner__buttons {
+  animation: slideContentFadeIn 600ms ease-out 300ms forwards;
+}
+
+.template-index .tech-hero .slideshow__slide.is-active .slide-trust-row,
+.template-index .tech-hero .slideshow__slide[aria-hidden="false"] .slide-trust-row {
+  animation: slideContentFadeIn 600ms ease-out 400ms forwards;
+}
+
+/* =============================================================================
+   7. HEADING & SUBHEADING TYPOGRAPHY
+   ============================================================================= */
+
+.slideshow__text-wrapper .banner__heading,
+.banner__content .banner__heading,
+.template-index slideshow-component .banner__heading {
+  font-family: var(--ta-font-heading);
+  font-size: var(--ta-text-hero);
+  font-weight: var(--ta-font-extrabold, 800);
+  color: #ffffff;
+  line-height: var(--ta-leading-tight, 1.1);
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.2rem;
+  text-wrap: balance;
+}
+
+/* Mobile: smaller heading */
+@media screen and (max-width: 749px) {
+
+  .slideshow__text-wrapper .banner__heading,
+  .banner__content .banner__heading,
+  .template-index slideshow-component .banner__heading {
+    font-size: var(--ta-text-3xl);
+  }
+}
+
+/* Disable golden gradient from old enhancements — use clean white */
+.template-index slideshow-component .banner__heading {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: unset !important;
+}
+
+.slideshow__text-wrapper .banner__text,
+.banner__content .banner__text,
+.template-index slideshow-component .banner__text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--ta-text-lg);
+  font-weight: var(--ta-font-normal, 400);
+  line-height: var(--ta-leading-relaxed, 1.6);
+  max-width: 50ch;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 749px) {
+
+  .slideshow__text-wrapper .banner__text,
+  .banner__content .banner__text,
+  .template-index slideshow-component .banner__text {
+    font-size: var(--ta-text-base);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =============================================================================
+   8. CTA BUTTONS — Amber primary pill, ghost secondary
+   ============================================================================= */
+
+.template-index slideshow-component .banner__buttons.slideshow-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .template-index slideshow-component .banner__buttons.slideshow-ctas {
+    justify-content: flex-start;
+  }
+}
+
+.template-index slideshow-component .slideshow-cta {
+  min-height: 48px;
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--ta-text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  text-decoration: none;
+  border-radius: var(--ta-radius-pill, 9999px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* Primary CTA — Warm amber gradient (conversion-optimized) */
+.template-index slideshow-component .slideshow-cta.button--primary {
+  background: var(--ta-gradient-cta) !important;
+  color: var(--ta-cta-contrast, #ffffff) !important;
+  border: none !important;
+  box-shadow: 0 4px 20px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:hover {
+  background: var(--ta-gradient-cta-hover) !important;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 30px var(--ta-glow-cta, rgba(245, 158, 11, 0.5));
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.template-index slideshow-component .slideshow-cta.button--primary:focus-visible {
+  outline: 3px solid rgba(245, 158, 11, 0.7);
+  outline-offset: 3px;
+}
+
+/* Secondary CTA — Ghost button */
+.template-index slideshow-component .slideshow-cta.button--secondary {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+.template-index slideshow-component .slideshow-cta.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  transform: translateY(-2px);
+}
+
+.template-index slideshow-component .slideshow-cta.button--secondary:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+.template-index slideshow-component .slideshow-cta[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Mobile: single full-width CTA */
+@media screen and (max-width: 749px) {
+  .template-index slideshow-component .slideshow-ctas {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .template-index slideshow-component .slideshow-cta {
+    width: 100%;
+    min-height: 52px;
+    padding: 1.4rem 2rem;
+  }
+
+  /* Hide secondary CTA on mobile */
+  .template-index slideshow-component .slideshow-cta.button--secondary {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .template-index slideshow-component .slideshow-ctas {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+
+  .template-index slideshow-component .slideshow-cta {
+    min-width: 180px;
+  }
+}
+
+/* =============================================================================
+   9. TRUST MICRO-INDICATORS
+   ============================================================================= */
+
+.slide-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  margin-top: 1.5rem;
+  font-size: var(--ta-text-xs);
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+  justify-content: center;
+}
+
+@media screen and (min-width: 750px) {
+  .slide-trust-row {
+    justify-content: flex-start;
+  }
+}
+
+.slide-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.slide-trust-item .trust-check {
+  color: var(--ta-success, #10b981);
+  font-weight: 600;
+}
+
+/* =============================================================================
+   10. PILL SLIDE INDICATORS (dots)
+   Active dot is elongated pill, inactive are small circles
+   ============================================================================= */
+
+/* Container: absolute at bottom-center */
 .template-index slideshow-component .slideshow__controls {
   position: absolute;
-  bottom: 24px;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
   pointer-events: auto;
 }
 
-/* Auto-rotate mode: arrows positioned on sides */
+/* Auto-rotate: arrows on sides */
 .template-index slideshow-component .slideshow__controls--top {
   position: absolute;
   top: 50%;
@@ -139,265 +543,55 @@
   padding: 0 1.5rem;
 }
 
-/* Force placeholder SVGs in slideshow to be visible and fill container */
-/* 
- * Note: !important on width/height/max properties is required to override base.css line 337-345
- * which forces all SVGs in .media containers to 1.6rem using !important.
- * This is a justified use since we're specifically overriding another !important rule.
- */
-.slideshow__media.placeholder .placeholder-svg,
-.banner__media.placeholder .placeholder-svg {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  min-height: 280px;
-  /* Mobile - matches hero */
-  object-fit: cover;
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
-@media screen and (min-width: 750px) {
-
-  .slideshow__media.placeholder .placeholder-svg,
-  .banner__media.placeholder .placeholder-svg {
-    min-height: 350px;
-    /* Tablet - matches hero */
-  }
-}
-
-@media screen and (min-width: 990px) {
-
-  .slideshow__media.placeholder .placeholder-svg,
-  .banner__media.placeholder .placeholder-svg {
-    min-height: 400px;
-    /* Desktop - matches hero */
-    max-height: 560px;
-  }
-}
-
-/* Ensure slideshow media containers have consistent height with aspect ratio */
-.slideshow__media,
-.banner__media {
-  min-height: 280px;
-  max-height: 400px;
-  /* Cap mobile height */
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  background: var(--ta-bg-secondary, #f1f5f9);
-  /* Light gray fallback background */
-}
-
-/* Tablet: Set height */
-@media screen and (min-width: 750px) {
-
-  .slideshow__media,
-  .banner__media {
-    min-height: 350px;
-    max-height: 500px;
-  }
-}
-
-/* Desktop: Set height with max to prevent excessive height */
-@media screen and (min-width: 990px) {
-
-  .slideshow__media,
-  .banner__media {
-    min-height: 400px;
-    max-height: 560px;
-  }
-}
-
-/* Ensure all images in slideshow are visible with proper object-fit */
-.slideshow__media img,
-.banner__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Explicitly ensure lazy loading doesn't affect slideshow images */
-.slideshow__media img[loading="lazy"],
-.banner__media img[loading="lazy"] {
-  opacity: 1;
-}
-
-/* Ensure slideshow slide containers maintain consistent height */
-.slideshow__slide {
-  min-height: 280px;
-  /* Mobile */
-  max-height: 400px;
-  /* Cap mobile height to prevent excessive growth */
-}
-
-@media screen and (min-width: 750px) {
-  .slideshow__slide {
-    min-height: 350px;
-    /* Tablet - matches hero ratio */
-    max-height: 500px;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .slideshow__slide {
-    min-height: 400px;
-    /* Desktop - matches hero ratio */
-    max-height: 560px;
-  }
-}
-
-/* =============================================================================
-   OVERLAY ALIGNMENT - Consistent text/button centering across breakpoints
-   ============================================================================= */
-
-/* =============================================================================
-   OVERLAY ALIGNMENT - Consistent text/button centering across breakpoints
-   Note: These selectors target general slideshow/banner content (not .tech-hero specific)
-   Parent containers have explicit heights set via .slideshow__slide and .banner__media
-   ============================================================================= */
-
-/* Overlay styling - text content positioning for better centering */
-/* This ensures text content stays above the overlay - z-index layering */
-.slideshow__text-wrapper,
-.banner__content {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  /* Above overlay (z-index: 2) */
-  pointer-events: none;
-  /* Allow clicks to pass through wrapper */
+/* Dot buttons */
+.template-index slideshow-component .slider-counter__link--dots {
+  padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  /* Contain content within boundaries - prevents overlap with adjacent sections */
-  overflow: hidden;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+  background: transparent;
+  border: none;
 }
 
-/* Mobile-specific overlay alignment */
-@media screen and (max-width: 749px) {
-
-  .slideshow__text-wrapper,
-  .banner__content {
-    padding: 0.75rem;
-  }
+.template-index slideshow-component .slider-counter__link--dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Re-enable pointer events for interactive elements */
-.slideshow__text-wrapper .banner__box,
-.banner__content .banner__box {
-  pointer-events: auto;
-  /* Enhanced glassmorphism effect - premium depth and elegance */
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  padding: 2rem 2.5rem;
-  max-width: min(90%, 600px);
-  /* Ensure consistent centering of content within box */
-  text-align: center;
+/* Active dot: elongated pill */
+.template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
+  width: 24px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 9999px;
 }
 
-@media screen and (min-width: 750px) {
-
-  .slideshow__text-wrapper .banner__box,
-  .banner__content .banner__box {
-    padding: 3rem 3.5rem;
-  }
+.template-index slideshow-component .slider-counter__link--dots:hover .dot {
+  background: rgba(255, 255, 255, 0.7);
 }
 
 /* =============================================================================
-   SLIDESHOW HEADING - Premium golden gradient typography
+   11. SLIDESHOW ARROW CONTROLS
    ============================================================================= */
 
-/* Hero heading with golden gradient for premium impact */
-.slideshow__text-wrapper .banner__heading,
-.banner__content .banner__heading,
-.template-index slideshow-component .banner__heading {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  /* Fallback for browsers without background-clip support */
-  color: #fbbf24;
-}
-
-/* Slideshow text/subheading styling */
-.slideshow__text-wrapper .banner__text,
-.banner__content .banner__text,
-.template-index slideshow-component .banner__text {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.125rem;
-  line-height: 1.6;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Ensure overlay is positioned correctly with subtle gradient - not a "patch" look */
-/* Note: Uses gradient overlay for premium appearance instead of solid block */
-.slideshow__media::after,
-.banner__media::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* Gradient overlay: subtle at top, stronger at bottom for text readability */
-  background: linear-gradient(180deg,
-      rgba(0, 0, 0, 0.15) 0%,
-      rgba(0, 0, 0, 0.25) 40%,
-      rgba(0, 0, 0, 0.45) 100%);
-  content: '';
-  z-index: 1;
-  /* Above image (z-index: 0) */
-  pointer-events: none;
-  /* Don't block clicks */
-}
-
-/* Ensure the image stays at base z-index */
-.slideshow__media img,
-.banner__media img {
-  position: relative;
-  z-index: 0;
-}
-
-/* =============================================================================
-   SLIDESHOW CONTROLS - Desktop & Mobile Positioning
-   Unified control styling - removed duplicate class references
-   
-   Button size rationale:
-   - 52x52px exceeds WCAG 2.1 minimum touch target (44x44px) by ~18%
-   - Provides comfortable touch area without being visually dominant
-   - Consistent with common UI patterns for navigation controls
-   ============================================================================= */
-
-/* Desktop: Arrow buttons centered vertically on hero (auto-rotate mode) */
 @media screen and (min-width: 750px) {
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     position: relative;
-    z-index: var(--ta-z-slideshow-controls, 20);
-    /* Local stacking within slideshow */
-    /* Enhanced glassmorphism effect for navigation buttons */
+    z-index: 20;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    /* 48px exceeds WCAG 2.1 minimum touch target (44px) */
     width: 48px;
     height: 48px;
     min-width: 48px;
@@ -416,479 +610,117 @@
     transform: scale(1.1);
   }
 
-  .template-index slideshow-component .slideshow__controls--top .slider-button:focus {
-    outline: 3px solid rgba(255, 255, 255, 0.5);
-    outline-offset: 3px;
-  }
-
   .template-index slideshow-component .slideshow__controls--top .slider-button:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.7);
     outline-offset: 3px;
     background: rgba(255, 255, 255, 0.25);
   }
 
-  /* Ensure SVG icons in slider buttons are white */
   .template-index slideshow-component .slideshow__controls--top .slider-button svg {
     color: white;
     fill: currentColor;
   }
 }
 
-/* 
- * Mobile: Hide arrows for auto-rotate, show dots below hero for manual mode
- * Arrows are hidden on mobile for better UX - users swipe to navigate slides
- */
+/* Mobile: hide arrows, users swipe */
 @media screen and (max-width: 749px) {
-
-  /* Hide arrow buttons on mobile for auto-rotate mode - users swipe instead */
   .template-index slideshow-component .slideshow__controls--top .slider-button {
     display: none;
   }
 
-  /* Controls positioning for mobile - spacing ensures no overlap with next section */
   .template-index slideshow-component .slideshow__controls {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin: 1rem auto 0;
-    /* Padding provides separation from next section content */
-    padding: 0.75rem 0 1.5rem;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  /* Dots container */
-  .template-index slideshow-component .slider-counter {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .template-index slideshow-component .slideshow__control-wrapper {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-/* Desktop: Position controls at bottom of hero */
-@media screen and (min-width: 750px) {
-  .template-index slideshow-component .slideshow__controls:not(.slideshow__controls--top) {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: var(--ta-z-slideshow-controls, 20);
-    /* Local stacking within slideshow */
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* When controls are at top (with autoplay), position arrows on sides */
-  .template-index slideshow-component .slideshow__controls--top {
-    position: absolute;
-    top: 50%;
-    bottom: auto;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    pointer-events: none;
-    justify-content: space-between;
-    padding: 0 1.5rem;
+    bottom: 1rem;
   }
 }
 
 /* =============================================================================
-   SLIDER DOTS - Improved Visibility & Touch Targets
+   12. SLIDESHOW CONTAINER SPACING
    ============================================================================= */
 
-.template-index slideshow-component .slider-counter__link--dots {
-  padding: 0.7rem;
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
-
-.template-index slideshow-component .slider-counter__link--dots:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.template-index slideshow-component .slider-counter__link--dots:focus {
-  outline: 2px solid rgba(37, 99, 235, 0.8);
-  outline-offset: 2px;
-}
-
-.template-index slideshow-component .slider-counter__link--dots:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.8);
-  outline-offset: 2px;
-}
-
-.template-index slideshow-component .slider-counter__link--dots .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(226, 232, 240, 0.5);
-  border: 2px solid rgba(226, 232, 240, 0.7);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
-  background: var(--ta-primary, #2563eb);
-  border-color: var(--ta-primary, #2563eb);
-  width: 14px;
-  height: 14px;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
-}
-
-.template-index slideshow-component .slider-counter__link--dots:hover .dot {
-  background: rgba(37, 99, 235, 0.7);
-  border-color: rgba(37, 99, 235, 0.9);
-  transform: scale(1.15);
-}
-
-/* Mobile specific dot styling */
-@media screen and (max-width: 749px) {
-  .template-index slideshow-component .slider-counter__link--dots {
-    padding: 0.6rem;
-    min-width: 48px;
-    min-height: 48px;
-  }
-
-  .template-index slideshow-component .slider-counter__link--dots .dot {
-    width: 11px;
-    height: 11px;
-  }
-
-  .template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-/* =============================================================================
-   SLIDESHOW CTAs - Canonical CTA Rendering (Single Source of Truth)
-   Note: CTAs are rendered ONLY in slideshow.liquid via .banner__buttons.slideshow-ctas
-   This is the authoritative styling - other files should not override these styles.
-   ============================================================================= */
-
-/* CTA Container - targets the combined class selector for specificity */
-.template-index slideshow-component .banner__buttons.slideshow-ctas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-  position: relative;
-  z-index: 10;
-  /* Ensure CTAs are above overlay */
-  pointer-events: auto;
-  /* Ensure clickability */
-}
-
-/* Individual CTA Button */
-.template-index slideshow-component .slideshow-cta {
-  min-height: 48px;
-  /* Exceeds 44px requirement for better touch targets */
-  padding: 1rem 2rem;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.025em;
-  line-height: 1.5;
-  text-decoration: none;
-  border-radius: 0.75rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  pointer-events: auto;
-  /* Ensure clickability */
-}
-
-/* Primary CTA - Neon Green conversion button with pulse (Isolation Effect) */
-.template-index slideshow-component .slideshow-cta.button--primary {
-  background: linear-gradient(135deg, #00D95F 0%, #00C853 100%);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 4px 14px 0 rgba(0, 217, 95, 0.4);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  animation: cta-pulse 2s ease-in-out infinite;
-}
-
-@keyframes cta-pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 4px 14px 0 rgba(0, 217, 95, 0.4);
-  }
-
-  50% {
-    box-shadow: 0 4px 30px 0 rgba(0, 217, 95, 0.7), 0 0 60px rgba(0, 217, 95, 0.2);
-  }
-}
-
-.template-index slideshow-component .slideshow-cta.button--primary:hover {
-  background: linear-gradient(135deg, #00E676 0%, #00D95F 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px 0 rgba(0, 217, 95, 0.6);
-  animation: none;
-}
-
-.template-index slideshow-component .slideshow-cta.button--primary:focus {
-  outline: 3px solid rgba(0, 217, 95, 0.5);
-  outline-offset: 3px;
-}
-
-.template-index slideshow-component .slideshow-cta.button--primary:focus-visible {
-  outline: 3px solid rgba(0, 217, 95, 0.7);
-  outline-offset: 3px;
-}
-
-/* Secondary CTA - "CONTACTAR" transparent with border */
-.template-index slideshow-component .slideshow-cta.button--secondary {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.template-index slideshow-component .slideshow-cta.button--secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
-}
-
-.template-index slideshow-component .slideshow-cta.button--secondary:focus {
-  outline: 3px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 3px;
-}
-
-.template-index slideshow-component .slideshow-cta.button--secondary:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.7);
-  outline-offset: 3px;
-}
-
-/* Disabled state */
-.template-index slideshow-component .slideshow-cta[aria-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Mobile: Full-width stacked buttons with 44px+ min height */
-@media screen and (max-width: 749px) {
-  .template-index slideshow-component .slideshow-ctas {
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .template-index slideshow-component .slideshow-cta {
-    width: 100%;
-    max-width: 100%;
-    min-height: 52px;
-    /* Exceeds 44px requirement */
-    padding: 16px 24px;
-  }
-}
-
-/* Desktop: Side-by-side buttons */
-@media screen and (min-width: 750px) {
-  .template-index slideshow-component .slideshow-ctas {
-    flex-direction: row;
-    gap: 1.25rem;
-  }
-
-  .template-index slideshow-component .slideshow-cta {
-    min-width: 180px;
-  }
-}
-
-/* =============================================================================
-   PREVENT CONTROL OVERLAP - Ensure controls stay within slideshow bounds
-   ============================================================================= */
-
-/* Container for slideshow to prevent overflow and ensure proper positioning */
 .template-index slideshow-component {
   position: relative;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-/* Ensure slideshow has proper positioning context for absolute controls */
-/* Arrow positioning: lines 95-142, Dot positioning: lines 180-212 */
 .template-index slideshow-component .slideshow {
   position: relative;
-  /* Positioning context for arrows and dots */
   margin-bottom: 0;
-  padding-bottom: 4rem;
-  /* Space for dots */
-}
-
-@media screen and (max-width: 749px) {
-  .template-index slideshow-component .slideshow {
-    padding-bottom: 2rem;
-  }
-
-  /* Add extra spacing after slideshow on mobile to prevent overlap */
-  .template-index slideshow-component+* {
-    margin-top: 2rem;
-  }
-}
-
-/* Adjust slideshow section spacing - fallback for browsers without :has() support */
-.template-index .section slideshow-component {
-  display: block;
-}
-
-@supports selector(:has(*)) {
-  .template-index .section:has(slideshow-component) {
-    padding-bottom: 2rem;
-  }
+  padding-bottom: 0;
 }
 
 /* =============================================================================
-   ACCESSIBILITY IMPROVEMENTS
+   13. PLACEHOLDER SVGs
    ============================================================================= */
 
-/* Ensure all interactive elements are keyboard accessible */
+.slideshow__media.placeholder .placeholder-svg,
+.banner__media.placeholder .placeholder-svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+/* =============================================================================
+   14. HIDE AUTOPLAY PAUSE BUTTON (handled by JS)
+   ============================================================================= */
+
+slideshow-component .slideshow__autoplay,
+.template-index slideshow-component .slideshow__autoplay,
+.slideshow__controls--top .slideshow__autoplay {
+  display: none !important;
+}
+
+/* =============================================================================
+   15. ACCESSIBILITY & REDUCED MOTION
+   ============================================================================= */
+
 .template-index slideshow-component .slider-button,
 .template-index slideshow-component .slider-counter__link,
 .template-index slideshow-component .slideshow-cta {
   -webkit-tap-highlight-color: rgba(37, 99, 235, 0.3);
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
 
   .template-index slideshow-component .slider-button,
   .template-index slideshow-component .slideshow-cta {
     border-width: 3px;
   }
-
-  .template-index slideshow-component .slider-counter__link--dots .dot {
-    border-width: 3px;
-  }
 }
-
-/* Print styles - hide controls */
-@media print {
-
-  .template-index slideshow-component .slideshow__controls,
-  .template-index slideshow-component .slider-button {
-    display: none !important;
-  }
-}
-
-/* =============================================================================
-   REDUCED MOTION SUPPORT
-   Respects user preferences for reduced motion animations
-   ============================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
-  /* Disable slideshow auto-rotation transitions */
-  .template-index slideshow-component .slideshow,
-  .template-index slideshow-component .slideshow__slide,
-  .template-index slideshow-component .slider {
-    scroll-behavior: auto;
+  .template-index .tech-hero .slideshow__slide {
     transition: none;
   }
 
-  /* Disable slide animations */
-  .template-index slideshow-component .slideshow__slide.animate--ambient,
-  .template-index slideshow-component .slideshow__media.animate--ambient {
+  .template-index .tech-hero .slideshow__slide .banner__heading,
+  .template-index .tech-hero .slideshow__slide .banner__text,
+  .template-index .tech-hero .slideshow__slide .banner__buttons,
+  .template-index .tech-hero .slideshow__slide .slide-trust-row {
+    opacity: 1;
     animation: none;
   }
 
-  /* Simplify button transitions */
   .template-index slideshow-component .slider-button,
   .template-index slideshow-component .slideshow-cta {
     transition: none;
     animation: none;
   }
 
-  /* Disable hover transforms that cause motion */
   .template-index slideshow-component .slider-button:hover,
   .template-index slideshow-component .slideshow-cta:hover {
     transform: none;
   }
+}
 
-  /* Disable slide-in animations */
-  .template-index slideshow-component .scroll-trigger.animate--slide-in {
-    animation: none;
-    opacity: 1;
-    transform: none;
+@media print {
+
+  .template-index slideshow-component .slideshow__controls,
+  .template-index slideshow-component .slider-button {
+    display: none !important;
   }
-}
-
-/* Autoplay pause/play button — repositioned to bottom-right corner
-   so it doesn't overlap the hero heading and CTAs.
-   !important on position is required to override ui-ux-responsive-fixes.css
-   which sets .slideshow__controls children to position: relative via cascade. */
-slideshow-component .slideshow__autoplay,
-.template-index slideshow-component .slideshow__autoplay,
-.slideshow__controls--top .slideshow__autoplay {
-  position: absolute !important;
-  bottom: 16px !important;
-  right: 16px !important;
-  top: auto !important;
-  left: auto !important;
-  z-index: 25;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  padding: 0;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  transition: background 0.2s ease, color 0.2s ease;
-  pointer-events: auto;
-  transform: none !important;
-}
-
-slideshow-component .slideshow__autoplay:hover,
-.template-index slideshow-component .slideshow__autoplay:hover {
-  background: rgba(0, 0, 0, 0.55);
-  color: #ffffff;
-}
-
-.slideshow__autoplay .icon--play {
-  display: none;
-}
-
-.slideshow__autoplay .icon--pause {
-  display: inline-block;
-}
-
-.slideshow__autoplay--paused .icon--play {
-  display: inline-block;
-}
-
-.slideshow__autoplay--paused .icon--pause {
-  display: none;
 }

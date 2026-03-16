@@ -35,7 +35,7 @@
   /* Enhanced CSS custom properties for premium cards */
   --card-border-radius: 16px;
   --card-shadow-rest: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: var(--ta-glow-card-hover, 0 8px 30px rgba(147, 197, 253, 0.2));
 
   position: relative;
   height: 100%;
@@ -45,7 +45,9 @@
   overflow: hidden;
   background: #ffffff;
   border: 1px solid var(--ta-border-light, #f1f5f9);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--card-shadow-rest);
 
   /* CWV: CSS containment — reduces paint/layout cost for off-screen cards */
@@ -53,7 +55,7 @@
 }
 
 .card-wrapper.product-card-wrapper:hover {
-  border-color: var(--ta-border-hover, #3b82f6);
+  border-color: var(--ta-primary-100, #dbeafe);
   box-shadow: var(--card-shadow-hover);
   transform: translateY(-4px);
 }
@@ -91,12 +93,32 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.3s ease-out;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle zoom on hover */
+/* Enhanced zoom on hover */
 .card-wrapper.product-card-wrapper:hover .card__media img {
-  transform: scale(1.03);
+  transform: scale(1.08);
+}
+
+/* Secondary image — fades in on hover */
+.card-wrapper.product-card-wrapper .card__media .media--secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+  z-index: 1;
+}
+
+.card-wrapper.product-card-wrapper:hover .card__media .media--secondary {
+  opacity: 1;
+}
+
+.card-wrapper.product-card-wrapper .card__media .media--secondary img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* =============================================================================
@@ -233,17 +255,17 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: var(--ta-text-sm);
+  font-weight: 500;
   line-height: 1.4;
-  color: #1a1a2e;
+  color: var(--ta-neutral-800, #1e293b);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color 200ms ease;
   margin-bottom: 8px;
 }
 
 .card-wrapper.product-card-wrapper:hover .card__heading .full-unstyled-link {
-  color: var(--ta-primary, #2563eb);
+  color: var(--ta-primary-600, #2563eb);
 }
 
 /* Ensure readable contrast - no dark overlays on titles */
@@ -273,7 +295,8 @@
 .card-wrapper.product-card-wrapper .price .price-item--regular {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0f172a;
+  font-family: var(--ta-font-mono);
+  color: var(--ta-neutral-900, #0f172a);
   letter-spacing: var(--ta-tracking-tight, -0.025em);
 }
 
@@ -281,14 +304,15 @@
 .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
   font-size: var(--ta-font-size-sm, 1.4rem);
   font-weight: 400;
-  color: #94a3b8;
+  color: var(--ta-neutral-400, #94a3b8);
   text-decoration: line-through;
   text-decoration-thickness: 2px;
 }
 
 .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
-  font-size: var(--ta-font-size-xl, 2rem);
+  font-size: var(--ta-text-xl, 2rem);
   font-weight: var(--ta-font-extrabold, 800);
+  font-family: var(--ta-font-mono);
   color: var(--ta-error, #ef4444);
   text-decoration: none;
 }
@@ -320,47 +344,47 @@
   gap: var(--ta-space-sm, 0.8rem);
   position: relative;
   z-index: 3;
-  /* Green conversion gradient — matches hero CTA */
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  /* Warm amber CTA gradient — conversion-optimized */
+  background: var(--ta-gradient-cta) !important;
+  color: var(--ta-cta-contrast, #ffffff) !important;
+  box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 /* Hover: deeper green + lift */
 .card-wrapper.product-card-wrapper .quick-add__submit:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+  background: var(--ta-gradient-cta-hover) !important;
+  box-shadow: 0 8px 20px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
   transform: translateY(-2px);
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 8px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 /* Override for button--secondary (some themes add this class) */
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-  color: white !important;
+  background: var(--ta-gradient-cta) !important;
+  color: var(--ta-cta-contrast, #ffffff) !important;
   border: none;
   border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+  background: var(--ta-gradient-cta-hover) !important;
+  box-shadow: 0 8px 20px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
   transform: translateY(-2px);
 }
 
 .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 8px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 /* Sold out / disabled state */
 .card-wrapper.product-card-wrapper .quick-add__submit[disabled] {
-  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  background: linear-gradient(135deg, var(--ta-neutral-400) 0%, var(--ta-neutral-500) 100%);
   color: var(--ta-text-inverse, #ffffff);
   cursor: not-allowed;
   opacity: 0.7;
@@ -507,7 +531,7 @@
   }
 
   .card-wrapper.product-card-wrapper .quick-add__submit {
-    min-height: var(--ta-touch-min, 44px);
+    min-height: 44px;
     padding: var(--ta-space-sm, 0.8rem) var(--ta-space-md, 1.2rem);
     font-size: var(--ta-font-size-xs, 1.2rem);
   }
@@ -541,7 +565,7 @@
   }
 
   .product-grid {
-    gap: var(--ta-space-md, 1.2rem);
+    gap: 8px;
   }
 
   .related-products__heading {
@@ -738,14 +762,14 @@
 
 /* Quick add button - ensure visibility and contrast */
 [class*="color-scheme-"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-  color: var(--ta-primary-contrast, #ffffff) !important;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  background: var(--ta-gradient-cta) !important;
+  color: var(--ta-cta-contrast, #ffffff) !important;
+  box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 [class*="color-scheme-"] .card-wrapper.product-card-wrapper .quick-add__submit.button--secondary:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+  background: var(--ta-gradient-cta-hover) !important;
+  box-shadow: 0 8px 20px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
 }
 
 /* Focus state for accessibility */
@@ -1026,4 +1050,133 @@
 
 .card-wrapper.product-card-wrapper .quick-add {
   margin-top: auto;
+}
+
+/* =============================================================================
+   24. TRUST MICRO-LINE — "Envío gratis · Pago contraentrega"
+   ============================================================================= */
+
+.card__trust-line {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--ta-text-xs);
+  color: var(--ta-neutral-400, #94a3b8);
+  line-height: 1.3;
+  margin-top: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__trust-line .trust-dot {
+  color: var(--ta-neutral-300, #cbd5e1);
+}
+
+/* =============================================================================
+   25. CARD SKELETON / LOADING STATE — Shimmer animation
+   ============================================================================= */
+
+@keyframes cardShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.card-skeleton {
+  background: var(--ta-bg-secondary, #f8fafc);
+  border-radius: var(--ta-radius-lg, 16px);
+  overflow: hidden;
+  border: 1px solid var(--ta-border-light, #f1f5f9);
+}
+
+.card-skeleton__placeholder {
+  background: linear-gradient(90deg,
+      var(--ta-neutral-100, #f1f5f9) 25%,
+      var(--ta-neutral-50, #f8fafc) 50%,
+      var(--ta-neutral-100, #f1f5f9) 75%);
+  background-size: 200% 100%;
+  animation: cardShimmer 1.5s ease-in-out infinite;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+.card-skeleton__image {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.card-skeleton__body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-skeleton__title {
+  height: 14px;
+  width: 80%;
+}
+
+.card-skeleton__title-2 {
+  height: 14px;
+  width: 55%;
+}
+
+.card-skeleton__price {
+  height: 20px;
+  width: 40%;
+}
+
+.card-skeleton__button {
+  height: 44px;
+  width: 100%;
+  margin-top: 4px;
+  border-radius: var(--ta-radius-lg, 12px);
+}
+
+/* =============================================================================
+   26. BADGE VARIANTS — HOT amber gradient
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .card__badge--hot {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #78350f;
+}
+
+/* Badge vertical stacking */
+.card-wrapper.product-card-wrapper .card__badges {
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Badge rounded-full variant */
+.card-wrapper.product-card-wrapper .card__badge--pill {
+  border-radius: 9999px;
+  padding: var(--ta-space-xs, 0.4rem) var(--ta-space-md, 1.2rem);
+}
+
+/* =============================================================================
+   27. FOCUS STATES — WCAG-compliant visible outlines
+   ============================================================================= */
+
+.card-wrapper.product-card-wrapper .full-unstyled-link:focus-visible,
+.card-wrapper.product-card-wrapper .card__media a:focus-visible {
+  outline: 2px solid var(--ta-primary-500, #3b82f6);
+  outline-offset: 2px;
+  border-radius: var(--ta-radius-sm, 4px);
+}
+
+.card-wrapper.product-card-wrapper .card__badge:focus-visible {
+  outline: 2px solid var(--ta-primary-500, #3b82f6);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-skeleton__placeholder {
+    animation: none;
+  }
 }

@@ -47,6 +47,34 @@
   z-index: 500;
   padding: 8px 0;
   border-bottom: 1px solid #e2e8f0;
+  transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Sticky state: translucent + blur + shadow */
+.header-wrapper.scrolled {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--ta-shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+  padding: 4px 0;
+}
+
+/* Desktop sticky: max-height 64px */
+@media screen and (min-width: 990px) {
+  .header-wrapper {
+    max-height: 72px;
+  }
+
+  .header-wrapper.scrolled {
+    max-height: 64px;
+  }
+}
+
+/* Mobile header: 56px */
+@media screen and (max-width: 989px) {
+  .header-wrapper {
+    max-height: 56px;
+  }
 }
 
 /* Show border only when modifier class is present */
@@ -283,37 +311,48 @@
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1e293b;
+  font-size: var(--ta-text-sm);
+  font-weight: 500;
+  color: var(--ta-neutral-700, #334155);
   text-decoration: none;
   border-radius: var(--tech-radius-md, 8px);
-  transition: var(--tech-transition-colors, color 150ms ease, background-color 150ms ease);
+  transition: color 200ms ease;
   white-space: nowrap;
   letter-spacing: -0.01em;
+  position: relative;
 }
 
-.header__menu-link:hover,
-.header__menu-link:focus,
-.header__menu-link[aria-current="page"] {
-  color: var(--tech-color-primary, #2563eb);
-  background: var(--tech-color-primary-bg, rgba(37, 99, 235, 0.1));
-}
-
-.header__menu-link[aria-current="page"] {
-  font-weight: var(--tech-font-semibold, 600);
-}
-
-/* Active state underline */
-.header__menu-link[aria-current="page"]::after {
+/* Bottom-border hover indicator animation */
+.header__menu-link::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: var(--tech-space-3, 12px);
-  right: var(--tech-space-3, 12px);
+  left: 16px;
+  right: 16px;
   height: 2px;
-  background: var(--tech-color-primary, #2563eb);
-  border-radius: var(--tech-radius-full, 9999px);
+  background: var(--ta-primary-500, #3b82f6);
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transition: transform 200ms ease;
+}
+
+.header__menu-link:hover {
+  color: var(--ta-primary-500, #3b82f6);
+}
+
+.header__menu-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active page: permanent bottom-border */
+.header__menu-link[aria-current="page"] {
+  color: var(--ta-primary-600, #2563eb);
+  font-weight: 600;
+}
+
+.header__menu-link[aria-current="page"]::after {
+  transform: scaleX(1);
+  background: var(--ta-primary-600, #2563eb);
 }
 
 /* ============================================
@@ -418,31 +457,30 @@ body.overflow-hidden-desktop {
     position: absolute;
     top: calc(100% + 4px);
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%) translateY(-4px);
     min-width: 480px;
     max-width: min(90vw, 900px);
-    /* Constrain to viewport width */
-    background: var(--ta-surface, #ffffff);
-    border-radius: 12px;
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border-radius: var(--ta-radius-xl, 16px);
+    box-shadow: var(--ta-shadow-xl,
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 8px 10px -6px rgba(0, 0, 0, 0.1));
     border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 2rem;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    transition: opacity 150ms ease, visibility 150ms ease, transform 150ms ease;
+    transition-delay: 150ms;
     z-index: var(--ta-z-mega-menu, 300);
-    /* Ensure menu doesn't overflow viewport horizontally */
     overflow-x: auto;
   }
 
-  /* Open state */
+  /* Open state — fade+slide from -4px to 0 */
   details[open]>.mega-menu__content {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
+    transition-delay: 0ms;
   }
 
   /* Hover bridge - invisible element to prevent menu closing when moving to dropdown */
@@ -703,8 +741,8 @@ body.overflow-hidden-desktop {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 52px;
-    /* Minimum tap target of 48px + padding */
+    min-height: 48px;
+    /* Minimum tap target of 48px */
     padding: 1rem 1.5rem;
     font-size: 1.6rem;
     font-weight: 500;

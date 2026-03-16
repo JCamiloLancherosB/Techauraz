@@ -87,7 +87,7 @@
       {%- unless product.price_varies == false and product.compare_at_price_varies %}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
         <span>
-          <s class="price-item price-item--regular">
+          <s class="price-item price-item--regular ta-price-compare">
             {% if settings.currency_code_enabled %}
               {{ compare_at_price | money_with_currency }}
             {% else %}
@@ -97,12 +97,12 @@
         </span>
       {%- endunless -%}
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-      <span class="price-item price-item--sale price-item--last">
+      <span class="price-item price-item--sale price-item--last ta-price-current">
         {{ money_price }}
       </span>
       {%- if compare_at_price and compare_at_price > price -%}
         {%- assign savings_pct = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price -%}
-        <span class="price__savings-pill">Ahorras {{ savings_pct }}%</span>
+        <span class="price__savings-pill badge ta-price-savings">🔥 -{{ savings_pct }}%</span>
       {%- endif -%}
     </div>
     <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
@@ -124,9 +124,6 @@
     <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
       {% render 'icon-system', icon: 'fire', size: 14, color: 'currentColor' %} {{ 'products.product.on_sale' | t }}
     </span>
-{% comment %} 
-    <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-      {{ 'products.product.sold_out' | t }}
-    </span> {% endcomment %}
+
   {%- endif -%}
 </div>

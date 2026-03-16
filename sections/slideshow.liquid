@@ -168,6 +168,12 @@
                 {%- endif -%}
               </div>
             {%- endif -%}
+            {%- comment -%} Trust micro-indicators {%- endcomment -%}
+            <div class="slide-trust-row" aria-label="Garantías de compra">
+              <span class="slide-trust-item"><span class="trust-check">✓</span> Envío Gratis</span>
+              <span class="slide-trust-item"><span class="trust-check">✓</span> Garantía 30 Días</span>
+              <span class="slide-trust-item"><span class="trust-check">✓</span> Pago Contraentrega</span>
+            </div>
           </div>
         </div>
       </div>
@@ -242,22 +248,12 @@
   <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-{%- comment -%} HD Image Override — replace low-res Shopify uploads with hi-res theme assets {%- endcomment -%}
-<style>
-  {%- for block in section.blocks -%}
-    {%- assign slide_index = forloop.index -%}
-    {%- assign asset_name = 'hero-slide-' | append: slide_index | append: '.png' -%}
-    #Slide-{{ section.id }}-{{ slide_index }} .slideshow__media {
-      background-image: url({{ asset_name | asset_url }});
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-    }
-    #Slide-{{ section.id }}-{{ slide_index }} .slideshow__media img {
-      opacity: 0;
-    }
-  {%- endfor -%}
-</style>
+{%- comment -%}
+  HD Image Override REMOVED (March 2026):
+  Was hiding <img> with opacity:0 and loading PNG assets as background-image.
+  This blocked LCP and double-downloaded images. Shopify's native srcset/WebP
+  handles image optimization. Upload hi-res images directly via the theme admin.
+{%- endcomment -%}
 
 {% schema %}
 {
@@ -337,12 +333,12 @@
     {
       "type": "range",
       "id": "change_slides_speed",
-      "min": 3,
-      "max": 9,
-      "step": 2,
+      "min": 5,
+      "max": 12,
+      "step": 1,
       "unit": "s",
       "label": "t:sections.slideshow.settings.change_slides_speed.label",
-      "default": 5
+      "default": 6
     },
     {
       "type": "header",

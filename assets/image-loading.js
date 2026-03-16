@@ -114,14 +114,15 @@
     processImages();
   }
 
-  // Re-process when new content is added (e.g., infinite scroll)
+  // Re-process when new content is added (e.g., infinite scroll, AJAX pagination)
+  // Scoped to #MainContent to avoid reacting to analytics/script mutations on <body>
+  let pendingImageProcess = null;
   const contentObserver = new MutationObserver(function (mutations) {
     let hasNewImages = false;
 
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
         mutation.addedNodes.forEach(function (node) {
-          // Check if the added node or its children contain images
           if (node.nodeType === 1) { // Element node
             if (node.tagName === 'IMG' || node.querySelector('img')) {
               hasNewImages = true;
@@ -131,24 +132,26 @@
       }
     });
 
-    // Only process if we actually found new images
+    // Debounce: batch rapid DOM mutations into a single processImages() call
     if (hasNewImages) {
-      processImages();
+      clearTimeout(pendingImageProcess);
+      pendingImageProcess = setTimeout(processImages, 300);
     }
   });
 
-  if (document.body) {
-    contentObserver.observe(document.body, {
+  function startObserving() {
+    // Prefer #MainContent to avoid noise from header/footer/analytics mutations
+    var target = document.getElementById('MainContent') || document.body;
+    contentObserver.observe(target, {
       childList: true,
       subtree: true
     });
+  }
+
+  if (document.body) {
+    startObserving();
   } else {
-    document.addEventListener('DOMContentLoaded', function () {
-      contentObserver.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    });
+    document.addEventListener('DOMContentLoaded', startObserving);
   }
 
 })();
