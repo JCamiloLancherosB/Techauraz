@@ -528,12 +528,16 @@ class HeaderDrawer extends MenuDrawer {
   }
 
   onResize = () => {
-    this.header &&
-      document.documentElement.style.setProperty(
-        '--header-bottom-position',
-        `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
-      );
-    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+    // Wrap layout reads in rAF to prevent forced reflow on resize
+    requestAnimationFrame(() => {
+      if (this.header) {
+        document.documentElement.style.setProperty(
+          '--header-bottom-position',
+          `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+        );
+      }
+      document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+    });
   };
 }
 
@@ -685,38 +689,42 @@ class SliderComponent extends HTMLElement {
     // This should be refactored as part of https://github.com/Shopify/dawn/issues/2057
     if (!this.slider || !this.nextButton) return;
 
-    const previousPage = this.currentPage;
-    this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
+    // Batch all DOM reads in a single rAF to prevent forced reflow
+    requestAnimationFrame(() => {
+      const scrollLeft = this.slider.scrollLeft;
+      const previousPage = this.currentPage;
+      this.currentPage = Math.round(scrollLeft / this.sliderItemOffset) + 1;
 
-    if (this.currentPageElement && this.pageTotalElement) {
-      this.currentPageElement.textContent = this.currentPage;
-      this.pageTotalElement.textContent = this.totalPages;
-    }
+      if (this.currentPageElement && this.pageTotalElement) {
+        this.currentPageElement.textContent = this.currentPage;
+        this.pageTotalElement.textContent = this.totalPages;
+      }
 
-    if (this.currentPage != previousPage) {
-      this.dispatchEvent(
-        new CustomEvent('slideChanged', {
-          detail: {
-            currentPage: this.currentPage,
-            currentElement: this.sliderItemsToShow[this.currentPage - 1],
-          },
-        })
-      );
-    }
+      if (this.currentPage != previousPage) {
+        this.dispatchEvent(
+          new CustomEvent('slideChanged', {
+            detail: {
+              currentPage: this.currentPage,
+              currentElement: this.sliderItemsToShow[this.currentPage - 1],
+            },
+          })
+        );
+      }
 
-    if (this.enableSliderLooping) return;
+      if (this.enableSliderLooping) return;
 
-    if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
-      this.prevButton.setAttribute('disabled', 'disabled');
-    } else {
-      this.prevButton.removeAttribute('disabled');
-    }
+      if (this.isSlideVisible(this.sliderItemsToShow[0]) && scrollLeft === 0) {
+        this.prevButton.setAttribute('disabled', 'disabled');
+      } else {
+        this.prevButton.removeAttribute('disabled');
+      }
 
-    if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])) {
-      this.nextButton.setAttribute('disabled', 'disabled');
-    } else {
-      this.nextButton.removeAttribute('disabled');
-    }
+      if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])) {
+        this.nextButton.setAttribute('disabled', 'disabled');
+      } else {
+        this.nextButton.removeAttribute('disabled');
+      }
+    });
   }
 
   isSlideVisible(element, offset = 0) {

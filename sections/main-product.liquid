@@ -24,9 +24,11 @@
     Load shared CSS assets once at section level (not per card)
     Note: visual-system-unified-2024.css is loaded globally in theme.liquid
   {%- endcomment -%}
-  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript>{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}</noscript>
 
-  {{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'section-main-product-techauraz.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript>{{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}</noscript>
 
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>

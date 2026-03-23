@@ -1,4 +1,4 @@
-<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
+{%- comment -%} forms-techauraz.js is loaded globally by footer.liquid — do NOT duplicate here {%- endcomment -%}
 <div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">
   <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
     {%- for block in section.blocks -%}

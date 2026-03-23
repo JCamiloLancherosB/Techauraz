@@ -840,7 +840,6 @@ select:focus {
   font-weight: var(--ta-font-medium, 500);
 }
 
-/* quick-add__submit — see techauraz-product-card.css (canonical source) */
 
 /* Image aspect ratio consistency - prevent overly tall images */
 .card__media .media {
@@ -1169,9 +1168,6 @@ select:focus {
   display: none;
 }
 
-/* NOTE: sticky-cta-bar + sticky-mobile-cta styles REMOVED (2026-03-02)
-   Reason: Canonical version with full WhatsApp/cookie/cart coordination
-   lives in ui-ux-responsive-fixes.css (STICKY CTA BAR section). */
 
 /* =============================================================================
    FIX: Floating slider buttons on desktop for non-desktop-slider collections

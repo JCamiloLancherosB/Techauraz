@@ -46,7 +46,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
   const observer = new IntersectionObserver(onIntersection, {
     rootMargin: '0px 0px -50px 0px',
   });
-  
+
   // Batch DOM reads to prevent layout thrashing
   // Wrap in requestAnimationFrame for optimal rendering cycle timing
   requestAnimationFrame(() => {
@@ -59,7 +59,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
       const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
       return { element, isVisible };
     });
-    
+
     // Now apply classes based on pre-calculated positions
     elementPositions.forEach(({ element, isVisible }) => {
       // Only mark as offscreen if element is NOT visible in viewport
@@ -67,7 +67,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
       if (!isVisible) {
         element.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
       }
-      
+
       observer.observe(element);
     });
   });
@@ -82,10 +82,10 @@ function initializeScrollZoomAnimationTrigger() {
   if (animationTriggerElements.length === 0) return;
 
   const scaleAmount = 0.2 / 100;
-  
+
   // Use WeakMap to avoid memory leaks when elements are removed from DOM
   const elementData = new WeakMap();
-  
+
   animationTriggerElements.forEach((element) => {
     // Create element-specific state object
     const state = {
@@ -93,14 +93,14 @@ function initializeScrollZoomAnimationTrigger() {
       lastRatio: 0,
       ticking: false  // Per-element ticking flag
     };
-    
+
     const observer = new IntersectionObserver((elements) => {
       elements.forEach((entry) => {
         state.isVisible = entry.isIntersecting;
       });
     });
     observer.observe(element);
-    
+
     // Store element-specific data - WeakMap allows garbage collection
     elementData.set(element, state);
 
@@ -118,7 +118,7 @@ function initializeScrollZoomAnimationTrigger() {
         const data = elementData.get(element);
         // Null check in case element was removed from DOM
         if (!data || !data.isVisible || data.ticking) return;
-        
+
         data.ticking = true;
         requestAnimationFrame(() => {
           const ratio = 1 + scaleAmount * percentageSeen(element);
@@ -137,13 +137,12 @@ function initializeScrollZoomAnimationTrigger() {
 
 // OPTIMIZED: Batch DOM reads to prevent layout thrashing
 function percentageSeen(element) {
-  // Batch all reads together
+  // Batch all reads together — use rect.height instead of offsetHeight to avoid extra reflow
   const viewportHeight = window.innerHeight;
   const scrollY = window.scrollY;
   const rect = element.getBoundingClientRect();
   const elementPositionY = rect.top + scrollY;
-  // Use offsetHeight for integer precision needed for animation calculations
-  const elementHeight = element.offsetHeight;
+  const elementHeight = rect.height;
 
   if (elementPositionY > scrollY + viewportHeight) {
     // If we haven't reached the image yet

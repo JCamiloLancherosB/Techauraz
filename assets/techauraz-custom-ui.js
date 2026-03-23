@@ -100,6 +100,10 @@
         return;
       }
 
+      // Pre-measure all item widths in a single batch read (avoids forced reflow in loop)
+      var itemWidths = originalItems.map(function (item) { return item.offsetWidth || 0; });
+      var totalItemWidth = itemWidths.reduce(function (sum, w) { return sum + w; }, 0);
+
       // Clone items using documentFragment for batch DOM writes
       var minWidth = viewportWidth * MIN_TRACK_MULTIPLIER;
       var currentWidth = originalWidth;
@@ -113,9 +117,9 @@
           var links = clone.querySelectorAll('a');
           links.forEach(function (link) { link.setAttribute('tabindex', '-1'); });
           fragment.appendChild(clone);
-          currentWidth += item.offsetWidth || 0;
         });
         track.appendChild(fragment);
+        currentWidth += totalItemWidth;
       }
 
       // Calculate animation duration based on scroll distance and speed

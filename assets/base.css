@@ -613,22 +613,6 @@ select:focus {
   opacity: 0.5;
 }
 
-/* =============================================================================
-   MODERN INTERACTIVE ENHANCEMENTS - White/Blue Theme
-   ============================================================================= */
-
-/* Gradient text for headings - adds modern flair */
-
-/* Modern card hover effects */
-
-
-/* Badge/Chip styles for interactive elements */
-
-
-/* Icon containers with blue accent */
-
-
-/* Divider with blue accent */
 
 /* Info boxes with blue accent */
 .info-box {
@@ -2241,13 +2225,7 @@ select:focus {
   }
 }
 
-/* .card--standard.card--media .card__inner .card__information,
-.card--standard.card--text:not(.card--horizontal) > .card__content .card__heading:not(.card__heading--placeholder),
-.card--standard:not(.card--horizontal) > .card__content .card__badge,
-.card--standard.card--text.article-card > .card__content .card__information,
-.card--standard > .card__content .card__caption {
-  display: none;
-} */
+
 
 .card--standard:not(.card--horizontal) .placeholder-svg {
   width: 100%;
@@ -2349,8 +2327,6 @@ select:focus {
   /* Allow flexbox to work properly */
 }
 
-
-/* Product card value bullets */
 
 
 /* Price styling */
@@ -2524,9 +2500,6 @@ select:focus {
   box-shadow: 0 2px 8px rgba(6, 182, 212, 0.4);
 }
 
-/* Card CTAs */
-
-
 .card .media img {
   display: block;
   width: 100%;
@@ -2689,7 +2662,7 @@ select:focus {
   text-decoration: line-through;
 }
 
-/* quick-add button â€” see techauraz-product-card.css (canonical source) */
+/* Mobile adjustments â€” see techauraz-product-card.css (canonical source) */
 
 
 /* ============================================================
@@ -4360,7 +4333,7 @@ a.product__text {
    PERSUASIVE UI ELEMENTS - Product Page Enhancements
    ============================================================================= */
 
-/* Utility Bar - Tighter padding to prevent layout push */
+
 
 /* ===== GALERÃA DE PRODUCTO MEJORADA ===== */
 .product-hero-slider {
@@ -4460,21 +4433,6 @@ a.product__text {
   transform: scale(1.2);
 }
 
-/* 3D/GIF Wrapper - Repurposed for trust badges */
-
-/* Price/Urgency Badges - Improved spacing, contrast, and text clamping */
-
-
-/* ===== COUNTDOWN TIMER ===== */
-
-
-/* ===== TRUST PAYMENTS MEJORADO ===== */
-
-
-/* ===== PASOS DE ENTREGA ===== */
-
-
-/* Trust Indicators (dynamically injected) */
 
 
 /* ===== ACORDEÃ“N MEJORADO ===== */
@@ -4503,8 +4461,6 @@ a.product__text {
   padding: 1rem 1.2rem;
   background: rgba(15, 23, 42, 0.5);
 }
-
-/* Animations */
 
 /* Responsive adjustments */
 @media screen and (max-width: 749px) {
@@ -4903,49 +4859,8 @@ a.product__text {
  * =============================================================================
  */
 
-/* =============================================================================
-   PRIMARY BUTTON STYLES
-   ============================================================================= */
 
 
-/* Hover State - Enhanced visibility with brighter gradient */
-
-/* Active State */
-
-/* Focus State - Accessibility with high contrast outline */
-
-/* Disabled State */
-
-/* =============================================================================
-   SECONDARY BUTTON STYLES - Subtle but visible
-   ============================================================================= */
-
-
-.button--secondary:hover {
-  background: rgba(251, 191, 36, 0.1);
-  border-color: var(--color-border-hover);
-  color: var(--color-primary);
-  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
-}
-
-/* =============================================================================
-   TERTIARY / TEXT BUTTON STYLES
-   ============================================================================= */
-
-
-/* =============================================================================
-   ICON BUTTONS (Cart, Search, Account, etc.)
-   ============================================================================= */
-
-
-/* =============================================================================
-   BANNER & HERO BUTTON OVERRIDES
-   ============================================================================= */
-
-
-/* =============================================================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================================================= */
 
 /* Mobile (<640px) - Touch-optimized sizing */
 @media screen and (max-width: 639px) {
@@ -5554,7 +5469,6 @@ details[open].menu-opening>.menu-drawer__submenu {
   height: 24px;
 }
 
-/* InformaciÃ³n de contacto */
 
 
 .menu-drawer .list-social {
@@ -6720,9 +6634,6 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   width: 100%;
 }
 
-/* Mobile: 2 columns (default on most devices) */
-
-
 /* Very small mobile: 1 column (optional, for tiny screens) */
 @media screen and (max-width: 420px) {
   .grid--2-col-tablet-down {
@@ -6845,7 +6756,6 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   contain-intrinsic-size: auto 500px;
 }
 
-/* Section-specific intrinsic sizes for better CLS prevention */
 
 
 /* Respect prefers-reduced-data: don't lazy-render if user wants minimal data */

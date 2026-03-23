@@ -2929,9 +2929,7 @@ details-modal,
   z-index: var(--ta-z-modal, 410) !important;
 }
 
-/* REMOVED 2026-03-02: Duplicate z-index for .cookie-banner and .whatsapp-float.
-   Canonical source: techauraz-tokens.css (CSS custom properties).
-   Note: Coordination rules (sticky CTA ↔ WhatsApp ↔ cookie) remain below. */
+
 
 /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
 @media screen and (max-width: 749px) {

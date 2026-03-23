@@ -8,7 +8,7 @@
   {% render 'newsletter-conversion' %}
 {% endcomment %}
 
-<script src="{{ 'forms-techauraz.js' | asset_url }}" defer="defer"></script>
+{%- comment -%} forms-techauraz.js is loaded globally by footer.liquid — do NOT duplicate here {%- endcomment -%}
 
 {%- liquid
   assign heading = section.settings.heading | default: 'Únete a nuestra comunidad'

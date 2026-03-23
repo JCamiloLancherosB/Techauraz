@@ -1,8 +1,6 @@
-{{ 'section-main-product-techauraz.css' | asset_url | stylesheet_tag }}
-{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+{%- comment -%} CSS is loaded by main-product section — do NOT duplicate preloads here {%- endcomment -%}
 
-<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- comment -%} product-info.js and product-form.js are loaded by main-product section — do NOT duplicate here {%- endcomment -%}
 
 {%- comment -%}
   ===================================================================

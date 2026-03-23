@@ -135,11 +135,19 @@
         });
 
         // Mark elements already in viewport as revealed immediately
+        // Batch reads then batch writes to avoid forced reflow
         requestAnimationFrame(function () {
-            document.querySelectorAll('.ta-reveal').forEach(function (el) {
-                var rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    el.classList.add('ta-revealed');
+            var elements = document.querySelectorAll('.ta-reveal');
+            var viewportH = window.innerHeight;
+            // Batch read: collect all rects first
+            var rects = [];
+            elements.forEach(function (el) {
+                rects.push({ el: el, rect: el.getBoundingClientRect() });
+            });
+            // Batch write: apply classes after all reads are done
+            rects.forEach(function (item) {
+                if (item.rect.top < viewportH && item.rect.bottom > 0) {
+                    item.el.classList.add('ta-revealed');
                 }
             });
         });
