@@ -39,7 +39,16 @@
    HEADER WRAPPER (Sticky Container)
    ============================================ */
 
+/* Custom element defaults to display:inline — must be block for bg + layout */
+sticky-header {
+  display: block !important;
+  width: 100%;
+  background: #ffffff !important;
+  isolation: isolate;
+}
+
 .header-wrapper {
+  display: block !important;
   position: relative;
   width: 100%;
   background: #ffffff !important;
@@ -62,6 +71,15 @@
 /* Show border only when modifier class is present */
 .header-wrapper--border-bottom {
   border-bottom: 1px solid var(--tech-color-gray-200, #e2e8f0);
+}
+
+/* Ensure the header section wrapper creates proper stacking context
+   The Shopify section wrapper (.section-header) defaults to position:static,
+   so z-index on inner elements doesn't affect sibling-section stacking. */
+.section-header,
+.shopify-section-header-sticky {
+  position: relative;
+  z-index: 501;
 }
 
 /* Sticky States — keep relative to prevent slideshow overlap */
