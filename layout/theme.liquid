@@ -164,7 +164,11 @@
     
     {%- comment -%} Non-critical scripts: loaded via requestIdleCallback to reduce main-thread work {%- endcomment -%}
 
-    {{ content_for_header }}
+{%- comment -%}
+  content_for_header positioned here — after critical CSS inline block (line 234)
+  but before async stylesheets, so Shopify tracking loads before body paint.
+{%- endcomment -%}
+{{ content_for_header }}
 
     <!-- Estilos de Fuentes -->
     {%- liquid
@@ -294,13 +298,15 @@
      2030 ADVANCED SYSTEMS — Scroll Reveal, Social Proof, Micro-Interactions
      ============================================================================= -->
 
-<!-- Scroll-Reveal Animation System (GLOBAL) -->
+{%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
+<!-- Scroll-Reveal Animation System -->
 <link rel="stylesheet" href="{{ 'scroll-reveal.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'scroll-reveal.css' | asset_url }}"></noscript>
 
-<!-- Micro-Interactions CSS (GLOBAL) -->
+<!-- Micro-Interactions CSS -->
 <link rel="stylesheet" href="{{ 'micro-interactions.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'micro-interactions.css' | asset_url }}"></noscript>
+{%- endif -%}
 
 {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
   <!-- Social Proof Toast CSS (PAGES WITH PRODUCTS ONLY) -->

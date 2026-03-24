@@ -91,7 +91,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
 }
 
@@ -131,7 +131,7 @@
   font-weight: 500;
   color: var(--tech-color-text-secondary, #666666);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .compare-button:hover {
@@ -253,7 +253,7 @@
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .comparison__empty-btn:hover {
@@ -411,7 +411,7 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .comparison-table__add-btn:hover {
@@ -431,7 +431,7 @@
   border-radius: 6px;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .comparison-table__remove-btn:hover {
@@ -497,7 +497,7 @@
   font-size: 0.8125rem;
   color: var(--tech-color-text, #333333);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .comparison__share-btn:hover {
@@ -524,7 +524,7 @@
   font-weight: 500;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
   z-index: 500;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
@@ -624,6 +624,7 @@
    Print Styles
    ----------------------------------------------------------------------------- */
 @media print {
+
   .comparison-bar,
   .comparison-table__remove-btn,
   .comparison-table__add-btn,
@@ -679,6 +680,7 @@
    Accessibility
    ----------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
+
   .comparison-bar,
   .comparison-notification,
   .compare-button {

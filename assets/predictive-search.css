@@ -39,7 +39,7 @@ predictive-search[open] .predictive-search--header {
    SEARCH INPUT ENHANCEMENTS
    ============================================================================= */
 .search-modal__form .search__input {
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .search-modal__form .search__input:focus {
@@ -140,7 +140,7 @@ predictive-search[open] .predictive-search--header {
   font-size: 1.3rem;
   color: var(--ta-text, #0f172a);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .predictive-search__recent-item:hover {

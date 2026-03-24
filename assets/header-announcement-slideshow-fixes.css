@@ -171,7 +171,7 @@ body.scrolled-past-header .announcement-bar-section,
   border: 2px solid rgba(30, 58, 95, 0.2);
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
 
 .template-index .slideshow__controls--top .slider-button:hover {
@@ -202,7 +202,7 @@ body.scrolled-past-header .announcement-bar-section,
   border-radius: 50%;
   background: rgba(226, 232, 240, 0.5);
   border: 2px solid rgba(226, 232, 240, 0.7);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
 
 .template-index slideshow-component .slider-counter__link--active.slider-counter__link--dots .dot {
@@ -287,7 +287,7 @@ body.scrolled-past-header .announcement-bar-section,
   padding: 14px 32px;
   font-weight: 600;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slideshow .button--primary:hover,
@@ -304,7 +304,7 @@ body.scrolled-past-header .announcement-bar-section,
   color: var(--ta-surface, #ffffff);
   padding: 12px 30px;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slideshow .button--secondary:hover,
