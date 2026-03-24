@@ -466,9 +466,6 @@
         {%- if template.name == 'index' -%}
         lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});
         {%- endif -%}
-        {%- if template.name == 'index' or template.name == 'product' -%}
-        lazyLoad({{ 'purchase-notification.js' | asset_url | json }});
-        {%- endif -%}
         {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
         lazyLoad({{ 'social-proof-toast.js' | asset_url | json }});
         {%- endif -%}

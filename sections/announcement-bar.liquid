@@ -179,45 +179,11 @@
             {%- endfor -%}
           </div>
         </div>
-      </div>
-      <script>
-        (function() {
-          document.addEventListener('DOMContentLoaded', function initAnnouncementTicker() {
-            var ticker = document.getElementById('AnnouncementTicker-{{ section.id }}');
-            if (!ticker) return;
-            
-            // Skip if the external JS already initialized this ticker
-            var tickerRoot = ticker.closest('.announcement-ticker');
-            if (tickerRoot && tickerRoot.getAttribute('data-ta-ticker-initialized') === 'true') return;
-
-            // Clone content for seamless infinite scroll using cloneNode
-            var items = ticker.querySelectorAll('.announcement-ticker__item');
-            var originalWidth = ticker.scrollWidth;
-
-            items.forEach(function(item) {
-              var clone = item.cloneNode(true);
-              clone.removeAttribute('data-shopify-editor-block');
-              clone.setAttribute('data-ta-cloned', 'true');
-              clone.setAttribute('aria-hidden', 'true');
-              ticker.appendChild(clone);
-            });
-            
-            // Calculate animation duration based on content width and speed
-            var speedLevel = {{ ticker_speed | default: 5 }};
-            var speed = 40 + (speedLevel - 1) * 9;
-            var duration = Math.max(5, Math.min(120, originalWidth / speed));
-            
-            // Set CSS custom properties that the animation uses
-            ticker.style.setProperty('--ta-ticker-scroll-distance', '-' + originalWidth + 'px');
-            ticker.style.setProperty('--ta-ticker-duration', duration + 's');
-
-            // Mark as initialized — this triggers the CSS animation rule
-            if (tickerRoot) {
-              tickerRoot.setAttribute('data-ta-ticker-initialized', 'true');
-            }
-          });
-        })();
-      </script>
+      {%- endif -%}
+    {%- comment -%}
+      Ticker initialization handled by techauraz-custom-ui.js (loaded globally via defer).
+      Inline script removed to avoid duplicate DOM cloning + layout recalculation.
+    {%- endcomment -%}
     {%- endif -%}
     <div class="localization-wrapper">
       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}

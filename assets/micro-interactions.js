@@ -142,7 +142,7 @@
         initRipple();
         initMagneticHover();
         initCountUp();
-        initParallax();
+        // initParallax() removed — perpetual scroll listener fights LCP compositing
         initCardGlow();
     }
 
