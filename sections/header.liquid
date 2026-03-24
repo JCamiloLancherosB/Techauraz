@@ -4,8 +4,7 @@
   component-menu-drawer.css, component-cart-items.css — all inlined in base.css.
 {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}"></noscript>
+<link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}">
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}

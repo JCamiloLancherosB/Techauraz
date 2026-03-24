@@ -106,7 +106,7 @@
               endif
               assign fetch_priority = 'high'
             -%}
-            {%- if forloop.index <= 2 %}
+            {%- if forloop.index == 1 %}
               {{
                 block.settings.image
                 | image_url: width: 3840
