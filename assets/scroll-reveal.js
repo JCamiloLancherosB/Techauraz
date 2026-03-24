@@ -135,20 +135,22 @@
         });
 
         // Mark elements already in viewport as revealed immediately
-        // Batch reads then batch writes to avoid forced reflow
+        // Double-rAF: ensures layout is settled before reading rects
         requestAnimationFrame(function () {
-            var elements = document.querySelectorAll('.ta-reveal');
-            var viewportH = window.innerHeight;
-            // Batch read: collect all rects first
-            var rects = [];
-            elements.forEach(function (el) {
-                rects.push({ el: el, rect: el.getBoundingClientRect() });
-            });
-            // Batch write: apply classes after all reads are done
-            rects.forEach(function (item) {
-                if (item.rect.top < viewportH && item.rect.bottom > 0) {
-                    item.el.classList.add('ta-revealed');
-                }
+            requestAnimationFrame(function () {
+                var elements = document.querySelectorAll('.ta-reveal');
+                var viewportH = window.innerHeight;
+                // Batch read: collect all rects first
+                var rects = [];
+                elements.forEach(function (el) {
+                    rects.push({ el: el, rect: el.getBoundingClientRect() });
+                });
+                // Batch write: apply classes after all reads are done
+                rects.forEach(function (item) {
+                    if (item.rect.top < viewportH && item.rect.bottom > 0) {
+                        item.el.classList.add('ta-revealed');
+                    }
+                });
             });
         });
     }

@@ -26,11 +26,8 @@
 </div>
 
 <script>
-  /* ========================================================
-     WhatsApp Context-Aware Router — Phase 3 Revenue Protocol
-     Lightweight IIFE (~1KB) · Zero dependencies · Mobile-first
-     ======================================================== */
-  (function() {
+  /* WhatsApp Context-Aware Router — deferred to idle to reduce main-thread blocking */
+  (window.requestIdleCallback||function(c){setTimeout(c,2000)})(function() {
     'use strict';
 
     var WA_NUMBER   = '573008602789';
@@ -48,22 +45,17 @@
     }
 
     function getProductTitle() {
-      /* Primary: Dawn's .product__title wrapper → h1 */
       var el = document.querySelector('.product__title h1');
       if (el) return el.textContent.trim();
-      /* Fallback: any h1 on the page */
       var h1 = document.querySelector('h1');
       return h1 ? h1.textContent.trim() : '';
     }
 
     function getProductPrice() {
-      /* Priority 1: sale price (visible when on sale) */
       var sale = document.querySelector('.price-item--sale.price-item--last');
       if (sale) return sale.textContent.trim();
-      /* Priority 2: regular price (non-sale) */
       var regular = document.querySelector('.price-item--last');
       if (regular) return regular.textContent.trim();
-      /* Priority 3: any .price-item--regular */
       var any = document.querySelector('.price-item--regular');
       return any ? any.textContent.trim() : '';
     }
@@ -82,7 +74,6 @@
             + title + '* por *' + price
             + '*. Me interesa pedirlo con Pago Contraentrega. \u00bfMe ayudan a confirmar mi pedido? \ud83d\ude80 Aqu\u00ed est\u00e1 el link: ' + url;
         } else {
-          /* Partial context — still send URL */
           message = '\u00a1Hola equipo TechAura! \ud83d\udc4b Estoy interesado en este producto: ' + url + ' \u00bfMe ayudan con info y disponibilidad?';
         }
       } else {
@@ -98,7 +89,7 @@
       window.open(buildWhatsAppURL(), '_blank', 'noopener,noreferrer');
     });
 
-    /* ── Tooltip Logic (preserved from original) ─────── */
+    /* ── Tooltip Logic ─────────────────────────────────── */
     if (!tooltip || !fab) return;
 
     var isMobile = window.matchMedia('(max-width: 767px)').matches;
@@ -126,5 +117,5 @@
         }, VISIBLE_TIME);
       }, SHOW_DELAY);
     }
-  })();
+  });
 </script>

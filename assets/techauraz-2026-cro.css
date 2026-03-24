@@ -58,78 +58,9 @@ h6 {
 
 /* =============================================================================
    3. SCROLL-TRIGGERED REVEAL ANIMATIONS
-   Uses IntersectionObserver-driven class toggle for smooth entry
+   Canonical rules are in scroll-reveal.css (GPU-composited via translate3d).
+   Duplicate rules removed to avoid non-composited animation warnings.
    ============================================================================= */
-
-/* Elements that should animate in on scroll */
-.ta-reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.ta-reveal--visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Staggered reveals for grid items */
-.ta-reveal--stagger:nth-child(1) {
-    transition-delay: 0ms;
-}
-
-.ta-reveal--stagger:nth-child(2) {
-    transition-delay: 80ms;
-}
-
-.ta-reveal--stagger:nth-child(3) {
-    transition-delay: 160ms;
-}
-
-.ta-reveal--stagger:nth-child(4) {
-    transition-delay: 240ms;
-}
-
-.ta-reveal--stagger:nth-child(5) {
-    transition-delay: 320ms;
-}
-
-.ta-reveal--stagger:nth-child(6) {
-    transition-delay: 400ms;
-}
-
-/* Fade-in variants */
-.ta-reveal--fade-up {
-    transform: translateY(32px);
-}
-
-.ta-reveal--fade-left {
-    opacity: 0;
-    transform: translateX(-24px);
-}
-
-.ta-reveal--fade-right {
-    opacity: 0;
-    transform: translateX(24px);
-}
-
-.ta-reveal--fade-left.ta-reveal--visible,
-.ta-reveal--fade-right.ta-reveal--visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Scale-in for images and cards */
-.ta-reveal--scale {
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-.ta-reveal--scale.ta-reveal--visible {
-    opacity: 1;
-    transform: scale(1);
-}
 
 /* =============================================================================
    4. ENTRY ANIMATIONS via @starting-style (Progressive Enhancement)
@@ -148,12 +79,12 @@ h6 {
     @keyframes ta-section-reveal {
         from {
             opacity: 0.7;
-            transform: translateY(20px);
+            transform: translate3d(0, 20px, 0);
         }
 
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
         }
     }
 }
@@ -205,15 +136,7 @@ a.button:active,
         scroll-behavior: auto;
     }
 
-    .ta-reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-
-    .ta-reveal--visible {
-        transition: none;
-    }
+    /* .ta-reveal reduced-motion handled by scroll-reveal.css */
 
     * {
         animation-duration: 0.01ms !important;

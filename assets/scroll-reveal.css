@@ -40,10 +40,11 @@
     transform: scale3d(0.85, 0.85, 1);
 }
 
-/* --- Revealed state (visible) --- */
+/* --- Revealed state (visible) — clear will-change to free GPU memory --- */
 .ta-revealed {
     opacity: 1 !important;
     transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
+    will-change: auto;
 }
 
 /* --- Stagger timing helpers --- */
