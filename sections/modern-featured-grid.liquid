@@ -10,10 +10,7 @@
 <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}</noscript>
 
-{%- if section.settings.enable_quick_add -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
+{%- comment -%} quick-add.js + product-form.js loaded centrally in theme.liquid {%- endcomment -%}
 
 {%- comment -%} home-modern-blocks.css is loaded globally in theme.liquid {%- endcomment -%}
 

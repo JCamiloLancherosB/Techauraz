@@ -14,10 +14,7 @@
   No need to load them again here to avoid duplicate CSS/JS loads
 {%- endcomment -%}
 
-{%- if section.settings.enable_quick_add -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
+{%- comment -%} quick-add.js + product-form.js loaded centrally in theme.liquid {%- endcomment -%}
 
 {%- liquid
   assign products_to_display = section.settings.collection.all_products_count

@@ -28,7 +28,7 @@
         >
           {%- comment -%} Star Rating {%- endcomment -%}
           {%- if block.settings.rating > 0 -%}
-            <div class="testimonials-wall__rating" aria-label="Calificación: {{ block.settings.rating }} de 5 estrellas">
+            <div class="testimonials-wall__rating" role="img" aria-label="Calificación: {{ block.settings.rating }} de 5 estrellas">
               {%- for i in (1..5) -%}
                 {%- if i <= block.settings.rating -%}
                   <svg class="testimonials-wall__star testimonials-wall__star--filled" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">

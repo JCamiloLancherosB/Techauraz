@@ -925,6 +925,7 @@ class SlideshowComponent extends SliderComponent {
   }
 
   setSlideVisibility(event) {
+    if (!this.sliderItemsToShow) return;
     this.sliderItemsToShow.forEach((item, index) => {
       const linkElements = item.querySelectorAll('a');
       if (index === this.currentPage - 1) {

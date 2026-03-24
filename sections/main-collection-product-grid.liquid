@@ -12,10 +12,7 @@
   Note: quick-view-modal.css and quick-view.js are loaded globally in theme.liquid
 {%- endcomment -%}
 
-{%- if section.settings.enable_quick_add -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
+{%- comment -%} quick-add.js + product-form.js loaded centrally in theme.liquid {%- endcomment -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}

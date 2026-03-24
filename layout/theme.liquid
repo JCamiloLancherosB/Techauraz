@@ -470,7 +470,9 @@
     {%- endif -%}
     <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
-    {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' -%}
+    {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
+      <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     {%- if template.name == 'product' or template.suffix == 'comparison' -%}
