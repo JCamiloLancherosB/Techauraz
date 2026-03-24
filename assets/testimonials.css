@@ -69,7 +69,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   z-index: 2;
   color: var(--ta-neutral-700, #334155);
 }

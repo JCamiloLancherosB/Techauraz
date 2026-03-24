@@ -226,7 +226,7 @@
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .ta-404__btn--primary {

@@ -406,7 +406,7 @@
   border: 2px solid var(--ta-border-light, #e2e8f0);
   border-radius: var(--ta-radius-sm, 4px);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .quick-view-modal__variant-option:hover:not(.is-disabled) {
@@ -522,7 +522,7 @@
   border: none;
   border-radius: var(--ta-radius-button, 8px);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -786,7 +786,7 @@ body.quick-view-modal-open {
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease;
   z-index: 4;
   white-space: nowrap;
   backdrop-filter: blur(4px);

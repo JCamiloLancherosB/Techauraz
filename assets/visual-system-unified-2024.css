@@ -241,7 +241,7 @@ h2.title {
   border-radius: 16px;
   padding: 1.75rem 1.25rem;
   text-align: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
@@ -370,7 +370,7 @@ h2.title {
   padding: 0.875rem 2rem;
   font-weight: 700;
   letter-spacing: 0.025em;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .featured-collection .button:hover {
@@ -563,7 +563,7 @@ a {
   border: none;
   cursor: pointer;
   min-height: 48px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
