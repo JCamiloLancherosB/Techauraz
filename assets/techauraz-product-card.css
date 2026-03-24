@@ -1102,6 +1102,7 @@
   background-size: 200% 100%;
   animation: cardShimmer 1.5s ease-in-out infinite;
   border-radius: var(--ta-radius-sm, 4px);
+  will-change: background-position;
 }
 
 .card-skeleton__image {

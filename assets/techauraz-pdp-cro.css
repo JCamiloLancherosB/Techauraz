@@ -16,16 +16,16 @@
    56px, amber gradient, pulsating glow
    ---------------------------------------- */
 
+/* GPU-composited: animate opacity on pseudo-element instead of box-shadow */
 @keyframes ctaGlowPulse {
 
     0%,
     100% {
-        box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
+        opacity: 0;
     }
 
     50% {
-        box-shadow: 0 4px 30px var(--ta-glow-cta, rgba(245, 158, 11, 0.6)),
-            0 0 50px var(--ta-glow-cta, rgba(245, 158, 11, 0.15));
+        opacity: 1;
     }
 }
 
@@ -46,14 +46,27 @@
     box-shadow: 0 4px 14px var(--ta-glow-cta, rgba(245, 158, 11, 0.4));
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    overflow: hidden;
-    animation: ctaGlowPulse 2.5s ease-in-out infinite;
+    overflow: visible;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
     cursor: pointer;
+}
+
+/* Glow pseudo-element — GPU-composited via opacity animation */
+.product-form__submit::after,
+.shopify-payment-button .shopify-payment-button__button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 4px 30px var(--ta-glow-cta, rgba(245, 158, 11, 0.6)),
+        0 0 50px var(--ta-glow-cta, rgba(245, 158, 11, 0.15));
+    opacity: 0;
+    animation: ctaGlowPulse 2.5s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .product-form__submit.shopify-payment-button__button:hover,
@@ -64,6 +77,12 @@
     box-shadow: 0 8px 28px var(--ta-glow-cta, rgba(245, 158, 11, 0.5));
     transform: translateY(-2px);
     animation: none;
+}
+
+.product-form__submit:hover::after,
+.shopify-payment-button .shopify-payment-button__button:hover::after {
+    animation: none;
+    opacity: 0;
 }
 
 .product-form__submit:active,

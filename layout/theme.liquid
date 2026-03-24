@@ -8,7 +8,7 @@
 <!-- Phase 3: WhatsApp API domain hint for floating CTA -->
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="dns-prefetch" href="https://api.whatsapp.com">
-<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+{%- comment -%} cdn.shopify.com preconnect removed — Shopify sends it via HTTP response headers automatically {%- endcomment -%}
 
 <!-- Preload critical JavaScript -->
 {%- if request.design_mode -%}
@@ -245,8 +245,10 @@
 <noscript><link rel="stylesheet" href="{{ 'home-modern-blocks.css' | asset_url }}"></noscript>
 <link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' or template.name == 'product' -%}
 <link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
 <link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -429,8 +431,7 @@
     {%- if template.name == 'product' -%}
       <script src="{{ 'techauraz-animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script src="{{ 'techauraz-custom-ui.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'header-scroll-handler.js' | asset_url }}" defer="defer"></script>
+    {%- comment -%} techauraz-custom-ui.js and header-scroll-handler.js moved to idle callback below {%- endcomment -%}
     {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
       <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -455,6 +456,8 @@
       idle(function(){
         var agregarCar=document.querySelector('.product-form__submit[id*="ProductSubmitButton"]');
         if(agregarCar){agregarCar.classList.remove('button--full-width','button--secondary');}
+        lazyLoad({{ 'techauraz-custom-ui.js' | asset_url | json }});
+        lazyLoad({{ 'header-scroll-handler.js' | asset_url | json }});
         lazyLoad({{ 'scroll-reveal.js' | asset_url | json }});
         lazyLoad({{ 'micro-interactions.js' | asset_url | json }});
         lazyLoad({{ 'image-loading.js' | asset_url | json }});

@@ -466,17 +466,32 @@ form[action="/cart/add"] .button--primary {
     min-height: 56px;
     transition: all 0.3s ease;
     animation: ctaPulseGlow 3s ease-in-out infinite;
+    position: relative;
+    overflow: visible;
+}
+
+/* GPU-composited glow via pseudo-element opacity instead of animating box-shadow */
+.product-form__submit.button--primary::after,
+.product-form__submit[name="add"]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 4px 24px rgba(245, 158, 11, 0.6);
+    opacity: 0;
+    animation: ctaPulseGlow 3s ease-in-out infinite;
+    pointer-events: none;
 }
 
 @keyframes ctaPulseGlow {
 
     0%,
     100% {
-        box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+        opacity: 0;
     }
 
     50% {
-        box-shadow: 0 4px 24px rgba(245, 158, 11, 0.6);
+        opacity: 1;
     }
 }
 
@@ -486,6 +501,12 @@ form[action="/cart/add"] .button--primary {
     transform: translateY(-2px);
     box-shadow: 0 6px 28px rgba(245, 158, 11, 0.5) !important;
     animation: none;
+}
+
+.product-form__submit.button--primary:hover::after,
+.product-form__submit[name="add"]:hover::after {
+    animation: none;
+    opacity: 0;
 }
 
 /* =============================================================================

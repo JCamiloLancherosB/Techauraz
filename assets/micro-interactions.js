@@ -124,17 +124,22 @@
 
     /* ---- 5. SMOOTH HOVER GLOW on cards ---- */
     function initCardGlow() {
+        var glowTicking = false;
         document.addEventListener('mousemove', function (e) {
-            var card = e.target.closest('.card-wrapper.product-card-wrapper, .category-card');
-            if (!card) return;
-
-            var rect = card.getBoundingClientRect();
-            var x = ((e.clientX - rect.left) / rect.width) * 100;
-            var y = ((e.clientY - rect.top) / rect.height) * 100;
-
-            card.style.setProperty('--glow-x', x + '%');
-            card.style.setProperty('--glow-y', y + '%');
-        });
+            if (glowTicking) return;
+            glowTicking = true;
+            requestAnimationFrame(function () {
+                var card = e.target.closest('.card-wrapper.product-card-wrapper, .category-card');
+                if (card) {
+                    var rect = card.getBoundingClientRect();
+                    var x = ((e.clientX - rect.left) / rect.width) * 100;
+                    var y = ((e.clientY - rect.top) / rect.height) * 100;
+                    card.style.setProperty('--glow-x', x + '%');
+                    card.style.setProperty('--glow-y', y + '%');
+                }
+                glowTicking = false;
+            });
+        }, { passive: true });
     }
 
     /* ---- INIT ---- */
