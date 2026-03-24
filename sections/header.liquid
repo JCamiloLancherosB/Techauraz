@@ -3,7 +3,10 @@
   section-header.css, component-list-menu.css, component-search.css,
   component-menu-drawer.css, component-cart-items.css — all inlined in base.css.
 {%- endcomment -%}
+{%- if settings.cart_type == 'notification' -%}
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}"></noscript>
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-header.css' | asset_url }}"></noscript>
 {%- if settings.predictive_search_enabled -%}
@@ -332,17 +335,17 @@
     updateHeaderPosition() {
       if (!this.header) return;
 
-      const position = window.getComputedStyle(this.header).position;
-      // Track previous position for comparison (null/undefined treated as not-fixed)
-      const wasFixed = this.headerPosition === 'fixed';
-      const isFirstCall = this.headerPosition === null;
-      const isFixed = position === 'fixed';
-      
-      // Always update the state on first call or when position changes
-      if (isFirstCall || position !== this.headerPosition) {
-        this.headerPosition = position;
-        document.documentElement.classList.toggle('tech-header-fixed', isFixed);
-      }
+      // Wrap in rAF to avoid forced reflow from getComputedStyle
+      requestAnimationFrame(() => {
+        const position = window.getComputedStyle(this.header).position;
+        const isFirstCall = this.headerPosition === null;
+        const isFixed = position === 'fixed';
+        
+        if (isFirstCall || position !== this.headerPosition) {
+          this.headerPosition = position;
+          document.documentElement.classList.toggle('tech-header-fixed', isFixed);
+        }
+      });
     }
 
     handleMediaChange() {
@@ -353,9 +356,11 @@
     setHeaderHeight() {
       if (!this.header) return;
 
-      // Get the actual rendered height and set CSS custom property
-      const headerHeight = this.header.offsetHeight;
-      document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
+      // Wrap in rAF to avoid forced reflow from offsetHeight
+      requestAnimationFrame(() => {
+        const headerHeight = this.header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
+      });
     }
 
     onScroll() {

@@ -1,12 +1,16 @@
-{%- comment -%} Preload first hero image for better LCP - optimized for mobile {%- endcomment -%}
-{%- if section.blocks.first.settings.image and section.index == 0 -%}
-  <link 
-    rel="preload" 
-    as="image" 
-    href="{{ section.blocks.first.settings.image | image_url: width: 1920, format: 'webp' }}"
-    imagesrcset="{{ section.blocks.first.settings.image | image_url: width: 750, format: 'webp' }} 750w, {{ section.blocks.first.settings.image | image_url: width: 1100, format: 'webp' }} 1100w, {{ section.blocks.first.settings.image | image_url: width: 1500, format: 'webp' }} 1500w, {{ section.blocks.first.settings.image | image_url: width: 1920, format: 'webp' }} 1920w"
-    imagesizes="(max-width: 749px) 100vw, (max-width: 1200px) 85vw, 1920px"
-    fetchpriority="high">
+{%- comment -%} Preload first TWO hero images for better LCP — slide 2 is often the LCP element {%- endcomment -%}
+{%- if section.index == 0 -%}
+  {%- for block in section.blocks limit: 2 -%}
+    {%- if block.settings.image -%}
+      <link 
+        rel="preload" 
+        as="image" 
+        href="{{ block.settings.image | image_url: width: 1920, format: 'webp' }}"
+        imagesrcset="{{ block.settings.image | image_url: width: 750, format: 'webp' }} 750w, {{ block.settings.image | image_url: width: 1100, format: 'webp' }} 1100w, {{ block.settings.image | image_url: width: 1500, format: 'webp' }} 1500w, {{ block.settings.image | image_url: width: 1920, format: 'webp' }} 1920w"
+        imagesizes="(max-width: 749px) 100vw, (max-width: 1200px) 85vw, 1920px"
+        fetchpriority="high">
+    {%- endif -%}
+  {%- endfor -%}
 {%- endif -%}
 
 {%- comment -%} Find first slide with an image to determine if slideshow has images {%- endcomment -%}
@@ -106,7 +110,7 @@
               endif
               assign fetch_priority = 'high'
             -%}
-            {%- if forloop.index == 1 %}
+            {%- if forloop.index <= 2 %}
               {{
                 block.settings.image
                 | image_url: width: 1920
