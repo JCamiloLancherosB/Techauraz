@@ -4,7 +4,8 @@
   No hay números aleatorios/falsos.
 {%- endcomment -%}
 
-{{ 'section-product-views-counter.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'section-product-views-counter.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'section-product-views-counter.css' | asset_url }}"></noscript>
 
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant

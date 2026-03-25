@@ -4,7 +4,8 @@
   Usage: Add as a section in your template
 {% endcomment %}
 
-{{ 'social-proof-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'social-proof-banner.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'social-proof-banner.css' | asset_url }}"></noscript>
 
 <section 
   class="social-proof-banner section-{{ section.id }}-padding"

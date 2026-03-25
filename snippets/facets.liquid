@@ -13,7 +13,7 @@
 {% endcomment %}
 
 {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-{{ 'component-show-more.css' | asset_url | stylesheet_tag }}
+{%- comment -%} component-show-more.css removed — file did not exist, causing MIME type errors (2026-03-25 audit) {%- endcomment -%}
 {{ 'component-visual-display.css' | asset_url | stylesheet_tag }}
 
 {%- liquid

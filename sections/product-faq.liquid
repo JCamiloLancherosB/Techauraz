@@ -11,7 +11,8 @@
   - Keyboard accessibility with ARIA attributes
 {%- endcomment -%}
 
-{{ 'faq-accordion.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'faq-accordion.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'faq-accordion.css' | asset_url }}"></noscript>
 
 {%- liquid
   assign use_metafield_faqs = false

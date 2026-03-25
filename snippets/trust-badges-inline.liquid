@@ -87,7 +87,8 @@
 -%}
 
 {%- if visible_badges > 0 -%}
-  {{ 'trust-badges.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'trust-badges.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'trust-badges.css' | asset_url }}"></noscript>
   
   <div 
     class="trust-badges-inline trust-badges-inline--{{ layout_class }}{% if context_class != '' %} trust-badges-inline--{{ context_class }}{% endif %}"

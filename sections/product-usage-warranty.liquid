@@ -27,9 +27,11 @@
             {% endfor %}
           </div>
         {% else %}
-          <div class="product-usage-warranty__placeholder">
-            <p>Configura los pasos de uso desde el Theme Editor para que los clientes sepan cómo usar el producto.</p>
-          </div>
+          {%- if request.design_mode -%}
+            <div class="product-usage-warranty__placeholder">
+              <p>Configura los pasos de uso desde el Theme Editor para que los clientes sepan cómo usar el producto.</p>
+            </div>
+          {%- endif -%}
         {% endif %}
       </div>
     {% endif %}

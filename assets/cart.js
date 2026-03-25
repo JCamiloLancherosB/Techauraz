@@ -79,10 +79,12 @@ class CartItems extends HTMLElement {
   }
 
   getSectionsToRender() {
+    const mainCartItemsEl = document.getElementById('main-cart-items');
+    const mainCartFooterEl = document.getElementById('main-cart-footer');
     return [
       {
         id: 'main-cart-items',
-        section: document.getElementById('main-cart-items').dataset.id,
+        section: mainCartItemsEl ? mainCartItemsEl.dataset.id : 'main-cart-items',
         selector: '.js-contents',
       },
       {
@@ -97,7 +99,7 @@ class CartItems extends HTMLElement {
       },
       {
         id: 'main-cart-footer',
-        section: document.getElementById('main-cart-footer').dataset.id,
+        section: mainCartFooterEl ? mainCartFooterEl.dataset.id : 'main-cart-footer',
         selector: '.js-contents',
       },
     ];
@@ -184,7 +186,7 @@ class CartItems extends HTMLElement {
       document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
     if (lineItemError) lineItemError.querySelector('.cart-item__error-text').innerHTML = message;
 
-    this.lineItemStatusElement.setAttribute('aria-hidden', true);
+    if (this.lineItemStatusElement) this.lineItemStatusElement.setAttribute('aria-hidden', true);
 
     const cartStatus =
       document.getElementById('cart-live-region-text') || document.getElementById('CartDrawer-LiveRegionText');

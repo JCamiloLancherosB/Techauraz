@@ -122,6 +122,7 @@
 </div>
 
 {%- comment -%} Load CSS and JS assets {%- endcomment -%}
-{{ 'sticky-cart-bar.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'sticky-cart-bar.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'sticky-cart-bar.css' | asset_url }}"></noscript>
 <script src="{{ 'sticky-cart-bar.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}

@@ -6,7 +6,8 @@
 {%- endcomment -%}
 
 {%- if section.settings.show_section -%}
-{{ 'product-reviews-summary.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'product-reviews-summary.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'product-reviews-summary.css' | asset_url }}"></noscript>
 
 {%- assign rating_value = product.metafields.reviews.rating.value -%}
 {%- assign rating_count = product.metafields.reviews.rating_count.value -%}

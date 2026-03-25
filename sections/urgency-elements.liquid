@@ -6,7 +6,8 @@
   Los contadores de "personas viendo" han sido eliminados porque son datos ficticios.
 {% endcomment %}
 
-{{ 'section-urgency-elements.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'section-urgency-elements.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'section-urgency-elements.css' | asset_url }}"></noscript>
 
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant

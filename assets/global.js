@@ -206,12 +206,12 @@ class QuantityInput extends HTMLElement {
     if (this.input.min) {
       const min = parseInt(this.input.min);
       const buttonMinus = this.querySelector(".quantity__button[name='minus']");
-      buttonMinus.classList.toggle('disabled', value <= min);
+      if (buttonMinus) buttonMinus.classList.toggle('disabled', value <= min);
     }
     if (this.input.max) {
       const max = parseInt(this.input.max);
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
-      buttonPlus.classList.toggle('disabled', value >= max);
+      if (buttonPlus) buttonPlus.classList.toggle('disabled', value >= max);
     }
   }
 }
@@ -220,7 +220,7 @@ customElements.define('quantity-input', QuantityInput);
 
 function debounce(fn, wait) {
   let t;
-  return (...args) => {
+  return function (...args) {
     clearTimeout(t);
     t = setTimeout(() => fn.apply(this, args), wait);
   };
@@ -502,7 +502,7 @@ class HeaderDrawer extends MenuDrawer {
   openMenuDrawer(summaryElement) {
     this.header = this.header || document.querySelector('.section-header');
     this.borderOffset =
-      this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
+      this.borderOffset || (this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0);
     document.documentElement.style.setProperty(
       '--header-bottom-position',
       `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
@@ -671,10 +671,18 @@ class SliderComponent extends HTMLElement {
       const secondItemOffset = this.sliderItemsToShow[1].offsetLeft;
 
       this.sliderItemOffset = secondItemOffset - firstItemOffset;
+
+      if (this.sliderItemOffset <= 0) {
+        this.totalPages = 1;
+        this.slidesPerPage = this.sliderItemsToShow.length;
+        this.update();
+        return;
+      }
+
       this.slidesPerPage = Math.floor(
         (sliderWidth - firstItemOffset) / this.sliderItemOffset
       );
-      this.totalPages = this.sliderItemsToShow.length - this.slidesPerPage + 1;
+      this.totalPages = Math.max(1, this.sliderItemsToShow.length - this.slidesPerPage + 1);
       this.update();
     });
   }
@@ -693,11 +701,18 @@ class SliderComponent extends HTMLElement {
     requestAnimationFrame(() => {
       const scrollLeft = this.slider.scrollLeft;
       const previousPage = this.currentPage;
-      this.currentPage = Math.round(scrollLeft / this.sliderItemOffset) + 1;
+
+      if (!this.sliderItemOffset || this.sliderItemOffset <= 0) {
+        this.currentPage = 1;
+      } else {
+        this.currentPage = Math.round(scrollLeft / this.sliderItemOffset) + 1;
+      }
 
       if (this.currentPageElement && this.pageTotalElement) {
-        this.currentPageElement.textContent = this.currentPage;
-        this.pageTotalElement.textContent = this.totalPages;
+        const safeTotal = (this.totalPages && isFinite(this.totalPages) && this.totalPages >= 1) ? this.totalPages : 1;
+        const safeCurrent = (this.currentPage && isFinite(this.currentPage) && this.currentPage >= 1) ? this.currentPage : 1;
+        this.currentPageElement.textContent = safeCurrent;
+        this.pageTotalElement.textContent = safeTotal;
       }
 
       if (this.currentPage != previousPage) {
@@ -751,6 +766,7 @@ class SliderComponent extends HTMLElement {
   setSlidePosition(position) {
     this.slider.scrollTo({
       left: position,
+      behavior: 'smooth',
     });
   }
 }
@@ -860,8 +876,11 @@ class SlideshowComponent extends SliderComponent {
       link.classList.remove('slider-counter__link--active');
       link.removeAttribute('aria-current');
     });
-    this.sliderControlButtons[this.currentPage - 1].classList.add('slider-counter__link--active');
-    this.sliderControlButtons[this.currentPage - 1].setAttribute('aria-current', true);
+    const activeButton = this.sliderControlButtons[this.currentPage - 1];
+    if (activeButton) {
+      activeButton.classList.add('slider-counter__link--active');
+      activeButton.setAttribute('aria-current', true);
+    }
   }
 
   autoPlayToggle() {
@@ -890,7 +909,7 @@ class SlideshowComponent extends SliderComponent {
       } else if (this.autoplayButtonIsSetToPlay) {
         this.pause();
       }
-    } else if (this.announcementBarSlider.contains(event.target)) {
+    } else if (this.announcementBarSlider && this.announcementBarSlider.contains(event.target)) {
       this.pause();
     }
   }

@@ -22,7 +22,8 @@
   - padding_top/padding_bottom: Section padding
 {%- endcomment -%}
 
-{{ 'recently-viewed.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'recently-viewed.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'recently-viewed.css' | asset_url }}"></noscript>
 
 <recently-viewed-section 
   class="recently-viewed-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"

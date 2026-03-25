@@ -5,7 +5,8 @@
   - Supports cookie preferences modal
 {% endcomment %}
 
-{{ 'cookie-banner-techauraz.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'cookie-banner-techauraz.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'cookie-banner-techauraz.css' | asset_url }}"></noscript>
 
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" tabindex="-1">
   <div class="cookie-banner__inner">
