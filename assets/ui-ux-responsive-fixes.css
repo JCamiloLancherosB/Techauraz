@@ -2050,25 +2050,7 @@ body.template-index #shopify-section-cta_midpage .rich-text__buttons {
   }
 }
 
-/* Reduce newsletter wrapper internal padding
-   Maintains ~35-40% reduction consistently across breakpoints
-   Original: 40px 24px (mobile), 50px 32px (tablet), 70px 60px (desktop)
-   New: 32px 20px (mobile), 40px 28px (tablet), 50px 44px (desktop) */
-.newsletter__wrapper {
-  padding: 2rem 1.25rem !important;
-}
-
-@media screen and (min-width: 750px) {
-  .newsletter__wrapper {
-    padding: 2.5rem 1.75rem !important;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .newsletter__wrapper {
-    padding: 3.125rem 2.75rem !important;
-  }
-}
+/* newsletter__wrapper padding consolidated at line ~3484 (single source of truth) */
 
 /* Trust Badges Section - Reduce padding if present */
 #shopify-section-trust_badges_section {
