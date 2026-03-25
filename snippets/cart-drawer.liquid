@@ -482,12 +482,60 @@
       </cart-drawer-items>
 
       {%- comment -%} ══════════════════════════════════════════════════
-         ORDER BUMP — 1-Click AOV Booster (Phase 3)
-         Injected between cart items and footer.
-         Uses Shopify AJAX Cart API for frictionless add.
-         Product data loaded dynamically via Liquid.
+         ORDER BUMP — Smart Cross-Sell AOV Booster
+         Selects the best complementary product based on cart contents.
+         Falls back to cable if no contextual match found.
+         Product mapping is managed via tags: bump:handle-name
       ══════════════════════════════════════════════════ {%- endcomment -%}
-      {%- assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado' -%}
+      {%- liquid
+        assign bump_handle = ''
+        assign bump_fallback = 'cable-usb-c-de-carga-rapida-trenzado'
+
+        comment
+          Smart cross-sell: check cart items for product type and select
+          the best complementary product. Priority order:
+          1. Check if any cart item has a bump:xxx tag (explicit mapping)
+          2. Check product type for category-based mapping
+          3. Fallback to universal accessory (cable)
+        endcomment
+
+        for item in cart.items
+          comment Step 1: Check explicit bump tags endcomment
+          for tag in item.product.tags
+            if tag contains 'bump:'
+              assign bump_handle = tag | remove: 'bump:'
+              break
+            endif
+          endfor
+          if bump_handle != ''
+            break
+          endif
+
+          comment Step 2: Product type mapping endcomment
+          assign item_type = item.product.type | downcase
+          if item_type contains 'audífono' or item_type contains 'auricular' or item_type contains 'headphone' or item_type contains 'earphone'
+            assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+            break
+          elsif item_type contains 'power bank' or item_type contains 'batería' or item_type contains 'cargador'
+            assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+            break
+          elsif item_type contains 'cable' or item_type contains 'usb'
+            assign bump_handle = ''
+            comment Cables don't cross-sell cables — let fallback handle it endcomment
+          elsif item_type contains 'memoria' or item_type contains 'usb flash' or item_type contains 'storage'
+            assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+            break
+          elsif item_type contains 'smartwatch' or item_type contains 'reloj'
+            assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+            break
+          endif
+        endfor
+
+        comment Step 3: Fallback endcomment
+        if bump_handle == ''
+          assign bump_handle = bump_fallback
+        endif
+      -%}
       {%- assign bump_product = all_products[bump_handle] -%}
       {%- if cart != empty and bump_product != blank -%}
         {%- comment -%} Check if order bump product is already in cart {%- endcomment -%}
