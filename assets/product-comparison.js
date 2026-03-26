@@ -1,7 +1,7 @@
 /**
  * =============================================================================
  * PRODUCT COMPARISON FEATURE
- * TechAura Electronics Store - Colombia
+ * TechAuraz Electronics Store - Colombia
  * =============================================================================
  * 
  * Features:

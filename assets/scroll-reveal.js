@@ -1,5 +1,5 @@
 /* =============================================================================
-   SCROLL-REVEAL ANIMATION SYSTEM — TechAura 2030
+   SCROLL-REVEAL ANIMATION SYSTEM — TechAuraz 2030
    
    GPU-accelerated IntersectionObserver-based entrance animations.
    Targets .ta-reveal elements and auto-discovers major sections.

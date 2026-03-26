@@ -1,5 +1,5 @@
 /* =============================================================================
-   SOCIAL PROOF TOAST — TechAura Prompt 8
+   SOCIAL PROOF TOAST — TechAuraz Prompt 8
    
    Floating purchase notifications that show real-time social proof.
    Rotates through realistic Colombian buyer data.

@@ -243,9 +243,9 @@ details.facets__disclosure summary .icon-caret {
   /* Tighter spacing between paragraphs */
 }
 
-/* Ensure collection hero doesn't take too much vertical space */
+/* Ensure collection hero doesn't overlap with header */
 .collection-hero__inner {
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 2rem;
 }
 
@@ -385,9 +385,6 @@ details.facets__disclosure summary .icon-caret {
   }
 }
 
-.facets__display {
-  /* will-change removed to improve performance - apply dynamically if needed */
-}
 
 /* Smooth transitions */
 .facets__summary,

@@ -269,11 +269,11 @@
    
    Date: 2026-02-09
    Source: assets/base.css
-   Reason: Separate TechAura custom overrides from Dawn core theme
+   Reason: Separate TechAuraz custom overrides from Dawn core theme
    
    These blocks were moved from base.css to improve maintainability:
    - Easier to update Dawn theme base without conflicts
-   - Clear separation between core Dawn and TechAura customizations
+   - Clear separation between core Dawn and TechAuraz customizations
    - Reduces base.css file size
    
    BLOCKS MOVED:

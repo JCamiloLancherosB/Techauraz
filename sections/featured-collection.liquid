@@ -1,6 +1,6 @@
 {%- comment -%}
   Load shared CSS assets once at section level (not per card)
-  Note: visual-system-unified-2024.css is loaded globally in theme.liquid
+  Note: visual-system-unified.css is loaded globally in theme.liquid
 {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}</noscript>

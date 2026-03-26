@@ -1,5 +1,5 @@
 /* =============================================================================
-   ENHANCED 404 PAGE — TechAura 2030
+   ENHANCED 404 PAGE — TechAuraz 2026
    Conversion-focused 404 with product rescue and search
    ============================================================================= */
 
@@ -192,6 +192,7 @@
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

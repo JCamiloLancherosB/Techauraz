@@ -1,5 +1,5 @@
 /**
- * FAQ Accordion - TechAura Product FAQ Section
+ * FAQ Accordion - TechAuraz Product FAQ Section
  * Version: 1.0.0
  *
  * Features:

@@ -1,5 +1,5 @@
 /* =============================================================================
-   MICRO-INTERACTIONS ENGINE — TechAura 2030
+   MICRO-INTERACTIONS ENGINE — TechAuraz 2030
    
    Premium interactive effects:
    - Button ripple on click  

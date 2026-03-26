@@ -1,5 +1,5 @@
 /**
- * Urgency Elements — TechAura Prompt 8
+ * Urgency Elements — TechAuraz Prompt 8
  * 
  * 1. Countdown timer with digit cards (DD:HH:MM:SS), flip animation
  * 2. Product views counter with pulsing dot
