@@ -43,17 +43,17 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% elsif template.name == 'index' %}
-      <meta name="description" content="TechAura ✓ Tienda online #1 de tecnología en Colombia. Audífonos, smartwatches, memorias USB personalizadas y accesorios tech con envío GRATIS y pago contra entrega. Garantía 30 días.">
+      <meta name="description" content="TechAuraz ✓ Tienda online #1 de tecnología en Colombia. Audífonos, smartwatches, memorias USB personalizadas y accesorios tech con envío GRATIS y pago contra entrega. Garantía 30 días.">
     {% elsif template.name == 'collection' %}
-      <meta name="description" content="{{ collection.title }} en TechAura. {{ collection.products_count }} productos tecnológicos con envío gratis a toda Colombia. Pago contra entrega disponible.">
+      <meta name="description" content="{{ collection.title }} en TechAuraz. {{ collection.products_count }} productos tecnológicos con envío gratis a toda Colombia. Pago contra entrega disponible.">
     {% elsif template.name == 'product' %}
-      <meta name="description" content="{{ product.title | escape }} - Desde {{ product.price | money }}. Envío GRATIS + Garantía 30 días + Pago contra entrega en toda Colombia. Compra seguro en TechAura.">
+      <meta name="description" content="{{ product.title | escape }} - Desde {{ product.price | money }}. Envío GRATIS + Garantía 30 días + Pago contra entrega en toda Colombia. Compra seguro en TechAuraz.">
     {% elsif template contains 'article' %}
       <meta name="description" content="{{ article.excerpt_or_content | strip_html | truncate: 155 | escape }}">
     {% elsif template contains 'blog' %}
-      <meta name="description" content="Blog TechAura - Guías, reseñas y consejos sobre tecnología, gadgets, audífonos, smartwatches y más. Tips para sacar el máximo provecho a tus dispositivos.">
+      <meta name="description" content="Blog TechAuraz - Guías, reseñas y consejos sobre tecnología, gadgets, audífonos, smartwatches y más. Tips para sacar el máximo provecho a tus dispositivos.">
     {% else %}
-      <meta name="description" content="TechAura ✓ Tienda online de tecnología en Colombia. Audífonos, smartwatches, memorias USB y accesorios tech con envío GRATIS, pago contra entrega y garantía 30 días.">
+      <meta name="description" content="TechAuraz ✓ Tienda online de tecnología en Colombia. Audífonos, smartwatches, memorias USB y accesorios tech con envío GRATIS, pago contra entrega y garantía 30 días.">
     {% endif %}
     
     <!-- Localización Colombia -->
@@ -66,8 +66,8 @@
     <meta name="distribution" content="Colombia">
     <meta property="og:locale" content="es_CO">
     
-    <!-- SEO Esencial TechAura -->
-    <meta name="author" content="TechAura">
+    <!-- SEO Esencial TechAuraz -->
+    <meta name="author" content="TechAuraz">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- Open Graph and Twitter Card tags are rendered dynamically via snippets/meta-tags.liquid -->
@@ -80,7 +80,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "TechAura",
+      "name": "TechAuraz",
       "url": "{{ shop.url }}",
       "potentialAction": {
         "@type": "SearchAction",
@@ -107,19 +107,19 @@
 
     <title>
       {%- if template.name == 'index' -%}
-        TechAura | Tienda #1 de Tecnología en Colombia | Envío Gratis
+        TechAuraz | Tienda #1 de Tecnología en Colombia | Envío Gratis
       {%- elsif template.name == 'product' -%}
-        {{ product.title }} | Desde {{ product.price | money }} | Envío GRATIS | TechAura
+        {{ product.title }} | Desde {{ product.price | money }} | Envío GRATIS | TechAuraz
       {%- elsif template.name == 'collection' -%}
-        {{ collection.title }} | Compra Online con Envío Gratis | TechAura
+        {{ collection.title }} | Compra Online con Envío Gratis | TechAuraz
       {%- elsif template contains 'article' -%}
-        {{ article.title }} | Blog TechAura
+        {{ article.title }} | Blog TechAuraz
       {%- elsif template contains 'blog' -%}
-        {{ blog.title | default: 'Blog' }} | Guías y Consejos Tech | TechAura
+        {{ blog.title | default: 'Blog' }} | Guías y Consejos Tech | TechAuraz
       {%- elsif template.name == '404' -%}
-        Página no encontrada | TechAura
+        Página no encontrada | TechAuraz
       {%- elsif template.name == 'search' -%}
-        Buscar: {{ search.terms | escape }} | TechAura
+        Buscar: {{ search.terms | escape }} | TechAuraz
       {%- else -%}
         {{ page_title }}
         {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
@@ -187,7 +187,7 @@
      
      GLOBAL (loaded on all pages):
      1. techauraz-tokens.css - CSS custom properties, design tokens + legacy --tech-* compat (MUST BE FIRST)
-     2. base.css - Core Dawn theme styles + TechAura unified styles
+     2. base.css - Core Dawn theme styles + TechAuraz unified styles
      3. ui-ux-responsive-fixes.css - Responsive design and layout fixes
      4. home-modern-blocks.css - Newsletter + Footer styles (contains global footer styles)
      5. techauraz-custom-ui.css - WhatsApp, Announcement Bar, Cookie Banner
@@ -197,9 +197,11 @@
      
      CONDITIONAL (loaded only on specific pages):
      A. testimonials.css - Reviews & carousel sections (HOME ONLY: template.name == 'index')
-     B. slideshow-enhancements.css - Slider controls and CTAs (HOME ONLY: template.name == 'index')
+     B. slideshow-unified.css - Slider controls, CTAs, fixes (HOME ONLY, merged from enhancements + fixes-2026)
      C. quick-view-modal.css - Product preview modal (HOME, COLLECTION, SEARCH pages)
      D. product-comparison.css - Side-by-side comparison (PDP & comparison pages)
+     E. techauraz-pdp-unified.css - PDP CRO + Premium design (PDP ONLY, merged from pdp-cro + pdp-premium)
+     F. social-proof-unified.css - Banner + toast notifications (merged from banner + toast)
      
      Z-INDEX HIERARCHY (defined in techauraz-tokens.css):
      - Base content: 0-99
@@ -213,10 +215,10 @@
      This is normal Shopify behavior and should not interfere with our styles
      as long as the loading order is maintained.
      
-     Last updated: 2026-03-13
+     Last updated: 2026-03-25 (CSS consolidation audit)
      ============================================================================= -->
 
-<!-- TechAura Design Tokens — async (critical vars already inlined in <style> below) -->
+<!-- TechAuraz Design Tokens — async (critical vars already inlined in <style> below) -->
 <link rel="stylesheet" href="{{ 'techauraz-tokens.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-tokens.css' | asset_url }}"></noscript>
 
@@ -289,8 +291,8 @@
 <link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}"></noscript>
 {%- if template.name == 'index' -%}
-<link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ 'visual-system-unified-2024.css' | asset_url }}"></noscript>
+<link rel="stylesheet" href="{{ 'visual-system-unified.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'visual-system-unified.css' | asset_url }}"></noscript>
 {%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
@@ -303,9 +305,9 @@
   <!-- Testimonials (HOME ONLY — print/onload) -->
   <link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}"></noscript>
-  <!-- Slideshow Enhancements (HOME ONLY — print/onload) -->
-  <link rel="stylesheet" href="{{ 'slideshow-enhancements.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'slideshow-enhancements.css' | asset_url }}"></noscript>
+  <!-- Slideshow Unified (HOME ONLY — print/onload, merged: enhancements + fixes-2026) -->
+  <link rel="stylesheet" href="{{ 'slideshow-unified.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ 'slideshow-unified.css' | asset_url }}"></noscript>
 {%- endif -%}
 
 {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' or template.name == 'cart' -%}
@@ -328,9 +330,9 @@
 {%- endif -%}
 
 {%- if template.name == 'product' -%}
-  <!-- PDP CRO (print/onload) -->
-  <link rel="stylesheet" href="{{ 'techauraz-pdp-cro.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'techauraz-pdp-cro.css' | asset_url }}"></noscript>
+  <!-- PDP Unified CRO + Premium (print/onload, merged: pdp-cro + pdp-premium) -->
+  <link rel="stylesheet" href="{{ 'techauraz-pdp-unified.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ 'techauraz-pdp-unified.css' | asset_url }}"></noscript>
 {%- endif -%}
 
 <!-- =============================================================================
@@ -348,16 +350,12 @@
 {%- endif -%}
 
 {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
-  <!-- Social Proof Toast CSS (PAGES WITH PRODUCTS ONLY) -->
-  <link rel="stylesheet" href="{{ 'social-proof-toast.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'social-proof-toast.css' | asset_url }}"></noscript>
+  <!-- Social Proof Unified CSS (PAGES WITH PRODUCTS ONLY, merged: banner + toast) -->
+  <link rel="stylesheet" href="{{ 'social-proof-unified.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ 'social-proof-unified.css' | asset_url }}"></noscript>
 {%- endif -%}
 
-{%- if template.name == 'index' -%}
-  <!-- Slideshow & Header Fixes (HOME ONLY) -->
-  <link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'slideshow-fixes-2026.css' | asset_url }}"></noscript>
-{%- endif -%}
+{%- comment -%} slideshow-fixes-2026.css merged into slideshow-unified.css (loaded above) {%- endcomment -%}
 
 <!-- 2026 CRO Best Practices — scroll, typography, performance, animations (GLOBAL) -->
 <link rel="stylesheet" href="{{ 'techauraz-2026-cro.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -367,15 +365,17 @@
 <link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}"></noscript>
 
-{%- if template.name == 'product' -%}
-  <!-- PDP Premium Design (print/onload) -->
-  <link rel="stylesheet" href="{{ 'techauraz-pdp-premium.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'techauraz-pdp-premium.css' | asset_url }}"></noscript>
-{%- endif -%}
+{%- comment -%} techauraz-pdp-premium.css merged into techauraz-pdp-unified.css (loaded above) {%- endcomment -%}
 
     {%- comment -%} Font preloads moved before content_for_header (see above, after critical CSS inline block) {%- endcomment -%}
 
     <!-- Componentes Adicionales -->
+    {%- comment -%}
+      Country Selector: Controlled by Shopify Admin → Settings → Markets.
+      To disable the 30+ country selector showing COP for all countries,
+      go to Shopify Admin → Settings → Markets and remove non-Colombian markets.
+      The code is correctly gated: only shows if enable_country_selector && countries.size > 1
+    {%- endcomment -%}
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -539,7 +539,7 @@
 <!-- FACEBOOK PIXEL - OPTIMIZED (moved from <head> for LCP) -->
 <script>
 (function() {
-  var FB_DELAY = 10000;
+  var FB_DELAY = 3500;
   var FB_INTERACTION_DELAY = 300;
   var fbLoaded = false;
   function loadFBPixel() {

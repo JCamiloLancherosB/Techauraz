@@ -3061,10 +3061,7 @@ details-modal,
   color: #ffffff;
 }
 
-/* Hide duplicate checkmark indicators */
-.tech-card-product .card__trust-indicators {
-  display: none;
-}
+
 
 /* Cleaner card layout - flexbox for bottom-aligned content */
 .tech-card-product .card__content {
@@ -4226,8 +4223,7 @@ body.quick-add-modal-open {
    ============================================================================= */
 
 /* Benefits bar elevation */
-.shopify-section .benefits-bar,
-.shopify-section .trust-badges-section {
+.shopify-section .benefits-bar {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 

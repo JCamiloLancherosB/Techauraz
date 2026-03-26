@@ -1,0 +1,123 @@
+{%- comment -%}
+  Visible Breadcrumb Navigation — TechAuraz
+  ==========================================
+  Renders a visible breadcrumb trail for SEO and UX.
+  Works on product, collection, and page templates.
+  Usage: {% render 'breadcrumbs' %}
+{%- endcomment -%}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" class="breadcrumbs__link" itemprop="item">
+        <span itemprop="name">Inicio</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+
+    {%- if template.name == 'product' -%}
+      {%- if product.collections.size > 0 -%}
+        {%- assign main_collection = product.collections | first -%}
+        <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+          <a href="{{ main_collection.url }}" class="breadcrumbs__link" itemprop="item">
+            <span itemprop="name">{{ main_collection.title }}</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+          <span itemprop="name" class="breadcrumbs__current">{{ product.title }}</span>
+          <meta itemprop="position" content="3" />
+        </li>
+      {%- else -%}
+        <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+          <span itemprop="name" class="breadcrumbs__current">{{ product.title }}</span>
+          <meta itemprop="position" content="2" />
+        </li>
+      {%- endif -%}
+
+    {%- elsif template.name == 'collection' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+        <span itemprop="name" class="breadcrumbs__current">{{ collection.title }}</span>
+        <meta itemprop="position" content="2" />
+      </li>
+
+    {%- elsif template.name == 'page' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+        <span itemprop="name" class="breadcrumbs__current">{{ page.title }}</span>
+        <meta itemprop="position" content="2" />
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    padding: 0.75rem 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .breadcrumbs__item {
+    display: inline-flex;
+    align-items: center;
+    color: var(--ta-text-muted, #64748b);
+  }
+
+  .breadcrumbs__separator {
+    margin: 0 0.5rem;
+    color: var(--ta-text-muted, #94a3b8);
+    font-size: 0.875rem;
+  }
+
+  .breadcrumbs__link {
+    color: var(--ta-text-muted, #64748b);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .breadcrumbs__link:hover {
+    color: var(--ta-primary, #1E3A5F);
+    text-decoration: underline;
+  }
+
+  .breadcrumbs__current {
+    color: var(--ta-text, #0f172a);
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 250px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .breadcrumbs {
+      padding: 0.5rem 0;
+    }
+
+    .breadcrumbs__list {
+      font-size: 0.75rem;
+    }
+
+    .breadcrumbs__current {
+      max-width: 180px;
+    }
+  }
+</style>

@@ -1457,31 +1457,7 @@ select:focus {
 }
 
 
-@media only screen and (max-width: 749px) {
-  .banner--content-align-mobile-right .banner__box {
-    text-align: right;
-  }
 
-  .banner--content-align-mobile-left .banner__box {
-    text-align: left;
-  }
-}
-
-@media only screen and (min-width: 750px) {
-  .banner--content-align-right .banner__box {
-    text-align: right;
-  }
-
-  .banner--content-align-left .banner__box {
-    text-align: left;
-  }
-
-  .banner--content-align-left.banner--desktop-transparent .banner__box,
-  .banner--content-align-right.banner--desktop-transparent .banner__box,
-  .banner--medium.banner--desktop-transparent .banner__box {
-    max-width: 68rem;
-  }
-}
 
 .banner__media.animate--zoom-in {
   clip-path: inset(0px);
@@ -1671,50 +1647,6 @@ select:focus {
     /* Better desktop padding */
   }
 
-  .banner__content--top-left {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-
-  .banner__content--top-center {
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  .banner__content--top-right {
-    align-items: flex-start;
-    justify-content: flex-end;
-  }
-
-  .banner__content--middle-left {
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .banner__content--middle-center {
-    align-items: center;
-    justify-content: center;
-  }
-
-  .banner__content--middle-right {
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .banner__content--bottom-left {
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-
-  .banner__content--bottom-center {
-    align-items: flex-end;
-    justify-content: center;
-  }
-
-  .banner__content--bottom-right {
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
 }
 
 @media screen and (max-width: 749px) {
@@ -2274,49 +2206,6 @@ select:focus {
 }
 
 
-/* Card Shape Hover Rules */
-
-@media (prefers-reduced-motion: no-preference) {
-  .product-card-wrapper .shape--round {
-    transition: clip-path var(--duration-long, 0.4s) ease;
-  }
-
-  .product-card-wrapper:hover .shape--round {
-    clip-path: ellipse(47% 47% at 50% 50%);
-  }
-
-  .product-card-wrapper .shape--blob {
-    transition: clip-path var(--duration-long, 0.4s) ease-in-out;
-  }
-
-  .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-5));
-  }
-
-  .grid__item:nth-child(2n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-6));
-  }
-
-  .grid__item:nth-child(3n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-1));
-  }
-
-  .grid__item:nth-child(4n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-2));
-  }
-
-  .grid__item:nth-child(5n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-3));
-  }
-
-  .grid__item:nth-child(7n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-4));
-  }
-
-  .grid__item:nth-child(8n) .product-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-5));
-  }
-}
 
 /* Premium Card Content Styles - Conversion Focused */
 .card__content {
@@ -2639,11 +2528,7 @@ select:focus {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card__badge--stock {
-    animation: none;
-  }
-}
+
 
 
 /* Ensure high contrast and readability on dark backgrounds */
@@ -2674,27 +2559,7 @@ select:focus {
    ============================================================ */
 
 
-/* Mobile adjustments */
-@media screen and (max-width: 749px) {
-  .card__benefit-item {
-    font-size: 1.1rem;
-  }
 
-  .card__benefit-icon {
-    width: 10px;
-    height: 10px;
-  }
-
-  .card__trust-indicators {
-    gap: 0.5rem;
-    margin-top: 0.4rem;
-    font-size: 1rem;
-  }
-
-  .card__trust-indicator {
-    font-size: 1rem;
-  }
-}
 
 /* Details link styling */
 .card__details-link {
@@ -2787,28 +2652,7 @@ select:focus {
   }
 
   /* Make CTA buttons fully accessible and clickable */
-  .card__cta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 0.6rem;
-    width: 100%;
-  }
 
-  .card__cta .button {
-    width: 100% !important;
-    min-height: 44px !important;
-    padding: 0.9rem 1rem !important;
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    box-sizing: border-box;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    white-space: normal !important;
-    line-height: 1.3 !important;
-  }
 
   /* Ensure badges don't overflow */
   .card__badge,
@@ -4467,11 +4311,7 @@ a.product__text {
 
 /* Responsive adjustments */
 @media screen and (max-width: 749px) {
-  .product-top-utility-bar {
-    font-size: 1.2rem;
-    padding: 0.5rem 0.8rem;
-    margin-bottom: 0.8rem;
-  }
+
 
   /* Mobile slider controls - safe padding for swipe */
   .slider-prev,
@@ -4505,49 +4345,9 @@ a.product__text {
     touch-action: pan-y pinch-zoom;
   }
 
-  .product-countdown__segment {
-    padding: 0.5rem 0.8rem;
-    min-width: 44px;
-  }
 
-  .product-countdown__number {
-    font-size: 1.8rem;
-    min-width: 40px;
-    padding: 0.3rem 0.5rem;
-  }
 
-  .product-countdown__timer {
-    gap: 0.8rem;
-  }
 
-  .product-delivery-steps__icon {
-    font-size: 1.6rem;
-  }
-
-  .product-delivery-steps__text {
-    font-size: 1rem;
-  }
-
-  .product-trust-payments__icons {
-    font-size: 1.2rem;
-  }
-
-  /* Prevent badge overflow on mobile */
-  .product-urgency-badge,
-  .product-offer-badge {
-    font-size: 1.1rem;
-    padding: 0.4rem 0.7rem;
-  }
-
-  .urgency-indicator {
-    font-size: 1.2rem;
-    padding: 0.6rem 0.8rem;
-  }
-
-  .product-shipping-eta {
-    font-size: 1.2rem;
-    padding: 0.6rem;
-  }
 }
 
 /* ===== PRECIO PROMINENTE ===== */
@@ -4596,20 +4396,7 @@ a.product__text {
   }
 }
 
-/* ===== INDICADORES DE CONFIANZA ANTES DE CTA ===== */
 
-
-@media screen and (max-width: 749px) {
-  .product-trust-indicators {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    padding: 0.6rem;
-  }
-
-  .trust-indicator__text {
-    font-size: 1.1rem;
-  }
-}
 
 /* ===== SELECTOR DE VARIANTES MEJORADO ===== */
 /* Variant selector styles moved to component-product-variant-picker.css to avoid duplication */

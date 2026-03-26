@@ -1,0 +1,24 @@
+{%- comment -%}
+  Breadcrumbs Section — TechAuraz
+  ================================
+  Section wrapper to enable breadcrumb usage in JSON templates.
+  Renders the breadcrumbs snippet inside a page-width container.
+{%- endcomment -%}
+
+<div class="page-width">
+  {% render 'breadcrumbs' %}
+</div>
+
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "tag": "nav",
+  "class": "section-breadcrumbs",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Breadcrumbs"
+    }
+  ]
+}
+{% endschema %}

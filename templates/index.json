@@ -86,7 +86,7 @@
         "change_slides_speed": 9,
         "image_behavior": "none",
         "show_text_below": false,
-        "accessibility_info": "TechAura - Tecnología premium para Colombia"
+        "accessibility_info": "TechAuraz - Tecnología premium para Colombia"
       }
     },
     "benefits_conversion_home": {
@@ -143,7 +143,6 @@
           "settings": {
             "icon": "🎧",
             "title": "Audífonos",
-            "product_count": "25",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
         },
@@ -152,7 +151,6 @@
           "settings": {
             "icon": "⌚",
             "title": "Smart Watches",
-            "product_count": "18",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
         },
@@ -161,7 +159,6 @@
           "settings": {
             "icon": "💾",
             "title": "Memorias USB",
-            "product_count": "30",
             "link": "shopify://pages/usb-al-gusto-personalizada"
           }
         },
@@ -170,7 +167,6 @@
           "settings": {
             "icon": "📱",
             "title": "Accesorios",
-            "product_count": "40",
             "link": "shopify://collections/varios-productos-tecnologicos-techaura-utiles"
           }
         },
@@ -179,7 +175,6 @@
           "settings": {
             "icon": "💡",
             "title": "Iluminación",
-            "product_count": "15",
             "link": "shopify://collections/iluminacion"
           }
         }

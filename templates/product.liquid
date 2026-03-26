@@ -4,7 +4,7 @@
 
 {%- comment -%}
   ===================================================================
-  TechAura Product Template — 2026 Conversion-Optimized PDP
+  TechAuraz Product Template — 2026 Conversion-Optimized PDP
   ===================================================================
   
   Uses .liquid format instead of .json due to Shopify GitHub sync
@@ -20,6 +20,14 @@
   7. Sticky mobile CTA — mobile conversion rescue
   ===================================================================
 {%- endcomment -%}
+
+{%- comment -%}
+  ===== BREADCRUMB NAVIGATION =====
+  Visible breadcrumbs for UX + Schema.org structured data
+{%- endcomment -%}
+<div class="page-width">
+  {% render 'breadcrumbs' %}
+</div>
 
 {%- comment -%}
   ===== ABOVE THE FOLD: Product Hero =====
