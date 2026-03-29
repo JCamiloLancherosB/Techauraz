@@ -157,3 +157,17 @@
         padding: 0.8rem;
     }
 }
+
+/* ── Cart Page Context Override ────────────────────── */
+/* When rendered inside cart page instead of drawer,
+   wider margins and padding for full-width layout */
+.cart__contents .cart-drawer__order-bump {
+    margin: 1.5rem 0;
+}
+
+@media screen and (min-width: 750px) {
+    .cart__contents .cart-drawer__order-bump {
+        margin: 2rem 0;
+        padding: 1.5rem;
+    }
+}

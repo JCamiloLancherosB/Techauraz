@@ -18,7 +18,7 @@
             "image": "shopify://shop_images/hero_slide_1_1773242158470.png",
             "heading": "Tecnología Premium para tu Estilo de Vida",
             "heading_size": "h0",
-            "subheading": "Audífonos, smartwatches y gadgets con garantía de 30 días",
+            "subheading": "Power banks, hubs USB y accesorios tech con garantía de 30 días",
             "button_label": "Ver catálogo",
             "link": "shopify://collections/all",
             "button_style_secondary": false,
@@ -254,7 +254,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Los audífonos superaron mis expectativas. El sonido es cristalino y la cancelación de ruido es increíble. Los uso diariamente en el trabajo y los recomiendo totalmente.",
+            "review_text": "El cable USB-C es excelente, carga rápido y se siente muy resistente. Llegó en 3 días a mi casa. Ya es mi segunda compra en TechAuraz.",
             "customer_name": "Carlos M.",
             "customer_city": "Bogotá"
           }
@@ -281,7 +281,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El smartwatch es increíble por el precio. Todas las funciones funcionan perfectamente y la batería dura varios días. Muy satisfecho con mi compra.",
+            "review_text": "El hub USB funciona perfecto con mi laptop. Conecto monitor, teclado y mouse sin problemas. La calidad de construcción es notable.",
             "customer_name": "Pedro L.",
             "customer_city": "Barranquilla"
           }
@@ -305,7 +305,7 @@
       ],
       "settings": {
         "title": "Lo que dicen nuestros clientes",
-        "subtitle": "Reseñas verificadas de clientes satisfechos",
+        "subtitle": "Opiniones de nuestros clientes en Colombia",
         "heading_size": "h1",
         "background_color": "#f8fafc",
         "padding_top": 60,

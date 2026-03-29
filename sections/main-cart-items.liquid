@@ -424,6 +424,12 @@
         </div>
       </div>
 
+      {%- comment -%} Order Bump — Smart cross-sell for cart page (Phase 1 remediation) {%- endcomment -%}
+      {%- if cart != empty -%}
+        {{ 'cart-drawer-order-bump.css' | asset_url | stylesheet_tag }}
+        {%- render 'order-bump', context: 'page' -%}
+      {%- endif -%}
+
       <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
       <p
         class="visually-hidden"

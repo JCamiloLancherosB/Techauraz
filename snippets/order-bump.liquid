@@ -1,0 +1,227 @@
+{% comment %}
+  Renders an Order Bump — Smart Cross-Sell AOV Booster
+  
+  Reusable snippet for both cart drawer and cart page.
+  Selects the best complementary product based on cart contents.
+  Falls back to cable if no contextual match found.
+  Product mapping is managed via tags: bump:handle-name
+  
+  Accepts:
+  - context: {String} 'drawer' or 'page' — determines component ID prefix
+  
+  Usage:
+  {% render 'order-bump', context: 'drawer' %}
+  {% render 'order-bump', context: 'page' %}
+{% endcomment %}
+
+{%- liquid
+  assign ob_context = context | default: 'page'
+  assign ob_id_prefix = 'CartPage'
+  if ob_context == 'drawer'
+    assign ob_id_prefix = 'CartDrawer'
+  endif
+
+  assign bump_handle = ''
+  assign bump_fallback = 'cable-usb-c-de-carga-rapida-trenzado'
+
+  comment
+    Smart cross-sell: check cart items for product type and select
+    the best complementary product. Priority order:
+    1. Check if any cart item has a bump:xxx tag (explicit mapping)
+    2. Check product type for category-based mapping
+    3. Fallback to universal accessory (cable)
+  endcomment
+
+  for item in cart.items
+    comment Step 1: Check explicit bump tags endcomment
+    for tag in item.product.tags
+      if tag contains 'bump:'
+        assign bump_handle = tag | remove: 'bump:'
+        break
+      endif
+    endfor
+    if bump_handle != ''
+      break
+    endif
+
+    comment Step 2: Product type mapping endcomment
+    assign item_type = item.product.type | downcase
+    if item_type contains 'audífono' or item_type contains 'auricular' or item_type contains 'headphone' or item_type contains 'earphone'
+      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      break
+    elsif item_type contains 'power bank' or item_type contains 'batería' or item_type contains 'cargador'
+      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      break
+    elsif item_type contains 'cable' or item_type contains 'usb'
+      assign bump_handle = ''
+      comment Cables don't cross-sell cables — let fallback handle it endcomment
+    elsif item_type contains 'memoria' or item_type contains 'usb flash' or item_type contains 'storage'
+      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      break
+    elsif item_type contains 'smartwatch' or item_type contains 'reloj'
+      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      break
+    endif
+  endfor
+
+  comment Step 3: Fallback endcomment
+  if bump_handle == ''
+    assign bump_handle = bump_fallback
+  endif
+-%}
+{%- assign bump_product = all_products[bump_handle] -%}
+{%- if cart != empty and bump_product != blank -%}
+  {%- comment -%} Check if order bump product is already in cart {%- endcomment -%}
+  {%- assign bump_already_in_cart = false -%}
+  {%- for item in cart.items -%}
+    {%- if item.product.handle == bump_handle -%}
+      {%- assign bump_already_in_cart = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless bump_already_in_cart -%}
+    {%- assign bump_variant = bump_product.selected_or_first_available_variant -%}
+    <div class="cart-drawer__order-bump" id="{{ ob_id_prefix }}-OrderBump">
+      <div class="order-bump__badge">{{ 'sections.cart.order_bump.badge' | t }}</div>
+      <div class="order-bump__content">
+        {%- if bump_product.featured_image -%}
+          <div class="order-bump__image">
+            <img
+              src="{{ bump_product.featured_image | image_url: width: 112 }}"
+              alt="{{ bump_product.title | escape }}"
+              width="56"
+              height="56"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+        <div class="order-bump__info">
+          <p class="order-bump__title">{{ bump_product.title }}</p>
+          <div class="order-bump__pricing">
+            {%- if bump_variant.compare_at_price > bump_variant.price -%}
+              <del class="order-bump__original-price">{{ bump_variant.compare_at_price | money }}</del>
+            {%- endif -%}
+            <span class="order-bump__sale-price">+{{ bump_variant.price | money }}</span>
+          </div>
+          <p class="order-bump__reason">{{ 'sections.cart.order_bump.reason' | t }}</p>
+        </div>
+        <button
+          type="button"
+          class="order-bump__cta"
+          id="{{ ob_id_prefix }}-OrderBump-AddBtn"
+          data-variant-id="{{ bump_variant.id }}"
+          aria-label="Agregar {{ bump_product.title | escape }} al carrito"
+        >
+          <span class="order-bump__cta-text">{{ 'sections.cart.order_bump.cta' | t }}</span>
+          <span class="order-bump__cta-loading" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </span>
+          <span class="order-bump__cta-done" hidden>{{ 'sections.cart.order_bump.added' | t }}</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      /* Order Bump AJAX — context: {{ ob_context }} */
+      (function() {
+        'use strict';
+        var btn = document.getElementById('{{ ob_id_prefix }}-OrderBump-AddBtn');
+        if (!btn) return;
+
+        var variantId = parseInt(btn.getAttribute('data-variant-id'), 10);
+        if (!variantId || isNaN(variantId)) return;
+
+        var textEl    = btn.querySelector('.order-bump__cta-text');
+        var loadingEl = btn.querySelector('.order-bump__cta-loading');
+        var doneEl    = btn.querySelector('.order-bump__cta-done');
+        var isAdding  = false;
+
+        btn.addEventListener('click', function() {
+          if (isAdding) return;
+          isAdding = true;
+          btn.disabled = true;
+
+          textEl.hidden = true;
+          loadingEl.hidden = false;
+
+          fetch(window.routes.cart_add_url + '.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ items: [{ id: variantId, quantity: 1 }] })
+          })
+          .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function() {
+            loadingEl.hidden = true;
+            doneEl.hidden = false;
+            btn.classList.add('order-bump__cta--added');
+
+            {%- if ob_context == 'drawer' -%}
+            /* Refresh cart drawer + icon bubble */
+            var sectionEl = document.querySelector('cart-drawer')
+              ? document.querySelector('cart-drawer').closest('.shopify-section')
+              : null;
+            var sectionsToFetch = 'cart-icon-bubble';
+            if (sectionEl && sectionEl.id) {
+              sectionsToFetch = sectionEl.id.replace('shopify-section-', '') + ',' + sectionsToFetch;
+            }
+            {%- else -%}
+            /* Refresh cart page + icon bubble */
+            var sectionsToFetch = 'main-cart-items,cart-icon-bubble';
+            {%- endif -%}
+
+            fetch('/?sections=' + sectionsToFetch)
+              .then(function(r) { return r.json(); })
+              .then(function(sections) {
+                var bubbleEl = document.getElementById('cart-icon-bubble');
+                if (bubbleEl && sections['cart-icon-bubble']) {
+                  var parser = new DOMParser();
+                  var doc = parser.parseFromString(sections['cart-icon-bubble'], 'text/html');
+                  var newBubble = doc.querySelector('.shopify-section');
+                  if (newBubble) bubbleEl.innerHTML = newBubble.innerHTML;
+                }
+
+                {%- if ob_context == 'page' -%}
+                /* Refresh cart items on cart page */
+                if (sections['main-cart-items']) {
+                  var cartContainer = document.getElementById('main-cart-items');
+                  if (cartContainer) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(sections['main-cart-items'], 'text/html');
+                    var newItems = doc.getElementById('main-cart-items');
+                    if (newItems) cartContainer.innerHTML = newItems.innerHTML;
+                  }
+                }
+                /* Refresh cart footer/totals */
+                fetch(window.location.href)
+                  .then(function(r) { return r.text(); })
+                  .then(function(html) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    var newFooter = doc.querySelector('.cart__footer');
+                    var currentFooter = document.querySelector('.cart__footer');
+                    if (newFooter && currentFooter) {
+                      currentFooter.innerHTML = newFooter.innerHTML;
+                    }
+                  });
+                {%- endif -%}
+
+                document.dispatchEvent(new CustomEvent('cart:refresh'));
+              });
+          })
+          .catch(function(err) {
+            console.error('[OrderBump] Add to cart failed:', err);
+            loadingEl.hidden = true;
+            textEl.hidden = false;
+            btn.disabled = false;
+            isAdding = false;
+          });
+        });
+      })();
+    </script>
+  {%- endunless -%}
+{%- endif -%}

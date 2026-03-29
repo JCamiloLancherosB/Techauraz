@@ -37,7 +37,11 @@
     },
     "search": {
       "search": "Buscar",
-      "reset": "Borrar término de búsqueda"
+      "reset": "Borrar término de búsqueda",
+      "search_products": "Buscar productos..."
+    },
+    "breadcrumbs": {
+      "home": "Inicio"
     },
     "cart": {
       "view": "Ver carrito ({{ count }})",

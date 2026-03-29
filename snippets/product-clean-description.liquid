@@ -1,0 +1,18 @@
+{%- comment -%}
+  Product Clean Description Snippet — TechAuraz
+  Centralizes the dropshipping/supplier note sanitization filter.
+  Usage: {%- render 'product-clean-description', description: product.description -%}
+{%- endcomment -%}
+{%- assign clean_description = description
+  | replace: '(valor percibido alto)', ''
+  | replace: 'valor percibido alto', ''
+  | replace: '(high perceived value)', ''
+  | replace: '(margen alto)', ''
+  | replace: '(precio sugerido)', ''
+  | replace: '(dropshipping)', ''
+  | replace: '[INTERNAL]', ''
+  | replace: '[PROVEEDOR]', ''
+  | replace: '[SUPPLIER]', ''
+  | replace: '[NOTA INTERNA]', ''
+-%}
+{{ clean_description }}

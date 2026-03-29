@@ -45,7 +45,8 @@
               {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100, format: 'avif' }} 1100w,{%- endif -%}
               {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445, format: 'avif' }} 1445w,{%- endif -%}
               {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680, format: 'avif' }} 1680w,{%- endif -%}
-              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'avif' }} 2200w,{%- endif -%}"
+              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'avif' }} 2200w,{%- endif -%}
+              {{ media.preview_image | image_url: format: 'avif' }} {{ media.preview_image.width }}w"
       sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
     >
 
@@ -56,7 +57,8 @@
               {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100, format: 'webp' }} 1100w,{%- endif -%}
               {%- if media.preview_image.width >= 1445 -%}{{ media.preview_image | image_url: width: 1445, format: 'webp' }} 1445w,{%- endif -%}
               {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: width: 1680, format: 'webp' }} 1680w,{%- endif -%}
-              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'webp' }} 2200w,{%- endif -%}"
+              {%- if media.preview_image.width >= 2200 -%}{{ media.preview_image | image_url: width: 2200, format: 'webp' }} 2200w,{%- endif -%}
+              {{ media.preview_image | image_url: format: 'webp' }} {{ media.preview_image.width }}w"
       sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
     >
 

@@ -32,7 +32,7 @@
 
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  {%- comment -%} product-form.js is loaded centrally in theme.liquid for product/collection/search/index templates {%- endcomment -%}
   <script src="{{ 'product-hero-slider.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-enhancements.js' | asset_url }}" defer="defer"></script>
 
@@ -223,20 +223,7 @@
                       <h3 class="product-description__title">✨ Descubre Todo Sobre Este Producto</h3>
                     </div>
                     <div class="product-description__content">
-                      {%- comment -%} Safety filter: strip internal dropshipping/supplier notes that may leak into product descriptions {%- endcomment -%}
-                      {%- assign clean_description = product.description
-                        | replace: '(valor percibido alto)', ''
-                        | replace: 'valor percibido alto', ''
-                        | replace: '(high perceived value)', ''
-                        | replace: '(margen alto)', ''
-                        | replace: '(precio sugerido)', ''
-                        | replace: '(dropshipping)', ''
-                        | replace: '[INTERNAL]', ''
-                        | replace: '[PROVEEDOR]', ''
-                        | replace: '[SUPPLIER]', ''
-                        | replace: '[NOTA INTERNA]', ''
-                      -%}
-                      {{ clean_description }}
+                      {%- render 'product-clean-description', description: product.description -%}
                     </div>
                   </div>
                 {%- endif -%}
@@ -739,19 +726,7 @@
         <div class="product-description-container">
           <h2 class="product-description-heading">{{ 'products.product.description' | t }}</h2>
           <div class="product-description-content rte">
-            {%- assign clean_desc_full = product.description
-              | replace: '(valor percibido alto)', ''
-              | replace: 'valor percibido alto', ''
-              | replace: '(high perceived value)', ''
-              | replace: '(margen alto)', ''
-              | replace: '(precio sugerido)', ''
-              | replace: '(dropshipping)', ''
-              | replace: '[INTERNAL]', ''
-              | replace: '[PROVEEDOR]', ''
-              | replace: '[SUPPLIER]', ''
-              | replace: '[NOTA INTERNA]', ''
-            -%}
-            {{ clean_desc_full }}
+            {%- render 'product-clean-description', description: product.description -%}
           </div>
         </div>
       </div>

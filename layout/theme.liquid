@@ -43,7 +43,7 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% elsif template.name == 'index' %}
-      <meta name="description" content="TechAuraz ✓ Tienda online #1 de tecnología en Colombia. Audífonos, smartwatches, memorias USB personalizadas y accesorios tech con envío GRATIS y pago contra entrega. Garantía 30 días.">
+      <meta name="description" content="TechAuraz ✓ Tienda online #1 de tecnología en Colombia. Power banks, cables, hubs USB, memorias personalizadas y accesorios tech con envío GRATIS y pago contra entrega. Garantía 30 días.">
     {% elsif template.name == 'collection' %}
       <meta name="description" content="{{ collection.title }} en TechAuraz. {{ collection.products_count }} productos tecnológicos con envío gratis a toda Colombia. Pago contra entrega disponible.">
     {% elsif template.name == 'product' %}
@@ -51,9 +51,9 @@
     {% elsif template contains 'article' %}
       <meta name="description" content="{{ article.excerpt_or_content | strip_html | truncate: 155 | escape }}">
     {% elsif template contains 'blog' %}
-      <meta name="description" content="Blog TechAuraz - Guías, reseñas y consejos sobre tecnología, gadgets, audífonos, smartwatches y más. Tips para sacar el máximo provecho a tus dispositivos.">
+      <meta name="description" content="Blog TechAuraz - Guías, reseñas y consejos sobre tecnología, gadgets, power banks, cables y más. Tips para sacar el máximo provecho a tus dispositivos.">
     {% else %}
-      <meta name="description" content="TechAuraz ✓ Tienda online de tecnología en Colombia. Audífonos, smartwatches, memorias USB y accesorios tech con envío GRATIS, pago contra entrega y garantía 30 días.">
+      <meta name="description" content="TechAuraz ✓ Tienda online de tecnología en Colombia. Power banks, cables, hubs USB, memorias y accesorios tech con envío GRATIS, pago contra entrega y garantía 30 días.">
     {% endif %}
     
     <!-- Localización Colombia -->
@@ -504,9 +504,13 @@
         {%- if template.name == 'index' -%}
         lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});
         {%- endif -%}
-        {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}
-        lazyLoad({{ 'social-proof-toast.js' | asset_url | json }});
-        {%- endif -%}
+        {%- comment -%}
+          DISABLED (2026-03-26): social-proof-toast.js generated fake purchase notifications
+          with fabricated names, cities, and "Compra verificada" badges. This is a deceptive
+          dark pattern that poses legal risk (SIC Colombia) and can cause Meta/Google Ads rejection.
+          To re-enable with REAL data, integrate Shopify Order API or a verified social proof app.
+        {%- endcomment -%}
+        {%- comment -%} lazyLoad({{ 'social-proof-toast.js' | asset_url | json }}); {%- endcomment -%}
       });
     })();
     </script>
