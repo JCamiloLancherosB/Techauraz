@@ -4,8 +4,9 @@
   Usage: Add as a section in your template
 {% endcomment %}
 
-<link rel="stylesheet" href="{{ 'social-proof-banner.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ 'social-proof-banner.css' | asset_url }}"></noscript>
+{%- comment -%} Uses social-proof-unified.css (canonical). social-proof-banner.css was a duplicate. {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'social-proof-unified.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'social-proof-unified.css' | asset_url }}"></noscript>
 
 <section 
   class="social-proof-banner section-{{ section.id }}-padding"

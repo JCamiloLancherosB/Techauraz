@@ -117,7 +117,9 @@
   {% endif %}
 </div>
 
+{%- if section.settings.show_countdown and section.settings.countdown_end_date != blank -%}
 <script src="{{ 'urgency-countdown.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {% schema %}
 {

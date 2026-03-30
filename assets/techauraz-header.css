@@ -1182,3 +1182,43 @@ header-drawer>details {
     height: 18px;
   }
 }
+
+/* =============================================================================
+   HEADER-GROUP SECTION PADDING FIX
+   =============================================================================
+   Shopify's color scheme CSS injects padding: 32px 0 into section wrappers.
+   For header-group sections (announcement-bar + header), this creates a massive
+   gap between them. Override to zero for tight header stacking.
+   ============================================================================= */
+
+/* Announcement bar section wrapper — remove color scheme padding */
+.shopify-section-group-header-group .announcement-bar-section,
+.shopify-section-group-header-group .announcement-bar-section > .utility-bar,
+.shopify-section-group-header-group > .shopify-section:first-child {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Header section wrapper — remove color scheme padding */
+.shopify-section-group-header-group .section-header,
+.shopify-section-group-header-group > .shopify-section:last-child {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure the announcement-bar section itself has no inherited padding */
+.shopify-section-group-header-group [class*="color-"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure sticky-header width on mobile */
+@media screen and (max-width: 989px) {
+  sticky-header {
+    width: 100% !important;
+  }
+  
+  .header-wrapper {
+    width: 100% !important;
+  }
+}

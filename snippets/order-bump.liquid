@@ -22,7 +22,7 @@
   endif
 
   assign bump_handle = ''
-  assign bump_fallback = 'cable-usb-c-de-carga-rapida-trenzado'
+  assign bump_fallback = 'cable-tipo-c-a-tipo-c-w'
 
   comment
     Smart cross-sell: check cart items for product type and select
@@ -47,19 +47,19 @@
     comment Step 2: Product type mapping endcomment
     assign item_type = item.product.type | downcase
     if item_type contains 'audífono' or item_type contains 'auricular' or item_type contains 'headphone' or item_type contains 'earphone'
-      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
       break
     elsif item_type contains 'power bank' or item_type contains 'batería' or item_type contains 'cargador'
-      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
       break
     elsif item_type contains 'cable' or item_type contains 'usb'
       assign bump_handle = ''
       comment Cables don't cross-sell cables — let fallback handle it endcomment
     elsif item_type contains 'memoria' or item_type contains 'usb flash' or item_type contains 'storage'
-      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
       break
     elsif item_type contains 'smartwatch' or item_type contains 'reloj'
-      assign bump_handle = 'cable-usb-c-de-carga-rapida-trenzado'
+      assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
       break
     endif
   endfor

@@ -286,8 +286,10 @@
 <link rel="stylesheet" href="{{ 'ui-ux-responsive-fixes.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'ui-ux-responsive-fixes.css' | asset_url }}"></noscript>
 <!-- Non-critical CSS — async via print/onload pattern -->
+{%- if template.name == 'index' -%}
 <link rel="stylesheet" href="{{ 'home-modern-blocks.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'home-modern-blocks.css' | asset_url }}"></noscript>
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-custom-ui.css' | asset_url }}"></noscript>
 {%- if template.name == 'index' -%}
@@ -296,8 +298,10 @@
 {%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-utilities.css' | asset_url }}"></noscript>
+{%- if template.name == 'index' -%}
 <link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'header-announcement-slideshow-fixes.css' | asset_url }}"></noscript>
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-accessibility.css' | asset_url }}"></noscript>
 

@@ -485,8 +485,15 @@
       {%- comment -%} ══════════════════════════════════════════════════
          ORDER BUMP — Smart Cross-Sell AOV Booster
          Refactored to shared snippet (Phase 1 remediation)
+         CSS only loads if bump renders content (capture guard)
       ══════════════════════════════════════════════════ {%- endcomment -%}
-      {%- render 'order-bump', context: 'drawer' -%}
+      {%- capture order_bump_drawer_html -%}
+        {%- render 'order-bump', context: 'drawer' -%}
+      {%- endcapture -%}
+      {%- if order_bump_drawer_html != blank -%}
+        {{ 'cart-drawer-order-bump.css' | asset_url | stylesheet_tag }}
+        {{ order_bump_drawer_html }}
+      {%- endif -%}
 
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
@@ -587,5 +594,4 @@
   </div>
 </cart-drawer>
 
-{%- comment -%} Order Bump CSS — loaded by snippets/order-bump.liquid via cart page, and here for drawer {%- endcomment -%}
-{{ 'cart-drawer-order-bump.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Order Bump CSS now loaded conditionally via capture guard above (2026-03-29) {%- endcomment -%}

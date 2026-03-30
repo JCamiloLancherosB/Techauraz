@@ -35,11 +35,11 @@
 {%- if image != blank -%}
   <img 
     srcset="
-      {{ image | image_url: width: 200 }} 200w,
-      {{ image | image_url: width: 400 }} 400w,
-      {{ image | image_url: width: 600 }} 600w,
-      {{ image | image_url: width: 800 }} 800w,
-      {{ image | image_url: width: 1000 }} 1000w,
+      {%- if max_width >= 200 -%}{{ image | image_url: width: 200 }} 200w,{%- endif -%}
+      {%- if max_width >= 400 -%}{{ image | image_url: width: 400 }} 400w,{%- endif -%}
+      {%- if max_width >= 600 -%}{{ image | image_url: width: 600 }} 600w,{%- endif -%}
+      {%- if max_width >= 800 -%}{{ image | image_url: width: 800 }} 800w,{%- endif -%}
+      {%- if max_width >= 1000 -%}{{ image | image_url: width: 1000 }} 1000w,{%- endif -%}
       {{ image | image_url: width: max_width }} {{ max_width }}w"
     src="{{ image | image_url: width: 600 }}"
     sizes="{{ img_sizes }}"
