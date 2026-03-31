@@ -64,13 +64,14 @@
     <meta name="country" content="Colombia">
     <meta name="language" content="es-CO">
     <meta name="distribution" content="Colombia">
-    <meta property="og:locale" content="es_CO">
+    
     
     <!-- SEO Esencial TechAuraz -->
     <meta name="author" content="TechAuraz">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
-    <!-- Open Graph and Twitter Card tags are rendered dynamically via snippets/meta-tags.liquid -->
+    <!-- Open Graph and Twitter Card tags -->
+    {% render 'meta-tags' %}
     
     <!-- Structured Data: Organization (canonical source) -->
     {% render 'structured-data-base' %}
