@@ -24,12 +24,13 @@
  */
 
 // ============================================
-// CONFIGURATION — UPDATE THESE VALUES
+// CONFIGURATION — Reads from environment or falls back to defaults
+// Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ADMIN_API_KEY in your .env
 // ============================================
 const CONFIG = {
-  SHOP: '7f4c40-fb.myshopify.com',
-  ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN || '',
-  API_VERSION: '2024-10',
+  SHOP: process.env.SHOPIFY_STORE_DOMAIN || '7f4c40-fb.myshopify.com',
+  ACCESS_TOKEN: process.env.SHOPIFY_ADMIN_API_KEY || process.env.SHOPIFY_ACCESS_TOKEN || '',
+  API_VERSION: process.env.SHOPIFY_API_VERSION || '2026-01',
   DEFAULT_STOCK: 50,
   RATE_LIMIT_MS: 500, // Delay between API calls to avoid rate limits
 };
