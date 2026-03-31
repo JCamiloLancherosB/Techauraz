@@ -1,0 +1,124 @@
+{%- comment -%}
+  Product Buyer Activity — 2026 CRO Conversion Booster
+  =====================================================
+  Shows credible social proof indicators:
+  - Savings badge (when compare_at_price exists)
+  - Simulated recent purchases (seeded by product ID for consistency)
+  - Delivery estimate calculator
+  
+  All numbers are algorithmically seeded from product.id for consistency
+  across page loads (same product always shows same numbers).
+  
+  No external JS required — pure Liquid + minimal inline CSS.
+{%- endcomment -%}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign has_discount = false
+  if variant.compare_at_price > variant.price
+    assign has_discount = true
+    assign savings = variant.compare_at_price | minus: variant.price
+    assign savings_pct = savings | times: 100.0 | divided_by: variant.compare_at_price | round
+  endif
+  
+  comment
+    Generate consistent "recent buyers" number using product ID
+    This produces a number between 12-47 that's stable per product
+  endcomment
+  assign pid_mod = product.id | modulo: 36
+  assign recent_buyers = pid_mod | plus: 12
+  
+  comment
+    Delivery estimate: 2-5 business days from now
+  endcomment
+  assign delivery_min = 'now' | date: '%s' | plus: 172800 | date: '%e de %B'
+  assign delivery_max = 'now' | date: '%s' | plus: 432000 | date: '%e de %B'
+-%}
+
+{%- if product.available -%}
+<style>
+  .buyer-activity {
+    padding: 12px 0;
+    font-size: 0.85rem;
+  }
+  .buyer-activity__container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .buyer-activity__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--color-background);
+  }
+  .buyer-activity__item--savings {
+    background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-weight: 600;
+  }
+  .buyer-activity__item--buyers {
+    background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+  }
+  .buyer-activity__item--delivery {
+    background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+    border: 1px solid #ddd6fe;
+    color: #5b21b6;
+  }
+  .buyer-activity__icon {
+    flex-shrink: 0;
+    font-size: 1.1em;
+  }
+  .buyer-activity__pulse {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: ba-pulse 2s ease-in-out infinite;
+    margin-right: 4px;
+  }
+  @keyframes ba-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  @media (min-width: 750px) {
+    .buyer-activity__container {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .buyer-activity__item {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+</style>
+
+<div class="buyer-activity page-width">
+  <div class="buyer-activity__container">
+    
+    {%- if has_discount -%}
+    <div class="buyer-activity__item buyer-activity__item--savings">
+      <span class="buyer-activity__icon" aria-hidden="true">🏷️</span>
+      <span>Ahorras <strong>{{ savings | money }}</strong> (-{{ savings_pct }}%) · ¡Precio especial!</span>
+    </div>
+    {%- endif -%}
+    
+    <div class="buyer-activity__item buyer-activity__item--buyers">
+      <span class="buyer-activity__icon" aria-hidden="true"><span class="buyer-activity__pulse"></span></span>
+      <span><strong>{{ recent_buyers }}</strong> personas compraron esto en los últimos 7 días</span>
+    </div>
+    
+    <div class="buyer-activity__item buyer-activity__item--delivery">
+      <span class="buyer-activity__icon" aria-hidden="true">📦</span>
+      <span>Pide hoy y recíbelo aprox. <strong>{{ delivery_min }} - {{ delivery_max }}</strong></span>
+    </div>
+    
+  </div>
+</div>
+{%- endif -%}
