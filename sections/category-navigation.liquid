@@ -44,6 +44,16 @@
 
                 {%- if block.settings.subtitle != blank -%}
                   <p class="category-card__subtitle">{{ block.settings.subtitle }}</p>
+                {%- else -%}
+                  {%- comment -%} Auto-populate product count from linked collection {%- endcomment -%}
+                  {%- assign cat_link_str = block.settings.link | default: '' -%}
+                  {%- if cat_link_str contains '/collections/' -%}
+                    {%- assign cat_handle = cat_link_str | split: '/collections/' | last | split: '?' | first -%}
+                    {%- assign cat_collection = collections[cat_handle] -%}
+                    {%- if cat_collection != blank and cat_collection.products_count > 0 -%}
+                      <p class="category-card__subtitle">{{ cat_collection.products_count }} productos</p>
+                    {%- endif -%}
+                  {%- endif -%}
                 {%- endif -%}
               </div>
             </a>
@@ -69,8 +79,7 @@
       "type": "text",
       "id": "subtitle",
       "label": "Subtítulo (opcional)",
-      "info": "Agrega una descripción breve para dar contexto a los visitantes",
-      "default": ""
+      "info": "Agrega una descripción breve para dar contexto a los visitantes"
     }
   ],
   "blocks": [
