@@ -430,6 +430,21 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
+
+  {%- comment -%} og-whatsapp-enhanced — TechAuraz 2026 {%- endcomment -%}
+  <meta property="og:site_name" content="TechAuraz">
+  <meta property="og:locale" content="es_CO">
+  {%- if template contains 'product' -%}
+    <meta property="product:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}">
+    <meta property="product:price:currency" content="{{ shop.currency }}">
+    <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+    <meta property="product:condition" content="new">
+    <meta property="product:retailer_item_id" content="{{ product.id }}">
+    <meta name="twitter:label1" content="Precio">
+    <meta name="twitter:data1" content="{{ product.selected_or_first_available_variant.price | money }}">
+    <meta name="twitter:label2" content="Envío">
+    <meta name="twitter:data2" content="GRATIS a Colombia">
+  {%- endif -%}
 </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %}">
