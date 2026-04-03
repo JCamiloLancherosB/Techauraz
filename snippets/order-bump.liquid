@@ -33,7 +33,9 @@
   endcomment
 
   for item in cart.items
-    comment Step 1: Check explicit bump tags endcomment
+    comment
+      Step 1: Check explicit bump tags
+    endcomment
     for tag in item.product.tags
       if tag contains 'bump:'
         assign bump_handle = tag | remove: 'bump:'
@@ -44,7 +46,9 @@
       break
     endif
 
-    comment Step 2: Product type mapping endcomment
+    comment
+      Step 2: Product type mapping
+    endcomment
     assign item_type = item.product.type | downcase
     if item_type contains 'audífono' or item_type contains 'auricular' or item_type contains 'headphone' or item_type contains 'earphone'
       assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
@@ -54,7 +58,9 @@
       break
     elsif item_type contains 'cable' or item_type contains 'usb'
       assign bump_handle = ''
-      comment Cables don't cross-sell cables — let fallback handle it endcomment
+      comment
+        Cables don't cross-sell cables — let fallback handle it
+      endcomment
     elsif item_type contains 'memoria' or item_type contains 'usb flash' or item_type contains 'storage'
       assign bump_handle = 'cable-tipo-c-a-tipo-c-w'
       break
@@ -64,7 +70,9 @@
     endif
   endfor
 
-  comment Step 3: Fallback endcomment
+  comment
+    Step 3: Fallback
+  endcomment
   if bump_handle == ''
     assign bump_handle = bump_fallback
   endif

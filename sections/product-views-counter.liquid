@@ -10,11 +10,19 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign inventory_qty = current_variant.inventory_quantity
-  assign inventory_managed = current_variant.inventory_management == 'shopify'
+  assign inventory_managed = false
+  if current_variant.inventory_management == 'shopify'
+    assign inventory_managed = true
+  endif
   assign low_stock_threshold = section.settings.low_stock_threshold | default: 10
   assign show_low_stock = section.settings.show_low_stock
   assign show_reviews = section.settings.show_reviews
-  assign has_reviews = product.metafields.reviews.rating_count != blank and product.metafields.reviews.rating_count > 0
+  assign has_reviews = false
+  if product.metafields.reviews.rating_count != blank
+    if product.metafields.reviews.rating_count > 0
+      assign has_reviews = true
+    endif
+  endif
   assign review_count = product.metafields.reviews.rating_count | default: 0
   
   assign show_stock_indicator = false

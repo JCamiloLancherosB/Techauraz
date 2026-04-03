@@ -24,7 +24,10 @@
     endif
   endif
   
-  assign has_block_faqs = section.blocks.size > 0
+  assign has_block_faqs = false
+  if section.blocks.size > 0
+    assign has_block_faqs = true
+  endif
   assign show_default_faqs = false
   
   unless has_block_faqs or use_metafield_faqs
