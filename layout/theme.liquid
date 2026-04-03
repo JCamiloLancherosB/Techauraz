@@ -30,6 +30,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#1E3A5F">
+    <link rel="manifest" href="{{ 'manifest.json' | asset_url }}" crossorigin="use-credentials">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TechAuraz">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <!-- Hreflang tags for multilingual SEO -->
@@ -530,6 +534,7 @@
           To re-enable with REAL data, integrate Shopify Order API or a verified social proof app.
         {%- endcomment -%}
         {%- comment -%} lazyLoad({{ 'social-proof-toast.js' | asset_url | json }}); {%- endcomment -%}
+        if('serviceWorker' in navigator){navigator.serviceWorker.register({{ 'service-worker.js' | asset_url | json }},{scope:'/'}).catch(function(){});}
       });
     })();
     </script>
