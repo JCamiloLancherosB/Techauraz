@@ -409,6 +409,10 @@
     <!-- Google Webmaster Tools Site Verification -->
     <meta name="google-site-verification" content="fj7UYrB5GV0ojQhLbYR8XqrgfSDiY8Bcqz-npt1MvQo" />
 
+    <!-- 2026 Security Headers (meta-based since Shopify manages HTTP headers) -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
 </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %}">
@@ -517,6 +521,7 @@
         lazyLoad({{ 'image-loading.js' | asset_url | json }});
         lazyLoad({{ 'tiny-img-link-preloader.js' | asset_url | json }});
         lazyLoad({{ 'speculative-prefetch.js' | asset_url | json }});
+        lazyLoad({{ 'lqip-blur-up.js' | asset_url | json }});
         lazyLoad({{ 'view-transitions.js' | asset_url | json }});
         lazyLoad({{ 'performance-monitor.js' | asset_url | json }});
         {%- if template.name == 'product' or template.name == 'collection' or template.name == 'index' -%}

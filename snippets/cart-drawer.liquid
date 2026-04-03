@@ -495,6 +495,9 @@
         {{ order_bump_drawer_html }}
       {%- endif -%}
 
+      {%- comment -%} Smart Cart Upsell — contextual recommendations based on cart content {%- endcomment -%}
+      {% render 'cart-upsell' %}
+
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
