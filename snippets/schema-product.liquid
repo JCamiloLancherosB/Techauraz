@@ -77,12 +77,18 @@
       "returnFees": "https://schema.org/FreeReturn"
     }
   }
-  {% if product.metafields.reviews.rating.value %}
+  {% comment %}
+    AggregateRating: Only emit if BOTH rating value exists AND review count > 0.
+    This safeguards against fabricated/placeholder review data in product metafields.
+    If you see reviews in schema but "Sé el primero en opinar" on the page,
+    the product metafields need to be cleaned up in Shopify Admin.
+  {% endcomment %}
+  {% if product.metafields.reviews.rating.value and product.metafields.reviews.rating_count > 0 %}
   ,
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": {{ product.metafields.reviews.rating.value | json }},
-    "reviewCount": {{ product.metafields.reviews.rating_count | default: 0 | json }},
+    "reviewCount": {{ product.metafields.reviews.rating_count | json }},
     "bestRating": "5",
     "worstRating": "1"
   }

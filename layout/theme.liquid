@@ -35,8 +35,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#1E3A5F">
     <link rel="manifest" href="{{ 'manifest.json' | asset_url }}" crossorigin="use-credentials">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    {%- comment -%} apple-mobile-web-app-capable removed — deprecated, handled by manifest.json display:standalone {%- endcomment -%}
     <meta name="apple-mobile-web-app-title" content="TechAuraz">
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -137,8 +136,12 @@
       {%- endif -%}
     </title>
     
-    <!-- Meta Tags de Shopify -->
-    {% render 'meta-tags' %}
+    {%- comment -%}
+      REMOVED: Duplicate meta-tags render.
+      The canonical render is at line ~82 (after OG/Twitter comment).
+      Having it twice caused duplicate OG tags on every page — critical SEO bug.
+      Fixed: 2026-04-03
+    {%- endcomment -%}
 
     {%- comment -%} SEO: Breadcrumbs Structured Data {%- endcomment -%}
     {% render 'schema-breadcrumbs' %}
@@ -349,7 +352,7 @@
 {%- endif -%}
 
 <!-- =============================================================================
-     2030 ADVANCED SYSTEMS — Scroll Reveal, Social Proof, Micro-Interactions
+     2026 ADVANCED SYSTEMS — Scroll Reveal, Social Proof, Micro-Interactions
      ============================================================================= -->
 
 {%- if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template.name == 'product' -%}

@@ -768,8 +768,15 @@
     {%- comment -%}3D model scripts removed per requirements{%- endcomment -%}
   </div>
   
-  {%- comment -%} Sticky Add-to-Cart Bar for Mobile {%- endcomment -%}
-  {% render 'sticky-add-to-cart', product: product %}
+  {%- comment -%}
+    DISABLED (2026-04-03): Duplicate sticky bar.
+    The canonical sticky CTA is sections/sticky-mobile-cta.liquid (loaded from product.liquid L144).
+    Having both caused: duplicate scroll/resize listeners, redundant JS (~31KB total),
+    and body class conflicts (sticky-add-to-cart-active vs sticky-cta-active).
+    Keeping the section-based one because it's configurable via Shopify Admin,
+    has benefits bar ("Envío Gratis" + "Contraentrega"), and supports dual CTAs.
+  {%- endcomment -%}
+  {%- comment -%} {% render 'sticky-add-to-cart', product: product %} {%- endcomment -%}
 </section>
 
 
