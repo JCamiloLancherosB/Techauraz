@@ -445,7 +445,14 @@
     <meta name="twitter:label2" content="Envío">
     <meta name="twitter:data2" content="GRATIS a Colombia">
   {%- endif -%}
-</head>
+
+  {%- comment -%} noindex-seo-2026 — Prevent duplicate content in Google {%- endcomment -%}
+  {%- if current_page > 1 or template == 'search' -%}
+    <meta name="robots" content="noindex, follow">
+  {%- endif -%}
+  {%- if canonical_url != blank -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}\n</head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %}">
 
