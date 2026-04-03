@@ -517,9 +517,11 @@
         lazyLoad({{ 'performance-monitor.js' | asset_url | json }});
         {%- if template.name == 'product' or template.name == 'collection' or template.name == 'index' -%}
         lazyLoad({{ 'exit-intent-recovery.js' | asset_url | json }});
+        lazyLoad({{ 'gtm-ecommerce.js' | asset_url | json }});
         {%- endif -%}
+        lazyLoad({{ 'bfcache-optimizer.js' | asset_url | json }});
         {%- if template.name == 'index' -%}
-        lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});
+        lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});\r
         {%- endif -%}
         {%- comment -%}
           DISABLED (2026-03-26): social-proof-toast.js generated fake purchase notifications
