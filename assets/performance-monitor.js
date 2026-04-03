@@ -22,18 +22,25 @@
     };
   }
 
-  // ===== 2. Force passive listeners on common events =====
-  // Hidden tip: Passive listeners allow browser to scroll immediately
-  // without waiting for JS, eliminating scroll jank
+  // ===== 2. Force passive listeners + bfcache-safe unload conversion =====
+  // UNIFIED patch: Handles both passive scroll optimization AND unload→pagehide
+  // conversion in a single override to prevent conflicts with other scripts.
   var origAdd = EventTarget.prototype.addEventListener;
   var passiveEvents = { touchstart: 1, touchmove: 1, wheel: 1, mousewheel: 1 };
   EventTarget.prototype.addEventListener = function (type, fn, opts) {
+    // Convert 'unload' to 'pagehide' for bfcache compatibility
+    if (type === 'unload') {
+      return origAdd.call(this, 'pagehide', fn, opts);
+    }
+    // Force passive on scroll-related events
     if (passiveEvents[type] && opts !== false) {
       var newOpts = typeof opts === 'object' ? Object.assign({}, opts, { passive: true }) : { passive: true };
       return origAdd.call(this, type, fn, newOpts);
     }
     return origAdd.call(this, type, fn, opts);
   };
+  // Export reference for other scripts that need the original
+  window.__origAddEventListener = origAdd;
 
   // ===== 3. Real-User Web Vitals → GTM =====
   // Hidden tip: Sending real CWV to GTM enables:

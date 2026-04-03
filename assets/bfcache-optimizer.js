@@ -14,19 +14,10 @@
 (function () {
   'use strict';
 
-  // ===== 1. Remove the #1 bfcache blocker: 'unload' listeners =====
-  // Hidden tip: ANY 'unload' listener disqualifies the page from bfcache
-  // in most browsers. We monkey-patch to prevent third-party scripts
-  // from accidentally adding them.
-  var origAdd = EventTarget.prototype.addEventListener;
-  EventTarget.prototype.addEventListener = function (type, fn, opts) {
-    if (type === 'unload') {
-      // Convert 'unload' to 'pagehide' (bfcache-safe equivalent)
-      console.warn('[TechAuraz] Converted "unload" to "pagehide" for bfcache compatibility');
-      return origAdd.call(this, 'pagehide', fn, opts);
-    }
-    return origAdd.call(this, type, fn, opts);
-  };
+  // ===== 1. 'unload' → 'pagehide' conversion =====
+  // NOTE: This is now handled by the unified patch in performance-monitor.js
+  // which loads before this script. Both passive listeners AND unload conversion
+  // are consolidated there to prevent double-patching conflicts.
 
   // ===== 2. bfcache restore handling =====
   // When page is restored from bfcache, re-initialize dynamic elements
