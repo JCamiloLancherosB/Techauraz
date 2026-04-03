@@ -8,6 +8,10 @@
 <!-- Phase 3: WhatsApp API domain hint for floating CTA -->
 <link rel="dns-prefetch" href="https://wa.me">
 <link rel="dns-prefetch" href="https://api.whatsapp.com">
+<!-- Checkout domain hints — resolve DNS before user clicks checkout -->
+<link rel="dns-prefetch" href="https://checkout.shopify.com">
+<link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
+<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 {%- comment -%} cdn.shopify.com preconnect removed — Shopify sends it via HTTP response headers automatically {%- endcomment -%}
 
 <!-- Preload critical JavaScript -->
@@ -529,6 +533,7 @@
         lazyLoad({{ 'gtm-ecommerce.js' | asset_url | json }});
         {%- endif -%}
         lazyLoad({{ 'bfcache-optimizer.js' | asset_url | json }});
+        lazyLoad({{ 'resource-budget.js' | asset_url | json }});
         {%- if template.name == 'index' -%}
         lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});\r
         {%- endif -%}

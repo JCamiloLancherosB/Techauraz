@@ -50,9 +50,9 @@
   {%- endif -%}
 
   {%- if upsell_collection and upsell_collection.products.size > 0 -%}
-    <div class="cart-upsell" id="cart-upsell-section">
+    <div class="cart-upsell" id="cart-upsell-section" role="complementary" aria-label="Productos recomendados">
       <div class="cart-upsell__header">
-        <span class="cart-upsell__icon">💡</span>
+        <span class="cart-upsell__icon" aria-hidden="true">💡</span>
         <h3 class="cart-upsell__title">{{ upsell_title }}</h3>
       </div>
       <div class="cart-upsell__grid">
