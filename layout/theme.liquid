@@ -32,6 +32,16 @@
 {%- endcomment -%}
     <!-- Meta Tags Básicos -->
     <meta charset="utf-8">
+  {%- comment -%} preconnect-performance-hints — TechAuraz 2026 {%- endcomment -%}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+  <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
+  {%- comment -%} Preload critical hero image for LCP {%- endcomment -%}
+  {%- if template == 'index' -%}
+    <link rel="preload" as="image" href="{{ 'hero-slide-1.png' | asset_url }}" fetchpriority="high">
+  {%- endif -%}
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#1E3A5F">
     <link rel="manifest" href="{{ 'manifest.json' | asset_url }}" crossorigin="use-credentials">
