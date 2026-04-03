@@ -366,6 +366,12 @@
 <link rel="stylesheet" href="{{ 'techauraz-2026-cro.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-2026-cro.css' | asset_url }}"></noscript>
 
+<!-- 2026 Rendering Performance: content-visibility for below-fold sections -->
+<style>
+  .shopify-section:nth-child(n+4) { content-visibility: auto; contain-intrinsic-size: auto 500px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+
 <!-- Global Polish — WhatsApp FAB, scroll-to-top, form inputs, cart drawer, page fade-in -->
 <link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'techauraz-global-polish.css' | asset_url }}"></noscript>
@@ -506,6 +512,7 @@
         lazyLoad({{ 'micro-interactions.js' | asset_url | json }});
         lazyLoad({{ 'image-loading.js' | asset_url | json }});
         lazyLoad({{ 'tiny-img-link-preloader.js' | asset_url | json }});
+        lazyLoad({{ 'speculative-prefetch.js' | asset_url | json }});
         {%- if template.name == 'index' -%}
         lazyLoad({{ 'slideshow-autoplay-force.js' | asset_url | json }});
         {%- endif -%}
