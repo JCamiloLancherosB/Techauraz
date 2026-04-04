@@ -9,22 +9,22 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/techaura_d7386c28-df90-4f40-86e2-5fc9ca842aed.png",
+    "logo": "shopify://shop_images/techauraz-logo-2026.jpg",
     "logo_width": 60,
-    "favicon": "shopify://shop_images/techAuraico.png",
+    "favicon": "shopify://shop_images/techauraz-logo-2026.jpg",
     "type_header_font": "assistant_n4",
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
     "body_scale": 100,
-    "page_width": 1440,
-    "spacing_sections": 36,
-    "spacing_grid_horizontal": 12,
+    "page_width": 1600,
+    "spacing_sections": 0,
+    "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
-    "buttons_radius": 10,
+    "buttons_radius": 0,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
@@ -38,7 +38,7 @@
     "variant_pills_shadow_blur": 5,
     "inputs_border_thickness": 1,
     "inputs_border_opacity": 55,
-    "inputs_radius": 8,
+    "inputs_radius": 0,
     "inputs_shadow_opacity": 0,
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 2,
@@ -49,8 +49,8 @@
     "card_color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
     "card_border_thickness": 0,
     "card_border_opacity": 10,
-    "card_corner_radius": 14,
-    "card_shadow_opacity": 10,
+    "card_corner_radius": 0,
+    "card_shadow_opacity": 0,
     "card_shadow_horizontal_offset": 0,
     "card_shadow_vertical_offset": 4,
     "card_shadow_blur": 5,
@@ -85,14 +85,14 @@
     "text_boxes_shadow_blur": 5,
     "media_border_thickness": 1,
     "media_border_opacity": 5,
-    "media_radius": 10,
-    "media_shadow_opacity": 5,
+    "media_radius": 0,
+    "media_shadow_opacity": 0,
     "media_shadow_horizontal_offset": 0,
     "media_shadow_vertical_offset": 4,
     "media_shadow_blur": 5,
     "popup_border_thickness": 1,
     "popup_border_opacity": 10,
-    "popup_corner_radius": 16,
+    "popup_corner_radius": 0,
     "popup_shadow_opacity": 5,
     "popup_shadow_horizontal_offset": 0,
     "popup_shadow_vertical_offset": 4,
@@ -123,9 +123,9 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "drawer",
+    "cart_type": "notification",
     "show_vendor": false,
-    "show_cart_note": true,
+    "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
     "sections": {
@@ -154,6 +154,54 @@
           "payment_enable": true,
           "show_policy": false,
           "margin_top": 0,
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "main-product": {
+        "type": "main-product",
+        "blocks": {
+          "price_QrbxPF": {
+            "type": "price",
+            "settings": {}
+          },
+          "quantity_selector_wnrxE8": {
+            "type": "quantity_selector",
+            "disabled": true,
+            "settings": {}
+          },
+          "buy_buttons_FNgTtK": {
+            "type": "buy_buttons",
+            "settings": {
+              "show_dynamic_checkout": true,
+              "show_gift_card_recipient": true
+            }
+          },
+          "share_yYxKCp": {
+            "type": "share",
+            "disabled": true,
+            "settings": {
+              "share_label": "Compartir"
+            }
+          }
+        },
+        "block_order": [
+          "price_QrbxPF",
+          "quantity_selector_wnrxE8",
+          "buy_buttons_FNgTtK",
+          "share_yYxKCp"
+        ],
+        "settings": {
+          "gallery_layout": "stacked",
+          "media_size": "large",
+          "constrain_to_viewport": "true",
+          "media_fit": "contain",
+          "media_position": "left",
+          "image_zoom": "click",
+          "mobile_thumbnails": "hide",
+          "hide_variants": false,
+          "enable_sticky_info": true,
+          "color_scheme": "background-1",
           "padding_top": 36,
           "padding_bottom": 36
         }
@@ -192,16 +240,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "2567389343055140935": {
-        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
-        "disabled": false,
-        "settings": {}
-      },
-      "2200952712151285029": {
-        "type": "shopify://apps/microsoft-clarity/blocks/brandAgents_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
-        "disabled": false,
-        "settings": {}
-      },
       "4976129024724438625": {
         "type": "shopify://apps/smart-seo/blocks/brokenLinkDetection/7b0a6064-ca2e-4392-9a1d-8c43c942357b",
         "disabled": true,
@@ -271,13 +309,13 @@
       },
       "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71": {
         "settings": {
-          "background": "#0f172a",
-          "background_gradient": "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+          "background": "#202b3d",
+          "background_gradient": "",
           "text": "#ffffff",
-          "button": "#00D4AA",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#0f172a"
+          "button": "#202b3d",
+          "button_label": "#000000",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
         }
       }
     }
