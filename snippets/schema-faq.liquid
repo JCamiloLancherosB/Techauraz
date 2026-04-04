@@ -6,16 +6,27 @@
   
   Usage: {% render 'schema-faq', faq_items: section.blocks %}
   Each block must have settings: question, answer
+
+  2026-04-03: Fixed trailing comma bug when last item is blank.
 {%- endcomment -%}
 
-{%- if faq_items.size > 0 -%}
+{%- assign valid_faq_count = 0 -%}
+{%- for item in faq_items -%}
+  {%- if item.settings.question != blank and item.settings.answer != blank -%}
+    {%- assign valid_faq_count = valid_faq_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if valid_faq_count > 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {%- assign faq_index = 0 -%}
     {%- for item in faq_items -%}
       {%- if item.settings.question != blank and item.settings.answer != blank -%}
+        {%- assign faq_index = faq_index | plus: 1 -%}
         {
           "@type": "Question",
           "name": {{ item.settings.question | json }},
@@ -23,10 +34,11 @@
             "@type": "Answer",
             "text": {{ item.settings.answer | strip_html | json }}
           }
-        }{%- unless forloop.last -%},{%- endunless -%}
+        }{%- if faq_index < valid_faq_count -%},{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
   ]
 }
 </script>
 {%- endif -%}
+
