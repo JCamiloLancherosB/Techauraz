@@ -182,3 +182,37 @@ a.button:active,
         height: auto;
     }
 }
+
+/* =============================================================================
+   10. SCROLLBAR-GUTTER — Prevent layout shift from scrollbar appearance (2026)
+   ============================================================================= */
+
+html {
+    scrollbar-gutter: stable;
+}
+
+/* =============================================================================
+   11. HEAVY SECTION CONTAINMENT — Reduce paint cost on product grids
+   ============================================================================= */
+
+.collection-product-list,
+.product-grid-container,
+.featured-collection__product-list {
+    contain: layout paint;
+}
+
+/* =============================================================================
+   12. DARK MODE FOUNDATION — CSS custom properties (2026 readiness)
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ta-dark-bg: #0f172a;
+        --ta-dark-surface: #1e293b;
+        --ta-dark-text: #f1f5f9;
+        --ta-dark-muted: #94a3b8;
+        --ta-dark-border: #334155;
+        /* NOTE: Dark mode UI not yet applied — these are foundation tokens.
+           To enable, swap --color-bg-primary etc. to use these values. */
+    }
+}
