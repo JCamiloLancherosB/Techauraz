@@ -1,0 +1,27 @@
+{%- comment -%}
+  TechAuraz 2026 — Enhanced 404 Page
+  Shows search + popular collections + WhatsApp CTA
+{%- endcomment -%}
+
+<div class="ta-404" style="text-align:center;padding:4rem 1.5rem;max-width:600px;margin:0 auto;">
+  <h1 style="font-size:3rem;margin-bottom:1rem;">🔍</h1>
+  <h2 style="font-size:2.4rem;color:var(--color-text-primary);margin-bottom:1rem;">Página no encontrada</h2>
+  <p style="color:var(--color-text-muted);margin-bottom:2rem;">La página que buscas no existe o fue movida. Prueba buscar lo que necesitas:</p>
+  
+  <form action="/search" method="get" style="margin-bottom:3rem;">
+    <input type="search" name="q" placeholder="Buscar productos..." 
+           style="width:100%;max-width:400px;padding:12px 16px;border:2px solid var(--color-border);border-radius:var(--radius-lg);font-size:1.6rem;" />
+  </form>
+
+  <h3 style="margin-bottom:1.5rem;color:var(--color-text-primary);">Categorías populares</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:0.8rem;justify-content:center;margin-bottom:3rem;">
+    <a href="/collections/all" style="padding:8px 16px;background:var(--color-primary);color:white;border-radius:var(--radius-pill);text-decoration:none;font-size:1.4rem;">🛒 Ver todo</a>
+    <a href="/collections/diademas-gamer-techaura" style="padding:8px 16px;background:var(--color-bg-tertiary);border-radius:var(--radius-pill);text-decoration:none;font-size:1.4rem;">🎧 Audio</a>
+    <a href="/collections/carga-energia-techaura" style="padding:8px 16px;background:var(--color-bg-tertiary);border-radius:var(--radius-pill);text-decoration:none;font-size:1.4rem;">⚡ Carga</a>
+    <a href="/collections/cables-de-datos-techaura" style="padding:8px 16px;background:var(--color-bg-tertiary);border-radius:var(--radius-pill);text-decoration:none;font-size:1.4rem;">🔌 Cables</a>
+    <a href="/blogs/news" style="padding:8px 16px;background:var(--color-bg-tertiary);border-radius:var(--radius-pill);text-decoration:none;font-size:1.4rem;">📝 Blog</a>
+  </div>
+
+  <p style="color:var(--color-text-muted);">¿Necesitas ayuda?<br>
+  📲 <a href="https://wa.me/573008602789" style="color:var(--color-primary);font-weight:600;">WhatsApp: +57 300 860 2789</a></p>
+</div>

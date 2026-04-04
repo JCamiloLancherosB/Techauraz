@@ -1,0 +1,63 @@
+{%- comment -%}
+  TechAuraz 2026 — Performance Monitoring & Hidden Tips
+  Tracks Core Web Vitals and sends to analytics
+{%- endcomment -%}
+
+{%- comment -%} 2026 Tip: DNS Prefetch for common CDNs {%- endcomment -%}
+<link rel="dns-prefetch" href="https://cdn.shopify.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+{%- comment -%} 2026 Tip: Preload LCP candidate (hero image) with fetchpriority {%- endcomment -%}
+{%- if template == 'index' -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.image != blank -%}
+      <link rel="preload" as="image" href="{{ block.settings.image | image_url: width: 1200 }}" fetchpriority="high">
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} 2026 Tip: Instant back-forward navigation via bfcache hint {%- endcomment -%}
+<script>
+// bfcache optimization — freeze/thaw handlers
+window.addEventListener('pageshow', function(e) {
+  if (e.persisted) {
+    // Restore any dynamic state after bfcache
+    document.querySelectorAll('[data-bfcache-refresh]').forEach(function(el) {
+      el.dispatchEvent(new CustomEvent('bfcache:restore'));
+    });
+  }
+});
+
+// Core Web Vitals reporter — sends to GA4 if available
+if ('web-vital' in window || typeof PerformanceObserver !== 'undefined') {
+  try {
+    var lcpObserver = new PerformanceObserver(function(list) {
+      var entries = list.getEntries();
+      var lastEntry = entries[entries.length - 1];
+      if (window.gtag) {
+        window.gtag('event', 'web_vital_lcp', {
+          value: Math.round(lastEntry.startTime),
+          event_category: 'Web Vitals',
+          non_interaction: true,
+        });
+      }
+    });
+    lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+
+    var clsObserver = new PerformanceObserver(function(list) {
+      var clsValue = 0;
+      list.getEntries().forEach(function(entry) { if (!entry.hadRecentInput) clsValue += entry.value; });
+      if (window.gtag && clsValue > 0) {
+        window.gtag('event', 'web_vital_cls', {
+          value: Math.round(clsValue * 1000),
+          event_category: 'Web Vitals',
+          non_interaction: true,
+        });
+      }
+    });
+    clsObserver.observe({ type: 'layout-shift', buffered: true });
+  } catch(e) {}
+}
+</script>
