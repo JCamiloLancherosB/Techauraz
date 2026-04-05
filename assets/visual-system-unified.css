@@ -159,7 +159,7 @@ h2.title {
   font-weight: 600;
 }
 
-.price--on-sale .price__sale .price-item--regular {
+.price--on-sale .price__sale .price-item--sale {
   font-size: var(--ta-font-size-h4, 1.5rem);
   color: var(--ta-error, #ef4444);
   text-decoration: none;

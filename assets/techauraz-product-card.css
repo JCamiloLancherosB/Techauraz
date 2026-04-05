@@ -300,7 +300,7 @@
   letter-spacing: var(--ta-tracking-tight, -0.025em);
 }
 
-/* Sale price styling */
+/* Sale price styling — compare_at (old price) small + strikethrough */
 .card-wrapper.product-card-wrapper .price--on-sale .price-item--regular {
   font-size: var(--ta-font-size-sm, 1.4rem);
   font-weight: 400;
@@ -309,7 +309,8 @@
   text-decoration-thickness: 2px;
 }
 
-.card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+/* Actual sale price — BIG, RED, BOLD (this is the lower price customers pay) */
+.card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--sale {
   font-size: var(--ta-text-xl, 2rem);
   font-weight: var(--ta-font-extrabold, 800);
   font-family: var(--ta-font-mono);
@@ -526,7 +527,7 @@
     font-size: var(--ta-font-size-lg, 1.8rem);
   }
 
-  .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+  .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--sale {
     font-size: var(--ta-font-size-lg, 1.8rem);
   }
 
@@ -744,9 +745,9 @@
   color: var(--ta-text-muted, #64748b) !important;
 }
 
-/* Sale price - red for emphasis on discounted price */
+/* Sale price - red for emphasis on discounted price (the LOWER price a customer pays) */
 [class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price-item--sale,
-[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--regular {
+[class*="color-scheme-"] .card-wrapper.product-card-wrapper .price--on-sale .price__sale .price-item--sale {
   color: var(--ta-error, #ef4444) !important;
 }
 

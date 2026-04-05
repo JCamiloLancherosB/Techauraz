@@ -2244,11 +2244,13 @@ select:focus {
   white-space: nowrap;
 }
 
+/* .price-item--sale is the ACTUAL sale price (lower price customers pay) — must be prominent */
 .price-item--sale {
-  color: rgba(226, 232, 240, 0.45);
-  text-decoration: line-through;
-  font-size: 1.4rem;
+  color: #10b981;
+  font-weight: 800;
+  font-size: 1.7rem;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 /* Desktop - enhanced price visibility */
@@ -2262,7 +2264,7 @@ select:focus {
   }
 
   .price-item--sale {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
 
