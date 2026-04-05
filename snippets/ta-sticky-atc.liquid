@@ -1,1 +1,43 @@
-{%- comment -%}\n  TechAuraz 2026 — Mobile Sticky Add To Cart\n{%- endcomment -%}\n\n<style>\n  .ta-sticky-atc { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; background: var(--color-background, #fff); box-shadow: 0 -4px 12px rgba(0,0,0,0.1); padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }\n  .ta-sticky-atc.is-visible { transform: translateY(0); }\n  .ta-sticky-info { display: flex; flex-direction: column; }\n  .ta-sticky-title { font-size: 1.2rem; font-weight: 600; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.5px; }\n  .ta-sticky-price { font-size: 1.4rem; font-weight: bold; color: var(--color-base-accent-1, #E52E2D); }\n  .ta-sticky-btn { background: var(--color-base-accent-1, #E52E2D); color: #fff; border: none; padding: 12px 24px; font-weight: bold; font-size: 1.4rem; border-radius: 4px; border-radius: var(--radius-md, 8px); cursor: pointer; text-transform: uppercase; flex-shrink: 0; }\n  @media screen and (min-width: 768px) { .ta-sticky-atc { display: none !important; } }\n</style>\n\n<div class="ta-sticky-atc" id="taStickyATC">\n  <div class="ta-sticky-info">\n    <span class="ta-sticky-title">{{ product.title | truncate: 15 }}</span>\n    <span class="ta-sticky-price">{{ product.price | money }}</span>\n  </div>\n  <button class="ta-sticky-btn" onclick="document.querySelector('form[action=\'/cart/add\'] button[type=\'submit\']').click()">Lo Quiero Ya</button>\n</div>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    const stickyBar = document.getElementById('taStickyATC');\n    const mainATC = document.querySelector('form[action=\'/cart/add\'] button[type=\'submit\']');\n    if (!stickyBar || !mainATC) return;\n    const observer = new IntersectionObserver(entries => {\n      entries.forEach(entry => {\n        if (!entry.isIntersecting) {\n          stickyBar.classList.add('is-visible');\n        } else {\n          stickyBar.classList.remove('is-visible');\n        }\n      });\n    }, { threshold: 0 });\n    observer.observe(mainATC);\n  });\n</script>
+{%- comment -%}
+  TechAuraz 2026 — Mobile Sticky Add To Cart
+{%- endcomment -%}
+
+<style>
+  .ta-sticky-atc { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; background: var(--color-background, #fff) !important; box-shadow: 0 -4px 12px rgba(0,0,0,0.1) !important; padding: 10px 15px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+  .ta-sticky-atc.is-visible { transform: translateY(0) !important; }
+  .ta-sticky-info { display: flex; flex-direction: column; }
+  .ta-sticky-title { font-size: 1.2rem; font-weight: 600; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;}
+  .ta-sticky-price { font-size: 1.4rem; font-weight: bold; color: var(--color-base-accent-1, #E52E2D); margin: 0;}
+  .ta-sticky-btn { background: var(--color-base-accent-1, #E52E2D) !important; color: #fff !important; border: none !important; padding: 12px 24px !important; font-weight: bold !important; font-size: 1.4rem !important; border-radius: 4px !important; cursor: pointer !important; text-transform: uppercase !important; flex-shrink: 0 !important; margin: 0 !important;}
+  @media screen and (min-width: 768px) { .ta-sticky-atc { display: none !important; } }
+</style>
+
+<div class="ta-sticky-atc" id="taStickyATC">
+  <div class="ta-sticky-info">
+    <span class="ta-sticky-title">{{ product.title | truncate: 15 }}</span>
+    <span class="ta-sticky-price">{{ product.price | money }}</span>
+  </div>
+  <button class="ta-sticky-btn" onclick="document.querySelector('form[action=\'/cart/add\'] button[type=\'submit\']').click()">Lo Quiero Ya</button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyBar = document.getElementById('taStickyATC');
+    const mainATC = document.querySelector('form[action=\'/cart/add\'] button[type=\'submit\']');
+    if (!stickyBar || !mainATC) return;
+    
+    // Force direct DOM manipulation to bypass Dawn overrides
+    document.body.appendChild(stickyBar);
+    
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          stickyBar.classList.add('is-visible');
+        } else {
+          stickyBar.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0 });
+    observer.observe(mainATC);
+  });
+</script>
