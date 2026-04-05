@@ -5,13 +5,13 @@
  * Upgrades all product descriptions with persuasive, conversion-focused
  * e-commerce copy. Also fixes remaining product_type misclassifications.
  * 
- * Run: $env:SHOPIFY_ACCESS_TOKEN="shpat_xxx"; node scripts/shopify-description-optimizer.mjs
+ * Run: $env:SHOPIFY_ACCESS_TOKEN="HIDDEN_SECRET_TOKEN"; node scripts/shopify-description-optimizer.mjs
  */
 
 const CONFIG = {
   SHOP: '7f4c40-fb.myshopify.com',
   ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN || '',
-  API_VERSION: '2024-10',
+  API_VERSION: '2026-01',
   RATE_LIMIT_MS: 600,
 };
 

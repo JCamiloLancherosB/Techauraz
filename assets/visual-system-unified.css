@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ============================================================
    VISUAL SYSTEM UNIFIED 2024
    TechAuraz — Complete Visual Cohesion Layer
@@ -565,4 +566,573 @@ a {
 .ta-cta-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+=======
+/* ============================================================
+   VISUAL SYSTEM UNIFIED 2024
+   TechAuraz — Complete Visual Cohesion Layer
+   
+   This file provides:
+   1. Global section spacing & transitions
+   2. Section heading consistency
+   3. Product card enhancements
+   4. Benefits bar modern design
+   5. Featured collection polish
+   6. Global polish & micro-interactions
+   
+   Relies on tokens from techauraz-tokens.css
+   ============================================================ */
+
+/* ============================================================
+   1. GLOBAL SECTION SPACING & TRANSITIONS
+   Smooth visual flow between all homepage sections
+   ============================================================ */
+
+/* Sections get subtle fade-in on scroll */
+.section {
+  opacity: 1;
+}
+
+/* Smooth breathing room between sections */
+.template-index .section+.section {
+  border-top: none;
+}
+
+/* Remove harsh section separator lines */
+.template-index .section:not(:first-child) {
+  margin-top: 0;
+}
+
+/* ============================================================
+   2. SECTION HEADING CONSISTENCY
+   All section titles get the same premium typography
+   ============================================================ */
+
+/* Section-level headings — consistent across all homepage blocks */
+.ta-conv-section-heading,
+.category-nav-title,
+.social-proof-banner__title,
+.testimonials-wall__title,
+.featured-collection .title,
+.section-header .h2,
+.section-header .h1,
+h2.title {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Section subtitles / subheadings */
+.category-nav-subtitle,
+.social-proof-banner__subtitle,
+.testimonials-wall__subtitle {
+  color: var(--ta-text-muted, #64748b);
+  line-height: 1.5;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   3. PRODUCT CARD ENHANCEMENTS
+   ============================================================ */
+
+/* Card container with consistent aspect ratio */
+.card-wrapper.product-card-wrapper {
+  position: relative;
+  height: 100%;
+  border-radius: var(--ta-radius-card, 14px);
+  overflow: hidden;
+  transition: var(--ta-transition-normal, all 250ms ease);
+  background: var(--ta-bg, #ffffff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-wrapper.product-card-wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Card image */
+.card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--ta-bg-secondary, #f8fafc);
+  border-radius: var(--ta-radius-card, 14px) var(--ta-radius-card, 14px) 0 0;
+}
+
+.card__media .media {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle zoom on hover */
+.card-wrapper.product-card-wrapper:hover .media img {
+  transform: scale(1.05);
+}
+
+/* Title clamping */
+.card__heading {
+  min-height: 2.6em;
+  margin-bottom: var(--ta-space-sm, 0.5rem);
+}
+
+.card__heading .full-unstyled-link {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.375;
+  font-size: var(--ta-font-size-sm, 0.875rem);
+  font-weight: 700;
+  color: var(--ta-text, #0f172a);
+  transition: color 150ms ease;
+}
+
+.card__heading .full-unstyled-link:hover {
+  color: var(--ta-primary, #1E3A5F);
+}
+
+/* Price */
+.card-information .price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+}
+
+.price .price-item--regular {
+  font-size: var(--ta-font-size-xl, 1.25rem);
+  font-weight: 800;
+  color: var(--ta-success, #059669);
+  letter-spacing: -0.025em;
+}
+
+.price--on-sale .price-item--regular {
+  font-size: var(--ta-font-size-md, 1rem);
+  color: var(--ta-text-muted, #64748b);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  font-weight: 600;
+}
+
+.price--on-sale .price__sale .price-item--sale {
+  font-size: var(--ta-font-size-h4, 1.5rem);
+  color: var(--ta-error, #ef4444);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+/* quick-add__submit base styles — see techauraz-product-card.css (canonical source) */
+
+/* Card content area */
+.product-grid .card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.product-grid .grid__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ============================================================
+   4. BENEFITS BAR — Modern Horizontal Cards
+   Replaces the deprecated benefits-conversion section styling
+   ============================================================ */
+
+.ta-conv-section-spacing {
+  padding: 2.5rem 0;
+}
+
+.ta-conv-section-heading {
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--ta-text, #0f172a);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.ta-conv-benefits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.ta-conv-benefit {
+  background: var(--ta-surface, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.ta-conv-benefit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ta-conv-benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 212, 170, 0.2);
+}
+
+.ta-conv-benefit:hover::before {
+  opacity: 1;
+}
+
+.ta-conv-benefit__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 170, 0.1);
+  border-radius: 50%;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.ta-conv-benefit:hover .ta-conv-benefit__icon {
+  transform: scale(1.1);
+  background: rgba(0, 212, 170, 0.18);
+}
+
+.ta-conv-benefit__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ta-conv-benefit__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ta-text, #0f172a);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.ta-conv-benefit__description {
+  font-size: 0.85rem;
+  color: var(--ta-text-muted, #64748b);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Benefits responsive */
+@media screen and (max-width: 989px) {
+  .ta-conv-benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ta-conv-benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .ta-conv-benefit {
+    padding: 1.25rem 1rem;
+  }
+
+  .ta-conv-benefit__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.75rem;
+  }
+
+  .ta-conv-benefit__title {
+    font-size: 0.875rem;
+  }
+
+  .ta-conv-benefit__description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ============================================================
+   5. FEATURED COLLECTION POLISH
+   Better title styling and section separation
+   ============================================================ */
+
+/* Featured collection section titles */
+.featured-collection .title-wrapper {
+  margin-bottom: 2rem;
+}
+
+.featured-collection .title-wrapper .title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* View all button polish */
+.featured-collection .view-all__button-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.featured-collection .button {
+  border-radius: 10px;
+  padding: 0.875rem 2rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.featured-collection .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   6. GLOBAL POLISH & MICRO-INTERACTIONS
+   ============================================================ */
+
+/* Smooth link transitions globally */
+a {
+  transition: color 200ms ease;
+}
+
+/* Better focus indicators */
+*:focus-visible {
+  outline: 3px solid var(--ta-primary, #1E3A5F);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Card overlay link */
+.card-wrapper__link--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.quick-add,
+.card__details-link,
+.card__badges,
+.quick-add__submit {
+  position: relative;
+  z-index: 3;
+}
+
+/* Related products section */
+.related-products {
+  padding: 4rem 0;
+}
+
+.related-products__heading {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.heading-icon {
+  display: inline-block;
+  animation: sparkle 1.5s ease-in-out 3;
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Staggered fade-in */
+.tech-related-products .grid__item {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
+  opacity: 0;
+}
+
+.no-js .tech-related-products .grid__item,
+.tech-related-products .grid__item:not([style*="--animation-delay"]) {
+  opacity: 1;
+  animation: none;
+}
+
+/* @keyframes fadeInUp — already defined in base.css and home-modern-blocks.css */
+
+/* ============================================================
+   7. RESPONSIVE DESIGN
+   ============================================================ */
+
+@media screen and (max-width: 749px) {
+  .card__heading .full-unstyled-link {
+    font-size: 0.8rem;
+  }
+
+  .price .price-item--regular {
+    font-size: 1.1rem;
+  }
+
+  .card-wrapper.product-card-wrapper:hover {
+    transform: none;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .card__heading .full-unstyled-link {
+    font-size: 0.875rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .card__heading .full-unstyled-link {
+    font-size: 1rem;
+  }
+
+  .price .price-item--regular {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================================
+   8. ACCESSIBILITY & PERFORMANCE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card-wrapper.product-card-wrapper,
+  .quick-add__submit,
+  .ta-conv-benefit,
+  .card__details-link .link {
+    transition: none;
+  }
+
+  .card-wrapper.product-card-wrapper:hover {
+    transform: none;
+  }
+
+  .card-wrapper.product-card-wrapper:hover .media img {
+    transform: none;
+  }
+
+  .ta-conv-benefit:hover {
+    transform: none;
+  }
+
+  .heading-icon {
+    animation: none;
+  }
+
+  .tech-related-products .grid__item {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Quick-add focus */
+.quick-add__submit:focus-visible {
+  outline: 3px solid var(--ta-primary, #1E3A5F);
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.quick-add__submit .loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ============================================================
+   9. CTA BUTTON — Green Gradient Action Button
+   Used for newsletter submit, lead magnets, and primary CTAs
+   ============================================================ */
+
+.ta-cta-button {
+  padding: 0.9rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  min-height: 48px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.ta-cta-button:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+}
+
+.ta-cta-button:focus-visible {
+  outline: 3px solid rgba(16, 185, 129, 0.5);
+  outline-offset: 3px;
+}
+
+.ta-cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+>>>>>>> c338a4c (Actualizacion de productos)
 }

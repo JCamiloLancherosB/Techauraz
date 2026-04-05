@@ -13,6 +13,28 @@
  */
 
 /* =============================================================================
+   FIX: Shopify animations_reveal_on_scroll adds transform to section wrappers.
+   CSS spec: a transform on an ancestor creates a new containing block,
+   which breaks position:fixed on descendant elements. 
+   Override this for sticky section wrappers to restore viewport-fixed behavior.
+   Ref: https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed
+   Fixed: 2026-04-03
+   ============================================================================= */
+#shopify-section-sticky-mobile-cta,
+.shopify-section[id*="sticky-mobile-cta"],
+.shopify-section:has(.sticky-add-to-cart),
+.shopify-section:has(.sticky-cta-bar) {
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+  /* Remove from layout flow — let the fixed child own its position */
+  position: static !important;
+  overflow: visible !important;
+  contain: none !important;
+  content-visibility: visible !important;
+}
+
+/* =============================================================================
    BASE STYLES - Only visible on mobile (< 768px)
    ============================================================================= */
 

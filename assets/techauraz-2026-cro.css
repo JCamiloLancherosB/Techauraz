@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* =============================================================================
    TECHAURAZ 2026 CRO BEST PRACTICES
    Advanced CSS features for conversion rate optimization
@@ -215,4 +216,223 @@ html {
         /* NOTE: Dark mode UI not yet applied — these are foundation tokens.
            To enable, swap --color-bg-primary etc. to use these values. */
     }
+=======
+/* =============================================================================
+   TECHAURAZ 2026 CRO BEST PRACTICES
+   Advanced CSS features for conversion rate optimization
+   
+   Features:
+   - Smooth scroll behavior
+   - Entry animations via @starting-style
+   - Rendering performance with content-visibility & contain
+   - Modern typography with text-wrap: pretty
+   - Scroll-triggered reveal animations
+   - Accessible reduced-motion support
+   - Color-mix for dynamic hover states
+   ============================================================================= */
+
+/* =============================================================================
+   1. SMOOTH SCROLL & TYPOGRAPHY FOUNDATIONS
+   ============================================================================= */
+
+html {
+    scroll-behavior: smooth;
+    /* Prevent overscroll bouncing on iOS/Chrome */
+    overscroll-behavior-y: none;
+}
+
+/* Modern typography — improved line breaking for readability */
+p,
+li,
+dd,
+figcaption,
+blockquote {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+/* =============================================================================
+   2. PERFORMANCE — Contain & content-visibility
+   ============================================================================= */
+
+/* Product cards — contain layout to avoid cross-card reflow */
+.card-wrapper.product-card-wrapper,
+.card-wrapper.product-card-wrapper .card {
+    contain: layout style;
+}
+
+/* Below-fold sections get content-visibility for render skipping */
+.shopify-section:nth-child(n+4):not(.shopify-section--header) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+}
+
+/* =============================================================================
+   3. SCROLL-TRIGGERED REVEAL ANIMATIONS
+   Canonical rules are in scroll-reveal.css (GPU-composited via translate3d).
+   Duplicate rules removed to avoid non-composited animation warnings.
+   ============================================================================= */
+
+/* =============================================================================
+   4. ENTRY ANIMATIONS via @starting-style (Progressive Enhancement)
+   For browsers supporting CSS @starting-style (Chrome 117+, Safari 17.5+)
+   ============================================================================= */
+
+@supports (animation-timeline: view()) {
+
+    /* View-driven animations for sections scrolled into view */
+    .shopify-section:not(.shopify-section--header):not(.section-header) {
+        animation: ta-section-reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 30%;
+    }
+
+    @keyframes ta-section-reveal {
+        from {
+            opacity: 0.7;
+            transform: translate3d(0, 20px, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
+/* =============================================================================
+   5. INTERACTIVE HOVER STATES — color-mix for dynamic blending
+   ============================================================================= */
+
+/* Button hover using color-mix — creates perfectly blended hover colors */
+@supports (color: color-mix(in oklch, red, blue)) {
+
+    .button--primary:hover,
+    .btn-primary:hover,
+    .slideshow-cta.button--primary:hover {
+        background: color-mix(in oklch, var(--ta-primary, #3b82f6) 85%, black);
+    }
+
+    .card-wrapper:hover .card {
+        border-color: color-mix(in oklch, var(--ta-primary, #3b82f6) 30%, transparent);
+    }
+}
+
+/* =============================================================================
+   6. TOUCH & INTERACTION FEEDBACK
+   ============================================================================= */
+
+/* Active press feedback for all buttons */
+button:active:not(:disabled),
+a.button:active,
+.slideshow-cta:active,
+.whatsapp-button:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+}
+
+/* Better focus-visible ring for keyboard users */
+:focus-visible {
+    outline: 3px solid var(--ta-primary, #3b82f6);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* =============================================================================
+   7. REDUCED MOTION — Respect user accessibility preferences
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    /* .ta-reveal reduced-motion handled by scroll-reveal.css */
+
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =============================================================================
+   8. SCROLL SNAP — Smooth mobile slideshow swiping
+   ============================================================================= */
+
+/* Apply scroll-snap to slideshow for mobile swipe */
+@media screen and (max-width: 749px) {
+    .slideshow .slider {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+
+    .slideshow .slider .slideshow__slide {
+        scroll-snap-align: center;
+    }
+}
+
+/* =============================================================================
+   9. SMOOTH ACCORDION ANIMATIONS (2026 CSS)
+   ============================================================================= */
+
+@supports (interpolate-size: allow-keywords) {
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    details .accordion__content {
+        height: 0;
+        overflow: clip;
+        transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    details[open] .accordion__content {
+        height: auto;
+    }
+}
+
+/* =============================================================================
+   10. SCROLLBAR-GUTTER — Prevent layout shift from scrollbar appearance (2026)
+   ============================================================================= */
+
+html {
+    scrollbar-gutter: stable;
+}
+
+/* =============================================================================
+   11. HEAVY SECTION CONTAINMENT — Reduce paint cost on product grids
+   ============================================================================= */
+
+.collection-product-list,
+.product-grid-container,
+.featured-collection__product-list {
+    contain: layout paint;
+}
+
+/* =============================================================================
+   12. DARK MODE FOUNDATION — CSS custom properties (2026 readiness)
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ta-dark-bg: #0f172a;
+        --ta-dark-surface: #1e293b;
+        --ta-dark-text: #f1f5f9;
+        --ta-dark-muted: #94a3b8;
+        --ta-dark-border: #334155;
+        /* NOTE: Dark mode UI not yet applied — these are foundation tokens.
+           To enable, swap --color-bg-primary etc. to use these values. */
+    }
+>>>>>>> c338a4c (Actualizacion de productos)
 }

@@ -83,13 +83,23 @@
       }
     ]
   },
+  {%- comment -%}
+    AggregateRating RE-ENABLED (2026-04-04):
+    Now reads from Judge.me metafields (verified review app).
+    Previously hardcoded "4.9 / 527" — that was fabricated and removed.
+    Guard clause: only emits when real reviews exist (count > 0).
+  {%- endcomment -%}
+  {%- assign jm_count = shop.metafields.judgeme.all_reviews_count | plus: 0 -%}
+  {%- assign jm_rating = shop.metafields.judgeme.all_reviews_rating -%}
+  {%- if jm_count > 0 and jm_rating != blank -%}
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "527",
+    "ratingValue": "{{ jm_rating }}",
+    "reviewCount": "{{ jm_count }}",
     "bestRating": "5",
     "worstRating": "1"
   },
+  {%- endif -%}
   "slogan": "Tecnología Premium con Envío GRATIS a Todo Colombia",
   "foundingDate": "2024",
   "knowsAbout": [

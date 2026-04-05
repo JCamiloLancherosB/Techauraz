@@ -1,16 +1,27 @@
 /**
- * GTM Enhanced E-Commerce — TechAuraz 2026
+ * GTM Enhanced E-Commerce + FB Pixel — TechAuraz 2026
  * 
  * Hidden tip: Google Ads Smart Bidding uses these events to optimize ROAS.
  * Without them, the algorithm is blind to conversion value.
  * 
- * Events implemented:
+ * GA4 Events implemented:
  * - view_item: When a product page loads
- * - add_to_cart: When user clicks "Add to Cart"
- * - begin_checkout: When user proceeds to checkout
  * - view_item_list: When collection page loads
+ * - add_to_cart: When user clicks "Add to Cart"
+ * - remove_from_cart: When user removes item from cart
+ * - begin_checkout: When user proceeds to checkout
+ * - purchase: When order is confirmed (thank-you page)
+ * - page_view_enhanced: Homepage with returning user flag
+ * 
+ * FB Pixel Events implemented:
+ * - ViewContent: Product page view
+ * - AddToCart: Add to cart click
+ * - InitiateCheckout: Checkout button click
+ * - Purchase: Order confirmation
  * 
  * All events follow GA4 enhanced e-commerce spec.
+ * FB Pixel events use waitForFBQ() to handle deferred loading.
+ * Updated: 2026-04-04
  */
 (function () {
   'use strict';
@@ -167,4 +178,154 @@
       user_returning: document.cookie.indexOf('_shopify_s=') > -1
     });
   }
+
+  // ===== 6. purchase — Order confirmation / Thank-you page =====
+  // Shopify exposes order data on the thank-you page via Shopify.checkout
+  if (/\/thank[-_]?you|\/orders\//.test(location.pathname) || document.querySelector('[data-checkout-payment-due]')) {
+    setTimeout(function () {
+      var checkout = window.Shopify && window.Shopify.checkout;
+      if (checkout) {
+        var items = [];
+        if (checkout.line_items) {
+          checkout.line_items.forEach(function (item, i) {
+            items.push({
+              item_name: item.title || item.product_title || '',
+              item_id: String(item.product_id || ''),
+              item_variant: item.variant_title || '',
+              price: parseFloat(item.price) || 0,
+              currency: checkout.currency || 'COP',
+              item_brand: 'TechAuraz',
+              quantity: item.quantity || 1,
+              index: i
+            });
+          });
+        }
+
+        var purchaseValue = parseFloat(checkout.total_price || checkout.payment_due || 0);
+
+        window.dataLayer.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: String(checkout.order_id || checkout.token || ''),
+            value: purchaseValue,
+            currency: checkout.currency || 'COP',
+            tax: parseFloat(checkout.total_tax || 0),
+            shipping: parseFloat(checkout.shipping_rate && checkout.shipping_rate.price || 0),
+            items: items
+          }
+        });
+
+        // FB Pixel: Purchase event
+        if (typeof fbq === 'function') {
+          fbq('track', 'Purchase', {
+            value: purchaseValue,
+            currency: checkout.currency || 'COP',
+            content_ids: items.map(function (i) { return i.item_id; }),
+            content_type: 'product',
+            num_items: items.length
+          });
+        }
+      }
+    }, 1000);
+  }
+
+  // ===== 7. remove_from_cart — Cart quantity changes =====
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('cart-remove-button a, .cart-item__remove, [data-cart-remove]');
+    if (!btn) return;
+
+    var card = btn.closest('.cart-item, tr[id*="CartItem"]');
+    if (card) {
+      var titleEl = card.querySelector('.cart-item__name, .cart-item__details a');
+      var priceEl = card.querySelector('.price, .cart-item__price .money');
+      window.dataLayer.push({
+        event: 'remove_from_cart',
+        ecommerce: {
+          currency: 'COP',
+          items: [{
+            item_name: titleEl ? titleEl.textContent.trim() : 'Unknown',
+            price: priceEl ? parseFloat(priceEl.textContent.replace(/[^\d.]/g, '')) || 0 : 0,
+            item_brand: 'TechAuraz',
+            quantity: 1
+          }]
+        }
+      });
+    }
+  }, { capture: true });
+
+  // ===== 8. FB Pixel Standard Events (fire alongside GTM) =====
+  // These fire AFTER FB Pixel has loaded (3.5s or interaction delay)
+  function waitForFBQ(callback) {
+    if (typeof fbq === 'function') { callback(); return; }
+    var checks = 0;
+    var interval = setInterval(function () {
+      checks++;
+      if (typeof fbq === 'function') { clearInterval(interval); callback(); }
+      if (checks > 60) clearInterval(interval); // Give up after 30s
+    }, 500);
+  }
+
+  // FB: ViewContent — Product page
+  if (/\/products\//.test(location.pathname)) {
+    waitForFBQ(function () {
+      var product = getProductFromMeta();
+      if (product) {
+        fbq('track', 'ViewContent', {
+          content_name: product.item_name,
+          content_ids: [product.item_id],
+          content_type: 'product',
+          value: product.price,
+          currency: product.currency || 'COP'
+        });
+      }
+    });
+  }
+
+  // FB: AddToCart — Click handler (uses same selector as GTM)
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[type="submit"][name="add"], .product-form__submit, .quick-add__submit');
+    if (!btn) return;
+
+    waitForFBQ(function () {
+      var product = getProductFromMeta();
+      if (!product) {
+        var card = btn.closest('.card-wrapper, .product-card');
+        if (card) {
+          var titleEl = card.querySelector('.card__heading, h3');
+          var priceEl = card.querySelector('.price-item--regular, .money');
+          product = {
+            item_name: titleEl ? titleEl.textContent.trim() : 'Unknown',
+            item_id: 'unknown',
+            price: priceEl ? parseFloat(priceEl.textContent.replace(/[^\d.]/g, '')) || 0 : 0,
+            currency: 'COP'
+          };
+        }
+      }
+      if (product) {
+        fbq('track', 'AddToCart', {
+          content_name: product.item_name,
+          content_ids: [product.item_id],
+          content_type: 'product',
+          value: product.price,
+          currency: product.currency || 'COP'
+        });
+      }
+    });
+  }, { capture: true });
+
+  // FB: InitiateCheckout — Checkout button click
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[name="checkout"], a[href*="/checkout"], .cart__checkout-button');
+    if (!btn) return;
+
+    waitForFBQ(function () {
+      var totalEl = document.querySelector('.totals__total-value, .cart-drawer__footer .price, [data-cart-total]');
+      var total = totalEl ? parseFloat(totalEl.textContent.replace(/[^\d.]/g, '')) || 0 : 0;
+      fbq('track', 'InitiateCheckout', {
+        value: total,
+        currency: 'COP'
+      });
+    });
+  }, { capture: true });
+
 })();

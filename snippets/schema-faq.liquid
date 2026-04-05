@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {%- comment -%}
   FAQPage Structured Data Schema
   ==============================
@@ -42,3 +43,49 @@
 </script>
 {%- endif -%}
 
+=======
+{%- comment -%}
+  FAQPage Structured Data Schema
+  ==============================
+  Generates JSON-LD FAQPage schema for product FAQ sections.
+  This helps Google display FAQ rich results in search.
+  
+  Usage: {% render 'schema-faq', faq_items: section.blocks %}
+  Each block must have settings: question, answer
+
+  2026-04-03: Fixed trailing comma bug when last item is blank.
+{%- endcomment -%}
+
+{%- assign valid_faq_count = 0 -%}
+{%- for item in faq_items -%}
+  {%- if item.settings.question != blank and item.settings.answer != blank -%}
+    {%- assign valid_faq_count = valid_faq_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if valid_faq_count > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign faq_index = 0 -%}
+    {%- for item in faq_items -%}
+      {%- if item.settings.question != blank and item.settings.answer != blank -%}
+        {%- assign faq_index = faq_index | plus: 1 -%}
+        {
+          "@type": "Question",
+          "name": {{ item.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.settings.answer | strip_html | json }}
+          }
+        }{%- if faq_index < valid_faq_count -%},{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+>>>>>>> c338a4c (Actualizacion de productos)

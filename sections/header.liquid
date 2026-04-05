@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="{{ 'predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 {%- if section.settings.menu_type_desktop == 'mega' -%}
-  <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}"></noscript>
+  {%- comment -%} component-mega-menu.css removed — styles merged into base.css (2026-04-04) {%- endcomment -%}
 {%- endif -%}
 
 

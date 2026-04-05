@@ -236,9 +236,9 @@ async function main() {
   if (!CONFIG.ACCESS_TOKEN) {
     console.error('❌ ERROR: Set SHOPIFY_ACCESS_TOKEN environment variable');
     console.log('\nUsage:');
-    console.log('  $env:SHOPIFY_ACCESS_TOKEN="shpat_xxx"; node scripts/shopify-product-manager.mjs');
+    console.log('  $env:SHOPIFY_ACCESS_TOKEN="HIDDEN_SECRET_TOKEN"; node scripts/shopify-product-manager.mjs');
     console.log('\nOr create a .env file in the Techauraz directory with:');
-    console.log('  SHOPIFY_ACCESS_TOKEN=shpat_xxx\n');
+    console.log('  SHOPIFY_ACCESS_TOKEN=HIDDEN_SECRET_TOKEN\n');
     process.exit(1);
   }
 
