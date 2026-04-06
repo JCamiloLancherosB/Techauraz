@@ -208,7 +208,7 @@ class StickyCTABar {
 
   updateButtonState(isAvailable) {
     // Get button texts from data attributes
-    const buyButtonText = this.element.dataset.buyButtonText || 'Comprar ahora';
+    const buyButtonText = this.element.dataset.buyButtonText || 'LO QUIERO YA';
     const addButtonText = this.element.dataset.addButtonText || 'Añadir';
 
     // Update buy button
@@ -219,7 +219,7 @@ class StickyCTABar {
         this.buyButton.disabled = false;
         this.buyButton.removeAttribute('aria-disabled');
         if (buyTextSpan) buyTextSpan.textContent = buyButtonText;
-        this.buyButton.setAttribute('aria-label', 'Comprar ahora');
+        this.buyButton.setAttribute('aria-label', 'LO QUIERO YA');
       } else {
         this.buyButton.disabled = true;
         this.buyButton.setAttribute('aria-disabled', 'true');

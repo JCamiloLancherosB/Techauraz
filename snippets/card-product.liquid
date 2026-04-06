@@ -205,16 +205,7 @@
               </div>
             {%- endif -%}
             
-            {%- comment -%} Quick View Trigger Button - Appears on hover {%- endcomment -%}
-            <button 
-              type="button" 
-              class="quick-view-trigger no-js-hidden"
-              data-quick-view-trigger
-              data-product-handle="{{ card_product.handle }}"
-              aria-label="{{ 'products.product.quick_view' | t | default: 'Vista Rápida' }}: {{ card_product.title | escape }}"
-            >
-              {{ 'products.product.quick_view' | t | default: 'Vista Rápida' }}
-            </button>
+
             
             {%- comment -%} Compare Button - Adds product to comparison {%- endcomment -%}
             <div class="card__compare-wrapper no-js-hidden">

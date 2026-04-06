@@ -3,7 +3,7 @@
 <div 
   class="sticky-cta-bar{% if show_secondary_cta %} sticky-cta-bar--dual{% endif %}" 
   data-sticky-cta
-  data-buy-button-text="{{ section.settings.buy_button_text | default: 'Comprar ahora' }}"
+  data-buy-button-text="{{ section.settings.buy_button_text | default: 'LO QUIERO YA' }}"
   data-add-button-text="{{ section.settings.add_button_text | default: 'Añadir' }}"
   role="region"
   aria-label="Botones de compra rápida"
@@ -65,7 +65,7 @@
           {%- if product.selected_or_first_available_variant.available == false -%}
             Agotado
           {%- else -%}
-            {{ section.settings.buy_button_text | default: 'Comprar ahora' }}
+            {{ section.settings.buy_button_text | default: 'LO QUIERO YA' }}
           {%- endif -%}
         </span>
       </button>
@@ -125,7 +125,7 @@
       "id": "enable_secondary_cta",
       "label": "Mostrar botón secundario",
       "default": false,
-      "info": "Muestra un botón 'Añadir al carrito' junto al botón principal 'Comprar ahora'"
+      "info": "Muestra un botón 'Añadir al carrito' junto al botón principal 'LO QUIERO YA'"
     },
     {
       "type": "checkbox",
@@ -150,7 +150,7 @@
       "type": "text",
       "id": "buy_button_text",
       "label": "Texto botón comprar",
-      "default": "Comprar ahora"
+      "default": "LO QUIERO YA"
     },
     {
       "type": "text",
