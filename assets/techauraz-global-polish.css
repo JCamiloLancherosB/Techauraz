@@ -527,3 +527,148 @@ form[action="/cart/add"] .button--primary {
 sticky-header {
     margin-top: 0 !important;
 }
+
+/* =============================================================================
+   12. AESTHETIC REDESIGN & LAYOUT FIXES (PROMPT 10)
+   ============================================================================= */
+
+/* Task 2: Hide WhatsApp float icon on mobile when Sticky CTA is visible */
+body.sticky-cta-active .whatsapp-float,
+body.sticky-cta-active .whatsapp-button-float {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Task 3: Fix Header icons/menus misalignment */
+.header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+}
+.header__icons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex: 0 0 auto !important;
+}
+.header__icon, .header__heading-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.header__icon--cart {
+    position: relative !important;
+}
+.cart-count-bubble {
+    position: absolute !important;
+    top: 4px !important;
+    right: 4px !important;
+    transform: translate(50%, -50%) !important;
+    min-width: 1.5rem !important;
+    height: 1.5rem !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+/* Task 4: Fix Product card badges wrapping awkwardly */
+.card__fomo, .card__badge, .card__value-badge {
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: inline-block !important;
+}
+.card__fomo-badge, .card__badges {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+/* Task 5: Fix Category Section grid overlap */
+.section-category-navigation .category-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    padding: 1.5rem 1rem !important;
+    overflow: hidden !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+.section-category-navigation .category-card__content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+.section-category-navigation .category-card__image {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Task 6: PDP Pricing Layout (Gap between COP and price) */
+.price--large .price__container, .product__info-container .price {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: flex-start !important;
+    gap: 0.25rem !important;
+    margin: 0 !important;
+}
+.price-item--sale {
+    margin-right: 0 !important;
+}
+
+/* Task 7: PDP Scarcity Urgency Bar Fix */
+.urgency-element {
+    padding: 1rem !important;
+    border-radius: var(--ta-radius-md, 8px) !important;
+    border: 1px solid var(--ta-neutral-200, #e2e8f0) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.low-stock-indicator__bar {
+    width: 100% !important;
+    background: var(--ta-neutral-200, #e2e8f0) !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    display: block !important;
+}
+.low-stock-indicator__bar-fill {
+    height: 100% !important;
+    display: block !important;
+    border-radius: 4px !important;
+}
+.urgency-stock--low {
+    background: var(--ta-warning-light, #fffbeb) !important;
+    border-color: var(--ta-warning, #f59e0b) !important;
+}
+
+/* Task 8: Standardize Buttons & Trust Icons */
+.button, .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 48px !important;
+    padding: 0 1.5rem !important;
+    border-radius: var(--ta-radius-md, 8px) !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    transition: all 0.2s ease !important;
+    line-height: 1.2 !important;
+}
+.trust-icon, .icon-guarantee {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain !important;
+}
