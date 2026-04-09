@@ -59,26 +59,30 @@
 
 /* Cart bubble badge — positioned top-right of cart icon */
 .header__icon--cart {
-  position: relative;
-}
-
-.cart-count-bubble {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  transform: translate(40%, -40%);
-  min-width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  position: relative !important;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cart-count-bubble {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  transform: translate(30%, -30%) !important;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   font-size: 0.65rem;
   font-weight: 700;
   line-height: 1;
   padding: 0 4px;
   background: var(--ta-primary-500, #3b82f6);
   color: #fff;
+  z-index: 5;
 }
 
 /* Mobile menu — prevent icon overlap */
@@ -90,6 +94,24 @@
   .header__inline-menu {
     display: none;
   }
+}
+
+.header__icon--menu .icon-close {
+  display: none;
+}
+details[open] > summary .header__icon--menu .icon-close {
+  display: block;
+}
+details[open] > summary .header__icon--menu .icon-hamburger {
+  display: none;
+}
+
+.header__heading-logo {
+  min-width: 140px !important;
+}
+
+main.content-for-layout {
+  padding-top: calc(var(--header-height, 70px) + 20px) !important;
 }
 
 /* Remove gap between announcement bar and header */
@@ -372,6 +394,55 @@ form[action="/cart/add"] .button--primary {
   font-weight: 700;
   text-transform: uppercase;
 }
+
+/* =============================================================================
+   7.1 PDP DESCRIPTION MAX-WIDTH & READABILITY (Task 8)
+   ============================================================================= */
+.product__description,
+.product-description-full-width .rte,
+.product-description__content {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.6 !important;
+}
+
+/* =============================================================================
+   7.2 HERO BANNER TEXT CUTOFF FIX (Task 9)
+   ============================================================================= */
+.banner__heading,
+.hero__title {
+  font-size: clamp(2.4rem, 8vw, 4.8rem) !important;
+  line-height: 1.1 !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+}
+
+/* =============================================================================
+   7.5 PRODUCT CARDS (MOBILE OVERLAP FIX PR-01)
+   ============================================================================= */
+.card-wrapper .card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+
+@media screen and (max-width: 749px) {
+  .quick-add,
+  .quick-add-button,
+  .card__quick-add {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+    display: block !important;
+    z-index: 4;
+  }
+}
+
 
 /* =============================================================================
    8. STICKY MOBILE CTA & WHATSAPP FLOAT

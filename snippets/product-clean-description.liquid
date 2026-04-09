@@ -15,4 +15,27 @@
   | replace: '[SUPPLIER]', ''
   | replace: '[NOTA INTERNA]', ''
 -%}
+<div class="product-clean-description-text">
 {{ clean_description }}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.product-clean-description-text').forEach(function(container) {
+      // Look for the "Garantía TechAuraz" heading
+      const elements = Array.from(container.querySelectorAll('h1, h2, h3, h4, h5, h6, p, strong, b'));
+      const warrantyElement = elements.find(el => el.textContent.includes('Garantía TechAuraz'));
+      
+      if (warrantyElement) {
+        // Remove the heading and all subsequent siblings
+        let next = warrantyElement.nextSibling;
+        while (next) {
+          let toRemove = next;
+          next = next.nextSibling;
+          toRemove.remove();
+        }
+        warrantyElement.remove();
+      }
+    });
+  });
+</script>

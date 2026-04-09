@@ -51,7 +51,7 @@
                     {%- assign cat_handle = cat_link_str | split: '/collections/' | last | split: '?' | first -%}
                     {%- assign cat_collection = collections[cat_handle] -%}
                     {%- if cat_collection != blank and cat_collection.products_count > 0 -%}
-                      <p class="category-card__subtitle">{{ cat_collection.products_count }} productos</p>
+                      <p class="category-card__subtitle">{{ cat_collection.products_count }} {% if cat_collection.products_count == 1 %}producto{% else %}productos{% endif %}</p>
                     {%- endif -%}
                   {%- endif -%}
                 {%- endif -%}
