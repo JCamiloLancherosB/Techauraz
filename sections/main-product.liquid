@@ -124,6 +124,10 @@
                 <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
                 </div>
+                {%- comment -%} NEUROMARKETING: Simulación de compradores activos {%- endcomment -%}
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                  {% render 'product-buyer-activity' %}
+                </div>
 
               {%- when 'price' -%}
                 <div class="product__price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -134,6 +138,10 @@
                     price_class: 'price--large'
                   -%}
   {%- render "ta-booster-2026" -%}
+                  {%- comment -%} NEUROMARKETING: Urgencia de stock {%- endcomment -%}
+                  <div style="margin-top: 15px;">
+                    {%- render 'product-urgency-bar' -%}
+                  </div>
                   
                   {%- comment -%}
                     Urgency elements (stock counter + delivery estimate) are rendered via
@@ -509,6 +517,7 @@
                   -%}
                 </div>
                 {%- comment -%} Trust Badges below Add to Cart {%- endcomment -%}
+                {%- render 'pdp-conversion-badges' -%}
                 {%- render 'trust-badges-inline', layout: 'compact', show_heading: false, context: 'product' -%}
 
               {%- when 'rating' -%}
