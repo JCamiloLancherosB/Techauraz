@@ -18,6 +18,10 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: "C:/Users/Torre/Desktop/TechAuraBot/techaura_full_automatic-main/.env" });
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -454,9 +458,13 @@ async function additionalImprovements() {
   // Deploy any other modified files
   const additionalFiles = [
     'snippets/cart-drawer.liquid',
+    'snippets/product-urgency-bar.liquid',
+    'snippets/product-buyer-activity.liquid',
+    'snippets/pdp-conversion-badges.liquid',
     'sections/product-trust-strip.liquid',
     'sections/product-benefits.liquid',
     'sections/product-includes.liquid',
+
     'sections/product-features.liquid',
     'sections/product-faq.liquid',
     'sections/product-testimonials.liquid',
