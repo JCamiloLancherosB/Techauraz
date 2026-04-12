@@ -728,3 +728,49 @@ main {
   font-weight: 700;
   text-decoration: none;
 }
+
+/* =============================================================================
+   16. PRODUCT PAGE (PDP) PREMIUM GLOW & EFFECTS
+   ============================================================================= */
+.tech-pdp-purchase .product-form__submit {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+  border: none;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.tech-pdp-purchase .product-form__submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6) !important;
+}
+.tech-pdp-purchase .product-form__submit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  animation: shine-pulse 3.5s infinite;
+}
+@keyframes shine-pulse {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+.product-thumbnail {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.product-thumbnail:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6 !important;
+}
+.product-description__content {
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,0.03);
+}

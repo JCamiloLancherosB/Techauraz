@@ -205,8 +205,8 @@ main[role="main"] {
    ============================================================================= */
 :root {
   /* ---- Font Families ---- */
-  --ta-font-heading: var(--font-heading-family, system-ui, -apple-system, 'Segoe UI', sans-serif);
-  --ta-font-body: var(--font-body-family, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  --ta-font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ta-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ta-font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
 
   /* ---- Fluid Type Scale (clamp: mobile → desktop) ----

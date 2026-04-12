@@ -8,6 +8,65 @@
 <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}</noscript>
 
+<style>
+/* Glassmorphism Cart Drawer */
+.cart-drawer .drawer__inner {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.1);
+}
+.cart-drawer[data-theme="dark"] .drawer__inner {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cart-drawer .drawer__header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.cart-drawer .drawer__footer {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.cart-drawer .cart-item {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cart-drawer .cart-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+.cart-drawer .cart__checkout-button--cod {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+.cart-drawer .cart__checkout-button--cod::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  animation: shine-cta 3s infinite;
+}
+@keyframes shine-cta {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+</style>
+
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
