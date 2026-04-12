@@ -732,7 +732,7 @@ main {
 /* =============================================================================
    16. PRODUCT PAGE (PDP) PREMIUM GLOW & EFFECTS
    ============================================================================= */
-.tech-pdp-purchase .product-form__submit {
+.tech-pdp-purchase .p-buy-btn-primary {
   background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
   border: none;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
@@ -741,11 +741,11 @@ main {
   overflow: hidden;
   border-radius: 12px;
 }
-.tech-pdp-purchase .product-form__submit:hover {
+.tech-pdp-purchase .p-buy-btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6) !important;
 }
-.tech-pdp-purchase .product-form__submit::before {
+.tech-pdp-purchase .p-buy-btn-primary::before {
   content: '';
   position: absolute;
   top: 0; left: -100%;
@@ -753,6 +753,21 @@ main {
   background: linear-gradient(to right, transparent, rgba(255,255,255,0.35), transparent);
   transform: skewX(-20deg);
   animation: shine-pulse 3.5s infinite;
+}
+
+/* Secondary Button - Add to Cart */
+.tech-pdp-purchase .product-form__submit.button--secondary {
+  background: rgba(241, 245, 249, 0.8) !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: none !important;
+  border-radius: 12px;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+.tech-pdp-purchase .product-form__submit.button--secondary:hover {
+  background: #e2e8f0 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
 }
 @keyframes shine-pulse {
   0% { left: -100%; }
