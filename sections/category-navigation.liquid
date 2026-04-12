@@ -1,5 +1,135 @@
-<link rel="stylesheet" href="{{ 'section-category-navigation.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ 'section-category-navigation.css' | asset_url }}"></noscript>
+<style>
+/* Modern Glassmorphic Tech Grid for Categories */
+.category-nav-section {
+  padding: 60px 0;
+  background-color: #ffffff;
+}
+.category-nav-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.category-nav-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+.category-nav-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-bottom: 40px;
+}
+.category-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 32px 16px;
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(0,0,0,0.08);
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+.category-card__image {
+  margin-bottom: 20px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); /* soft emerald tint */
+  color: #10b981;
+  transition: transform 0.3s ease;
+}
+.category-card:hover .category-card__image {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+}
+.category-card__image svg {
+  width: 36px;
+  height: 36px;
+  fill: currentColor;
+}
+.category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.category-card__content {
+  text-align: center;
+  z-index: 2;
+}
+.category-card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+.category-card__name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+}
+.category-card__subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+/* Responsive overrides */
+@media (max-width: 768px) {
+  .category-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .category-nav-title {
+    font-size: 1.8rem;
+  }
+  .category-card {
+    min-height: 180px;
+    padding: 24px 12px;
+  }
+  .category-card__image {
+    width: 56px;
+    height: 56px;
+  }
+  .category-card__image svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+</style>
 
 <div class="category-nav-section">
   <div class="category-nav-wrapper">
@@ -15,29 +145,26 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'category' -%}
-            <a href="{{ block.settings.link }}" class="category-card{% if forloop.first %} category-card--featured{% endif %}" {{ block.shopify_attributes }}>
-              {%- if block.settings.image -%}
-                <div class="category-card__image">
-                  {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 50vw, 20vw' }}
-                </div>
-              {%- else -%}
-                <div class="category-card__image category-card__image--placeholder">
-                  {%- assign cat_icon = block.settings.icon | default: 'sparkles' -%}
-                  {%- if cat_icon == 'headphones' or cat_icon == 'watch' or cat_icon == 'usb' or cat_icon == 'smartphone' or cat_icon == 'lightbulb' or cat_icon == 'shipping' or cat_icon == 'payment' or cat_icon == 'guarantee' or cat_icon == 'lightning' or cat_icon == 'sparkles' or cat_icon == 'rocket' or cat_icon == 'diamond' or cat_icon == 'lock' or cat_icon == 'fire' or cat_icon == 'package' -%}
-                    {% render 'icon-system', icon: cat_icon, size: 48, color: 'var(--ta-accent, #00D4AA)' %}
-                  {%- else -%}
-                    <span class="category-card__emoji" aria-hidden="true">{{ cat_icon }}</span>
-                  {%- endif -%}
-                </div>
+            <a href="{{ block.settings.link }}" class="category-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.badge != blank -%}
+                <span class="category-card__badge">{{ block.settings.badge }}</span>
               {%- endif -%}
 
-              <div class="category-card__overlay"></div>
+              <div class="category-card__image">
+                {%- if block.settings.image -%}
+                  {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  {%- assign cat_icon = block.settings.icon | default: 'sparkles' -%}
+                  {%- if cat_icon == 'headphones' or cat_icon == 'watch' or cat_icon == 'usb' or cat_icon == 'smartphone' or cat_icon == 'lightbulb' or cat_icon == 'shipping' or cat_icon == 'payment' or cat_icon == 'guarantee' or cat_icon == 'lightning' or cat_icon == 'sparkles' or cat_icon == 'rocket' or cat_icon == 'diamond' or cat_icon == 'lock' or cat_icon == 'fire' or cat_icon == 'package' -%}
+                    {% render 'icon-system', icon: cat_icon %}
+                  {%- else -%}
+                    {%- comment -%} Forced standard generic SVG to avoid emoji completely {%- endcomment -%}
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
 
               <div class="category-card__content">
-                {%- if block.settings.badge != blank -%}
-                  <span class="category-card__badge">{{ block.settings.badge }}</span>
-                {%- endif -%}
-                
                 {%- if block.settings.title != blank -%}
                   <h3 class="category-card__name">{{ block.settings.title }}</h3>
                 {%- endif -%}
@@ -65,7 +192,7 @@
 
 {% schema %}
 {
-  "name": "Navegación de Categorías",
+  "name": "Categorías Premium",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -91,14 +218,14 @@
           "type": "image_picker",
           "id": "image",
           "label": "Imagen de categoría",
-          "info": "Usa una foto lifestyle del producto. Tamaño recomendado: 600x400px"
+          "info": "Usa una foto cuadrada de alto contraste (opcional)"
         },
         {
           "type": "text",
           "id": "icon",
-          "label": "Icono fallback (si no hay imagen)",
+          "label": "Icono de sistema (sin imagen)",
           "default": "headphones",
-          "info": "Nombre de icono SVG (headphones, watch, usb, smartphone, lightbulb) o emoji"
+          "info": "Ejemplo: headphones, watch, usb, smartphone, lightbulb"
         },
         {
           "type": "text",
@@ -110,18 +237,18 @@
           "type": "text",
           "id": "subtitle",
           "label": "Subtítulo (opcional)",
-          "info": "Ej: 'Desde $49.900'"
+          "info": "Ej: 'Novedades de Abril'"
         },
         {
           "type": "text",
           "id": "badge",
-          "label": "Badge (opcional)",
-          "info": "Ej: 'Trending 🔥' o 'Nuevo'. Déjalo vacío para no mostrar badge."
+          "label": "Badge Promocional (opcional)",
+          "info": "Ej: 'Trending' o 'Sale'"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Enlace"
+          "label": "Enlace a la Colección"
         }
       ]
     }
@@ -135,7 +262,7 @@
           "settings": {
             "icon": "headphones",
             "title": "Audífonos",
-            "badge": "Trending 🔥"
+            "badge": "Recomendado"
           }
         },
         {
@@ -157,13 +284,6 @@
           "settings": {
             "icon": "smartphone",
             "title": "Accesorios"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "icon": "lightbulb",
-            "title": "Iluminación"
           }
         }
       ]
