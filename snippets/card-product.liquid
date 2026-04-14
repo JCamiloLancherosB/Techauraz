@@ -147,14 +147,7 @@
                 endif
               endfor
               
-              comment
-                Auto-assign FOMO badge for on-sale products without explicit tags
-              endcomment
-              if has_hot_demand == false and has_low_stock == false
-                if card_product.compare_at_price and card_product.compare_at_price > card_product.price
-                  assign has_hot_demand = true
-                endif
-              endif
+
             -%}
 
             {%- comment -%} FOMO BADGE: Positioned top-left over the image {%- endcomment -%}
@@ -290,21 +283,11 @@
               </div>
             {%- endif -%}
             
-            {%- comment -%} Trust micro-line — conversion reinforcement {%- endcomment -%}
-            <div class="card__trust-line">
-              <span>Envío gratis</span>
-              <span class="trust-dot">·</span>
-              <span>Pago contraentrega</span>
-            </div>
+
           </div>
         </div>
         
-        {%- comment -%} CRO: "Ver todos los detalles" link {%- endcomment -%}
-        <div class="card__details-link">
-          <a href="{{ card_product.url }}" class="link link--text link--underline">
-            Ver todos los detalles →
-          </a>
-        </div>
+
         {%- if show_quick_add -%}
           <div class="quick-add no-js-hidden">
             {%- liquid
