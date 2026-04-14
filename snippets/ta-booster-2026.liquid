@@ -1,27 +1,27 @@
 {%- comment -%}
-  TechAuraz 2026 — Conversion Boosters (Urgency & Trust)
-  - Blinking Free Shipping Badge
-  - Dynamic Stock Scarcity
+  TechAuraz 2026 — Conversion Trust Strip
+  - Shipping confirmation
+  - Real stock availability (from variant inventory)
 {%- endcomment -%}
 
 <style>
-  .ta-2026-booster { margin: 1.5rem 0; padding: 1.2rem; background: #f8fcf8; border: 1px solid #c3e6cb; border-radius: var(--radius-md, 8px); font-family: var(--font-body-family); }
-  .ta-booster-shipping { display: flex; align-items: center; gap: 8px; font-size: 1.4rem; font-weight: 700; color: #155724; margin-bottom: 8px; }
-  .ta-blink-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #28a745; animation: ta-pulse 1.5s infinite; }
-  @keyframes ta-pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); } 100% { transform: scale(1); } }
-  .ta-booster-stock { font-size: 1.3rem; color: #856404; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
-  .ta-stock-bar { height: 4px; background: #ffeeba; border-radius: 2px; width: 100%; overflow: hidden; }
-  .ta-stock-fill { height: 100%; background: #ffc107; width: 15%; }
+  .ta-2026-booster { margin: 1.2rem 0; padding: 1rem 1.2rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-md, 8px); font-family: var(--font-body-family); }
+  .ta-booster-shipping { display: flex; align-items: center; gap: 8px; font-size: 1.3rem; font-weight: 600; color: #166534; }
+  .ta-blink-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #22c55e; animation: ta-pulse 2s infinite; flex-shrink: 0; }
+  @keyframes ta-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .ta-booster-stock { font-size: 1.15rem; color: #6b7280; margin-top: 6px; padding-top: 6px; border-top: 1px solid #dcfce7; }
+  .ta-stock-low { color: #b45309; font-weight: 600; }
 </style>
 
 <div class="ta-2026-booster">
   <div class="ta-booster-shipping">
     <div class="ta-blink-dot"></div>
-    <span>¡Envío GRATIS y Pago Contra Entrega Activos!</span>
+    <span>Envío gratis y pago contra entrega activos</span>
   </div>
-  <div class="ta-booster-stock">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.657 18.657A8 8 0 0 1 6.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0 1 20 13a7.975 7.975 0 0 1-2.343 5.657z"></path><path d="M9.824 14.176A2.974 2.974 0 0 1 12 13a2.974 2.974 0 0 1 2.176 1.176"></path></svg>
-    Alta Demanda: ¡Solo quedan <strong style="color:#d39e00;">{% cycle 3, 5, 2, 4, 3 %} unidades</strong> promocionales!
-  </div>
-  <div class="ta-stock-bar"><div class="ta-stock-fill"></div></div>
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- if current_variant.inventory_management == 'shopify' and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 10 -%}
+    <div class="ta-booster-stock">
+      📦 Quedan <strong class="ta-stock-low">{{ current_variant.inventory_quantity }} unidades</strong> disponibles
+    </div>
+  {%- endif -%}
 </div>
