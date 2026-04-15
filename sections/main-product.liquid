@@ -724,6 +724,12 @@
     </div>
 
     {%- comment -%} Full-width product description below the gallery {%- endcomment -%}
+    {%- comment -%}
+      REMOVED (2026-04-14): Duplicate — description already rendered in the buy-box
+      panel via the 'description' block and warranty info via product-usage-warranty section.
+      Having the description 3x on the page degraded credibility.
+    {%- endcomment -%}
+    {%- comment -%}
     {%- if product.description != blank -%}
       <div class="product-description-full-width product-description-full-width--compact">
         <div class="product-description-container">
@@ -734,6 +740,7 @@
         </div>
       </div>
     {%- endif -%}
+    {%- endcomment -%}
 
     {% render 'product-media-modal', variant_images: variant_images %}
 
