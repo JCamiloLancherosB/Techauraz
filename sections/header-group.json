@@ -17,28 +17,28 @@
         "announcement_flash": {
           "type": "announcement",
           "settings": {
-            "text": "ABRIL TECH: Hasta -40% en audífonos y smartwatches 🔥",
+            "text": "ABRIL TECH · Hasta -40% en audífonos y relojes 🔥",
             "link": "/collections/all"
           }
         },
         "announcement_cod": {
           "type": "announcement",
           "settings": {
-            "text": "PAGO CONTRAENTREGA: Recibe primero, paga después",
+            "text": "Paga al recibir · Pago contra entrega en todo Colombia",
             "link": ""
           }
         },
         "announcement_shipping": {
           "type": "announcement",
           "settings": {
-            "text": "ENVÍO 100% GRATIS a toda Colombia — Sin monto mínimo ✈️",
+            "text": "Envío 100% Gratis a toda Colombia ✈️",
             "link": ""
           }
         },
         "announcement_guarantee": {
           "type": "announcement",
           "settings": {
-            "text": "Garantía 30 días: No te gusta? Te devolvemos el 100%",
+            "text": "Garantía 30 días · Devolución sin preguntas",
             "link": ""
           }
         },
@@ -54,8 +54,7 @@
         "announcement_flash",
         "announcement_cod",
         "announcement_shipping",
-        "announcement_guarantee",
-        "announcement_proof"
+        "announcement_guarantee"
       ],
       "settings": {
         "sticky_promo": true,
@@ -93,10 +92,15 @@
         "padding_top": 12,
         "padding_bottom": 12
       }
+    },
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "cart-drawer"
   ]
 }
