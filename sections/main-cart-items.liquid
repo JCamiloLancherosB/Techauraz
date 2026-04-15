@@ -4,6 +4,13 @@
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
+<style>
+  cart-items:not(.is-empty) .cart__warnings { display: none; }
+  cart-items.is-empty .cart__contents { display: none; }
+  cart-items.is-empty .cart__login-title,
+  cart-items.is-empty .cart__login-paragraph { text-align: center; }
+</style>
+
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">

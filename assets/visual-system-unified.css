@@ -1,1 +1,138 @@
-/* }
+/* ================================================================
+   TechAuraz Visual System — Unified CSS
+   Benefits conversion & utility classes for the design system
+   ================================================================ */
+
+/* ─────────────────────────────────────────
+   BENEFITS CONVERSION STRIP (Homepage)
+   Horizontal 4-column grid with SVG icons
+   ───────────────────────────────────────── */
+
+.ta-conv-section-spacing {
+  padding: 48px 0 40px;
+}
+
+.ta-conv-section-heading {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+
+.ta-conv-benefits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ta-conv-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ta-conv-benefit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+.ta-conv-benefit__icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  margin-bottom: 14px;
+  transition: background 0.3s ease;
+}
+
+.ta-conv-benefit:hover .ta-conv-benefit__icon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.ta-conv-benefit__icon .icon-system {
+  width: 26px;
+  height: 26px;
+  color: #10b981;
+  transition: color 0.3s ease;
+}
+
+.ta-conv-benefit:hover .ta-conv-benefit__icon .icon-system {
+  color: #ffffff;
+}
+
+/* Emoji fallback — style emojis that haven't been converted */
+.ta-conv-benefit__icon:not(:has(.icon-system)) {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.ta-conv-benefit__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.ta-conv-benefit__description {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 240px;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE: Benefits
+   ───────────────────────────────────────── */
+
+@media (max-width: 990px) {
+  .ta-conv-benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .ta-conv-section-spacing {
+    padding: 32px 16px 28px;
+  }
+  .ta-conv-section-heading {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ta-conv-benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .ta-conv-benefit {
+    padding: 18px 10px;
+  }
+  .ta-conv-benefit__icon {
+    width: 44px;
+    height: 44px;
+  }
+  .ta-conv-benefit__icon .icon-system {
+    width: 22px;
+    height: 22px;
+  }
+  .ta-conv-benefit__title {
+    font-size: 0.85rem;
+  }
+  .ta-conv-benefit__description {
+    font-size: 0.75rem;
+  }
+}

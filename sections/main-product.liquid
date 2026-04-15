@@ -124,10 +124,6 @@
                 <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
                 </div>
-                {%- comment -%} NEUROMARKETING: Simulación de compradores activos {%- endcomment -%}
-                <div style="margin-top: 10px; margin-bottom: 10px;">
-                  {% render 'product-buyer-activity' %}
-                </div>
 
               {%- when 'price' -%}
                 <div class="product__price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -138,10 +134,7 @@
                     price_class: 'price--large'
                   -%}
   {%- render "ta-booster-2026" -%}
-                  {%- comment -%} NEUROMARKETING: Urgencia de stock {%- endcomment -%}
-                  <div style="margin-top: 15px;">
-                    {%- render 'product-urgency-bar' -%}
-                  </div>
+
                   
                   {%- comment -%}
                     Urgency elements (stock counter + delivery estimate) are rendered via
@@ -731,6 +724,12 @@
     </div>
 
     {%- comment -%} Full-width product description below the gallery {%- endcomment -%}
+    {%- comment -%}
+      REMOVED (2026-04-14): Duplicate — description already rendered in the buy-box
+      panel via the 'description' block and warranty info via product-usage-warranty section.
+      Having the description 3x on the page degraded credibility.
+    {%- endcomment -%}
+    {%- comment -%}
     {%- if product.description != blank -%}
       <div class="product-description-full-width product-description-full-width--compact">
         <div class="product-description-container">
@@ -741,6 +740,7 @@
         </div>
       </div>
     {%- endif -%}
+    {%- endcomment -%}
 
     {% render 'product-media-modal', variant_images: variant_images %}
 
