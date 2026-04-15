@@ -254,8 +254,8 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 40;
-  /* Below sticky bars (450-460) but above page content */
+  z-index: 90;
+  /* Above content but below modals/drawers */
   animation: fadeInUp 0.6s ease-out;
 }
 
@@ -394,7 +394,7 @@
 
 @media (max-width: 768px) {
   .whatsapp-float {
-    bottom: 15px;
+    bottom: 85px; /* Evita superposición con el sticky CTA */
     right: 15px;
   }
 
@@ -428,13 +428,16 @@
 }
 
 /* Hide WhatsApp float when drawers or modals are open to prevent overlapping content */
+body:has(cart-drawer.is-active) .whatsapp-float,
+body:has(cart-drawer.active) .whatsapp-float,
 body:has(cart-drawer .drawer.active) .whatsapp-float,
 body:has(cart-drawer .drawer[open]) .whatsapp-float,
 body:has(.menu-drawer[open]) .whatsapp-float,
 body:has(.modal[open]) .whatsapp-float {
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 /* =============================================================================

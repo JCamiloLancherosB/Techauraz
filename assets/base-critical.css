@@ -172,7 +172,8 @@ a {
 .list-menu--inline {
     display: inline-flex;
     flex-wrap: wrap;
-    align-items: center
+    align-items: center;
+    gap: 2rem;
 }
 
 img {
