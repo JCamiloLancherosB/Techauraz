@@ -94,7 +94,12 @@
       }
     },
     "cart-drawer": {
+<<<<<<< HEAD
       "type": "cart-drawer"
+=======
+      "type": "cart-drawer",
+      "settings": {}
+>>>>>>> 57e4ba0191e4754b1148139990a93ad352d07357
     }
   },
   "order": [

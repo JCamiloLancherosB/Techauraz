@@ -1,92 +1,58 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "slideshow_iqMhTA": {
-      "type": "slideshow",
+    "image_banner_hero": {
+      "type": "image-banner",
       "blocks": {
-        "slide_AiKY4R": {
-          "type": "slide",
+        "heading_1": {
+          "type": "heading",
           "settings": {
-            "image": "shopify://shop_images/hero_slide_1_1773242158470.png",
-            "heading": "Tecnología Premium para tu Estilo de Vida",
-            "heading_size": "h0",
-            "subheading": "Power banks, hubs USB y accesorios tech con garantía de 30 días",
-            "button_label": "Ver catálogo",
-            "link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "button_label_2": "Contactar",
-            "link_2": "shopify://pages/contacto-techaura",
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 40,
-            "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-            "text_alignment_mobile": "center"
+            "heading": "Tecnología de Alta Gama a un Clic.",
+            "heading_size": "h0"
           }
         },
-        "slide_zPiaUe": {
-          "type": "slide",
+        "text_1": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/hero_slide_2_1773242172837.png",
-            "heading": "Memorias USB 100% Personalizadas",
-            "heading_size": "h0",
-            "subheading": "Diseña tu USB con el contenido que desees",
-            "button_label": "Personalizar ahora",
-            "link": "shopify://pages/usb-al-gusto-personalizada",
-            "button_style_secondary": false,
-            "button_label_2": "Ver catálogo",
-            "link_2": "shopify://collections/all",
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 40,
-            "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-            "text_alignment_mobile": "center"
+            "text": "⭐ 4.9/5 en cientos de entregas en toda Colombia",
+            "text_style": "subtitle"
           }
         },
-        "slide_medrLN": {
-          "type": "slide",
+        "text_2": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/hero_slide_3_1773242189235.jpg",
-            "heading": "Envío Gratis a Todo Colombia",
-            "heading_size": "h0",
-            "subheading": "Pago contra entrega · Garantía 30 días · Soporte WhatsApp",
-            "button_label": "Comprar Ahora",
-            "link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "button_label_2": "WhatsApp",
-            "link_2": "https://wa.me/573008602789",
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 40,
-            "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-            "text_alignment_mobile": "center"
+            "text": "Equipa tu día a día con periféricos confiables y unidades USB cargadas del mejor entretenimiento. Envío a nivel nacional. Pagas al recibir.",
+            "text_style": "body"
+          }
+        },
+        "buttons_1": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Explorar Best Sellers",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "Armar mi USB ahora",
+            "button_link_2": "shopify://pages/usb-al-gusto-personalizada",
+            "button_style_secondary_2": true
           }
         }
       },
       "block_order": [
-        "slide_AiKY4R",
-        "slide_zPiaUe",
-        "slide_medrLN"
+        "heading_1",
+        "text_1",
+        "text_2",
+        "buttons_1"
       ],
       "settings": {
-        "layout": "full_bleed",
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "change_slides_speed": 9,
-        "image_behavior": "none",
-        "show_text_below": false,
-        "accessibility_info": "TechAuraz - Tecnología premium para Colombia"
+        "image": "shopify://shop_images/hero_slide_1_1773242158470.png",
+        "image_overlay_opacity": 40,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
       }
     },
     "benefits_conversion_home": {
@@ -96,8 +62,8 @@
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Envío Gratis a Todo Colombia",
-            "description": "Sin costos ocultos. El precio que ves es el precio final, envío incluido."
+            "title": "Envío Gratis Nacional",
+            "description": "Sin costos ocultos. El precio que ves es el precio final."
           }
         },
         "benefit_payment": {
@@ -105,23 +71,23 @@
           "settings": {
             "icon": "payment",
             "title": "Paga al Recibir",
-            "description": "Pago contra entrega disponible. Inspecciona tu pedido antes de pagar."
+            "description": "Pago contra entrega disponible. Mayor tranquilidad."
           }
         },
         "benefit_guarantee": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Garantía 30 Días",
-            "description": "¿No quedaste satisfecho? Devuélvelo sin preguntas ni complicaciones."
+            "title": "Garantía TechAuraz",
+            "description": "¿No satisfecho? Cambios fáciles y sin líos."
           }
         },
         "benefit_delivery": {
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Entrega en 2-5 Días",
-            "description": "Tu pedido se procesa el mismo día. Recíbelo rápido donde estés."
+            "title": "Envíos Seguros (2-5 Días)",
+            "description": "Tu pedido procesado y enviado con velocidad."
           }
         }
       },
@@ -142,8 +108,8 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audífonos",
-            "subtitle": "Inmersión total",
+            "title": "Audio & Audífonos",
+            "subtitle": "Sonido inmersivo",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
         },
@@ -151,8 +117,8 @@
           "type": "category",
           "settings": {
             "icon": "watch",
-            "title": "Relojes Inteligentes",
-            "subtitle": "Tu asistente tech",
+            "title": "Smartwatches",
+            "subtitle": "Tu vida en tu muñeca",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
         },
@@ -160,8 +126,8 @@
           "type": "category",
           "settings": {
             "icon": "usb",
-            "title": "USB Personalizada",
-            "subtitle": "Diseña la tuya",
+            "title": "USBs a Medida",
+            "subtitle": "Series, música y más",
             "link": "shopify://pages/usb-al-gusto-personalizada"
           }
         },
@@ -169,8 +135,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga y Energía",
-            "subtitle": "Nunca sin batería",
+            "title": "Carga e Inversores",
+            "subtitle": "Nunca te quedes en 0%",
             "link": "shopify://collections/carga-energia-techaura"
           }
         },
@@ -178,8 +144,8 @@
           "type": "category",
           "settings": {
             "icon": "package",
-            "title": "Conectividad",
-            "subtitle": "Hubs, cables y más",
+            "title": "Cables & Hubs",
+            "subtitle": "Expande tu setup",
             "link": "shopify://collections/conectividad-hubs-y-adaptadores-techaura"
           }
         },
@@ -187,8 +153,8 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Iluminación",
-            "subtitle": "Ambienta tu espacio",
+            "title": "Luces & Gaming",
+            "subtitle": "Arma el ambiente ideal",
             "link": "shopify://collections/iluminacion"
           }
         }
@@ -202,19 +168,19 @@
         "category_6"
       ],
       "settings": {
-        "heading": "Encuentra lo que buscas"
+        "heading": "Explora Nuestras Categorías Destacadas"
       }
     },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
       "settings": {
-        "title": "<strong>Selección TechAuraz</strong>",
+        "title": "<strong>Los Verdaderos Best Sellers</strong>",
         "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "conectividad-hubs-y-adaptadores-techaura",
+        "description": "🚚 Envío gratis hoy | Pago Seguro",
+        "show_description": true,
+        "description_style": "subtitle",
+        "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
         "full_width": true,
@@ -237,12 +203,12 @@
     "featured_collection_bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "title": "<strong>Los Favoritos del Mes</strong>",
+        "title": "<strong>Accesorios Imprescindibles</strong>",
         "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "carga-energia-techaura",
+        "description": "🚚 Envío gratis hoy | Pago Seguro",
+        "show_description": true,
+        "description_style": "subtitle",
+        "collection": "conectividad-hubs-y-adaptadores-techaura",
         "products_to_show": 8,
         "columns_desktop": 4,
         "full_width": true,
@@ -319,8 +285,8 @@
         "testimonial_carousel_5"
       ],
       "settings": {
-        "title": "Miles de colombianos confían en TechAuraz",
-        "subtitle": "Opiniones reales de clientes en todo el país",
+        "title": "La gente prefiere nuestra garantía TechAuraz",
+        "subtitle": "Opiniones reales de clientes en todo Colombia",
         "heading_size": "h1",
         "background_color": "#f8fafc",
         "padding_top": 60,
@@ -329,7 +295,7 @@
     }
   },
   "order": [
-    "slideshow_iqMhTA",
+    "image_banner_hero",
     "benefits_conversion_home",
     "category_navigation",
     "featured_collection_9GzLFt",
