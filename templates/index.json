@@ -6,7 +6,7 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "heading": "Tecnología de Alta Gama a un Clic.",
+            "heading": "Equipa tu Setup. Domina tu Día.",
             "heading_size": "h0"
           }
         },
@@ -20,17 +20,17 @@
         "text_2": {
           "type": "text",
           "settings": {
-            "text": "Equipa tu día a día con periféricos confiables y unidades USB cargadas del mejor entretenimiento. Envío a nivel nacional. Pagas al recibir.",
+            "text": "Periféricos premium y unidades USB cargadas con tu entretenimiento favorito. Compra seguro: Pagas al recibir en tu casa.",
             "text_style": "body"
           }
         },
         "buttons_1": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Explorar Best Sellers",
+            "button_label_1": "Ver Productos Destacados",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
-            "button_label_2": "Armar mi USB ahora",
+            "button_label_2": "Quiero mi USB Personalizada",
             "button_link_2": "shopify://pages/usb-al-gusto-personalizada",
             "button_style_secondary_2": true
           }
@@ -62,7 +62,7 @@
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Envío Gratis Nacional",
+            "title": "Envío Gratis en Colombia",
             "description": "Sin costos ocultos. El precio que ves es el precio final."
           }
         },
@@ -70,15 +70,15 @@
           "type": "benefit",
           "settings": {
             "icon": "payment",
-            "title": "Paga al Recibir",
-            "description": "Pago contra entrega disponible. Mayor tranquilidad."
+            "title": "Pago Contra Entrega",
+            "description": "Paga en efectivo al recibir tu pedido en casa."
           }
         },
         "benefit_guarantee": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Garantía TechAuraz",
+            "title": "Garantía Extendida",
             "description": "¿No satisfecho? Cambios fáciles y sin líos."
           }
         },
@@ -108,7 +108,7 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audio & Audífonos",
+            "title": "Audio Premium",
             "subtitle": "Sonido inmersivo",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
@@ -118,7 +118,7 @@
           "settings": {
             "icon": "watch",
             "title": "Smartwatches",
-            "subtitle": "Tu vida en tu muñeca",
+            "subtitle": "Control en tu muñeca",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
         },
@@ -127,7 +127,7 @@
           "settings": {
             "icon": "usb",
             "title": "USBs a Medida",
-            "subtitle": "Series, música y más",
+            "subtitle": "Entretenimiento al instante",
             "link": "shopify://pages/usb-al-gusto-personalizada"
           }
         },
@@ -135,8 +135,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga e Inversores",
-            "subtitle": "Nunca te quedes en 0%",
+            "title": "Carga Rápida",
+            "subtitle": "Baterías y cargadores",
             "link": "shopify://collections/carga-energia-techaura"
           }
         },
@@ -144,8 +144,8 @@
           "type": "category",
           "settings": {
             "icon": "package",
-            "title": "Cables & Hubs",
-            "subtitle": "Expande tu setup",
+            "title": "Hubs & Cables",
+            "subtitle": "Conectividad total",
             "link": "shopify://collections/conectividad-hubs-y-adaptadores-techaura"
           }
         },
@@ -153,8 +153,8 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Luces & Gaming",
-            "subtitle": "Arma el ambiente ideal",
+            "title": "Setup Gamer",
+            "subtitle": "Iluminación y periféricos",
             "link": "shopify://collections/iluminacion"
           }
         }
@@ -175,7 +175,7 @@
       "type": "featured-collection",
       "custom_css": [],
       "settings": {
-        "title": "<strong>Los Verdaderos Best Sellers</strong>",
+        "title": "<strong>Periféricos Exclusivos</strong>",
         "heading_size": "h2",
         "description": "🚚 Envío gratis hoy | Pago Seguro",
         "show_description": true,
@@ -203,7 +203,7 @@
     "featured_collection_bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "title": "<strong>Accesorios Imprescindibles</strong>",
+        "title": "<strong>Hubs & Conectividad</strong>",
         "heading_size": "h2",
         "description": "🚚 Envío gratis hoy | Pago Seguro",
         "show_description": true,
