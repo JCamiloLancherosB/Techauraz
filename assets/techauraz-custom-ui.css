@@ -1141,7 +1141,14 @@ select:focus {
   min-height: var(--ta-touch-comfortable, 48px);
 }
 
-/* View all buttons - consistent CTA style */
+/* View all buttons - centered + consistent CTA style */
+.collection__view-all {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
 .collection__view-all a.button {
   background: var(--ta-gradient-cta, linear-gradient(135deg, #0ea5e9, #22c55e));
   color: var(--ta-text-inverse, #ffffff);
@@ -1203,5 +1210,58 @@ select:focus {
 @media screen and (min-width: 990px) {
   .product-grid.grid--4-col-desktop>.grid__item:last-child:nth-child(4n + 1) {
     grid-column: 2 / 3;
+  }
+}
+
+/* =============================================================================
+   SPRINT 3: Section Spacing Polish — Reduce vertical dead space
+   ============================================================================= */
+
+/* Hero → Trust Bar: remove the gap Dawn adds after image-banner */
+.section-image_banner_hero {
+  margin-bottom: 0 !important;
+}
+
+/* Trust Bar → Categories: tighten section transition */
+.section--trust-bar {
+  margin-bottom: 0 !important;
+}
+
+/* Collection sections: tighten vertical rhythm */
+.section-template--index .collection-section,
+section[id^="shopify-section-featured_collection"] {
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+/* Newsletter → Testimonials: eliminate excessive transition gap */
+section[id*="newsletter_cta"] {
+  margin-bottom: 0 !important;
+}
+
+section[id*="testimonials"] {
+  margin-top: 0 !important;
+}
+
+/* Footer: reduce top gap after testimonials */
+.section-group-footer-group {
+  margin-top: 0 !important;
+}
+
+/* Mobile: Even tighter spacing */
+@media (max-width: 749px) {
+  .section-image_banner_hero,
+  .section--trust-bar,
+  section[id*="newsletter_cta"],
+  section[id*="testimonials"] {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Reduce collection section padding on mobile */
+  .section-template--index .collection-section,
+  section[id^="shopify-section-featured_collection"] {
+    padding-top: 24px;
+    padding-bottom: 16px;
   }
 }

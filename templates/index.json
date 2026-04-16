@@ -145,8 +145,8 @@
           "type": "category",
           "settings": {
             "icon": "package",
-            "title": "Hubs & Cables",
-            "subtitle": "Conectividad total",
+            "title": "Conectividad",
+            "subtitle": "Hubs, cables y más",
             "link": "shopify://collections/conectividad-hubs-y-adaptadores-techaura"
           }
         },
@@ -290,8 +290,8 @@
         "subtitle": "Opiniones reales de compradores en toda Colombia",
         "heading_size": "h1",
         "background_color": "#f8fafc",
-        "padding_top": 60,
-        "padding_bottom": 60
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "newsletter_cta_home": {
