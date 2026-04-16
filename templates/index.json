@@ -45,7 +45,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/hero_slide_1_1773242158470.png",
-        "image_overlay_opacity": 50,
+        "image_overlay_opacity": 60,
         "image_height": "medium",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
@@ -288,7 +288,7 @@
       "settings": {
         "title": "Lo que dicen nuestros clientes",
         "subtitle": "Opiniones reales de compradores en toda Colombia",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "background_color": "#f8fafc",
         "padding_top": 36,
         "padding_bottom": 36

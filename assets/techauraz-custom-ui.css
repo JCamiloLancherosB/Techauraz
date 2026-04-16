@@ -1248,7 +1248,7 @@ section[id*="testimonials"] {
   margin-top: 0 !important;
 }
 
-/* Mobile: Even tighter spacing */
+/* Mobile: Even tighter spacing + Sprint 4 comprehensive mobile polish */
 @media (max-width: 749px) {
   .section-image_banner_hero,
   .section--trust-bar,
@@ -1263,5 +1263,76 @@ section[id*="testimonials"] {
   section[id^="shopify-section-featured_collection"] {
     padding-top: 24px;
     padding-bottom: 16px;
+  }
+
+  /* S4-1: Product card title truncation — max 2 lines on mobile */
+  .card__heading,
+  .card__heading a,
+  .full-unstyled-link {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  /* S4-2: Touch target minimum 44px for all interactive elements */
+  .slider-button,
+  .slider-button--prev,
+  .slider-button--next {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* S4-3: Hero subtitle enhanced contrast */
+  .banner__text .banner__text p,
+  .banner__text,
+  .banner .banner__box {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  /* S4-4: Collection title sizing for mobile */
+  .collection .title-wrapper-with-link h2,
+  .collection .title-wrapper h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  /* S4-5: Footer column stacking optimized for mobile */
+  .footer__content-top {
+    gap: 24px;
+  }
+  
+  .footer-block {
+    padding: 0;
+  }
+
+  /* S4-6: Newsletter inner padding on mobile */
+  .ta-newsletter__inner {
+    padding: 0 16px;
+  }
+  
+  /* S4-7: WhatsApp button clearance from footer content */
+  .footer {
+    padding-bottom: 80px;
+  }
+}
+
+/* Tablet-specific polish (750-989px) */
+@media (min-width: 750px) and (max-width: 989px) {
+  /* Ensure 2-col product grid on tablet */
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Trust bar horizontal on tablet */
+  .ta-trust-bar__grid {
+    display: flex;
+    min-height: 48px;
   }
 }
