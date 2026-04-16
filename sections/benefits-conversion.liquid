@@ -1,55 +1,67 @@
 {% comment %}
-  Conversion-Focused Benefits Strip
+  Trust Bar — Compact Benefits Strip
   
-  Displays 4 benefit cards in a horizontal grid with icons and outcome-driven copy.
-  Styled by visual-system-unified.css
+  Replaces the old oversized 4-card benefits section.
+  Shows 4 trust signals in a single horizontal row (desktop)
+  or a compact 2x2 grid (mobile) — total height: 56-100px.
+  
+  Styled by visual-system-unified.css (.ta-trust-bar-*)
 {% endcomment %}
 
 {%- liquid
   assign heading = section.settings.heading
 -%}
 
-<div class="page-width ta-conv-section-spacing">
-  {%- if heading != blank -%}
-    <h2 class="ta-conv-section-heading">{{ heading }}</h2>
-  {%- endif -%}
-  
-  <div class="ta-conv-benefits">
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'benefit' -%}
-          <div class="ta-conv-benefit" {{ block.shopify_attributes }}>
-            <div class="ta-conv-benefit__icon">
-              {%- assign icon_val = block.settings.icon | default: 'sparkles' -%}
-              {%- if icon_val == 'shipping' or icon_val == 'payment' or icon_val == 'guarantee' or icon_val == 'lightning' or icon_val == 'sparkles' or icon_val == 'rocket' or icon_val == 'diamond' or icon_val == 'lock' or icon_val == 'fire' or icon_val == 'package' -%}
-                {% render 'icon-system', icon: icon_val, size: 32, color: 'var(--ta-accent, #00D4AA)' %}
-              {%- else -%}
-                {{ icon_val }}
-              {%- endif -%}
+<section class="ta-trust-bar" aria-label="Beneficios de compra">
+  <div class="page-width">
+
+    {%- if heading != blank -%}
+      <h2 class="visually-hidden">{{ heading }}</h2>
+    {%- endif -%}
+
+    <div class="ta-trust-bar__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'benefit' -%}
+            <div class="ta-trust-bar__item" {{ block.shopify_attributes }}>
+              <span class="ta-trust-bar__icon" aria-hidden="true">
+                {%- assign icon_val = block.settings.icon | default: 'sparkles' -%}
+                {%- if icon_val == 'shipping' or icon_val == 'payment' or icon_val == 'guarantee' or icon_val == 'lightning' or icon_val == 'sparkles' or icon_val == 'rocket' or icon_val == 'diamond' or icon_val == 'lock' or icon_val == 'fire' or icon_val == 'package' -%}
+                  {% render 'icon-system', icon: icon_val, size: 20, color: 'currentColor' %}
+                {%- else -%}
+                  {{ icon_val }}
+                {%- endif -%}
+              </span>
+              <span class="ta-trust-bar__text">
+                <strong class="ta-trust-bar__title">{{ block.settings.title }}</strong>
+                {%- if block.settings.description != blank -%}
+                  <span class="ta-trust-bar__desc">{{ block.settings.description }}</span>
+                {%- endif -%}
+              </span>
             </div>
-            <h3 class="ta-conv-benefit__title">{{ block.settings.title }}</h3>
-            <p class="ta-conv-benefit__description">{{ block.settings.description }}</p>
-          </div>
-      {%- endcase -%}
-    {%- endfor -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Beneficios de Compra",
-  "class": "section",
+  "name": "Barra de Confianza",
+  "class": "section section--trust-bar",
   "tag": "section",
   "settings": [
     {
       "type": "paragraph",
-      "content": "Muestra 4 beneficios en tarjetas horizontales con iconos y texto persuasivo."
+      "content": "Barra compacta de beneficios. Muestra 4 señales de confianza en línea horizontal."
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Título de la sección",
-      "default": "¿Por qué comprar con nosotros?"
+      "label": "Título (accesibilidad)",
+      "default": "¿Por qué comprar con nosotros?",
+      "info": "Se oculta visualmente pero los lectores de pantalla lo anuncian."
     }
   ],
   "blocks": [
@@ -60,59 +72,59 @@
         {
           "type": "text",
           "id": "icon",
-          "label": "Icono (emoji)",
-          "default": "sparkles",
-          "info": "Usa un nombre de icono SVG (shipping, payment, guarantee, lightning, sparkles, lock, fire, check-circle, award, diamond) o cualquier emoji"
+          "label": "Icono SVG",
+          "default": "shipping",
+          "info": "Nombres válidos: shipping, payment, guarantee, lightning, sparkles, lock, fire, package, rocket, diamond"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Título",
-          "default": "Beneficio importante"
+          "label": "Título corto",
+          "default": "Envío Gratis"
         },
         {
           "type": "textarea",
           "id": "description",
-          "label": "Descripción",
-          "default": "Describe el resultado positivo que obtiene el cliente con este beneficio."
+          "label": "Descripción (tooltip en desktop)",
+          "default": "A toda Colombia, sin costos ocultos."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Beneficios de Compra",
+      "name": "Barra de Confianza",
       "blocks": [
         {
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Recibe gratis en tu casa",
-            "description": "Sin costos ocultos ni sorpresas. El precio que ves es el que pagas, envío incluido a toda Colombia."
+            "title": "Envío Gratis",
+            "description": "A toda Colombia, sin costos ocultos."
           }
         },
         {
           "type": "benefit",
           "settings": {
             "icon": "payment",
-            "title": "Paga cuando recibes",
-            "description": "Inspecciona tu producto antes de pagar. Pago contra entrega disponible en todo el país."
+            "title": "Paga al Recibir",
+            "description": "Pago contra entrega en tu puerta."
           }
         },
         {
           "type": "benefit",
           "settings": {
-            "icon": "sparkles",
-            "title": "30 días de garantía",
-            "description": "Si no quedas satisfecho, devuélvelo sin preguntas. Tu satisfacción es nuestra prioridad."
+            "icon": "guarantee",
+            "title": "Garantía 30 Días",
+            "description": "Devolución sin complicaciones."
           }
         },
         {
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Entrega en 2-5 días",
-            "description": "Procesamos y enviamos tu pedido el mismo día. Recíbelo rápidamente donde estés."
+            "title": "Entrega 2-5 Días",
+            "description": "Procesamos y enviamos rápido."
           }
         }
       ]

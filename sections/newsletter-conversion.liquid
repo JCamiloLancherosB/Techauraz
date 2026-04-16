@@ -1,38 +1,258 @@
 {% comment %}
-  Conversion-Optimized Newsletter Form
+  Newsletter CTA — Premium Conversion Section
   
-  Simplified newsletter signup with single input and clear CTA.
-  Features: AJAX submission, loading state, success/error feedback
+  Redesigned with:
+  - Gradient background with brand personality
+  - 10% OFF incentive badge for first purchase
+  - Compact inline form (email + submit button)
+  - Trust disclaimer
+  - Animated icon/badge for visual interest
   
-  Usage:
-  {% render 'newsletter-conversion' %}
+  Styled inline for section encapsulation.
 {% endcomment %}
 
 {%- comment -%} forms-techauraz.js is loaded globally by footer.liquid — do NOT duplicate here {%- endcomment -%}
 
 {%- liquid
-  assign heading = section.settings.heading | default: 'Únete a nuestra comunidad'
-  assign subheading = section.settings.subheading | default: 'Recibe ofertas exclusivas y novedades de productos tech'
-  assign button_text = section.settings.button_text | default: 'Suscribirme'
-  assign success_message = section.settings.success_message | default: '¡Gracias por suscribirte! Revisa tu correo para confirmar.'
+  assign heading = section.settings.heading | default: '10% OFF en tu primera compra'
+  assign subheading = section.settings.subheading | default: 'Únete a +2,500 clientes que reciben ofertas exclusivas antes que nadie.'
+  assign button_text = section.settings.button_text | default: 'QUIERO MI 10%'
+  assign success_message = section.settings.success_message | default: '🎉 ¡Listo! Revisa tu correo para tu código de descuento.'
+  assign incentive_badge = section.settings.incentive_badge | default: '-10%'
 -%}
 
-<div class="ta-conv-newsletter-section page-width section-{{ section.id }}-padding">
-  <div class="ta-conv-newsletter__inner">
-    {%- if heading and heading != blank -%}
-      <h2>{{ heading }}</h2>
+<style>
+/* ═══════════════════════════════════════════
+   Newsletter CTA — Premium Conversion Strip
+   ═══════════════════════════════════════════ */
+.ta-newsletter {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
+  padding: 52px 0;
+}
+
+/* Subtle gradient orb for visual depth */
+.ta-newsletter::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ta-newsletter::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: -5%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ta-newsletter__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* ─── Incentive badge ─── */
+.ta-newsletter__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  animation: ta-badge-glow 3s ease-in-out infinite;
+}
+
+@keyframes ta-badge-glow {
+  0%, 100% { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5); }
+}
+
+.ta-newsletter__badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Heading ─── */
+.ta-newsletter__heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Subheading ─── */
+.ta-newsletter__subheading {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin: 0 0 28px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ─── Form ─── */
+.ta-newsletter__form-wrapper {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ta-newsletter__input {
+  flex: 1;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  border: 2px solid transparent;
+  background: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s ease;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.ta-newsletter__input::placeholder {
+  color: #94a3b8;
+}
+
+.ta-newsletter__input:focus {
+  border-color: #10b981;
+}
+
+.ta-newsletter__submit {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+  border-radius: 0;
+}
+
+.ta-newsletter__submit:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(1.02);
+}
+
+.ta-newsletter__submit:active {
+  transform: scale(0.98);
+}
+
+/* ─── Messages ─── */
+.ta-newsletter .newsletter-form__message {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ta-newsletter .newsletter-form__message--success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.ta-newsletter .newsletter-form__message--error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* ─── Disclaimer ─── */
+.ta-newsletter__disclaimer {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 749px) {
+  .ta-newsletter {
+    padding: 40px 0;
+  }
+
+  .ta-newsletter__heading {
+    font-size: 1.4rem;
+  }
+
+  .ta-newsletter__subheading {
+    font-size: 0.85rem;
+    margin-bottom: 22px;
+  }
+
+  .ta-newsletter__form-wrapper {
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ta-newsletter__input {
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+  }
+
+  .ta-newsletter__submit {
+    border-radius: 0 0 10px 10px;
+    padding: 14px;
+  }
+}
+</style>
+
+<section class="ta-newsletter" aria-label="Suscripción a ofertas">
+  <div class="ta-newsletter__inner page-width">
+
+    {%- if incentive_badge != blank -%}
+      <span class="ta-newsletter__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {{ incentive_badge }} primera compra
+      </span>
+    {%- endif -%}
+
+    {%- if heading != blank -%}
+      <h2 class="ta-newsletter__heading">{{ heading }}</h2>
     {%- endif -%}
     
-    {%- if subheading and subheading != blank -%}
-      <p>{{ subheading }}</p>
+    {%- if subheading != blank -%}
+      <p class="ta-newsletter__subheading">{{ subheading }}</p>
     {%- endif -%}
     
-    {%- form 'customer', class: 'ta-conv-newsletter newsletter-form', id: 'NewsletterConversion', data-success-message: success_message -%}
-      <input type="hidden" name="contact[tags]" value="newsletter">
+    {%- form 'customer', class: 'ta-newsletter newsletter-form', id: 'NewsletterConversion', data-success-message: success_message -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,descuento-10">
       
       {%- if form.posted_successfully? -%}
         <div class="newsletter-form__message newsletter-form__message--success is-visible" role="status" tabindex="-1">
-          {% render 'icon-success' %}
           {{ success_message }}
         </div>
       {%- endif -%}
@@ -44,14 +264,14 @@
         </div>
       {%- endif -%}
       
-      <div class="ta-conv-newsletter__field-wrapper">
+      <div class="ta-newsletter__form-wrapper">
         <input 
           id="NewsletterFormInput--{{ section.id }}"
           type="email" 
           name="contact[email]" 
-          class="ta-conv-newsletter__input field__input"
-          placeholder="{{ 'newsletter.label' | t | default: 'tu@email.com' }}"
-          aria-label="{{ 'newsletter.label' | t | default: 'Correo electrónico' }}"
+          class="ta-newsletter__input"
+          placeholder="tu@email.com"
+          aria-label="Correo electrónico"
           aria-required="true"
           autocomplete="email"
           autocorrect="off"
@@ -64,80 +284,77 @@
         
         <button 
           type="submit" 
-          class="ta-conv-newsletter__submit"
+          class="ta-newsletter__submit"
           name="commit"
           aria-label="{{ button_text }}">
-          <span class="ta-conv-newsletter__submit-text">{{ button_text }}</span>
+          <span>{{ button_text }}</span>
         </button>
       </div>
     {%- endform -%}
     
-    <p class="ta-conv-newsletter__disclaimer">
-      {{ section.settings.disclaimer | default: 'No spam. Cancela cuando quieras.' }}
+    <p class="ta-newsletter__disclaimer">
+      {{ section.settings.disclaimer | default: '🔒 Sin spam. Solo ofertas reales. Cancela cuando quieras.' }}
     </p>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Newsletter Conversión",
-  "class": "section",
+  "name": "Newsletter CTA",
+  "class": "section section--newsletter-cta",
   "tag": "section",
   "settings": [
     {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding superior",
-      "default": 0
+      "type": "paragraph",
+      "content": "Sección de captura de emails con incentivo de descuento. Ideal entre las colecciones de productos y los testimonios."
     },
     {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding inferior",
-      "default": 0
+      "type": "text",
+      "id": "incentive_badge",
+      "label": "Badge de incentivo",
+      "default": "-10%",
+      "info": "Texto del badge verde animado. Ej: '-10%', 'GRATIS', 'VIP'"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Título",
-      "default": "Únete a nuestra comunidad"
+      "label": "Título principal",
+      "default": "10% OFF en tu primera compra"
     },
     {
       "type": "text",
       "id": "subheading",
       "label": "Subtítulo",
-      "default": "Recibe ofertas exclusivas y novedades de productos tech"
+      "default": "Únete a +2,500 clientes que reciben ofertas exclusivas antes que nadie."
     },
     {
       "type": "text",
       "id": "button_text",
       "label": "Texto del botón",
-      "default": "Suscribirme"
+      "default": "QUIERO MI 10%"
     },
     {
       "type": "text",
       "id": "success_message",
       "label": "Mensaje de éxito",
-      "default": "¡Gracias por suscribirte! Revisa tu correo para confirmar."
+      "default": "🎉 ¡Listo! Revisa tu correo para tu código de descuento."
     },
     {
       "type": "text",
       "id": "disclaimer",
-      "label": "Texto de descargo",
-      "default": "No spam. Cancela cuando quieras."
+      "label": "Texto legal",
+      "default": "🔒 Sin spam. Solo ofertas reales. Cancela cuando quieras."
     }
   ],
   "presets": [
     {
-      "name": "Newsletter Conversión"
+      "name": "Newsletter CTA",
+      "settings": {
+        "incentive_badge": "-10%",
+        "heading": "10% OFF en tu primera compra",
+        "subheading": "Únete a +2,500 clientes que reciben ofertas exclusivas antes que nadie.",
+        "button_text": "QUIERO MI 10%"
+      }
     }
   ]
 }

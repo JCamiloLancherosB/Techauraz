@@ -6,31 +6,31 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "heading": "Equipa tu Setup. Domina tu Día.",
+            "heading": "Tu Tech. Tu Estilo.",
             "heading_size": "h0"
           }
         },
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "⭐ 4.9/5 en cientos de entregas en toda Colombia",
+            "text": "+2,500 entregas exitosas en toda Colombia ⭐",
             "text_style": "subtitle"
           }
         },
         "text_2": {
           "type": "text",
           "settings": {
-            "text": "Periféricos premium y unidades USB cargadas con tu entretenimiento favorito. Compra seguro: Pagas al recibir en tu casa.",
+            "text": "Periféricos, cargadores y accesorios tech con envío gratis y pago contra entrega.",
             "text_style": "body"
           }
         },
         "buttons_1": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Ver Productos Destacados",
+            "button_label_1": "EXPLORAR CATÁLOGO",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
-            "button_label_2": "Quiero mi USB Personalizada",
+            "button_label_2": "PERSONALIZA TU USB",
             "button_link_2": "shopify://pages/usb-al-gusto-personalizada",
             "button_style_secondary_2": true
           }
@@ -44,7 +44,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/hero_slide_1_1773242158470.png",
-        "image_overlay_opacity": 40,
+        "image_overlay_opacity": 50,
         "image_height": "medium",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
@@ -62,32 +62,32 @@
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Envío Gratis en Colombia",
-            "description": "Sin costos ocultos. El precio que ves es el precio final."
+            "title": "Envío Gratis",
+            "description": "A toda Colombia, sin costos ocultos."
           }
         },
         "benefit_payment": {
           "type": "benefit",
           "settings": {
             "icon": "payment",
-            "title": "Pago Contra Entrega",
-            "description": "Paga en efectivo al recibir tu pedido en casa."
+            "title": "Paga al Recibir",
+            "description": "Contra entrega en tu puerta."
           }
         },
         "benefit_guarantee": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Garantía Extendida",
-            "description": "¿No satisfecho? Cambios fáciles y sin líos."
+            "title": "Garantía 30 Días",
+            "description": "Devolución sin complicaciones."
           }
         },
         "benefit_delivery": {
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Envíos Seguros (2-5 Días)",
-            "description": "Tu pedido procesado y enviado con velocidad."
+            "title": "Entrega 2-5 Días",
+            "description": "Procesamos y enviamos rápido."
           }
         }
       },
@@ -98,7 +98,7 @@
         "benefit_delivery"
       ],
       "settings": {
-        "heading": ""
+        "heading": "¿Por qué comprar con nosotros?"
       }
     },
     "category_navigation": {
@@ -108,8 +108,8 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audio Premium",
-            "subtitle": "Sonido inmersivo",
+            "title": "Audífonos & Audio",
+            "subtitle": "Inmersión total",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
         },
@@ -117,8 +117,8 @@
           "type": "category",
           "settings": {
             "icon": "watch",
-            "title": "Smartwatches",
-            "subtitle": "Control en tu muñeca",
+            "title": "Relojes Inteligentes",
+            "subtitle": "Tu asistente tech",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
         },
@@ -126,8 +126,8 @@
           "type": "category",
           "settings": {
             "icon": "usb",
-            "title": "USBs a Medida",
-            "subtitle": "Entretenimiento al instante",
+            "title": "USB Personalizada",
+            "subtitle": "Diseña la tuya",
             "link": "shopify://pages/usb-al-gusto-personalizada"
           }
         },
@@ -135,8 +135,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga Rápida",
-            "subtitle": "Baterías y cargadores",
+            "title": "Carga y Energía",
+            "subtitle": "Nunca sin batería",
             "link": "shopify://collections/carga-energia-techaura"
           }
         },
@@ -153,8 +153,8 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Setup Gamer",
-            "subtitle": "Iluminación y periféricos",
+            "title": "Iluminación",
+            "subtitle": "Ambienta tu espacio",
             "link": "shopify://collections/iluminacion"
           }
         }
@@ -168,17 +168,17 @@
         "category_6"
       ],
       "settings": {
-        "heading": "Explora Nuestras Categorías Destacadas"
+        "heading": "Encuentra lo que buscas"
       }
     },
     "featured_collection_9GzLFt": {
       "type": "featured-collection",
       "custom_css": [],
       "settings": {
-        "title": "<strong>Periféricos Exclusivos</strong>",
+        "title": "Los Más Vendidos",
         "heading_size": "h2",
-        "description": "🚚 Envío gratis hoy | Pago Seguro",
-        "show_description": true,
+        "description": "",
+        "show_description": false,
         "description_style": "subtitle",
         "collection": "all",
         "products_to_show": 8,
@@ -203,10 +203,10 @@
     "featured_collection_bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "title": "<strong>Hubs & Conectividad</strong>",
+        "title": "Conecta Todo",
         "heading_size": "h2",
-        "description": "🚚 Envío gratis hoy | Pago Seguro",
-        "show_description": true,
+        "description": "",
+        "show_description": false,
         "description_style": "subtitle",
         "collection": "conectividad-hubs-y-adaptadores-techaura",
         "products_to_show": 8,
@@ -244,7 +244,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El cargador rápido es excelente. Carga mi teléfono en menos de una hora y la calidad de construcción es notable. Definitivamente vale cada peso.",
+            "review_text": "El cargador rápido es increíble. Mi celular carga en menos de una hora y ya lleva 4 meses sin fallar. Vale cada peso.",
             "customer_name": "Ana R.",
             "customer_city": "Medellín"
           }
@@ -252,9 +252,9 @@
         "testimonial_carousel_3": {
           "type": "testimonial",
           "settings": {
-            "rating": 4,
-            "review_text": "Las memorias USB personalizadas son perfectas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es muy buena.",
-            "customer_name": "Empresas Tech",
+            "rating": 5,
+            "review_text": "Pedí USBs personalizadas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es excelente. Ya encargamos 30 más.",
+            "customer_name": "Santiago G.",
             "customer_city": "Cali"
           }
         },
@@ -262,7 +262,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El hub USB funciona perfecto con mi laptop. Conecto monitor, teclado y mouse sin problemas. La calidad de construcción es notable.",
+            "review_text": "El hub USB funciona perfecto con mi laptop de trabajo. Conecto monitor, teclado y mouse sin lag. Ideal para home office.",
             "customer_name": "Pedro L.",
             "customer_city": "Barranquilla"
           }
@@ -285,12 +285,23 @@
         "testimonial_carousel_5"
       ],
       "settings": {
-        "title": "La gente prefiere nuestra garantía TechAuraz",
-        "subtitle": "Opiniones reales de clientes en todo Colombia",
+        "title": "Lo que dicen nuestros clientes",
+        "subtitle": "Opiniones reales de compradores en toda Colombia",
         "heading_size": "h1",
         "background_color": "#f8fafc",
         "padding_top": 60,
         "padding_bottom": 60
+      }
+    },
+    "newsletter_cta_home": {
+      "type": "newsletter-conversion",
+      "settings": {
+        "incentive_badge": "-10%",
+        "heading": "10% OFF en tu primera compra",
+        "subheading": "Únete a +2,500 clientes que reciben ofertas exclusivas antes que nadie.",
+        "button_text": "QUIERO MI 10%",
+        "success_message": "🎉 ¡Listo! Revisa tu correo para tu código de descuento.",
+        "disclaimer": "🔒 Sin spam. Solo ofertas reales. Cancela cuando quieras."
       }
     }
   },
@@ -300,6 +311,7 @@
     "category_navigation",
     "featured_collection_9GzLFt",
     "featured_collection_bestsellers",
+    "newsletter_cta_home",
     "testimonials_carousel_home"
   ]
 }
