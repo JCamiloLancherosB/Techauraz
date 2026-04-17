@@ -108,6 +108,26 @@ cart-drawer.active .drawer__inner {
   20% { left: 200%; }
   100% { left: 200%; }
 }
+
+/* Empty State Visibility Fix */
+.drawer__inner-empty {
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+}
+.drawer.is-empty .drawer__inner-empty {
+  display: flex;
+}
+.drawer.is-empty .drawer__header,
+.drawer.is-empty .drawer__footer,
+.drawer.is-empty .cart-drawer__shipping-bar,
+.drawer.is-empty .cart-drawer__cod-top,
+.drawer.is-empty cart-drawer-items,
+.drawer.is-empty .cart-drawer__trust-strip {
+  display: none !important;
+}
 </style>
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>

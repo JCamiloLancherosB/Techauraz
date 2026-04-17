@@ -259,20 +259,86 @@ details.facets__disclosure summary .icon-caret {
 
 @media screen and (max-width: 749px) {
 
-  /* Mobile: Drawer takes full screen */
+  /* Mobile: Clean Drawer Behavior */
   .mobile-facets__wrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .mobile-facets__open-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  /* Overlay Background for Drawer */
+  .mobile-facets__disclosure[open]::before,
+  .mobile-facets__disclosure.menu-opening::before {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.6);
+    z-index: 400; /* Above header */
+    cursor: default;
+  }
+
+  /* Drawer Container */
+  .mobile-facets__inner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85vw;
+    max-width: 400px;
+    height: 100vh;
+    background-color: var(--color-bg-primary, #fff);
+    z-index: 500;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-facets__disclosure[open] .mobile-facets__inner,
+  .mobile-facets__disclosure.menu-opening .mobile-facets__inner {
+    transform: translateX(0);
   }
 
   .mobile-facets {
-    height: 100%;
+    flex: 1;
     overflow-y: auto;
     padding: 2rem;
+    height: auto;
+  }
+  
+  .mobile-facets__header {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .mobile-facets__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--color-bg-tertiary);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
   }
 
   /* Collection description: More compact on mobile */

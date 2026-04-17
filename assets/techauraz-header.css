@@ -650,9 +650,10 @@ body.overflow-hidden-desktop {
   }
 
   /* Open state */
-  details[open].menu-opening>.menu-drawer,
+  details[open] > .menu-drawer,
+  details[open].menu-opening > .menu-drawer,
   .menu-drawer.is-open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 
   /* Inner container - scrollable content area */

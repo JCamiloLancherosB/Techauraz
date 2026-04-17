@@ -26,6 +26,56 @@
    ============================================================================= */
 
 /* =============================================================================
+   0. GLOBAL QUANTITY SELECTOR LAYOUT
+   ============================================================================= */
+/* Global Quantity Selector Layout (Fix for stacked + / - buttons) */
+.quantity {
+  display: flex !important;
+  align-items: center;
+  border: 1px solid var(--ta-border, #e2e8f0);
+  border-radius: var(--ta-radius-sm, 6px);
+  overflow: hidden;
+  background: #fff;
+  min-width: 110px;
+  max-width: 130px;
+  height: 40px;
+}
+.quantity__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ta-text, #1e293b);
+  transition: background 0.2s;
+}
+.quantity__button:hover {
+  background: var(--ta-bg-secondary, #f8fafc);
+}
+.quantity__input {
+  flex: 1 1 auto;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ta-text, #1e293b);
+  width: 30px;
+  min-width: 0;
+  padding: 0;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+.quantity__input::-webkit-outer-spin-button,
+.quantity__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* =============================================================================
    TOPBAR + HEADER STACK STABILIZATION
    Version: 1.1.0
    Date: 2026-01-23
@@ -3036,6 +3086,15 @@ quick-add-modal .product-form__buttons button[name="add"]:hover {
   }
 
   /* Quantity input sizing for mobile */
+  .quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--ta-border, #e2e8f0);
+    border-radius: var(--ta-radius-sm, 6px);
+    overflow: hidden;
+    background: #fff;
+  }
+
   .cart-item__quantity .quantity {
     min-width: auto;
     max-width: 110px;
@@ -3100,6 +3159,13 @@ quick-add-modal .product-form__buttons button[name="add"]:hover {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
+  }
+
+  /* Cart, Collection and PDP Specific Fix for WhatsApp Overlap */
+  .template-cart #MainContent,
+  .template-collection #MainContent,
+  .template-product #MainContent {
+    padding-bottom: 90px;
   }
 }
 
