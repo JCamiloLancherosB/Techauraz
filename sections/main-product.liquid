@@ -511,7 +511,7 @@
                 </div>
                 {%- comment -%} Trust Badges below Add to Cart {%- endcomment -%}
                 {%- render 'pdp-conversion-badges' -%}
-                {%- render 'trust-badges-inline', layout: 'compact', show_heading: false, context: 'product' -%}
+                {%- comment -%} trust-badges-inline removed: canonical trust_line block handles trust messaging {%- endcomment -%}
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
