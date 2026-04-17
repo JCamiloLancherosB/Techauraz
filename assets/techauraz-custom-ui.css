@@ -267,6 +267,33 @@
   }
 }
 
+/* Mobile: Smaller button + higher position on product pages to avoid CTA overlap */
+@media screen and (max-width: 749px) {
+  .whatsapp-float {
+    bottom: 24px;
+    right: 16px;
+  }
+
+  .whatsapp-float .whatsapp-button {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 48px;
+    max-height: 48px;
+  }
+
+  .whatsapp-float .whatsapp-button svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Push WhatsApp above product CTA buttons on PDP */
+  .template-product .whatsapp-float {
+    bottom: 90px;
+  }
+}
+
 .whatsapp-button {
   display: flex;
   align-items: center;
