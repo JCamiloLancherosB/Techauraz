@@ -649,11 +649,22 @@ body.overflow-hidden-desktop {
     overflow: hidden;
   }
 
-  /* Open state */
+  /* Open state — must counteract Shopify CDN's visibility:hidden + pointer-events:none */
   details[open] > .menu-drawer,
   details[open].menu-opening > .menu-drawer,
   .menu-drawer.is-open {
     transform: translateX(0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    display: flex !important;
+  }
+
+  /* Force the open details container fully visible too */
+  .menu-drawer-container[open],
+  header-drawer > details[open] {
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
   /* Inner container - scrollable content area */

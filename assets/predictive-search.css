@@ -430,6 +430,22 @@ predictive-search[loading] #predictive-search-results-groups-wrapper {
     flex-direction: column;
   }
 
+  /* Force search modal visible when details is open — counteract CDN visibility:hidden */
+  .header__search details[open],
+  .header__search details[open] > .search-modal,
+  .header__search details[open] .search-modal__content {
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure predictive results dropdown is visible on mobile */
+  predictive-search[open] .predictive-search--header {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+  }
+
   .search-modal .modal-overlay {
     display: none;
   }
