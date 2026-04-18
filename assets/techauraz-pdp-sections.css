@@ -1,0 +1,1128 @@
+/* =============================================================================
+   TechAuraz PDP Information Sections
+   Unified CSS for all product detail page content sections
+   ============================================================================= */
+
+/* =============================================================================
+   SHARED SECTION STYLES
+   Common layout, headings, and card patterns used across all PDP sections
+   ============================================================================= */
+
+.product-benefits,
+.product-includes,
+.product-features,
+.shipping-timeline,
+.shipping-returns,
+.product-usage-warranty {
+  padding: 3.2rem 0;
+  font-family: var(--ta-font-body, 'Inter', system-ui, sans-serif);
+}
+
+/* Alternating section backgrounds for visual rhythm */
+.product-benefits { background: var(--ta-bg-subtle, #f8fafc); }
+.product-includes { background: var(--ta-bg, #ffffff); }
+.product-features { background: var(--ta-bg-subtle, #f8fafc); }
+.shipping-timeline { background: var(--ta-bg, #ffffff); }
+.shipping-returns { background: var(--ta-bg-subtle, #f8fafc); }
+.product-usage-warranty { background: var(--ta-bg, #ffffff); }
+
+/* Section headings */
+.product-benefits__heading,
+.product-includes__heading,
+.product-features__heading,
+.shipping-timeline__heading,
+.shipping-returns__heading,
+.product-usage-warranty__heading {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.8rem;
+  line-height: 1.3;
+}
+
+/* Section descriptions */
+.product-includes__description,
+.shipping-timeline__description,
+.product-features__description {
+  font-size: 1.4rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0 0 2.4rem;
+  line-height: 1.5;
+}
+
+
+/* =============================================================================
+   1. PRODUCT BENEFITS (¿Por qué elegir este producto?)
+   ============================================================================= */
+
+.product-benefits__list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+.product-benefits__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  padding: 1.6rem 2rem;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.product-benefits__item:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 2px 12px rgba(0, 212, 170, 0.08);
+}
+
+.product-benefits__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.08), rgba(0, 212, 170, 0.15));
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 2rem;
+}
+
+.product-benefits__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.product-benefits__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-benefits__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.3rem;
+  line-height: 1.3;
+}
+
+.product-benefits__description {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================================
+   2. PRODUCT INCLUDES (¿Qué incluye tu compra?)
+   ============================================================================= */
+
+.product-includes__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.product-includes__item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--ta-bg-subtle, #f8fafc);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  transition: border-color 0.2s ease;
+}
+
+.product-includes__item:hover {
+  border-color: var(--ta-accent, #00D4AA);
+}
+
+.product-includes__item-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: var(--ta-bg, #ffffff);
+  border-radius: var(--ta-radius-sm, 0.6rem);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.product-includes__item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-includes__item-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.product-includes__item-description {
+  font-size: 1.2rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0.2rem 0 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================================
+   3. PRODUCT FEATURES (Características Técnicas)
+   ============================================================================= */
+
+.product-features__list,
+.product-features__grid {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.product-features__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-features__item:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.product-features__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.08), rgba(0, 212, 170, 0.15));
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 1.8rem;
+}
+
+.product-features__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.product-features__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-features__label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ta-text-secondary, #64748b);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.product-features__value {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+}
+
+
+/* =============================================================================
+   4. SHIPPING TIMELINE (¿Cómo funciona el envío?)
+   ============================================================================= */
+
+.shipping-timeline__track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 3.2rem;
+  margin-top: 2rem;
+}
+
+/* Vertical line connecting steps */
+.shipping-timeline__track::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--ta-accent, #00D4AA), var(--ta-accent-light, #5eead4));
+  border-radius: 1px;
+}
+
+.shipping-timeline__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  position: relative;
+  padding: 1.2rem 0;
+}
+
+.shipping-timeline__step-icon {
+  position: absolute;
+  left: -3.2rem;
+  top: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-accent, #00D4AA);
+  border-radius: var(--ta-radius-full, 50%);
+  color: var(--ta-accent, #00D4AA);
+  z-index: 1;
+  font-size: 1.4rem;
+}
+
+.shipping-timeline__step-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--ta-accent, #00D4AA);
+}
+
+.shipping-timeline__step-content {
+  flex: 1;
+  padding-left: 0.8rem;
+}
+
+.shipping-timeline__step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.3rem;
+}
+
+.shipping-timeline__step-description,
+.shipping-timeline__step-desc {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.shipping-timeline__step-time {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ta-accent-dark, #0d9488);
+  background: rgba(0, 212, 170, 0.08);
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--ta-radius-sm, 0.4rem);
+  margin-top: 0.4rem;
+}
+
+/* Connector between steps (used in shipping-returns section) */
+.shipping-timeline__connector {
+  display: none;
+}
+
+.shipping-timeline__footer {
+  font-size: 1.2rem;
+  color: var(--ta-text-muted, #94a3b8);
+  margin-top: 2rem;
+  font-style: italic;
+  padding-left: 3.2rem;
+}
+
+
+/* =============================================================================
+   5. SHIPPING & RETURNS (Envío y Garantía)
+   ============================================================================= */
+
+.shipping-returns__heading {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 2rem;
+}
+
+.shipping-returns__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.shipping-returns__card {
+  padding: 2rem;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.shipping-returns__card:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 4px 16px rgba(0, 212, 170, 0.1);
+  transform: translateY(-2px);
+}
+
+.shipping-returns__icon-wrapper {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.2));
+  border-radius: var(--ta-radius-full, 50%);
+  color: var(--ta-accent, #00D4AA);
+}
+
+.shipping-returns__icon {
+  width: 28px;
+  height: 28px;
+}
+
+.shipping-returns__card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.6rem;
+}
+
+.shipping-returns__card-text {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Timeline within shipping-returns (reuses class names from shipping-timeline) */
+.shipping-returns .shipping-timeline {
+  margin-top: 2.4rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--ta-border-light, #e2e8f0);
+}
+
+.shipping-returns .shipping-timeline__heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+
+.shipping-returns .shipping-timeline__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 3.2rem;
+}
+
+.shipping-returns .shipping-timeline__steps::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--ta-accent, #00D4AA), var(--ta-accent-light, #5eead4));
+  border-radius: 1px;
+}
+
+.shipping-returns .shipping-timeline__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.shipping-returns .shipping-timeline__step-icon {
+  position: absolute;
+  left: -3.2rem;
+  top: 1rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ta-bg, #ffffff);
+  border: 2px solid var(--ta-accent, #00D4AA);
+  border-radius: var(--ta-radius-full, 50%);
+  color: var(--ta-accent, #00D4AA);
+  z-index: 1;
+}
+
+.shipping-returns .shipping-timeline__step-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.shipping-returns .shipping-timeline__step-content {
+  padding-left: 0.8rem;
+}
+
+.shipping-returns .shipping-timeline__step-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0;
+  display: block;
+}
+
+.shipping-returns .shipping-timeline__step-desc {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.shipping-returns .shipping-timeline__connector {
+  display: none;
+}
+
+
+/* =============================================================================
+   6. PRODUCT USAGE & WARRANTY
+   ============================================================================= */
+
+.product-usage-warranty__section {
+  margin-bottom: 2.4rem;
+}
+
+.product-usage-warranty__section:last-child {
+  margin-bottom: 0;
+}
+
+/* Usage Steps */
+.product-usage-warranty__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.product-usage-warranty__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  padding: 1.4rem 1.8rem;
+  background: var(--ta-bg-subtle, #f8fafc);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  transition: border-color 0.2s ease;
+}
+
+.product-usage-warranty__step:hover {
+  border-color: var(--ta-accent, #00D4AA);
+}
+
+.product-usage-warranty__step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--ta-accent, #00D4AA), #0d9488);
+  color: #fff;
+  border-radius: var(--ta-radius-full, 50%);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.product-usage-warranty__step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-usage-warranty__step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.3rem;
+}
+
+.product-usage-warranty__step-description {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Warranty Grid */
+.product-usage-warranty__warranty-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.product-usage-warranty__warranty-card {
+  padding: 2rem;
+  background: var(--ta-bg-subtle, #f8fafc);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-usage-warranty__warranty-card:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 4px 16px rgba(0, 212, 170, 0.08);
+}
+
+.product-usage-warranty__warranty-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.2));
+  border-radius: var(--ta-radius-full, 50%);
+  color: var(--ta-accent, #00D4AA);
+}
+
+.product-usage-warranty__warranty-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.product-usage-warranty__warranty-icon--whatsapp {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(37, 211, 102, 0.2));
+  color: #25D366;
+}
+
+.product-usage-warranty__warranty-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.6rem;
+}
+
+.product-usage-warranty__warranty-text {
+  font-size: 1.3rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.product-usage-warranty__whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding: 0.8rem 2rem;
+  background: #25D366;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.product-usage-warranty__whatsapp-button:hover {
+  background: #1da851;
+  transform: translateY(-1px);
+}
+
+.product-usage-warranty__whatsapp-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.product-usage-warranty__placeholder {
+  padding: 2rem;
+  background: var(--ta-bg-subtle, #f8fafc);
+  border: 2px dashed var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  text-align: center;
+  color: var(--ta-text-muted, #94a3b8);
+  font-size: 1.3rem;
+}
+
+
+/* =============================================================================
+   7. PRODUCT WHATSAPP SHARE
+   ============================================================================= */
+
+.product-share {
+  padding: 2.4rem 0;
+  border-top: 1px solid var(--ta-border-light, #e2e8f0);
+}
+
+.product-share__container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.product-share__label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ta-text-secondary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product-share__buttons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.product-share__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-radius: var(--ta-radius-md, 0.8rem);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  background: var(--ta-bg, #ffffff);
+  color: var(--ta-text-primary, #1e293b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.product-share__btn:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.product-share__btn--whatsapp {
+  background: #25D366;
+  color: #ffffff;
+  border-color: #25D366;
+}
+
+.product-share__btn--whatsapp:hover {
+  background: #1da851;
+  border-color: #1da851;
+}
+
+.product-share__btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Generic sharing buttons from theme */
+.sharing-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-radius: var(--ta-radius-md, 0.8rem);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  background: var(--ta-bg, #ffffff);
+  color: var(--ta-text-primary, #1e293b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.sharing-button:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sharing-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Share section at bottom of PDP */
+.share-buttons,
+.product-share-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-top: 1px solid var(--ta-border-light, #e2e8f0);
+}
+
+.share-buttons__label,
+.product-share-section__label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ta-text-secondary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Shopify's native share-button */
+share-button {
+  display: inline-flex;
+}
+
+share-button button,
+share-button .share-button__fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.3rem;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-md, 0.8rem);
+  color: var(--ta-text-primary, #1e293b);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+share-button button:hover,
+share-button .share-button__fallback:hover {
+  border-color: var(--ta-accent, #00D4AA);
+}
+
+
+/* =============================================================================
+   8. CROSS-SELL (Completa tu compra)
+   ============================================================================= */
+
+.cross-sell {
+  padding: 3.2rem 0;
+  background: var(--ta-bg-subtle, #f8fafc);
+}
+
+.cross-sell__header {
+  text-align: center;
+  margin-bottom: 2.4rem;
+}
+
+.cross-sell__title {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ta-text-primary, #1e293b);
+  margin: 0 0 0.4rem;
+}
+
+.cross-sell__subtitle {
+  font-size: 1.4rem;
+  color: var(--ta-text-secondary, #64748b);
+  margin: 0;
+}
+
+.cross-sell__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+}
+
+.cross-sell-item {
+  position: relative;
+  background: var(--ta-bg, #ffffff);
+  border: 1px solid var(--ta-border-light, #e2e8f0);
+  border-radius: var(--ta-radius-card, 1.2rem);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cross-sell-item:hover {
+  border-color: var(--ta-accent, #00D4AA);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.cross-sell-item__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: var(--ta-accent, #00D4AA);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--ta-radius-sm, 0.4rem);
+  z-index: 1;
+}
+
+.cross-sell-item__content {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.6rem;
+}
+
+.cross-sell-item__image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--ta-radius-sm, 0.6rem);
+  overflow: hidden;
+  background: var(--ta-bg-subtle, #f8fafc);
+}
+
+.cross-sell-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cross-sell-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cross-sell-item__title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.3;
+}
+
+.cross-sell-item__title a {
+  color: var(--ta-text-primary, #1e293b);
+  text-decoration: none;
+}
+
+.cross-sell-item__price {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.cross-sell-item__price-current {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ta-price, #059669);
+}
+
+.cross-sell-item__price-compare {
+  font-size: 1.2rem;
+  color: var(--ta-text-muted, #94a3b8);
+  text-decoration: line-through;
+}
+
+.cross-sell-item__savings {
+  font-size: 1.1rem;
+  color: var(--ta-accent-dark, #0d9488);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.cross-sell-item__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.4rem;
+  background: var(--ta-accent, #00D4AA);
+  color: #fff;
+  border: none;
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cross-sell-item__action:hover {
+  background: #0d9488;
+}
+
+
+/* =============================================================================
+   9. COUNTDOWN TIMER
+   ============================================================================= */
+
+.countdown-timer {
+  padding: 2.4rem 0;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  text-align: center;
+}
+
+.countdown-timer__heading {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.6rem;
+}
+
+.countdown-timer__display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.countdown-timer__segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.countdown-timer__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ta-accent, #00D4AA);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-timer__label {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.countdown-timer__separator {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: -1.4rem;
+}
+
+.countdown-timer__subheading {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 1.2rem;
+}
+
+.countdown-timer__button {
+  display: inline-flex;
+  padding: 1rem 2.4rem;
+  background: var(--ta-accent, #00D4AA);
+  color: #fff;
+  border: none;
+  border-radius: var(--ta-radius-md, 0.8rem);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.countdown-timer__button:hover {
+  background: #0d9488;
+  transform: translateY(-1px);
+}
+
+
+/* =============================================================================
+   RESPONSIVE — MOBILE FIRST
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Reduce section padding on mobile */
+  .product-benefits,
+  .product-includes,
+  .product-features,
+  .shipping-timeline,
+  .shipping-returns,
+  .product-usage-warranty {
+    padding: 2.4rem 0;
+  }
+
+  /* Stack grids to single column */
+  .product-includes__grid,
+  .product-features__list,
+  .product-features__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-returns__grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  /* Smaller cards on mobile */
+  .shipping-returns__card {
+    padding: 1.6rem;
+  }
+
+  .shipping-returns__icon-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .shipping-returns__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Share buttons wrap on mobile */
+  .product-share__container,
+  .share-buttons,
+  .product-share-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Warranty grid stacks on mobile */
+  .product-usage-warranty__warranty-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  /* Wider benefit items on tablet+ */
+  .product-benefits__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 3-column includes grid */
+  .product-includes__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Usage/warranty side by side */
+  .product-usage-warranty__grid,
+  .product-usage-warranty__content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* 3-column benefits for desktop */
+  .product-benefits__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 4-column includes */
+  .product-includes__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* 3-column features */
+  .product-features__list,
+  .product-features__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
