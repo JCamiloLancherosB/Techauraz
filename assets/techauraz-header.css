@@ -1249,3 +1249,15 @@ header-drawer>details {
     width: 100% !important;
   }
 }
+
+/* --------------------------------------------------------
+   SEARCH TOGGLE ICON VISIBILITY
+   Ensure the correct icon shows when search modal is open/closed
+-------------------------------------------------------- */
+details:not([open]) > summary .modal__toggle-close {
+  display: none !important;
+}
+
+details[open] > summary .modal__toggle-open {
+  display: none !important;
+}
