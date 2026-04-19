@@ -15,26 +15,26 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "heading": "Eleva tu Setup. Tecnología Que Marca La Diferencia.",
+            "heading": "Eleva tu setup. Tecnología que marca la diferencia.",
             "heading_size": "h0"
           }
         },
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "Envío Gratis 🇨🇴 · Pago Contra Entrega · Garantía Premium 🛡️",
+            "text": "Envío gratis a toda Colombia 🇨🇴 · Paga al recibir · Garantía 30 días 🛡️",
             "text_style": "subtitle"
           }
         },
         "buttons_1": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "DESCUBRIR TOP VENTAS",
+            "button_label_1": "VER MÁS VENDIDOS",
             "button_link_1": "shopify://collections/nuestros-favoritos",
             "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_2": "VER OFERTAS",
+            "button_link_2": "shopify://collections/sale",
+            "button_style_secondary_2": true
           }
         }
       },
@@ -45,7 +45,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/Hero_Setup_Gamer.jpg",
-        "image_overlay_opacity": 0,
+        "image_overlay_opacity": 30,
         "image_height": "adapt",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
@@ -65,7 +65,7 @@
           "settings": {
             "icon": "shipping",
             "title": "Envío Gratis",
-            "description": "Sin costo adicional a cualquier ciudad"
+            "description": "A cualquier ciudad de Colombia"
           }
         },
         "benefit_payment": {
@@ -73,15 +73,15 @@
           "settings": {
             "icon": "payment",
             "title": "Paga al Recibir",
-            "description": "Solo pagas cuando recibes tu pedido"
+            "description": "Paga cuando tengas tu producto"
           }
         },
         "benefit_guarantee": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Garantía 30 Días",
-            "description": "Devuélvelo en 30 días. Sin preguntas."
+            "title": "Garantía Premium",
+            "description": "Devoluciones simples. Sin excusas."
           }
         },
         "benefit_delivery": {
@@ -89,7 +89,7 @@
           "settings": {
             "icon": "lightning",
             "title": "Despacho Rápido",
-            "description": "Tu pedido sale en 24h a tu ciudad"
+            "description": "Envíos en menos de 24 horas"
           }
         }
       },
@@ -110,8 +110,8 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audio & Gaming",
-            "subtitle": "Audífonos y diademas pro",
+            "title": "Audio Pro",
+            "subtitle": "Audífonos y sonido de alta fidelidad",
             "badge": "",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
@@ -120,8 +120,8 @@
           "type": "category",
           "settings": {
             "icon": "watch",
-            "title": "Smartwatches",
-            "subtitle": "Conectividad total desde $89.900",
+            "title": "Relojes Inteligentes",
+            "subtitle": "Conectividad total y monitor deportivo",
             "badge": "",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
@@ -130,8 +130,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga & Conectividad",
-            "subtitle": "Cables power y hubs ultra-veloces",
+            "title": "Carga Ultrarrápida",
+            "subtitle": "Cables de alta gama, hubs y adaptadores",
             "badge": "",
             "link": "shopify://collections/carga-energia-techaura"
           }
@@ -141,7 +141,7 @@
           "settings": {
             "icon": "home",
             "title": "Hogar Inteligente",
-            "subtitle": "Domótica para tu día",
+            "subtitle": "Automatización, cámaras y domótica",
             "badge": "",
             "link": "shopify://collections/hogar-inteligente-domotica"
           }
@@ -150,8 +150,8 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Setup & Iluminación",
-            "subtitle": "Crea el mejor ambiente LED",
+            "title": "Setup y Luces",
+            "subtitle": "Barras LED, tiras RGB y aros de luz",
             "badge": "",
             "link": "shopify://collections/iluminacion-led-y-aros-de-luz"
           }
@@ -160,8 +160,8 @@
           "type": "category",
           "settings": {
             "icon": "diamond",
-            "title": "Ofertas Flash",
-            "subtitle": "Liquidación especial",
+            "title": "Ofertas Especiales",
+            "subtitle": "Liquidación de inventario. Unidades limitadas.",
             "badge": "HOT",
             "link": "shopify://collections/sale"
           }
@@ -176,8 +176,8 @@
         "category_6"
       ],
       "settings": {
-        "heading": "Categorías Destacadas",
-        "subtitle": "Equipa tu vida con las mejores marcas"
+        "heading": "Explora por categoría",
+        "subtitle": "Encuentra exactamente lo que necesitas"
       }
     },
     "featured_collection_9GzLFt": {
@@ -213,62 +213,14 @@
       "type": "countdown-timer",
       "settings": {
         "enable_section": true,
-        "heading": "⚡ OFERTAS FLASH: HASTA 40% OFF",
-        "subheading": "Inventario limitado. Las mejores ofertas expiran pronto.",
+        "heading": "⚡ Ofertas flash: hasta 40% OFF",
+        "subheading": "Inventario limitado. Estas ofertas no se repiten.",
         "days_to_add": 1,
         "hours_to_add": 12,
         "button_label": "VER OFERTAS",
         "button_link": "shopify://collections/sale",
         "padding_top": 16,
         "padding_bottom": 36
-      }
-    },
-    "promo_usb_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Tu Logo, Tu USB. Pedidos desde 10 unidades.",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Memorias corporativas de alta resistencia con tu diseño. Entrega en 5 días hábiles a toda Colombia.",
-            "text_style": "body"
-          }
-        },
-        "buttons": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "COTIZAR AHORA",
-            "button_link_1": "shopify://pages/usb-al-gusto-personalizada",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "buttons"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/USB_Corporativa_Banner.jpg",
-        "image_overlay_opacity": 80,
-        "image_height": "adapt",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
       }
     },
     "testimonials_carousel_home": {
@@ -296,7 +248,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Pedí USBs personalizadas para regalos corporativos. La impresión del logo quedó nítida y la velocidad de transferencia es excelente. Ya encargamos 30 más.",
+            "review_text": "Los audífonos gamer son brutales. Se escucha todo nítido y el micrófono es de otro nivel. Mis compañeros de equipo ya están pidiendo los suyos.",
             "customer_name": "Santiago G.",
             "customer_city": "Cali"
           }
@@ -328,7 +280,7 @@
         "testimonial_carousel_5"
       ],
       "settings": {
-        "title": "Clientes Reales, Opiniones Reales",
+        "title": "Lo que dicen nuestros clientes",
         "subtitle": "+2,500 envíos exitosos en todo el país 🇨🇴",
         "heading_size": "h2",
         "background_color": "#f8fafc",
@@ -351,11 +303,10 @@
   "order": [
     "image_banner_hero",
     "benefits_conversion_home",
-    "category_navigation",
-    "featured_collection_9GzLFt",
     "countdown_timer_home",
+    "featured_collection_9GzLFt",
+    "category_navigation",
     "testimonials_carousel_home",
-    "promo_usb_banner",
     "newsletter_cta_home"
   ]
 }
