@@ -1,1 +1,5 @@
 /*    ============================================================================= */
+
+/* TechAuraz Video Responsive Wrapper */
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.video-wrapper iframe, .video-wrapper object, .video-wrapper embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
