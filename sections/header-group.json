@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
@@ -30,13 +39,6 @@
           "type": "announcement",
           "settings": {
             "text": "Garantía 30 días · Devolución sin preguntas",
-            "link": ""
-          }
-        },
-        "announcement_proof": {
-          "type": "announcement",
-          "settings": {
-            "text": "Clientes satisfechos en toda Colombia 🇨🇴 — TechAuraz",
             "link": ""
           }
         }
@@ -80,8 +82,8 @@
         "show_mobile_promo": true,
         "mobile_promo_text": "Envío Gratis + Pago Contra Entrega",
         "margin_bottom": 0,
-        "padding_top": 12,
-        "padding_bottom": 12
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "cart-drawer": {
