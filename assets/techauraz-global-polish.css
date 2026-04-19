@@ -1,3 +1,9 @@
+/* Fix Hero Contrast */
+.banner__content .subtitle, .banner__content p, .banner__content .banner__text, .banner__content .h0, .banner__content h1 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6) !important;
+}
+
 /* =============================================================================
    TECHAURAZ GLOBAL POLISH — 2026 Production
    Single source of truth for layout guardrails, CRO polish, and visual fixes.
