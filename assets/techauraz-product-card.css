@@ -1,4 +1,4 @@
-﻿/* =============================================================================
+/* =============================================================================
    TECHAURAZ PRODUCT CARD STYLES â€” 2026
    Canonical source for all product card styling across grids
    ============================================================================= */
@@ -19,12 +19,13 @@
   overflow: hidden;
   background: var(--color-background, #fff);
   border: 1px solid var(--ta-neutral-100, #f1f5f9);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-4px);
 }
 
 /* ---- Card Image ---- */
@@ -119,9 +120,16 @@
   color: #fff;
 }
 
+@keyframes taFomoPulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
 .card__fomo--low-stock {
-  background: rgba(239, 68, 68, 0.9);
+  background: rgba(239, 68, 68, 0.95);
   color: #fff;
+  animation: taFomoPulse 2s infinite;
 }
 
 /* ---- Card Content ---- */
@@ -216,12 +224,32 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card__quick-add .button::after,
+.quick-add__submit::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  transition: all 0.75s ease;
+}
+
+.card__quick-add .button:hover::after,
+.quick-add__submit:hover::after {
+  left: 150%;
 }
 
 .card__quick-add .button:hover,
 .quick-add__submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
 }
 
 /* ---- Compare Button â€” HIDDEN in cards, only visible on PDP ---- */
