@@ -15,22 +15,22 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "heading": "Tu Setup, Tu Nivel. Tecnología Que Se Nota.",
+            "heading": "Eleva tu Setup. Tecnología Que Marca La Diferencia.",
             "heading_size": "h0"
           }
         },
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "Envío 100% gratis a toda Colombia · Pago contra entrega · Garantía 30 días · +2,500 clientes satisfechos ⭐",
+            "text": "Envío Gratis 🇨🇴 · Pago Contra Entrega · Garantía Premium 🛡️",
             "text_style": "subtitle"
           }
         },
         "buttons_1": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "EXPLORAR CATÁLOGO",
-            "button_link_1": "shopify://collections/all",
+            "button_label_1": "DESCUBRIR TOP VENTAS",
+            "button_link_1": "shopify://collections/nuestros-favoritos",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -88,8 +88,8 @@
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Entrega 2-5 Días",
-            "description": "Despacho en 24h, entrega en 2-5 días"
+            "title": "Despacho Rápido",
+            "description": "Tu pedido sale en 24h a tu ciudad"
           }
         }
       },
@@ -120,8 +120,8 @@
           "type": "category",
           "settings": {
             "icon": "watch",
-            "title": "Relojes Inteligentes",
-            "subtitle": "Smartwatches desde $89.900",
+            "title": "Smartwatches",
+            "subtitle": "Conectividad total desde $89.900",
             "badge": "",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
@@ -130,8 +130,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga Rápida",
-            "subtitle": "Cargadores y cables pro",
+            "title": "Carga & Conectividad",
+            "subtitle": "Cables power y hubs ultra-veloces",
             "badge": "",
             "link": "shopify://collections/carga-energia-techaura"
           }
@@ -139,50 +139,30 @@
         "category_4": {
           "type": "category",
           "settings": {
-            "icon": "usb",
-            "title": "Hubs & Conectores",
-            "subtitle": "USB-C, HDMI, adaptadores",
+            "icon": "home",
+            "title": "Hogar Inteligente",
+            "subtitle": "Domótica para tu día",
             "badge": "",
-            "link": "shopify://collections/conectividad-hubs-y-adaptadores-techaura"
+            "link": "shopify://collections/hogar-inteligente-domotica"
           }
         },
         "category_5": {
           "type": "category",
           "settings": {
-            "icon": "smartphone",
-            "title": "Memorias USB",
-            "subtitle": "Almacenamiento veloz",
+            "icon": "lightbulb",
+            "title": "Setup & Iluminación",
+            "subtitle": "Crea el mejor ambiente LED",
             "badge": "",
-            "link": "shopify://collections/memorias-y-almacenamiento-digital-y-usb"
+            "link": "shopify://collections/iluminacion-led-y-aros-de-luz"
           }
         },
         "category_6": {
           "type": "category",
           "settings": {
-            "icon": "lightbulb",
-            "title": "Iluminación LED",
-            "subtitle": "Strips, aros y rgb",
-            "badge": "",
-            "link": "shopify://collections/iluminacion-led-y-aros-de-luz"
-          }
-        },
-        "category_7": {
-          "type": "category",
-          "settings": {
-            "icon": "home",
-            "title": "Hogar Inteligente",
-            "subtitle": "Cámaras, sensores y más",
-            "badge": "",
-            "link": "shopify://collections/hogar-inteligente-domotica"
-          }
-        },
-        "category_8": {
-          "type": "category",
-          "settings": {
             "icon": "diamond",
-            "title": "Ofertas del Mes",
-            "subtitle": "Descuentos hasta 50%",
-            "badge": "SALE",
+            "title": "Ofertas Flash",
+            "subtitle": "Liquidación especial",
+            "badge": "HOT",
             "link": "shopify://collections/sale"
           }
         }
@@ -193,13 +173,11 @@
         "category_3",
         "category_4",
         "category_5",
-        "category_6",
-        "category_7",
-        "category_8"
+        "category_6"
       ],
       "settings": {
-        "heading": "Encuentra Tu Tech en Segundos",
-        "subtitle": "Navega por categoría y encuentra exactamente lo que buscas"
+        "heading": "Categorías Destacadas",
+        "subtitle": "Equipa tu vida con las mejores marcas"
       }
     },
     "featured_collection_9GzLFt": {
@@ -235,12 +213,12 @@
       "type": "countdown-timer",
       "settings": {
         "enable_section": true,
-        "heading": "¡48 HORAS DE ENVÍO GRATIS!",
-        "subheading": "Aprovecha que no cobramos envío a ninguna ciudad de Colombia.",
-        "days_to_add": 2,
+        "heading": "⚡ OFERTAS FLASH: HASTA 40% OFF",
+        "subheading": "Inventario limitado. Las mejores ofertas expiran pronto.",
+        "days_to_add": 1,
         "hours_to_add": 12,
-        "button_label": "EXPLORAR OFERTAS",
-        "button_link": "shopify://collections/all",
+        "button_label": "VER OFERTAS",
+        "button_link": "shopify://collections/sale",
         "padding_top": 16,
         "padding_bottom": 36
       }
@@ -376,8 +354,8 @@
     "category_navigation",
     "featured_collection_9GzLFt",
     "countdown_timer_home",
-    "promo_usb_banner",
     "testimonials_carousel_home",
+    "promo_usb_banner",
     "newsletter_cta_home"
   ]
 }
