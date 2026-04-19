@@ -280,8 +280,9 @@
         "buttons"
       ],
       "settings": {
-        "image_overlay_opacity": 50,
-        "image_height": "small",
+        "image": "shopify://shop_images/USB_Corporativa_Banner.jpg",
+        "image_overlay_opacity": 80,
+        "image_height": "adapt",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
