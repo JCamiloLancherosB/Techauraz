@@ -1,27 +1,18 @@
-{% comment %}
-  TechAuraz — Optimized robots.txt 2026
-  Maximizes crawl budget by blocking irrelevant paths
-{% endcomment %}
-User-agent: *
-Disallow: /admin
-Disallow: /cart
-Disallow: /orders
-Disallow: /checkouts/
-Disallow: /checkout
-Disallow: /carts
-Disallow: /account
-Disallow: /collections/*sort_by*
-Disallow: /collections/*+*
-Disallow: /collections/*%2B*
-Disallow: /collections/*%2b*
-Disallow: /*/collections/*sort_by*
-Disallow: /search
-Disallow: /apple-app-site-association
-Disallow: /.well-known
-
-Sitemap: https://{{ shop.domain }}/sitemap.xml
-
-# TechAuraz Pro Tips:
-# - Block sort/filter URLs to prevent crawl waste
-# - Let Google find sitemap via this file + Search Console
-# - Keep /collections/* and /products/* fully open
+{% for group in robots.default_groups %}
+  {{- group.user_agent -}}
+  {% for rule in group.rules %}
+    {{- rule.directive -}}
+  {% endfor %}
+  {%- if group.sitemap != blank -%}
+    {{ group.sitemap }}
+  {%- endif -%}
+  {% if group.user_agent.value == '*' %}
+    Disallow: /collections/*+*
+    Disallow: /collections/*%2B*
+    Disallow: /search
+    Disallow: /account
+    Disallow: /policies/
+    Disallow: /checkout
+    Disallow: /carts
+  {% endif %}
+{% endfor %}
