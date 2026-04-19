@@ -29,8 +29,8 @@
 }
 .category-nav-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 /* ─── Individual card ─── */
@@ -51,9 +51,9 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 .category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -4px rgba(0,0,0,0.07);
-  border-color: #cbd5e1;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -4px rgba(15, 23, 42, 0.12);
+  border-color: #94a3b8;
   background: #ffffff;
 }
 
@@ -71,10 +71,10 @@
   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 .category-card:hover .category-card__image {
-  transform: scale(1.08);
+  transform: scale(1.1);
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: #ffffff;
-  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
 }
 .category-card__image svg {
   width: 28px;
@@ -134,7 +134,7 @@
   }
   .category-nav-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
   .category-nav-title {
     font-size: 1.4rem;

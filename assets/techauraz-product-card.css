@@ -1,5 +1,5 @@
-/* =============================================================================
-   TECHAURAZ PRODUCT CARD STYLES — 2026
+﻿/* =============================================================================
+   TECHAURAZ PRODUCT CARD STYLES â€” 2026
    Canonical source for all product card styling across grids
    ============================================================================= */
 
@@ -224,10 +224,9 @@
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
 
-/* ---- Compare Button — HIDDEN in cards, only visible on PDP ---- */
+/* ---- Compare Button â€” HIDDEN in cards, only visible on PDP ---- */
 .card__compare-wrapper,
 .card-wrapper .compare-button {
-  display: none !important;
 }
 
 /* ---- Grid Layout ---- */
@@ -279,4 +278,9 @@
   .card:hover .card__media img {
     transform: none;
   }
+.card-wrapper .card__heading,
+.card-wrapper .card__heading a,
+.card-wrapper .card__heading .full-unstyled-link,
+.tech-card-product .card__heading,
+.tech-card-product .card__heading a {
 }

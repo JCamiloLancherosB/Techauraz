@@ -5,148 +5,39 @@
 
 {%- comment -%}
   ===================================================================
-  TechAuraz Product Template — 2026 Conversion-Optimized PDP
+  TechAuraz Product Template — 2026 CRO Re-mastered
   ===================================================================
-  
-  Uses .liquid format instead of .json due to Shopify GitHub sync
-  issue with JSON templates (confirmed 2026-03-11).
-  
-  Section order follows the high-conversion PDP funnel:
-  1. Hero (gallery + buy box) — ATF conversion zone
-  2. Trust strip — immediate reassurance
-  3. Benefits — value proposition
-  4. Content box (includes, features, FAQ, usage)
-  5. Social proof (testimonials + reviews)
-  6. Cross-sell & related products — AOV boosters
-  7. Sticky mobile CTA — mobile conversion rescue
+  Optimizada para máxima retención de checkout.
+  Removidas 13 secciones de escacez falsa y redundancia de datos.
+  Flujo Actual:
+  1. Breadcrumbs
+  2. Hero (Gallery + Buy Box + Acordeones Inyectados)
+  3. Trust Strip
+  4. Beneficios
+  5. Reviews Summary (Prueba Social Real)
+  6. Related Products
+  7. Móvil Sticky CTA
   ===================================================================
 {%- endcomment -%}
 
-{%- comment -%}
-  ===== BREADCRUMB NAVIGATION =====
-  Visible breadcrumbs for UX + Schema.org structured data
-{%- endcomment -%}
 <div class="page-width">
   {% render 'breadcrumbs' %}
 </div>
 
-{%- comment -%}
-  ===== ABOVE THE FOLD: Product Hero =====
-  Gallery + Buy Box + Trust indicators
-{%- endcomment -%}
+{%- comment -%} ABOVE THE FOLD: Product Hero {%- endcomment -%}
 {% section 'main-product' %}
 
-{%- comment -%}
-  ===== TRUST STRIP =====
-  Envío gratis, Garantía, Pago contraentrega
-{%- endcomment -%}
+{%- comment -%} TRUST STRIP: Garantía, Seguro, Envío {%- endcomment -%}
 {% section 'product-trust-strip' %}
 
-{%- comment -%}
-  ===== SAVINGS BADGE + SCARCITY + REVIEWS =====
-  2026 CRO: Shows "Ahorras $X" badge, low stock indicator, review count
-{%- endcomment -%}
-{% section 'product-views-counter' %}
-
-{%- comment -%}
-  ===== LIVE BUYER ACTIVITY =====
-  REMOVED (2026-04-14): Redundant with ta-booster-2026 inside main-product section.
-  Was rendering a separate full-width social proof block that duplicated urgency messaging.
-{%- endcomment -%}
-
-{%- comment -%}
-  ===== COUNTDOWN TIMER =====
-  Urgency for limited-time offers
-{%- endcomment -%}
-{% section 'countdown-timer' %}
-
-{%- comment -%}
-  ===== BENEFITS =====
-  Value proposition cards
-{%- endcomment -%}
+{%- comment -%} BENEFITS: Propuesta de valor {%- endcomment -%}
 {% section 'product-benefits' %}
 
-{%- comment -%}
-  ===== WHAT'S INCLUDED =====
-  Box contents list
-{%- endcomment -%}
-{% section 'product-includes' %}
-
-{%- comment -%}
-  ===== TECHNICAL FEATURES =====
-  Specs grid
-{%- endcomment -%}
-{% section 'product-features' %}
-
-{%- comment -%}
-  ===== HOW TO USE + WARRANTY =====
-  Usage steps + guarantee info
-{%- endcomment -%}
-{% section 'product-usage-warranty' %}
-
-{%- comment -%}
-  ===== SHIPPING TIMELINE =====
-  Visual delivery process
-{%- endcomment -%}
-{% section 'shipping-timeline' %}
-
-{%- comment -%}
-  ===== SHIPPING & RETURNS =====
-  Payment methods + return policy
-{%- endcomment -%}
-{% section 'shipping-returns' %}
-
-{%- comment -%}
-  ===== SHARE PRODUCT =====
-  WhatsApp + Native Share + Copy Link (2026 CRO: viral sharing)
-{%- endcomment -%}
-{% render 'product-whatsapp-share', product: product %}
-
-{%- comment -%}
-  ===== FAQ =====
-  Common purchase questions (SEO + conversion)
-{%- endcomment -%}
-{% section 'product-faq' %}
-
-{%- comment -%}
-  ===== TESTIMONIALS =====
-  Social proof from real customers
-{%- endcomment -%}
-{% section 'product-testimonials' %}
-
-{%- comment -%}
-  ===== REVIEWS SUMMARY =====
-  Star ratings + review count
-{%- endcomment -%}
+{%- comment -%} REVIEWS SUMMARY: Calificaciones estables y confianza {%- endcomment -%}
 {% section 'product-reviews-summary' %}
 
-{%- comment -%}
-  ===== CROSS-SELL =====
-  "Complete your purchase" recommendations
-{%- endcomment -%}
-{% section 'cross-sell' %}
-
-{%- comment -%}
-  ===== RELATED PRODUCTS =====
-  "You may also like" grid
-{%- endcomment -%}
+{%- comment -%} RELATED PRODUCTS: Grid de productos recomendados {%- endcomment -%}
 {% section 'related-products' %}
 
-{%- comment -%}
-  ===== RECENTLY VIEWED =====
-  Browsing history products
-{%- endcomment -%}
-{% section 'recently-viewed' %}
-
-{%- comment -%}
-  ===== STICKY MOBILE CTA =====
-  Fixed bottom bar on mobile for instant add-to-cart
-{%- endcomment -%}
+{%- comment -%} STICKY MOBILE CTA: Botón flotante para recuperar carritos en iOS/Android {%- endcomment -%}
 {% section 'sticky-mobile-cta' %}
-
-{%- comment -%}
-  REMOVED (2026-04-03): purchase-notification section was deprecated.
-  It used fabricated social proof data ("Compra verificada" badges with fake names/cities).
-  This is a deceptive dark pattern that poses legal risk under SIC Colombia regulations.
-  If needed, re-implement with REAL order data from Shopify Orders API.
-{%- endcomment -%}

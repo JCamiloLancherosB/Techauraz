@@ -14,7 +14,7 @@
                 "hero_title": "Memorias USB Personalizadas Premium",
                 "hero_text": "Capacidades reales verificadas, grabado profesional y entregas ágiles.",
                 "hero_btn_label": "Solicitar Cotización",
-                "hero_btn_link": ""
+                "hero_btn_link": "#usb-form"
             }
         },
         "fig1": {
@@ -152,7 +152,7 @@
                 "title": "Oferta Limitada",
                 "text": "Mockup + precarga básica gratuita desde 100 unidades. Control de capacidad real incluido.",
                 "btn_label": "Quiero mi Cotización",
-                "btn_link": "",
+                "btn_link": "#usb-form",
                 "note": "Sujeto a stock. Validez 30 días."
             }
         },
@@ -163,7 +163,7 @@
                 "title": "Listo para Impulsar tu Marca",
                 "text": "Envíanos tu logo y recibe un mockup sin costo. Respuesta en menos de 24h hábiles.",
                 "btn_label": "Iniciar Ahora",
-                "btn_link": ""
+                "btn_link": "#usb-form"
             }
         },
         "form": {
