@@ -12,6 +12,52 @@
         "color_scheme": "scheme-1"
       }
     },
+    "benefits_conversion_collection": {
+      "type": "benefits-conversion",
+      "blocks": {
+        "benefit_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Envío Gratis Colombia",
+            "description": "Sin montos mínimos."
+          }
+        },
+        "benefit_payment": {
+          "type": "benefit",
+          "settings": {
+            "icon": "payment",
+            "title": "Pago Contra Entrega",
+            "description": "Paga al recibir."
+          }
+        },
+        "benefit_guarantee": {
+          "type": "benefit",
+          "settings": {
+            "icon": "guarantee",
+            "title": "Garantía Premium",
+            "description": "Compra 100% protegida."
+          }
+        },
+        "benefit_delivery": {
+          "type": "benefit",
+          "settings": {
+            "icon": "lightning",
+            "title": "Despacho Rápido",
+            "description": "Salida en 24 horas."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_shipping",
+        "benefit_payment",
+        "benefit_guarantee",
+        "benefit_delivery"
+      ],
+      "settings": {
+        "heading": "Compra 100% Segura"
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -28,8 +74,8 @@
         "filter_type": "horizontal",
         "enable_sorting": true,
         "columns_mobile": "2",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "recently-viewed": {
@@ -50,6 +96,7 @@
   "order": [
     "breadcrumbs",
     "banner",
+    "benefits_conversion_collection",
     "product-grid",
     "recently-viewed"
   ]

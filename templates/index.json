@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "image_banner_hero": {
@@ -22,7 +13,7 @@
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "Envío gratis a toda Colombia 🇨🇴 · Paga al recibir · Garantía 30 días 🛡️",
+            "text": "Equipos de alto rendimiento para gaming, productividad y smart home. Sé el primero en experimentar el siguiente nivel.",
             "text_style": "subtitle"
           }
         },
@@ -64,16 +55,16 @@
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Envío Gratis",
-            "description": "A cualquier ciudad de Colombia"
+            "title": "Envío Gratis Colombia",
+            "description": "Sin montos mínimos."
           }
         },
         "benefit_payment": {
           "type": "benefit",
           "settings": {
             "icon": "payment",
-            "title": "Paga al Recibir",
-            "description": "Paga cuando tengas tu producto"
+            "title": "Pago Contra Entrega",
+            "description": "Paga al recibir en tus manos."
           }
         },
         "benefit_guarantee": {
@@ -81,15 +72,15 @@
           "settings": {
             "icon": "guarantee",
             "title": "Garantía Premium",
-            "description": "Devoluciones simples. Sin excusas."
+            "description": "Compra protegida 30 días."
           }
         },
         "benefit_delivery": {
           "type": "benefit",
           "settings": {
             "icon": "lightning",
-            "title": "Despacho Rápido",
-            "description": "Envíos en menos de 24 horas"
+            "title": "Despacho Flash 24h",
+            "description": "Tu orden sale hoy mismo."
           }
         }
       },
@@ -110,8 +101,8 @@
           "type": "category",
           "settings": {
             "icon": "headphones",
-            "title": "Audio Pro",
-            "subtitle": "Audífonos y sonido de alta fidelidad",
+            "title": "Audio de Alta Fidelidad",
+            "subtitle": "Audífonos y sonido premium",
             "badge": "",
             "link": "shopify://collections/diademas-gamer-techaura"
           }
@@ -120,8 +111,8 @@
           "type": "category",
           "settings": {
             "icon": "watch",
-            "title": "Relojes Inteligentes",
-            "subtitle": "Conectividad total y monitor deportivo",
+            "title": "Smartwatches & Wearables",
+            "subtitle": "Conectividad total",
             "badge": "",
             "link": "shopify://collections/productos-inteligentes-electronicos"
           }
@@ -130,8 +121,8 @@
           "type": "category",
           "settings": {
             "icon": "lightning",
-            "title": "Carga Ultrarrápida",
-            "subtitle": "Cables de alta gama, hubs y adaptadores",
+            "title": "Carga y Energía",
+            "subtitle": "Cables de alta gama y adaptadores",
             "badge": "",
             "link": "shopify://collections/carga-energia-techaura"
           }
@@ -140,8 +131,8 @@
           "type": "category",
           "settings": {
             "icon": "home",
-            "title": "Hogar Inteligente",
-            "subtitle": "Automatización, cámaras y domótica",
+            "title": "Smart Home",
+            "subtitle": "Automatización y domótica",
             "badge": "",
             "link": "shopify://collections/hogar-inteligente-domotica"
           }
@@ -150,20 +141,10 @@
           "type": "category",
           "settings": {
             "icon": "lightbulb",
-            "title": "Setup y Luces",
-            "subtitle": "Barras LED, tiras RGB y aros de luz",
+            "title": "Iluminación & Setup",
+            "subtitle": "Barras LED, tiras RGB",
             "badge": "",
             "link": "shopify://collections/iluminacion-led-y-aros-de-luz"
-          }
-        },
-        "category_6": {
-          "type": "category",
-          "settings": {
-            "icon": "diamond",
-            "title": "Ofertas Especiales",
-            "subtitle": "Liquidación de inventario. Unidades limitadas.",
-            "badge": "HOT",
-            "link": "shopify://collections/sale"
           }
         }
       },
@@ -172,12 +153,11 @@
         "category_2",
         "category_3",
         "category_4",
-        "category_5",
-        "category_6"
+        "category_5"
       ],
       "settings": {
-        "heading": "Explora por categoría",
-        "subtitle": "Encuentra exactamente lo que necesitas"
+        "heading": "Explora por Categoría",
+        "subtitle": "Descubre nuestros departamentos especializados"
       }
     },
     "featured_collection_9GzLFt": {
@@ -209,18 +189,47 @@
         "padding_bottom": 28
       }
     },
-    "countdown_timer_home": {
-      "type": "countdown-timer",
+    "promo_banner_home": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "⚡ Zona de Liquidación Final",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Últimas unidades con hasta 40% OFF. Ofertas reales mientras haya inventario.",
+            "text_style": "subtitle"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "VER OFERTAS",
+            "button_link_1": "shopify://collections/sale",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
-        "enable_section": true,
-        "heading": "⚡ Ofertas flash: hasta 40% OFF",
-        "subheading": "Inventario limitado. Estas ofertas no se repiten.",
-        "days_to_add": 1,
-        "hours_to_add": 12,
-        "button_label": "VER OFERTAS",
-        "button_link": "shopify://collections/sale",
-        "padding_top": 16,
-        "padding_bottom": 36
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-d58c693b-8d46-40fa-a967-ed7a734e2f71",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "testimonials_carousel_home": {
@@ -230,54 +239,34 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El cable USB-C es excelente, carga rápido y se siente muy resistente. Llegó en 3 días a mi casa. Ya es mi segunda compra en TechAuraz.",
-            "customer_name": "Carlos M.",
-            "customer_city": "Bogotá"
+            "review_text": "El pago contra entrega me dio mucha seguridad. La barra de luz RGB me llegó en 2 días a Medellín, funciona excelente en mi setup.",
+            "customer_name": "Carlos Mauricio",
+            "customer_city": "Medellín"
           }
         },
         "testimonial_carousel_2": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "El cargador rápido es increíble. Mi celular carga en menos de una hora y ya lleva 4 meses sin fallar. Vale cada peso.",
-            "customer_name": "Ana R.",
-            "customer_city": "Medellín"
+            "review_text": "Cargador ultrarrápido 65W que vale cada centavo. Carga mi portátil y el teléfono al tiempo sin calentarse. Envío increíblemente rápido.",
+            "customer_name": "Ana Lucía R.",
+            "customer_city": "Bogotá"
           }
         },
         "testimonial_carousel_3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "Los audífonos gamer son brutales. Se escucha todo nítido y el micrófono es de otro nivel. Mis compañeros de equipo ya están pidiendo los suyos.",
-            "customer_name": "Santiago G.",
+            "review_text": "Los audífonos gamer me sorprendieron. El micrófono es nítido para Discord y las almohadillas no cansan después de horas. Un 10.",
+            "customer_name": "Santiago Gómez",
             "customer_city": "Cali"
-          }
-        },
-        "testimonial_carousel_4": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "El hub USB funciona perfecto con mi laptop de trabajo. Conecto monitor, teclado y mouse sin lag. Ideal para home office.",
-            "customer_name": "Pedro L.",
-            "customer_city": "Barranquilla"
-          }
-        },
-        "testimonial_carousel_5": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "Servicio al cliente excepcional. Tuve una duda y me respondieron inmediatamente. El producto llegó en perfecto estado y antes de lo esperado.",
-            "customer_name": "Laura S.",
-            "customer_city": "Cartagena"
           }
         }
       },
       "block_order": [
         "testimonial_carousel_1",
         "testimonial_carousel_2",
-        "testimonial_carousel_3",
-        "testimonial_carousel_4",
-        "testimonial_carousel_5"
+        "testimonial_carousel_3"
       ],
       "settings": {
         "title": "Lo que dicen nuestros clientes",
@@ -303,9 +292,9 @@
   "order": [
     "image_banner_hero",
     "benefits_conversion_home",
-    "countdown_timer_home",
-    "featured_collection_9GzLFt",
     "category_navigation",
+    "featured_collection_9GzLFt",
+    "promo_banner_home",
     "testimonials_carousel_home",
     "newsletter_cta_home"
   ]
