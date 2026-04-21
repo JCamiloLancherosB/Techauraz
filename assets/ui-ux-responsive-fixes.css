@@ -3180,9 +3180,9 @@ quick-add-modal .product-form__buttons button[name="add"]:hover {
    ============================================================================= */
 
 @media screen and (max-width: 749px) {
-  /* Ensure main content clears the sticky header */
+  /* The browser handles sticky header natively now, no manual padding needed */
   .content-for-layout {
-    padding-top: var(--tech-stack-h, 0px);
+    padding-top: 0 !important;
   }
 
   /* Cart page header spacing */
