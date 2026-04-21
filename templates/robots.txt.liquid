@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+{% comment %}
+  TechAuraz — Optimized robots.txt 2026
+  Maximizes crawl budget by blocking irrelevant paths
+{% endcomment %}
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /orders
+Disallow: /checkouts/
+Disallow: /checkout
+Disallow: /carts
+Disallow: /account
+# Removed blocking of parameter pages so Google can read the canonical/noindex tags natively
+Disallow: /search
+Disallow: /apple-app-site-association
+Disallow: /.well-known
+
+Sitemap: https://{{ shop.domain }}/sitemap.xml
+
+# TechAuraz Pro Tips:
+# - Let parameter URLs be crawled so Google reads the <meta robots="noindex"> tag!
+# - Let Google find sitemap via this file + Search Console
+# - Keep /collections/* and /products/* fully open
+=======
 {% for group in robots.default_groups %}
   {{- group.user_agent -}}
   {% for rule in group.rules %}
@@ -16,3 +41,4 @@
     Disallow: /carts
   {% endif %}
 {% endfor %}
+>>>>>>> 3eb3428d94df6469e2bdb930b05604fec515978e

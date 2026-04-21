@@ -82,7 +82,11 @@
     
     <!-- SEO Esencial TechAuraz -->
     <meta name="author" content="TechAuraz">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    {%- if current_page > 1 or template.name == 'search' or template.name == 'cart' or request.path contains '/vendors' or request.path contains '/types' or current_tags -%}
+      <meta name="robots" content="noindex, follow">
+    {%- else -%}
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    {%- endif -%}
     
     <!-- Open Graph and Twitter Card tags -->
     {% render 'meta-tags' %}

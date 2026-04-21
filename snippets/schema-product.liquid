@@ -27,7 +27,7 @@
   {% endif %}
   "offers": {
     "@type": "Offer",
-    "url": {{ product.url | within: collection | default: product.url | prepend: request.origin | json }},
+    "url": {{ product.url | prepend: request.origin | json }},
     "priceCurrency": {{ cart.currency.iso_code | default: 'COP' | json }},
     "price": {{ product.selected_or_first_available_variant.price | divided_by: 100.0 | json }},
     {% comment %}30 days validity: 2592000 seconds = 30 days{% endcomment %}
